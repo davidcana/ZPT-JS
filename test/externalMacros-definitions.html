@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Macro definitions</title>
+    </head>
+    <body>
+        
+        <!-- Macro definitions -->
+        <p data-mdefine-macro="copyright">
+            Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+        </p>
+        <p data-mdefine-macro="dynamicMacro">
+            Dynamic text: <span data-tcontent="string:A test of a dynamic macro" data-tattributes="id string:t2-1">A text</span>
+        </p>
+        <p data-mdefine-macro="dynamicMacroReadingVar">
+            Var value: <span data-tcontent="var" data-tattributes="id id">The var value</span>
+        </p>
+        
+        <ul data-mdefine-macro="list">
+            <li data-trepeat="item items">
+                <span data-tcontent="item" data-tattributes="class string:listItems1">An item</span>
+            </li>
+        </ul>
+        
+        <div data-mdefine-macro="sidebar">
+            Links
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+            <span data-mdefine-slot="additional_info"></span>
+        </div>
+        
+        <div data-mdefine-macro="enhacedSidebar">
+            Links
+            <div data-mdefine-slot="links">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Products</a></li>
+                    <li><a href="/support">Support</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <span data-mdefine-slot="additional_info"></span>
+        </div>
+        
+        <ul data-mdefine-macro="dynamicListWith1Slot">
+            <li data-trepeat="item items">
+                <span data-tcontent="item">An item</span>
+            </li>
+            <li>
+                <span data-mdefine-slot="additional_info"></span>
+            </li>
+        </ul>
+    </body>
+</html>

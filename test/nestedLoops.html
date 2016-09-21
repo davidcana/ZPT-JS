@@ -1,0 +1,60 @@
+<!doctype html>
+<html> 
+    <head> 
+        <meta charset="utf-8">
+        <title>loops tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="../js/lib/jquery-2.0.3.js"></script>
+        <script src="../js/app/jsptContext.js"></script>
+        <script src="../js/app/scope.js"></script>
+        <script src="../js/app/expressionEvaluator.js"></script> 
+        <script src="../js/app/expressionTokenizer.js"></script> 
+        <script src="../js/app/loop.js"></script>
+        <script src="../js/app/nodeAttributes.js"></script>
+        <script src="../js/app/resolver.js"></script>
+        <script src="../js/app/jspt.js"></script> 
+        
+        <script src="js/lib/qunit-1.19.0.js"></script>
+        <script src="js/app/nestedLoops.js"></script>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+    </head> 
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <p>
+            Try out nested loops
+        </p>
+        
+        <p>
+            Try out nested loops with numeric arrays
+        </p>
+        <ol id="2NestedLoops">
+            <ol data-trepeat="list someNumbers">
+                <li data-trepeat="c list">
+                    Iterating element 
+                    <span class="nestedValue1" data-tcontent="c" data-tattributes="id string:number${c}">10/20/30/40</span>
+                </li>
+            </ol>
+        </ol>
+        
+        <p>
+            Try out nested loops with complex object
+        </p>
+        <ol id="toolsLoop">
+            <ol data-trepeat="tool tools">
+                <span class="toolNames" data-tcontent="tool.name" data-tattributes="id string:tool${tool.id}">Tool X</span>
+                <li data-trepeat="c tool.numbers">
+                    Iterating element 
+                    <span class="toolNumbers" data-tcontent="c" data-tattributes="id string:toolNumber${tool.id}${c}">
+                        10/20/30
+                    </span>
+                </li>
+            </ol>
+        </ol>
+   </body> 
+ </html>

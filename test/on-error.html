@@ -1,0 +1,37 @@
+<!doctype html>
+<html> 
+    <head>
+        <meta charset="utf-8">
+        <title>on-error tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="../js/lib/jquery-2.0.3.js"></script>
+        <script src="../js/app/jsptContext.js"></script>
+        <script src="../js/app/scope.js"></script>
+        <script src="../js/app/expressionEvaluator.js"></script> 
+        <script src="../js/app/expressionTokenizer.js"></script> 
+        <script src="../js/app/loop.js"></script>
+        <script src="../js/app/nodeAttributes.js"></script>
+        <script src="../js/app/resolver.js"></script>
+        <script src="../js/app/jspt.js"></script> 
+        
+        <script src="js/lib/qunit-1.19.0.js"></script>
+        <script src="js/app/dictionary.js"></script>
+        <script src="js/app/on-error.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <p>
+            Try out on-error tag
+        </p>
+        
+        <ul data-ton-error="string:Oh, noooo!">
+            <li>number1 = 1 = <span id="t1" data-tcontent="number1">must be 1</span></li>
+            <li>user/fireError() = Oh, noooo! = <span id="t2" data-tcontent="user/fireError()">must fire error</span></li>
+            <li>yes = yes = <span id="t3" data-tcontent="yes">must be yes</span></li>
+            <li>divBy0() = Infinity = <span id="t4" data-tcontent="divBy0()">1 / 0</span></li>
+        </ul>
+    </body> 
+</html>

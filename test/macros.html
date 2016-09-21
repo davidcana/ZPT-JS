@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Macros tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="../js/lib/jquery-2.0.3.js"></script>
+        <script src="../js/app/jsptContext.js"></script>
+        <script src="../js/app/scope.js"></script>
+        <script src="../js/app/expressionEvaluator.js"></script> 
+        <script src="../js/app/expressionTokenizer.js"></script> 
+        <script src="../js/app/loop.js"></script>
+        <script src="../js/app/nodeAttributes.js"></script>
+        <script src="../js/app/resolver.js"></script>
+        <script src="../js/app/jspt.js"></script> 
+        
+        <script src="js/lib/qunit-1.19.0.js"></script>
+        <script src="js/lib/qunit-assert-html.js"></script>
+        <script src="js/app/dictionary.js"></script>
+        <script src="js/app/macros.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <h4>Simple macros</h4>
+        <div id="t1">
+	        <p>
+	            Before use macro
+	        </p>
+	        <b data-muse-macro="copyright">
+	            Macro goes here
+	        </b>
+	        <p>
+	            In the middle of 2 macros
+	        </p>
+	        <b data-muse-macro="copyright">
+	            Macro goes here
+	        </b>
+	        <p>
+	            After use macro
+	        </p>
+        </div>
+        
+        <h4>Dynamic macro</h4>
+        <div id="t2">
+	        <b data-muse-macro="dynamicMacro">
+	            Macro goes here
+	        </b>
+        </div>
+        
+        <h4>Dynamic macro reading var (var = undefined)</h4>
+        <div id="t3">
+	        <b data-tdefine="id string:t3-1" data-muse-macro="dynamicMacroReadingVar">
+	            Macro goes here
+	        </b>
+        </div>
+        
+        <h4>Dynamic macro reading var (var = 1)</h4>
+        <div id="t4">
+	        <b data-tdefine="var 1; id string:t4-1" data-muse-macro="dynamicMacroReadingVar">
+	            Macro goes here
+	        </b>
+        </div>
+        
+        <h4>Dynamic macro reading var (items = [10 20 30])</h4>
+        <div id="t5">
+	        <b data-tdefine="items [10 20 30]" data-muse-macro="list">
+	            Macro goes here
+	        </b>
+        </div>
+        
+        <h4>Macro using 1 slot</h4>
+        <div id="t6">
+	        <p data-muse-macro="sidebar">
+			    <em data-mfill-slot="additional_info">
+			        Make sure to check out our <a href="/specials">specials</a>.
+			    </em>
+	        </p>
+        </div>
+        
+        <h4>Macro using 2 slots</h4>
+        <div id="t7">
+	        <div data-muse-macro="enhacedSidebar">
+	            <div data-mfill-slot="links">
+	                <ul>
+	                    <li><a href="/">Home</a></li>
+	                    <li><a href="/otherProducts">Other products</a></li>
+	                </ul>
+	            </div>
+	            <em data-mfill-slot="additional_info">
+	                Make sure to check out our <a href="/specials">specials</a>.
+	            </em>
+	        </div>
+        </div>
+        
+        <h4>Macro using 2 slots but only defining 1</h4>
+        <div id="t8">
+	        <div data-muse-macro="enhacedSidebar">
+	            <em data-mfill-slot="additional_info">
+	                Make sure to check out our <a href="/specials">specials</a>.
+	            </em>
+	        </div>
+        </div>
+        
+        <h4>Dynamic macro using 1 slot (items = [10 20 30])</h4>
+        <div id="t9">
+	        <b data-tdefine="items [10 20 30]" data-muse-macro="dynamicListWith1Slot">
+	            <em data-mfill-slot="additional_info">
+	                Make sure to check out our <a href="/specials">specials</a>.
+	            </em>
+	        </b>
+        </div>
+        
+        <!-- Macro definitions -->
+        <p data-mdefine-macro="copyright">
+            Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+        </p>
+        <p data-mdefine-macro="dynamicMacro">
+            Dynamic text: <span data-tcontent="string:A test of a dynamic macro" data-tattributes="id string:t2-1">A text</span>
+        </p>
+        <p data-mdefine-macro="dynamicMacroReadingVar">
+            Var value: <span data-tcontent="var" data-tattributes="id id">The var value</span>
+        </p>
+        
+        <ul data-mdefine-macro="list">
+	        <li data-trepeat="item items">
+		        <span data-tcontent="item" data-tattributes="class string:listItems1">An item</span>
+	        </li>
+        </ul>
+        
+        <div data-mdefine-macro="sidebar">
+			Links
+			<ul>
+			    <li><a href="/">Home</a></li>
+			    <li><a href="/products">Products</a></li>
+			    <li><a href="/support">Support</a></li>
+			    <li><a href="/contact">Contact Us</a></li>
+			</ul>
+			<span data-mdefine-slot="additional_info"></span>
+        </div>
+        
+        <div data-mdefine-macro="enhacedSidebar">
+            Links
+            <div data-mdefine-slot="links">
+	            <ul>
+	                <li><a href="/">Home</a></li>
+	                <li><a href="/products">Products</a></li>
+	                <li><a href="/support">Support</a></li>
+	                <li><a href="/contact">Contact Us</a></li>
+	            </ul>
+            </div>
+            <span data-mdefine-slot="additional_info"></span>
+        </div>
+        
+        <ul data-mdefine-macro="dynamicListWith1Slot">
+            <li data-trepeat="item items">
+                <span data-tcontent="item">An item</span>
+            </li>
+            <li>
+                <span data-mdefine-slot="additional_info"></span>
+            </li>
+        </ul>
+    </body>
+</html>

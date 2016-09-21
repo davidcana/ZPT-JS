@@ -1,0 +1,10 @@
+# Linux
+.*
+!.gitignore
+!.htaccess
+*~
+
+# Misc
+dist/
+node_modules/
+.directory
