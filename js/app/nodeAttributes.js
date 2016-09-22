@@ -18,7 +18,7 @@ var NodeAttributes = function( node ) {
     this.metalDefineMacro = node.getAttribute( tags.metalDefineMacro );
     this.metalUseMacro = node.getAttribute( tags.metalUseMacro );
     this.metalDefineSlot = node.getAttribute( tags.metalDefineSlot );
-    this.metalFillSlot = node.getAttribute( tags.metalFillSlot );;
+    this.metalFillSlot = node.getAttribute( tags.metalFillSlot );
     
     // i18n namespace
     this.i18nDomain = undefined;
