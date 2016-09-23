@@ -12,6 +12,7 @@
       h2 { font-size: 20pt; font-weight: bold; }
       h3 { font-size: 18pt; font-weight: bold; }
       h4 { font-size: 16pt; font-weight: bold; }
+      table, th, td { border: 1px solid black; }
       .sub { font-size: 10pt; }
       code { color: red; }
       pre { background-color: black; color: white; padding-top: 1em; padding-left: 4em;}
@@ -60,12 +61,89 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       JSPT uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing JSPT open test/index.html with your
       favourite browser.
     </p>
+    <a name="zpt.evaluationOrder"></a>
+    
+    <h3>JSPT tags</h3>
+    <p>
+      The name of tags are not the same because if they were the resulting HTML douments will not be well formed. The list of 
+      tags with their equivalences are:
+      <table>
+        <tr>
+            <th>ZPT tag name</th>
+            <th>JSPT tag name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>metal:define-macro</td>
+            <td>data-mdefine-macro</td>
+            <td>Defines a macro</td>
+        </tr>
+        <tr>
+            <td>metal:define-slot</td>
+            <td>data-mdefine-slot</td>
+            <td>Defines a slot to make possible to fill it later</td>
+        </tr>
+        <tr>
+            <td>metal:fill-slot</td>
+            <td>data-mfill-slot</td>
+            <td>Fills a slot</td>
+        </tr>
+        <tr>
+            <td>metal:use-macro</td>
+            <td>data-muse-macro</td>
+            <td>Invokes a macro</td>
+        </tr>
+        <tr>
+            <td>tal:attributes</td>
+            <td>data-tattributes</td>
+            <td>Replace the value of one or more attributes</td>
+        </tr>
+        <tr>
+            <td>tal:condition</td>
+            <td>data-tcondition</td>
+            <td>Display or hide nodes depending on a condition</td>
+        </tr>
+        <tr>
+            <td>tal:content</td>
+            <td>data-tcontent</td>
+            <td>Replace the content of the element</td>
+        </tr>
+        <tr>
+            <td>tal:define</td>
+            <td>data-tdefine</td>
+            <td>Define one or more variables</td>
+        </tr>
+        <tr>
+            <td>tal:on-error</td>
+            <td>data-ton-error</td>
+            <td>Handle errors</td>
+        </tr>
+        <tr>
+            <td>tal:omit-tag</td>
+            <td>data-tomit-tag</td>
+            <td>Remove an element, leaving the content of the element</td>
+        </tr>
+        <tr>
+            <td>tal:repeat</td>
+            <td>data-trepeat</td>
+            <td>Repeat an element</td>
+        </tr>
+        <tr>
+            <td>tal:replace</td>
+            <td>data-treplace</td>
+            <td>Replace the content of an element and remove the element leaving the content</td>
+        </tr>
+      </table>
+      The tags can be changed. Customize the <code>defaultTag</code> variable in js/app/jsptContext.js file.
+      You can also use <code>jsptContext.setTags( tags )</code> to define the tags programmatically.<br>
+      Important: <strong>after this point we will refer to tags as the JSPT tag name</strong>.
+    </p>
     
     <a name="zpt.evaluationOrder"></a>
     <h3>Evaluation order</h3>
     <p>
       The order evaluation of attributes in JPT is not equal than ZPT's. The new order is:
-      <ul>
+      <ol>
         <li><code>data-trepeat</code></li>
         <li><code>data-ton-error</code></li>
         <li><code>data-mdefine-macro</code></li>
@@ -77,9 +155,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
         <li><code>data-tcontent</code></li>
         <li>content</li>
         <li><code>data-muse-macro</code></li>
-      </ul>
-      The tags can be changed. Customize the <code>defaultTag</code> variable in js/app/jsptContext.js file.
-      You can also use <code>jsptContext.setTags( tags )</code> to define the tags programmatically.
+      </ol>
     </p>
 
     <a name="tales"></a>
@@ -110,7 +186,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       via a <code>data-tdefine</code> attribute, or passed in to the template at runtime.  
       The following variables are predefined:
       <ul>
-        <li><code>repeat</code> see <code><a href="#data-trepeat">data-trepeat</a></code></li>
+        <li><code>repeat</code> see <code><a href="https://docs.zope.org/zope2/zope2book/AppendixC.html#repeat-repeat-an-element">ZPT reference</a></code></li>
       </ul>
       The <code>here</code> variable (the context) is not defined in JSPT; it is implicit. The scope of all variables in context 
       is global. Take a look to <a href="">examples</a> to understand how you can define variables of the context.<br />
@@ -282,7 +358,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     </p>
     
     <a name="tal.range"></a>
-    <h4>Lists expressions</h4>
+    <h3>Lists expressions</h3>
       <p>
         A list is defined as an enumeration of items in brackets. Some examples:
       <ul>
@@ -291,14 +367,14 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       </ul>
       You can iterate through lists using loops:
       <ul>
-        <li><code>data-trepeat="c [10 20 30]"</code> iterates using <code>c</code> 10, 20 and 30 values</li>
+        <li><code>data-trepeat="c [10 20 30]"</code> iterates using <code>c</code> through 10, 20 and 30</li>
         <li><code>data-trepeat="mixed ['yes!' 'no!' aNumber]"</code> iterates using <code>mixed</code></li>
       </ul>
-      Another way of using lists is as range expressions:
+      Another ways of using lists is as range expressions:
       <ul>
-        <li><code>data-trepeat="c [1:5]"</code> iterates using <code>c</code> 1,2,3,4 and 5 values</li>
-        <li><code>data-trepeat="c [1:7:2]"</code> iterates using <code>c</code> 1,3,5 and 7 values</li>
-        <li><code>data-trepeat="c [:5]"</code> iterates using <code>c</code> 0,1,2,3,4 and 5 values</li>
+        <li><code>data-trepeat="c [1:5]"</code> iterates using <code>c</code> through 1,2,3,4 and 5</li>
+        <li><code>data-trepeat="c [1:7:2]"</code> iterates using <code>c</code> through 1,3,5 and 7</li>
+        <li><code>data-trepeat="c [:5]"</code> iterates using <code>c</code> through 0,1,2,3,4 and 5</li>
       </ul>
     </p>
     
@@ -306,35 +382,42 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <h2>METAL</h2>
     <p>
       METAL statements behave exactly as in ZPT. The only difference, which is really a difference
-      in Path expressions, is the means of finding another template which contains macros. Since,
-      there is no Zope tree in which to locate templates, templates must be resolved via a URI.  
-      The predefined variable, <code>resolver</code>, holds a reference to an instance of 
-      <code>Resolver</code> which can be used to resolve references to external templates.
+      in Path expressions, is the means of finding another template which contains macros. There is 
+      no Zope tree in which to locate templates.
      </p>
-     <p>
-       The <code>Resolver</code> class contains these methods:
-       <ul>
-         <li>getPageTemplate( String uri )</li>
-         <li>getResource( String uri )</li>
-         <li>getScript( String uri )</li>
-       </ul>
-       The <code>getPageTemplate</code> method returns a <code>PageTemplate</code> instance which can then
-       be used for macro processing. <code>getScript</code> returns 
-       <a href="#tales.java.scripts">script</a> that is then executed.  
-       <code>getResource</code> is there in case anyone needs a more generic resource
-       finding method and returns a <code>URL</code>. If the URI passed to these methods is relative
-       it will be resolved relative to the URI of the current template.  
-     </p>
-     <p>
-       For example:<br>
-       <pre>
-&lt;html metal:use-macro="resolver/getPageTemplate( '../base.jpt' )/macros/page"&gt;
-  &lt;div metal:fill-slot="content"&gt;
-    This is the content for my web page.
-  &lt;/div&gt;
-&lt;/html&gt;
-       </pre>
-     </p>
+
+    <a name="metal.local"></a>
+    <h3>Local macros</h3>
+    <p>
+      Local macros are defined at the same HTML file where they are invoked. An example of definition of a local macro:
+      <pre>
+&lt;ul data-mdefine-macro="list"&gt;
+    &lt;li data-trepeat="item items"&gt;
+        &lt;span data-tcontent="item"&gt;An item&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+      </pre>
+      That macro generates an unordered list iterating through the <code>items</code> variable. Let's invoke them;
+      to do this, the next HTML code must be at the same file.
+      <pre>
+&lt;div data-tdefine="items [10 20 30]" data-muse-macro="list"&gt;
+    Macro goes here
+&lt;/div&gt;
+      </pre>
+    </p>
+    
+    <a name="metal.external"></a>
+    <h3>External macros</h3>
+    <p>
+      External macros are defined at a different page that where they are invoked. It only differs how they are invoked;
+      if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
+      <pre>
+&lt;div data-tdefine="items [10 20 30]" data-muse-macro="list/macros.html"&gt;
+    Macro goes here
+&lt;/div&gt;
+      </pre>
+
+    </p>
 
     <a name="moreExamples">
     <h2>More examples</h2>
@@ -342,54 +425,68 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       Please, take a look to test files in <code>test/</code> to view more JSPT examples.
       
      <a name="invocation"></a>
-     <h2>Invoking Page Templates</h2>
+     <h2>Invoking Javascript Page Templates</h2>
      <p>
-       There are 2 available implementations of JPT. The first one is PageTemplateImpl, that makes all the job in one phase, reading the JPT file and generating the output simultaneously. The second one is TwoPhasesPageTemplateImpl, that divides the job in two phases:
-       <ul>
-         <li>A first phase reading the JPT and generating a java representation.</li>
-         <li>A second phase reading the java representation and generating the real output.</li>
-       </ul>
-       It is recommended to use the two phases implementation, the performance is better and new enhancements could only be available in that one.
+       But, how can we use JSPT? The <code>dictionary</code> is used to define variables for use by the template.
      </p>
      <p>
-       But, how can we use JPT? The <code>context</code> may be any Java object.  This is the same object referred to by <code>here</code> in path expressions.  The <code>dictionary</code> is optional and may be used to define variables for use by the template.
-     </p>
-     <p>
-       An example of invoking a PageTemplate from a Servlet:
+       An example of invoking  JSPT:
      <pre>
-public class MyServlet extends HttpServlet {
-    public void service( HttpServletRequest request, HttpServletResponse response )
-        throws ServletException, IOException
-    {
-        // Some business logic here. . . .
-        User user = . . . 
-        Record record = . . .
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Some JSPT examples&lt;/title&gt;
+        
+        &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
+        &lt;script src="../dist/jspt.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+        
+$(function () {
+    "use strict";
 
-        // Response to user
-        try {
-        // Find and instantiate template, located in the record directory
-            // under our web application root.
-            URL templateURL = getServletContext().getResource( "record/showrecord.jpt" );
-            PageTemplate template = new TwoPhasesPageTemplateImpl( templateURL );
+    var dictionary = { 
+        aString: "string",
+        doggy: false,
+        number1: 1,
+        number100: 100,
+        user: {
+            name: "Bob", 
+            age: function( ){
+                return 25;
+            }
+        },
+        items: [ 'item0', 'item1', 'item2' ]
+    };
 
-            // Initialize some variables to be used by the template
-            Map dictionary = new HashMap();
-            dictionary.put( "request", request );
-            dictionary.put( "user", user );
+    jspt.run( document.body, dictionary );
+});
 
-            // Output response
-            OutputStream output = response.getOutputStream();
-    	    response.setContentType( "text/html" );
-            template.process( output, record, dictionary );
-            output.close();
-            
-        } catch( PageTemplateException e ) {
-            // Oh no!
-            throw new ServletException( e );
-        }
-    }
-}
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Some expressions&lt;/h1&gt;
+        &lt;ol&gt;
+            &lt;li data-tcontent="user.name"&gt;xxx&lt;/li&gt;
+            &lt;li data-tcontent="string:help my ${user.name}"&gt;xxx&lt;/li&gt;
+            &lt;li data-tcontent="doggy"&gt;not false&lt;/li&gt;
+            &lt;li data-tcontent="not:doggy"&gt;not false&lt;/li&gt;
+            &lt;li data-tcontent="eq: number1 number100"&gt;not true&lt;/li&gt;
+            &lt;li data-tcontent="user.name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-tcontent="user2.name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-tcontent="items[0]"&gt;an item&lt;/li&gt;
+            &lt;li data-tcontent="user/age()"&gt;user/age()&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+
     </pre>
+    The invokation of JSPT is at:
+    <pre>
+jspt.run( document.body, dictionary );
+    </pre>
+    The fist argument sets the DOM node where JPST will search its custom HTML tags. The second one
+    is the dictionary, a Javascript object that will be available to all custom HTML tags of JSPT.
     </p>
   </body>
 </html>
