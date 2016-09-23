@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Some JSPT examples</title>
+        
+        <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
+        <script src="../dist/jspt.js"></script>
+        <script>
+$(function () {
+    "use strict";
+
+    var dictionary = { 
+        aString: "string",
+        doggy: false,
+        number1: 1,
+        number100: 100,
+        user: {
+            name: "Bob", 
+            age: function( ){
+                return 25;
+            }
+        },
+        items: [ 'item0', 'item1', 'item2' ]
+    };
+
+    jspt.run( document.body, dictionary );
+});
+
+        </script>
+    </head>
+    <body>
+        <h1>Some expressions</h1>
+        <ol>
+            <li data-tcontent="user.name">xxx</li>
+            <li data-tcontent="string:help my ${user.name}">xxx</li>
+            <li data-tcontent="doggy">not false</li>
+            <li data-tcontent="not:doggy">not false</li>
+            <li data-tcontent="eq: number1 number100">not true</li>
+            <li data-tcontent="user.name | string:no friends">any friends?</li>
+            <li data-tcontent="user2.name | string:no friends">any friends?</li>
+            <li data-tcontent="items[0]">an item</li>
+            <li data-tcontent="user/age()">user/age()</li>
+        </ol>
+    </body>
+</html>
