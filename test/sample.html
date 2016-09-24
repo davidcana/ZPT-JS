@@ -33,14 +33,15 @@ $(function () {
         <h1>Some expressions</h1>
         <ol>
             <li data-tcontent="user.name">xxx</li>
-            <li data-tcontent="string:help my ${user.name}">xxx</li>
+            <li data-tcontent="string: help my ${user.name}">xxx</li>
             <li data-tcontent="doggy">not false</li>
-            <li data-tcontent="not:doggy">not false</li>
+            <li data-tcontent="not: doggy">not false</li>
             <li data-tcontent="eq: number1 number100">not true</li>
             <li data-tcontent="user.name | string:no friends">any friends?</li>
             <li data-tcontent="user2.name | string:no friends">any friends?</li>
-            <li data-tcontent="items[0]">an item</li>
             <li data-tcontent="user/age()">user/age()</li>
+            <li data-tcontent="items[0]">an item</li>
+            <li data-tcontent="items[ number1 ]">an item</li>
         </ol>
     </body>
 </html>

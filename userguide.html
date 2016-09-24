@@ -30,7 +30,7 @@
     <p>
       JSPT is a Javascript implementation of Zope Page Templates (ZPT). Because JSPT
       isn't running in the context of Zope and isn't written with Python,
-      there are necessarily some differences between JPT and ZPT. This document
+      there are necessarily some differences between JSPT and ZPT. This document
       will concentrate on the ways that JSPT differs from ZPT. For an introduction
       to ZPT refer to the chapter 
       <a href="http://docs.zope.org/zope2/zope2book/ZPT.html">Using
@@ -41,28 +41,25 @@
     </p>
     
     <a name="zpt.grunt"></a>
-    <h3>Grunt project</h3>
+    <h3>Building and testing</h3>
     <p>
       JSPT uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you know
       how a Grunt project works you can skip this chapter.
     </p>
     <p>
-      If you want to test JSPT the next command lines are useful:
+      If you want to modify and rebuild JSPT the next command lines are useful:
       <pre>
 grunt concat    // Concatenate all scripts in the scripts sub-directory into a single script called dist/jspt.js
 grunt uglify    // Create a file within dist/jspt.min.js that contains the result of minifying the JavaScript files
 grunt compress  // Compress files and folders of this project into dist/jspt_yyyy-mm-dd_hhmm.tar.gz
       </pre>
     </p>
-    
-    <a name="zpt.testing"></a>
-    <h3>Testing project</h3>
     <p>
       JSPT uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing JSPT open test/index.html with your
       favourite browser.
     </p>
-    <a name="zpt.evaluationOrder"></a>
     
+    <a name="zpt.tags"></a>
     <h3>JSPT tags</h3>
     <p>
       The name of tags are not the same because if they were the resulting HTML douments will not be well formed. The list of 
@@ -134,7 +131,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
             <td>Replace the content of an element and remove the element leaving the content</td>
         </tr>
       </table>
-      The tags can be changed. Customize the <code>defaultTag</code> variable in js/app/jsptContext.js file.
+      The tags can be changed. Customize the <code>defaultTag</code> variable in <code>js/app/jsptContext.js</code> file.
       You can also use <code>jsptContext.setTags( tags )</code> to define the tags programmatically.<br>
       Important: <strong>after this point we will refer to tags as the JSPT tag name</strong>.
     </p>
@@ -142,7 +139,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <a name="zpt.evaluationOrder"></a>
     <h3>Evaluation order</h3>
     <p>
-      The order evaluation of attributes in JPT is not equal than ZPT's. The new order is:
+      The order evaluation of attributes in JSPT is not equal than ZPT's. The new order is:
       <ol>
         <li><code>data-trepeat</code></li>
         <li><code>data-ton-error</code></li>
@@ -188,8 +185,8 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       <ul>
         <li><code>repeat</code> see <code><a href="https://docs.zope.org/zope2/zope2book/AppendixC.html#repeat-repeat-an-element">ZPT reference</a></code></li>
       </ul>
-      The <code>here</code> variable (the context) is not defined in JSPT; it is implicit. The scope of all variables in context 
-      is global. Take a look to <a href="">examples</a> to understand how you can define variables of the context.<br />
+      The <code>here</code> variable (the context) is not defined in JSPT; it is implicit. The scope of all variables in dictionary 
+      is global. Take a look to <a href="#invocation">Invoking JSPT</a> to understand how you can define variables of the dictionary.<br />
       The scope of the variables defined via a <code>data-tdefine</code> attribute is local. An example:
       <pre>
 &lt;div data-tdefine="a number"&gt;
@@ -198,6 +195,14 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
 &lt;span data-treplace="a">null&lt;/span&gt;
       </pre>
       At the first replace the value in <code>number</code> will be used. At the second replace, a <code>null</code> value (the <code>a</code> variable is out of scope).<br />
+      
+      Global variables are also implemented. Their scope is all document after their definition: <br />
+      <pre>
+&lt;div data-tdefine="global a number"&gt;
+    &lt;span data-treplace="a">5&lt;/span&gt;
+&lt;/div&gt;
+&lt;span data-treplace="a">5&lt;/span&gt;
+      </pre>
       
       The following variables are defined in ZPT but not in JSPT:
       <code>here, template, resolver, options, CONTEXTS, root, container, request, user, modules</code>.  
@@ -209,19 +214,16 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <h4>Path traversal</h4>
     <p>
       Following the initial path element, path elements are either properties or methods
-      of the preceding object. Example: <br />
-      <code>object.name</code> will search for a property <code>name</code> or a method <code>name()</code>
-            in the passed object.
-    </p>
-    <p>
-      Some examples more:
+      of the preceding object. Examples: <br />
       <ul>
-        <li><code>object1.doSomething( 9, 8 )</code> will run <code>doSomething</code> method 
-                in <code>object1</code> with <code>9</code> and <code>8</code> as arguments.</li>
-        <li><code>object2.values.length</code> will run <code>values</code> method in <code>object2</code>
-                and get its length.</li>
-        <li><code>object3.getItem( itemName )</code> will get the item identified by <code>itemName</code>
-                variable.</li>
+        <li><code>object.name</code> will search for a property <code>name</code>
+            in the passed object.</li>
+        <li><code>object/name()</code> will search for a method <code>name()</code>
+            in the passed object.</li>
+        <li><code>object/name( arg1, arg2 )</code> will search for a method <code>name()</code>
+            in the passed object and pass <code>arg1</code> and <code>arg2</code> as parameters.</li>
+        <li><code>object/name()/name2()</code> will search for a method <code>name()</code>
+            in the passed object and then search for a method <code>name2()</code>.</li>
       </ul>
       The last element in a path expression may resolve to <code>null</code>, but if an intermediate element resolves
       to <code>null</code> an <code>Exception</code> will be thrown. 
@@ -251,9 +253,6 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
         <li><code>js: ${aNumber} + 1</code> returns the result of adding 1 to the value of <code>aNumber</code> variable.</li>
       </ul>
     </p>
-      
-    <a name="tales.java.variables"></a>
-    <h4>Variables</h4>
     
     <a name="tales.exists"></a>
     <h3>Exists expressions</h3>
@@ -331,6 +330,27 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
         <li><code>equals: assets liabilities anObject</code></li>
         <li><code>greater: 10 ( +: children pets )</code></li>
       </ul>
+    </p>
+    
+    <a name="tales.jquery"></a>
+    <h3>Jquery expressions</h3>
+    <p>
+        JSPT supports some jquery expressions:
+        
+        <ul>
+&lt;div&gt;
+    &lt;div&gt;value1 = &lt;span id="value1" class="values"&gt;10&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;value2 = &lt;span id="value2" class="values"&gt;20&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;value3 = &lt;span id="value3" class="values"&gt;30&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;div data-tcontent="$('#value1')"&gt;must be 10&lt;/div&gt;
+    &lt;div data-tcontent="$('.values')"&gt;must be 10,20,30&lt;/div&gt;
+    &lt;div data-tcontent="+: $('.values')"&gt;must be 10 + 20 + 30 = 60&lt;/div&gt;
+    &lt;div data-tcontent="+: 100 $( '.values' )"&gt;must be 100 + 10 + 20 + 30 = 160&lt;/div&gt;
+&lt;/div&gt;
+        </ul>
     </p>
     
     <a name="tales.other"></a>
@@ -427,7 +447,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
      <a name="invocation"></a>
      <h2>Invoking Javascript Page Templates</h2>
      <p>
-       But, how can we use JSPT? The <code>dictionary</code> is used to define variables for use by the template.
+       But, how can we use JSPT? The <code>dictionary</code> is used to define global variables.
      </p>
      <p>
        An example of invoking  JSPT:
@@ -485,7 +505,7 @@ $(function () {
     <pre>
 jspt.run( document.body, dictionary );
     </pre>
-    The fist argument sets the DOM node where JPST will search its custom HTML tags. The second one
+    The first argument sets the DOM node where JPST will search its custom HTML tags. The second one
     is the dictionary, a Javascript object that will be available to all custom HTML tags of JSPT.
     </p>
   </body>
