@@ -1,9 +1,16 @@
 {
-  "name": "jspt",
-  "version": "0.1.0",
-  "author": "David Cana Lopez",
-  "description": "Javascript Page Templates",
+  "name": "zpt",
+  "version": "0.2.0",
+  "description": "Zenon Page Templates - JS (ZPT-JS)",
+  "keywords": [ "template", "templating", "python", "zope" ],
+  "homepage": "https://github.com/davidcana/ZPT-JS",
+  "bugs": "david.javapagetemplates@gmail.com",
   "license": "AGPL-3.0",
+  "author": "David Cana Lopez",
+  "contributors": [""],
+  "repository": {
+    "private": true
+  },
   "dependencies": {
     "jquery": "^2.0.3",
     "mstring": "^0.1.2"
@@ -17,8 +24,5 @@
     "grunt-contrib-qunit": "~0.7.0",
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-watch": "~0.6.1"
-  },
-  "repository": {
-    "private": true
   }
 }

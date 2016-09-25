@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>JSPT: User's Guide</title>
+    <title>ZPT-JS: User's Guide</title>
     <style>
       body { 
         background-color: white; 
@@ -20,7 +20,7 @@
   </head>
   <body>
     <a name="top"></a>
-    <h1>JSPT: User's Guide</h1>
+    <h1>ZPT-JS: User's Guide</h1>
     <div class="sub">last modified: 2015/22/04</div>
     <div class="sub">author <a href="mailto:chris@christophermrossi.com">Chris Rossi</a></div>
     <div class="sub">contributed by <a href="mailto:david.javapagetemplates@gmail.com">David Cana</a></div>
@@ -28,10 +28,10 @@
     <a name="zpt"></a>
     <h2>Zope Page Templates</h2>
     <p>
-      JSPT is a Javascript implementation of Zope Page Templates (ZPT). Because JSPT
+      ZPT-JS is a Javascript implementation of Zope Page Templates (ZPT). Because ZPT-JS
       isn't running in the context of Zope and isn't written with Python,
-      there are necessarily some differences between JSPT and ZPT. This document
-      will concentrate on the ways that JSPT differs from ZPT. For an introduction
+      there are necessarily some differences between ZPT-JS and ZPT. This document
+      will concentrate on the ways that ZPT-JS differs from ZPT. For an introduction
       to ZPT refer to the chapter 
       <a href="http://docs.zope.org/zope2/zope2book/ZPT.html">Using
       Zope Page Templates</a> in the 
@@ -43,11 +43,11 @@
     <a name="zpt.grunt"></a>
     <h3>Building and testing</h3>
     <p>
-      JSPT uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you know
+      ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you know
       how a Grunt project works you can skip this chapter.
     </p>
     <p>
-      If you want to modify and rebuild JSPT the next command lines are useful:
+      If you want to modify and rebuild ZPT-JS the next command lines are useful:
       <pre>
 grunt concat    // Concatenate all scripts in the scripts sub-directory into a single script called dist/jspt.js
 grunt uglify    // Create a file within dist/jspt.min.js that contains the result of minifying the JavaScript files
@@ -55,19 +55,19 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       </pre>
     </p>
     <p>
-      JSPT uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing JSPT open test/index.html with your
+      ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open test/index.html with your
       favourite browser.
     </p>
     
     <a name="zpt.tags"></a>
-    <h3>JSPT tags</h3>
+    <h3>ZPT-JS tags</h3>
     <p>
       The name of tags are not the same because if they were the resulting HTML douments will not be well formed. The list of 
       tags with their equivalences are:
       <table>
         <tr>
             <th>ZPT tag name</th>
-            <th>JSPT tag name</th>
+            <th>ZPT-JS tag name</th>
             <th>Description</th>
         </tr>
         <tr>
@@ -133,13 +133,13 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       </table>
       The tags can be changed. Customize the <code>defaultTag</code> variable in <code>js/app/jsptContext.js</code> file.
       You can also use <code>jsptContext.setTags( tags )</code> to define the tags programmatically.<br>
-      Important: <strong>after this point we will refer to tags as the JSPT tag name</strong>.
+      Important: <strong>after this point we will refer to tags as the ZPT-JS tag name</strong>.
     </p>
     
     <a name="zpt.evaluationOrder"></a>
     <h3>Evaluation order</h3>
     <p>
-      The order evaluation of attributes in JSPT is not equal than ZPT's. The new order is:
+      The order evaluation of attributes in ZPT-JS is not equal than ZPT's. The new order is:
       <ol>
         <li><code>data-trepeat</code></li>
         <li><code>data-ton-error</code></li>
@@ -185,8 +185,8 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
       <ul>
         <li><code>repeat</code> see <code><a href="https://docs.zope.org/zope2/zope2book/AppendixC.html#repeat-repeat-an-element">ZPT reference</a></code></li>
       </ul>
-      The <code>here</code> variable (the context) is not defined in JSPT; it is implicit. The scope of all variables in dictionary 
-      is global. Take a look to <a href="#invocation">Invoking JSPT</a> to understand how you can define variables of the dictionary.<br />
+      The <code>here</code> variable (the context) is not defined in ZPT-JS; it is implicit. The scope of all variables in dictionary 
+      is global. Take a look to <a href="#invocation">Invoking ZPT-JS</a> to understand how you can define variables of the dictionary.<br />
       The scope of the variables defined via a <code>data-tdefine</code> attribute is local. An example:
       <pre>
 &lt;div data-tdefine="a number"&gt;
@@ -204,9 +204,9 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
 &lt;span data-treplace="a">5&lt;/span&gt;
       </pre>
       
-      The following variables are defined in ZPT but not in JSPT:
+      The following variables are defined in ZPT but not in ZPT-JS:
       <code>here, template, resolver, options, CONTEXTS, root, container, request, user, modules</code>.  
-      The following variables are defined in ZPT but aren't yet implemented in JSPT:
+      The following variables are defined in ZPT but aren't yet implemented in ZPT-JS:
       <code>nothing, default, attrs</code>.  If you need these, holler.
     </p>
 
@@ -335,7 +335,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <a name="tales.jquery"></a>
     <h3>Jquery expressions</h3>
     <p>
-        JSPT supports some jquery expressions:
+        ZPT-JS supports some jquery expressions:
         
         <pre>
 &lt;div&gt;
@@ -357,7 +357,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <h3>Other expressions</h3>
     <p>
       String expressions behave exactly as in ZPT. Python expressions are not
-      supported in JSPT.
+      supported in ZPT-JS.
     </p>
 
     <a name="tal"></a>
@@ -373,7 +373,7 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <h3>Repeat expressions</h3>
     <p>
       There are a few minor variations for <code>tal:repeat</code>. The repeat expression must 
-      evaluate to an array. The repeat variables <code>Letter</code> and <code>Roman</code> have been changed in JSPT to
+      evaluate to an array. The repeat variables <code>Letter</code> and <code>Roman</code> have been changed in ZPT-JS to
       <code>capitalLetter</code> and <code>capitalRoman</code>.  
     </p>
     
@@ -442,21 +442,21 @@ grunt compress  // Compress files and folders of this project into dist/jspt_yyy
     <a name="moreExamples">
     <h2>More examples</h2>
     <p>
-      Please, take a look to test files in <code>test/</code> to view more JSPT examples.
+      Please, take a look to test files in <code>test/</code> to view more ZPT-JS examples.
       
      <a name="invocation"></a>
      <h2>Invoking Javascript Page Templates</h2>
      <p>
-       But, how can we use JSPT? The <code>dictionary</code> is used to define global variables.
+       But, how can we use ZPT-JS? The <code>dictionary</code> is used to define global variables.
      </p>
      <p>
-       An example of invoking  JSPT:
+       An example of invoking  ZPT-JS:
      <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
         &lt;meta charset="utf-8"&gt;
-        &lt;title&gt;Some JSPT examples&lt;/title&gt;
+        &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
         
         &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
         &lt;script src="../dist/jspt.js"&gt;&lt;/script&gt;
@@ -501,12 +501,12 @@ $(function () {
 &lt;/html&gt;
 
     </pre>
-    The invokation of JSPT is at:
+    The invokation of ZPT-JS is at:
     <pre>
 jspt.run( document.body, dictionary );
     </pre>
     The first argument sets the DOM node where JPST will search its custom HTML tags. The second one
-    is the dictionary, a Javascript object that will be available to all custom HTML tags of JSPT.
+    is the dictionary, a Javascript object that will be available to all custom HTML tags of ZPT-JS.
     </p>
   </body>
 </html>
