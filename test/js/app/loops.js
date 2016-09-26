@@ -33,21 +33,21 @@ QUnit.test( "dynamic loops test", function( assert ) {
     assert.equal( getValues( '.nValue1' ) , '10/20/30/40' );
     
     // Replace 10/20/30/40 by 10/20/30
-    var statistics = {
+    var dictionary = {
             someNumbers: [ 10, 20, 30 ]
         };
-    jspt.run( 
+    zpt.run( 
             $( '#dynamicLoop' )[0], 
-            statistics);
+            dictionary);
     assert.equal( getValues( '.nValue1' ) , '10/20/30' );
     
     // Add 40/50/60
-    var statistics = {
+    var dictionary = {
             someNumbers: [ 40, 50, 60 ]
         };
-    jspt.run( 
+    zpt.run( 
             $( '#dynamicLoop' )[0], 
-            statistics,
+            dictionary,
             null, 
             true );
     assert.equal( getValues( '.nValue1' ) , '10/20/30/40/50/60' );

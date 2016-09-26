@@ -1,5 +1,5 @@
-/* JSPTContext singleton class */
-var jsptContext = (function() {
+/* ZPTContext singleton class */
+var zptContext = (function() {
     var defaultTags = {
             talCondition:     "data-tcondition",
             talRepeat:        "data-trepeat",

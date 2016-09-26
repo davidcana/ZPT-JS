@@ -1,7 +1,7 @@
 /* Class NodeAttributes */
 var NodeAttributes = function( node ) {
     
-    var tags = jsptContext.getTags();
+    var tags = zptContext.getTags();
     
     // tal namespace
     this.talDefine = node.getAttribute( tags.talDefine );

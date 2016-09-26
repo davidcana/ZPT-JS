@@ -1,7 +1,7 @@
 $(function () {
     "use strict";
 
-    var statistics = { 
+    var dictionary = { 
         nullValue: null,
         aString: "string",
         yes: "yes",
@@ -54,5 +54,5 @@ $(function () {
         someNumbers: [ 10, 20, 30, 40 ]
     };
 
-    jspt.run( document.body, statistics );
+    zpt.run( document.body, dictionary );
 });

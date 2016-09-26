@@ -1,9 +1,9 @@
-var jspt = (function() {
+var zpt = (function() {
     "use strict";
     
     var run = function( root, obj, callbackToApply, notRemoveGeneratedTags ){
-        var jsptNode =  new JsptNode( root, obj, callbackToApply, notRemoveGeneratedTags );
-        jsptNode.run();
+        var zptNode =  new ZptNode( root, obj, callbackToApply, notRemoveGeneratedTags );
+        zptNode.run();
     };
     
     return {
@@ -11,8 +11,8 @@ var jspt = (function() {
     };
 })();
 
-/* Class JsptNode */
-var JsptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
+/* Class ZptNode */
+var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     "use strict";
     
     var undefined = {}._;
@@ -28,8 +28,8 @@ var JsptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     var ON_ERROR_VAR_NAME = "on-error";
     
     // TAL attributes for querySelectorAll call
-    var beforeAttr = jspt.beforeAttr;
-    var beforeText = jspt.beforeText;
+    var beforeAttr = zpt.beforeAttr;
+    var beforeText = zpt.beforeText;
     
     // Attributes which don't support setAttribute()
     var altAttr = {
@@ -59,7 +59,7 @@ var JsptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     var callback = callbackToApply;
     var scope = new Scope( obj );
     var querySelectorAll = !!root.querySelectorAll;
-    var tags = jsptContext.getTags();
+    var tags = zptContext.getTags();
 
     // Optimize comparison check
     var innerText = "innerText" in root ? "innerText" : "textContent";
@@ -577,7 +577,7 @@ var JsptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
 
 // Support RequireJS module pattern
 if ( typeof define == "function" && define.amd ) {
-    define( "jspt", function() {
-        return jspt;
+    define( "zpt", function() {
+        return zpt;
     });
 }

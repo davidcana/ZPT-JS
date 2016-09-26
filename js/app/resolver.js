@@ -1,8 +1,8 @@
 /* Class Resolver */
 var Resolver = function( ) {
     //var self = this;
-    var defineMacroTag = jsptContext.getTags().metalDefineMacro;
-    var macroTag = jsptContext.getTags().metalMacro;
+    var defineMacroTag = zptContext.getTags().metalDefineMacro;
+    var macroTag = zptContext.getTags().metalMacro;
     var macros = {};
     var remote = {};
     var remoteUrls = {};

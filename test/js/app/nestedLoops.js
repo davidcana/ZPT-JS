@@ -1,6 +1,6 @@
 QUnit.test( "nested loops test", function( assert ) {
     
-    // Init and run jspt
+    // Init and run zpt
     var values = {
         someNumbers: [ [10, 20], [30, 40] ],
         tools: [ 
@@ -9,7 +9,7 @@ QUnit.test( "nested loops test", function( assert ) {
             {id: "3", name: "tool C", numbers: [50, 60]}
         ]
         };
-    jspt.run( document.body, values );
+    zpt.run( document.body, values );
     
     // Test nested loop with numeric arrays
     assert.equal( $('#number10').html() , "10" );
