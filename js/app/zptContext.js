@@ -46,10 +46,42 @@ var zptContext = (function() {
         
         return tal;
     };
-
+    
+    var formatters = {};
+    formatters.lowerCase = function ( value ){
+        return value.toLocaleLowerCase();
+    };
+    formatters.upperCase = function ( value ){
+        return value.toLocaleUpperCase();
+    };
+    formatters.localeDate = function ( value ){
+        return value.toLocaleDateString;
+    };
+    formatters.localeTime = function ( value ){
+        return value.toLocaleTimeString;
+    };
+    formatters.localeString = function ( value, locale ){
+        return locale? 
+               value.toLocaleString( value, locale ): 
+               value.toLocaleString( value );
+    };
+    formatters.fix = function ( number, fixTo ){
+        return number.toFixed( fixTo );
+    };
+    
+    var getFormatter = function ( id ){
+        return formatters[ id ];
+    };
+    
+    var registerFormatter = function ( id, formatter ){
+        formatters[ id ] = formatter;
+    };
+    
     return {
         getTags: getTags,
         setTags: setTags,
-        getTal: getTal
+        getTal: getTal,
+        getFormatter: getFormatter,
+        registerFormatter: registerFormatter
     };
 })();

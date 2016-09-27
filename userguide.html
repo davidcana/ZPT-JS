@@ -71,23 +71,78 @@
         <a href="http://docs.zope.org/zope2/zope2book/">Zope Book</a>. For a complete reference to ZPT, refer to the
         <a href="http://docs.zope.org/zope2/zope2book/AppendixC.html">ZPT Reference</a>.
     </p>
-
-    <a id="zpt.grunt"></a>
-    <h3>Building and testing</h3>
+    
+    <a id="firstSteps"></a>
+    <h2>First steps using ZPT-JS</h2>
     <p>
-        ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you know how a Grunt project works you can skip this chapter.
+        How can we use ZPT-JS? The <code>dictionary</code> is used to define global variables.
     </p>
     <p>
-        If you want to modify and rebuild ZPT-JS the next command lines are useful:
+        An example of invoking ZPT-JS:
     </p>
     <pre>
-$ grunt concat    // Concatenate all scripts in the scripts sub-directory into a single script called dist/zpt.js
-$ grunt uglify    // Create a file within dist/zpt.min.js that contains the result of minifying the JavaScript files
-$ grunt compress  // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
+        
+        &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
+        &lt;script src="../dist/zpt.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+        
+$(function () {
+    "use strict";
+
+    var dictionary = { 
+        aString: "string",
+        doggy: false,
+        number1: 1,
+        number100: 100,
+        user: {
+            name: "Bob", 
+            age: function( ){
+                return 25;
+            }
+        },
+        items: [ 'item0', 'item1', 'item2' ]
+    };
+
+    zpt.run( document.body, dictionary );
+});
+
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Some expressions&lt;/h1&gt;
+        &lt;ol&gt;
+            &lt;li data-tcontent="user.name"&gt;xxx&lt;/li&gt;
+            &lt;li data-tcontent="string:help my ${user.name}"&gt;xxx&lt;/li&gt;
+            &lt;li data-tcontent="doggy"&gt;not false&lt;/li&gt;
+            &lt;li data-tcontent="not:doggy"&gt;not false&lt;/li&gt;
+            &lt;li data-tcontent="eq: number1 number100"&gt;not true&lt;/li&gt;
+            &lt;li data-tcontent="user.name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-tcontent="user2.name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-tcontent="items[0]"&gt;an item&lt;/li&gt;
+            &lt;li data-tcontent="user/age()"&gt;user/age()&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
     </pre>
     <p>
-        ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open test/index.html with your favourite browser.
+        The invokation of ZPT-JS is at:
     </p>
+    <pre>
+zpt.run( document.body, dictionary );
+    </pre>
+    <p>
+        The first argument sets the DOM node where ZPT-JS will search its custom HTML tags. The second one is the dictionary, a Javascript object that will be available to all custom HTML tags of ZPT-JS. You can also run ZPT-JS as a Jquery plugin:
+    </p>
+    <pre>
+$( 'body' ).zpt({
+    dictionary: dictionary
+});
+    </pre>
 
     <a id="zpt.tags"></a>
     <h3>ZPT-JS tags</h3>
@@ -263,7 +318,7 @@ $ grunt compress  // Compress files and folders of this project into dist/zpt_yy
     </p>
     <ul>
         <li><code>people[ 2 ]</code></li>
-        <li><code>grid[ point / x ][ point / y ]</code></li>
+        <li><code>people[ index ]</code></li>
     </ul>
 
     <a id="tales.javascript"></a>
@@ -289,7 +344,7 @@ $ grunt compress  // Compress files and folders of this project into dist/zpt_yy
         <li><code>0</code></li>
     </ul>
     <p>
-        the expression evaluates to <code>false</code>. Otherwise the expression evaluates to <code>true</code>.
+        the expression evaluates to <code>false</code>. Otherwise the expression evaluates to <code>true</code>. If an exception is thrown trying to evaluate the expression, it evaluates to <code>false</code>.
     </p>
 
     <a id="tales.not"></a>
@@ -334,7 +389,7 @@ $ grunt compress  // Compress files and folders of this project into dist/zpt_yy
         All operators uses lazy evaluation. OR and AND expressions support 2 or more operators. COND expression only support 3. An example:
     </p>
     <ul>
-        <li><code>&lt;p data-tcondition="and: ( exists:here/pets/dog ) ( not:here/pets/dog/badDog )"&gt;
+        <li><code>&lt;p data-tcondition="and: ( exists:pets()/dog() ) ( not:pets()/dog()/badDog() )"&gt;
               Good Dog&lt;/p&gt;</code></li>
         <li><code>&lt;p data-tcondition="or: isFridayNight isSaturday isSunday"&gt;
               Yeah!&lt;/p&gt;</code></li>
@@ -463,80 +518,67 @@ Macro goes here
     Macro goes here
 &lt;/div&gt;
     </pre>
-
+    
+    <a id="formatters"></a>
+    <h2>Formatters</h2>
+    <p>
+        A <code>formatter</code> allows to format the evaluation of an expression. ZPT-JS includes some formatters:
+    </p>
+    <ul>
+        <li><code>format: lowerCase 'Test'</code> evaluates as 'test'</li>
+        <li><code>format: upperCase 'TEST'</code> evaluates as 'TEST'</li>
+        <li><code>format: fix 1.371 2</code> evaluates as '1.37'</li>
+        <li><code>format: fix (:: 1 3) 2</code> evaluates as '0.33'</li>
+    </ul>
+        
+    <p>
+        You can register other formatters of your own:
+    </p>
+    <pre>
+zptContext.registerFormatter( 
+    'myCustomFormatter', 
+    function( value ){
+        return "$" + value;
+    }
+);
+    </pre>
+    <p>
+        After registering it you will be able to use it as usual:
+    </p>
+    <ul>
+        <li><code>format: myCustomFormatter aNumber</code></li>
+    </ul>
+    
+    <p>
+        It is possible to run custom formatters without registering them. They must be functions defined in the dictionary:
+    </p>
+    <ul>
+        <li><code>format: customFormatter aNumber</code> formats aNumber using a function in the dictionary called <code>customFormatter</code></li>
+        <li><code>format: customFormatterName aNumber</code> formats aNumber using a function in the dictionary called as the value of the <code>customFormatterName</code> variable</li>
+    </ul>
+    
+    <a id="zpt.grunt"></a>
+    <h3>Building and testing</h3>
+    <p>
+        ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you know how a Grunt project works you can skip this chapter.
+    </p>
+    <p>
+        If you want to modify and rebuild ZPT-JS the next command lines are useful:
+    </p>
+    <pre>
+$ grunt concat    // Concatenate all scripts in the scripts sub-directory into a single script called dist/zpt.js
+$ grunt uglify    // Create a file within dist/zpt.min.js that contains the result of minifying the JavaScript files
+$ grunt compress  // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
+    </pre>
+    <p>
+        ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open test/index.html with your favourite browser.
+    </p>
+    
     <a id="moreExamples"></a>
     <h2>More examples</h2>
     <p>
         Please, take a look to test files in <code>test/</code> to view more ZPT-JS examples.
     </p>
-
-    <a id="invocation"></a>
-    <h2>Invoking Javascript Page Templates</h2>
-    <p>
-        But, how can we use ZPT-JS? The <code>dictionary</code> is used to define global variables.
-    </p>
-    <p>
-        An example of invoking ZPT-JS:
-    </p>
-    <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset="utf-8"&gt;
-        &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
-        
-        &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
-        &lt;script src="../dist/zpt.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-        
-$(function () {
-    "use strict";
-
-    var dictionary = { 
-        aString: "string",
-        doggy: false,
-        number1: 1,
-        number100: 100,
-        user: {
-            name: "Bob", 
-            age: function( ){
-                return 25;
-            }
-        },
-        items: [ 'item0', 'item1', 'item2' ]
-    };
-
-    zpt.run( document.body, dictionary );
-});
-
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Some expressions&lt;/h1&gt;
-        &lt;ol&gt;
-            &lt;li data-tcontent="user.name"&gt;xxx&lt;/li&gt;
-            &lt;li data-tcontent="string:help my ${user.name}"&gt;xxx&lt;/li&gt;
-            &lt;li data-tcontent="doggy"&gt;not false&lt;/li&gt;
-            &lt;li data-tcontent="not:doggy"&gt;not false&lt;/li&gt;
-            &lt;li data-tcontent="eq: number1 number100"&gt;not true&lt;/li&gt;
-            &lt;li data-tcontent="user.name | string:no friends"&gt;any friends?&lt;/li&gt;
-            &lt;li data-tcontent="user2.name | string:no friends"&gt;any friends?&lt;/li&gt;
-            &lt;li data-tcontent="items[0]"&gt;an item&lt;/li&gt;
-            &lt;li data-tcontent="user/age()"&gt;user/age()&lt;/li&gt;
-        &lt;/ol&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-    </pre>
-    <p>
-        The invokation of ZPT-JS is at:
-    </p>
-    <pre>
-zpt.run( document.body, dictionary );
-    </pre>
-    <p>
-        The first argument sets the DOM node where ZPT-JS will search its custom HTML tags. The second one is the dictionary, a Javascript object that will be available to all custom HTML tags of ZPT-JS.
-    </p>
-    
 </body>
 
 </html>

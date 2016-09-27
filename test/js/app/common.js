@@ -51,7 +51,10 @@ $(function () {
         divBy0: function( ){
             return 1 / 0;
         },
-        someNumbers: [ 10, 20, 30, 40 ]
+        someNumbers: [ 10, 20, 30, 40 ],
+        customFormatter: function( value ){
+            return "$" + value;
+        }
     };
 
     zpt.run( document.body, dictionary );

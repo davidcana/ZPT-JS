@@ -6,6 +6,7 @@ var expressionEvaluator = (function() {
     var PATH_SEGMENT_DELIMITER = '/';
     var EXPRESSION_DELIMITER = ' ';
     var INTERVAL_DELIMITER = ':';
+    var PROPERTY_DELIMITER = '.';
     
     var EXPRESSION_SUFFIX = ":";
     var EXPR_STRING = "string" + EXPRESSION_SUFFIX;
@@ -24,6 +25,7 @@ var expressionEvaluator = (function() {
     var EXPR_OR = "or" + EXPRESSION_SUFFIX;
     var EXPR_AND = "and" + EXPRESSION_SUFFIX;
     var EXPR_COND = "cond" + EXPRESSION_SUFFIX;
+    var EXPR_FORMAT = "format" + EXPRESSION_SUFFIX;
     var EXPR_JQUERY = "$";
     
     var evaluateToNotNull = function( scope, expression ) {
@@ -48,6 +50,9 @@ var expressionEvaluator = (function() {
         }
         if ( expression.indexOf( EXPR_JQUERY ) == 0 ) {
             return evaluateJQuery( scope, effectiveExpression );
+        }
+        if ( expression.indexOf( EXPR_FORMAT ) == 0 ) {
+            return evaluateFormat( scope, effectiveExpression.substr( EXPR_FORMAT.length ) );
         }
         
         // Comparison expressions
@@ -113,7 +118,11 @@ var expressionEvaluator = (function() {
     };
     
     var evaluateExists = function( scope, expression ) {
-        return evaluateBoolean( scope, expression );
+        try {
+            return evaluateBoolean( scope, expression );
+        } catch ( e ){
+            return false;
+        }
     };
     
     var evaluateNoCall = function( scope, expression ) {
@@ -154,6 +163,54 @@ var expressionEvaluator = (function() {
         } catch ( e ){
             return "Jquery expression error!";
         }
+    };
+    
+    var evaluateFormat = function( scope, exp ) {
+        var expression = exp.trim();
+        if ( expression.length == 0 ) {
+            throw 'Format expression void.';
+        }
+
+        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var numberOfTokens = segments.countTokens();
+        if ( numberOfTokens == 1 ) {
+            throw 'Only one element in format expression, please add at least one more.';
+        }
+        
+        // Get formatter
+        var formatter = evaluateFormatter( scope, segments.nextToken().trim() );
+        if (! formatter){
+            throw 'Formatter evaluated to undefined in format expression!';
+        }
+        
+        // Get arguments
+        var args = [];
+        while ( segments.hasMoreTokens() ) {
+            var argumentExpression = segments.nextToken().trim();
+            args.push( 
+                    evaluate( scope, argumentExpression ) );
+        }
+        
+        return formatter.apply( formatter, args );
+    };
+    
+    var evaluateFormatter = function( scope, expression ) {
+        
+        // Try to get a built-in formatter
+        var formatter = zptContext.getFormatter( expression );
+        
+        // Try to get a function with a name
+        if (! formatter){
+            formatter = scope.get( expression );
+        }
+        
+        // Try to get a function evaluating the expression
+        if (! formatter){
+            formatter = scope.get( 
+                evaluate( scope, expression ) );
+        }
+        
+        return formatter;
     };
     
     var evaluateEquals = function( scope, expression ) {
@@ -391,24 +448,6 @@ var expressionEvaluator = (function() {
         return result;
     };
     
-    // follows the dot notation path to find an object within an object:
-    // obj["a"]["b"]["1"] = c;
-    /*
-    var evaluateDefault = function( obj, expression ) {
-
-        // if fully qualified path is at top level: obj["a.b.d"] = c
-        if((x = obj[expression])) return (typeof x == "function") ? x.call(obj, expression) : x;
-
-        expression = expression.split(".");
-        
-        if ( expression[0] == 'repeat' ){
-            return evaluateRepeatExpression( scope, expression[1], expression[2] );
-        }
-        
-        x = 0;
-        while(expression[x] && (lastObj = obj) && (obj = obj[expression[x++]]));
-        return (typeof obj == "function") ? obj.call(lastObj, expression.join(".")) : obj;
-    }*/
     var evaluateDefault = function( scope, expression ) {
 
         // if fully qualified path is at top level: obj["a.b.d"] = c
@@ -419,9 +458,9 @@ var expressionEvaluator = (function() {
                    value;
         }
 
-        var expressionItem = expression.split( '.' );
+        var expressionItem = expression.split( PROPERTY_DELIMITER );
         
-        if ( expressionItem[0] == 'repeat' ){
+        if ( expressionItem[ 0 ] == 'repeat' ){
             return evaluateRepeatExpression( scope, expressionItem[1], expressionItem[2] );
         }
         
