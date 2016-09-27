@@ -62,12 +62,12 @@ var ExpressionTokenizer = function( exp, delimiter, escape ) {
             }
             
             // Increment parenthesis level
-            else if ( ch == '(' ) {
+            else if ( ch == '(' || ch == '[' ) {
                 parentLevel++;
             }
             
             // Decrement parenthesis level
-            else if ( ch == ')' ) {
+            else if ( ch == ')' || ch == ']' ) {
                 parentLevel--;
                 // If unmatched right parenthesis
                 if ( parentLevel < 0 ) {

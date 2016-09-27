@@ -763,7 +763,7 @@ var expressionEvaluator = (function() {
         }
         return undefined;
     };
-    
+
     var arrayExpression = function( scope, expression ) {
         
         if ( expression.charAt( 0 ) !== '[' || expression.charAt( expression.length - 1 ) !==  ']' ) {
@@ -771,6 +771,10 @@ var expressionEvaluator = (function() {
         }
 
         var arrayExp = expression.substring( 1, expression.length - 1 );
+        
+        if ( expression.indexOf( INTERVAL_DELIMITER ) != -1 ) {
+        }
+        
         var result = [];
         var segments = new ExpressionTokenizer( arrayExp, EXPRESSION_DELIMITER, true );
         

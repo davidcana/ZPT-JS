@@ -480,7 +480,28 @@ $( 'body' ).zpt({
         <li><code>data-trepeat="c [1:7:2]"</code> iterates using <code>c</code> through 1,3,5 and 7</li>
         <li><code>data-trepeat="c [:5]"</code> iterates using <code>c</code> through 0,1,2,3,4 and 5</li>
     </ul>
-
+    
+    <p>
+        Lists are very versatile:
+    </p>
+    <ul>
+        <li><code>[1:3 10]</code> evaluates to 1,2,3 and 10</li>
+        <li><code>[4 1:3 10]</code> evaluates to 4,1,2,3 and 10</li>
+    </ul>
+    
+    <p>
+        ...and can be used in arithmethic operations:
+    </p>
+    <ul>
+        <li><code>+: [1:3 10]</code> evaluates to 1+2+3+10 = 16</li>
+        <li><code>+: [4 1:3 10]</code> evaluates to 4+1+2+3+10 = 20</li>
+    </ul>
+    
+    Don't forget to not use spaces inside ranges! 
+    <ul>
+        <li><code>[ 1 : 3 ]</code> will not work!</li>
+    </ul>
+    
     <a id="metal"></a>
     <h2>METAL</h2>
     <p>

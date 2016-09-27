@@ -125,6 +125,7 @@ QUnit.test( "Arrays test", function( assert ) {
     assert.equal( $('#t11-6').html() , "10" );
     assert.equal( $('#t11-7').html() , "1,2,3" );
     assert.equal( $('#t11-8').html() , "1,2,3,1" );
+    assert.equal( $('#t11-9').html() , "7" );
 });
 
 QUnit.test( "Methods expressions test", function( assert ) {
