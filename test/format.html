@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Format tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="../js/lib/jquery-2.0.3.js"></script>
+        <script src="../js/app/zptContext.js"></script>
+        <script src="../js/app/scope.js"></script>
+        <script src="../js/app/expressionEvaluator.js"></script> 
+        <script src="../js/app/expressionTokenizer.js"></script> 
+        <script src="../js/app/loop.js"></script>
+        <script src="../js/app/nodeAttributes.js"></script>
+        <script src="../js/app/resolver.js"></script>
+        <script src="../js/app/zpt.js"></script>
+        
+        <script src="js/lib/qunit-1.19.0.js"></script>
+        <script src="js/app/common.js"></script>
+        <script src="js/app/format.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <p>
+            Simple format
+        </p>
+        <ol>
+            <li>format: lowerCase 'Test' should be <span id="t1-1" data-tcontent="format: lowerCase 'Test'">a lowercase</span></li>
+            <li>format: upperCase 'Test' should be <span id="t1-2" data-tcontent="format: upperCase 'Test'">an uppercase</span></li>
+            <li>format: lowerCase aString should be <span id="t1-3" data-tdefine="aString 'Variable Test'"
+                                                                    data-tcontent="format: lowerCase aString">a lowercase</span></li>
+            <li>format: upperCase aString should be <span id="t1-4" data-tdefine="aString 'Variable Test'"
+                                                                    data-tcontent="format: upperCase aString">an uppercase</span></li>
+        </ol>
+        
+        <p>
+            Format with arguments
+        </p>
+        <ol>
+            <li>format: fix 1.371 2 should be <span id="t2-1" data-tcontent="format: fix 1.377 2">a number fixed to 2</span></li>
+            <li>format: fix number fixTo should be <span id="t2-2" data-tdefine="fixTo 1; number 1.6341"
+                                                                       data-tcontent="format: fix number fixTo">a number fixed to 1</span></li>
+            <li>format: fix (:: 1 3) 2 should be <span id="t2-3" data-tcontent="format: fix (:: 1 3) 2">a number fixed to 2</span></li>
+        </ol>
+        
+        <p>
+            Custom fomatters
+        </p>
+        <ol>
+            <li>format: customFormatter 150 should be <span id="t3-1" data-tcontent="format: customFormatter 150">money!</span></li>
+            <li>format: customFormatter number should be <span id="t3-2" data-tdefine="number 225"
+                                                                        data-tcontent="format: customFormatter number">money!</span></li>
+            <li>format: customFormatterName number should be <span id="t3-3" data-tdefine="number 1225; customFormatterName 'customFormatter'"
+                                                                        data-tcontent="format: customFormatter number">money!</span></li>
+        </ol>
+    </body>
+</html>
