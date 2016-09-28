@@ -1,32 +1,7 @@
 /* ExpressionEvaluator singleton class */
 var expressionEvaluator = (function() {
     //var self = this;
-    
-    var PATH_DELIMITER = '|';
-    var PATH_SEGMENT_DELIMITER = '/';
-    var EXPRESSION_DELIMITER = ' ';
-    var INTERVAL_DELIMITER = ':';
-    var PROPERTY_DELIMITER = '.';
-    
-    var EXPRESSION_SUFFIX = ":";
-    var EXPR_STRING = "string" + EXPRESSION_SUFFIX;
-    var EXPR_EXISTS = "exists" + EXPRESSION_SUFFIX;
-    var EXPR_NOCALL = "nocall" + EXPRESSION_SUFFIX;
-    var EXPR_NOT = "not" + EXPRESSION_SUFFIX;
-    var EXPR_JAVASCRIPT = "js" + EXPRESSION_SUFFIX;
-    var EXPR_EQUALS = "eq" + EXPRESSION_SUFFIX;
-    var EXPR_GREATER = "gt" + EXPRESSION_SUFFIX;
-    var EXPR_LOWER = "lt" + EXPRESSION_SUFFIX;
-    var EXPR_ADD = "+" + EXPRESSION_SUFFIX;
-    var EXPR_SUB = "-" + EXPRESSION_SUFFIX;
-    var EXPR_MUL = "*" + EXPRESSION_SUFFIX;
-    var EXPR_DIV = ":" + EXPRESSION_SUFFIX;
-    var EXPR_MOD = "%" + EXPRESSION_SUFFIX;
-    var EXPR_OR = "or" + EXPRESSION_SUFFIX;
-    var EXPR_AND = "and" + EXPRESSION_SUFFIX;
-    var EXPR_COND = "cond" + EXPRESSION_SUFFIX;
-    var EXPR_FORMAT = "format" + EXPRESSION_SUFFIX;
-    var EXPR_JQUERY = "$";
+    var conf = zptContext.getExpressionsConf();
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = evaluate( scope, expression );
@@ -39,65 +14,65 @@ var expressionEvaluator = (function() {
                 expression.trim() );
         
         // General purpose expressions
-        if ( expression.indexOf( EXPR_STRING ) == 0 ) {
-            return evaluateString( scope, effectiveExpression.substr( EXPR_STRING.length ) );
+        if ( expression.indexOf( conf.stringExpression ) == 0 ) {
+            return evaluateString( scope, effectiveExpression.substr( conf.stringExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_NOCALL ) == 0 ) {
-            return evaluateNoCall( scope, effectiveExpression.substr( EXPR_NOCALL.length ) );
+        if ( expression.indexOf( conf.noCallExpression ) == 0 ) {
+            return evaluateNoCall( scope, effectiveExpression.substr( conf.noCallExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_JAVASCRIPT ) == 0 ) {
-            return evaluateJavascript( scope, effectiveExpression.substr( EXPR_JAVASCRIPT.length ) );
+        if ( expression.indexOf( conf.javaScriptExpression ) == 0 ) {
+            return evaluateJavascript( scope, effectiveExpression.substr( conf.javaScriptExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_JQUERY ) == 0 ) {
+        if ( expression.indexOf( conf.jqueryExpression ) == 0 ) {
             return evaluateJQuery( scope, effectiveExpression );
         }
-        if ( expression.indexOf( EXPR_FORMAT ) == 0 ) {
-            return evaluateFormat( scope, effectiveExpression.substr( EXPR_FORMAT.length ) );
+        if ( expression.indexOf( conf.formatExpression ) == 0 ) {
+            return evaluateFormat( scope, effectiveExpression.substr( conf.formatExpression.length ) );
         }
         
         // Comparison expressions
-        if ( expression.indexOf( EXPR_EQUALS ) == 0 ) {
-            return evaluateEquals( scope, effectiveExpression.substr( EXPR_EQUALS.length ) );
+        if ( expression.indexOf( conf.equalsExpression ) == 0 ) {
+            return evaluateEquals( scope, effectiveExpression.substr( conf.equalsExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_GREATER ) == 0 ) {
-            return evaluateGreater( scope, effectiveExpression.substr( EXPR_GREATER.length ) );
+        if ( expression.indexOf( conf.greaterExpression ) == 0 ) {
+            return evaluateGreater( scope, effectiveExpression.substr( conf.greaterExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_LOWER ) == 0 ) {
-            return evaluateLower( scope, effectiveExpression.substr( EXPR_LOWER.length ) );
+        if ( expression.indexOf( conf.lowerExpression ) == 0 ) {
+            return evaluateLower( scope, effectiveExpression.substr( conf.lowerExpression.length ) );
         }
         
         // Arithmetic expressions
-        if ( expression.indexOf( EXPR_ADD ) == 0 ) {
-            return evaluateArithmetic( scope, effectiveExpression.substr( EXPR_ADD.length ), EXPR_ADD );
+        if ( expression.indexOf( conf.addExpression ) == 0 ) {
+            return evaluateArithmetic( scope, effectiveExpression.substr( conf.addExpression.length ), conf.addExpression );
         }
-        if ( expression.indexOf( EXPR_SUB ) == 0 ) {
-            return evaluateArithmetic( scope, effectiveExpression.substr( EXPR_SUB.length ), EXPR_SUB );
+        if ( expression.indexOf( conf.subExpression ) == 0 ) {
+            return evaluateArithmetic( scope, effectiveExpression.substr( conf.subExpression.length ), conf.subExpression );
         }
-        if ( expression.indexOf( EXPR_MUL ) == 0 ) {
-            return evaluateArithmetic( scope, effectiveExpression.substr( EXPR_MUL.length ), EXPR_MUL );
+        if ( expression.indexOf( conf.mulExpression ) == 0 ) {
+            return evaluateArithmetic( scope, effectiveExpression.substr( conf.mulExpression.length ), conf.mulExpression );
         }
-        if ( expression.indexOf( EXPR_DIV ) == 0 ) {
-            return evaluateArithmetic( scope, effectiveExpression.substr( EXPR_DIV.length ), EXPR_DIV );
+        if ( expression.indexOf( conf.divExpression ) == 0 ) {
+            return evaluateArithmetic( scope, effectiveExpression.substr( conf.divExpression.length ), conf.divExpression );
         }
-        if ( expression.indexOf( EXPR_MOD ) == 0 ) {
-            return evaluateArithmetic( scope, effectiveExpression.substr( EXPR_MOD.length ), EXPR_MOD );
+        if ( expression.indexOf( conf.modExpression ) == 0 ) {
+            return evaluateArithmetic( scope, effectiveExpression.substr( conf.modExpression.length ), conf.modExpression );
         }
         
         // Logical expressions
-        if ( expression.indexOf( EXPR_EXISTS ) == 0 ) {
-            return evaluateExists( scope, effectiveExpression.substr( EXPR_EXISTS.length ) );
+        if ( expression.indexOf( conf.existsExpression ) == 0 ) {
+            return evaluateExists( scope, effectiveExpression.substr( conf.existsExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_NOT ) == 0 ) {
-            return evaluateNot( scope, effectiveExpression.substr( EXPR_NOT.length ).trim() );
+        if ( expression.indexOf( conf.notExpression ) == 0 ) {
+            return evaluateNot( scope, effectiveExpression.substr( conf.notExpression.length ).trim() );
         }
-        if ( expression.indexOf( EXPR_OR ) == 0 ) {
-            return evaluateOr( scope, effectiveExpression.substr( EXPR_OR.length ) );
+        if ( expression.indexOf( conf.orExpression ) == 0 ) {
+            return evaluateOr( scope, effectiveExpression.substr( conf.orExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_AND ) == 0 ) {
-            return evaluateAnd( scope, effectiveExpression.substr( EXPR_AND.length ) );
+        if ( expression.indexOf( conf.andExpression ) == 0 ) {
+            return evaluateAnd( scope, effectiveExpression.substr( conf.andExpression.length ) );
         }
-        if ( expression.indexOf( EXPR_COND ) == 0 ) {
-            return evaluateCond( scope, effectiveExpression.substr( EXPR_COND.length ) );
+        if ( expression.indexOf( conf.condExpression ) == 0 ) {
+            return evaluateCond( scope, effectiveExpression.substr( conf.condExpression.length ) );
         }
         
         return evaluatePath( scope, effectiveExpression );
@@ -171,7 +146,7 @@ var expressionEvaluator = (function() {
             throw 'Format expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens == 1 ) {
             throw 'Only one element in format expression, please add at least one more.';
@@ -218,7 +193,7 @@ var expressionEvaluator = (function() {
             throw 'Equals expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in equals expression, please add at least one more.';
         }
@@ -242,7 +217,7 @@ var expressionEvaluator = (function() {
             throw 'Greater/lower expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() != 2 ) {
             throw 'Wrong number of elements, greater/lower expressions only support two.';
         }
@@ -287,7 +262,7 @@ var expressionEvaluator = (function() {
             throw 'OR expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in OR expression, please add at least one more.';
         }
@@ -311,7 +286,7 @@ var expressionEvaluator = (function() {
             throw 'AND expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in AND expression, please add at least one more.';
         }
@@ -335,7 +310,7 @@ var expressionEvaluator = (function() {
             throw 'Cond expression void.';
         }
         
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() != 3 ) {
             throw '3 element are needed in cond expression.';
         }
@@ -366,7 +341,7 @@ var expressionEvaluator = (function() {
             throw mathOperation + " expression void.";
         }
         
-        var segments = new ExpressionTokenizer( expression, EXPRESSION_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
 
         // Evaluate segments
         var result = 0;
@@ -426,19 +401,19 @@ var expressionEvaluator = (function() {
     var evaluateArithmeticItem = function( result, value, mathOperation ) {
         
         switch ( mathOperation ) {
-        case EXPR_ADD:
+        case conf.addExpression:
             result += value;
             break;
-        case EXPR_SUB:
+        case conf.subExpression:
             result -=  value;
             break;
-        case EXPR_MUL:
+        case conf.mulExpression:
             result *=  value;
             break;
-        case EXPR_DIV:
+        case conf.divExpression:
             result /=  value;
             break;
-        case EXPR_MOD:
+        case conf.modExpression:
             result %=  value;
             break;
         default:
@@ -458,7 +433,7 @@ var expressionEvaluator = (function() {
                    value;
         }
 
-        var expressionItem = expression.split( PROPERTY_DELIMITER );
+        var expressionItem = expression.split( conf.propertyDelimiter );
         
         if ( expressionItem[ 0 ] == 'repeat' ){
             return evaluateRepeatExpression( scope, expressionItem[1], expressionItem[2] );
@@ -578,7 +553,7 @@ var expressionEvaluator = (function() {
             return '';
         }
 
-        var segments = new ExpressionTokenizer( expression, PATH_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.pathDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             return evaluatePathSegment( expression, scope );
         }
@@ -612,7 +587,7 @@ var expressionEvaluator = (function() {
         }
     
         // Evaluate first token
-        var path = new ExpressionTokenizer( expression, PATH_SEGMENT_DELIMITER, false );
+        var path = new ExpressionTokenizer( expression, conf.pathSegmentDelimiter, false );
         var token = path.nextToken().trim();
         var result = evaluateFirstPathToken( token, scope );
     
@@ -772,11 +747,11 @@ var expressionEvaluator = (function() {
 
         var arrayExp = expression.substring( 1, expression.length - 1 );
         
-        if ( expression.indexOf( INTERVAL_DELIMITER ) != -1 ) {
+        if ( expression.indexOf( conf.intervalDelimiter ) != -1 ) {
         }
         
         var result = [];
-        var segments = new ExpressionTokenizer( arrayExp, EXPRESSION_DELIMITER, true );
+        var segments = new ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
         
         while ( segments.hasMoreTokens() ) {
             var segment = segments.nextToken().trim();
@@ -806,7 +781,7 @@ var expressionEvaluator = (function() {
         
         var expression = exp.trim();
         
-        var segments = new ExpressionTokenizer( expression, INTERVAL_DELIMITER, false );
+        var segments = new ExpressionTokenizer( expression, conf.intervalDelimiter, false );
         
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens != 2 && numberOfTokens != 3 ) {
@@ -980,12 +955,17 @@ var expressionEvaluator = (function() {
     var endsWith = function( str, suffix ) {
         return str.indexOf( suffix, str.length - suffix.length ) !== -1;
     };
+    
+    var updateConf = function( confToApply){
+        conf = confToApply;
+    };
 
     return {
         evaluateToNotNull: evaluateToNotNull,
         evaluate: evaluate,
         evaluateBoolean: evaluateBoolean,
         removeParenthesisIfAny: removeParenthesisIfAny,
-        endsWith: endsWith
+        endsWith: endsWith,
+        updateConf: updateConf
     };
 })();

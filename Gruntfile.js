@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 separator: '\n'
             },
             dist: {
-                src: ['js/app/*.js'],
+                src: ['js/app/zptContext.js', 'js/app/*.js'],
                 dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },

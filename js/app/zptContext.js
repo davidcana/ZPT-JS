@@ -1,5 +1,7 @@
 /* ZPTContext singleton class */
 var zptContext = (function() {
+    
+    /* Tags */
     var defaultTags = {
             talCondition:     "data-tcondition",
             talRepeat:        "data-trepeat",
@@ -46,7 +48,9 @@ var zptContext = (function() {
         
         return tal;
     };
+    /* End Tags */
     
+    /* Formatters */
     var formatters = {};
     formatters.lowerCase = function ( value ){
         return value.toLocaleLowerCase();
@@ -76,12 +80,55 @@ var zptContext = (function() {
     var registerFormatter = function ( id, formatter ){
         formatters[ id ] = formatter;
     };
+    /* End Formatters */
+    
+    /* Expresions */
+    var EXPRESSION_SUFFIX = ":";
+    var defaultExpressionsConf = {
+            pathDelimiter:          '|',
+            pathSegmentDelimiter:   '/',
+            expressionDelimiter:    ' ',
+            intervalDelimiter:      ':',
+            propertyDelimiter:      '.',
+        
+            stringExpression: "string" + EXPRESSION_SUFFIX,
+            existsExpression: "exists" + EXPRESSION_SUFFIX,
+            noCallExpression: "nocall" + EXPRESSION_SUFFIX,
+            notExpression: "not" + EXPRESSION_SUFFIX,
+            javaScriptExpression: "js" + EXPRESSION_SUFFIX,
+            equalsExpression: "eq" + EXPRESSION_SUFFIX,
+            greaterExpression: "gt" + EXPRESSION_SUFFIX,
+            lowerExpression: "lt" + EXPRESSION_SUFFIX,
+            addExpression: "+" + EXPRESSION_SUFFIX,
+            subExpression: "-" + EXPRESSION_SUFFIX,
+            mulExpression: "*" + EXPRESSION_SUFFIX,
+            divExpression: ":" + EXPRESSION_SUFFIX,
+            modExpression: "%" + EXPRESSION_SUFFIX,
+            orExpression: "or" + EXPRESSION_SUFFIX,
+            andExpression: "and" + EXPRESSION_SUFFIX,
+            condExpression: "cond" + EXPRESSION_SUFFIX,
+            formatExpression: "format" + EXPRESSION_SUFFIX,
+            jqueryExpression: "$"
+    };
+    var expressionsConf = defaultExpressionsConf;
+    
+    var getExpressionsConf = function (){
+        return expressionsConf;
+    };
+    
+    var setExpressionsConf = function ( expressionsConfToSet ){
+        expressionsConf = expressionsConfToSet;
+        expressionEvaluator.updateConf( expressionsConf );
+    };
+    /* End Expresions */
     
     return {
         getTags: getTags,
         setTags: setTags,
         getTal: getTal,
         getFormatter: getFormatter,
-        registerFormatter: registerFormatter
+        registerFormatter: registerFormatter,
+        getExpressionsConf: getExpressionsConf,
+        setExpressionsConf: setExpressionsConf
     };
 })();
