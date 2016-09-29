@@ -116,13 +116,13 @@ $(function () {
     &lt;body&gt;
         &lt;h1&gt;Some expressions&lt;/h1&gt;
         &lt;ol&gt;
-            &lt;li data-tcontent="user.name"&gt;xxx&lt;/li&gt;
-            &lt;li data-tcontent="string:help my ${user.name}"&gt;xxx&lt;/li&gt;
+            &lt;li data-tcontent="user/name"&gt;xxx&lt;/li&gt;
+            &lt;li data-tcontent="string:help my ${user/name}"&gt;xxx&lt;/li&gt;
             &lt;li data-tcontent="doggy"&gt;not false&lt;/li&gt;
             &lt;li data-tcontent="not:doggy"&gt;not false&lt;/li&gt;
             &lt;li data-tcontent="eq: number1 number100"&gt;not true&lt;/li&gt;
-            &lt;li data-tcontent="user.name | string:no friends"&gt;any friends?&lt;/li&gt;
-            &lt;li data-tcontent="user2.name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-tcontent="user/name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-tcontent="user2/name | string:no friends"&gt;any friends?&lt;/li&gt;
             &lt;li data-tcontent="items[0]"&gt;an item&lt;/li&gt;
             &lt;li data-tcontent="user/age()"&gt;user/age()&lt;/li&gt;
         &lt;/ol&gt;
@@ -302,7 +302,7 @@ $( 'body' ).zpt({
         Following the initial path element, path elements are either properties or methods of the preceding object. Examples:
     </p>
     <ul>
-        <li><code>object.name</code> will search for a property <code>name</code> in the passed object.</li>
+        <li><code>object/name</code> will search for a property <code>name</code> in the passed object.</li>
         <li><code>object/name()</code> will search for a method <code>name()</code> in the passed object.</li>
         <li><code>object/name( arg1, arg2 )</code> will search for a method <code>name()</code> in the passed object and pass <code>arg1</code> and <code>arg2</code> as parameters.</li>
         <li><code>object/name()/name2()</code> will search for a method <code>name()</code> in the passed object and then search for a method <code>name2()</code>.</li>
@@ -452,8 +452,7 @@ $( 'body' ).zpt({
     <a id="tal.repeat"></a>
     <h3>Repeat expressions</h3>
     <p>
-        There are a few minor variations for <code>tal:repeat</code>. The repeat expression must evaluate to an array. The repeat variables <code>Letter</code> and <code>Roman</code> have been changed in ZPT-JS to
-        <code>capitalLetter</code> and <code>capitalRoman</code>.
+        There are a few minor variations for <code>tal:repeat</code>. The repeat expression must evaluate to an array.
     </p>
 
     <a id="tal.range"></a>

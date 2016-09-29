@@ -422,7 +422,7 @@ var expressionEvaluator = (function() {
         
         return result;
     };
-    
+    /*
     var evaluateDefault = function( scope, expression ) {
 
         // if fully qualified path is at top level: obj["a.b.d"] = c
@@ -453,8 +453,8 @@ var expressionEvaluator = (function() {
         return typeof value == 'function'? 
                value.call( lastValue, expressionItem.join( '.' ) ) : 
                value;
-    };
-    
+    };*/
+    /*
     var evaluateRepeatExpression = function( scope, name, method ) {
         var loop = loopManager.get( scope, name );
         
@@ -463,7 +463,7 @@ var expressionEvaluator = (function() {
         }
         
         return ( loop[ method ] )();
-    };
+    };*/
     
     var evaluateString = function( scope, expression ) {
         var STATE_SCANNING = 0;
@@ -649,7 +649,8 @@ var expressionEvaluator = (function() {
                         
                         // Must be an object in dictionary
                         if ( result === undefined ) {
-                            result = evaluateDefault( scope, token );
+                            //result = evaluateDefault( scope, token );
+                            result = scope.get( token );
                         }
                     }
                 }
@@ -693,7 +694,7 @@ var expressionEvaluator = (function() {
                 result = evaluateMethodCall( parent, methodName, arguments, scope );
             } else {
                 // A property
-                result = getProperty( parent, token );
+                result = parent[ token ];
             }
         }
     

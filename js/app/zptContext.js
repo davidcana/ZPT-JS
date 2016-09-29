@@ -89,7 +89,7 @@ var zptContext = (function() {
             pathSegmentDelimiter:   '/',
             expressionDelimiter:    ' ',
             intervalDelimiter:      ':',
-            propertyDelimiter:      '.',
+            propertyDelimiter:      '/',
         
             stringExpression: "string" + EXPRESSION_SUFFIX,
             existsExpression: "exists" + EXPRESSION_SUFFIX,

@@ -139,4 +139,8 @@ QUnit.test( "Default expressions test", function( assert ) {
     assert.equal( $('#t13-2').html() , "Bob" );
 });
 
-
+QUnit.test( "Some complex expressions test", function( assert ) {
+    assert.equal( $('#t14-1').html() , "1977" );
+    assert.equal( $('#t14-2').html() , "yes!" );
+    assert.equal( $('#t14-3').html() , "4" );
+});

@@ -26,7 +26,7 @@ QUnit.test( "Condition test", function( assert ) {
     assert.equal( $('#t2-8').html() , "a name" );
     assert.equal( $('#t2-9').html().trim() , "Bob" );
     assert.ok( $('#t2-9').is(':visible') );
-    assert.equal( $('#t2-10').html().trim() , "<span data-treplace=\"user.name\">a name</span>" );
+    assert.equal( $('#t2-10').html().trim() , "<span data-treplace=\"user/name\">a name</span>" );
     assert.notOk( $('#t2-10').is(':visible') );
 });
 

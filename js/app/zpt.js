@@ -163,7 +163,7 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         node.removeAttribute( 'style' );
         node.setAttribute( tags.qdup, 1 );
 
-        while (loop.repeat(scope)) {
+        while ( loop.repeat( scope ) ) {
             // Get tmpNode
             var tmpNode = node.cloneNode( true );
             if ( 'form' in tmpNode ) {

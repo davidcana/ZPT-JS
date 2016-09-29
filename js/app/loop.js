@@ -1,15 +1,17 @@
 /* LoopManager singleton class */
 var loopManager = (function() {
-    var NAME_PREFFIX = 'repeat-';
-
-    var getVarName = function( name ) {
-        return NAME_PREFFIX + name;
-    };
+    //var NAME_PREFFIX = 'repeat-';
+    var NAME = 'repeat';
     
+    var getVarName = function( name ) {
+        //return NAME_PREFFIX + name;
+        return NAME;
+    };
+    /*
     var get = function( scope, name ){
         var fullName = getVarName( name );
         return scope.get( fullName );
-    };
+    };*/
     
     var create = function( scope, expression ){
         expression = expression.trim();
@@ -23,14 +25,14 @@ var loopManager = (function() {
         
         var fullName = getVarName( name );
         var loop = new Loop( fullName, name, items );
-        scope.set( fullName, loop );
+        //scope.set( fullName, loop );
         
         return loop;
     };
 
     return {
         getVarName: getVarName,
-        get: get,
+        //get: get,
         create: create
     };
 })();
@@ -50,7 +52,14 @@ var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
     
     var repeat = function( scope ){
         if ( currentIndex < maxIndex ) {
+            // Set item variable
             scope.set( itemVariableName, items[ ++currentIndex ] );
+            
+            // Set repeat variable
+            var repeatVar = {};
+            repeatVar[ itemVariableName ] = this;
+            scope.set( name, repeatVar );
+            
             return true;
         }
         
@@ -65,31 +74,31 @@ var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
         return currentIndex + 1;
     };
     
-    var isEven = function( ) {
+    var even = function( ) {
         return currentIndex % 2 == 0;
     };
     
-    var isOdd = function ( ) {
+    var odd = function ( ) {
         return currentIndex % 2 == 1;
     };
     
-    var isStart = function ( ) {
+    var start = function ( ) {
         return currentIndex == 0;
     };
     
-    var isEnd = function ( ) {
+    var end = function ( ) {
         return currentIndex == items.length - 1;
     };
     
-    var getLength = function () {
+    var length = function () {
         return items.length;
     };
 
-    var getLetter = function () {
+    var letter = function () {
         return formatLetter( currentIndex, 'a' );
     };
     
-    var getCapitalLetter = function () {
+    var Letter = function () {
         return formatLetter( currentIndex, 'A' );
     };
     
@@ -109,11 +118,11 @@ var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
         return buffer.split('').reverse().join('');
     };
     
-    var getRoman = function () {
+    var roman = function () {
         return formatRoman( currentIndex + 1, 0 );
     };
     
-    var getCapitalRoman = function () {
+    var Roman = function () {
         return formatRoman( currentIndex + 1, 1 );
     };
     
@@ -130,7 +139,7 @@ var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
             var digit = n % 10;
             if ( digit > 0 ) {
                 digit--;
-                buf +=  roman [ decade ][ digit ][ capital ];
+                buf +=  romanArray [ decade ][ digit ][ capital ];
             }
             n = (n / 10) >> 0;
         }
@@ -138,7 +147,7 @@ var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
         return buf.split( '' ).reverse().join( '' );
     };
     
-    var roman = [
+    var romanArray = [
         /* One's place */
         [
             [ "i", "I" ],
@@ -191,14 +200,14 @@ var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
         repeat:repeat,
         index: index,
         number: number,
-        isEven: isEven,
-        isOdd: isOdd,
-        isStart: isStart,
-        isEnd: isEnd,
-        getLength: getLength,
-        getLetter: getLetter,
-        getCapitalLetter: getCapitalLetter,
-        getRoman: getRoman,
-        getCapitalRoman: getCapitalRoman
+        even: even,
+        odd: odd,
+        start: start,
+        end: end,
+        length: length,
+        letter: letter,
+        Letter: Letter,
+        roman: roman,
+        Roman: Roman
     };
 };

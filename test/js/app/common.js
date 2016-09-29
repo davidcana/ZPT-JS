@@ -16,6 +16,18 @@ $(function () {
             age: function( ){
                 return 25;
             },
+            birth: function( ){
+                return {
+                    day: 3,
+                    month: 3,
+                    year: 1977,
+                    aFunction: function(){
+                        return {
+                            another: 'yes!'
+                        };
+                    }
+                };
+            },
             add1Method: function( a ){
                 return a + 1;
             },
