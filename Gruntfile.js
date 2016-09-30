@@ -61,7 +61,16 @@ module.exports = function(grunt) {
                         src: ['Gruntfile.js']
                         }, 
                         {
+                        src: ['LICENSE.txt']
+                        }, 
+                        {
                         src: ['package.json']
+                        },
+                        {
+                        src: ['README.txt']
+                        }, 
+                        {
+                        src: ['userguide.html']
                         }
                 ]
             }
