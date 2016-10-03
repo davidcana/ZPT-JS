@@ -1,6 +1,6 @@
 Hello! My name is David Cana. I needed some time ago a Zope Page Templates (ZPT) implementation in Javascript. The best one I found was Distal (https://github.com/collective/collective.js.distal), but its implementation of ZPT was not as full as I wanted. So I decided to fork that project to make it better (IMHO, of course). The result of this is Zenon Page Templates - Javascript (ZPT-JS).
 
-Nowadays the list of contributors to this propject is:
+Nowadays the list of contributors to this project is:
     - Héctor Velarde and all the contributors to Distal. First implementations, but nearly all of that code was replaced, only some lines of code left.
     - Chris Rossi, developer of JPT (https://github.com/chrisrossi/JPT), a Java implementation of ZPT. Some litte routines have been migrated from Java to Javascript.
     - David Cana (me!), the main developer of ZPT-JS. This is my first project using Javascript, so don't expect a perfect code!
