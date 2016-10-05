@@ -10,6 +10,8 @@ QUnit.testSuites([
 	{ name: "on-error tag Test Suite", path: "./on-error.html" },
 	{ name: "vars scope Test Suite", path: "./scope.html" },
     { name: "jquery plugin Test Suite", path: "./plugin.html" },
-    { name: "formatters Test Suite", path: "./format.html" }
+    { name: "formatters Test Suite", path: "./format.html" },
+    { name: "rerun simple Test Suite", path: "./rerunSimple.html" },
+    { name: "rerun macro Test Suite", path: "./rerunMacros.html" }
 ]);
 
