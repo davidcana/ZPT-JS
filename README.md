@@ -7,18 +7,18 @@ Zope Page Templates are a web page generation tool. They help programmers and de
 There are some important differences between ZPT-JS and ZPT.
 
 Using ZPT we have:
-    the ZPT template (an HTML file with the ZPT tags inside)
-    the data
-    the final HTML file (the ZPT template combined with the data)
+*   the ZPT template (a HTML file with the ZPT tags inside)
+*   the data
+*   the final HTML file (the ZPT template combined with the data)
 
 Using ZPT-JS:
-    the ZPT template (an HTML file with the ZPT tags inside)
-    the data
-    the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.
+*   the ZPT template (a HTML file with the ZPT tags inside)
+*   the data
+*   the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.
     
 A main goal of ZPT-JS is not to break a valid HTML documents. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way tal:content attribute is replaced by data-tcontent.
 
-A sample of ZPT-JS template:
+A sample of a ZPT-JS template:
 
     <!DOCTYPE html>
     <html>
