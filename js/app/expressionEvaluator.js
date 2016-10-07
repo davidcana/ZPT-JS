@@ -631,9 +631,9 @@ var expressionEvaluator = (function() {
             if ( result === undefined ) {
                 result = booleanLiteral( token );
                 
-                // An array?
+                // A list?
                 if ( result === undefined ){
-                    result = arrayExpression( scope, token );
+                    result = listExpression( scope, token );
 
                     // A function call?
                     if ( result === undefined ) {                         
@@ -740,17 +740,13 @@ var expressionEvaluator = (function() {
         return undefined;
     };
 
-    var arrayExpression = function( scope, expression ) {
+    var listExpression = function( scope, expression ) {
         
         if ( expression.charAt( 0 ) !== '[' || expression.charAt( expression.length - 1 ) !==  ']' ) {
             return undefined;
         }
 
         var arrayExp = expression.substring( 1, expression.length - 1 );
-        
-        if ( expression.indexOf( conf.intervalDelimiter ) != -1 ) {
-        }
-        
         var result = [];
         var segments = new ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
         
@@ -762,9 +758,7 @@ var expressionEvaluator = (function() {
                 result = result.concat( range );
             } else {
                 var value = evaluate( scope, segment );
-                //if ( value !== undefined ) {
                 result.push( value );
-                //}
             }
         }
         
