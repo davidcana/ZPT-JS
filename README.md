@@ -43,7 +43,13 @@ A sample of a ZPT-JS template:
                     return 25;
                 }
             },
-            items: [ 'item0', 'item1', 'item2' ]
+            items: [ 'item0', 'item1', 'item2' ],
+            tools: [ 
+                {name: "tool A", rent_url: "rent?id=1000"}, 
+                {name: "tool B", rent_url: "rent?id=1002"}, 
+                {name: "tool C", rent_url: "rent?id=1004"},
+                {name: "tool D", rent_url: "rent?id=1006"}
+            ]
         };
 
         zpt.run( document.body, dictionary );
