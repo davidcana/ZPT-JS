@@ -35,7 +35,6 @@ A sample of a ZPT-JS template:
 
         var dictionary = { 
             aString: "string",
-            doggy: false,
             number1: 1,
             number100: 100,
             user: {
@@ -55,16 +54,77 @@ A sample of a ZPT-JS template:
         <body>
             <h1>Some expressions</h1>
             <ol>
-                <li data-tcontent="user/name">xxx</li>
-                <li data-tcontent="string:help my ${user/name}">xxx</li>
-                <li data-tcontent="doggy">not false</li>
-                <li data-tcontent="not:doggy">not false</li>
-                <li data-tcontent="eq: number1 number100">not true</li>
-                <li data-tcontent="user/name | string:no friends">any friends?</li>
-                <li data-tcontent="user2/name | string:no friends">any friends?</li>
+                <li data-tcontent="user/name">a name</li>
+                <li data-tcontent="string:help my ${user/name}">message with the same name</li>
+                <li>
+                    <a data-tattributes="href string:www.yoursite.org;
+                                         title 'a title for your site'">A link</a>
+                </li>
+                <li data-tcondition="eq: number1 number100">
+                    change number1 or number100 to show this!
+                </li>
+                <li>
+                    <span data-treplace="user/name | string:no friends">
+                        any friends?
+                    </span>
+                </li>
+                <li data-tcontent="user2/name | string:no friends">
+                    any friends?
+                </li>
                 <li data-tcontent="items[0]">an item</li>
                 <li data-tcontent="user/age()">user/age()</li>
             </ol>
+            
+            <h1>Loops</h1>
+            <table>
+                <tr>
+                    <th>Value</th>
+                    <th>Index</th>
+                    <th>Number</th>
+                    <th>Even index</th>
+                    <th>Odd index</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Length</th>
+                    <th>Letter</th>
+                    <th>Capital Letter</th>
+                    <th>Roman</th>
+                    <th>Capital Roman</th>
+                </tr>
+                <tr data-trepeat="item tools">
+                    <td class="value" data-tcontent="item/name">value</td>
+                    <td class="index" data-tcontent="repeat/item/index()">index</td>
+                    <td class="number" data-tcontent="repeat/item/number()">number</td>
+                    <td class="isEven" data-tcontent="repeat/item/even()">even</td>
+                    <td class="isOdd" data-tcontent="repeat/item/odd()">odd</td>
+                    <td class="isStart" data-tcontent="repeat/item/start()">start</td>
+                    <td class="isEnd" data-tcontent="repeat/item/end()">end</td>
+                    <td class="getLength" data-tcontent="repeat/item/length()">length</td>
+                    <td class="getLetter" data-tcontent="repeat/item/letter()">letter</td>
+                    <td class="getCapitalLetter" data-tcontent="repeat/item/Letter()">capital letter</td>
+                    <td class="getRoman" data-tcontent="repeat/item/roman()">roman</td>
+                    <td class="getCapitalRoman" data-tcontent="repeat/item/Roman()">capitalRoman</td>
+                </tr>
+            </table>
+            
+            <h1>Macros</h1>
+            
+            <h2>Macro invokation - Dynamic macro using 1 slot (items = [10 20 30])</h2>
+            <div data-tdefine="items [10 20 30]" data-muse-macro="dynamicListWith1Slot">
+                <em data-mfill-slot="additional_info">
+                    Make sure to check out our <a href="/specials">specials</a>.
+                </em>
+            </div>
+            
+            <h2>Macro definition - Dynamic macro using 1 slot</h2>
+            <ul data-mdefine-macro="dynamicListWith1Slot">
+                <li data-trepeat="item items">
+                    <span data-tcontent="item">An item</span>
+                </li>
+                <li>
+                    <span data-mdefine-slot="additional_info"></span>
+                </li>
+            </ul>
         </body>
     </html>
 
