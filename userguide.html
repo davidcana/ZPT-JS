@@ -445,9 +445,13 @@ $( 'body' ).zpt({
     <a id="tal"></a>
     <h2>TAL Statements</h2>
     <p>
-        All TAL statements behave almost exactly as in ZPT, except for <code>tal:no-call</code> which is not yet implemented (if you need it, holler). <code>data-tcondition (tal:condition in ZPT)</code> and
-        <code>data-tomit-tag (tal:omit-tag in ZPT)</code> must cast their expression to a boolean, which follows the rules described for <a href="#tales.not">Not expressions</a>.
+        All TAL statements behave almost exactly as in ZPT, except:
     </p>
+    <ul>
+        <li><code>tal:no-call</code>: not yet implemented</li>
+        <li><code>data-tcondition</code> and <code>data-tomit-tag</code>: must cast their expression to a boolean, which follows the rules described for <a href="#tales.not">Not expressions</a>.</li>
+        <li><code>data-treplace</code> and <code>data-tomit-tag</code>: because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are REMOVED when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-treplace</code> and <code>data-tomit-tag</code> inside a macro definition and invoke it. See <a href="#metal">macros</a>.</li>
+    </ul>
 
     <a id="tal.repeat"></a>
     <h3>Repeat expressions</h3>
@@ -524,7 +528,7 @@ $( 'body' ).zpt({
     </p>
     <pre>
 &lt;div data-tdefine="items [10 20 30]" data-muse-macro="list"&gt;
-Macro goes here
+    Macro goes here
 &lt;/div&gt;
     </pre>
 
