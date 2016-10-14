@@ -1,6 +1,6 @@
 {
   "name": "zpt",
-  "version": "0.2.0",
+  "version": "0.3.0-SNAPSHOT",
   "description": "Zenon Page Templates - JS (ZPT-JS)",
   "keywords": [ 
         "jquery-plugin", 
@@ -19,7 +19,8 @@
   "contributors": [""],
   "dependencies": {
     "jquery": "^2.0.3",
-    "mstring": "^0.1.2"
+    "mstring": "^0.1.2",
+    "messageformat": "^1.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
