@@ -122,6 +122,21 @@ var zptContext = (function() {
     };
     /* End Expresions */
     
+    /* Translators */
+    var translator = undefined;
+    
+    var getTranslator = function (){
+        if ( translator == undefined ){
+            translator = defaultTranslator;
+        }
+        return translator;
+    };
+    
+    var setTranslator = function ( translatorToSet ){
+        translator = translatorToSet;
+    };
+    /* End Translators */
+    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -129,6 +144,8 @@ var zptContext = (function() {
         getFormatter: getFormatter,
         registerFormatter: registerFormatter,
         getExpressionsConf: getExpressionsConf,
-        setExpressionsConf: setExpressionsConf
+        setExpressionsConf: setExpressionsConf,
+        getTranslator: getTranslator,
+        setTranslator: setTranslator
     };
 })();
