@@ -2,7 +2,7 @@
 var defaultTranslator = (function() {
     
     var createI18nBundle = function( resources ){
-        return new i18nBundle( resources );
+        return new I18nBundle( resources );
     };
     
     var tr = function ( i18nList, id, params ){
@@ -67,6 +67,7 @@ var I18n = function( res ) {
     };
     
     return {
+        exists: exists,
         tr: tr
     };
 };

@@ -21,11 +21,10 @@ var NodeAttributes = function( node ) {
     this.metalFillSlot = node.getAttribute( tags.metalFillSlot );
     
     // i18n namespace
-    this.i18nDomain = undefined;
-    this.i18nDefine = undefined;
-    this.i18nContent = undefined;
-    this.i18nParams = undefined;
-    this.i18nAttributes = undefined;
-    this.i18nOnError = undefined;
-    
+    this.i18nDomain = node.getAttribute( tags.i18nDomain );
+    this.i18nDefine = node.getAttribute( tags.i18nDefine );
+    this.i18nContent = node.getAttribute( tags.i18nContent );
+    this.i18nAttributes = node.getAttribute( tags.i18nAttributes );
+    //this.i18nParams = undefined;
+    this.i18nOnError = node.getAttribute( tags.i18nOnError );
 };

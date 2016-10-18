@@ -26,15 +26,15 @@
         <p>
             Simple i18n
         </p>
-        <ol data-idomain="i18n">
+        <ol>
             <li>
                ¡Hola mundo! = <span id="t1-1" 
-                                     data-tdefine="[LOCALE] 'es'"
-                                     data-icontent="'Hello world!'">Must be ¡Hola mundo!</span>
+                                    data-idomain="i18nBundle/getI18n( 'es' )"
+                                    data-icontent="'Hello world!'">Must be ¡Hola mundo!</span>
             </li>
             <li>
                 Hello world! = <span id="t1-2" 
-                                     data-tdefine="[LOCALE] 'en'"
+                                     data-idomain="i18nBundle/getI18n( 'en' )"
                                      data-icontent="'Hello world!'">Must be Hello world!</span>
             </li>
         </ol>

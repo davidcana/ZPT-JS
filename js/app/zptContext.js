@@ -16,7 +16,13 @@ var zptContext = (function() {
             metalUseMacro:    "data-muse-macro",
             metalDefineSlot:  "data-mdefine-slot",
             metalFillSlot:    "data-mfill-slot",
-            metalMacro:       "data-mmacro"
+            metalMacro:       "data-mmacro",
+            i18nAttributes:    "data-iattributes",
+            i18nContent:       "data-icontent",
+            i18nDefine:        "data-idefine",
+            i18nDomain:        "data-idomain",
+            i18nReplace:       "data-ireplace",
+            i18nOnError:       "data-ion-error"
     };
     var tags = defaultTags;
     var tal = '';
