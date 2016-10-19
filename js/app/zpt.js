@@ -28,6 +28,9 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     var I18N_EXPRESSION_PREFIX = "i18nExp:";
     var ON_ERROR_VAR_NAME = "on-error";
     var I18N_DOMAIN_VAR_NAME = "i18nDomain";
+    var CONTENT_DELIMITER = ';';
+    var IN_CONTENT_DELIMITER = ' ';
+    var HTML_EXPR_STRUCTURE = "html ";
     
     // TAL attributes for querySelectorAll call
     var beforeAttr = zpt.beforeAttr;
@@ -567,41 +570,31 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         return result;
     };
 
-    var translate = function( scope, id ){
+    var translate = function( scope, id, params ){
         
         var i18nList = scope.get( I18N_DOMAIN_VAR_NAME );
-        return zptContext.getTranslator().tr( i18nList, id, null );
+        /*return zptContext.getTranslator().tr( i18nList, id, params );*/
+        return translator.tr( i18nList, id, params );
     };
     
     var processContent = function( node, scope, talExp, i18nExp ) {
-
-        if ( ! talExp && ! i18nExp ) {
-            return false;
-        }
         
-        // Set exp and i18nMode
-        var exp = talExp;
-        var i18nMode = false;
         if ( i18nExp ){
-            exp = i18nExp;
-            i18nMode = true;
+            return processI18nContent( node, scope, i18nExp );
         }
         
-        // Process it
-        var content = exp.trim();
-        var HTML_EXPR_STRUCTURE = "html ";
-
-        var html = content.indexOf( HTML_EXPR_STRUCTURE ) == 0;
-        var valueExpression = html? content.substr( HTML_EXPR_STRUCTURE.length ): content;
-
-        if ( beforeText ) {
-            beforeText( node, valueExpression );
+        if ( talExp ){
+            return processTalContent( node, scope, talExp );
         }
-
-        // Evaluate and translate if needed
-        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        if ( i18nMode ){
-            evaluated = translate( scope, evaluated );
+        
+        return false;
+    };
+    
+    var finishProcessContent = function( node, expression, evaluated, html ){
+        
+        // Add beforeText if needed
+        if ( beforeText ) {
+            beforeText( node, expression );
         }
         
         // Add it to node
@@ -610,6 +603,60 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         } else {
             node[ "form" in node && !formInputHasBody[node.tagName] ? "value": innerText] = evaluated;
         }
+    };
+    
+    var processI18nContent = function( node, scope, exp ) {
+        
+        // Process it
+        var content = exp.trim();
+        var html = content.indexOf( HTML_EXPR_STRUCTURE ) == 0;
+        var expression = html? content.substr( HTML_EXPR_STRUCTURE.length ): content;
+        if ( ! expression ){
+            throw 'data-icontent expression void.';
+        }
+        
+        // Get valueExpression and params
+        var tokens = new ExpressionTokenizer( expression, CONTENT_DELIMITER, true );
+        var valueExpression = tokens.nextToken().trim();
+        var params = {};
+        while ( tokens.hasMoreTokens() ) {
+            var token = tokens.nextToken().trim();
+            var paramsTokens = new ExpressionTokenizer( token, IN_CONTENT_DELIMITER, true );
+            if ( paramsTokens.countTokens() != 2 ) {
+                throw '2 elements are needed in data-icontent expression.';
+            }
+            
+            var paramName = paramsTokens.nextToken().trim();
+            var paramExpressionValue = paramsTokens.nextToken().trim();
+            var paramValue = expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
+            params[ paramName ] = paramValue;
+        }
+        
+        // Evaluate and translate
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        evaluated = translate( scope, evaluated, params );
+        
+        // Add content to node
+        finishProcessContent( node, valueExpression, evaluated, html );
+
+        return true;
+    };
+    
+    var processTalContent = function( node, scope, exp ) {
+        
+        // Process it
+        var content = exp.trim();
+        var html = content.indexOf( HTML_EXPR_STRUCTURE ) == 0;
+        var valueExpression = html? content.substr( HTML_EXPR_STRUCTURE.length ): content;
+        if ( ! valueExpression ){
+            throw 'data-tcontent expression void.';
+        }
+        
+        // Evaluate
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        
+        // Add content to node
+        finishProcessContent( node, valueExpression, evaluated, html );
 
         return true;
     };

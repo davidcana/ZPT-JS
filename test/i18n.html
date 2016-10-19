@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="styles/qunit-1.19.0.css">
         
         <script src="../js/lib/jquery-2.0.3.js"></script>
+        <script src="../js/lib/messageformat.js"></script>
         <script src="../js/app/zptContext.js"></script>
         <script src="../js/app/scope.js"></script>
         <script src="../js/app/expressionEvaluator.js"></script> 
@@ -13,8 +14,9 @@
         <script src="../js/app/loop.js"></script>
         <script src="../js/app/nodeAttributes.js"></script>
         <script src="../js/app/resolver.js"></script>
+        <script src="../js/app/translator.js"></script>
+        <script src="../js/app/i18n.js"></script>
         <script src="../js/app/zpt.js"></script>
-        <script src="../js/app/defaultTranslator.js"></script>
         
         <script src="js/lib/qunit-1.19.0.js"></script>
         <script src="js/app/i18n.js"></script>
@@ -28,14 +30,148 @@
         </p>
         <ol>
             <li>
-               ¡Hola mundo! = <span id="t1-1" 
-                                    data-idomain="i18nBundle/getI18n( 'es' )"
-                                    data-icontent="'Hello world!'">Must be ¡Hola mundo!</span>
+               ¡Hola mundo! = 
+               <span id="t1-1" 
+                     data-idomain="i18n-ES"
+                     data-icontent="'Hello world!'">Must be ¡Hola mundo!</span>
             </li>
             <li>
-                Hello world! = <span id="t1-2" 
-                                     data-idomain="i18nBundle/getI18n( 'en' )"
-                                     data-icontent="'Hello world!'">Must be Hello world!</span>
+                Hello world! = 
+                <span id="t1-2" 
+                      data-idomain="i18n-EN"
+                      data-icontent="'Hello world!'">Must be Hello world!</span>
+            </li>
+        </ol>
+        
+        <p>
+            With parameters (spanish): 
+        </p>
+        <ol data-idomain="i18n-ES">
+            <li>
+               Él no ha encontrado ningún resultado = 
+                <span id="t2-1" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 0">Must be 'Él no ha encontrado ningún resultado'</span>
+            </li>
+            <li>
+               Él ha encontrado un único resultado = 
+                <span id="t2-2" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 1">Must be 'Él ha encontrado un único resultado'</span>
+            </li>
+            <li>
+               Él ha encontrado 10 resultados = 
+                <span id="t2-3" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 10">Must be 'Él ha encontrado 10 resultados'</span>
+            </li>
+            <li>
+               Ella no ha encontrado ningún resultado = 
+                <span id="t2-4" 
+                      data-icontent="'Results msg';
+                                     GENDER 'female';
+                                     RES 0">Must be 'Ella no ha encontrado ningún resultado'</span>
+            </li>
+            <li>
+               Ella ha encontrado un único resultado = 
+                <span id="t2-5" 
+                      data-icontent="'Results msg';
+                                     GENDER 'female';
+                                     RES 1">Must be 'Ella ha encontrado un único resultado'</span>
+            </li>
+            <li>
+               Ella ha encontrado 10 resultados = 
+                <span id="t2-6" 
+                      data-icontent="'Results msg';
+                                     GENDER 'female';
+                                     RES 10">Must be 'Ella ha encontrado 10 resultados'</span>
+            </li>
+            <li>
+               Ellos no han encontrado ningún resultado = 
+                <span id="t2-7" 
+                      data-icontent="'Results msg';
+                                     RES 0">Must be 'Ellos no han encontrado ningún resultado'</span>
+            </li>
+            <li>
+               Ellos han encontrado un único resultado = 
+                <span id="t2-8" 
+                      data-icontent="'Results msg';
+                                     RES 1">Must be 'Ellos han encontrado un único resultado'</span>
+            </li>
+            <li>
+               Ellos han encontrado 10 resultados = 
+                <span id="t2-9" 
+                      data-icontent="'Results msg';
+                                     RES 10">Must be 'Ellos han encontrado 10 resultados'</span>
+            </li>
+        </ol>
+        
+        <p>
+            With parameters (english): 
+        </p>
+        <ol data-idomain="i18n-EN">
+            <li>
+               He found no results = 
+                <span id="t3-1" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 0">Must be 'He found no results'</span>
+            </li>
+            <li>
+               He found 1 result = 
+                <span id="t3-2" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 1">Must be 'He found 1 result'</span>
+            </li>
+            <li>
+               He found 10 results = 
+                <span id="t3-3" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 10">Must be 'He found 10 results'</span>
+            </li>
+            <li>
+                She found no results = 
+                <span id="t3-4" 
+                      data-icontent="'Results msg';
+                                     GENDER 'female';
+                                     RES 0">Must be 'She found no results'</span>
+            </li>
+            <li>
+                She found 1 result = 
+                <span id="t3-5" 
+                      data-icontent="'Results msg';
+                                     GENDER 'female';
+                                     RES 1">Must be 'She found 1 result'</span>
+            </li>
+            <li>
+               She found 10 results = 
+                <span id="t3-6" 
+                      data-icontent="'Results msg';
+                                     GENDER 'female';
+                                     RES 10">Must be 'She found 10 results'</span>
+            </li>
+            <li>
+               They found no results = 
+                <span id="t3-7" 
+                      data-icontent="'Results msg';
+                                     RES 0">Must be 'They found no results'</span>
+            </li>
+            <li>
+               They found 1 result = 
+                <span id="t3-8" 
+                      data-icontent="'Results msg';
+                                     RES 1">Must be 'They found 1 result'</span>
+            </li>
+            <li>
+               They found 10 results = 
+                <span id="t3-9" 
+                      data-icontent="'Results msg';
+                                     RES 10">Must be 'They found 10 results'</span>
             </li>
         </ol>
     </body>

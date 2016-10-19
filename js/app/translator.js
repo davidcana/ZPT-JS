@@ -1,9 +1,9 @@
-/* DefaultTranslator singleton class */
-var defaultTranslator = (function() {
-    
+/* translator singleton class */
+var translator = (function() {
+    /*
     var createI18nBundle = function( resources ){
         return new I18nBundle( resources );
-    };
+    };*/
     
     var tr = function ( i18nList, id, params ){
         
@@ -27,12 +27,13 @@ var defaultTranslator = (function() {
     };
     
     return {
-        createI18nBundle: createI18nBundle,
+        /*createI18nBundle: createI18nBundle,*/
         tr: tr
     };
 })();
 
 /* I18nBundle class */
+/*
 var I18nBundle = function( res ) {
     var resources = res;
     var cache = {};
@@ -42,7 +43,7 @@ var I18nBundle = function( res ) {
         var result = cache[ languageId ];
         
         if ( ! result ){
-            result = new I18n( resources[ languageId ] );
+            result = new I18n( languageId, resources[ languageId ] );
             cache[ languageId ] = result;
         }
         
@@ -52,22 +53,4 @@ var I18nBundle = function( res ) {
     return {
         getI18n: getI18n
     };
-};
-
-/* I18n class */
-var I18n = function( res ) {
-    var resources = res;
-    
-    var exists = function( id ) {
-        return resources[ id ] != undefined;
-    };
-    
-    var tr = function( id, params ) {
-        return resources[ id ];
-    };
-    
-    return {
-        exists: exists,
-        tr: tr
-    };
-};
+};*/

@@ -129,6 +129,7 @@ var zptContext = (function() {
     /* End Expresions */
     
     /* Translators */
+    /*
     var translator = undefined;
     
     var getTranslator = function (){
@@ -140,7 +141,7 @@ var zptContext = (function() {
     
     var setTranslator = function ( translatorToSet ){
         translator = translatorToSet;
-    };
+    };*/
     /* End Translators */
     
     return {
@@ -150,8 +151,8 @@ var zptContext = (function() {
         getFormatter: getFormatter,
         registerFormatter: registerFormatter,
         getExpressionsConf: getExpressionsConf,
-        setExpressionsConf: setExpressionsConf,
-        getTranslator: getTranslator,
-        setTranslator: setTranslator
+        setExpressionsConf: setExpressionsConf
+        /*getTranslator: getTranslator,
+        setTranslator: setTranslator*/
     };
 })();
