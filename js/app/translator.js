@@ -7,19 +7,19 @@ var translator = (function() {
     
     var tr = function ( i18nList, id, params ){
         
-        if ( i18nList ) {
+        if ( ! i18nList ) {
+            return "No I18n instance defined!";
+        }
             
-            var length = i18nList.length;
-            
-            if ( ! length ){
-                return "No I18n instance defined!";
-            }
-            
-            for ( var i = 0; i < length; i++ ) {
-                i18n = i18nList[ i ];
-                if ( i18n.exists( id ) ){
-                    return i18n.tr( id, params );
-                }
+        var length = i18nList.length;
+        if ( ! length ){
+            return "Void I18n list!";
+        }
+
+        for ( var i = 0; i < length; i++ ) {
+            i18n = i18nList[ i ];
+            if ( i18n.exists( id ) ){
+                return i18n.tr( id, params );
             }
         }
         
