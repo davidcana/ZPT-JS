@@ -1,0 +1,4 @@
+{
+  "Hello world!": "¡Hola mundo!",
+  "Results msg": "{ GENDER, select, male{Él} female{Ella} other{Ellos} } { RES, plural, =0{no } other{} }{ GENDER, select, male{ha} female{ha} other{han} } encontrado { RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }"
+}
