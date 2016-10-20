@@ -3,15 +3,20 @@ $(function () {
     
     var es1JSONFileName = 'i18n/es1.json';
     var en1JSONFileName = 'i18n/en1.json';
-    var jsonFiles = [ es1JSONFileName , en1JSONFileName];
+    var es2JSONFileName = 'i18n/es2.json';
+    var en2JSONFileName = 'i18n/en2.json';
+    
+    var jsonFiles = [ es1JSONFileName , en1JSONFileName, es2JSONFileName , en2JSONFileName ];
     
     translator.loadAsync( jsonFiles , callback );
     
     function callback( i18nMap ){
         
         var dictionary = {
-            'i18n-ES': new I18n( 'es', i18nMap[ es1JSONFileName ] ),
-            'i18n-EN': new I18n( 'en', i18nMap[ en1JSONFileName ] )
+            'i18n-ES' : new I18n( 'es', i18nMap[ es1JSONFileName ] ),
+            'i18n-EN' : new I18n( 'en', i18nMap[ en1JSONFileName ] ),
+            'i18n-ES2': new I18n( 'es', i18nMap[ es2JSONFileName ] ),
+            'i18n-EN2': new I18n( 'en', i18nMap[ en2JSONFileName ] )
         };
         
         zpt.run( document.body, dictionary );
@@ -47,6 +52,26 @@ $(function () {
             assert.equal( $('#t3-7').html() , "They found no results" );
             assert.equal( $('#t3-8').html() , "They found 1 result" );
             assert.equal( $('#t3-9').html() , "They found 10 results" );
+        });
+        
+        QUnit.test( "2 domains in domain definition: i18n-ES2 i18n-ES (spanish)", function( assert ) {
+            assert.equal( $('#t4-1').html() , "¡¡¡Hola mundo 2!!!" );
+            assert.equal( $('#t4-2').html() , "Él no ha encontrado ningún resultado" );
+        });
+
+        QUnit.test( "2 domains in domain definition: i18n-EN2 i18n-EN (english) ", function( assert ) {
+            assert.equal( $('#t5-1').html() , "Hello world 2.0!!!" );
+            assert.equal( $('#t5-2').html() , "He found no results" );
+        });
+
+        QUnit.test( "Nested domains: i18n-ES and i18n-ES2 nested (spanish) ", function( assert ) {
+            assert.equal( $('#t6-1').html() , "¡¡¡Hola mundo 2!!!" );
+            assert.equal( $('#t6-2').html() , "Él no ha encontrado ningún resultado" );
+        });
+
+        QUnit.test( "Nested domains: i18n-EN and i18n-EN2 nested (english) ", function( assert ) {
+            assert.equal( $('#t7-1').html() , "Hello world 2.0!!!" );
+            assert.equal( $('#t7-2').html() , "He found no results" );
         });
     }
 });

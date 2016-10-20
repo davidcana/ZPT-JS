@@ -434,13 +434,26 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         }
 
         var i18nList = [];
+        
+        // Add the domains in this tag
         var expression = exp.trim();
         var tokens = new ExpressionTokenizer( expression, DOMAIN_DELIMITER, true );
 
         while ( tokens.hasMoreTokens() ) {
             var i18nExpression = tokens.nextToken().trim();
             var i18n = expressionEvaluator.evaluate( scope, i18nExpression);
+            
+            if ( ! i18n ){
+                throw 'Error evaluating domain: ' + i18nExpression;    
+            }
+            
             i18nList.push( i18n );
+        }
+        
+        // Add the domains defined previously
+        var previousI18nList = scope.get( I18N_DOMAIN_VAR_NAME );
+        if ( previousI18nList ) {
+            i18nList = i18nList.concat( previousI18nList );
         }
         
         scope.set( I18N_DOMAIN_VAR_NAME, i18nList, false );

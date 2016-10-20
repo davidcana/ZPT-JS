@@ -174,5 +174,81 @@
                                      RES 10">Must be 'They found 10 results'</span>
             </li>
         </ol>
+        
+        <p>
+            2 domains in domain definition: i18n-ES2 i18n-ES (spanish)
+        </p>
+        <ol data-idomain="i18n-ES2 i18n-ES">
+            <li>
+               (in i18n-ES2) ¡¡¡Hola mundo 2!!! = 
+               <span id="t4-1" 
+                     data-icontent="'Hello world!'">Must be ¡¡¡Hola mundo 2!!!</span>
+            </li>
+            <li>
+               (in i18n-ES) Él no ha encontrado ningún resultado = 
+                <span id="t4-2" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 0">Must be 'Él no ha encontrado ningún resultado'</span>
+            </li>
+        </ol>
+        
+        <p>
+            2 domains in domain definition: i18n-EN2 i18n-EN (english)
+        </p>
+        <ol data-idomain="i18n-EN2 i18n-EN">
+            <li>
+               (in i18n-EN2) Hello world 2.0!!! = 
+               <span id="t5-1" 
+                     data-icontent="'Hello world!'">Must be Hello world 2.0!!!</span>
+            </li>
+            <li>
+               (in i18n-EN) He found no results = 
+                <span id="t5-2" 
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 0">Must be 'He found no results'</span>
+            </li>
+        </ol>
+        
+        <p>
+            Nested domains: i18n-ES and i18n-ES2 nested (spanish)
+        </p>
+        <ol data-idomain="i18n-ES">
+            <li>
+               (in i18n-ES2) ¡¡¡Hola mundo 2!!! = 
+               <span id="t6-1" 
+                     data-idomain="i18n-ES2"
+                     data-icontent="'Hello world!'">Must be ¡¡¡Hola mundo 2!!!</span>
+            </li>
+            <li>
+               (in i18n-ES) Él no ha encontrado ningún resultado = 
+                <span id="t6-2" 
+                      data-idomain="i18n-ES2"
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 0">Must be 'Él no ha encontrado ningún resultado'</span>
+            </li>
+        </ol>
+        
+        <p>
+            Nested domains: i18n-EN and i18n-EN2 nested (english)
+        </p>
+        <ol data-idomain="i18n-EN">
+            <li>
+               (in i18n-EN2) Hello world 2.0!!! = 
+               <span id="t7-1" 
+                     data-idomain="i18n-EN2"
+                     data-icontent="'Hello world!'">Must be Hello world 2.0!!!</span>
+            </li>
+            <li>
+               (in i18n-EN) He found no results = 
+                <span id="t7-2" 
+                      data-idomain="i18n-EN2"
+                      data-icontent="'Results msg';
+                                     GENDER 'male';
+                                     RES 0">Must be 'He found no results'</span>
+            </li>
+        </ol>
     </body>
 </html>
