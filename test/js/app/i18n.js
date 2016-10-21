@@ -88,4 +88,34 @@ $(function () {
         assert.equal( $('#t7-1').html() , "Hello world 2.0!!!" );
         assert.equal( $('#t7-2').html() , "He found no results" );
     });
+    
+    QUnit.test( "Attributes test (spanish)", function( assert ) {
+        assert.equal( $('#t8-1').attr('title') , "¡Hola mundo!" );
+        assert.equal( $('#t8-2').attr('title') , "Ella ha encontrado 4 resultados" );
+        assert.equal( $('#t8-3').attr('title') , "¡Hola mundo!" );
+        assert.equal( $('#t8-3').attr('alt') , "Ella ha encontrado 4 resultados" );
+        assert.equal( $('#t8-4').attr('title') , "¡Hola mundo!" );
+        assert.equal( $('#t8-4').attr('alt') , "Ella ha encontrado 4 resultados" );
+        assert.equal( $('#t8-4').attr('longdesc') , "http://www.fsf.org" );
+    });
+    
+    QUnit.test( "Attributes test (english)", function( assert ) {
+        assert.equal( $('#t9-1').attr('title') , "Hello world!" );
+        assert.equal( $('#t9-2').attr('title') , "She found 4 results" );
+        assert.equal( $('#t9-3').attr('title') , "Hello world!" );
+        assert.equal( $('#t9-3').attr('alt') , "She found 4 results" );
+        assert.equal( $('#t9-4').attr('title') , "Hello world!" );
+        assert.equal( $('#t9-4').attr('alt') , "She found 4 results" );
+        assert.equal( $('#t9-4').attr('longdesc') , "http://www.fsf.org" );
+    });
+    
+    QUnit.test( "Replace (spanish) ", function( assert ) {
+        assert.equal( $('#t10-1').html().trim() , "¡Hola mundo!" );
+        assert.equal( $('#t10-2').html().trim() , "Él ha encontrado un único resultado" );
+    });
+    
+    QUnit.test( "Replace (english) ", function( assert ) {
+        assert.equal( $('#t11-1').html().trim() , "Hello world!" );
+        assert.equal( $('#t11-2').html().trim() , "He found 1 result" );
+    });
 });

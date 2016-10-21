@@ -28,8 +28,8 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     var I18N_EXPRESSION_PREFIX = "i18nExp:";
     var ON_ERROR_VAR_NAME = "on-error";
     var I18N_DOMAIN_VAR_NAME = "i18nDomain";
-    var CONTENT_DELIMITER = ';';
-    var IN_CONTENT_DELIMITER = ' ';
+    var I18N_DELIMITER = ',';
+    var IN_I18N_DELIMITER = ' ';
     var HTML_EXPR_STRUCTURE = "html ";
     
     // TAL attributes for querySelectorAll call
@@ -266,7 +266,6 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
                 scope, 
                 attributes.talCondition ) ) {
 
-
             // Stop processing the rest of this node as it is invisible
             return false;
         }
@@ -279,13 +278,20 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         var replaced = processReplace(
                 node, 
                 scope, 
-                attributes.talReplace );
+                attributes.talReplace,
+                attributes.i18nReplace );
 
         if ( ! omittedTag && ! replaced ) {
+            
             processAttributes(
                     node, 
                     scope, 
                     attributes.talAttributes );
+            
+            processI18nAttributes(
+                    node, 
+                    scope, 
+                    attributes.i18nAttributes );
         }
 
         if ( ! omittedTag && ! replaced) {
@@ -343,11 +349,6 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
             }
             var name = attribute.substring( 0, space );
             var valueExpression = attribute.substring( space + 1 ).trim();
-            /*
-             * var value = translate? processI18nContent( evaluationHelper,
-             * valueExpression, i18nParams ): Expression.evaluate(
-             * valueExpression, evaluationHelper );
-             */
             var value = expressionEvaluator.evaluate( scope, valueExpression );
 
             if ( value != undefined ) {
@@ -380,7 +381,42 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
             }
         }
     };
+    
+    var processI18nAttributes = function( node, scope, exp ) {
 
+        if ( ! exp ) {
+            return;
+        }
+
+        var expression = exp.trim();
+        var tokens = new ExpressionTokenizer( expression, ATTRIBUTE_DELIMITER, true );
+
+        while ( tokens.hasMoreTokens() ) {
+            var token = tokens.nextToken().trim();
+            var i18nTokens = new ExpressionTokenizer( token, I18N_DELIMITER, true );
+            var attribute = i18nTokens.nextToken().trim();
+            var space = attribute.indexOf( IN_ATTRIBUTE_DELIMITER );
+            if ( space == -1 ) {
+                throw 'Bad attributes expression: ' + attribute;
+            }
+            var name = attribute.substring( 0, space );
+            var valueExpression = attribute.substring( space + 1 ).trim();
+
+            // Parse and evaluate params
+            var params = processI18nParams( scope, i18nTokens );
+            
+            // Evaluate and translate
+            var value = expressionEvaluator.evaluate( scope, valueExpression );
+            if ( value != undefined ) {
+                value = translate( scope, value, params );
+                if ( beforeAttr ) {
+                    beforeAttr( node, name, value );
+                }
+                node.setAttribute( name, value );
+            }
+        }
+    };
+    
     var processOnError = function( scope, exp ) {
 
         if ( ! exp ) {
@@ -540,24 +576,58 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
 
         return result;
     };
-
-    var processReplace = function( node, scope, exp ) {
-
-        if ( ! exp ) {
-            return false;
+    
+    var processReplace = function( node, scope, talExp, i18nExp ) {
+                
+        if ( i18nExp ){
+            return processI18nReplace( node, scope, i18nExp );
         }
-
-        var expression = exp.trim();
-        var result = expressionEvaluator.evaluate( scope, expression );
-
+        
+        if ( talExp ){
+            return processTalReplace( node, scope, talExp );
+        }
+        
+        return false;
+    };
+    
+    var finishProcessReplace = function( node, evaluated ){
+        
         // Remove child nodes
         var parentNode = node.parentNode;
         //parentNode.removeChild( node );
 
         // Append text node
-        var textNode = document.createTextNode( result );
+        var textNode = document.createTextNode( evaluated );
         //parentNode.appendChild( textNode );
         parentNode.replaceChild( textNode, node );
+    };
+    
+    var processI18nReplace = function( node, scope, exp ) {
+        
+        var expression = exp.trim();
+
+        // Get valueExpression and params
+        var tokens = new ExpressionTokenizer( expression, I18N_DELIMITER, true );
+        var valueExpression = tokens.nextToken().trim();
+        
+        // Parse and evaluate params
+        var params = processI18nParams( scope, tokens );
+        
+        // Evaluate and translate
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        evaluated = translate( scope, evaluated, params );
+        
+        finishProcessReplace( node, evaluated );
+        
+        return true;
+    };
+    
+    var processTalReplace = function( node, scope, exp ) {
+
+        var expression = exp.trim();
+        var evaluated = expressionEvaluator.evaluate( scope, expression );
+
+        finishProcessReplace( node, evaluated );
         
         return true;
     };
@@ -618,6 +688,23 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         }
     };
     
+    var processI18nParams = function( scope, tokens ){
+        var params = {};
+        while ( tokens.hasMoreTokens() ) {
+            var token = tokens.nextToken().trim();
+            var paramsTokens = new ExpressionTokenizer( token, IN_I18N_DELIMITER, true );
+            if ( paramsTokens.countTokens() != 2 ) {
+                throw '2 elements are needed in data-icontent expression.';
+            }
+            
+            var paramName = paramsTokens.nextToken().trim();
+            var paramExpressionValue = paramsTokens.nextToken().trim();
+            var paramValue = expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
+            params[ paramName ] = paramValue;
+        }
+        return params;
+    };
+    
     var processI18nContent = function( node, scope, exp ) {
         
         // Process it
@@ -629,21 +716,11 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         }
         
         // Get valueExpression and params
-        var tokens = new ExpressionTokenizer( expression, CONTENT_DELIMITER, true );
+        var tokens = new ExpressionTokenizer( expression, I18N_DELIMITER, true );
         var valueExpression = tokens.nextToken().trim();
-        var params = {};
-        while ( tokens.hasMoreTokens() ) {
-            var token = tokens.nextToken().trim();
-            var paramsTokens = new ExpressionTokenizer( token, IN_CONTENT_DELIMITER, true );
-            if ( paramsTokens.countTokens() != 2 ) {
-                throw '2 elements are needed in data-icontent expression.';
-            }
-            
-            var paramName = paramsTokens.nextToken().trim();
-            var paramExpressionValue = paramsTokens.nextToken().trim();
-            var paramValue = expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
-            params[ paramName ] = paramValue;
-        }
+        
+        // Parse and evaluate params
+        var params = processI18nParams( scope, tokens );
         
         // Evaluate and translate
         var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
