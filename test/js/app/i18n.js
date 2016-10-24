@@ -15,6 +15,7 @@ $(function () {
     msg.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' +
         ' found ' +
         '{RES, plural, =0{no results} one{1 result} other{# results} }';
+    msg.en[ 'Oh, noooo!' ] = 'Error found... Oh, noooo!';
     msg2.en[ 'Hello world!' ] = 'Hello world 2.0!!!';
     
     /* Spanish i18n messages */
@@ -25,13 +26,18 @@ $(function () {
         '{ GENDER, select, male{ha} female{ha} other{han} }' +
         ' encontrado ' +
         '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
+    msg.es[ 'Oh, noooo!' ] = 'Error encontrado... Oh, noooo!';
     msg2.es[ 'Hello world!' ] = '¡¡¡Hola mundo 2!!!';
     
     var dictionary = {
         'i18n-ES': new I18n( 'es', msg[ 'es' ] ),
         'i18n-ES2': new I18n( 'es', msg2[ 'es' ] ),
         'i18n-EN': new I18n( 'en', msg[ 'en' ] ),
-        'i18n-EN2': new I18n( 'en', msg2[ 'en' ] )
+        'i18n-EN2': new I18n( 'en', msg2[ 'en' ] ),
+        fireError: function( ){
+            //return 1 / 0;
+            document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
+        }
     };
 
     zpt.run( document.body, dictionary );
@@ -109,13 +115,37 @@ $(function () {
         assert.equal( $('#t9-4').attr('longdesc') , "http://www.fsf.org" );
     });
     
-    QUnit.test( "Replace (spanish) ", function( assert ) {
+    QUnit.test( "Replace (spanish)", function( assert ) {
         assert.equal( $('#t10-1').html().trim() , "¡Hola mundo!" );
         assert.equal( $('#t10-2').html().trim() , "Él ha encontrado un único resultado" );
     });
     
-    QUnit.test( "Replace (english) ", function( assert ) {
+    QUnit.test( "Replace (english)", function( assert ) {
         assert.equal( $('#t11-1').html().trim() , "Hello world!" );
         assert.equal( $('#t11-2').html().trim() , "He found 1 result" );
+    });
+    
+    QUnit.test( "Define (spanish)", function( assert ) {
+        assert.equal( $('#t12-1').html(), "¡Hola mundo!" );
+        assert.equal( $('#t12-2').html(), "Él ha encontrado un único resultado" );
+        assert.equal( $('#t12-3').html(), "¡Hola mundo!" );
+        assert.equal( $('#t12-4').html(), "Él ha encontrado un único resultado" );
+    });
+    
+    QUnit.test( "Define (english)", function( assert ) {
+        assert.equal( $('#t13-1').html(), "Hello world!" );
+        assert.equal( $('#t13-2').html(), "He found 1 result" );
+        assert.equal( $('#t13-3').html(), "Hello world!" );
+        assert.equal( $('#t13-4').html(), "He found 1 result" );
+    });
+    
+    QUnit.test( "On error test (spanish)", function( assert ) {
+        assert.equal( $('#t14-1').html() , "¡Hola mundo!" );
+        assert.equal( $('#t14-2').html() , "Error encontrado... Oh, noooo!" );
+    });
+    
+    QUnit.test( "On error test (english)", function( assert ) {
+        assert.equal( $('#t15-1').html() , "Hello world!" );
+        assert.equal( $('#t15-2').html() , "Error found... Oh, noooo!" );
     });
 });

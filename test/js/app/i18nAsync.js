@@ -16,7 +16,11 @@ $(function () {
             'i18n-ES' : new I18n( 'es', i18nMap[ es1JSONFileName ] ),
             'i18n-EN' : new I18n( 'en', i18nMap[ en1JSONFileName ] ),
             'i18n-ES2': new I18n( 'es', i18nMap[ es2JSONFileName ] ),
-            'i18n-EN2': new I18n( 'en', i18nMap[ en2JSONFileName ] )
+            'i18n-EN2': new I18n( 'en', i18nMap[ en2JSONFileName ] ),
+            fireError: function( ){
+                //return 1 / 0;
+                document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
+            }
         };
         
         zpt.run( document.body, dictionary );
@@ -102,6 +106,30 @@ $(function () {
         QUnit.test( "Replace (english) ", function( assert ) {
             assert.equal( $('#t11-1').html().trim() , "Hello world!" );
             assert.equal( $('#t11-2').html().trim() , "He found 1 result" );
+        });
+        
+        QUnit.test( "Define (spanish) ", function( assert ) {
+            assert.equal( $('#t12-1').html(), "¡Hola mundo!" );
+            assert.equal( $('#t12-2').html(), "Él ha encontrado un único resultado" );
+            assert.equal( $('#t12-3').html(), "¡Hola mundo!" );
+            assert.equal( $('#t12-4').html(), "Él ha encontrado un único resultado" );
+        });
+
+        QUnit.test( "Define (english) ", function( assert ) {
+            assert.equal( $('#t13-1').html(), "Hello world!" );
+            assert.equal( $('#t13-2').html(), "He found 1 result" );
+            assert.equal( $('#t13-3').html(), "Hello world!" );
+            assert.equal( $('#t13-4').html(), "He found 1 result" );
+        });
+        
+        QUnit.test( "On error test (spanish)", function( assert ) {
+            assert.equal( $('#t14-1').html() , "¡Hola mundo!" );
+            assert.equal( $('#t14-2').html() , "Error encontrado... Oh, noooo!" );
+        });
+
+        QUnit.test( "On error test (english)", function( assert ) {
+            assert.equal( $('#t15-1').html() , "Hello world!" );
+            assert.equal( $('#t15-2').html() , "Error found... Oh, noooo!" );
         });
     }
 });

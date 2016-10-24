@@ -354,5 +354,100 @@
                 </span>
             </li>
         </ol>
+        
+        <p>
+            Define (spanish)
+        </p>
+        <ol data-idomain="i18n-ES">
+            <li data-idefine="msg 'Hello world!'">
+               ¡Hola mundo! = 
+               <span id="t12-1" data-tcontent="msg">
+                   Must be ¡Hola mundo!
+                </span>
+            </li>
+            <li data-idefine="msg 'Results msg', GENDER 'male', RES 1">
+               Él ha encontrado un único resultado = 
+               <span id="t12-2" data-tcontent="msg">
+                   Must be Él ha encontrado un único resultado
+                </span>
+            </li>
+            <li data-idefine="msg1 'Hello world!';
+                              msg2 'Results msg', GENDER 'male', RES 1">
+               ¡Hola mundo! = 
+               <span id="t12-3" data-tcontent="msg1">
+                   Must be ¡Hola mundo!
+                </span><br>
+               Él ha encontrado un único resultado = 
+               <span id="t12-4" data-tcontent="msg2">
+                   Must be Él ha encontrado un único resultado
+                </span>
+            </li>
+        </ol>
+        
+        <p>
+            Define (english)
+        </p>
+        <ol data-idomain="i18n-EN">
+            <li data-idefine="msg 'Hello world!'">
+               Hello world! = 
+               <span id="t13-1" data-tcontent="msg">
+                   Must be Hello world!
+                </span>
+            </li>
+            <li data-idefine="msg 'Results msg', GENDER 'male', RES 1">
+               He found 1 result = 
+               <span id="t13-2" data-tcontent="msg">
+                   Must be He found 1 result
+                </span>
+            </li>
+            <li data-idefine="msg1 'Hello world!';
+                              msg2 'Results msg', GENDER 'male', RES 1">
+               Hello world! = 
+               <span id="t13-3" data-tcontent="msg1">
+                   Must be Hello world!
+                </span><br>
+               He found 1 result = 
+               <span id="t13-4" data-tcontent="msg2">
+                   Must be He found 1 result
+                </span>
+            </li>
+        </ol>
+        
+        
+        <p>
+            On error (spanish)
+        </p>
+        <div data-idomain="i18n-ES">
+            <ol data-ion-error="'Oh, noooo!'">
+                <li>
+                    ¡Hola mundo! = 
+                    <span id="t14-1" 
+                          data-icontent="'Hello world!'">Must be ¡Hola mundo!</span>
+                </li>
+                <li>
+                    fireError() = Error encontrado... Oh, noooo! = 
+                    <span id="t14-2" 
+                          data-tcontent="fireError()">must fire error</span>
+                </li>
+            </ol>
+        </div>
+        
+        <p>
+            On error (english)
+        </p>
+        <div data-idomain="i18n-EN">
+            <ol data-ion-error="'Oh, noooo!'">
+                <li>
+                    Hello world! = 
+                    <span id="t15-1" 
+                          data-icontent="'Hello world!'">Must be Hello world!</span>
+                </li>
+                <li>
+                    fireError() = Error found... Oh, noooo!! = 
+                    <span id="t15-2" 
+                          data-tcontent="fireError()">must fire error</span>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>
