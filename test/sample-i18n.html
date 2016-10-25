@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Some I18n examples</title>
+        
+        <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
+        <script src="../js/lib/messageformat.js"></script>
+        <script src="../dist/zpt-0.3.0.js"></script>
+        <script>
+$(function () {
+    "use strict";
+    
+    var msg = {
+        en : {},
+        es : {}
+    };
+    
+    /* English */
+    msg.en[ 'Hello world!' ] = 'Hello world!';
+    msg.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' +
+        ' found ' +
+        '{RES, plural, =0{no results} one{1 result} other{# results} }';
+    
+    /* Spanish i18n messages */
+    msg.es[ 'Hello world!' ] = '¡Hola mundo!';
+    msg.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos} }' +
+        ' ' +
+        '{ RES, plural, =0{no } other{} }' +
+        '{ GENDER, select, male{ha} female{ha} other{han} }' +
+        ' encontrado ' +
+        '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
+    
+    var dictionary = {
+        'i18n-ES': new I18n( 'es', msg[ 'es' ] ),
+        'i18n-EN': new I18n( 'en', msg[ 'en' ] )
+    };
+
+    zpt.run( document.body, dictionary );
+});
+
+        </script>
+    </head>
+    <body>
+        <h1>Some I18n expressions</h1>
+        <ol data-idomain="i18n-ES">
+            <li>
+               ¡Hola mundo! = 
+               <span data-icontent="'Hello world!'">Must be ¡Hola mundo!</span>
+            </li>
+            <li>
+               Él ha encontrado 10 resultados = 
+                <span data-icontent="'Results msg',
+                                     GENDER 'male',
+                                     RES 10">Must be 'Él ha encontrado 10 resultados'</span>
+            </li>
+        </ol>
+    </body>
+</html>

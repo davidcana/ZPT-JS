@@ -88,7 +88,7 @@
         &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
         
         &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
-        &lt;script src="../dist/zpt.js"&gt;&lt;/script&gt;
+        &lt;script src="../dist/zpt-0.3.0.js"&gt;&lt;/script&gt;
         &lt;script&gt;
         
 $(function () {
@@ -580,6 +580,199 @@ zptContext.registerFormatter(
         <li><code>format: customFormatter aNumber</code> formats aNumber using a function in the dictionary called <code>customFormatter</code></li>
         <li><code>format: customFormatterName aNumber</code> formats aNumber using a function in the dictionary called as the value of the <code>customFormatterName</code> variable</li>
     </ul>
+    
+    <a id="zpt.i18n"></a>
+    <h3>I18n and l10n</h3>
+    
+    <h4>Basics about i18n</h4>
+    <p>
+        Nowadays ZPT-JS has some i18n capabilities. How do they work? Let's see an example:
+    </p>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Some I18n examples&lt;/title&gt;
+        
+        &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
+        &lt;script src="../js/lib/messageformat.js"&gt;&lt;/script&gt;
+        &lt;script src="../dist/zpt-0.3.0.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+$(function () {
+    "use strict";
+    
+    var msg = {
+        en : {},
+        es : {}
+    };
+    
+    /* English */
+    msg.en[ 'Hello world!' ] = 'Hello world!';
+    msg.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' +
+        ' found ' +
+        '{RES, plural, =0{no results} one{1 result} other{# results} }';
+    
+    /* Spanish i18n messages */
+    msg.es[ 'Hello world!' ] = '¡Hola mundo!';
+    msg.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos} }' +
+        ' ' +
+        '{ RES, plural, =0{no } other{} }' +
+        '{ GENDER, select, male{ha} female{ha} other{han} }' +
+        ' encontrado ' +
+        '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
+    
+    var dictionary = {
+        'i18n-ES': new I18n( 'es', msg[ 'es' ] ),
+        'i18n-EN': new I18n( 'en', msg[ 'en' ] )
+    };
+
+    zpt.run( document.body, dictionary );
+});
+
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Some I18n expressions&lt;/h1&gt;
+        &lt;ol data-idomain="i18n-ES"&gt;
+            &lt;li&gt;
+               ¡Hola mundo! = 
+               &lt;span data-icontent="'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+               Él ha encontrado 10 resultados = 
+                &lt;span data-icontent="'Results msg', GENDER 'male', RES 10"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
+            &lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+    
+    <p>
+        Some remarks about this:
+    </p>
+    <ul>
+        <li>The dictionary must contain at least one instance per supported language of <code>I18n</code> class. The constructor accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
+        <li>The <code>data-idomain</code> attribute defines the <code>I18n</code> to use.</li>
+        <li>The <code>data-icontent</code> attribute is similar to <code>data-icontent</code>. It also evaluates an expression but then it searches that value into the messages.</li>
+        <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg', GENDER 'male', RES 10</code> is a little more complex:
+            <ol>
+                <li>The first item is the message id: <code>'Results msg'</code>.</li>
+                <li>The rest are variables used to build the message: <code>GENDER 'male'</code> defines a <code>GENDER</code> variable with <code>'male'</code> as value.</li>
+                <li><code>RES 10</code> defines a <code>RES</code> variable with <code>10</code> as value.</li>
+            </ol>
+        </li>
+    </ul>
+    
+    <h4>I18n tags</h4>
+    <p>
+        The list of i18n tags with their twins TAL tags is:
+    </p>
+    <table>
+        <tr>
+            <th>TAL tag name</th>
+            <th>I18N tag name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>data-idomain</td>
+            <td>Defines a i18n domain</td>
+        </tr>
+        <tr>
+            <td>data-tattributes</td>
+            <td>data-iattributes</td>
+            <td>Replace the value of one or more attributes</td>
+        </tr>
+        <tr>
+            <td>data-tcontent</td>
+            <td>data-icontent</td>
+            <td>Replace the content of the element</td>
+        </tr>
+        <tr>
+            <td>data-tdefine</td>
+            <td>data-idefine</td>
+            <td>Define one or more variables</td>
+        </tr>
+        <tr>
+            <td>data-ton-error</td>
+            <td>data-ion-error</td>
+            <td>Handle errors</td>
+        </tr>
+        <tr>
+            <td>data-treplace</td>
+            <td>data-ireplace</td>
+            <td>Replace the content of an element and remove the element leaving the content</td>
+        </tr>
+    </table>
+    
+    <p>
+        Some examples of i18n tags in action:
+    </p>
+    <ul>
+        <li>
+            <code>&lt;img src="image.png" data-iattributes="title 'Hello world!'"&gt;</code> adds an i18n title to the image.
+        </li>
+        <li>
+            <code>&lt;li data-idefine="msg 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
+        </li>
+        <li>
+            <code>&lt;body data-ion-error="'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
+        </li>
+        <li><code>&lt;span data-ireplace="'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
+    </ul>
+    
+    <h4>Working with domains</h4>
+    <p>
+        In the previous example the domain was a simple <code>I18n</code> instance. This forces to use a big map with all the messages. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>I18n</code> instances, so the messages will be searched in the same order.
+    </p>
+    <p>
+        Therefore, <code>data-idomain="i18n-ES1 i18n-ES2"</code> allows yoy to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
+    </p>
+    
+    <p>
+        <code>data-idomain</code> also supports nested definitions:
+    </p>
+    <pre>
+&lt;div data-idomain="i18n-ES1"&gt;
+   &lt;span data-icontent="'Hello world!'"&gt;
+        ¡Hola mundo!
+   &lt;/span&gt;
+   &lt;span data-idomain="i18n-ES2" data-icontent="'Hello world!'"&gt;
+        ¡¡¡Hola mundo 2!!!
+   &lt;/span&gt;
+&lt;/div&gt; 
+    </pre>
+    <p>
+        The first <code>data-icontent</code> will search only in <code>i18n-ES1</code>. The second one will search first in <code>i18n-ES2</code> and if it is not found will search in <code>i18n-ES1</code>.
+    </p>
+    
+    <h4>Loading messages from JSON files</h4>
+    <p>
+        ZPT-JS makes it easy loading i18n messages from JSON files:
+    </p>
+    <pre>
+ $(function () {
+    "use strict";
+    
+    var esJSONFileName = 'i18n/es.json';
+    var enJSONFileName = 'i18n/en.json';
+    
+    var jsonFiles = [ esJSONFileName , enJSONFileName ];
+    
+    translator.loadAsync( jsonFiles , callback );
+    
+    function callback( i18nMap ){
+        
+        var dictionary = {
+            'i18n-ES' : new I18n( 'es', i18nMap[ esJSONFileName ] ),
+            'i18n-EN' : new I18n( 'en', i18nMap[ enJSONFileName ] )
+        };
+        
+        zpt.run( document.body, dictionary );
+    }
+});
+    </pre>
     
     <a id="zpt.grunt"></a>
     <h3>Building and testing</h3>
