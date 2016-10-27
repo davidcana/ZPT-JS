@@ -20,9 +20,7 @@
   "dependencies": {
     "jquery": "^2.0.3",
     "mstring": "^0.1.2",
-    "messageformat": "^1.0.2",
-    "number-formatter": "^1.2.0",
-    "date-format": "^0.0.2"
+    "messageformat": "^1.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
