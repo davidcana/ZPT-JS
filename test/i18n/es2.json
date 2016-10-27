@@ -1,3 +1,7 @@
 {
-  "Hello world!": "¡¡¡Hola mundo 2!!!"
+    "/CONF/": {
+        "language": "es",
+        "locale": "es-ES"
+    },
+    "Hello world!": "¡¡¡Hola mundo 2!!!"
 }

@@ -62,6 +62,16 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         FIELDSET : 1,
         OPTION : 1
     };
+    var formatTypes = {
+        string : 1,
+        number : 1,
+        currency : 1,
+        time : 1,
+        date : 1
+    };
+    var complexFormatTypes = {
+        currency : 1
+    };
     var callback = callbackToApply;
     var scope = new Scope( obj );
     var querySelectorAll = !!root.querySelectorAll;
@@ -579,6 +589,27 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     
     var evaluateAndTranslate = function( scope, expression ) {
         
+        // Get the format and discard it from expression
+        var format = 'string';
+        var subformat = undefined;
+        if ( expression.startsWith( '{' ) ) {
+            format = expression.substring( 1, expression.indexOf( '}' ) ).trim();
+            if ( ! formatTypes[ format ] ){
+                var separatorIndex = format.indexOf( '/' );
+                if ( separatorIndex == -1 ){
+                    throw complexFormatTypes[ format ]?
+                          'Subformat needed: ' + format:
+                          'Format type not supported: ' + format;
+                }
+                subformat = format.substring( 1 + separatorIndex );
+                format = format.substring( 0, separatorIndex );
+                if ( ! complexFormatTypes[ format ] ){
+                    throw 'Format type not supported: ' + format;
+                }
+            }
+            expression = expression.substring( 1 + expression.indexOf( '}' ) ).trim();
+        }
+        
         // Get valueExpression and params
         var tokens = new ExpressionTokenizer( expression, I18N_DELIMITER, true );
         var valueExpression = tokens.nextToken().trim();
@@ -588,7 +619,7 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
 
         // Evaluate and translate
         var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        evaluated = translate( scope, evaluated, params );
+        evaluated = translate( scope, evaluated, params, format, subformat );
         
         return evaluated;
     };
@@ -637,10 +668,10 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         return result;
     };
 
-    var translate = function( scope, id, params ){
+    var translate = function( scope, id, params, format, subformat ){
         
         var i18nList = scope.get( I18N_DOMAIN_VAR_NAME );
-        return translator.tr( i18nList, id, params );
+        return translator.tr( i18nList, id, params, format, subformat );
     };
     
     var processContent = function( node, scope, talExp, i18nExp ) {

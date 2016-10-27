@@ -131,5 +131,31 @@ $(function () {
             assert.equal( $('#t15-1').html() , "Hello world!" );
             assert.equal( $('#t15-2').html() , "Error found... Oh, noooo!" );
         });
+        
+        QUnit.test( "Numbers (spanish)", function( assert ) {
+            assert.equal( $('#t16-1').html() , "1.355,23" );
+            assert.equal( $('#t16-2').html() , "1.355,236" );
+            assert.equal( $('#t16-3').html() , "001.355,236" );
+        });
+
+        QUnit.test( "Numbers (english)", function( assert ) {
+            assert.equal( $('#t17-1').html() , "1,355.23" );
+            assert.equal( $('#t17-2').html() , "1,355.236" );
+            assert.equal( $('#t17-3').html() , "001,355.236" );
+        });
+
+        QUnit.test( "Currencies (spanish)", function( assert ) {
+            assert.equal( $('#t18-1').html() , "1.355,23&nbsp;€" );
+            assert.equal( $('#t18-2').html() , "1.355,23&nbsp;$" );
+            assert.equal( $('#t18-3').html() , "1.355,23 euros" );
+            assert.equal( $('#t18-4').html() , "1.355,23 dólares estadounidenses" );
+        });
+
+        QUnit.test( "Currencies (english)", function( assert ) {
+            assert.equal( $('#t19-1').html() , "€1,355.23" );
+            assert.equal( $('#t19-2').html() , "$1,355.23" );
+            assert.equal( $('#t19-3').html() , "1,355.23 euros" );
+            assert.equal( $('#t19-4').html() , "1,355.23 US dollars" );
+        });
     }
 });

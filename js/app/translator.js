@@ -5,7 +5,7 @@ var translator = (function() {
         return new I18nBundle( resources );
     };*/
     
-    var tr = function ( i18nList, id, params ){
+    var tr = function ( i18nList, id, params, format, subformat ){
         
         if ( ! i18nList ) {
             return "No I18n instance defined!";
@@ -18,8 +18,8 @@ var translator = (function() {
 
         for ( var i = 0; i < length; i++ ) {
             i18n = i18nList[ i ];
-            if ( i18n.exists( id ) ){
-                return i18n.tr( id, params );
+            if ( format !== 'string' || i18n.exists( id ) ){
+                return i18n.tr( id, params, format, subformat );
             }
         }
         

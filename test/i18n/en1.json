@@ -1,5 +1,9 @@
 {
-  "Hello world!": "Hello world!",
-  "Results msg": "{GENDER, select, male{He} female{She} other{They} } found {RES, plural, =0{no results} one{1 result} other{# results} }",
-  "Oh, noooo!": "Error found... Oh, noooo!"
+    "/CONF/": {
+        "language": "en",
+        "locale": "en-US"
+    },
+    "Hello world!": "Hello world!",
+    "Results msg": "{GENDER, select, male{He} female{She} other{They} } found {RES, plural, =0{no results} one{1 result} other{# results} }",
+    "Oh, noooo!": "Error found... Oh, noooo!"
 }

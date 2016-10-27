@@ -1,5 +1,9 @@
 {
-  "Hello world!": "¡Hola mundo!",
-  "Results msg": "{ GENDER, select, male{Él} female{Ella} other{Ellos} } { RES, plural, =0{no } other{} }{ GENDER, select, male{ha} female{ha} other{han} } encontrado { RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }",
-  "Oh, noooo!": "Error encontrado... Oh, noooo!"
+    "/CONF/": {
+        "language": "es",
+        "locale": "es-ES"
+    },
+    "Hello world!": "¡Hola mundo!",
+    "Results msg": "{ GENDER, select, male{Él} female{Ella} other{Ellos} } { RES, plural, =0{no } other{} }{ GENDER, select, male{ha} female{ha} other{han} } encontrado { RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }",
+    "Oh, noooo!": "Error encontrado... Oh, noooo!"
 }
