@@ -1,0 +1,17 @@
+New in 0.4.0
+    - Added number formatting L10n using Intl.
+    - Added currency formatting L10n using Intl (currency codes from ISO 4217).
+    - Added date/time formatting L10n using Intl?
+    
+New in 0.3.0
+ - Added i18n capabilities (only for text) using messageformat.js.
+ - Added i18n tags. Add new tags:
+    - data-idomain. Register a list of I18n instances to do i18n.
+    - data-idefine. Search the specified value into the available I18n instances and save the value to a variable.
+    - data-icontent. It works as data-tcontent, but searching the specified value into the available I18n instances.
+    - data-ireplace. As data-treplace.
+    - data-iattributes. As data-tattributes.
+    - data-ion-error. As data-ton-error.
+
+New in 0.2.0
+ - Initial version. Initially a fork of Distal but finally nearly all code removed. Added some code from JPT (migrated from Java).
