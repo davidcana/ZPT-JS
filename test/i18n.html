@@ -540,5 +540,97 @@
                      data-icontent="{currency/USD} 1355.23, currencyDisplay 'name'">Must be 1,355.23 US dollars</span>
             </li>
         </ol>
+        
+        <p>
+            Datetime (spanish)
+        </p>
+        <ol data-idomain="i18n-ES">
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = 20/12/2012 =
+               <span id="t20-1"
+                     data-icontent="{datetime} date">Must be 20/12/2012</span>
+            </li>
+            <li>
+               Inline 12/21/2012 3:00:00 UTC as datetime = 21/12/2012 =
+               <span id="t20-2"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )">Must be 20/12/2012</span>
+            </li>
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = jueves, 20 de diciembre de 2012 =
+               <span id="t20-3"
+                     data-icontent="{datetime} date, weekday 'long', year 'numeric', month 'long', day 'numeric'">Must be jueves, 20 de diciembre de 2012</span>
+            </li>
+            <li>
+               Inline 12/20/2012 3:00:00 UTC as datetime = jueves, 21 de diciembre de 2012 =
+               <span id="t20-4"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ), weekday 'long', year 'numeric', month 'long', day 'numeric'">Must be jueves, 21 de diciembre de 2012</span>
+            </li>
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = 4:00:00 =
+               <span id="t20-5"
+                     data-icontent="{datetime} date, hour 'numeric', minute 'numeric', second 'numeric'">Must be 4:00:00</span>
+            </li>
+            <li>
+               Inline 12/20/2012 3:00:00 UTC as datetime = 4:00:00 =
+               <span id="t20-6"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ), hour 'numeric', minute 'numeric', second 'numeric'">Must be 4:00:00</span>
+            </li>
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = jueves, 21 de diciembre de 2012 4:00:00 =
+               <span id="t20-7"
+                     data-icontent="{datetime} date, weekday 'long', year 'numeric', month 'long', day 'numeric', hour 'numeric', minute 'numeric', second 'numeric'">Must be jueves, 21 de diciembre de 2012</span>
+            </li>
+            <li>
+               Inline 12/20/2012 3:00:00 UTC as datetime = jueves, 21 de diciembre de 2012 4:00:00 =
+               <span id="t20-8"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ), weekday 'long', year 'numeric', month 'long', day 'numeric', hour 'numeric', minute 'numeric', second 'numeric'">Must be jueves, 21 de diciembre de 2012</span>
+            </li>
+        </ol>
+        
+        <p>
+            Datetime (english)
+        </p>
+        <ol data-idomain="i18n-EN">
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = 12/20/2012 =
+               <span id="t21-1"
+                     data-icontent="{datetime} date">Must be 12/20/2012</span>
+            </li>
+            <li>
+               Inline 12/21/2012 3:00:00 UTC as datetime = 12/21/2012 =
+               <span id="t21-2"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )">Must be 12/20/2012</span>
+            </li>
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = Thursday, December 20, 2012 =
+               <span id="t21-3"
+                     data-icontent="{datetime} date, weekday 'long', year 'numeric', month 'long', day 'numeric'">Must be Thursday, December 20, 2012</span>
+            </li>
+            <li>
+               Inline 12/20/2012 3:00:00 UTC as datetime = Friday, December 21, 2012 =
+               <span id="t21-4"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ), weekday 'long', year 'numeric', month 'long', day 'numeric'">Must be Friday, December 21, 2012</span>
+            </li>
+            <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = 4:00:00 AM =
+               <span id="t21-5"
+                     data-icontent="{datetime} date, hour 'numeric', minute 'numeric', second 'numeric'">Must be 4:00:00</span>
+            </li>
+            <li>
+               Inline 12/20/2012 3:00:00 UTC as datetime = 4:00:00 AM =
+               <span id="t21-6"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ), hour 'numeric', minute 'numeric', second 'numeric'">Must be 4:00:00 AM</span>
+            </li>
+             <li>
+               In var 12/20/2012 3:00:00 UTC as datetime = Thursday, December 20, 2012, 4:00:00 AM =
+               <span id="t21-7"
+                     data-icontent="{datetime} date, weekday 'long', year 'numeric', month 'long', day 'numeric', hour 'numeric', minute 'numeric', second 'numeric'">Must be Thursday, December 20, 2012, 4:00:00 AM</span>
+            </li>
+            <li>
+               Inline 12/20/2012 3:00:00 UTC as datetime = Friday, December 21, 2012, 4:00:00 AM =
+               <span id="t21-8"
+                     data-icontent="{datetime} ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ), weekday 'long', year 'numeric', month 'long', day 'numeric', hour 'numeric', minute 'numeric', second 'numeric'">Must be Friday, December 21, 2012, 4:00:00 AM</span>
+            </li>
+        </ol>
     </body>
 </html>

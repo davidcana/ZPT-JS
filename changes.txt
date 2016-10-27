@@ -1,7 +1,9 @@
 New in 0.4.0
     - Added number formatting L10n using Intl.
     - Added currency formatting L10n using Intl (currency codes from ISO 4217).
-    - Added date/time formatting L10n using Intl?
+    - Added date/time formatting L10n using Intl.
+    - Added support of reading formatting options from resources?
+    - Added help to select the correct I18n instance depending on available locales?
     
 New in 0.3.0
  - Added i18n capabilities (only for text) using messageformat.js.

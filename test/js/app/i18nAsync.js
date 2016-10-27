@@ -20,7 +20,8 @@ $(function () {
             fireError: function( ){
                 //return 1 / 0;
                 document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
-            }
+            },
+            date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
         };
         
         zpt.run( document.body, dictionary );
@@ -156,6 +157,28 @@ $(function () {
             assert.equal( $('#t19-2').html() , "$1,355.23" );
             assert.equal( $('#t19-3').html() , "1,355.23 euros" );
             assert.equal( $('#t19-4').html() , "1,355.23 US dollars" );
+        });
+    
+        QUnit.test( "Datetime (spanish)", function( assert ) {
+            assert.equal( $('#t20-1').html() , "20/12/2012" );
+            assert.equal( $('#t20-2').html() , "21/12/2012" );
+            assert.equal( $('#t20-3').html() , "jueves, 20 de diciembre de 2012" );
+            assert.equal( $('#t20-4').html() , "viernes, 21 de diciembre de 2012" );
+            assert.equal( $('#t20-5').html() , "4:00:00" );
+            assert.equal( $('#t20-6').html() , "4:00:00" );
+            assert.equal( $('#t20-7').html() , "jueves, 20 de diciembre de 2012 4:00:00" );
+            assert.equal( $('#t20-8').html() , "viernes, 21 de diciembre de 2012 4:00:00" );
+        });
+
+        QUnit.test( "Datetime (english)", function( assert ) {
+            assert.equal( $('#t21-1').html() , "12/20/2012" );
+            assert.equal( $('#t21-2').html() , "12/21/2012" );
+            assert.equal( $('#t21-3').html() , "Thursday, December 20, 2012" );
+            assert.equal( $('#t21-4').html() , "Friday, December 21, 2012" );
+            assert.equal( $('#t21-5').html() , "4:00:00 AM" );
+            assert.equal( $('#t21-6').html() , "4:00:00 AM" );
+            assert.equal( $('#t21-7').html() , "Thursday, December 20, 2012, 4:00:00 AM" );
+            assert.equal( $('#t21-8').html() , "Friday, December 21, 2012, 4:00:00 AM" );
         });
     }
 });

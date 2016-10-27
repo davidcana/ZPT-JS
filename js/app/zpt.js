@@ -66,8 +66,7 @@ var ZptNode = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         string : 1,
         number : 1,
         currency : 1,
-        time : 1,
-        date : 1
+        datetime : 1
     };
     var complexFormatTypes = {
         currency : 1

@@ -4,6 +4,7 @@ var I18n = function( languageId, res ) {
     var mf = new MessageFormat( languageId );
     var cache = {};
     var numberFormatCache = {};
+    var dateTimeFormatCache = {};
     
     var getLanguage = function(){
         return resources[ '/CONF/' ].language;
@@ -29,11 +30,8 @@ var I18n = function( languageId, res ) {
         case 'currency':
             return trCurrency( id, params, subformat );
             break;
-        case 'time':
-            return trString( id, params );
-            break;
-        case 'date':
-            return trString( id, params );
+        case 'datetime':
+            return trDateTime( id, params );
             break;
         } 
         
@@ -65,13 +63,24 @@ var I18n = function( languageId, res ) {
         return numberFormat.format( value );
     };
     
-    
     var trCurrency = function( value, params, theCurrency ) {
         
         params.style = "currency";
         params.currency = theCurrency;
         
         return trNumber( value, params );
+    };
+    
+    var trDateTime = function( value, params ) {
+        
+        var dateTimeFormat = dateTimeFormatCache[ params.toSource() ];
+        
+        if ( ! dateTimeFormat ){
+            dateTimeFormat = new Intl.DateTimeFormat( getLocale(), params );
+            dateTimeFormatCache[ params.toSource() ] = dateTimeFormat;
+        }
+        
+        return dateTimeFormat.format( value );
     };
     
     return {
