@@ -17,12 +17,7 @@ var zptContext = (function() {
             metalDefineSlot:  "data-mdefine-slot",
             metalFillSlot:    "data-mfill-slot",
             metalMacro:       "data-mmacro",
-            i18nAttributes:   "data-iattributes",
-            i18nContent:      "data-icontent",
-            i18nDefine:       "data-idefine",
-            i18nDomain:       "data-idomain",
-            i18nReplace:      "data-ireplace",
-            i18nOnError:      "data-ion-error"
+            i18nDomain:       "data-idomain"
     };
     var tags = defaultTags;
     var tal = '';
@@ -132,22 +127,6 @@ var zptContext = (function() {
     };
     /* End Expresions */
     
-    /* Translators */
-    /*
-    var translator = undefined;
-    
-    var getTranslator = function (){
-        if ( translator == undefined ){
-            translator = defaultTranslator;
-        }
-        return translator;
-    };
-    
-    var setTranslator = function ( translatorToSet ){
-        translator = translatorToSet;
-    };*/
-    /* End Translators */
-    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -156,7 +135,5 @@ var zptContext = (function() {
         registerFormatter: registerFormatter,
         getExpressionsConf: getExpressionsConf,
         setExpressionsConf: setExpressionsConf
-        /*getTranslator: getTranslator,
-        setTranslator: setTranslator*/
     };
 })();

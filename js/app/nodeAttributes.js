@@ -22,9 +22,4 @@ var NodeAttributes = function( node ) {
     
     // i18n namespace
     this.i18nDomain = node.getAttribute( tags.i18nDomain );
-    this.i18nDefine = node.getAttribute( tags.i18nDefine );
-    this.i18nContent = node.getAttribute( tags.i18nContent );
-    this.i18nAttributes = node.getAttribute( tags.i18nAttributes );
-    this.i18nReplace = node.getAttribute( tags.i18nReplace );
-    this.i18nOnError = node.getAttribute( tags.i18nOnError );
 };
