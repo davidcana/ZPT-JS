@@ -1,6 +1,10 @@
 /* ExpressionEvaluator singleton class */
 var expressionEvaluator = (function() {
     //var self = this;
+    var I18N_DELIMITER = ';';
+    var IN_I18N_DELIMITER = ' ';
+    var I18N_DOMAIN_VAR_NAME = "i18nDomain";
+    
     var conf = zptContext.getExpressionsConf();
     
     var evaluateToNotNull = function( scope, expression ) {
@@ -73,6 +77,20 @@ var expressionEvaluator = (function() {
         }
         if ( expression.indexOf( conf.condExpression ) == 0 ) {
             return evaluateCond( scope, effectiveExpression.substr( conf.condExpression.length ) );
+        }
+        
+        // I18n expressions
+        if ( expression.indexOf( conf.trExpression ) == 0 ) {
+            return evaluateTr( scope, effectiveExpression.substr( conf.trExpression.length ) );
+        }
+        if ( expression.indexOf( conf.trNumberExpression ) == 0 ) {
+            return evaluateTrNumber( scope, effectiveExpression.substr( conf.trNumberExpression.length ) );
+        }
+        if ( expression.indexOf( conf.trCurrencyExpression ) == 0 ) {
+            return evaluateTrCurrency( scope, effectiveExpression.substr( conf.trCurrencyExpression.length ) );
+        }
+        if ( expression.indexOf( conf.trDateTimeExpression ) == 0 ) {
+            return evaluateTrDateTime( scope, effectiveExpression.substr( conf.trDateTimeExpression.length ) );
         }
         
         return evaluatePath( scope, effectiveExpression );
@@ -186,6 +204,199 @@ var expressionEvaluator = (function() {
         }
         
         return formatter;
+    };
+    
+    var evaluateAnyTr = function( scope, expression, tag, minElements, maxElements, format, useSubformat ) {
+        if ( expression.length == 0 ) {
+            throw tag + ' expression void.';
+        }
+
+        var segments = new ExpressionTokenizer( expression.trim(), conf.expressionDelimiter, false );
+        var count = segments.countTokens();
+        if ( count < minElements ) {
+            throw 'Too few elements in ' + tag + ' expression (minimum is ' + minElements + ', ' + count + ' present): ' + expression;
+        }
+        if ( count > maxElements ) {
+            //var a = 1;
+            throw 'Too many elements in ' + tag + ' expression (maximum is ' + maxElements + ', ' + count + ' present):' + expression;
+        }
+        
+        // Get tokens
+        var subformat = useSubformat? segments.nextToken().trim(): undefined;
+        var valueExpression = segments.nextToken().trim();
+        var paramsSegment = segments.hasMoreTokens()? segments.nextToken().trim(): undefined;
+
+        // Evaluate and translate
+        var params = processI18nParams( scope, paramsSegment );
+        var subformatEvaluated = subformat? expressionEvaluator.evaluateToNotNull( scope, subformat ): undefined;
+        var valueEvaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        evaluated = translate( 
+            scope, 
+            valueEvaluated, 
+            params, 
+            format, 
+            subformatEvaluated );
+        
+        return evaluated;
+    };
+    
+    var evaluateTr = function( scope, expression ) {
+        return evaluateAnyTr(
+            scope, 
+            expression, 
+            'tr', 
+            1, 
+            2, 
+            'string', 
+            false );
+    };
+    
+    var evaluateTrNumber = function( scope, expression ) {
+        return evaluateAnyTr(
+            scope, 
+            expression, 
+            'trNumber', 
+            1, 
+            2, 
+            'number', 
+            false );
+    };
+    
+    var evaluateTrCurrency = function( scope, expression ) {
+        return evaluateAnyTr(
+            scope, 
+            expression, 
+            'trCurrency', 
+            2, 
+            3, 
+            'currency', 
+            true );
+    };
+    
+    var evaluateTrDateTime = function( scope, expression ) {
+        return evaluateAnyTr(
+            scope, 
+            expression, 
+            'trDate', 
+            1, 
+            2, 
+            'datetime', 
+            false );
+    };
+    /*
+    var evaluateTr = function( scope, expression ) {
+        if ( expression.length == 0 ) {
+            throw 'Tr expression void.';
+        }
+
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        if ( segments.countTokens() > 2 ) {
+            throw 'Too many elements in tr expression (maximum is 2).';
+        }
+        
+        // Get tokens
+        var valueExpression = segments.nextToken().trim();
+        var paramsSegment = segments.nextToken().trim();
+        
+        // Process params
+        var params = processI18nParams( scope, paramsSegment );
+        
+        // Evaluate and translate
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        evaluated = translate( 
+            scope, 
+            evaluated, 
+            params, 
+            'string', 
+            undefined );
+        
+        return evaluated;
+    };
+    
+    var evaluateTrNumber = function( scope, expression ) {
+        if ( expression.length == 0 ) {
+            throw 'TrNumber expression void.';
+        }
+
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        if ( segments.countTokens() > 2 ) {
+            throw 'Too many elements in trNumber expression (maximum is 2).';
+        }
+        
+        // Get tokens
+        var valueExpression = segments.nextToken().trim();
+        var paramsSegment = segments.nextToken().trim();
+        
+        // Process params
+        var params = processI18nParams( scope, paramsSegment );
+        
+        // Evaluate and translate
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        evaluated = translate( 
+            scope, 
+            evaluated, 
+            params, 
+            'number', 
+            undefined );
+        
+        return evaluated;
+    };
+    
+    var evaluateTrCurrency = function( scope, expression ) {
+        if ( expression.length == 0 ) {
+            throw 'TrCurrency expression void.';
+        }
+
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        if ( segments.countTokens() > 3 ) {
+            throw 'Too many elements in TrCurrency expression (maximum is 3).';
+        }
+        
+        // Get tokens
+        var theCurrency = segments.nextToken().trim();
+        var valueExpression = segments.nextToken().trim();
+        var paramsSegment = segments.nextToken().trim();
+        
+        // Process params
+        var params = processI18nParams( scope, paramsSegment );
+        
+        // Evaluate and translate
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        evaluated = translate( 
+            scope, 
+            evaluated, 
+            params, 
+            'number', 
+            theCurrency );
+        
+        return evaluated;
+    };*/
+    
+    var translate = function( scope, id, params, format, subformat ){
+        
+        var i18nList = scope.get( I18N_DOMAIN_VAR_NAME );
+        return translator.tr( i18nList, id, params, format, subformat );
+    };
+    
+    var processI18nParams = function( scope, segment ){
+        var params = {};
+        if ( ! segment ){
+            return params;
+        }
+        var tokens = new ExpressionTokenizer( segment, I18N_DELIMITER, true );
+        while ( tokens.hasMoreTokens() ) {
+            var token = tokens.nextToken().trim();
+            var paramsTokens = new ExpressionTokenizer( token, IN_I18N_DELIMITER, true );
+            if ( paramsTokens.countTokens() != 2 ) {
+                throw '2 elements are needed in i18n expression.';
+            }
+            
+            var paramName = paramsTokens.nextToken().trim();
+            var paramExpressionValue = paramsTokens.nextToken().trim();
+            var paramValue = expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
+            params[ paramName ] = paramValue;
+        }
+        return params;
     };
     
     var evaluateEquals = function( scope, expression ) {
@@ -940,8 +1151,10 @@ var expressionEvaluator = (function() {
             return effectiveToken;
         }
         
-        if ( effectiveToken.charAt(0) == '(' ){
-            return effectiveToken.substring( 1, effectiveToken.lastIndexOf( ')' ) ).trim();     
+        if ( effectiveToken.charAt( 0 ) == '(' ){
+            return removeParenthesisIfAny( 
+                        effectiveToken.substring( 1, effectiveToken.lastIndexOf( ')' ) ).trim() );
+            //return effectiveToken.substring( 1, effectiveToken.lastIndexOf( ')' ) ).trim();
         }
         
         return effectiveToken;

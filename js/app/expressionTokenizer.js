@@ -40,7 +40,7 @@ var ExpressionTokenizer = function( exp, delimiter, escape ) {
                 // If delimiter is not buried in parentheses or a quote
                 if ( parentLevel == 0 && ! inQuote  ) {
                     
-                    if ( avoidRepeatedSeparators && previousCh == delimiter ){
+                    if ( avoidRepeatedSeparators && ( previousCh == delimiter || previousCh == '\n' ) ) {
                         continue;
                     }
                     

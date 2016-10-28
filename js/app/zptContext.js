@@ -114,6 +114,10 @@ var zptContext = (function() {
             andExpression: "and" + EXPRESSION_SUFFIX,
             condExpression: "cond" + EXPRESSION_SUFFIX,
             formatExpression: "format" + EXPRESSION_SUFFIX,
+            trExpression: "tr" + EXPRESSION_SUFFIX,
+            trNumberExpression: "trNumber" + EXPRESSION_SUFFIX,
+            trCurrencyExpression: "trCurrency" + EXPRESSION_SUFFIX,
+            trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
             jqueryExpression: "$"
     };
     var expressionsConf = defaultExpressionsConf;
