@@ -58,6 +58,9 @@ module.exports = function(grunt) {
                         dest: 'js'
                         },
                         {
+                        src: ['changes.txt']
+                        },
+                        {
                         src: ['CONTRIBUTORS.txt']
                         },
                         {
