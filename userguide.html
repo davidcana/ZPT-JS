@@ -88,7 +88,7 @@
         &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
         
         &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
-        &lt;script src="../dist/zpt-0.3.0.js"&gt;&lt;/script&gt;
+        &lt;script src="../dist/zpt-0.4.0.js"&gt;&lt;/script&gt;
         &lt;script&gt;
         
 $(function () {
@@ -597,7 +597,7 @@ zptContext.registerFormatter(
         
         &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
         &lt;script src="../js/lib/messageformat.js"&gt;&lt;/script&gt;
-        &lt;script src="../dist/zpt-0.3.0.js"&gt;&lt;/script&gt;
+        &lt;script src="../dist/zpt-0.4.0.js"&gt;&lt;/script&gt;
         &lt;script&gt;
 $(function () {
     "use strict";
@@ -637,11 +637,11 @@ $(function () {
         &lt;ol data-idomain="i18n-ES"&gt;
             &lt;li&gt;
                ¡Hola mundo! = 
-               &lt;span data-icontent="'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
+               &lt;span data-tcontent="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
             &lt;/li&gt;
             &lt;li&gt;
                Él ha encontrado 10 resultados = 
-                &lt;span data-icontent="'Results msg', GENDER 'male', RES 10"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
+                &lt;span data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 10 )"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
             &lt;/li&gt;
         &lt;/ol&gt;
     &lt;/body&gt;
@@ -654,8 +654,8 @@ $(function () {
     <ul>
         <li>The dictionary must contain at least one instance per supported language of <code>I18n</code> class. The constructor accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
         <li>The <code>data-idomain</code> attribute defines the <code>I18n</code> to use.</li>
-        <li>The <code>data-icontent</code> attribute is similar to <code>data-icontent</code>. It also evaluates an expression but then it searches that value into the messages.</li>
-        <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg', GENDER 'male', RES 10</code> is a little more complex:
+        <li>The <code>tr</code> expression  evaluates an expression but then it searches that value into the messages.</li>
+        <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg' ( GENDER 'male'; RES 10 )</code> is a little more complex:
             <ol>
                 <li>The first item is the message id: <code>'Results msg'</code>.</li>
                 <li>The rest are variables used to build the message: <code>GENDER 'male'</code> defines a <code>GENDER</code> variable with <code>'male'</code> as value.</li>
@@ -664,62 +664,21 @@ $(function () {
         </li>
     </ul>
     
-    <h4>I18n tags</h4>
-    <p>
-        The list of i18n tags with their twins TAL tags is:
-    </p>
-    <table>
-        <tr>
-            <th>TAL tag name</th>
-            <th>I18N tag name</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td>data-idomain</td>
-            <td>Defines a i18n domain</td>
-        </tr>
-        <tr>
-            <td>data-tattributes</td>
-            <td>data-iattributes</td>
-            <td>Replace the value of one or more attributes</td>
-        </tr>
-        <tr>
-            <td>data-tcontent</td>
-            <td>data-icontent</td>
-            <td>Replace the content of the element</td>
-        </tr>
-        <tr>
-            <td>data-tdefine</td>
-            <td>data-idefine</td>
-            <td>Define one or more variables</td>
-        </tr>
-        <tr>
-            <td>data-ton-error</td>
-            <td>data-ion-error</td>
-            <td>Handle errors</td>
-        </tr>
-        <tr>
-            <td>data-treplace</td>
-            <td>data-ireplace</td>
-            <td>Replace the content of an element and remove the element leaving the content</td>
-        </tr>
-    </table>
-    
+    <h4>Some examples</h4>
     <p>
         Some examples of i18n tags in action:
     </p>
     <ul>
         <li>
-            <code>&lt;img src="image.png" data-iattributes="title 'Hello world!'"&gt;</code> adds an i18n title to the image.
+            <code>&lt;img src="image.png" data-tattributes="title tr: 'Hello world!'"&gt;</code> adds an i18n title to the image.
         </li>
         <li>
-            <code>&lt;li data-idefine="msg 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
+            <code>&lt;li data-tdefine="msg tr: 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
         </li>
         <li>
-            <code>&lt;body data-ion-error="'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
+            <code>&lt;body data-ton-error="tr: 'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
         </li>
-        <li><code>&lt;span data-ireplace="'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
+        <li><code>&lt;span data-treplace="tr: 'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
     </ul>
     
     <h4>Working with domains</h4>
@@ -735,16 +694,16 @@ $(function () {
     </p>
     <pre>
 &lt;div data-idomain="i18n-ES1"&gt;
-   &lt;span data-icontent="'Hello world!'"&gt;
+   &lt;span data-tcontent="tr: 'Hello world!'"&gt;
         ¡Hola mundo!
    &lt;/span&gt;
-   &lt;span data-idomain="i18n-ES2" data-icontent="'Hello world!'"&gt;
+   &lt;span data-idomain="i18n-ES2" data-tcontent="tr: 'Hello world!'"&gt;
         ¡¡¡Hola mundo 2!!!
    &lt;/span&gt;
 &lt;/div&gt; 
     </pre>
     <p>
-        The first <code>data-icontent</code> will search only in <code>i18n-ES1</code>. The second one will search first in <code>i18n-ES2</code> and if it is not found will search in <code>i18n-ES1</code>.
+        The first <code>data-tcontent</code> will search only in <code>i18n-ES1</code>. The second one will search first in <code>i18n-ES2</code> and if it is not found will search in <code>i18n-ES1</code>.
     </p>
     
     <h4>Loading messages from JSON files</h4>
@@ -773,6 +732,63 @@ $(function () {
     }
 });
     </pre>
+    
+    <h4>Numbers</h4>
+    <p>
+        ZPT-JS uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> as i18n API for numbers. Let's see some examples:
+    </p>
+    <ul>
+        <li>
+            <code>&lt;span data-tcontent="trNumber: 1355.23"&gt;</code> formats that number depending on the active i18n domain (<em>1,355.23</em> in english, <em>1.355,23</em> in spanish...).
+        </li>
+        <li>
+            <code>&lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits (<em>1,355.236</em> in english, <em>1.355,236</em> in spanish...).
+        </li>
+        <li>
+            <code>&lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits and a minimum of 6 integer digits (<em>001,355.236</em> in english, <em>001.355,236</em> in spanish...).
+        </li>
+    </ul>
+    
+    <p>
+        Take a look on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat">NumberFormat options</a> to see all available options.
+    </p>
+    
+    <h4>Currencies</h4>
+    <p>
+        ZPT-JS uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> as i18n API for currencies. Let's see some examples:
+    </p>
+    <ul>
+        <li>
+            <code>&lt;span data-tcontent="trCurrency: 'EUR' 1355.23"&gt;</code> formats that number depending on the active i18n domain and using that currency (<em>€ 1,355.23</em> in english, <em>1.355,23 €</em> in spanish...).
+        </li>
+        <li>
+            <code>&lt;span data-tcontent="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;</code> uses the name of the currency (<em>1,355.23 US dollars</em> in english, <em>1.355,23 € dólares estadounidenses</em> in spanish...).
+        </li>
+    </ul>
+    
+    <p>
+        Options are the same as numbers (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat">NumberFormat options</a>) plus some specific options of currencies.
+    </p>
+    
+    <h4>Dates and times</h4>
+    <p>
+        ZPT-JS uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> as i18n API for date and times. Let's see some examples:
+    </p>
+    <ul>
+        <li>
+            <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;</code> formats that date depending on the active i18n domain (<em>12/21/2012</em> in english, <em>21/12/2012</em> in spanish...).
+        </li>
+        <li>
+            <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) (  weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;</code> formats that date with some options (<em>Friday, December 21, 2012</em> in english, <em>viernes, 21 de diciembre de 2012</em> in spanish...).
+        </li>
+        <li>
+            <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( hour 'numeric'; minute 'numeric';  second 'numeric' )"&gt;</code> formats that date with some options (<em>4:00:00 AM</em> in english, <em>4:00:00</em> in spanish...).
+        </li>
+    </ul>
+    
+    <p>
+        Take a look on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat">DateTimeFormat options</a> to see all available options.
+    </p>
     
     <a id="zpt.grunt"></a>
     <h3>Building and testing</h3>
