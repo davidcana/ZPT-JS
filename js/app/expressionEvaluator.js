@@ -1,11 +1,13 @@
 /* ExpressionEvaluator singleton class */
-var expressionEvaluator = (function() {
+var ZPT = ZPT || {};
+
+ZPT.expressionEvaluator = (function() {
     //var self = this;
     var I18N_DELIMITER = ';';
     var IN_I18N_DELIMITER = ' ';
     var I18N_DOMAIN_VAR_NAME = "i18nDomain";
     
-    var conf = zptContext.getExpressionsConf();
+    var conf = ZPT.zptContext.getExpressionsConf();
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = evaluate( scope, expression );
@@ -164,7 +166,7 @@ var expressionEvaluator = (function() {
             throw 'Format expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens == 1 ) {
             throw 'Only one element in format expression, please add at least one more.';
@@ -190,15 +192,15 @@ var expressionEvaluator = (function() {
     var evaluateFormatter = function( scope, expression ) {
         
         // Try to get a built-in formatter
-        var formatter = zptContext.getFormatter( expression );
+        var formatter = ZPT.zptContext.getFormatter( expression );
         
         // Try to get a function with a name
-        if (! formatter){
+        if ( ! formatter ){
             formatter = scope.get( expression );
         }
         
         // Try to get a function evaluating the expression
-        if (! formatter){
+        if ( ! formatter ){
             formatter = scope.get( 
                 evaluate( scope, expression ) );
         }
@@ -211,7 +213,7 @@ var expressionEvaluator = (function() {
             throw tag + ' expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression.trim(), conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression.trim(), conf.expressionDelimiter, false );
         var count = segments.countTokens();
         if ( count < minElements ) {
             throw 'Too few elements in ' + tag + ' expression (minimum is ' + minElements + ', ' + count + ' present): ' + expression;
@@ -228,8 +230,8 @@ var expressionEvaluator = (function() {
 
         // Evaluate and translate
         var params = processI18nParams( scope, paramsSegment );
-        var subformatEvaluated = subformat? expressionEvaluator.evaluateToNotNull( scope, subformat ): undefined;
-        var valueEvaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        var subformatEvaluated = subformat? ZPT.expressionEvaluator.evaluateToNotNull( scope, subformat ): undefined;
+        var valueEvaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
         evaluated = translate( 
             scope, 
             valueEvaluated, 
@@ -289,7 +291,7 @@ var expressionEvaluator = (function() {
             throw 'Tr expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() > 2 ) {
             throw 'Too many elements in tr expression (maximum is 2).';
         }
@@ -302,7 +304,7 @@ var expressionEvaluator = (function() {
         var params = processI18nParams( scope, paramsSegment );
         
         // Evaluate and translate
-        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
         evaluated = translate( 
             scope, 
             evaluated, 
@@ -318,7 +320,7 @@ var expressionEvaluator = (function() {
             throw 'TrNumber expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() > 2 ) {
             throw 'Too many elements in trNumber expression (maximum is 2).';
         }
@@ -331,7 +333,7 @@ var expressionEvaluator = (function() {
         var params = processI18nParams( scope, paramsSegment );
         
         // Evaluate and translate
-        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
         evaluated = translate( 
             scope, 
             evaluated, 
@@ -347,7 +349,7 @@ var expressionEvaluator = (function() {
             throw 'TrCurrency expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() > 3 ) {
             throw 'Too many elements in TrCurrency expression (maximum is 3).';
         }
@@ -361,7 +363,7 @@ var expressionEvaluator = (function() {
         var params = processI18nParams( scope, paramsSegment );
         
         // Evaluate and translate
-        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
         evaluated = translate( 
             scope, 
             evaluated, 
@@ -375,7 +377,7 @@ var expressionEvaluator = (function() {
     var translate = function( scope, id, params, format, subformat ){
         
         var i18nList = scope.get( I18N_DOMAIN_VAR_NAME );
-        return translator.tr( i18nList, id, params, format, subformat );
+        return ZPT.translator.tr( i18nList, id, params, format, subformat );
     };
     
     var processI18nParams = function( scope, segment ){
@@ -383,17 +385,17 @@ var expressionEvaluator = (function() {
         if ( ! segment ){
             return params;
         }
-        var tokens = new ExpressionTokenizer( segment, I18N_DELIMITER, true );
+        var tokens = new ZPT.ExpressionTokenizer( segment, I18N_DELIMITER, true );
         while ( tokens.hasMoreTokens() ) {
             var token = tokens.nextToken().trim();
-            var paramsTokens = new ExpressionTokenizer( token, IN_I18N_DELIMITER, true );
+            var paramsTokens = new ZPT.ExpressionTokenizer( token, IN_I18N_DELIMITER, true );
             if ( paramsTokens.countTokens() != 2 ) {
                 throw '2 elements are needed in i18n expression.';
             }
             
             var paramName = paramsTokens.nextToken().trim();
             var paramExpressionValue = paramsTokens.nextToken().trim();
-            var paramValue = expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
+            var paramValue = ZPT.expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
             params[ paramName ] = paramValue;
         }
         return params;
@@ -404,7 +406,7 @@ var expressionEvaluator = (function() {
             throw 'Equals expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in equals expression, please add at least one more.';
         }
@@ -428,7 +430,7 @@ var expressionEvaluator = (function() {
             throw 'Greater/lower expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() != 2 ) {
             throw 'Wrong number of elements, greater/lower expressions only support two.';
         }
@@ -473,7 +475,7 @@ var expressionEvaluator = (function() {
             throw 'OR expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in OR expression, please add at least one more.';
         }
@@ -497,7 +499,7 @@ var expressionEvaluator = (function() {
             throw 'AND expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in AND expression, please add at least one more.';
         }
@@ -521,7 +523,7 @@ var expressionEvaluator = (function() {
             throw 'Cond expression void.';
         }
         
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() != 3 ) {
             throw '3 element are needed in cond expression.';
         }
@@ -552,7 +554,7 @@ var expressionEvaluator = (function() {
             throw mathOperation + " expression void.";
         }
         
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
 
         // Evaluate segments
         var result = 0;
@@ -667,7 +669,7 @@ var expressionEvaluator = (function() {
     };*/
     /*
     var evaluateRepeatExpression = function( scope, name, method ) {
-        var loop = loopManager.get( scope, name );
+        var loop = ZPT.loopManager.get( scope, name );
         
         if ( ! loop ){
             throw 'Loop "' + name + '" not found.';
@@ -764,7 +766,7 @@ var expressionEvaluator = (function() {
             return '';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.pathDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.pathDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             return evaluatePathSegment( expression, scope );
         }
@@ -798,7 +800,7 @@ var expressionEvaluator = (function() {
         }
     
         // Evaluate first token
-        var path = new ExpressionTokenizer( expression, conf.pathSegmentDelimiter, false );
+        var path = new ZPT.ExpressionTokenizer( expression, conf.pathSegmentDelimiter, false );
         var token = path.nextToken().trim();
         var result = evaluateFirstPathToken( token, scope );
     
@@ -918,7 +920,7 @@ var expressionEvaluator = (function() {
     
     var getArgumentsFromString = function( argumentString, scope ) {
         // Parse and evaluate arguments; then push them to an array
-        var argumentTokens = new ExpressionTokenizer( argumentString, ',', true );
+        var argumentTokens = new ZPT.ExpressionTokenizer( argumentString, ',', true );
         var arguments = [];
         while ( argumentTokens.hasMoreTokens() ) {
             var argumentExpression = argumentTokens.nextToken().trim();
@@ -959,7 +961,7 @@ var expressionEvaluator = (function() {
 
         var arrayExp = expression.substring( 1, expression.length - 1 );
         var result = [];
-        var segments = new ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
+        var segments = new ZPT.ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
         
         while ( segments.hasMoreTokens() ) {
             var segment = segments.nextToken().trim();
@@ -987,7 +989,7 @@ var expressionEvaluator = (function() {
         
         var expression = exp.trim();
         
-        var segments = new ExpressionTokenizer( expression, conf.intervalDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( expression, conf.intervalDelimiter, false );
         
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens != 2 && numberOfTokens != 3 ) {

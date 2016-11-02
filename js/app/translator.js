@@ -1,5 +1,7 @@
 /* translator singleton class */
-var translator = (function() {
+var ZPT = ZPT || {};
+
+ZPT.translator = (function() {
     /*
     var createI18nBundle = function( resources ){
         return new I18nBundle( resources );

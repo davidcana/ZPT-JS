@@ -1,5 +1,7 @@
 /* Class Scope */
-var Scope = (function( obj ) {
+var ZPT = ZPT || {};
+
+ZPT.Scope = (function( obj ) {
     // Create a duplicate object which we can add properties to without affecting the original
     var wrapper = function() {};
     wrapper.prototype = obj;
@@ -8,7 +10,7 @@ var Scope = (function( obj ) {
     var globals = obj;
     var varsStack = [];
     
-    globals.resolver = new Resolver();
+    globals.resolver = new ZPT.Resolver();
     
     var getResolver = function( ) {
         return globals.resolver;

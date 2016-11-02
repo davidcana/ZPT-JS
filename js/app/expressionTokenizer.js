@@ -1,6 +1,8 @@
 /* Class ExpressionTokenizer */
-var ExpressionTokenizer = function( exp, delimiter, escape ) {
-    var removeParenthesisIfAny = expressionEvaluator.removeParenthesisIfAny;
+var ZPT = ZPT || {};
+
+ZPT.ExpressionTokenizer = function( exp, delimiter, escape ) {
+    var removeParenthesisIfAny = ZPT.expressionEvaluator.removeParenthesisIfAny;
     var expression = exp.trim();
 
     var iterator;

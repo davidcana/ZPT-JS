@@ -1,5 +1,7 @@
 /* LoopManager singleton class */
-var loopManager = (function() {
+var ZPT = ZPT || {};
+
+ZPT.loopManager = (function() {
     //var NAME_PREFFIX = 'repeat-';
     var NAME = 'repeat';
     
@@ -21,10 +23,10 @@ var loopManager = (function() {
         }
         var name = expression.substring( 0, space );
         var loopExpression = expression.substring( space + 1 );
-        var items = expressionEvaluator.evaluate( scope, loopExpression );            
+        var items = ZPT.expressionEvaluator.evaluate( scope, loopExpression );            
         
         var fullName = getVarName( name );
-        var loop = new Loop( fullName, name, items );
+        var loop = new ZPT.Loop( fullName, name, items );
         //scope.set( fullName, loop );
         
         return loop;
@@ -39,7 +41,7 @@ var loopManager = (function() {
 
 
 /* Class Loop */
-var Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
+ZPT.Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
     var name = nameOfLoop;
     var itemVariableName = itemVariableNameToApply;
     var items = itemsToIterate;

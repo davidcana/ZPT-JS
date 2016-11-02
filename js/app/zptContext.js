@@ -1,5 +1,7 @@
 /* ZPTContext singleton class */
-var zptContext = (function() {
+var ZPT = ZPT || {};
+
+ZPT.zptContext = (function() {
     
     /* Tags */
     var defaultTags = {
@@ -123,7 +125,7 @@ var zptContext = (function() {
     
     var setExpressionsConf = function ( expressionsConfToSet ){
         expressionsConf = expressionsConfToSet;
-        expressionEvaluator.updateConf( expressionsConf );
+        ZPT.expressionEvaluator.updateConf( expressionsConf );
     };
     /* End Expresions */
     
