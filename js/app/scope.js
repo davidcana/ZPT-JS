@@ -2,6 +2,8 @@
 var ZPT = ZPT || {};
 
 ZPT.Scope = (function( obj ) {
+    "use strict";
+    
     // Create a duplicate object which we can add properties to without affecting the original
     var wrapper = function() {};
     wrapper.prototype = obj;

@@ -1,5 +1,9 @@
 /* I18n class using MessageFormat and Intl */
-var I18n = function( languageId, res ) {
+var ZPT = ZPT || {};
+
+ZPT.I18n = function( languageId, res ) {
+    "use strict";
+    
     var resources = res;
     var mf = new MessageFormat( languageId );
     var cache = {};

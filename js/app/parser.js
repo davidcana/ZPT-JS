@@ -1,47 +1,10 @@
 var ZPT = ZPT || {};
 
-var zpt = (function() {
-    "use strict";
-    
-    var run = function( root, obj, callbackToApply, notRemoveGeneratedTags ){
-        var parser =  new ZPT.Parser( root, obj, callbackToApply, notRemoveGeneratedTags );
-        parser.run();
-    };
-    
-    return {
-        run: run
-    };
-})();
-
-ZPT.run = function( options ){
-    var parser =  new ZPT.Parser( options );
-    parser.run();
-};
-
 /* Class Parser */
-ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
+ZPT.Parser = function ( options ) {
     "use strict";
     
-    var undefined = {}._;
-
-    var DEFINE_DELIMITER = ';';
-    var IN_DEFINE_DELIMITER = ' ';
-    var ATTRIBUTE_DELIMITER = ';';
-    var IN_ATTRIBUTE_DELIMITER = ' ';
-    //var IN_REPEAT_DELIMITER = ' ';
-    var DOMAIN_DELIMITER = ' ';
-    
-    var TEMPLATE_ERROR_VAR_NAME = "error";
-    var ON_ERROR_VAR_NAME = "on-error";
-    var I18N_DOMAIN_VAR_NAME = "i18nDomain";
-    var I18N_DELIMITER = ',';
-    var IN_I18N_DELIMITER = ' ';
-    var HTML_STRUCTURE_EXPRESION = "html ";
-    var GLOBAL_EXPRESSION_MARKER = "global";
-    
-    // TAL attributes for querySelectorAll call
-    var beforeAttr = zpt.beforeAttr;
-    var beforeText = zpt.beforeText;
+    var conf = ZPT.context.getExpressionsConf();
     
     // Attributes which don't support setAttribute()
     var altAttr = {
@@ -68,13 +31,20 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         FIELDSET : 1,
         OPTION : 1
     };
-    var callback = callbackToApply;
-    var scope = new ZPT.Scope( obj );
+    
+    // Get values from options
+    var root = options.root;
+    var dictionary = options.dictionary;
+    var callback = options.callback;
+    var notRemoveGeneratedTags = options.notRemoveGeneratedTags;
+    
+    // Continue with other var inits
+    var scope = new ZPT.Scope( dictionary );
     var querySelectorAll = !!root.querySelectorAll;
-    var tags = ZPT.zptContext.getTags();
+    var tags = ZPT.context.getTags();
 
     // Optimize comparison check
-    var innerText = "innerText" in root ? "innerText" : "textContent";
+    var innerText = "innerText" in root? "innerText": "textContent";
 
     var run = function(){
         if ( ! notRemoveGeneratedTags ){
@@ -212,7 +182,7 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
     var treatError = function( node, scope, exception ) {
 
         // Exit if there is no on-error expression defined
-        var content = scope.get( ON_ERROR_VAR_NAME );
+        var content = scope.get( conf.onErrorVarName );
         if ( content == null ) {
             return false;
         }
@@ -222,7 +192,7 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
             type : typeof exception,
             value : exception
         };
-        scope.set( TEMPLATE_ERROR_VAR_NAME, templateError );
+        scope.set( conf.templateErrorVarName, templateError );
 
         try {
             // Process content
@@ -327,11 +297,11 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         }
 
         var expression = exp.trim();
-        var tokens = new ZPT.ExpressionTokenizer( expression, ATTRIBUTE_DELIMITER, true );
+        var tokens = new ZPT.ExpressionTokenizer( expression, conf.attributeDelimiter, true );
 
         while ( tokens.hasMoreTokens() ) {
             var attribute = tokens.nextToken().trim();
-            var space = attribute.indexOf( IN_ATTRIBUTE_DELIMITER );
+            var space = attribute.indexOf( conf.inAttributeDelimiter );
             if ( space == -1 ) {
                 throw 'Bad attributes expression: ' + attribute;
             }
@@ -342,9 +312,6 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
             var value = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
 
             if ( value != undefined ) {
-                if ( beforeAttr ) {
-                    beforeAttr( node, name, value );
-                }
                 if ( altAttr[ name ] ) {
                     switch ( name ) {
                     case "innerHTML":
@@ -378,7 +345,7 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
             return false;
         }
         
-        scope.set( ON_ERROR_VAR_NAME, exp );
+        scope.set( conf.onErrorVarName, exp );
     };
 
     var processDefine = function( scope, exp ) {
@@ -388,18 +355,18 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         }
 
         var expression = exp.trim();
-        var tokens = new ZPT.ExpressionTokenizer( expression, DEFINE_DELIMITER, true );
+        var tokens = new ZPT.ExpressionTokenizer( expression, conf.defineDelimiter, true );
 
         while ( tokens.hasMoreTokens() ) {
             var variable = tokens.nextToken().trim();
-            var space = variable.indexOf( IN_DEFINE_DELIMITER );
+            var space = variable.indexOf( conf.inDefineDelimiter );
             if ( space == -1 ) {
                 throw 'Bad variable definition: ' + variable;
             }
 
             var token1 = variable.substring( 0, space );
             var token2 = variable.substring( space + 1 ).trim();
-            var isGlobal = GLOBAL_EXPRESSION_MARKER === token1;
+            var isGlobal = conf.globalVariableExpressionPrefix === token1;
             var name;
             var valueExpression;
 
@@ -407,7 +374,7 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
                 name = token1;
                 valueExpression = token2.trim();
             } else {
-                space = token2.indexOf( IN_DEFINE_DELIMITER );
+                space = token2.indexOf( conf.inDefineDelimiter );
                 name = token2.substring( 0, space );
                 valueExpression = token2.substring( space + 1 ).trim();
             }
@@ -428,7 +395,7 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         
         // Add the domains in this tag
         var expression = exp.trim();
-        var tokens = new ZPT.ExpressionTokenizer( expression, DOMAIN_DELIMITER, true );
+        var tokens = new ZPT.ExpressionTokenizer( expression, conf.domainDelimiter, true );
         while ( tokens.hasMoreTokens() ) {
             var i18nExpression = tokens.nextToken().trim();
             var i18n = ZPT.expressionEvaluator.evaluate( scope, i18nExpression);
@@ -441,12 +408,12 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         }
         
         // Add the domains defined previously
-        var previousI18nList = scope.get( I18N_DOMAIN_VAR_NAME );
+        var previousI18nList = scope.get( conf.i18nDomainVarName );
         if ( previousI18nList ) {
             i18nList = i18nList.concat( previousI18nList );
         }
         
-        scope.set( I18N_DOMAIN_VAR_NAME, i18nList, false );
+        scope.set( conf.i18nDomainVarName, i18nList, false );
     };
 
     var processDefineMacro = function( node, scope, exp ) {
@@ -587,19 +554,16 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         var content = exp.trim();
         
         // Check if is an HTML expression
-        var html = content.indexOf( HTML_STRUCTURE_EXPRESION ) == 0;
-        var expression = html? content.substr( HTML_STRUCTURE_EXPRESION.length ): content;
+        var html = content.indexOf( conf.htmlStructureExpressionPrefix + ' ' ) == 0;
+        var expression = html? 
+                         content.substr( 1 + conf.htmlStructureExpressionPrefix.length ): 
+                         content;
         if ( ! expression ){
             throw 'data-tcontent expression void.';
         }
         
         // Evaluate
         var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, expression );
-        
-        // Add beforeText if needed
-        if ( beforeText ) {
-            beforeText( node, expression );
-        }
         
         // Add it to node
         if ( html ) {
@@ -615,11 +579,3 @@ ZPT.Parser = function ( root, obj, callbackToApply, notRemoveGeneratedTags ) {
         run: run
     };
 };
-
-// Support RequireJS module pattern
-if ( typeof define == "function" && define.amd ) {
-    define( "zpt", function() {
-        return zpt;
-    });
-}
-

@@ -9,13 +9,21 @@ $(function () {
     };
 
     QUnit.test( "Rerun simple tests", function( assert ) {
+        ZPT.run({
+            root: root,
+            dictionary: dictionary,
+            callback: function(){
+                continueTesting( root, counter );
+            }
+        });
+        /*
         zpt.run( 
             root, 
             dictionary, 
             function(){
                 continueTesting( root, counter );
             }
-        );
+        );*/
     
         function continueTesting( root, counter ){
             runTests( counter );
@@ -23,13 +31,21 @@ $(function () {
                 var dictionary = { 
                     counter: --counter
                 };
+                ZPT.run({
+                    root: root,
+                    dictionary: dictionary,
+                    callback: function(){
+                        continueTesting( root, counter );
+                    }
+                });
+                /*
                 zpt.run( 
                     root, 
                     dictionary, 
                     function(){
                         continueTesting( root, counter ) 
                     }
-                );
+                );*/
             }
         }
 

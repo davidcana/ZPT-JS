@@ -53,7 +53,12 @@ $(function () {
         }
     };
 
-    zpt.run( document.body, dictionary, runTests );
+    /*zpt.run( document.body, dictionary, runTests );*/
+    ZPT.run({
+        root: document.body,
+        dictionary: dictionary,
+        callback: runTests
+    });
 });
 
 function runTests(){

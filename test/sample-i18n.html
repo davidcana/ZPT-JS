@@ -6,7 +6,7 @@
         
         <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
         <script src="../js/lib/messageformat.js"></script>
-        <script src="../dist/zpt-0.4.0.js"></script>
+        <script src="../dist/zpt-0.5.0.js"></script>
         <script>
 $(function () {
     "use strict";
@@ -32,8 +32,8 @@ $(function () {
         '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
     
     var dictionary = {
-        'i18n-ES': new I18n( 'es', msg[ 'es' ] ),
-        'i18n-EN': new I18n( 'en', msg[ 'en' ] )
+        'i18n-ES': new ZPT.I18n( 'es', msg[ 'es' ] ),
+        'i18n-EN': new ZPT.I18n( 'en', msg[ 'en' ] )
     };
 
     zpt.run( document.body, dictionary );

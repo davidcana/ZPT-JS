@@ -38,18 +38,22 @@ $(function () {
     msg2.es[ 'Hello world!' ] = '¡¡¡Hola mundo 2!!!';
     
     var dictionary = {
-        'i18n-ES': new I18n( 'es', msg[ 'es' ] ),
-        'i18n-ES2': new I18n( 'es', msg2[ 'es' ] ),
-        'i18n-EN': new I18n( 'en', msg[ 'en' ] ),
-        'i18n-EN2': new I18n( 'en', msg2[ 'en' ] ),
+        'i18n-ES': new ZPT.I18n( 'es', msg[ 'es' ] ),
+        'i18n-ES2': new ZPT.I18n( 'es', msg2[ 'es' ] ),
+        'i18n-EN': new ZPT.I18n( 'en', msg[ 'en' ] ),
+        'i18n-EN2': new ZPT.I18n( 'en', msg2[ 'en' ] ),
         fireError: function( ){
             //return 1 / 0;
             document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
         },
         date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
     };
-
-    zpt.run( document.body, dictionary );
+    
+    ZPT.run({
+        root: document.body,
+        dictionary: dictionary
+    });
+    /*zpt.run( document.body, dictionary );*/
     /*
     $( 'body' ).zpt({
         dictionary: dictionary

@@ -2,9 +2,11 @@
 var ZPT = ZPT || {};
 
 ZPT.Resolver = function( ) {
+    "use strict";
+    
     //var self = this;
-    var defineMacroTag = ZPT.zptContext.getTags().metalDefineMacro;
-    var macroTag = ZPT.zptContext.getTags().metalMacro;
+    var defineMacroTag = ZPT.context.getTags().metalDefineMacro;
+    var macroTag = ZPT.context.getTags().metalMacro;
     var macros = {};
     var remote = {};
     var remoteUrls = {};

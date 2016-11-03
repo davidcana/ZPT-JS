@@ -69,5 +69,9 @@ $(function () {
         }
     };
 
-    zpt.run( document.body, dictionary );
+    /*zpt.run( document.body, dictionary );*/
+    ZPT.run({
+        root: document.body,
+        dictionary: dictionary
+    });
 });

@@ -2,6 +2,8 @@
 var ZPT = ZPT || {};
 
 ZPT.ExpressionTokenizer = function( exp, delimiter, escape ) {
+    "use strict";
+    
     var removeParenthesisIfAny = ZPT.expressionEvaluator.removeParenthesisIfAny;
     var expression = exp.trim();
 

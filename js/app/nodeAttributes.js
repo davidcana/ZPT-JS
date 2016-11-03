@@ -2,8 +2,9 @@
 var ZPT = ZPT || {};
 
 ZPT.NodeAttributes = function( node ) {
+    "use strict";
     
-    var tags = ZPT.zptContext.getTags();
+    var tags = ZPT.context.getTags();
     
     // tal namespace
     this.talDefine = node.getAttribute( tags.talDefine );

@@ -36,20 +36,32 @@ QUnit.test( "dynamic loops test", function( assert ) {
     var dictionary = {
             someNumbers: [ 10, 20, 30 ]
         };
+    ZPT.run({
+        root: $( '#dynamicLoop' )[0],
+        dictionary: dictionary
+    });
+    /*
     zpt.run( 
             $( '#dynamicLoop' )[0], 
-            dictionary);
+            dictionary);*/
     assert.equal( getValues( '.nValue1' ) , '10/20/30' );
     
     // Add 40/50/60
     var dictionary = {
             someNumbers: [ 40, 50, 60 ]
         };
+    
+    ZPT.run({
+        root: $( '#dynamicLoop' )[0],
+        dictionary: dictionary,
+        notRemoveGeneratedTags: true
+    });
+    /*
     zpt.run( 
             $( '#dynamicLoop' )[0], 
             dictionary,
             null, 
-            true );
+            true );*/
     assert.equal( getValues( '.nValue1' ) , '10/20/30/40/50/60' );
 });
 

@@ -2,6 +2,8 @@
 var ZPT = ZPT || {};
 
 ZPT.loopManager = (function() {
+    "use strict";
+    
     //var NAME_PREFFIX = 'repeat-';
     var NAME = 'repeat';
     
@@ -42,6 +44,8 @@ ZPT.loopManager = (function() {
 
 /* Class Loop */
 ZPT.Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
+    "use strict";
+    
     var name = nameOfLoop;
     var itemVariableName = itemVariableNameToApply;
     var items = itemsToIterate;

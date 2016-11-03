@@ -1,7 +1,9 @@
 /* translator singleton class */
 var ZPT = ZPT || {};
 
-ZPT.translator = (function() {
+ZPT.i18nHelper = (function() {
+    "use strict";
+    
     /*
     var createI18nBundle = function( resources ){
         return new I18nBundle( resources );
@@ -19,7 +21,7 @@ ZPT.translator = (function() {
         }
 
         for ( var i = 0; i < length; i++ ) {
-            i18n = i18nList[ i ];
+            var i18n = i18nList[ i ];
             if ( format !== 'string' || i18n.exists( id ) ){
                 return i18n.tr( id, params, format, subformat );
             }

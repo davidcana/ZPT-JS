@@ -2,12 +2,10 @@
 var ZPT = ZPT || {};
 
 ZPT.expressionEvaluator = (function() {
+    "use strict";
     //var self = this;
-    var I18N_DELIMITER = ';';
-    var IN_I18N_DELIMITER = ' ';
-    var I18N_DOMAIN_VAR_NAME = "i18nDomain";
     
-    var conf = ZPT.zptContext.getExpressionsConf();
+    var conf = ZPT.context.getExpressionsConf();
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = evaluate( scope, expression );
@@ -192,7 +190,7 @@ ZPT.expressionEvaluator = (function() {
     var evaluateFormatter = function( scope, expression ) {
         
         // Try to get a built-in formatter
-        var formatter = ZPT.zptContext.getFormatter( expression );
+        var formatter = ZPT.context.getFormatter( expression );
         
         // Try to get a function with a name
         if ( ! formatter ){
@@ -213,7 +211,10 @@ ZPT.expressionEvaluator = (function() {
             throw tag + ' expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression.trim(), conf.expressionDelimiter, false );
+        var segments = new ZPT.ExpressionTokenizer( 
+                expression.trim(), 
+                conf.expressionDelimiter, 
+                false );
         var count = segments.countTokens();
         if ( count < minElements ) {
             throw 'Too few elements in ' + tag + ' expression (minimum is ' + minElements + ', ' + count + ' present): ' + expression;
@@ -232,12 +233,12 @@ ZPT.expressionEvaluator = (function() {
         var params = processI18nParams( scope, paramsSegment );
         var subformatEvaluated = subformat? ZPT.expressionEvaluator.evaluateToNotNull( scope, subformat ): undefined;
         var valueEvaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        evaluated = translate( 
-            scope, 
-            valueEvaluated, 
-            params, 
-            format, 
-            subformatEvaluated );
+        var evaluated = translate( 
+                scope, 
+                valueEvaluated, 
+                params, 
+                format, 
+                subformatEvaluated );
         
         return evaluated;
     };
@@ -285,99 +286,11 @@ ZPT.expressionEvaluator = (function() {
             'datetime', 
             false );
     };
-    /*
-    var evaluateTr = function( scope, expression ) {
-        if ( expression.length == 0 ) {
-            throw 'Tr expression void.';
-        }
-
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
-        if ( segments.countTokens() > 2 ) {
-            throw 'Too many elements in tr expression (maximum is 2).';
-        }
-        
-        // Get tokens
-        var valueExpression = segments.nextToken().trim();
-        var paramsSegment = segments.nextToken().trim();
-        
-        // Process params
-        var params = processI18nParams( scope, paramsSegment );
-        
-        // Evaluate and translate
-        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        evaluated = translate( 
-            scope, 
-            evaluated, 
-            params, 
-            'string', 
-            undefined );
-        
-        return evaluated;
-    };
-    
-    var evaluateTrNumber = function( scope, expression ) {
-        if ( expression.length == 0 ) {
-            throw 'TrNumber expression void.';
-        }
-
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
-        if ( segments.countTokens() > 2 ) {
-            throw 'Too many elements in trNumber expression (maximum is 2).';
-        }
-        
-        // Get tokens
-        var valueExpression = segments.nextToken().trim();
-        var paramsSegment = segments.nextToken().trim();
-        
-        // Process params
-        var params = processI18nParams( scope, paramsSegment );
-        
-        // Evaluate and translate
-        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        evaluated = translate( 
-            scope, 
-            evaluated, 
-            params, 
-            'number', 
-            undefined );
-        
-        return evaluated;
-    };
-    
-    var evaluateTrCurrency = function( scope, expression ) {
-        if ( expression.length == 0 ) {
-            throw 'TrCurrency expression void.';
-        }
-
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
-        if ( segments.countTokens() > 3 ) {
-            throw 'Too many elements in TrCurrency expression (maximum is 3).';
-        }
-        
-        // Get tokens
-        var theCurrency = segments.nextToken().trim();
-        var valueExpression = segments.nextToken().trim();
-        var paramsSegment = segments.nextToken().trim();
-        
-        // Process params
-        var params = processI18nParams( scope, paramsSegment );
-        
-        // Evaluate and translate
-        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        evaluated = translate( 
-            scope, 
-            evaluated, 
-            params, 
-            'number', 
-            theCurrency );
-        
-        return evaluated;
-    };*/
     
     var translate = function( scope, id, params, format, subformat ){
         
-        var i18nList = scope.get( I18N_DOMAIN_VAR_NAME );
-        return ZPT.translator.tr( i18nList, id, params, format, subformat );
+        var i18nList = scope.get( conf.i18nDomainVarName );
+        return ZPT.i18nHelper.tr( i18nList, id, params, format, subformat );
     };
     
     var processI18nParams = function( scope, segment ){
@@ -385,10 +298,13 @@ ZPT.expressionEvaluator = (function() {
         if ( ! segment ){
             return params;
         }
-        var tokens = new ZPT.ExpressionTokenizer( segment, I18N_DELIMITER, true );
+        var tokens = new ZPT.ExpressionTokenizer( segment, conf.i18nOptionsDelimiter, true );
         while ( tokens.hasMoreTokens() ) {
             var token = tokens.nextToken().trim();
-            var paramsTokens = new ZPT.ExpressionTokenizer( token, IN_I18N_DELIMITER, true );
+            var paramsTokens = new ZPT.ExpressionTokenizer( 
+                    token, 
+                    conf.inI18nOptionsDelimiter, 
+                    true );
             if ( paramsTokens.countTokens() != 2 ) {
                 throw '2 elements are needed in i18n expression.';
             }
@@ -856,8 +772,8 @@ ZPT.expressionEvaluator = (function() {
                                 throw 'Syntax error: bad function call: ' + token;
                             }
                             var functionName = token.substring( 0, leftParen ).trim();
-                            var arguments = token.substring( leftParen + 1, token.length - 1 );
-                            result = evaluateFunctionCall( functionName, arguments, scope );
+                            var args = token.substring( leftParen + 1, token.length - 1 );
+                            result = evaluateFunctionCall( functionName, args, scope );
                         }
                         
                         // Must be an object in dictionary
@@ -903,8 +819,8 @@ ZPT.expressionEvaluator = (function() {
                     throw 'Syntax error: bad method call: ' + token;
                 }
                 var methodName = token.substring( 0, leftParen ).trim();
-                var arguments = token.substring( leftParen + 1, token.length - 1 );
-                result = evaluateMethodCall( parent, methodName, arguments, scope );
+                var args = token.substring( leftParen + 1, token.length - 1 );
+                result = evaluateMethodCall( parent, methodName, args, scope );
             } else {
                 // A property
                 result = parent[ token ];
@@ -921,25 +837,25 @@ ZPT.expressionEvaluator = (function() {
     var getArgumentsFromString = function( argumentString, scope ) {
         // Parse and evaluate arguments; then push them to an array
         var argumentTokens = new ZPT.ExpressionTokenizer( argumentString, ',', true );
-        var arguments = [];
+        var args = [];
         while ( argumentTokens.hasMoreTokens() ) {
             var argumentExpression = argumentTokens.nextToken().trim();
-            arguments.push( 
+            args.push( 
                     evaluate( scope, argumentExpression ) );
         }
         
-        return arguments;
+        return args;
     };
     
     var evaluateMethodCall = function( parent, methodName, argumentString, scope ) {
-        var arguments = getArgumentsFromString( argumentString, scope );
-        return parent[ methodName ].apply( parent, arguments );
+        var args = getArgumentsFromString( argumentString, scope );
+        return parent[ methodName ].apply( parent, args );
     };
     
     var evaluateFunctionCall = function( functionName, argumentString, scope ) {
-        var arguments = getArgumentsFromString( argumentString, scope );
+        var args = getArgumentsFromString( argumentString, scope );
         var element = scope.get( functionName );
-        return ! element? undefined: element.apply( element, arguments );
+        return ! element? undefined: element.apply( element, args );
     };
     
     var booleanLiteral = function( expression ) {
@@ -1127,7 +1043,7 @@ ZPT.expressionEvaluator = (function() {
             throw token + ' is not an array';
         }
 
-        array = result;
+        var array = result;
         var index = evaluate( scope, accessor.substring( 1, close ) );
         index = numericLiteral( index );
         if ( index === undefined ) {
@@ -1156,7 +1072,6 @@ ZPT.expressionEvaluator = (function() {
         if ( effectiveToken.charAt( 0 ) == '(' ){
             return removeParenthesisIfAny( 
                         effectiveToken.substring( 1, effectiveToken.lastIndexOf( ')' ) ).trim() );
-            //return effectiveToken.substring( 1, effectiveToken.lastIndexOf( ')' ) ).trim();
         }
         
         return effectiveToken;

@@ -9,7 +9,11 @@ QUnit.test( "nested loops test", function( assert ) {
             {id: "3", name: "tool C", numbers: [50, 60]}
         ]
         };
-    zpt.run( document.body, values );
+    ZPT.run({
+        root: document.body,
+        dictionary: values
+    });
+    /*zpt.run( document.body, values );*/
     
     // Test nested loop with numeric arrays
     assert.equal( $('#number10').html() , "10" );

@@ -1,7 +1,8 @@
 /* ZPTContext singleton class */
 var ZPT = ZPT || {};
 
-ZPT.zptContext = (function() {
+ZPT.context = (function() {
+    "use strict";
     
     /* Tags */
     var defaultTags = {
@@ -93,6 +94,20 @@ ZPT.zptContext = (function() {
             expressionDelimiter:    ' ',
             intervalDelimiter:      ':',
             propertyDelimiter:      '/',
+            defineDelimiter:        ';',
+            inDefineDelimiter:      ' ',
+            attributeDelimiter:     ';',
+            inAttributeDelimiter:   ' ',
+            domainDelimiter:        ' ',
+            i18nOptionsDelimiter:   ';',
+            inI18nOptionsDelimiter: ' ',
+        
+            htmlStructureExpressionPrefix:  "html",
+            globalVariableExpressionPrefix: "global",
+        
+            templateErrorVarName: "error",
+            onErrorVarName: "on-error",
+            i18nDomainVarName: "i18nDomain",
         
             stringExpression: "string" + EXPRESSION_SUFFIX,
             existsExpression: "exists" + EXPRESSION_SUFFIX,

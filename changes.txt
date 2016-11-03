@@ -1,11 +1,11 @@
 New in 0.6.0
 - Use requirejs?
+- Added support of reading i18n options from dictionary?
+- Added help to select the correct ZPT.I18n instance depending on available locales?
 
 New in 0.5.0
-- Use zpt namespace? 
-- Change signature of zpt.run to use options instead of several arguments?
-- Added support of reading i18n options from dictionary?
-- Added help to select the correct I18n instance depending on available locales?
+- Use ZPT namespace.
+- Change signature of ZPT.run to use options instead of several arguments.
 
 New in 0.4.0
 - Added number formatting L10n using Intl.
@@ -16,7 +16,7 @@ New in 0.4.0
     
 New in 0.3.0
 - Added i18n capabilities (only for text) using messageformat.js.
-- Added i18n tags. Add new tags:
+- Added i18n tags:
     - data-idomain. Register a list of I18n instances to do i18n.
     - data-idefine. Search the specified value into the available I18n instances and save the value to a variable.
     - data-icontent. It works as data-tcontent, but searching the specified value into the available I18n instances.

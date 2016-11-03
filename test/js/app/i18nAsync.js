@@ -8,15 +8,15 @@ $(function () {
     
     var jsonFiles = [ es1JSONFileName , en1JSONFileName, es2JSONFileName , en2JSONFileName ];
     
-    translator.loadAsync( jsonFiles , callback );
+    ZPT.i18nHelper.loadAsync( jsonFiles , callback );
     
     function callback( i18nMap ){
         
         var dictionary = {
-            'i18n-ES' : new I18n( 'es', i18nMap[ es1JSONFileName ] ),
-            'i18n-EN' : new I18n( 'en', i18nMap[ en1JSONFileName ] ),
-            'i18n-ES2': new I18n( 'es', i18nMap[ es2JSONFileName ] ),
-            'i18n-EN2': new I18n( 'en', i18nMap[ en2JSONFileName ] ),
+            'i18n-ES' : new ZPT.I18n( 'es', i18nMap[ es1JSONFileName ] ),
+            'i18n-EN' : new ZPT.I18n( 'en', i18nMap[ en1JSONFileName ] ),
+            'i18n-ES2': new ZPT.I18n( 'es', i18nMap[ es2JSONFileName ] ),
+            'i18n-EN2': new ZPT.I18n( 'en', i18nMap[ en2JSONFileName ] ),
             fireError: function( ){
                 //return 1 / 0;
                 document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
@@ -24,11 +24,11 @@ $(function () {
             date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
         };
         
-        zpt.run( document.body, dictionary );
-        /*
-        $( 'body' ).zpt({
+        ZPT.run({
+            root: document.body,
             dictionary: dictionary
-        });*/
+        });
+        /*zpt.run( document.body, dictionary );*/
         
         QUnit.test( "Simple i18n test", function( assert ) {
             assert.equal( $('#t1-1').html() , "¡Hola mundo!" );
