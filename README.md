@@ -1,8 +1,13 @@
+Zenon Page Templates - JS (ZPT-JS) is a Javascript implementation of Zope Page Templates (ZPT). Take a look at [Zope2 book](http://docs.zope.org/zope2/zope2book/ZPT.html) to learn about Zope Page Templates.
 
-Zenon Page Templates - JS (ZPT-JS) is a Javascript implementation of Zope Page Templates (ZPT).
+Zenon Page Templates - JS is a Javascript API that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes.
 
-Zope Page Templates are a web page generation tool. They help programmers and designers collaborate in producing dynamic web pages for Zope web applications. Designers can use them to maintain pages without having to abandon their tools, while preserving the work required to embed those pages in an application.
-(from Zope2 book, http://docs.zope.org/zope2/zope2book/ZPT.html)
+*   Easy to learn; clean, simple and consistent syntax.
+*   A rich and powerful group of expressions available (string, Jquery, logical, math, arrays, lists, ranges, function, method expressions...).
+*   Don't break HTML! The HTML documents using ZPT-JS are valid HTML documents.
+*   Makes it easy to designers maintain pages without having to abandon their tools.
+*   Internal macro support; external asynchronous macro loading support.
+*   I18n and L10n support using standards ([Intl](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl) and [ICU](http://userguide.icu-project.org/formatparse/messages)).
 
 There are some important differences between ZPT-JS and ZPT.
 
@@ -16,9 +21,9 @@ Using ZPT-JS:
 *   the data
 *   the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.
     
-A main goal of ZPT-JS is not to break a valid HTML documents. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way tal:content attribute is replaced by data-tcontent.
+A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-tcontent`.
 
-A sample of a ZPT-JS template:
+An example of ZPT-JS template:
 
     <!DOCTYPE html>
     <html>
@@ -52,7 +57,10 @@ A sample of a ZPT-JS template:
             ]
         };
 
-        zpt.run( document.body, dictionary );
+        ZPT.run({
+            root: document.body,
+            dictionary: dictionary
+        });
     });
 
             </script>
@@ -134,4 +142,4 @@ A sample of a ZPT-JS template:
         </body>
     </html>
 
-Please, take a look to https://github.com/davidcana/ZPT-JS/wiki for more information about ZPT-JS.
+Please, take a look to [the ZPT-JS wiki](https://github.com/davidcana/ZPT-JS/wiki) for more information about ZPT-JS.
