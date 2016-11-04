@@ -1,4 +1,7 @@
-/* ExpressionEvaluator singleton class */
+/* 
+    ExpressionEvaluator singleton class 
+    External dependencies: None 
+*/
 var ZPT = ZPT || {};
 
 ZPT.expressionEvaluator = (function() {
@@ -172,7 +175,7 @@ ZPT.expressionEvaluator = (function() {
         
         // Get formatter
         var formatter = evaluateFormatter( scope, segments.nextToken().trim() );
-        if (! formatter){
+        if ( ! formatter ){
             throw 'Formatter evaluated to undefined in format expression!';
         }
         
@@ -215,13 +218,16 @@ ZPT.expressionEvaluator = (function() {
                 expression.trim(), 
                 conf.expressionDelimiter, 
                 false );
+        
+        // Check number of tokens
         var count = segments.countTokens();
         if ( count < minElements ) {
-            throw 'Too few elements in ' + tag + ' expression (minimum is ' + minElements + ', ' + count + ' present): ' + expression;
+            throw 'Too few elements in ' + tag + ' expression (minimum is ' + minElements 
+                    + ', ' + count + ' present): ' + expression;
         }
         if ( count > maxElements ) {
-            //var a = 1;
-            throw 'Too many elements in ' + tag + ' expression (maximum is ' + maxElements + ', ' + count + ' present):' + expression;
+            throw 'Too many elements in ' + tag + ' expression (maximum is ' + maxElements 
+                    + ', ' + count + ' present):' + expression;
         }
         
         // Get tokens
@@ -231,7 +237,10 @@ ZPT.expressionEvaluator = (function() {
 
         // Evaluate and translate
         var params = processI18nParams( scope, paramsSegment );
-        var subformatEvaluated = subformat? ZPT.expressionEvaluator.evaluateToNotNull( scope, subformat ): undefined;
+        var subformatEvaluated = 
+                subformat? 
+                ZPT.expressionEvaluator.evaluateToNotNull( scope, subformat ): 
+                undefined;
         var valueEvaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
         var evaluated = translate( 
                 scope, 
@@ -247,7 +256,7 @@ ZPT.expressionEvaluator = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            'tr', 
+            conf.trExpression, 
             1, 
             2, 
             'string', 
@@ -258,7 +267,7 @@ ZPT.expressionEvaluator = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            'trNumber', 
+            conf.trNumberExpression, 
             1, 
             2, 
             'number', 
@@ -269,7 +278,7 @@ ZPT.expressionEvaluator = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            'trCurrency', 
+            conf.trCurrencyExpression, 
             2, 
             3, 
             'currency', 
@@ -280,7 +289,7 @@ ZPT.expressionEvaluator = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            'trDate', 
+            conf.trDateTimeExpression, 
             1, 
             2, 
             'datetime', 
@@ -311,7 +320,9 @@ ZPT.expressionEvaluator = (function() {
             
             var paramName = paramsTokens.nextToken().trim();
             var paramExpressionValue = paramsTokens.nextToken().trim();
-            var paramValue = ZPT.expressionEvaluator.evaluateToNotNull( scope, paramExpressionValue );
+            var paramValue = ZPT.expressionEvaluator.evaluateToNotNull( 
+                    scope, 
+                    paramExpressionValue );
             params[ paramName ] = paramValue;
         }
         return params;
@@ -436,7 +447,7 @@ ZPT.expressionEvaluator = (function() {
         var expression = exp.trim();
         
         if ( expression.length == 0 ) {
-            throw 'Cond expression void.';
+            throw 'COND expression void.';
         }
         
         var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
@@ -521,7 +532,8 @@ ZPT.expressionEvaluator = (function() {
         }
         
         if ( c < 2 ) {
-            throw 'Only one element in expression "' + mathOperation + ' ' + expression + '", please add at least one more.';
+            throw 'Only one element in expression "' + mathOperation + ' ' 
+                    + expression + '", please add at least one more.';
         }
         
         return result;
@@ -546,53 +558,12 @@ ZPT.expressionEvaluator = (function() {
             result %=  value;
             break;
         default:
-            throw "The evaluateArithmetic method can't handle '" + mathOperation + "' math operation";
+            throw "The evaluateArithmetic method can't handle '" + mathOperation 
+                    + "' math operation";
         }
         
         return result;
     };
-    /*
-    var evaluateDefault = function( scope, expression ) {
-
-        // if fully qualified path is at top level: obj["a.b.d"] = c
-        var value = scope.get( expression );
-        if ( value ){
-            return typeof value == 'function'?
-                   value.call( value, expression ) : 
-                   value;
-        }
-
-        var expressionItem = expression.split( conf.propertyDelimiter );
-        
-        if ( expressionItem[ 0 ] == 'repeat' ){
-            return evaluateRepeatExpression( scope, expressionItem[1], expressionItem[2] );
-        }
-        
-        var x = 0;
-        var lastValue;
-        var finish = ! expressionItem[ x ];
-        while( ! finish ){
-            lastValue = value;
-            value = x == 0? 
-                    scope.get( expressionItem [ x++ ] ):
-                    value[ expressionItem [ x++ ] ];
-            finish = ! expressionItem[ x ] || ! value;
-        }
-        
-        return typeof value == 'function'? 
-               value.call( lastValue, expressionItem.join( '.' ) ) : 
-               value;
-    };*/
-    /*
-    var evaluateRepeatExpression = function( scope, name, method ) {
-        var loop = ZPT.loopManager.get( scope, name );
-        
-        if ( ! loop ){
-            throw 'Loop "' + name + '" not found.';
-        }
-        
-        return ( loop[ method ] )();
-    };*/
     
     var evaluateString = function( scope, expression ) {
         var STATE_SCANNING = 0;
@@ -604,14 +575,14 @@ ZPT.expressionEvaluator = (function() {
         var subexpression = '';
         var state = STATE_SCANNING;
 
-        for ( var i = 0; i < expression.length; i++) {
+        for ( var i = 0; i < expression.length; i++ ) {
             var ch = expression.charAt( i );
 
             switch ( state ) {
             // In the string part of the expression
             case STATE_SCANNING:
                 // Found a dollar sign
-                if (ch == '$') {
+                if ( ch == '$' ) {
                     state = STATE_AT_DOLLAR;
                 }
                 // Just keep appending to result buffer
@@ -663,7 +634,7 @@ ZPT.expressionEvaluator = (function() {
 
         // Ended in unclosed bracket
         if ( state == STATE_IN_BRACKETED_EXPRESSION ) {
-            throw "Unclosed left curly brace: " + expression;
+            throw 'Unclosed left curly brace: ' + expression;
         }
         // Ended at expression
         else if ( state == STATE_IN_EXPRESSION ) {
@@ -766,19 +737,18 @@ ZPT.expressionEvaluator = (function() {
 
                     // A function call?
                     if ( result === undefined ) {                         
-                        var leftParen = token.indexOf( '(' );
-                        if ( leftParen != -1 ) {
+                        var leftParent = token.indexOf( '(' );
+                        if ( leftParent != -1 ) {
                             if ( ! endsWith( token, ')' ) ) {
                                 throw 'Syntax error: bad function call: ' + token;
                             }
-                            var functionName = token.substring( 0, leftParen ).trim();
-                            var args = token.substring( leftParen + 1, token.length - 1 );
+                            var functionName = token.substring( 0, leftParent ).trim();
+                            var args = token.substring( leftParent + 1, token.length - 1 );
                             result = evaluateFunctionCall( functionName, args, scope );
                         }
                         
                         // Must be an object in dictionary
                         if ( result === undefined ) {
-                            //result = evaluateDefault( scope, token );
                             result = scope.get( token );
                         }
                     }
@@ -813,13 +783,13 @@ ZPT.expressionEvaluator = (function() {
             result = evaluateNextPathToken( parent, indirectToken, scope );
         } else {
             // A method call?
-            var leftParen = token.indexOf( '(' );
-            if ( leftParen != -1 ) {
+            var leftParent = token.indexOf( '(' );
+            if ( leftParent != -1 ) {
                 if ( ! endsWith( token, ')' ) ) {
                     throw 'Syntax error: bad method call: ' + token;
                 }
-                var methodName = token.substring( 0, leftParen ).trim();
-                var args = token.substring( leftParen + 1, token.length - 1 );
+                var methodName = token.substring( 0, leftParent ).trim();
+                var args = token.substring( leftParent + 1, token.length - 1 );
                 result = evaluateMethodCall( parent, methodName, args, scope );
             } else {
                 // A property
@@ -836,7 +806,10 @@ ZPT.expressionEvaluator = (function() {
     
     var getArgumentsFromString = function( argumentString, scope ) {
         // Parse and evaluate arguments; then push them to an array
-        var argumentTokens = new ZPT.ExpressionTokenizer( argumentString, ',', true );
+        var argumentTokens = new ZPT.ExpressionTokenizer( 
+                argumentString, 
+                conf.argumentsDelimiter, 
+                true );
         var args = [];
         while ( argumentTokens.hasMoreTokens() ) {
             var argumentExpression = argumentTokens.nextToken().trim();

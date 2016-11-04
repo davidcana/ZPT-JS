@@ -1,6 +1,9 @@
+/* 
+    Class Parser 
+    External dependencies: None
+*/
 var ZPT = ZPT || {};
 
-/* Class Parser */
 ZPT.Parser = function ( options ) {
     "use strict";
     

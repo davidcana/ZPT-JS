@@ -1,21 +1,17 @@
-/* LoopManager singleton class */
+/*
+    loopManager singleton class
+    External dependencies: None 
+*/
 var ZPT = ZPT || {};
 
 ZPT.loopManager = (function() {
     "use strict";
     
-    //var NAME_PREFFIX = 'repeat-';
     var NAME = 'repeat';
     
     var getVarName = function( name ) {
-        //return NAME_PREFFIX + name;
         return NAME;
     };
-    /*
-    var get = function( scope, name ){
-        var fullName = getVarName( name );
-        return scope.get( fullName );
-    };*/
     
     var create = function( scope, expression ){
         expression = expression.trim();
@@ -29,20 +25,21 @@ ZPT.loopManager = (function() {
         
         var fullName = getVarName( name );
         var loop = new ZPT.Loop( fullName, name, items );
-        //scope.set( fullName, loop );
         
         return loop;
     };
 
     return {
         getVarName: getVarName,
-        //get: get,
         create: create
     };
 })();
 
 
-/* Class Loop */
+/* 
+    Class Loop 
+    External dependencies: None
+*/
 ZPT.Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
     "use strict";
     
@@ -137,7 +134,7 @@ ZPT.Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
         
         // Can't represent any number 4000 or greater
         if ( n >= 4000 ) {
-            return "<overflow>";
+            return '<overflow>';
         }
 
         var buf = '';

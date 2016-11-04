@@ -1,4 +1,7 @@
-/* Class NodeAttributes */
+/* 
+    Class NodeAttributes 
+    External dependencies: None
+*/
 var ZPT = ZPT || {};
 
 ZPT.NodeAttributes = function( node ) {

@@ -1,4 +1,7 @@
-/* ZPTContext singleton class */
+/* 
+    context singleton class
+    External dependencies: None 
+*/
 var ZPT = ZPT || {};
 
 ZPT.context = (function() {
@@ -101,6 +104,7 @@ ZPT.context = (function() {
             domainDelimiter:        ' ',
             i18nOptionsDelimiter:   ';',
             inI18nOptionsDelimiter: ' ',
+            argumentsDelimiter:     ',',
         
             htmlStructureExpressionPrefix:  "html",
             globalVariableExpressionPrefix: "global",

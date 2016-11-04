@@ -1,4 +1,7 @@
-/* Class Resolver */
+/* 
+    Class Resolver 
+    External dependencies: None
+*/
 var ZPT = ZPT || {};
 
 ZPT.Resolver = function( ) {

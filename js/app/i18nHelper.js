@@ -1,4 +1,7 @@
-/* translator singleton class */
+/* 
+    i18nHelper singleton class 
+    External dependencies: Jquery 
+*/
 var ZPT = ZPT || {};
 
 ZPT.i18nHelper = (function() {

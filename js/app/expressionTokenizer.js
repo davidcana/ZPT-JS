@@ -1,4 +1,7 @@
-/* Class ExpressionTokenizer */
+/* 
+    Class ExpressionTokenizer 
+    External dependencies: None 
+*/
 var ZPT = ZPT || {};
 
 ZPT.ExpressionTokenizer = function( exp, delimiter, escape ) {

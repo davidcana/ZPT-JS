@@ -1,4 +1,7 @@
-/* I18n class using MessageFormat and Intl */
+/* 
+    I18n class 
+    External dependencies: Intl (supported by recent browsers) and MessageFormat
+*/
 var ZPT = ZPT || {};
 
 ZPT.I18n = function( languageId, res ) {
@@ -9,13 +12,14 @@ ZPT.I18n = function( languageId, res ) {
     var cache = {};
     var numberFormatCache = {};
     var dateTimeFormatCache = {};
+    var CONF_RESOURCE_ID = '/CONF/';
     
     var getLanguage = function(){
-        return resources[ '/CONF/' ].language;
+        return resources[ CONF_RESOURCE_ID ].language;
     };
     
     var getLocale = function(){
-        return resources[ '/CONF/' ].locale;
+        return resources[ CONF_RESOURCE_ID ].locale;
     };
     
     var exists = function( id ) {
@@ -52,7 +56,6 @@ ZPT.I18n = function( languageId, res ) {
         }
         
         return mfunc( params );
-        //return resources[ id ];
     };
     
     var trNumber = function( value, params ) {
@@ -69,7 +72,7 @@ ZPT.I18n = function( languageId, res ) {
     
     var trCurrency = function( value, params, theCurrency ) {
         
-        params.style = "currency";
+        params.style = 'currency';
         params.currency = theCurrency;
         
         return trNumber( value, params );

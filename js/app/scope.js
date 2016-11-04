@@ -1,4 +1,7 @@
-/* Class Scope */
+/* 
+    Class Scope 
+    External dependencies: None
+*/
 var ZPT = ZPT || {};
 
 ZPT.Scope = (function( obj ) {
