@@ -2,10 +2,10 @@
     i18nHelper singleton class 
     External dependencies: Jquery 
 */
-var ZPT = ZPT || {};
-
-ZPT.i18nHelper = (function() {
+module.exports = (function() {
     "use strict";
+    
+    var $ = require( 'jquery' );
     
     /*
     var createI18nBundle = function( resources ){

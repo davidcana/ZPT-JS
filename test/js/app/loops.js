@@ -1,3 +1,17 @@
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( '../../../js/app/main.js' );
+var dictionary = require( './dictionary.js' );
+var Qunit = require( 'qunitjs' );
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+// Run tests
 QUnit.test( "loop test", function( assert ) {
     assert.equal( getValues( '.value' ) , 'tool A/tool B/tool C/tool D'  );
     assert.equal( getValues( '.index' ) , '0/1/2/3'  );
@@ -36,14 +50,10 @@ QUnit.test( "dynamic loops test", function( assert ) {
     var dictionary = {
             someNumbers: [ 10, 20, 30 ]
         };
-    ZPT.run({
+    zpt.run({
         root: $( '#dynamicLoop' )[0],
         dictionary: dictionary
     });
-    /*
-    zpt.run( 
-            $( '#dynamicLoop' )[0], 
-            dictionary);*/
     assert.equal( getValues( '.nValue1' ) , '10/20/30' );
     
     // Add 40/50/60
@@ -51,17 +61,11 @@ QUnit.test( "dynamic loops test", function( assert ) {
             someNumbers: [ 40, 50, 60 ]
         };
     
-    ZPT.run({
+    zpt.run({
         root: $( '#dynamicLoop' )[0],
         dictionary: dictionary,
         notRemoveGeneratedTags: true
     });
-    /*
-    zpt.run( 
-            $( '#dynamicLoop' )[0], 
-            dictionary,
-            null, 
-            true );*/
     assert.equal( getValues( '.nValue1' ) , '10/20/30/40/50/60' );
 });
 

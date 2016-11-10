@@ -2,18 +2,9 @@
     run function
     External dependencies: None
 */
-var ZPT = ZPT || {};
+exports.run = function( options ){
+    var Parser = require( './parser.js' );
 
-ZPT.run = function( options ){
-    "use strict";
-    
-    var parser =  new ZPT.Parser( options );
+    var parser =  new Parser( options );
     parser.run();
 };
-
-/* Support RequireJS module pattern */
-if ( typeof define == "function" && define.amd ) {
-    define( "ZPT.run", function() {
-        return ZPT.run;
-    });
-}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Some expressions using standalone version</title>
+        
+        <script src="../build/standalone.js" defer></script>
+        <script src="js/app/standalone.js" defer></script>
+    </head>
+    <body>
+        <h1>Some expressions using standalone version</h1>
+        <ol>
+            <li data-tcontent="cond: ( eq: number1 number100 ) 'Not working!' 'It works!'">xxx</li>
+            <li data-tcontent="user/name">xxx</li>
+            <li data-tcontent="string: help my ${user/name}">xxx</li>
+            <li data-tcontent="doggy">not false</li>
+            <li data-tcontent="not: doggy">not false</li>
+            <li data-tcontent="eq: number1 number100">not true</li>
+            <li data-tcontent="user/name | string:no friends">any friends?</li>
+            <li data-tcontent="user2/name | string:no friends">any friends?</li>
+            <li data-tcontent="user/age()">user/age()</li>
+            <li data-tcontent="items[0]">an item</li>
+            <li data-tcontent="items[ number1 ]">an item</li>
+        </ol>
+    </body>
+</html>

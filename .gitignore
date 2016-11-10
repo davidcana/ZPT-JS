@@ -5,6 +5,7 @@
 *~
 
 # Misc
+build/
 dist/
 node_modules/
 .directory

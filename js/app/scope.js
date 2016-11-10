@@ -2,10 +2,10 @@
     Class Scope 
     External dependencies: None
 */
-var ZPT = ZPT || {};
-
-ZPT.Scope = (function( obj ) {
+module.exports = function( obj ) {
     "use strict";
+    
+    var Resolver = require( './resolver.js' );
     
     // Create a duplicate object which we can add properties to without affecting the original
     var wrapper = function() {};
@@ -15,7 +15,7 @@ ZPT.Scope = (function( obj ) {
     var globals = obj;
     var varsStack = [];
     
-    globals.resolver = new ZPT.Resolver();
+    globals.resolver = new Resolver();
     
     var getResolver = function( ) {
         return globals.resolver;
@@ -95,4 +95,4 @@ ZPT.Scope = (function( obj ) {
         endElement: endElement,
         set: set
     };
-});
+};

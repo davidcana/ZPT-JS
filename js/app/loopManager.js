@@ -2,10 +2,11 @@
     loopManager singleton class
     External dependencies: None 
 */
-var ZPT = ZPT || {};
-
-ZPT.loopManager = (function() {
+module.exports = (function() {
     "use strict";
+    
+    var expressionEvaluator = require( './expressionEvaluator.js' );
+    var Loop = require( './loop.js' );
     
     var NAME = 'repeat';
     
@@ -21,10 +22,10 @@ ZPT.loopManager = (function() {
         }
         var name = expression.substring( 0, space );
         var loopExpression = expression.substring( space + 1 );
-        var items = ZPT.expressionEvaluator.evaluate( scope, loopExpression );            
+        var items = expressionEvaluator.evaluate( scope, loopExpression );            
         
         var fullName = getVarName( name );
-        var loop = new ZPT.Loop( fullName, name, items );
+        var loop = new Loop( fullName, name, items );
         
         return loop;
     };

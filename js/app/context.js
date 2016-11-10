@@ -2,9 +2,7 @@
     context singleton class
     External dependencies: None 
 */
-var ZPT = ZPT || {};
-
-ZPT.context = (function() {
+module.exports = (function() {
     "use strict";
     
     /* Tags */
@@ -144,7 +142,8 @@ ZPT.context = (function() {
     
     var setExpressionsConf = function ( expressionsConfToSet ){
         expressionsConf = expressionsConfToSet;
-        ZPT.expressionEvaluator.updateConf( expressionsConf );
+        var expressionEvaluator = require( './expressionEvaluator.js' );
+        expressionEvaluator.updateConf( expressionsConf );
     };
     /* End Expresions */
     

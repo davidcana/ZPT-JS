@@ -1,3 +1,9 @@
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( '../../../js/app/main.js' );
+var Qunit = require( 'qunitjs' );
+
 QUnit.test( "nested loops test", function( assert ) {
     
     // Init and run zpt
@@ -9,11 +15,10 @@ QUnit.test( "nested loops test", function( assert ) {
             {id: "3", name: "tool C", numbers: [50, 60]}
         ]
         };
-    ZPT.run({
+    zpt.run({
         root: document.body,
         dictionary: values
     });
-    /*zpt.run( document.body, values );*/
     
     // Test nested loop with numeric arrays
     assert.equal( $('#number10').html() , "10" );

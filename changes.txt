@@ -1,5 +1,5 @@
 New in 0.6.0
-- Use requirejs?
+- Migrate to Browserify (CommonJS modules).
 - Added support of reading i18n options from dictionary?
 - Added help to select the correct ZPT.I18n instance depending on available locales?
 

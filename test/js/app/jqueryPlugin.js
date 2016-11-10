@@ -2,12 +2,12 @@
 
 var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
+require( '../../../js/app/jqueryPlugin.js' );
+
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunitjs' );
 
-// Parse template
-zpt.run({
-    root: document.body,
+$( '#search' ).zpt({
     dictionary: dictionary
 });
 

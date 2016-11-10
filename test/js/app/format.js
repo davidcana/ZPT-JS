@@ -1,3 +1,16 @@
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( '../../../js/app/main.js' );
+var dictionary = require( './dictionary.js' );
+var Qunit = require( 'qunitjs' );
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
 QUnit.test( "Simple format test", function( assert ) {
     assert.equal( $('#t1-1').html() , "test" );
     assert.equal( $('#t1-2').html() , "TEST" );

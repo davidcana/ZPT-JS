@@ -2,10 +2,10 @@
     I18n class 
     External dependencies: Intl (supported by recent browsers) and MessageFormat
 */
-var ZPT = ZPT || {};
-
-ZPT.I18n = function( languageId, res ) {
+module.exports = function( languageId, res ) {
     "use strict";
+    
+    var MessageFormat = require( 'messageformat' );
     
     var resources = res;
     var mf = new MessageFormat( languageId );

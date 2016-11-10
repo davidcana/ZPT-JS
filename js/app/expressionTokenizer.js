@@ -2,12 +2,12 @@
     Class ExpressionTokenizer 
     External dependencies: None 
 */
-var ZPT = ZPT || {};
-
-ZPT.ExpressionTokenizer = function( exp, delimiter, escape ) {
+module.exports = function( exp, delimiter, escape ) {
     "use strict";
     
-    var removeParenthesisIfAny = ZPT.expressionEvaluator.removeParenthesisIfAny;
+    var expressionEvaluator = require( './expressionEvaluator.js' );
+    
+    var removeParenthesisIfAny = expressionEvaluator.removeParenthesisIfAny;
     var expression = exp.trim();
 
     var iterator;

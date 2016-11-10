@@ -1,3 +1,8 @@
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( './main.js' );
+
 (function ( $ ) {
  
     $.fn.zpt = function( options ) {
@@ -12,9 +17,9 @@
         var settings = $.extend( {}, defaults, options );
         settings.root = this[0];
         
-        ZPT.run( settings );
+        zpt.run( settings );
 
         return this;
     };
  
-}( jQuery )); 
+}( $ )); 

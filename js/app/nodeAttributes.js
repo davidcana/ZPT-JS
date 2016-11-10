@@ -2,12 +2,12 @@
     Class NodeAttributes 
     External dependencies: None
 */
-var ZPT = ZPT || {};
-
-ZPT.NodeAttributes = function( node ) {
+module.exports = function( node ) {
     "use strict";
     
-    var tags = ZPT.context.getTags();
+    var context = require( './context.js' );
+    
+    var tags = context.getTags();
     
     // tal namespace
     this.talDefine = node.getAttribute( tags.talDefine );

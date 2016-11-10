@@ -32,7 +32,7 @@ An example of ZPT-JS template:
             <title>Some ZPT-JS examples</title>
 
             <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
-            <script src="../dist/zpt.js"></script>
+            <script src="../build/zpt.js"></script>
             <script>
 
     $(function () {

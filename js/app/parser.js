@@ -2,12 +2,19 @@
     Class Parser 
     External dependencies: None
 */
-var ZPT = ZPT || {};
-
-ZPT.Parser = function ( options ) {
+module.exports = function ( options ) {
     "use strict";
     
-    var conf = ZPT.context.getExpressionsConf();
+    var context = require( './context.js' );
+    var Scope = require( './scope.js' );
+    var NodeAttributes = require( './nodeAttributes.js' );
+    var loopManager = require( './loopManager.js' );
+    var ExpressionTokenizer = require( './expressionTokenizer.js' );
+    var expressionEvaluator = require( './expressionEvaluator.js' );
+    var jQuery = require( 'jquery' );
+    var $ = jQuery;
+    
+    var conf = context.getExpressionsConf();
     
     // Attributes which don't support setAttribute()
     var altAttr = {
@@ -42,9 +49,9 @@ ZPT.Parser = function ( options ) {
     var notRemoveGeneratedTags = options.notRemoveGeneratedTags;
     
     // Continue with other var inits
-    var scope = new ZPT.Scope( dictionary );
+    var scope = new Scope( dictionary );
     var querySelectorAll = !!root.querySelectorAll;
-    var tags = ZPT.context.getTags();
+    var tags = context.getTags();
 
     // Optimize comparison check
     var innerText = "innerText" in root? "innerText": "textContent";
@@ -117,7 +124,7 @@ ZPT.Parser = function ( options ) {
 
         try {
             // Get the attributes from the node
-            var attributes = new ZPT.NodeAttributes( node );
+            var attributes = new NodeAttributes( node );
 
             scope.startElement();
 
@@ -138,7 +145,7 @@ ZPT.Parser = function ( options ) {
     var processLoop = function( node, attributes, scope ) {
 
         // Process repeat
-        var loop = ZPT.loopManager.create( scope, attributes.talRepeat );
+        var loop = loopManager.create( scope, attributes.talRepeat );
 
         node.removeAttribute( tags.talRepeat );
         node.removeAttribute( 'style' );
@@ -300,7 +307,7 @@ ZPT.Parser = function ( options ) {
         }
 
         var expression = exp.trim();
-        var tokens = new ZPT.ExpressionTokenizer( expression, conf.attributeDelimiter, true );
+        var tokens = new ExpressionTokenizer( expression, conf.attributeDelimiter, true );
 
         while ( tokens.hasMoreTokens() ) {
             var attribute = tokens.nextToken().trim();
@@ -312,7 +319,7 @@ ZPT.Parser = function ( options ) {
             var valueExpression = attribute.substring( space + 1 ).trim();
             
             // Evaluate
-            var value = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+            var value = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
 
             if ( value != undefined ) {
                 if ( altAttr[ name ] ) {
@@ -358,7 +365,7 @@ ZPT.Parser = function ( options ) {
         }
 
         var expression = exp.trim();
-        var tokens = new ZPT.ExpressionTokenizer( expression, conf.defineDelimiter, true );
+        var tokens = new ExpressionTokenizer( expression, conf.defineDelimiter, true );
 
         while ( tokens.hasMoreTokens() ) {
             var variable = tokens.nextToken().trim();
@@ -383,7 +390,7 @@ ZPT.Parser = function ( options ) {
             }
             
             // Evaluate
-            var value = ZPT.expressionEvaluator.evaluate( scope, valueExpression );
+            var value = expressionEvaluator.evaluate( scope, valueExpression );
             scope.set( name, value, isGlobal );
         }
     };
@@ -398,10 +405,10 @@ ZPT.Parser = function ( options ) {
         
         // Add the domains in this tag
         var expression = exp.trim();
-        var tokens = new ZPT.ExpressionTokenizer( expression, conf.domainDelimiter, true );
+        var tokens = new ExpressionTokenizer( expression, conf.domainDelimiter, true );
         while ( tokens.hasMoreTokens() ) {
             var i18nExpression = tokens.nextToken().trim();
-            var i18n = ZPT.expressionEvaluator.evaluate( scope, i18nExpression);
+            var i18n = expressionEvaluator.evaluate( scope, i18nExpression);
             
             if ( ! i18n ){
                 throw 'Error evaluating domain: ' + i18nExpression;    
@@ -495,7 +502,7 @@ ZPT.Parser = function ( options ) {
         }
 
         var expression = exp.trim();
-        var result = ZPT.expressionEvaluator.evaluateBoolean( scope, expression );
+        var result = expressionEvaluator.evaluateBoolean( scope, expression );
         node.style.display = result ? '' : 'none';
 
         return result;
@@ -510,7 +517,7 @@ ZPT.Parser = function ( options ) {
         var expression = exp.trim();
         
         // Evaluate
-        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, expression );
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, expression );
         
         // Remove child nodes
         var parentNode = node.parentNode;
@@ -533,7 +540,7 @@ ZPT.Parser = function ( options ) {
         var expression = exp.trim();
         var result = expression == '' ? 
             true : 
-            ZPT.expressionEvaluator.evaluateBoolean( scope, expression );
+            expressionEvaluator.evaluateBoolean( scope, expression );
 
         if ( result ) {
             // Move children from current node to its parent and then remove it
@@ -566,7 +573,7 @@ ZPT.Parser = function ( options ) {
         }
         
         // Evaluate
-        var evaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, expression );
+        var evaluated = expressionEvaluator.evaluateToNotNull( scope, expression );
         
         // Add it to node
         if ( html ) {

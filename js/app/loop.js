@@ -2,9 +2,7 @@
     Class Loop 
     External dependencies: None
 */
-var ZPT = ZPT || {};
-
-ZPT.Loop = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
+module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
     "use strict";
     
     var name = nameOfLoop;

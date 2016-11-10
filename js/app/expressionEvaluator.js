@@ -2,13 +2,17 @@
     ExpressionEvaluator singleton class 
     External dependencies: None 
 */
-var ZPT = ZPT || {};
-
-ZPT.expressionEvaluator = (function() {
+module.exports = (function() {
     "use strict";
     //var self = this;
     
-    var conf = ZPT.context.getExpressionsConf();
+    var context = require( './context.js' );
+    var ExpressionTokenizer = require( './expressionTokenizer.js' );
+    /*var expressionEvaluator = require( './expressionEvaluator.js' );*/
+    var i18nHelper = require( './i18nHelper.js' );
+    var $ = require( 'jquery' );
+    
+    var conf = context.getExpressionsConf();
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = evaluate( scope, expression );
@@ -167,7 +171,7 @@ ZPT.expressionEvaluator = (function() {
             throw 'Format expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens == 1 ) {
             throw 'Only one element in format expression, please add at least one more.';
@@ -193,7 +197,7 @@ ZPT.expressionEvaluator = (function() {
     var evaluateFormatter = function( scope, expression ) {
         
         // Try to get a built-in formatter
-        var formatter = ZPT.context.getFormatter( expression );
+        var formatter = context.getFormatter( expression );
         
         // Try to get a function with a name
         if ( ! formatter ){
@@ -214,7 +218,7 @@ ZPT.expressionEvaluator = (function() {
             throw tag + ' expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( 
+        var segments = new ExpressionTokenizer( 
                 expression.trim(), 
                 conf.expressionDelimiter, 
                 false );
@@ -239,9 +243,11 @@ ZPT.expressionEvaluator = (function() {
         var params = processI18nParams( scope, paramsSegment );
         var subformatEvaluated = 
                 subformat? 
-                ZPT.expressionEvaluator.evaluateToNotNull( scope, subformat ): 
+                /*expressionEvaluator.evaluateToNotNull( scope, subformat ):*/
+                evaluateToNotNull( scope, subformat ): 
                 undefined;
-        var valueEvaluated = ZPT.expressionEvaluator.evaluateToNotNull( scope, valueExpression );
+        /*var valueEvaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );*/
+        var valueEvaluated = evaluateToNotNull( scope, valueExpression );
         var evaluated = translate( 
                 scope, 
                 valueEvaluated, 
@@ -299,7 +305,7 @@ ZPT.expressionEvaluator = (function() {
     var translate = function( scope, id, params, format, subformat ){
         
         var i18nList = scope.get( conf.i18nDomainVarName );
-        return ZPT.i18nHelper.tr( i18nList, id, params, format, subformat );
+        return i18nHelper.tr( i18nList, id, params, format, subformat );
     };
     
     var processI18nParams = function( scope, segment ){
@@ -307,10 +313,10 @@ ZPT.expressionEvaluator = (function() {
         if ( ! segment ){
             return params;
         }
-        var tokens = new ZPT.ExpressionTokenizer( segment, conf.i18nOptionsDelimiter, true );
+        var tokens = new ExpressionTokenizer( segment, conf.i18nOptionsDelimiter, true );
         while ( tokens.hasMoreTokens() ) {
             var token = tokens.nextToken().trim();
-            var paramsTokens = new ZPT.ExpressionTokenizer( 
+            var paramsTokens = new ExpressionTokenizer( 
                     token, 
                     conf.inI18nOptionsDelimiter, 
                     true );
@@ -320,7 +326,8 @@ ZPT.expressionEvaluator = (function() {
             
             var paramName = paramsTokens.nextToken().trim();
             var paramExpressionValue = paramsTokens.nextToken().trim();
-            var paramValue = ZPT.expressionEvaluator.evaluateToNotNull( 
+            /*var paramValue = expressionEvaluator.evaluateToNotNull( */
+            var paramValue = evaluateToNotNull( 
                     scope, 
                     paramExpressionValue );
             params[ paramName ] = paramValue;
@@ -333,7 +340,7 @@ ZPT.expressionEvaluator = (function() {
             throw 'Equals expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in equals expression, please add at least one more.';
         }
@@ -357,7 +364,7 @@ ZPT.expressionEvaluator = (function() {
             throw 'Greater/lower expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() != 2 ) {
             throw 'Wrong number of elements, greater/lower expressions only support two.';
         }
@@ -402,7 +409,7 @@ ZPT.expressionEvaluator = (function() {
             throw 'OR expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in OR expression, please add at least one more.';
         }
@@ -426,7 +433,7 @@ ZPT.expressionEvaluator = (function() {
             throw 'AND expression void.';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in AND expression, please add at least one more.';
         }
@@ -450,7 +457,7 @@ ZPT.expressionEvaluator = (function() {
             throw 'COND expression void.';
         }
         
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
         if ( segments.countTokens() != 3 ) {
             throw '3 element are needed in cond expression.';
         }
@@ -481,7 +488,7 @@ ZPT.expressionEvaluator = (function() {
             throw mathOperation + " expression void.";
         }
         
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
 
         // Evaluate segments
         var result = 0;
@@ -653,7 +660,7 @@ ZPT.expressionEvaluator = (function() {
             return '';
         }
 
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.pathDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.pathDelimiter, false );
         if ( segments.countTokens() == 1 ) {
             return evaluatePathSegment( expression, scope );
         }
@@ -687,7 +694,7 @@ ZPT.expressionEvaluator = (function() {
         }
     
         // Evaluate first token
-        var path = new ZPT.ExpressionTokenizer( expression, conf.pathSegmentDelimiter, false );
+        var path = new ExpressionTokenizer( expression, conf.pathSegmentDelimiter, false );
         var token = path.nextToken().trim();
         var result = evaluateFirstPathToken( token, scope );
     
@@ -806,7 +813,7 @@ ZPT.expressionEvaluator = (function() {
     
     var getArgumentsFromString = function( argumentString, scope ) {
         // Parse and evaluate arguments; then push them to an array
-        var argumentTokens = new ZPT.ExpressionTokenizer( 
+        var argumentTokens = new ExpressionTokenizer( 
                 argumentString, 
                 conf.argumentsDelimiter, 
                 true );
@@ -850,7 +857,7 @@ ZPT.expressionEvaluator = (function() {
 
         var arrayExp = expression.substring( 1, expression.length - 1 );
         var result = [];
-        var segments = new ZPT.ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
+        var segments = new ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
         
         while ( segments.hasMoreTokens() ) {
             var segment = segments.nextToken().trim();
@@ -878,7 +885,7 @@ ZPT.expressionEvaluator = (function() {
         
         var expression = exp.trim();
         
-        var segments = new ZPT.ExpressionTokenizer( expression, conf.intervalDelimiter, false );
+        var segments = new ExpressionTokenizer( expression, conf.intervalDelimiter, false );
         
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens != 2 && numberOfTokens != 3 ) {

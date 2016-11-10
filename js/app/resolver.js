@@ -2,14 +2,15 @@
     Class Resolver 
     External dependencies: None
 */
-var ZPT = ZPT || {};
-
-ZPT.Resolver = function( ) {
+module.exports = function( ) {
     "use strict";
     
+    var $ = require( 'jquery' );
+    var context = require( './context.js' );
+    
     //var self = this;
-    var defineMacroTag = ZPT.context.getTags().metalDefineMacro;
-    var macroTag = ZPT.context.getTags().metalMacro;
+    var defineMacroTag = context.getTags().metalDefineMacro;
+    var macroTag = context.getTags().metalMacro;
     var macros = {};
     var remote = {};
     var remoteUrls = {};
@@ -205,4 +206,3 @@ ZPT.Resolver = function( ) {
         loadRemote: loadRemote
     };
 };
-
