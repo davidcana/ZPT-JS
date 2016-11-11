@@ -1,7 +1,6 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var zpt = require( '../../../js/app/main.js' );
 require( '../../../js/app/jqueryPlugin.js' );
 
 var dictionary = require( './dictionary.js' );
