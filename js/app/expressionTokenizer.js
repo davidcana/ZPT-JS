@@ -1,6 +1,5 @@
 /* 
     Class ExpressionTokenizer 
-    External dependencies: None 
 */
 module.exports = function( exp, delimiter, escape ) {
     "use strict";

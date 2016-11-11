@@ -1,6 +1,5 @@
 /* 
     Class Parser 
-    External dependencies: None
 */
 module.exports = function ( options ) {
     "use strict";
@@ -14,7 +13,7 @@ module.exports = function ( options ) {
     var jQuery = require( 'jquery' );
     var $ = jQuery;
     
-    var conf = context.getExpressionsConf();
+    var conf = context.getConf();
     
     // Attributes which don't support setAttribute()
     var altAttr = {
@@ -307,7 +306,10 @@ module.exports = function ( options ) {
         }
 
         var expression = exp.trim();
-        var tokens = new ExpressionTokenizer( expression, conf.attributeDelimiter, true );
+        var tokens = new ExpressionTokenizer( 
+                expression, 
+                conf.attributeDelimiter, 
+                true );
 
         while ( tokens.hasMoreTokens() ) {
             var attribute = tokens.nextToken().trim();
@@ -365,7 +367,10 @@ module.exports = function ( options ) {
         }
 
         var expression = exp.trim();
-        var tokens = new ExpressionTokenizer( expression, conf.defineDelimiter, true );
+        var tokens = new ExpressionTokenizer( 
+                expression, 
+                conf.defineDelimiter, 
+                true );
 
         while ( tokens.hasMoreTokens() ) {
             var variable = tokens.nextToken().trim();
@@ -405,7 +410,11 @@ module.exports = function ( options ) {
         
         // Add the domains in this tag
         var expression = exp.trim();
-        var tokens = new ExpressionTokenizer( expression, conf.domainDelimiter, true );
+        var tokens = new ExpressionTokenizer( 
+                expression, 
+                conf.domainDelimiter, 
+                true );
+        
         while ( tokens.hasMoreTokens() ) {
             var i18nExpression = tokens.nextToken().trim();
             var i18n = expressionEvaluator.evaluate( scope, i18nExpression);

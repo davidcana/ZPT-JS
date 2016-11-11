@@ -1,6 +1,5 @@
 /* 
     Class Scope 
-    External dependencies: None
 */
 module.exports = function( obj ) {
     "use strict";

@@ -1,6 +1,5 @@
 /* 
     Class NodeAttributes 
-    External dependencies: None
 */
 module.exports = function( node ) {
     "use strict";

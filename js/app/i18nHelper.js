@@ -1,16 +1,10 @@
 /* 
     i18nHelper singleton class 
-    External dependencies: Jquery 
 */
 module.exports = (function() {
     "use strict";
     
     var $ = require( 'jquery' );
-    
-    /*
-    var createI18nBundle = function( resources ){
-        return new I18nBundle( resources );
-    };*/
     
     var tr = function ( i18nList, id, params, format, subformat ){
         
@@ -59,31 +53,7 @@ module.exports = (function() {
     };
     
     return {
-        /*createI18nBundle: createI18nBundle,*/
         tr: tr,
         loadAsync: loadAsync
     };
 })();
-
-/* I18nBundle class */
-/*
-var I18nBundle = function( res ) {
-    var resources = res;
-    var cache = {};
-    
-    var getI18n = function( languageId ) {
-        
-        var result = cache[ languageId ];
-        
-        if ( ! result ){
-            result = new I18n( languageId, resources[ languageId ] );
-            cache[ languageId ] = result;
-        }
-        
-        return result;
-    };
-    
-    return {
-        getI18n: getI18n
-    };
-};*/

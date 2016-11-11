@@ -1,6 +1,5 @@
 /* 
     Class Loop 
-    External dependencies: None
 */
 module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
     "use strict";

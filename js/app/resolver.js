@@ -1,6 +1,5 @@
 /* 
     Class Resolver 
-    External dependencies: None
 */
 module.exports = function( ) {
     "use strict";

@@ -1,6 +1,5 @@
 /* 
     context singleton class
-    External dependencies: None 
 */
 module.exports = (function() {
     "use strict";
@@ -87,9 +86,9 @@ module.exports = (function() {
     };
     /* End Formatters */
     
-    /* Expresions */
+    /* Conf */
     var EXPRESSION_SUFFIX = ":";
-    var defaultExpressionsConf = {
+    var defaultConf = {
             pathDelimiter:          '|',
             pathSegmentDelimiter:   '/',
             expressionDelimiter:    ' ',
@@ -110,6 +109,7 @@ module.exports = (function() {
             templateErrorVarName: "error",
             onErrorVarName: "on-error",
             i18nDomainVarName: "i18nDomain",
+            repeatVarName: "repeat",
         
             stringExpression: "string" + EXPRESSION_SUFFIX,
             existsExpression: "exists" + EXPRESSION_SUFFIX,
@@ -134,18 +134,18 @@ module.exports = (function() {
             trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
             jqueryExpression: "$"
     };
-    var expressionsConf = defaultExpressionsConf;
+    var conf = defaultConf;
     
-    var getExpressionsConf = function (){
-        return expressionsConf;
+    var getConf = function (){
+        return conf;
     };
     
-    var setExpressionsConf = function ( expressionsConfToSet ){
-        expressionsConf = expressionsConfToSet;
+    var setConf = function ( confToSet ){
+        conf = confToSet;
         var expressionEvaluator = require( './expressionEvaluator.js' );
-        expressionEvaluator.updateConf( expressionsConf );
+        expressionEvaluator.updateConf( conf );
     };
-    /* End Expresions */
+    /* End conf */
     
     return {
         getTags: getTags,
@@ -153,7 +153,7 @@ module.exports = (function() {
         getTal: getTal,
         getFormatter: getFormatter,
         registerFormatter: registerFormatter,
-        getExpressionsConf: getExpressionsConf,
-        setExpressionsConf: setExpressionsConf
+        getConf: getConf,
+        setConf: setConf
     };
 })();

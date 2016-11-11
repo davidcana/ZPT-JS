@@ -1,6 +1,5 @@
 /* 
     ExpressionEvaluator singleton class 
-    External dependencies: None 
 */
 module.exports = (function() {
     "use strict";
@@ -8,11 +7,10 @@ module.exports = (function() {
     
     var context = require( './context.js' );
     var ExpressionTokenizer = require( './expressionTokenizer.js' );
-    /*var expressionEvaluator = require( './expressionEvaluator.js' );*/
     var i18nHelper = require( './i18nHelper.js' );
     var $ = require( 'jquery' );
     
-    var conf = context.getExpressionsConf();
+    var conf = context.getConf();
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = evaluate( scope, expression );
@@ -171,7 +169,10 @@ module.exports = (function() {
             throw 'Format expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens == 1 ) {
             throw 'Only one element in format expression, please add at least one more.';
@@ -243,10 +244,8 @@ module.exports = (function() {
         var params = processI18nParams( scope, paramsSegment );
         var subformatEvaluated = 
                 subformat? 
-                /*expressionEvaluator.evaluateToNotNull( scope, subformat ):*/
                 evaluateToNotNull( scope, subformat ): 
                 undefined;
-        /*var valueEvaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );*/
         var valueEvaluated = evaluateToNotNull( scope, valueExpression );
         var evaluated = translate( 
                 scope, 
@@ -305,7 +304,12 @@ module.exports = (function() {
     var translate = function( scope, id, params, format, subformat ){
         
         var i18nList = scope.get( conf.i18nDomainVarName );
-        return i18nHelper.tr( i18nList, id, params, format, subformat );
+        return i18nHelper.tr( 
+            i18nList, 
+            id, 
+            params, 
+            format, 
+            subformat );
     };
     
     var processI18nParams = function( scope, segment ){
@@ -313,7 +317,10 @@ module.exports = (function() {
         if ( ! segment ){
             return params;
         }
-        var tokens = new ExpressionTokenizer( segment, conf.i18nOptionsDelimiter, true );
+        var tokens = new ExpressionTokenizer( 
+                segment, 
+                conf.i18nOptionsDelimiter, 
+                true );
         while ( tokens.hasMoreTokens() ) {
             var token = tokens.nextToken().trim();
             var paramsTokens = new ExpressionTokenizer( 
@@ -326,7 +333,6 @@ module.exports = (function() {
             
             var paramName = paramsTokens.nextToken().trim();
             var paramExpressionValue = paramsTokens.nextToken().trim();
-            /*var paramValue = expressionEvaluator.evaluateToNotNull( */
             var paramValue = evaluateToNotNull( 
                     scope, 
                     paramExpressionValue );
@@ -340,7 +346,10 @@ module.exports = (function() {
             throw 'Equals expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in equals expression, please add at least one more.';
         }
@@ -364,7 +373,10 @@ module.exports = (function() {
             throw 'Greater/lower expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
         if ( segments.countTokens() != 2 ) {
             throw 'Wrong number of elements, greater/lower expressions only support two.';
         }
@@ -409,7 +421,10 @@ module.exports = (function() {
             throw 'OR expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in OR expression, please add at least one more.';
         }
@@ -433,7 +448,10 @@ module.exports = (function() {
             throw 'AND expression void.';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in AND expression, please add at least one more.';
         }
@@ -457,7 +475,10 @@ module.exports = (function() {
             throw 'COND expression void.';
         }
         
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
         if ( segments.countTokens() != 3 ) {
             throw '3 element are needed in cond expression.';
         }
@@ -488,7 +509,10 @@ module.exports = (function() {
             throw mathOperation + " expression void.";
         }
         
-        var segments = new ExpressionTokenizer( expression, conf.expressionDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.expressionDelimiter, 
+                false );
 
         // Evaluate segments
         var result = 0;
@@ -660,7 +684,10 @@ module.exports = (function() {
             return '';
         }
 
-        var segments = new ExpressionTokenizer( expression, conf.pathDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.pathDelimiter, 
+                false );
         if ( segments.countTokens() == 1 ) {
             return evaluatePathSegment( expression, scope );
         }
@@ -694,7 +721,10 @@ module.exports = (function() {
         }
     
         // Evaluate first token
-        var path = new ExpressionTokenizer( expression, conf.pathSegmentDelimiter, false );
+        var path = new ExpressionTokenizer( 
+                expression, 
+                conf.pathSegmentDelimiter, 
+                false );
         var token = path.nextToken().trim();
         var result = evaluateFirstPathToken( token, scope );
     
@@ -812,6 +842,7 @@ module.exports = (function() {
     };
     
     var getArgumentsFromString = function( argumentString, scope ) {
+        
         // Parse and evaluate arguments; then push them to an array
         var argumentTokens = new ExpressionTokenizer( 
                 argumentString, 
@@ -855,9 +886,12 @@ module.exports = (function() {
             return undefined;
         }
 
-        var arrayExp = expression.substring( 1, expression.length - 1 );
+        var arrayExp = expression.substring( 1, expression.length - 1 ).trim();
         var result = [];
-        var segments = new ExpressionTokenizer( arrayExp, conf.expressionDelimiter, true );
+        var segments = new ExpressionTokenizer( 
+                arrayExp, 
+                conf.expressionDelimiter, 
+                true );
         
         while ( segments.hasMoreTokens() ) {
             var segment = segments.nextToken().trim();
@@ -885,7 +919,10 @@ module.exports = (function() {
         
         var expression = exp.trim();
         
-        var segments = new ExpressionTokenizer( expression, conf.intervalDelimiter, false );
+        var segments = new ExpressionTokenizer( 
+                expression, 
+                conf.intervalDelimiter, 
+                false );
         
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens != 2 && numberOfTokens != 3 ) {
