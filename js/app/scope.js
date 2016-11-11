@@ -14,11 +14,10 @@ module.exports = function( obj ) {
     
     var globals = obj;
     var varsStack = [];
-    
-    globals.resolver = new Resolver();
+    var resolver = new Resolver();
     
     var getResolver = function( ) {
-        return globals.resolver;
+        return resolver;
     };
     
     var startElement = function( ) {
