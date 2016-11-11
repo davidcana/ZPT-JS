@@ -6,13 +6,15 @@ module.exports = function( languageId, res ) {
     "use strict";
     
     var MessageFormat = require( 'messageformat' );
+    var context = require( './context.js' );
     
     var resources = res;
     var mf = new MessageFormat( languageId );
     var cache = {};
     var numberFormatCache = {};
     var dateTimeFormatCache = {};
-    var CONF_RESOURCE_ID = '/CONF/';
+    /*var CONF_RESOURCE_ID = '/CONF/';*/
+    var CONF_RESOURCE_ID = context.getConf().i18nConfResourceId;
     
     var getLanguage = function(){
         return resources[ CONF_RESOURCE_ID ].language;

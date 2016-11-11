@@ -107,9 +107,11 @@ module.exports = (function() {
             globalVariableExpressionPrefix: "global",
         
             templateErrorVarName: "error",
-            onErrorVarName: "on-error",
-            i18nDomainVarName: "i18nDomain",
-            repeatVarName: "repeat",
+            onErrorVarName:       "on-error",
+            i18nDomainVarName:    "i18nDomain",
+            repeatVarName:        "repeat",
+        
+            i18nConfResourceId: '/CONF/',
         
             stringExpression: "string" + EXPRESSION_SUFFIX,
             existsExpression: "exists" + EXPRESSION_SUFFIX,
