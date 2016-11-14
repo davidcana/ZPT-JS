@@ -1,7 +1,10 @@
-New in 0.6.0
-- Migrate to Browserify (CommonJS modules).
+New in 0.6.1
+- Support of custom expressions? Refactoring of expressionEvaluator class?
 - Added support of reading i18n options from dictionary?
 - Added help to select the correct ZPT.I18n instance depending on available locales?
+
+New in 0.6.0
+- Migrate to Browserify (CommonJS modules).
 
 New in 0.5.0
 - Use ZPT namespace.

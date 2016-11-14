@@ -2,39 +2,48 @@
   "name": "zpt",
   "version": "0.6.0-SNAPSHOT",
   "description": "Zenon Page Templates - JS (ZPT-JS)",
-  "keywords": [ 
-        "jquery-plugin", 
-        "ecosystem:jquery", 
-        "template", 
-        "templates",
-        "templating", 
-        "python", 
-        "zpt", 
-        "zope", 
-        "page" ],
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "template",
+    "templates",
+    "templating",
+    "python",
+    "zpt",
+    "zope",
+    "page"
+  ],
   "homepage": "https://github.com/davidcana/ZPT-JS",
   "bugs": "david.javapagetemplates@gmail.com",
   "license": "AGPL-3.0",
   "author": "David Cana Lopez",
-  "contributors": [""],
+  "contributors": [
+    ""
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidcana/ZPT-JS"
+  },
   "dependencies": {
     "jquery": "^2.2.4",
     "messageformat": "^1.0.2"
   },
   "devDependencies": {
+    "browserify": "latest",
     "grunt": "~0.4.5",
+    "grunt-browserify": "latest",
     "grunt-contrib-compress": "^0.14.0",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-nodeunit": "~0.4.1",
     "grunt-contrib-qunit": "~0.7.0",
     "grunt-contrib-uglify": "~0.5.0",
-    "mstring": "^0.1.2",
-    "browserify": "latest",
-    "grunt-browserify": "latest",
     "grunt-contrib-watch": "latest",
-    "qunitjs": "~1.19.0",
     "qunit-assert-html": "~0.3.2",
-    "jsdom": "~9.8.3"
+    "qunitjs": "~1.19.0",
+    "beefy": "~2.1.8"
+  },
+  "scripts": {
+    "server": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js"
   }
 }
