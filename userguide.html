@@ -58,7 +58,7 @@
 <body>
     <a id="top"></a>
     <h1>Zenon Page Templates (ZPT-JS): User's guide</h1>
-    <div class="sub">last modified: 2015/22/04</div>
+    <div class="sub">last modified: 2016/15/11</div>
     <div class="sub">author <a href="mailto:david.javapagetemplates@gmail.com">David Cana</a></div>
     <div class="sub">contributed by <a href="mailto:david.javapagetemplates@gmail.com">David Cana</a></div>
 
@@ -78,8 +78,40 @@
         How can we use ZPT-JS? The <code>dictionary</code> is used to define global variables.
     </p>
     <p>
-        An example of invoking ZPT-JS:
+        An example of invoking ZPT-JS using require:
     </p>
+    
+    <strong>sample.js</strong>
+    <pre>
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    aString: "string",
+    doggy: false,
+    number1: 1,
+    number100: 100,
+    user: {
+        name: "Bob", 
+        age: function( ){
+            return 25;
+        }
+    },
+    items: [ 'item0', 'item1', 'item2' ]
+};
+    
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+    </pre>
+    <p>
+        Then browserify that file to build the final js file. And the html file is:
+    </p>
+    
+    <strong>sample.html</strong>
     <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -87,31 +119,7 @@
         &lt;meta charset="utf-8"&gt;
         &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
         
-        &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
-        &lt;script src="../dist/zpt-0.5.0.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-        
-$(function () {
-    "use strict";
-
-    var dictionary = { 
-        aString: "string",
-        doggy: false,
-        number1: 1,
-        number100: 100,
-        user: {
-            name: "Bob", 
-            age: function( ){
-                return 25;
-            }
-        },
-        items: [ 'item0', 'item1', 'item2' ]
-    };
-
-    zpt.run( document.body, dictionary );
-});
-
-        &lt;/script&gt;
+        &lt;script src="sample.js" defer&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;h1&gt;Some expressions&lt;/h1&gt;
@@ -133,7 +141,10 @@ $(function () {
         The invokation of ZPT-JS is at:
     </p>
     <pre>
-zpt.run( document.body, dictionary );
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
     </pre>
     <p>
         The first argument sets the DOM node where ZPT-JS will search its custom HTML tags. The second one is the dictionary, a Javascript object that will be available to all custom HTML tags of ZPT-JS. You can also run ZPT-JS as a Jquery plugin:
@@ -588,6 +599,54 @@ context.registerFormatter(
     <p>
         Nowadays ZPT-JS has some i18n capabilities. How do they work? Let's see an example:
     </p>
+    
+    <strong>i18n.js</strong>
+    <pre>
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var msg = {
+    en : {},
+    es : {}
+};
+
+/* English i18n messages */
+msg.en[ '/CONF/' ] = {
+    language: 'en',
+    locale: 'en-US'
+};
+msg.en[ 'Hello world!' ] = 'Hello world!';
+msg.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' +
+    ' found ' +
+    '{RES, plural, =0{no results} one{1 result} other{# results} }';
+
+/* Spanish i18n messages */
+msg.es[ '/CONF/' ] = {
+    language: 'es',
+    locale: 'es-ES'
+};
+msg.es[ 'Hello world!' ] = '¡Hola mundo!';
+msg.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos} }' +
+    ' ' +
+    '{ RES, plural, =0{no } other{} }' +
+    '{ GENDER, select, male{ha} female{ha} other{han} }' +
+    ' encontrado ' +
+    '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
+
+var dictionary = {
+    'i18n-ES': new zpt.I18n( 'es', msg[ 'es' ] ),
+    'i18n-EN': new zpt.I18n( 'en', msg[ 'en' ] )
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+    </pre>
+    
+    <strong>i18n.html</strong>
     <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html lang="es"&gt;
@@ -595,42 +654,7 @@ context.registerFormatter(
         &lt;meta charset="utf-8"&gt;
         &lt;title&gt;Some I18n examples&lt;/title&gt;
         
-        &lt;script src="https://code.jquery.com/jquery-2.0.3.js"&gt;&lt;/script&gt;
-        &lt;script src="../js/lib/messageformat.js"&gt;&lt;/script&gt;
-        &lt;script src="../dist/zpt-0.5.0.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-$(function () {
-    "use strict";
-    
-    var msg = {
-        en : {},
-        es : {}
-    };
-    
-    /* English */
-    msg.en[ 'Hello world!' ] = 'Hello world!';
-    msg.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' +
-        ' found ' +
-        '{RES, plural, =0{no results} one{1 result} other{# results} }';
-    
-    /* Spanish i18n messages */
-    msg.es[ 'Hello world!' ] = '¡Hola mundo!';
-    msg.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos} }' +
-        ' ' +
-        '{ RES, plural, =0{no } other{} }' +
-        '{ GENDER, select, male{ha} female{ha} other{han} }' +
-        ' encontrado ' +
-        '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
-    
-    var dictionary = {
-        'i18n-ES': new ZPT.I18n( 'es', msg[ 'es' ] ),
-        'i18n-EN': new ZPT.I18n( 'en', msg[ 'en' ] )
-    };
-
-    zpt.run( document.body, dictionary );
-});
-
-        &lt;/script&gt;
+        &lt;script src="i18n.js"&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;h1&gt;Some I18n expressions&lt;/h1&gt;
@@ -711,26 +735,29 @@ $(function () {
         ZPT-JS makes it easy loading i18n messages from JSON files:
     </p>
     <pre>
- $(function () {
-    "use strict";
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var esJSONFileName = 'i18n/es1.json';
+var enJSONFileName = 'i18n/en1.json';
+
+var jsonFiles = [ esJSONFileName , enJSONFileName ];
+
+zpt.i18nHelper.loadAsync( jsonFiles , callback );
+
+function callback( i18nMap ){
     
-    var esJSONFileName = 'i18n/es.json';
-    var enJSONFileName = 'i18n/en.json';
+    var dictionary = {
+        'i18n-ES' : new zpt.I18n( 'es', i18nMap[ esJSONFileName ] ),
+        'i18n-EN' : new zpt.I18n( 'en', i18nMap[ enJSONFileName ] )
+    };
     
-    var jsonFiles = [ esJSONFileName , enJSONFileName ];
-    
-    translator.loadAsync( jsonFiles , callback );
-    
-    function callback( i18nMap ){
-        
-        var dictionary = {
-            'i18n-ES' : new ZPT.I18n( 'es', i18nMap[ esJSONFileName ] ),
-            'i18n-EN' : new ZPT.I18n( 'en', i18nMap[ enJSONFileName ] )
-        };
-        
-        zpt.run( document.body, dictionary );
-    }
-});
+    zpt.run({
+        root: document.body,
+        dictionary: dictionary
+    });
+}
     </pre>
     
     <h4>Numbers</h4>
@@ -793,15 +820,13 @@ $(function () {
     <a id="zpt.grunt"></a>
     <h3>Building and testing</h3>
     <p>
-        ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you know how a Grunt project works you can skip this chapter.
-    </p>
-    <p>
-        If you want to modify and rebuild ZPT-JS the next command lines are useful:
+        ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:
     </p>
     <pre>
-$ grunt concat    // Concatenate all scripts in the scripts sub-directory into a single script called dist/zpt.js
-$ grunt uglify    // Create a file within dist/zpt.min.js that contains the result of minifying the JavaScript files
-$ grunt compress  // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
+$ grunt browserify // Build all test js files; also build a standalone version
+$ grunt browserify:[file] // Build a single js file; use 'standalone' to build a standalone version
+$ npm run server   // Run a beefy server to make it easy to test ZPT-JS without browserifying by hand
+$ grunt compress   // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
     </pre>
     <p>
         ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open test/index.html with your favourite browser.

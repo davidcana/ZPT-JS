@@ -1,6 +1,7 @@
 {
   "name": "zpt",
   "version": "0.6.0-SNAPSHOT",
+  "main" : "./js/app/main.js",
   "description": "Zenon Page Templates - JS (ZPT-JS)",
   "keywords": [
     "jquery-plugin",
