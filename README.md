@@ -50,6 +50,7 @@ sample.js
     });
 
 sample.html
+
     <!DOCTYPE html>
     <html>
         <head>
