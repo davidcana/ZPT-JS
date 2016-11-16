@@ -25,6 +25,32 @@ A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows
 
 An example of ZPT-JS template:
 
+sample.js
+    "use strict";
+
+    var $ = require( 'jquery' );
+    var zpt = require( 'zpt' );
+
+    var dictionary = { 
+        aString: "string",
+        doggy: false,
+        number1: 1,
+        number100: 100,
+        user: {
+            name: "Bob", 
+            age: function( ){
+                return 25;
+            }
+        },
+        items: [ 'item0', 'item1', 'item2' ]
+    };
+
+    zpt.run({
+        root: document.body,
+        dictionary: dictionary
+    });
+
+sample.html
     <!DOCTYPE html>
     <html>
         <head>
@@ -62,7 +88,6 @@ An example of ZPT-JS template:
             dictionary: dictionary
         });
     });
-
             </script>
         </head>
         <body>
