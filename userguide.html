@@ -676,8 +676,8 @@ zpt.run({
         Some remarks about this:
     </p>
     <ul>
-        <li>The dictionary must contain at least one instance per supported language of <code>ZPT.I18n</code> class. The constructor accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
-        <li>The <code>data-idomain</code> attribute defines the <code>ZPT.I18n</code> to use.</li>
+        <li>The dictionary must contain at least one instance per supported language of <code>I18n</code> class. The constructor accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
+        <li>The <code>data-idomain</code> attribute defines the <code>I18n</code> to use.</li>
         <li>The <code>tr</code> expression  evaluates an expression but then it searches that value into the messages.</li>
         <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg' ( GENDER 'male'; RES 10 )</code> is a little more complex:
             <ol>
@@ -707,7 +707,7 @@ zpt.run({
     
     <h4>Working with domains</h4>
     <p>
-        In the previous example the domain was a simple <code>ZPT.I18n</code> instance. This forces to use a big map with all the messages. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>ZPT.I18n</code> instances, so the messages will be searched in the same order.
+        In the previous example the domain was a simple <code>I18n</code> instance. This forces to use a big map with all the messages. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>I18n</code> instances, so the messages will be searched in the same order.
     </p>
     <p>
         Therefore, <code>data-idomain="i18n-ES1 i18n-ES2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
