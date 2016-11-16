@@ -28,7 +28,6 @@ An example of ZPT-JS template:
 sample.js
     "use strict";
 
-    var $ = require( 'jquery' );
     var zpt = require( 'zpt' );
 
     var dictionary = { 
@@ -57,38 +56,7 @@ sample.html
             <meta charset="utf-8">
             <title>Some ZPT-JS examples</title>
 
-            <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
             <script src="zpt.js"></script>
-            <script>
-
-    $(function () {
-        "use strict";
-
-        var dictionary = { 
-            aString: "string",
-            number1: 1,
-            number100: 100,
-            user: {
-                name: "Bob", 
-                age: function( ){
-                    return 25;
-                }
-            },
-            items: [ 'item0', 'item1', 'item2' ],
-            tools: [ 
-                {name: "tool A", rent_url: "rent?id=1000"}, 
-                {name: "tool B", rent_url: "rent?id=1002"}, 
-                {name: "tool C", rent_url: "rent?id=1004"},
-                {name: "tool D", rent_url: "rent?id=1006"}
-            ]
-        };
-
-        ZPT.run({
-            root: document.body,
-            dictionary: dictionary
-        });
-    });
-            </script>
         </head>
         <body>
             <h1>Some expressions</h1>
