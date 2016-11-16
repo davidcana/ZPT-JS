@@ -26,6 +26,7 @@ A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows
 An example of ZPT-JS template:
 
 sample.js
+
     "use strict";
 
     var zpt = require( 'zpt' );
