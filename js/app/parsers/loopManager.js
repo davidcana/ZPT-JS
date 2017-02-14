@@ -4,9 +4,9 @@
 module.exports = (function() {
     "use strict";
     
-    var context = require( './context.js' );
+    var context = require( '../context.js' );
     var expressionEvaluator = require( './expressionEvaluator.js' );
-    var Loop = require( './loop.js' );
+    var Loop = require( '../loop.js' );
     
     /*var NAME = 'repeat';*/
     var NAME = context.getConf().repeatVarName;

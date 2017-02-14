@@ -113,6 +113,12 @@ module.exports = (function() {
         
             i18nConfResourceId: '/CONF/',
         
+            loggingOn: false,
+        
+            expressionCacheOn: true,
+            attributeCacheOn: true,
+        
+            expressionSuffix: EXPRESSION_SUFFIX,
             stringExpression: "string" + EXPRESSION_SUFFIX,
             existsExpression: "exists" + EXPRESSION_SUFFIX,
             noCallExpression: "nocall" + EXPRESSION_SUFFIX,
@@ -124,7 +130,7 @@ module.exports = (function() {
             addExpression: "+" + EXPRESSION_SUFFIX,
             subExpression: "-" + EXPRESSION_SUFFIX,
             mulExpression: "*" + EXPRESSION_SUFFIX,
-            divExpression: ":" + EXPRESSION_SUFFIX,
+            divExpression: "/" + EXPRESSION_SUFFIX,
             modExpression: "%" + EXPRESSION_SUFFIX,
             orExpression: "or" + EXPRESSION_SUFFIX,
             andExpression: "and" + EXPRESSION_SUFFIX,
@@ -134,6 +140,8 @@ module.exports = (function() {
             trNumberExpression: "trNumber" + EXPRESSION_SUFFIX,
             trCurrencyExpression: "trCurrency" + EXPRESSION_SUFFIX,
             trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
+            /*pathExpression: "path" + EXPRESSION_SUFFIX,*/
+            pathExpression: "",
             jqueryExpression: "$"
     };
     var conf = defaultConf;
@@ -144,8 +152,8 @@ module.exports = (function() {
     
     var setConf = function ( confToSet ){
         conf = confToSet;
-        var expressionEvaluator = require( './expressionEvaluator.js' );
-        expressionEvaluator.updateConf( conf );
+        /*var expressionEvaluator = require( './expressionEvaluator.js' );
+        expressionEvaluator.updateConf( conf );*/
     };
     /* End conf */
     

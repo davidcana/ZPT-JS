@@ -5,20 +5,25 @@ module.exports = (function() {
     "use strict";
     //var self = this;
     
-    var context = require( './context.js' );
-    var ExpressionTokenizer = require( './expressionTokenizer.js' );
-    var i18nHelper = require( './i18nHelper.js' );
+    var context = require( '../context.js' );
+    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+    var i18nHelper = require( '../i18nHelper.js' );
     var $ = require( 'jquery' );
-    
-    var conf = context.getConf();
+    //var expressionBuilder = require( '../expressions/expressionBuilder.js' );
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = evaluate( scope, expression );
         return evaluated == undefined? 'undefined': evaluated;
     };
+    /*
+    var evaluate = function( scope, expression ) {
+        var expression = expressionBuilder.build( expression );
+        return expression.evaluate( scope );
+    };*/
     
     var evaluate = function( scope, expression ) {
         
+        var conf = context.getConf();
         var effectiveExpression = removeParenthesisIfAny(
                 expression.trim() );
         
@@ -171,7 +176,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         var numberOfTokens = segments.countTokens();
         if ( numberOfTokens == 1 ) {
@@ -221,7 +226,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression.trim(), 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         
         // Check number of tokens
@@ -261,7 +266,7 @@ module.exports = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            conf.trExpression, 
+            context.getConf().trExpression, 
             1, 
             2, 
             'string', 
@@ -272,7 +277,7 @@ module.exports = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            conf.trNumberExpression, 
+            context.getConf().trNumberExpression, 
             1, 
             2, 
             'number', 
@@ -283,7 +288,7 @@ module.exports = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            conf.trCurrencyExpression, 
+            context.getConf().trCurrencyExpression, 
             2, 
             3, 
             'currency', 
@@ -294,7 +299,7 @@ module.exports = (function() {
         return evaluateAnyTr(
             scope, 
             expression, 
-            conf.trDateTimeExpression, 
+            context.getConf().trDateTimeExpression, 
             1, 
             2, 
             'datetime', 
@@ -303,7 +308,7 @@ module.exports = (function() {
     
     var translate = function( scope, id, params, format, subformat ){
         
-        var i18nList = scope.get( conf.i18nDomainVarName );
+        var i18nList = scope.get( context.getConf().i18nDomainVarName );
         return i18nHelper.tr( 
             i18nList, 
             id, 
@@ -319,13 +324,13 @@ module.exports = (function() {
         }
         var tokens = new ExpressionTokenizer( 
                 segment, 
-                conf.i18nOptionsDelimiter, 
+                context.getConf().i18nOptionsDelimiter, 
                 true );
         while ( tokens.hasMoreTokens() ) {
             var token = tokens.nextToken().trim();
             var paramsTokens = new ExpressionTokenizer( 
                     token, 
-                    conf.inI18nOptionsDelimiter, 
+                    context.getConf().inI18nOptionsDelimiter, 
                     true );
             if ( paramsTokens.countTokens() != 2 ) {
                 throw '2 elements are needed in i18n expression.';
@@ -348,7 +353,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in equals expression, please add at least one more.';
@@ -375,7 +380,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() != 2 ) {
             throw 'Wrong number of elements, greater/lower expressions only support two.';
@@ -423,7 +428,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in OR expression, please add at least one more.';
@@ -450,7 +455,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() == 1 ) {
             throw 'Only one element in AND expression, please add at least one more.';
@@ -477,7 +482,7 @@ module.exports = (function() {
         
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() != 3 ) {
             throw '3 element are needed in cond expression.';
@@ -511,7 +516,7 @@ module.exports = (function() {
         
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 false );
 
         // Evaluate segments
@@ -573,19 +578,19 @@ module.exports = (function() {
     var evaluateArithmeticItem = function( result, value, mathOperation ) {
         
         switch ( mathOperation ) {
-        case conf.addExpression:
+        case context.getConf().addExpression:
             result += value;
             break;
-        case conf.subExpression:
+        case context.getConf().subExpression:
             result -=  value;
             break;
-        case conf.mulExpression:
+        case context.getConf().mulExpression:
             result *=  value;
             break;
-        case conf.divExpression:
+        case context.getConf().divExpression:
             result /=  value;
             break;
-        case conf.modExpression:
+        case context.getConf().modExpression:
             result %=  value;
             break;
         default:
@@ -686,7 +691,7 @@ module.exports = (function() {
 
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.pathDelimiter, 
+                context.getConf().pathDelimiter, 
                 false );
         if ( segments.countTokens() == 1 ) {
             return evaluatePathSegment( expression, scope );
@@ -723,7 +728,7 @@ module.exports = (function() {
         // Evaluate first token
         var path = new ExpressionTokenizer( 
                 expression, 
-                conf.pathSegmentDelimiter, 
+                context.getConf().pathSegmentDelimiter, 
                 false );
         var token = path.nextToken().trim();
         var result = evaluateFirstPathToken( token, scope );
@@ -784,7 +789,7 @@ module.exports = (function() {
                             result = evaluateFunctionCall( functionName, args, scope );
                         }
                         
-                        // Must be an object in dictionary
+                        // Must be an object in scope
                         if ( result === undefined ) {
                             result = scope.get( token );
                         }
@@ -846,7 +851,7 @@ module.exports = (function() {
         // Parse and evaluate arguments; then push them to an array
         var argumentTokens = new ExpressionTokenizer( 
                 argumentString, 
-                conf.argumentsDelimiter, 
+                context.getConf().argumentsDelimiter, 
                 true );
         var args = [];
         while ( argumentTokens.hasMoreTokens() ) {
@@ -868,17 +873,6 @@ module.exports = (function() {
         var element = scope.get( functionName );
         return ! element? undefined: element.apply( element, args );
     };
-    
-    var booleanLiteral = function( expression ) {
-        
-        if ( 'true' === expression ) {
-            return true;
-        }
-        if ( 'false' === expression ) {
-            return false;
-        }
-        return undefined;
-    };
 
     var listExpression = function( scope, expression ) {
         
@@ -890,7 +884,7 @@ module.exports = (function() {
         var result = [];
         var segments = new ExpressionTokenizer( 
                 arrayExp, 
-                conf.expressionDelimiter, 
+                context.getConf().expressionDelimiter, 
                 true );
         
         while ( segments.hasMoreTokens() ) {
@@ -921,7 +915,7 @@ module.exports = (function() {
         
         var segments = new ExpressionTokenizer( 
                 expression, 
-                conf.intervalDelimiter, 
+                context.getConf().intervalDelimiter, 
                 false );
         
         var numberOfTokens = segments.countTokens();
@@ -972,7 +966,12 @@ module.exports = (function() {
         
         return result;
     };
-    
+    /*
+    var stringLiteral = function( expression ) {
+        var StringLiteral = require( './expressions/path/literals/stringLiteral.js' );
+        var literal = StringLiteral.build( expression )
+        return literal === undefined? undefined: literal.evaluate();
+    };*/
     var stringLiteral = function( expression ) {
         
         if ( expression.charAt( 0 ) === "'" && expression.charAt( expression.length - 1 ) ===  "'" ) {
@@ -982,6 +981,12 @@ module.exports = (function() {
         return undefined;
     };
     
+    /*
+    var numericLiteral = function( expression ) {
+        var NumericLiteral = require( './expressions/path/literals/numericLiteral.js' );
+        var literal = NumericLiteral.build( expression )
+        return literal === undefined? undefined: literal.evaluate();
+    };*/
     var numericLiteral = function( expression ) {
         if ( isFinite( expression ) ){
             var integerValue = parseInt( expression );
@@ -995,6 +1000,23 @@ module.exports = (function() {
             }
         }
         
+        return undefined;
+    };
+    
+    /*
+    var booleanLiteral = function( expression ) {
+        var BooleanLiteral = require( './expressions/path/literals/booleanLiteral.js' );
+        var literal = BooleanLiteral.build( expression )
+        return literal === undefined? undefined: literal.evaluate();
+    };*/
+    var booleanLiteral = function( expression ) {
+        
+        if ( 'true' === expression ) {
+            return true;
+        }
+        if ( 'false' === expression ) {
+            return false;
+        }
         return undefined;
     };
     
@@ -1097,17 +1119,17 @@ module.exports = (function() {
     var endsWith = function( str, suffix ) {
         return str.indexOf( suffix, str.length - suffix.length ) !== -1;
     };
-    
+    /*
     var updateConf = function( confToApply){
         conf = confToApply;
-    };
+    };*/
 
     return {
         evaluateToNotNull: evaluateToNotNull,
         evaluate: evaluate,
         evaluateBoolean: evaluateBoolean,
         removeParenthesisIfAny: removeParenthesisIfAny,
-        endsWith: endsWith,
-        updateConf: updateConf
+        endsWith: endsWith
+        //updateConf: updateConf
     };
 })();

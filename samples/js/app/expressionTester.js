@@ -2,7 +2,8 @@
 
 var $ = require( 'jquery' );
 var Scope = require( '../../../js/app/scope.js' );
-var expressionEvaluator = require( '../../../js/app/expressionEvaluator.js' );
+/*var expressionEvaluator = require( '../../../js/app/expressionEvaluator.js' );*/
+var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
 
 var dictionary = { 
     aString: "string",
@@ -27,16 +28,21 @@ var dictionary = {
             };
         }
     },
-    items: [ 'item0', 'item1', 'item2' ]
+    items: [ 'item0', 'item1', 'item2' ],
+    return3: function( ){
+        return 3;
+    }
 };
 
 $( '#evaluate' ).click( function() {
     //alert('ok');
     try {
         var scope = new Scope( dictionary );
-        var valueExpression = $( '#expression' ).val();
-        var evaluated = expressionEvaluator.evaluateToNotNull( scope, valueExpression );
-        $( '#result' ).text( evaluated );
+        var string = $( '#expression' ).val();
+        /*var evaluated = expressionEvaluator.evaluateToNotNull( scope, string );*/
+        var expression = expressionBuilder.build( string );
+        var evaluated = expression? expression.evaluate( scope ): '[Error: no expression]';
+        $( '#result' ).text( evaluated === undefined? '[undefined]': evaluated );
     } catch ( e ){
         $( '#result' ).text( e );
     }

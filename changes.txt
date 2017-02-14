@@ -1,5 +1,9 @@
 New in 0.6.1
-- Support of custom expressions? Refactoring of expressionEvaluator class?
+- Version of jquery updated.
+- Support of custom expressions. Refactoring of expressionEvaluator class.
+- Cache of expressions and ZPT attributes.
+- Some logging support.
+- Sample using Node added?
 - Added support of reading i18n options from dictionary?
 - Added help to select the correct ZPT.I18n instance depending on available locales?
 

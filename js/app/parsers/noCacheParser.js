@@ -4,16 +4,16 @@
 module.exports = function ( options ) {
     "use strict";
     
-    var context = require( './context.js' );
-    var Scope = require( './scope.js' );
-    var NodeAttributes = require( './nodeAttributes.js' );
+    var context = require( '../context.js' );
+    var Scope = require( '../scope.js' );
+    var NodeAttributes = require( '../nodeAttributes.js' );
     var loopManager = require( './loopManager.js' );
-    var ExpressionTokenizer = require( './expressionTokenizer.js' );
+    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
     var expressionEvaluator = require( './expressionEvaluator.js' );
     var jQuery = require( 'jquery' );
     var $ = jQuery;
     
-    var conf = context.getConf();
+    /*var conf = context.getConf();*/
     
     // Attributes which don't support setAttribute()
     var altAttr = {
@@ -191,7 +191,7 @@ module.exports = function ( options ) {
     var treatError = function( node, scope, exception ) {
 
         // Exit if there is no on-error expression defined
-        var content = scope.get( conf.onErrorVarName );
+        var content = scope.get( context.getConf().onErrorVarName );
         if ( content == null ) {
             return false;
         }
@@ -201,7 +201,7 @@ module.exports = function ( options ) {
             type : typeof exception,
             value : exception
         };
-        scope.set( conf.templateErrorVarName, templateError );
+        scope.set( context.getConf().templateErrorVarName, templateError );
 
         try {
             // Process content
@@ -308,12 +308,12 @@ module.exports = function ( options ) {
         var expression = exp.trim();
         var tokens = new ExpressionTokenizer( 
                 expression, 
-                conf.attributeDelimiter, 
+                context.getConf().attributeDelimiter, 
                 true );
 
         while ( tokens.hasMoreTokens() ) {
             var attribute = tokens.nextToken().trim();
-            var space = attribute.indexOf( conf.inAttributeDelimiter );
+            var space = attribute.indexOf( context.getConf().inAttributeDelimiter );
             if ( space == -1 ) {
                 throw 'Bad attributes expression: ' + attribute;
             }
@@ -357,7 +357,7 @@ module.exports = function ( options ) {
             return false;
         }
         
-        scope.set( conf.onErrorVarName, exp );
+        scope.set( context.getConf().onErrorVarName, exp );
     };
 
     var processDefine = function( scope, exp ) {
@@ -369,19 +369,19 @@ module.exports = function ( options ) {
         var expression = exp.trim();
         var tokens = new ExpressionTokenizer( 
                 expression, 
-                conf.defineDelimiter, 
+                context.getConf().defineDelimiter, 
                 true );
 
         while ( tokens.hasMoreTokens() ) {
             var variable = tokens.nextToken().trim();
-            var space = variable.indexOf( conf.inDefineDelimiter );
+            var space = variable.indexOf( context.getConf().inDefineDelimiter );
             if ( space == -1 ) {
                 throw 'Bad variable definition: ' + variable;
             }
 
             var token1 = variable.substring( 0, space );
             var token2 = variable.substring( space + 1 ).trim();
-            var isGlobal = conf.globalVariableExpressionPrefix === token1;
+            var isGlobal = context.getConf().globalVariableExpressionPrefix === token1;
             var name;
             var valueExpression;
 
@@ -389,7 +389,7 @@ module.exports = function ( options ) {
                 name = token1;
                 valueExpression = token2.trim();
             } else {
-                space = token2.indexOf( conf.inDefineDelimiter );
+                space = token2.indexOf( context.getConf().inDefineDelimiter );
                 name = token2.substring( 0, space );
                 valueExpression = token2.substring( space + 1 ).trim();
             }
@@ -412,7 +412,7 @@ module.exports = function ( options ) {
         var expression = exp.trim();
         var tokens = new ExpressionTokenizer( 
                 expression, 
-                conf.domainDelimiter, 
+                context.getConf().domainDelimiter, 
                 true );
         
         while ( tokens.hasMoreTokens() ) {
@@ -427,12 +427,12 @@ module.exports = function ( options ) {
         }
         
         // Add the domains defined previously
-        var previousI18nList = scope.get( conf.i18nDomainVarName );
+        var previousI18nList = scope.get( context.getConf().i18nDomainVarName );
         if ( previousI18nList ) {
             i18nList = i18nList.concat( previousI18nList );
         }
         
-        scope.set( conf.i18nDomainVarName, i18nList, false );
+        scope.set( context.getConf().i18nDomainVarName, i18nList, false );
     };
 
     var processDefineMacro = function( node, scope, exp ) {
@@ -573,9 +573,9 @@ module.exports = function ( options ) {
         var content = exp.trim();
         
         // Check if is an HTML expression
-        var html = content.indexOf( conf.htmlStructureExpressionPrefix + ' ' ) == 0;
+        var html = content.indexOf( context.getConf().htmlStructureExpressionPrefix + ' ' ) == 0;
         var expression = html? 
-                         content.substr( 1 + conf.htmlStructureExpressionPrefix.length ): 
+                         content.substr( 1 + context.getConf().htmlStructureExpressionPrefix.length ): 
                          content;
         if ( ! expression ){
             throw 'data-tcontent expression void.';
