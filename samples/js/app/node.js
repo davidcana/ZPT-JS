@@ -1,10 +1,14 @@
 "use strict";
 
-// jsdom: it is needed when no browser is available
-var jsdom = require( 'jsdom' ).jsdom;
+// node-jsdom: it is needed when no browser is available
+var jsdom = require( 'node-jsdom' ).jsdom;
 
 jsdom.env(
-    '<!doctype html><html><body><h1 id="t1" data-tcontent="string:hello">a text</h1></body></html>', 
+    '<!doctype html>'
+	+ '<html>'
+	+ '<body><h1 id="t1" data-tcontent="string:hello">a text</h1></body>'
+	+ '</html>', 
+    /*[ '../../../js/lib/jquery-2.0.3.js' ], */
     [ 'http://code.jquery.com/jquery.min.js' ], 
     function( err, window ) {
         
@@ -17,10 +21,10 @@ jsdom.env(
         // Copy window to global
         global.window = window;
         
-        // Copy from window to lcal vars
+        // Copy from window to local vars
         var $ = window.$;
         var document = window.document;
-        console.log( document.body.innerHTML );
+        //console.log( document.body.innerHTML );
 
         // Parse template
         var zpt = require( '../../../js/app/main.js' );
@@ -30,7 +34,7 @@ jsdom.env(
             dictionary: {},
             callback: function(){
                 console.log( 'Done!' );
-                console.log( $('#t1').html() );
+                //console.log( $('#t1').html() );
             }
         });
         

@@ -14,14 +14,9 @@ var TALReplace = function( expressionToApply ) {
         // Evaluate
         var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
         
-        // Remove child nodes
-        var parentNode = node.parentNode;
-        //parentNode.removeChild( node );
-
         // Append text node
-        var textNode = document.createTextNode( evaluated );
-        //parentNode.appendChild( textNode );
-        parentNode.replaceChild( textNode, node );
+        var textNode = node.ownerDocument.createTextNode( evaluated );
+        node.parentNode.replaceChild( textNode, node );
         
         return true;
     };

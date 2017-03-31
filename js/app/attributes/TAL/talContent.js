@@ -28,7 +28,7 @@ var TALContent = function( expressionToApply, htmlToApply ) {
             node.innerHTML = evaluated;
         } else {
             /*node.value = evaluated;*/
-            
+            node.innerHTML = evaluated;
             node[ "form" in node && !formInputHasBody[ node.tagName ] ? "value": "innerText" ] = evaluated;
         }
 

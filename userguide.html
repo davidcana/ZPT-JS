@@ -7,28 +7,24 @@
     <style>
         body {
             background-color: white;
-            font-size: 12pt;
+            font-size: 1em;
             color: black;
             font-family: arial, helvetica, verdana;
         }
         
         h1 {
-            font-size: 24pt;
             font-weight: bold;
         }
         
         h2 {
-            font-size: 20pt;
             font-weight: bold;
         }
         
         h3 {
-            font-size: 18pt;
             font-weight: bold;
         }
         
         h4 {
-            font-size: 16pt;
             font-weight: bold;
         }
         
@@ -39,7 +35,7 @@
         }
         
         .sub {
-            font-size: 10pt;
+            font-size: .75em;
         }
         
         code {
@@ -74,11 +70,12 @@
     
     <a id="firstSteps"></a>
     <h2>First steps using ZPT-JS</h2>
+    
     <p>
         How can we use ZPT-JS? The <code>dictionary</code> is used to define global variables.
     </p>
     <p>
-        An example of invoking ZPT-JS using require:
+        An example of invoking ZPT-JS using CommonJS in a browser environment:
     </p>
     
     <strong>sample.js</strong>
@@ -153,7 +150,52 @@ $( 'body' ).zpt({
     dictionary: dictionary
 });
     </pre>
+    
+    <p>That's OK. But... how can we use ZPT-JS at the server side (using node.js)? node-jsdom is needed when no browser is available:</p>
+    <pre>
+"use strict";
 
+var jsdom = require( 'node-jsdom' ).jsdom;
+
+jsdom.env(
+    '&lt;!doctype html&gt;'
+	+ '&lt;html&gt;'
+	+ '&lt;body&gt;&lt;h1 id="t1" data-tcontent="string:hello"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
+	+ '&lt;/html&gt;', 
+    [ 'http://code.jquery.com/jquery.min.js' ], 
+    function( err, window ) {
+        
+        // Check if an error occurs
+        if ( err ) {
+            console.error( err );
+            return 1;
+        }
+
+        // Copy window to global
+        global.window = window;
+        
+        // Copy from window to local vars
+        var $ = window.$;
+        var document = window.document;
+
+        // Parse template
+        var zpt = require( 'zpt' );
+        
+        zpt.run({
+            root: document.body,
+            dictionary: {},
+            callback: function(){
+                console.log( 'Done!' );
+            }
+        });
+    }
+);
+    </pre>
+    
+    <p>
+        Take a look at <a href="https://www.npmjs.com/package/node-jsdom">jsdom docs</a> for more info about jsdom.
+    </p>
+    
     <a id="zpt.tags"></a>
     <h3>ZPT-JS tags</h3>
     <p>

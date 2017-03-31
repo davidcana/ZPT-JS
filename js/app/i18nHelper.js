@@ -37,6 +37,24 @@ module.exports = (function() {
     
     var loadAsyncItem = function( map, deferred, remoteList, currentIndex ){
         var url = remoteList[ currentIndex ];
+        $.getJSON( 
+            url,
+            function( data ) {
+                map[ url ] = data;
+                if ( currentIndex > 0 ){
+                    loadAsyncItem( 
+                        map, 
+                        deferred, 
+                        remoteList, 
+                        --currentIndex );
+                } else {
+                    deferred( map );
+                }
+            });
+    };
+    /*
+    var loadAsyncItem = function( map, deferred, remoteList, currentIndex ){
+        var url = remoteList[ currentIndex ];
         $.getJSON( url )
             .success(function( data ) {
                 map[ url ] = data;
@@ -50,7 +68,7 @@ module.exports = (function() {
                     deferred( map );
                 }
             });
-    };
+    };*/
     
     return {
         tr: tr,

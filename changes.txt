@@ -1,11 +1,10 @@
 New in 0.6.1
-- Version of jquery updated.
 - Support of custom expressions. Refactoring of expressionEvaluator class.
 - Cache of expressions and ZPT attributes.
 - Some logging support.
-- Sample using Node added?
+- Support of Node.js. Sample and tests added.
 - Added support of reading i18n options from dictionary?
-- Added help to select the correct ZPT.I18n instance depending on available locales?
+- Added help to select the correct ZPT. I18n instance depending on available locales?
 
 New in 0.6.0
 - Migrate to Browserify (CommonJS modules).
@@ -26,7 +25,7 @@ New in 0.3.0
 - Added i18n tags:
     - data-idomain. Register a list of I18n instances to do i18n.
     - data-idefine. Search the specified value into the available I18n instances and save the value to a variable.
-    - data-icontent. It works as data-tcontent, but searching the specified value into the available I18n instances.
+    - data-icontent. It works as data-tcontent, but searching the specified value into the availablbeefye I18n instances.
     - data-ireplace. As data-treplace.
     - data-iattributes. As data-tattributes.
     - data-ion-error. As data-ton-error.
