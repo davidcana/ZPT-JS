@@ -1,10 +1,12 @@
-New in 0.6.1
+New in 0.8.0
+- Added help to select the correct ZPT. Add data-iswitch-domain tag: first parameter a variable name, the rest a list of I18n instances?
+- Added support of reading i18n options from dictionary?
+
+New in 0.7.0
 - Support of custom expressions. Refactoring of expressionEvaluator class.
 - Cache of expressions and ZPT attributes.
 - Some logging support.
 - Support of Node.js. Sample and tests added.
-- Added support of reading i18n options from dictionary?
-- Added help to select the correct ZPT. I18n instance depending on available locales?
 
 New in 0.6.0
 - Migrate to Browserify (CommonJS modules).
