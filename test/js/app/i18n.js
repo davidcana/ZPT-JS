@@ -3,7 +3,8 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunitjs' );
 var zpt = require( '../../../js/app/main.js' );
-var I18n = require( '../../../js/app/i18n.js' );
+var I18n = require( '../../../js/app/i18n/i18n.js' );
+var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 
 /* I18n maps init */
 var msg = {
@@ -25,6 +26,10 @@ msg.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' 
     ' found ' +
     '{RES, plural, =0{no results} one{1 result} other{# results} }';
 msg.en[ 'Oh, noooo!' ] = 'Error found... Oh, noooo!';
+msg2.en[ '/CONF/' ] = {
+    language: 'en',
+    locale: 'en-US'
+};
 msg2.en[ 'Hello world!' ] = 'Hello world 2.0!!!';
 
 /* Spanish i18n messages */
@@ -40,14 +45,28 @@ msg.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos}
     ' encontrado ' +
     '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
 msg.es[ 'Oh, noooo!' ] = 'Error encontrado... Oh, noooo!';
+msg2.es[ '/CONF/' ] = {
+    language: 'es',
+    locale: 'es-ES'
+};
 msg2.es[ 'Hello world!' ] = '¡¡¡Hola mundo 2!!!';
+
+// Create I18n and I18nBundle instances
+var i18nES = new I18n( 'es', msg[ 'es' ] );
+var i18nES2 = new I18n( 'es', msg2[ 'es' ] );
+var i18nEN = new I18n( 'en', msg[ 'en' ] );
+var i18nEN2 = new I18n( 'en', msg2[ 'en' ] );
+var i18nBundle = new I18nBundle( i18nES, i18nEN );
+var i18nBundle2 = new I18nBundle( i18nES2, i18nEN2 );
 
 // Init dictionary
 var dictionary = {
-    'i18n-ES': new I18n( 'es', msg[ 'es' ] ),
-    'i18n-ES2': new I18n( 'es', msg2[ 'es' ] ),
-    'i18n-EN': new I18n( 'en', msg[ 'en' ] ),
-    'i18n-EN2': new I18n( 'en', msg2[ 'en' ] ),
+    'i18n-ES':  i18nES,
+    'i18n-ES2': i18nES2,
+    'i18n-EN':  i18nEN,
+    'i18n-EN2': i18nEN2,
+    'i18nBundle': i18nBundle,
+    'i18nBundle2': i18nBundle2,
     fireError: function( ){
         //return 1 / 0;
         document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined

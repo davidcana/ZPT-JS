@@ -11,6 +11,7 @@ module.exports = function ( options ) {
     var attributeCache = require( '../cache/attributeCache.js' );
     
     var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
+    var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
     var METALDefineMacro = require( '../attributes/METAL/metalDefineMacro.js' );
     var METALUseMacro = require( '../attributes/METAL/metalUseMacro.js' );
     var TALAttributes = require( '../attributes/TAL/talAttributes.js' );
@@ -216,6 +217,8 @@ module.exports = function ( options ) {
 
         processDefine( scope, attributes.talDefine );
         
+        processI18nLanguage( scope, attributes.i18nLanguage );
+        
         processI18nDomain( scope, attributes.i18nDomain );
         
         if ( ! processCondition(
@@ -311,6 +314,16 @@ module.exports = function ( options ) {
         
         var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string );
         return i18nDomain.process( scope );
+    };
+    
+    var processI18nLanguage = function( scope, string ) {
+        
+        if ( ! string ) {
+            return;
+        }
+        
+        var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string );
+        return i18nLanguage.process( scope );
     };
 
     var processDefineMacro = function( node, scope, string ) {

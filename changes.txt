@@ -1,5 +1,5 @@
 New in 0.8.0
-- Added help to select the correct ZPT. Add data-iswitch-domain tag: first parameter a variable name, the rest a list of I18n instances?
+- Added help to select the correct ZPT. Add data-ilanguage tag
 - Added support of reading i18n options from dictionary?
 
 New in 0.7.0

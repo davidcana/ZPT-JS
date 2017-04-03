@@ -6,7 +6,7 @@
 module.exports = (function() {
     var context = require( '../../context.js' );
     var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
-    var i18nHelper = require( '../../i18nHelper.js' );
+    var i18nHelper = require( '../../i18n/i18nHelper.js' );
     var evaluateHelper = require( '../evaluateHelper.js' );
     
     var build = function( string, tag, minElements, maxElements, useSubformat ) {
@@ -110,12 +110,14 @@ module.exports = (function() {
     var translate = function( scope, id, i18nArgs, format, subformat ){
         
         var i18nList = scope.get( context.getConf().i18nDomainVarName );
+        var language = scope.get( context.getConf().i18nLanguageVarName );
         return i18nHelper.tr( 
             i18nList, 
             id, 
             i18nArgs, 
             format, 
-            subformat );
+            subformat,
+            language );
     };
     
     return {

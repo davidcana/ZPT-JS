@@ -3,8 +3,8 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunitjs' );
 var zpt = require( '../../../js/app/main.js' );
-var I18n = require( '../../../js/app/i18n.js' );
-var i18nHelper = require( '../../../js/app/i18nHelper.js' );
+var I18n = require( '../../../js/app/i18n/i18n.js' );
+var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
 
 var es1JSONFileName = 'i18n/es1.json';
 var en1JSONFileName = 'i18n/en1.json';

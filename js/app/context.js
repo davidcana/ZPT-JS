@@ -20,7 +20,8 @@ module.exports = (function() {
             metalDefineSlot:  "data-mdefine-slot",
             metalFillSlot:    "data-mfill-slot",
             metalMacro:       "data-mmacro",
-            i18nDomain:       "data-idomain"
+            i18nDomain:       "data-idomain",
+            i18nLanguage:     "data-ilanguage"
     };
     var tags = defaultTags;
     var tal = '';
@@ -109,6 +110,7 @@ module.exports = (function() {
             templateErrorVarName: "error",
             onErrorVarName:       "on-error",
             i18nDomainVarName:    "i18nDomain",
+            i18nLanguageVarName:  "i18nLanguage",
             repeatVarName:        "repeat",
         
             i18nConfResourceId: '/CONF/',

@@ -6,7 +6,7 @@ module.exports = function( languageId, res ) {
     "use strict";
     
     var MessageFormat = require( 'messageformat' );
-    var context = require( './context.js' );
+    var context = require( '../context.js' );
     
     var resources = res;
     var mf = new MessageFormat( languageId );
@@ -17,10 +17,12 @@ module.exports = function( languageId, res ) {
     var CONF_RESOURCE_ID = context.getConf().i18nConfResourceId;
     
     var getLanguage = function(){
+        //return resources[ context.getConf().i18nConfResourceId ].language;
         return resources[ CONF_RESOURCE_ID ].language;
     };
     
     var getLocale = function(){
+        //return resources[ context.getConf().i18nConfResourceId ].locale;
         return resources[ CONF_RESOURCE_ID ].locale;
     };
     
@@ -93,6 +95,8 @@ module.exports = function( languageId, res ) {
     };
     
     return {
+        getLanguage: getLanguage,
+        getLocale: getLocale,
         exists: exists,
         tr: tr
     };

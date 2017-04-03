@@ -7,7 +7,7 @@ module.exports = (function() {
     
     var context = require( '../context.js' );
     var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-    var i18nHelper = require( '../i18nHelper.js' );
+    var i18nHelper = require( '../i18n/i18nHelper.js' );
     var $ = require( 'jquery' );
     //var expressionBuilder = require( '../expressions/expressionBuilder.js' );
     

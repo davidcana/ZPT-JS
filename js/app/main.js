@@ -10,8 +10,8 @@ exports.run = function( options ){
 };
 
 /* I18n and i18nHelp classes */
-exports.I18n = require( './i18n.js' );
-exports.i18nHelper = require( './i18nHelper.js' );
+exports.I18n = require( './i18n/i18n.js' );
+exports.i18nHelper = require( './i18n/i18nHelper.js' );
 
 /* Support RequireJS module pattern */
 if ( typeof define === 'function' && define.amd ) {
