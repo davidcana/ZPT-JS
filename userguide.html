@@ -645,8 +645,11 @@ context.registerFormatter(
     <pre>
 "use strict";
 
-var zpt = require( 'zpt' );
+var zpt = require( '../../../js/app/main.js' );
+var I18n = require( '../../../js/app/i18n/i18n.js' );
+var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 
+/* I18n maps init */
 var msg = {
     en : {},
     es : {}
@@ -675,9 +678,14 @@ msg.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos}
     ' encontrado ' +
     '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
 
+// Create I18n and i18nBundle instances
+var i18nES = new I18n( 'es', msg[ 'es' ] );
+var i18nEN = new I18n( 'en', msg[ 'en' ] );
+var i18nBundle = new I18nBundle( i18nES, i18nEN );
+
+// Init dictionary
 var dictionary = {
-    'i18n-ES': new zpt.I18n( 'es', msg[ 'es' ] ),
-    'i18n-EN': new zpt.I18n( 'en', msg[ 'en' ] )
+    'i18nBundle': i18nBundle
 };
 
 // Parse template
@@ -699,7 +707,7 @@ zpt.run({
     &lt;/head&gt;
     &lt;body&gt;
         &lt;h1&gt;Some I18n expressions&lt;/h1&gt;
-        &lt;ol data-idomain="i18n-ES"&gt;
+        &lt;ol data-ilanguage="'en'" data-idomain="i18nBundle"&gt;
             &lt;li&gt;
                ¡Hola mundo! = 
                &lt;span data-tcontent="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
@@ -717,8 +725,9 @@ zpt.run({
         Some remarks about this:
     </p>
     <ul>
-        <li>The dictionary must contain at least one instance per supported language of <code>I18n</code> class. The constructor accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
-        <li>The <code>data-idomain</code> attribute defines the <code>I18n</code> to use.</li>
+        <li>The dictionary must contain at least one instance of <code>I18nBundle</code> class. An instance of this class groups an instance of <code>I18n</code> class per supported language. The constructor of <code>I18n</code> class accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
+        <li>The <code>data-idomain</code> attribute defines the <code>I18nBundle</code> to use.</li>
+        <li>The <code>data-ilanguage</code> attribute defines the current language to use.</li>
         <li>The <code>tr</code> expression  evaluates an expression but then it searches that value into the messages.</li>
         <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg' ( GENDER 'male'; RES 10 )</code> is a little more complex:
             <ol>
@@ -748,27 +757,27 @@ zpt.run({
     
     <h4>Working with domains</h4>
     <p>
-        In the previous example the domain was a simple <code>I18n</code> instance. This forces to use a big map with all the messages. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>I18n</code> instances, so the messages will be searched in the same order.
+        In the previous example the domain was a simple <code>I18nBundle</code> instance. This forces to use big maps with all the messages of one language. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>I18nBundle</code> instances, so the messages will be searched in the same order.
     </p>
     <p>
-        Therefore, <code>data-idomain="i18n-ES1 i18n-ES2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
+        Therefore, <code>data-idomain="i18nBundle1 i18nBundle2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
     </p>
     
     <p>
         <code>data-idomain</code> also supports nested definitions:
     </p>
     <pre>
-&lt;div data-idomain="i18n-ES1"&gt;
+&lt;div data-idomain="i18nBundle1"&gt;
    &lt;span data-tcontent="tr: 'Hello world!'"&gt;
         ¡Hola mundo!
    &lt;/span&gt;
-   &lt;span data-idomain="i18n-ES2" data-tcontent="tr: 'Hello world!'"&gt;
+   &lt;span data-idomain="i18nBundle2" data-tcontent="tr: 'Hello world!'"&gt;
         ¡¡¡Hola mundo 2!!!
    &lt;/span&gt;
 &lt;/div&gt; 
     </pre>
     <p>
-        The first <code>data-tcontent</code> will search only in <code>i18n-ES1</code>. The second one will search first in <code>i18n-ES2</code> and if it is not found will search in <code>i18n-ES1</code>.
+        The first <code>data-tcontent</code> will search only in <code>i18nBundle1</code>. The second one will search first in <code>i18nBundle2</code> and if it is not found will search in <code>i18nBundle1</code>.
     </p>
     
     <h4>Loading messages from JSON files</h4>
@@ -778,16 +787,27 @@ zpt.run({
     <pre>
 "use strict";
 
-var zpt = require( 'zpt' );
+var zpt = require( '../../../js/app/main.js' );
+var I18n = require( '../../../js/app/i18n/i18n.js' );
+var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
+var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
 
 var esJSONFileName = 'i18n/es1.json';
 var enJSONFileName = 'i18n/en1.json';
 
 var jsonFiles = [ esJSONFileName , enJSONFileName ];
 
-zpt.i18nHelper.loadAsync( jsonFiles , callback );
+i18nHelper.loadAsync( jsonFiles , callback );
 
 function callback( i18nMap ){
+    
+    var i18nES =  new I18n( 'es', i18nMap[ esJSONFileName ] );
+    var i18nEN = new I18n( 'en', i18nMap[ enJSONFileName ] );
+    var i18nBundle = new I18nBundle( i18nES, i18nEN );
+
+    var dictionary = {
+        'i18nBundle': i18nBundle
+    };
     
     var dictionary = {
         'i18n-ES' : new zpt.I18n( 'es', i18nMap[ esJSONFileName ] ),
