@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Custom expressions tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/customExpressions.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <p>
+            This test shows how custom expressions can be added to ZPT-JS. We have written a custom expression class, <code>IncExpression</code>, available using <em>++:</em>. It adds 1 to the related variable and returns it.
+        </p>
+        
+        <ol>
+            <li>aNumber = 5</li>
+            <li>++: aNumber = 6 = <span id="t1-1" data-tcontent="++: aNumber">5 + 1 = 6</span></li>
+            <li>++: aNumber = 7 = <span id="t1-2" data-tcontent="++: aNumber">6 + 1 = 7</span></li>
+        </ol>
+    </body>
+</html>

@@ -196,7 +196,7 @@ jsdom.env(
         Take a look at <a href="https://www.npmjs.com/package/node-jsdom">jsdom docs</a> for more info about jsdom.
     </p>
     
-    <a id="zpt.tags"></a>
+    <a id="tags"></a>
     <h3>ZPT-JS tags</h3>
     <p>
         The name of tags are not the same because if they were the resulting HTML douments will not be well formed. The list of tags with their equivalences are:
@@ -273,7 +273,7 @@ jsdom.env(
         <br> Important: <strong>after this point we will refer to tags as the ZPT-JS tag name</strong>.
     </p>
 
-    <a id="zpt.evaluationOrder"></a>
+    <a id="evaluationOrder"></a>
     <h3>Evaluation order</h3>
     <p>
         The order evaluation of attributes in ZPT-JS is not equal than ZPT's. The new order is:
@@ -633,7 +633,7 @@ context.registerFormatter(
         <li><code>format: customFormatterName aNumber</code> formats aNumber using a function in the dictionary called as the value of the <code>customFormatterName</code> variable</li>
     </ul>
     
-    <a id="zpt.i18n"></a>
+    <a id="i18n"></a>
     <h3>I18n and l10n</h3>
     
     <h4>Basics about i18n</h4>
@@ -809,11 +809,6 @@ function callback( i18nMap ){
         'i18nBundle': i18nBundle
     };
     
-    var dictionary = {
-        'i18n-ES' : new zpt.I18n( 'es', i18nMap[ esJSONFileName ] ),
-        'i18n-EN' : new zpt.I18n( 'en', i18nMap[ enJSONFileName ] )
-    };
-    
     zpt.run({
         root: document.body,
         dictionary: dictionary
@@ -878,7 +873,64 @@ function callback( i18nMap ){
         Take a look on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat">DateTimeFormat options</a> to see all available options.
     </p>
     
-    <a id="zpt.grunt"></a>
+    <a id="customExpressions"></a>
+    <h3>Custom expressions</h3>
+    <p>
+        ZPT-JS makes it easy to register custom expression managers. For example, we want to develop an expression manager that operates similarly to the <code>++</code> C operator. First we must implement the class (incExpression.js file):
+    </p>
+    <pre>
+"use strict";
+
+var context = require( '../../../js/app/context.js' );
+var evaluateHelper = require( '../../../js/app/expressions/evaluateHelper.js' );
+var $ = require( 'jquery' );
+
+var IncExpression = function( varNameToApply ) {
+    
+    var varName = varNameToApply;
+    
+    var evaluate = function( scope ){
+        
+        var value = scope.get( varName );
+        
+        if ( ! evaluateHelper.isNumber( value ) ) {
+            throw 'Error trying to inc number, not a number!';
+        }
+        
+        scope.set( varName, ++value, true );
+        
+        return value;
+    };
+    
+    return {
+        evaluate: evaluate
+    };
+};
+
+IncExpression.removePrefix = true;
+IncExpression.getPrefix = function() {
+    return '++' + context.getConf().expressionSuffix;
+};
+IncExpression.getId = IncExpression.getPrefix;
+
+IncExpression.build = function( string ) {
+    return new IncExpression( string.trim() );
+}
+
+module.exports = IncExpression;
+    </pre>
+    
+    <p>
+        Don't forget to register that class!
+    </p>
+    <pre>
+var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
+var IncExpression = require( './incExpression.js' );
+
+expressionBuilder.register( require( IncExpression ) );
+    </pre>
+    
+    <a id="grunt"></a>
     <h3>Building and testing</h3>
     <p>
         ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:

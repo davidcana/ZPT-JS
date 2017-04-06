@@ -23,6 +23,11 @@ module.exports = (function() {
         }
     };
     
+    var unregister = function( expressionsManager, id ) {
+        //expressionManagers[ id ] = undefined;
+        delete expressionManagers[ id || expressionsManager.getPrefix() || expressionsManager.getId() ];
+    };
+    
     var registerGeneralPurpose = function(){
         register( require( './existsExpression.js' ) );
         register( require( './formatExpression.js' ) );
@@ -208,6 +213,7 @@ module.exports = (function() {
     
     return {
         register: register,
+        unregister: unregister,
         registerAll: registerAll,
         build: build,
         buildList: buildList,

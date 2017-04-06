@@ -44,7 +44,12 @@ module.exports = (function() {
         return builded;
     };
     
+    var clean = function( ) {
+        map = {};
+    };
+    
     return {
-        get: process
+        get: process,
+        clean: clean
     };
 })();

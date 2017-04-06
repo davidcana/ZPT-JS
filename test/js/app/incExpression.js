@@ -4,22 +4,23 @@
 "use strict";
 
 var context = require( '../../../js/app/context.js' );
-var evaluateHelper = require( '../../../js/app/evaluateHelper.js' );
-var $ = require( 'jquery' );
+var evaluateHelper = require( '../../../js/app/expressions/evaluateHelper.js' );
 
-var IncExpression = function( expressionToApply ) {
+var IncExpression = function( varNameToApply ) {
     
-    var expression = expressionToApply;
+    var varName = varNameToApply;
     
     var evaluate = function( scope ){
         
-        var evaluated = expression.evaluate( scope );
+        var value = scope.get( varName );
         
         if ( ! evaluateHelper.isNumber( value ) ) {
             throw 'Error trying to inc number, not a number!';
         }
-
-        return 1 + evaluated;
+        
+        scope.set( varName, ++value, true );
+        
+        return value;
     };
     
     return {
@@ -34,13 +35,7 @@ IncExpression.getPrefix = function() {
 IncExpression.getId = IncExpression.getPrefix;
 
 IncExpression.build = function( string ) {
-    var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
-    
-    var expression = expressionBuilder.build(
-        string, 
-        IncExpression.prefix );
-    
-    return new IncExpression( expression );
+    return new IncExpression( string.trim() );
 }
 
 module.exports = IncExpression;
