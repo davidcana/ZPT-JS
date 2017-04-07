@@ -14,6 +14,7 @@ QUnit.testSuites([
     { name: "rerun simple Test Suite", path: "./rerunSimple.html" },
     { name: "rerun macro Test Suite", path: "./rerunMacros.html" },
     { name: "i18n Test Suite", path: "./i18n.html" },
-    { name: "i18n async Test Suite", path: "./i18nAsync.html" }
+    { name: "i18n async Test Suite", path: "./i18nAsync.html" },
+    { name: "custom expressions Test Suite", path: "./customExpressions.html" }
 ]);
 
