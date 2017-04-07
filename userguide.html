@@ -146,6 +146,13 @@ zpt.run({
         The first argument sets the DOM node where ZPT-JS will search its custom HTML tags. The second one is the dictionary, a Javascript object that will be available to all custom HTML tags of ZPT-JS. You can also run ZPT-JS as a Jquery plugin:
     </p>
     <pre>
+"use strict";
+
+var $ = require( 'jquery' );
+require( '../../../js/app/jqueryPlugin.js' );
+
+var dictionary = { ... }; // Your dictionary entries
+
 $( 'body' ).zpt({
     dictionary: dictionary
 });
