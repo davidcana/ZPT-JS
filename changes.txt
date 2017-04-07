@@ -1,6 +1,5 @@
 New in 0.8.0
-- Added help to select the correct ZPT. Add data-ilanguage tag
-- Added support of reading i18n options from dictionary?
+- Added help to select the correct I18n instance. Add data-ilanguage tag.
 
 New in 0.7.0
 - Support of custom expressions. Refactoring of expressionEvaluator class.
