@@ -41,7 +41,7 @@ module.exports = (function() {
     var isNumber = function( string ){
         return ! isNaN( parseFloat( string ) ) || ! isFinite( string );
     };
-    
+    /*
     var evaluateInteger = function( scope, expression, errorMessageToApply ) {
         var evaluated = expression.evaluate( scope );
         
@@ -54,11 +54,11 @@ module.exports = (function() {
         }
         
         return evaluated;
-    };
-    
+    };*/
+    /*
     var isInteger = function( string ){
         return ! isNaN( parseInt( string ) ) || ! isFinite( string );
-    };
+    };*/
     
     var evaluateExpressionList = function ( list, scope ){
         
@@ -76,9 +76,9 @@ module.exports = (function() {
         evaluateToNotNull: evaluateToNotNull,
         evaluateBoolean: evaluateBoolean,
         evaluateNumber: evaluateNumber,
-        evaluateInteger: evaluateInteger,
+        //evaluateInteger: evaluateInteger,
         isNumber: isNumber,
-        isInteger: isInteger,
+        //isInteger: isInteger,
         evaluateExpressionList: evaluateExpressionList
     };
 })();

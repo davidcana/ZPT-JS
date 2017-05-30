@@ -16,26 +16,17 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         
         // Evaluate and check array bases and indexes
         var evaluatedArrayBase = arrayBase.evaluate( scope );
-        var evaluatedIndexes = evaluateHelper.evaluateExpressionList( indexes );
+        var evaluatedIndexes = evaluateHelper.evaluateExpressionList( indexes, scope );
 
         // Iterate indexes
         var result = evaluatedArrayBase;
         for ( var i = 0; i < indexes.length; i++ ) {
             
-            // Array accessor must operate on an array
-            if( ! $.isArray( result ) ) {
-                throw arrayBase + ' is not an array';
-            }
-            
             // Get and evaluate index as integer
             var indexExpression = indexes[ i ];
-            var evaluatedIndex = evaluateHelper.evaluateInteger(
-                scope,
-                indexExpression,
-                'Array index must be an integer' );
 
             // Evaluate array access
-            var result = result[ evaluatedIndex ];
+            var result = result[ indexExpression.evaluate( scope ) ];
         }
         
         return result;

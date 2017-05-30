@@ -158,3 +158,9 @@ QUnit.test( "Some complex expressions test", function( assert ) {
     assert.equal( $('#t14-2').html() , "yes!" );
     assert.equal( $('#t14-3').html() , "4" );
 });
+
+QUnit.test( "Map test", function( assert ) {
+    assert.equal( $('#t15-1').html() , "item0" );
+    assert.equal( $('#t15-2').html() , "Bob" );
+    assert.equal( $('#t15-3').html() , "Bob" );
+});

@@ -370,15 +370,23 @@ jsdom.env(
         The last element in a path expression may resolve to <code>null</code>, but if an intermediate element resolves to <code>null</code> an <code>Exception</code> will be thrown.
     </p>
 
-    <a id="tales.path.arrays"></a>
-    <h4>Arrays</h4>
+    <a id="tales.path.arraysAndObjects"></a>
+    <h4>Arrays and objects</h4>
     <p>
-        Array members may be accessed using the same syntax as in Javascript. Any number of dimensions are supported. The expression inside the array accessor may be any TALES expression and must evaluate to an integer value. If an array accessor is found modifying an object that is not an array an exception is thrown.
+        Array members may be accessed using the same syntax as in Javascript. Any number of dimensions are supported. The expression inside the array accessor may be any TALES expression and must evaluate to an integer value.
     </p>
     <ul>
         <li><code>people[ 2 ]</code></li>
         <li><code>people[ index ]</code></li>
     </ul>
+    <p>
+        Object properties may be accessed using the same syntax as in Javascript too.
+    </p>
+    <ul>
+        <li><code>user[ 'name' ]</code></li>
+        <li><code>user[ member ]</code></li>
+    </ul>
+    
 
     <a id="tales.javascript"></a>
     <h3>Javascript expressions</h3>
@@ -943,10 +951,10 @@ expressionBuilder.register( require( IncExpression ) );
         ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:
     </p>
     <pre>
-$ grunt browserify // Build all test js files; also build a standalone version
+$ grunt browserify        // Build all test js files; also build a standalone version
 $ grunt browserify:[file] // Build a single js file; use 'standalone' to build a standalone version
-$ npm run server   // Run a beefy server to make it easy to test ZPT-JS without browserifying by hand
-$ grunt compress   // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
+$ npm run start           // Run a beefy server to make it easy to test ZPT-JS without browserifying by hand
+$ grunt compress          // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
     </pre>
     <p>
         ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open test/index.html with your favourite browser.
