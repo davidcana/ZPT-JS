@@ -12,6 +12,9 @@ module.exports = function(grunt) {
         browserify: {
             standalone: {
                 options: {
+		    plugin: [
+                        [ "browserify-derequire" ]
+                    ],
                     browserifyOptions: {
                         standalone: 'zpt'
                     }
