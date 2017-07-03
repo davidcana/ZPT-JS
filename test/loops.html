@@ -34,18 +34,18 @@
                 <th>Capital Roman</th>
             </tr>
             <tr data-trepeat="item tools">
-                <td class="value" data-tcontent="item/name">value</td>
-                <td class="index" data-tcontent="repeat/item/index()">index</td>
-                <td class="number" data-tcontent="repeat/item/number()">number</td>
-                <td class="isEven" data-tcontent="repeat/item/even()">even</td>
-                <td class="isOdd" data-tcontent="repeat/item/odd()">odd</td>
-                <td class="isStart" data-tcontent="repeat/item/start()">start</td>
-                <td class="isEnd" data-tcontent="repeat/item/end()">end</td>
-                <td class="getLength" data-tcontent="repeat/item/length()">length</td>
-                <td class="getLetter" data-tcontent="repeat/item/letter()">letter</td>
-                <td class="getCapitalLetter" data-tcontent="repeat/item/Letter()">capital letter</td>
-                <td class="getRoman" data-tcontent="repeat/item/roman()">roman</td>
-                <td class="getCapitalRoman" data-tcontent="repeat/item/Roman()">capitalRoman</td>
+                <td data-tattributes="class 'value'" data-tcontent="item/name">value</td>
+                <td data-tattributes="class 'index'" data-tcontent="repeat/item/index()">index</td>
+                <td data-tattributes="class 'number'" data-tcontent="repeat/item/number()">number</td>
+                <td data-tattributes="class 'isEven'" data-tcontent="repeat/item/even()">even</td>
+                <td data-tattributes="class 'isOdd'" data-tcontent="repeat/item/odd()">odd</td>
+                <td data-tattributes="class 'isStart'" data-tcontent="repeat/item/start()">start</td>
+                <td data-tattributes="class 'isEnd'" data-tcontent="repeat/item/end()">end</td>
+                <td data-tattributes="class 'getLength'" data-tcontent="repeat/item/length()">length</td>
+                <td data-tattributes="class 'getLetter'" data-tcontent="repeat/item/letter()">letter</td>
+                <td data-tattributes="class 'getCapitalLetter'" data-tcontent="repeat/item/Letter()">capital letter</td>
+                <td data-tattributes="class 'getRoman'" data-tcontent="repeat/item/roman()">roman</td>
+                <td data-tattributes="class 'getCapitalRoman'" data-tcontent="repeat/item/Roman()">capitalRoman</td>
             </tr>
         </table>
 
@@ -54,70 +54,70 @@
         </p>
         <ol>
             <li data-trepeat="c [10 20 30]">
-                Iterating element <span class="cValue1" data-tcontent="c">10/20/30</span>
+                Iterating element <span data-tattributes="class 'cValue1'" data-tcontent="c">10/20/30</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c ['jaja' 'jeje' 'jiji']">
-                Iterating element <span class="cValue2" data-tcontent="c">jaja/jeje/jiji</span>
+                Iterating element <span data-tattributes="class 'cValue2'" data-tcontent="c">jaja/jeje/jiji</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c ['jaja' number100 2]">
-                Iterating element <span class="cValue3" data-tcontent="c">jaja/100/2</span>
+                Iterating element <span data-tattributes="class 'cValue3'" data-tcontent="c">jaja/100/2</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c ['jaja' number100 (+: 2 3)]">
-                Iterating element <span class="cValue4" data-tcontent="c">jaja/100/5</span>
+                Iterating element <span data-tattributes="class 'cValue4'" data-tcontent="c">jaja/100/5</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c [1:5]">
-                Iterating element <span class="cValue5" data-tcontent="c">1/2/3/4/5</span>
+                Iterating element <span data-tattributes="class 'cValue5'" data-tcontent="c">1/2/3/4/5</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c [1:7:2]">
-                Iterating element <span class="cValue6" data-tcontent="c">1/3/5/7</span>
+                Iterating element <span data-tattributes="class 'cValue6'" data-tcontent="c">1/3/5/7</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c [7:1:-2]">
-                Iterating element <span class="cValue7" data-tcontent="c">7/5/3/1</span>
+                Iterating element <span data-tattributes="class 'cValue7'" data-tcontent="c">7/5/3/1</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c [:5]">
-                Iterating element <span class="cValue8" data-tcontent="c">0/1/2/3/4/5</span>
+                Iterating element <span data-tattributes="class 'cValue8'" data-tcontent="c">0/1/2/3/4/5</span>
             </li>
         </ol>
         <ol data-tdefine="start 2; end 8; step 2">
             <li data-trepeat="c [start:end:step]">
-                Iterating element <span class="cValue9" data-tcontent="c">2/4/6/8</span>
+                Iterating element <span data-tattributes="class 'cValue9'" data-tcontent="c">2/4/6/8</span>
             </li>
         </ol>
         <ol>
             <li data-trepeat="c ['jaja' :2 'jeje']">
-                Iterating element <span class="cValue10" data-tcontent="c">jaja/0/1/2/jeje</span>
+                Iterating element <span data-tattributes="class 'cValue10'" data-tcontent="c">jaja/0/1/2/jeje</span>
             </li>
         </ol>
         <ol>
             <li>Next elements void evaluating [1:7:-1]</li>
             <li data-trepeat="c [1:7:-1]">
-                Iterating element <span class="cValue11" data-tcontent="c">[void]</span>
+                Iterating element <span data-tattributes="class 'cValue11'" data-tcontent="c">[void]</span>
             </li>
         </ol>
         <ol>
             <li>Next elements void evaluating [7:1:1]</li>
             <li data-trepeat="c [7:1:1]">
-                Iterating element <span class="cValue12" data-tcontent="c">[void]</span>
+                Iterating element <span data-tattributes="class 'cValue12'" data-tcontent="c">[void]</span>
             </li>
         </ol>
         <ol>
             <li>Next elements void evaluating a non defined variable</li>
             <li data-trepeat="c nonDefined">
-                Iterating element <span class="cValue13" data-tcontent="c">[void]</span>
+                Iterating element <span data-tattributes="class 'cValue13'" data-tcontent="c">[void]</span>
             </li>
         </ol>
         <p>
@@ -125,8 +125,16 @@
         </p>
         <ol id="dynamicLoop">
             <li data-trepeat="c someNumbers">
-                Iterating element <span class="nValue1" data-tcontent="c">10/20/30</span>
+                Iterating element <span data-tattributes="class 'nValue1'" data-tcontent="c">10/20/30</span>
             </li>
+        </ol>
+        <p>
+            Test position
+        </p>
+        <ol>
+            <li class="pValue">1</li>
+            <li data-trepeat="p [2:4]" data-tcontent="p" data-tattributes="class 'pValue'">Number</li>
+            <li class="pValue">5</li>
         </ol>
    </body> 
  </html>

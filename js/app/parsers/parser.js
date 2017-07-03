@@ -123,6 +123,33 @@ module.exports = function ( options ) {
         }
     };
 
+    var getLoopNextSibling = function( node ){
+        
+        var nextSibling = node;
+        do {
+            nextSibling = nextSibling.nextElementSibling;
+            if ( ! nextSibling ){
+                return null;
+            }
+        } while ( nextSibling.hasAttribute( tags.qdup ) );
+        
+        return nextSibling;
+        /*
+        var children = node.parentNode.children;
+        for ( var i = 0; i < children.length; i++ ) {
+            var child = children[ i ];
+            if ( ! child.hasAttribute( tags.qdup ) ){
+                return child;
+            }
+        }
+        
+        return child || node;
+        */
+        
+        
+        //return node.nextSibling;
+    };
+    
     var processLoop = function( node, attributes, scope ) {
 
         // Process repeat
@@ -133,6 +160,10 @@ module.exports = function ( options ) {
         node.removeAttribute( 'style' );
         node.setAttribute( tags.qdup, 1 );
 
+        //var lastNode = node;
+        //var nextSibling = node.nextElementSibling;
+        //var nextSibling = null;
+        var nextSibling = getLoopNextSibling( node );
         while ( loop.repeat( scope ) ) {
             // Get tmpNode
             var tmpNode = node.cloneNode( true );
@@ -142,9 +173,10 @@ module.exports = function ( options ) {
 
             // Insert it
             var parentNode = node.parentNode;
-            parentNode.insertBefore( tmpNode, null );
-            //var nextSibling = node.nextSibling;
-            //parentNode.insertBefore( tmpNode, nextSibling );
+            //parentNode.insertBefore( tmpNode, null );
+            //var nextSibling = lastNode.nextSibling;
+            //lastNode = tmpNode;
+            parentNode.insertBefore( tmpNode, nextSibling );
             
             // Process it
             if ( ! processElement( tmpNode, attributes, scope ) ) {
