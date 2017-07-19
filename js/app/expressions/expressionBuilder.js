@@ -38,6 +38,7 @@ module.exports = (function() {
         register( require( './comparison/equalsExpression.js' ) );
         register( require( './comparison/greaterExpression.js' ) );
         register( require( './comparison/lowerExpression.js' ) );
+        register( require( './comparison/inExpression.js' ) );
     };
     var registerArithmetic = function(){
         register( require( './arithmethic/addExpression.js' ) );

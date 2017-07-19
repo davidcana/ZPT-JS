@@ -76,6 +76,16 @@ QUnit.test( "Comparison expressions test", function( assert ) {
     assert.equal( $('#t5-19').html() , "true" );
     assert.equal( $('#t5-20').html() , "false" );
     assert.equal( $('#t5-21').html() , "false" );
+    assert.equal( $('#t5-22').html() , "true" );
+    assert.equal( $('#t5-23').html() , "false" );
+    assert.equal( $('#t5-24').html() , "true" );
+    assert.equal( $('#t5-25').html() , "false" );
+    assert.equal( $('#t5-26').html() , "true" );
+    assert.equal( $('#t5-27').html() , "false" );
+    assert.equal( $('#t5-28').html() , "true" );
+    assert.equal( $('#t5-29').html() , "false" );
+    assert.equal( $('#t5-30').html() , "true" );
+    assert.equal( $('#t5-31').html() , "false" );
 });
 
 QUnit.test( "Math expressions test", function( assert ) {

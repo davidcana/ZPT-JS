@@ -142,6 +142,7 @@ module.exports = (function() {
             trNumberExpression: "trNumber" + EXPRESSION_SUFFIX,
             trCurrencyExpression: "trCurrency" + EXPRESSION_SUFFIX,
             trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
+            inExpression: "in" + EXPRESSION_SUFFIX,
             /*pathExpression: "path" + EXPRESSION_SUFFIX,*/
             pathExpression: "",
             jqueryExpression: "$"
@@ -154,8 +155,6 @@ module.exports = (function() {
     
     var setConf = function ( confToSet ){
         conf = confToSet;
-        /*var expressionEvaluator = require( './expressionEvaluator.js' );
-        expressionEvaluator.updateConf( conf );*/
     };
     /* End conf */
     

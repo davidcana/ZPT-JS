@@ -467,10 +467,11 @@ jsdom.env(
     <a id="tales.comparison"></a>
     <h3>Comparison expressions</h3>
     <p>
-        The 3 available comparison expressions are:
+        The 4 available comparison expressions are:
     </p>
     <ul>
         <li><code>equals:</code> Checks if 2 or more integers are equals. If the values are not numbers, it checks if they are equals.</li>
+        <li><code>in:</code> Checks if a value is in a list of expressions.</li>
         <li><code>greater:</code> Checks if a number is greater than another.</li>
         <li><code>lower:</code> Checks if a number is lower than another.</li>
     </ul>
@@ -478,8 +479,9 @@ jsdom.env(
         Some examples:
     </p>
     <ul>
-        <li><code>equals: assets liabilities anObject</code></li>
-        <li><code>greater: 10 ( +: children pets )</code></li>
+        <li><code>equals: assets liabilities anObject</code> -> <code>True</code> if <code>assets</code>, <code>liabilities</code> and <code>anObject</code> are all equals.</li>
+        <li><code>in: value 'option1' 'option2' 'option3'</code> -> <code>True</code> if <code>value</code> is <code>'option1'</code>, <code>'option2'</code> or <code>'option3'</code>.</li>
+        <li><code>greater: 10 ( +: children pets )</code> -> <code>True</code> if <code>10 > ( children + pets)</code>.</li>
     </ul>
 
     <a id="tales.jquery"></a>

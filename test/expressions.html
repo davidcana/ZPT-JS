@@ -93,6 +93,16 @@
             <li>eq: (+: 1 3) (*: 2 2) = true = <span id="t5-19" data-tcontent="eq: (+: 1 3) (*: 2 2)">not false</span></li>
             <li>not: eq: (+: 1 3) (*: 2 2) = false = <span id="t5-20" data-tcontent="not: eq: (+: 1 3) (*: 2 2)">not true</span></li>
             <li>  not:  eq: (  +:    1    3 )  ( *: 2  2      ) = false = <span id="t5-21" data-tcontent="  not:  eq: (  +:    1    3 )  ( *: 2  2      )">not true</span></li>
+            <li>in: 1 1 = true = <span id="t5-22" data-tcontent="in: 1 1">not false</span></li>
+            <li>in: 1 2 = false = <span id="t5-23" data-tcontent="in: 1 2">not true</span></li>
+            <li>in: 1 0 1 = true = <span id="t5-24" data-tcontent="in: 1 0 1">not false</span></li>
+            <li>in: 1 0 2 = false = <span id="t5-25" data-tcontent="in: 1 0 2">not true</span></li>
+            <li>in: number1 0 number1 = true = <span id="t5-26" data-tcontent="in: number1 0 number1">not false</span></li>
+            <li>in: number1 0 number100 = false = <span id="t5-27" data-tcontent="in: number1 0 number100">not true</span></li>
+            <li>in: number1 0 [number1 number100] = true = <span id="t5-28" data-tcontent="in: number1 0 [number1 number100]">not false</span></li>
+            <li>in: number1 0 [2 number100] = false = <span id="t5-29" data-tcontent="in: number1 0 [2 number100]">not true</span></li>
+            <li>in: 'b' 'a' 'b' 'c' = true = <span id="t5-30" data-tcontent="in: 'b' 'a' 'b' 'c'">not false</span></li>
+            <li>in: 'z' 'a' 'b' 'c' = false = <span id="t5-31" data-tcontent="in: 'z' 'a' 'b' 'c'">not true</span></li>
         </ol>
         
         <p>
