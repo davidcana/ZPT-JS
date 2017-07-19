@@ -31,6 +31,15 @@ module.exports = function(grunt) {
                 src: 'test/js/app/expressions.js',
                 dest: 'build/expressions.js'
             },
+	    errors: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/errors.js',
+                dest: 'build/errors.js'
+            },
             format: {
                 options: {
                     browserifyOptions: {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Errors tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/errors.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <p>
+            Non existing expressions
+        </p>
+        <ol id="t1">
+            <li>strinnnng: should be <span id="t1-1" data-tcontent="strinnnng:">not defined</span></li>
+            <li>strinnnng:hello should be <span id="t1-2" data-tcontent="strinnnng:hello">not defined</span></li>
+        </ol>
+        
+        <p>
+            Using null values in expressions
+        </p>
+        <ol id="t2">
+            <li>+: 1 nullValue should be <span id="t2-1" data-tcontent="+: 1 nullValue">exception!</span></li>
+        </ol>
+    </body>
+</html>
