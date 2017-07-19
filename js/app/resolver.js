@@ -27,11 +27,11 @@ module.exports = function( ) {
     };
     
     var isRemote = function( macroKey ){
-        return -1 != macroKey.indexOf( '/' );
+        return -1 != macroKey.indexOf( context.getConf().macroDelimiter );
     };
     
     var getMacroData = function ( macroKey ){
-        var index = macroKey.indexOf( '/' );
+        var index = macroKey.indexOf( context.getConf().macroDelimiter );
         
         return index == -1?
             {
@@ -196,7 +196,7 @@ module.exports = function( ) {
     };
     
     var getMacroKey = function( macroId, url ){
-        return url? macroId + '/' + url: macroId;
+        return url? macroId + context.getConf().macroDelimiter + url: macroId;
     };
     
     return {

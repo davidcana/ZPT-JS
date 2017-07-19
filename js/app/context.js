@@ -103,6 +103,7 @@ module.exports = (function() {
             i18nOptionsDelimiter:   ';',
             inI18nOptionsDelimiter: ' ',
             argumentsDelimiter:     ',',
+            macroDelimiter:         '@',
         
             htmlStructureExpressionPrefix:  "html",
             globalVariableExpressionPrefix: "global",
