@@ -577,7 +577,7 @@ jsdom.env(
     <a id="metal"></a>
     <h2>METAL</h2>
     <p>
-        METAL statements behave exactly as in ZPT. The only difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates.
+        METAL statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. Use-macro tag uses expressions (ZPT's version does not, it uses literals).
     </p>
 
     <a id="metal.local"></a>
@@ -596,18 +596,26 @@ jsdom.env(
         That macro generates an unordered list iterating through the <code>items</code> variable. Let's invoke them; to do this, the next HTML code must be at the same file.
     </p>
     <pre>
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="list"&gt;
+&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list'"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
-
+    <p>
+        ZPT-JS allows to uses expressions when using macros. The next HTML code invokes the same macro if the value of <code>listMacro</code> variable is <code>list</code>:
+    </p>
+    <pre>
+&lt;div data-tdefine="items [10 20 30]" data-muse-macro="listMacro"&gt;
+    Macro goes here
+&lt;/div&gt;
+    </pre>
+    
     <a id="metal.external"></a>
     <h3>External macros</h3>
     <p>
         External macros are defined at a different page that where they are invoked. It only differs how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
     </p>
     <pre>
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="list/macros.html"&gt;
+&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list'@macros.html"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
