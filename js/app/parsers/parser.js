@@ -350,7 +350,7 @@ module.exports = function ( options ) {
         }
         
         // No sense to cache macro uses!
-        var metalUseMacro = METALUseMacro.build( string, stringDefine );
+        var metalUseMacro = METALUseMacro.build( string, stringDefine, scope );
         return metalUseMacro.process( scope, node );
     };
 

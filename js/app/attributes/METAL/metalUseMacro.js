@@ -4,14 +4,19 @@
 "use strict";
 
 var context = require( '../../context.js' );
+var Scope = require( '../../scope.js' );
 var $ = require( 'jquery' );
 
-var METALUseMacro = function( macroKeyToApply, defineToApply ) {
+var METALUseMacro = function( macroIdExpressionToApply, macroUrlToApply, defineToApply ) {
     
-    var macroKey = macroKeyToApply;
+    var macroIdExpression = macroIdExpressionToApply;
+    var macroUrl = macroUrlToApply;
     var define = defineToApply;
     
     var process = function( scope, node ){
+        
+        var macroId = macroIdExpression.evaluate( scope );
+        var macroKey = scope.getResolver().getMacroKey( macroId, macroUrl );
         
         var tags = context.getTags();
         var newNode = scope.getResolver().getNode( macroKey ); 
@@ -28,37 +33,22 @@ var METALUseMacro = function( macroKeyToApply, defineToApply ) {
         newNode.removeAttribute( 'style' );
 
         // Fill slots
-        $( node ).find( "[" + tags.metalFillSlot + "]" )
-            .each(
-                function( index, value ) {
-                    var slotId = $(this).attr( tags.metalFillSlot );
-                    // console.log( 'replacing ' + slotId + '...' );
+        $( node ).find( "[" + tags.metalFillSlot + "]" ).each(
+            function( index, value ) {
+                var slotId = $(this).attr( tags.metalFillSlot );
+                // console.log( 'replacing ' + slotId + '...' );
 
-                    var slotContent = $( this )[0].cloneNode( true );
-                    var currentNode = $( newNode ).find(
-                            "[" + tags.metalDefineSlot + "='" + slotId + "']")[0];
-                    currentNode.parentNode.insertBefore( 
-                            slotContent, 
-                            currentNode.nextSibling );
+                var slotContent = $( this )[0].cloneNode( true );
+                var currentNode = $( newNode ).find(
+                        "[" + tags.metalDefineSlot + "='" + slotId + "']")[0];
+                currentNode.parentNode.insertBefore( 
+                        slotContent, 
+                        currentNode.nextSibling );
 
-                    slotContent.removeAttribute( tags.metalFillSlot );
-                    currentNode.remove();
-                }
-            );
-        /*
-         * jQuery( newNode ).find( "[data-mdefine-slot]" ).each( function(
-         * index, value ){ var slotId = $( this ).attr( 'data-mdefine-slot' );
-         * //console.log( 'replacing ' + slotId + '...' );
-         * 
-         * var slotContent = jQuery( node ).find( "[data-mfill-slot='" + slotId +
-         * "']" )[0]; var currentNode = $( this )[0];
-         * currentNode.parentNode.insertBefore( slotContent,
-         * currentNode.nextSibling );
-         * 
-
-         * slotContent.removeAttribute( 'data-mfill-slot' ); $( this ).remove();
-         * });
-         */
+                slotContent.removeAttribute( tags.metalFillSlot );
+                currentNode.remove();
+            }
+        );
 
         // Add the macro node
         node.parentNode.insertBefore( newNode, node.nextSibling );
@@ -71,10 +61,14 @@ var METALUseMacro = function( macroKeyToApply, defineToApply ) {
 
 METALUseMacro.id = 'metal:use-macro';
 
-METALUseMacro.build = function( string, stringDefine ) {
-
+METALUseMacro.build = function( string, stringDefine, scope ) {
+    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+    
+    var macroData = scope.getResolver().getMacroData( string.trim() );
+    
     return new METALUseMacro( 
-            string.trim(), 
+            expressionBuilder.build( macroData.macroId ),
+            macroData.url,
             stringDefine? stringDefine.trim(): undefined );
 }
 

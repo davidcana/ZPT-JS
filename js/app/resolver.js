@@ -7,10 +7,6 @@ module.exports = function( ) {
     var $ = require( 'jquery' );
     var context = require( './context.js' );
     
-    //var defineMacroTag = context.getTags().metalDefineMacro;
-    //var macroTag = context.getTags().metalMacro;
-    //var remote = {};
-    //var remoteUrls = {};
     var macros = {};
     var remotePages = {};
     
@@ -19,7 +15,7 @@ module.exports = function( ) {
         var node = macros[ macroKey ];
         
         if ( ! node ){
-            node = loadNode2( macroKey );
+            node = loadNode( macroKey );
         }
         
         return node? node.cloneNode( true ): undefined;
@@ -42,41 +38,12 @@ module.exports = function( ) {
                 url: macroKey.substring( 1 + index )
             };
     };
-    /*
-    var loadNode = function( macroKey ){
-        var macroData = getMacroData( macroKey );
-        var macroId = macroData.macroId;
-        var url = macroData.url;
-        var selector = "[" + defineMacroTag + "='" + macroId + "']";
-        
-        if ( ! url ){
-            // Node is in this page
-            var node = $( selector )[0];
-            
-            return configureNode( 
-                    node.cloneNode( true ), 
-                    macroId,
-                    macroKey );
-            
-        }
-     
-        // Node is in another page
-        var data = {
-                'url': url,
-                'selector': selector,
-                'macroId': macroId
-        };
-        remote[ macroKey ] = data;
-        remoteUrls[ url ] = data;
-        
-        return undefined;
-    };*/
     
     var builDefineMacroSelector = function( macroId ){
         return "[" + context.getTags().metalDefineMacro + "='" + macroId + "']";
     };
     
-    var loadNode2 = function( macroKey ){
+    var loadNode = function( macroKey ){
         
         var macroData = getMacroData( macroKey );
         
@@ -112,40 +79,6 @@ module.exports = function( ) {
                     macroData.macroId,
                     macroKey );
     };
-    /*
-    var loadRemote = function( deferred ){
-        
-        var pending = Object.keys( remoteUrls ).length;
-        
-        for ( var url in remoteUrls ) {
-            var element = $( '<div></div>' );
-            
-            element.load( url, function( fileContent ) {
-                $( "[" + defineMacroTag + "]", element ).each( function( index ) {
-                    var currentMacro = $( this );
-                    var macroId = currentMacro.attr( defineMacroTag ); 
-                    var macroKey = getMacroKey( macroId, url );
-                    
-                    //console.log( index + ": " + $( this ).text() );
-                    //console.log( "macroId: " + macroId );
-                    
-                    if ( remote[ macroKey ] ){
-                        console.log( "Macro with key '" + macroKey + "' loaded." );
-                        configureNode(
-                                currentMacro[0],
-                                macroId,
-                                macroKey );
-                    } else {
-                        console.log( "Macro with key '" + macroKey + "' NOT loaded." );
-                    }
-                });
-                
-                if ( --pending == 0 ){
-                    deferred();
-                }
-            });
-        }
-    };*/
     
     var buildRemotePageUrlList = function(){
         
@@ -200,7 +133,8 @@ module.exports = function( ) {
     return {
         getNode: getNode,
         isRemote: isRemote,
-        //loadRemote: loadRemote,
-        loadRemotePages: loadRemotePages
+        loadRemotePages: loadRemotePages,
+        getMacroData: getMacroData,
+        getMacroKey: getMacroKey
     };
 };

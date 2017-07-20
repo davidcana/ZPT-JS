@@ -369,6 +369,30 @@ QUnit.test( "Dynamic macro using 1 slot (items = [10 20 30]) test", function( as
                 "Passed!" );*/
 });
 
+QUnit.test( "Using var as macro id test (using copyright)", function( assert ) {
+    var t10 = `
+<b style=\"display: none;\" data-muse-macro=\"copyright\">
+    Macro goes here
+</b>
+<p data-mmacro=\"copyright\">
+    Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+</p>
+        `;
+    assert.htmlEqualExt( '#t10', t10 );
+});
+
+QUnit.test( "Using var as macro id test (using newCopyright)", function( assert ) {
+    var t11 = `
+<b style=\"display: none;\" data-muse-macro=\"newCopyright\">
+    Macro goes here
+</b>
+<p data-mmacro=\"newCopyright\">
+    Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+</p>
+        `;
+    assert.htmlEqualExt( '#t11', t11 );
+});
+
 function getValues( selector ){
     return $( selector ).map( function( index, element ) {
         return this.innerHTML;
