@@ -218,7 +218,7 @@ QUnit.test( "Macro using 1 slot test", function( assert ) {
     
     var t6 = `
 <p style=\"display: none;\" data-muse-macro=\"sidebar\">
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </p>
@@ -253,13 +253,13 @@ QUnit.test( "Macro using 2 slots test", function( assert ) {
     
     var t7 = `
 <div style=\"display: none;\" data-muse-macro=\"enhacedSidebar\">
-    <div data-mfill-slot=\"links\">
+    <div data-mfill-slot=\"'links'\">
         <ul>
             <li><a href=\"/\">Home</a></li>
             <li><a href=\"/otherProducts\">Other products</a></li>
         </ul>
     </div>
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </div>
@@ -294,7 +294,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
     
     var t8 = `
 <div style=\"display: none;\" data-muse-macro=\"enhacedSidebar\">
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </div>
@@ -331,7 +331,7 @@ QUnit.test( "Dynamic macro using 1 slot (items = [10 20 30]) test", function( as
     
     var t9 = `
 <b style=\"display: none;\" data-tdefine=\"items [10 20 30]\" data-muse-macro=\"dynamicListWith1Slot\">
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </b>
@@ -391,6 +391,72 @@ QUnit.test( "Using var as macro id test (using newCopyright)", function( assert 
 </p>
         `;
     assert.htmlEqualExt( '#t11', t11 );
+});
+
+QUnit.test( "Macro using 2 slots test and vars", function( assert ) {
+    
+    var t12 = `
+<div style=\"display: none;\" data-muse-macro=\"enhacedSidebar\"
+                              data-tdefine="linksSlot 'links';
+                                            additionalInfoSlot 'additional_info'">
+    <div data-mfill-slot=\"linksSlot\">
+        <ul>
+            <li><a href=\"/\">Home</a></li>
+            <li><a href=\"/otherProducts\">Other products</a></li>
+        </ul>
+    </div>
+    <em data-mfill-slot=\"additionalInfoSlot\">
+        Make sure to check out our <a href=\"/specials\">specials</a>.
+    </em>
+</div>
+<div data-mmacro=\"enhacedSidebar\">
+    Links
+    <div>
+        <ul>
+            <li><a href=\"/\">Home</a></li>
+            <li><a href=\"/otherProducts\">Other products</a></li>
+        </ul>
+    </div>
+    <em>
+        Make sure to check out our <a href=\"/specials\">specials</a>.
+    </em>
+</div>
+        `;
+        assert.htmlEqualExt( '#t12', t12 );
+});
+
+QUnit.test( "Macro using 2 slots test and vars (first is null)", function( assert ) {
+    
+    var t13 = `
+<div style=\"display: none;\" data-muse-macro=\"enhacedSidebar\"
+                              data-tdefine="linksSlot 'links';
+                                            additionalInfoSlot 'additional_info'">
+    <div data-mfill-slot=\"linksSlot\">
+        <ul>
+            <li><a href=\"/\">Home</a></li>
+            <li><a href=\"/otherProducts\">Other products</a></li>
+        </ul>
+    </div>
+    <em data-mfill-slot=\"additionalInfoSlot\">
+        Make sure to check out our <a href=\"/specials\">specials</a>.
+    </em>
+</div>
+<div data-mmacro=\"enhacedSidebar\">
+    Links
+    <div>
+        <ul>
+	                <li><a href="/">Home</a></li>
+	                <li><a href="/products">Products</a></li>
+	                <li><a href="/support">Support</a></li>
+	                <li><a href="/contact">Contact Us</a></li>
+        </ul>
+    </div>
+    <em>
+        Make sure to check out our <a href=\"/specials\">specials</a>.
+    </em>
+</div>
+        `;
+        assert.htmlEqualExt( '#t13', t13 );
 });
 
 function getValues( selector ){

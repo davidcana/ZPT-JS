@@ -5,6 +5,8 @@
 
 var context = require( '../../context.js' );
 var Scope = require( '../../scope.js' );
+var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+
 var $ = require( 'jquery' );
 
 var METALUseMacro = function( macroIdExpressionToApply, macroUrlToApply, defineToApply ) {
@@ -35,12 +37,23 @@ var METALUseMacro = function( macroIdExpressionToApply, macroUrlToApply, defineT
         // Fill slots
         $( node ).find( "[" + tags.metalFillSlot + "]" ).each(
             function( index, value ) {
-                var slotId = $(this).attr( tags.metalFillSlot );
-                // console.log( 'replacing ' + slotId + '...' );
+                var slotIdExpressionString = $(this).attr( tags.metalFillSlot );
+                var slotIdExpression = expressionBuilder.build( slotIdExpressionString );
+                var slotId = slotIdExpression.evaluate( scope );
+                //var slotId = slotIdExpressionString;
+                //console.log( 'replacing ' + slotId + '...' );
 
+                // Do nothing if slotIdExpression evaluates to false
+                if ( ! slotId ){
+                    return;
+                }
+                
                 var slotContent = $( this )[0].cloneNode( true );
                 var currentNode = $( newNode ).find(
                         "[" + tags.metalDefineSlot + "='" + slotId + "']")[0];
+                if ( ! currentNode ){
+                    throw 'Slot "' + slotId + '" in expression "' + slotIdExpressionString +'" not found!';
+                }
                 currentNode.parentNode.insertBefore( 
                         slotContent, 
                         currentNode.nextSibling );

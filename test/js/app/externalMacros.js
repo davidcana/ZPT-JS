@@ -219,7 +219,7 @@ QUnit.test( "Macro using 1 slot test", function( assert ) {
     
     var t6 = `
 <p style=\"display: none;\" data-muse-macro=\"sidebar/externalMacros-definitions.html\">
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </p>
@@ -259,13 +259,13 @@ QUnit.test( "Macro using 2 slots test", function( assert ) {
     
     var t7 = `
 <div style=\"display: none;\" data-muse-macro=\"enhacedSidebar/externalMacros-definitions.html\">
-    <div data-mfill-slot=\"links\">
+    <div data-mfill-slot=\"'links'\">
         <ul>
             <li><a href=\"/\">Home</a></li>
             <li><a href=\"/otherProducts\">Other products</a></li>
         </ul>
     </div>
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </div>
@@ -304,7 +304,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
     
     var t8 = `
 <div style=\"display: none;\" data-muse-macro=\"enhacedSidebar/externalMacros-definitions.html\">
-    <em data-mfill-slot=\"additional_info\">
+    <em data-mfill-slot=\"'additional_info'\">
         Make sure to check out our <a href=\"/specials\">specials</a>.
     </em>
 </div>
