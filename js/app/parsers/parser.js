@@ -42,7 +42,10 @@ module.exports = function ( options ) {
             removeGeneratedTags();
         }
 
-        if ( ! preloadMacros() ){
+        if ( ! scope.getResolver().loadRemotePages( 
+            function (){
+                processRoot( root, scope );
+            })){
             processRoot( root, scope );
         }
     };
@@ -51,7 +54,7 @@ module.exports = function ( options ) {
         var node;
         var pos = 0;
         var list = root.querySelectorAll( "*[" + tag + "]" );
-        while ( ( node = list[ pos++ ] ) ) {
+        while ( node = list[ pos++ ] ) {
             node.parentNode.removeChild( node );
         }
     };
@@ -62,35 +65,6 @@ module.exports = function ( options ) {
             removeTags( tags.qdup );       // Remove all generated nodes (repeats)
             removeTags( tags.metalMacro ); // Remove all generated nodes (macros)
         }
-    };
-    
-    var preloadMacros = function() {
-        
-        var numberOfRemoteMacros = 0;
-        var resolver = scope.getResolver();
-        
-        $( "[" + tags.metalUseMacro + "]" ).each(
-            function( index, value ) {
-                var macroKey = $(this).attr( tags.metalUseMacro );
-                
-                //console.log( 'use macro  ' + macroKey + '...' );
-                var newNode = resolver.getNode( macroKey ); 
-                if ( ! newNode && resolver.isRemote( macroKey ) ){
-                    ++numberOfRemoteMacros;
-                }
-            }
-        );
-        
-        //console.log( numberOfRemoteMacros + ' delayed macros found.' );
-        
-        if ( numberOfRemoteMacros > 0 ){
-            resolver.loadRemote(
-                    function (){
-                        processRoot( root, scope );
-                    });
-        }
-        
-        return numberOfRemoteMacros;
     };
     
     var processRoot = function( node, scope ) {

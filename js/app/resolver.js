@@ -7,20 +7,19 @@ module.exports = function( ) {
     var $ = require( 'jquery' );
     var context = require( './context.js' );
     
-    //var self = this;
-    var defineMacroTag = context.getTags().metalDefineMacro;
-    var macroTag = context.getTags().metalMacro;
+    //var defineMacroTag = context.getTags().metalDefineMacro;
+    //var macroTag = context.getTags().metalMacro;
+    //var remote = {};
+    //var remoteUrls = {};
     var macros = {};
-    var remote = {};
-    var remoteUrls = {};
-    //var remoteContents = {};
+    var remotePages = {};
     
     var getNode = function( macroKey ) {
         
         var node = macros[ macroKey ];
         
         if ( ! node ){
-            node = loadNode( macroKey );
+            node = loadNode2( macroKey );
         }
         
         return node? node.cloneNode( true ): undefined;
@@ -43,7 +42,7 @@ module.exports = function( ) {
                 url: macroKey.substring( 1 + index )
             };
     };
-    
+    /*
     var loadNode = function( macroKey ){
         var macroData = getMacroData( macroKey );
         var macroId = macroData.macroId;
@@ -71,8 +70,49 @@ module.exports = function( ) {
         remoteUrls[ url ] = data;
         
         return undefined;
+    };*/
+    
+    var builDefineMacroSelector = function( macroId ){
+        return "[" + context.getTags().metalDefineMacro + "='" + macroId + "']";
     };
     
+    var loadNode2 = function( macroKey ){
+        
+        var macroData = getMacroData( macroKey );
+        
+        if ( ! macroData.url ){
+            // Node is in this page
+            var macroId = macroData.macroId;
+            var selector = builDefineMacroSelector( macroId );
+            var node = $( selector )[0];
+            
+            return configureNode( 
+                    node.cloneNode( true ), 
+                    macroId,
+                    macroKey );
+        }
+     
+        // Node is in another page
+        return loadRemoteNode( macroKey, macroData );
+    };
+    
+    var loadRemoteNode = function( macroKey, macroData ){
+        
+        var element = remotePages[ macroData.url ];
+        
+        if ( ! element ){
+            throw 'Macros in URL ' + macroData.url + ' not preloaded!';
+        }
+        
+        var selector = builDefineMacroSelector( macroData.macroId );
+        var node = $( selector, element )[0];
+        
+        return configureNode( 
+                    node.cloneNode( true ), 
+                    macroData.macroId,
+                    macroKey );
+    };
+    /*
     var loadRemote = function( deferred ){
         
         var pending = Object.keys( remoteUrls ).length;
@@ -105,90 +145,48 @@ module.exports = function( ) {
                 }
             });
         }
+    };*/
+    
+    var buildRemotePageUrlList = function(){
+        
+        var remotePageUrls = [];
+        
+        $( "[" + context.getTags().metalUseMacro + "]" ).each( function( index ) {
+            var currentMacroUse = $( this );
+            var macroKey = currentMacroUse.attr( context.getTags().metalUseMacro );
+            var macroData = getMacroData( macroKey );
+            
+            if ( macroData.url && remotePageUrls.indexOf( macroData.url ) == -1 ){
+                remotePageUrls.push( macroData.url );
+            }
+        });
+                                                              
+        return remotePageUrls;
     };
+    
+    var loadRemotePages = function( deferred ){
 
-    /*
-    var loadRemote = function( deferred ){
+        var remotePageUrls = buildRemotePageUrlList();
+        var pending = remotePageUrls.length;
+        remotePages = {};
         
-        var pending = Object.keys( remoteUrls ).length;
-        
-        for ( var url in remoteUrls ) {
+        for ( var c = 0; c < remotePageUrls.length; c++ ) {
+            var currentPageUrl = remotePageUrls[ c ];
             var element = $( '<div></div>' );
-            element.load( url , function( fileContent ) {
-                remoteContents [ url ] = fileContent;
-                if ( --pending == 0 ){
-                    loadRemoteMacros( deferred );
+            element.load( currentPageUrl, function( fileContent ) {
+                remotePages[ currentPageUrl ] = element;
+                if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
+                    deferred();
                 }
             });
         }
-    }
-    var loadRemoteMacros = function( deferred ){
         
-        for ( var macroKey in remote ) {
-            var data = remote[ macroKey ];
-            var url = data.url;
-            var selector = data.selector;
-            var macroData = getMacroData( macroKey );
-            var fileContent = remoteContents [ url ];
-            
-            var element = $( selector, fileContent );
-            
-            configureNode(
-                    //$( selector, fileContent )[0].cloneNode( true ),
-                    $( selector, fileContent )[0],
-                    macroData.macroId,
-                    macroKey );
-        }
-
-        deferred();
-    }*/
-
-    var loadRemote2 = function( deferred ){
-        
-        var remoteList = [];
-        
-        for ( var macroKey in remote ) {
-            remoteList.push( macroKey );
-        }
-        
-        loadRemoteItem( 
-                deferred, 
-                remoteList,
-                remoteList.length - 1);
-    };
-    
-    var loadRemoteItem = function( deferred, remoteList, currentIndex ){
-        
-        var macroKey = remoteList[ currentIndex ];
-        var data = remote[ macroKey ];
-        var url = data.url;
-        var selector = data.selector;
-        var macroData = getMacroData( macroKey );
-        
-        var element = $( '<div></div>' );
-        
-        //sample: macros.html  [data-mdefine-macro='macroId']
-        element.load( url + ' ' + selector , function( fileContent ) {
-
-            configureNode(
-                    element[0].firstChild.cloneNode( true ),
-                    macroData.macroId,
-                    macroKey );
-            
-            if ( currentIndex > 0 ){
-                loadRemoteItem( 
-                        deferred, 
-                        remoteList,
-                        --currentIndex );
-            } else {
-                deferred();
-            }
-        });
+        return remotePageUrls.length;
     };
     
     var configureNode = function( node, macroId, macroKey ){
-        node.removeAttribute( defineMacroTag );
-        node.setAttribute( macroTag, macroId );
+        node.removeAttribute( context.getTags().metalDefineMacro );
+        node.setAttribute( context.getTags().metalMacro, macroId );
         
         macros[ macroKey ] = node;
         
@@ -202,6 +200,7 @@ module.exports = function( ) {
     return {
         getNode: getNode,
         isRemote: isRemote,
-        loadRemote: loadRemote
+        //loadRemote: loadRemote,
+        loadRemotePages: loadRemotePages
     };
 };
