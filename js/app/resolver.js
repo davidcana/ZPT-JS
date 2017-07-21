@@ -129,6 +129,19 @@ module.exports = function( ) {
         
         for ( var c = 0; c < remotePageUrls.length; c++ ) {
             var currentPageUrl = remotePageUrls[ c ];
+            
+            $.ajax({
+                url: currentPageUrl,
+                dataType: 'html'
+            }).done( function( html ) {
+                var element = $( '<div></div>' );
+                element.html( html );
+                remotePages[ this.url ] = element;
+                if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
+                    deferred();
+                }
+            });
+            /*
             var element = $( '<div></div>' );
             element.load( currentPageUrl, function( response, status, xhr ) {
                 remotePages[ currentPageUrl ] = element;
@@ -136,11 +149,26 @@ module.exports = function( ) {
                 if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
                     deferred();
                 }
-            });
+            });*/
+            /*
+            var element = $( '<div></div>' );
+            element.load( 
+                currentPageUrl, 
+                makeLoadRemotePageFunction( remotePages, currentPageUrl, pending, deferred ));
+                */
         }
         
         return remotePageUrls.length;
     };
+    /*
+    var makeLoadRemotePageFunction = function( remotePages, currentPageUrl, pending, deferred){
+        return function() {
+            remotePages[ currentPageUrl ] = this;
+            if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
+                deferred();
+            }
+        }
+    };*/
     
     var configureNode = function( node, macroId, macroKey ){
         node.removeAttribute( context.getTags().metalDefineMacro );
