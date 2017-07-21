@@ -28,6 +28,7 @@ module.exports = function ( options ) {
     var dictionary = options.dictionary;
     var callback = options.callback;
     var notRemoveGeneratedTags = options.notRemoveGeneratedTags;
+    var declaredRemotePageUrls = options.declaredRemotePageUrls || [];
     
     // Continue with other var inits
     var scope = new Scope( dictionary );
@@ -43,6 +44,8 @@ module.exports = function ( options ) {
         }
 
         if ( ! scope.getResolver().loadRemotePages( 
+            scope,
+            declaredRemotePageUrls,
             function (){
                 processRoot( root, scope );
             })){

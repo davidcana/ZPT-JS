@@ -53,6 +53,7 @@ var dictionary = {
 };
 
 
+
 QUnit.test( "Found external macro test using var", function( assert ) {
     
     assert.equal( 0, 0, "Zero, Zero; equal succeeds" );
@@ -80,4 +81,10 @@ QUnit.test( "Found external macro test using var", function( assert ) {
 
 });
     
+function getValues( selector ){
+    return $( selector ).map( function( index, element ) {
+        return this.innerHTML;
+    } ).get().join( '/' );
+}
 
+}

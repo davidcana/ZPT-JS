@@ -9,19 +9,17 @@ var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 
 var $ = require( 'jquery' );
 
-var METALUseMacro = function( macroIdExpressionToApply, macroUrlToApply, defineToApply ) {
+var METALUseMacro = function( macroExpressionToApply, defineToApply ) {
     
-    var macroIdExpression = macroIdExpressionToApply;
-    var macroUrl = macroUrlToApply;
+    var macroExpression = macroExpressionToApply;
     var define = defineToApply;
     
     var process = function( scope, node ){
-        
-        var macroId = macroIdExpression.evaluate( scope );
-        var macroKey = scope.getResolver().getMacroKey( macroId, macroUrl );
+
+        var macroKey = scope.getResolver().getMacroKey( macroExpression, scope );
         
         var tags = context.getTags();
-        var newNode = scope.getResolver().getNode( macroKey ); 
+        var newNode = scope.getResolver().getNode( macroKey, scope ); 
             
         // Copy talDefine attribute from use-macro tag to the macro tag
         if ( define ) {
@@ -40,7 +38,6 @@ var METALUseMacro = function( macroIdExpressionToApply, macroUrlToApply, defineT
                 var slotIdExpressionString = $(this).attr( tags.metalFillSlot );
                 var slotIdExpression = expressionBuilder.build( slotIdExpressionString );
                 var slotId = slotIdExpression.evaluate( scope );
-                //var slotId = slotIdExpressionString;
                 //console.log( 'replacing ' + slotId + '...' );
 
                 // Do nothing if slotIdExpression evaluates to false
@@ -77,11 +74,8 @@ METALUseMacro.id = 'metal:use-macro';
 METALUseMacro.build = function( string, stringDefine, scope ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
-    var macroData = scope.getResolver().getMacroData( string.trim() );
-    
     return new METALUseMacro( 
-            expressionBuilder.build( macroData.macroId ),
-            macroData.url,
+            expressionBuilder.build( string.trim() ),
             stringDefine? stringDefine.trim(): undefined );
 }
 

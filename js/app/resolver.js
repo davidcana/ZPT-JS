@@ -6,26 +6,48 @@ module.exports = function( ) {
     
     var $ = require( 'jquery' );
     var context = require( './context.js' );
+    var expressionBuilder = require( './expressions/expressionBuilder.js' );
     
     var macros = {};
     var remotePages = {};
     
-    var getNode = function( macroKey ) {
+    var getNode = function( macroKey, scope ) {
         
         var node = macros[ macroKey ];
         
         if ( ! node ){
-            node = loadNode( macroKey );
+            node = loadNode( macroKey, scope );
         }
         
         return node? node.cloneNode( true ): undefined;
     };
-    
+    /*
     var isRemote = function( macroKey ){
         return -1 != macroKey.indexOf( context.getConf().macroDelimiter );
+    };*/
+    
+    var getMacroDataUsingExpression = function ( macroKeyExpression, scope ){
+        
+        var macroKey = macroKeyExpression.evaluate( scope );
+        
+        if ( ! macroKey ){
+            return {
+                macroId: null,
+                url: null
+            };
+        }
+        
+        return getMacroData( macroKey, scope );
     };
     
-    var getMacroData = function ( macroKey ){
+    var getMacroDataUsingExpressionString = function ( macroKeyExpressionString, scope ){
+        
+        var macroKeyExpression = expressionBuilder.build( macroKeyExpressionString );
+        return getMacroDataUsingExpression( macroKeyExpression, scope );
+    };
+    
+    var getMacroData = function ( macroKey, scope ){
+
         var index = macroKey.indexOf( context.getConf().macroDelimiter );
         
         return index == -1?
@@ -43,9 +65,9 @@ module.exports = function( ) {
         return "[" + context.getTags().metalDefineMacro + "='" + macroId + "']";
     };
     
-    var loadNode = function( macroKey ){
+    var loadNode = function( macroKey, scope ){
         
-        var macroData = getMacroData( macroKey );
+        var macroData = getMacroData( macroKey, scope );
         
         if ( ! macroData.url ){
             // Node is in this page
@@ -80,34 +102,37 @@ module.exports = function( ) {
                     macroKey );
     };
     
-    var buildRemotePageUrlList = function(){
+    var buildRemotePageUrlList = function( scope, declaredRemotePageUrls ){
         
-        var remotePageUrls = [];
+        //var remotePageUrls = [];
+        var remotePageUrls = declaredRemotePageUrls.slice();
         
         $( "[" + context.getTags().metalUseMacro + "]" ).each( function( index ) {
             var currentMacroUse = $( this );
-            var macroKey = currentMacroUse.attr( context.getTags().metalUseMacro );
-            var macroData = getMacroData( macroKey );
-            
-            if ( macroData.url && remotePageUrls.indexOf( macroData.url ) == -1 ){
-                remotePageUrls.push( macroData.url );
+            var macroKeyExpressionString = currentMacroUse.attr( context.getTags().metalUseMacro );
+            var macroData = getMacroDataUsingExpressionString( macroKeyExpressionString, scope );
+
+            var url = macroData.url;
+            if ( url && remotePageUrls.indexOf( url ) == -1 ){
+                remotePageUrls.push( url );
             }
         });
                                                               
         return remotePageUrls;
     };
     
-    var loadRemotePages = function( deferred ){
+    var loadRemotePages = function( scope, declaredRemotePageUrls, deferred ){
 
-        var remotePageUrls = buildRemotePageUrlList();
+        var remotePageUrls = buildRemotePageUrlList( scope, declaredRemotePageUrls );
         var pending = remotePageUrls.length;
         remotePages = {};
         
         for ( var c = 0; c < remotePageUrls.length; c++ ) {
             var currentPageUrl = remotePageUrls[ c ];
             var element = $( '<div></div>' );
-            element.load( currentPageUrl, function( fileContent ) {
+            element.load( currentPageUrl, function( response, status, xhr ) {
                 remotePages[ currentPageUrl ] = element;
+                var $this = $( this );
                 if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
                     deferred();
                 }
@@ -126,15 +151,18 @@ module.exports = function( ) {
         return node;
     };
     
-    var getMacroKey = function( macroId, url ){
-        return url? macroId + context.getConf().macroDelimiter + url: macroId;
+    var getMacroKey = function( macroKeyExpression, scope ){
+        
+        var macroData = getMacroDataUsingExpression( macroKeyExpression, scope );
+        
+        return macroData.url? macroData.macroId + context.getConf().macroDelimiter + macroData.url: macroData.macroId;
     };
     
     return {
         getNode: getNode,
-        isRemote: isRemote,
+        //isRemote: isRemote,
         loadRemotePages: loadRemotePages,
-        getMacroData: getMacroData,
+        //getMacroData: getMacroData,
         getMacroKey: getMacroKey
     };
 };
