@@ -53,9 +53,10 @@ var dictionary = {
 };
 
 zpt.run({
-    root: $( '#block1' )[0],
+    root: document.body,
     dictionary: dictionary,
-    callback: runTests
+    callback: runTests,
+    declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ]
 });
 
 function runTests(){
@@ -336,37 +337,82 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
                 t8, 
                 "Passed!" );*/
 });
-
-QUnit.test( "Found external macro test using var", function( assert ) {
+/*
+QUnit.test( "Not found external macro test using var", function( assert ) {
     
     assert.equal( 0, 0, "Zero, Zero; equal succeeds" );
+    var done = assert.async();
     
-    var t11 = `
-<b style="display: none;" data-muse-macro="copyright/externalMacros-definitions.html">
-    Macro goes here
-</b>
-<p data-mmacro="copyright">
-    Copyright 2020, <em>Foo, Bar, and Associates</em> Inc.
-</p>`;
-    //assert.htmlEqualExt( '#t11', t11 );
+    try {
+        zpt.run({
+            root: $( '#block2' )[0],
+            dictionary: dictionary,
+            callback: function(){
+                done();
+                throw "Not found external macro test using var: exception not thrown!"; 
+            }
+        });
+    } catch ( e ){
+        assert.equal( 1, 1, "1, 1; equal succeeds" );
+    }
+
+    //'Macros in URL externalMacros-definitions2.html not preloaded!');
+});*/
     
-    zpt.run({
-        root: $( '#block3' )[0],
-        dictionary: dictionary,
-        declaredRemotePageUrls: [ 'externalMacros-definitions2.html' ],
-        callback: function(){
-            assert.equal( 
-                        $( '#t11' ).text().replace(/\s+/, ""), 
-                        $( t11 ).text().replace(/\s+/, ""), 
-                        "Passed!" ); 
-        }
+
+    QUnit.test( "External macro test using var", function( assert ) {
+
+        var t10 = `
+    <b style="display: none;" data-muse-macro="copyright/externalMacros-definitions.html">
+        Macro goes here
+    </b>
+    <p data-mmacro="copyright">
+        Copyright 2020, <em>Foo, Bar, and Associates</em> Inc.
+    </p>
+`;
+        //assert.htmlEqualExt( '#t10', t10 );
+        
+        assert.equal( 
+                    $( '#t10' ).text().replace(/\s+/g, ""), 
+                    $( t10 ).text().replace(/\s+/g, ""), 
+                    "Passed!" ); 
     });
 
-});
+    
+
+    QUnit.test( "3 external macros in 3 different external macro files test using var", function( assert ) {
+
+        var t11 = `
+    <b style="display: none;" data-muse-macro="copyright/externalMacros-definitions.html">
+        Macro goes here
+    </b>
+    <p data-mmacro="copyright">
+        Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+    </p>
+    <b style="display: none;" data-muse-macro="copyright/externalMacros-definitions2.html">
+        Macro goes here
+    </b>
+    <p data-mmacro="copyright">
+        Copyright 2020, <em>Foo, Bar, and Associates</em> Inc.
+    </p>
+    <b style="display: none;" data-muse-macro="copyright/externalMacros-definitions3.html">
+        Macro goes here
+    </b>
+    <p data-mmacro="copyright">
+        Copyright 2030, <em>Foo, Bar, and Associates</em> Inc.
+    </p>
+`;
+
+        assert.equal( 
+                $( '#t11' ).text().replace(/\s+/g, ""), 
+                $( t11 ).text().replace(/\s+/g, ""), 
+                "Passed!" ); 
+    });
+}
+
 function getValues( selector ){
     return $( selector ).map( function( index, element ) {
         return this.innerHTML;
     } ).get().join( '/' );
 }
 
-}
