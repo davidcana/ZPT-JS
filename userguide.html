@@ -612,12 +612,30 @@ jsdom.env(
     <a id="metal.external"></a>
     <h3>External macros</h3>
     <p>
-        External macros are defined at a different page that where they are invoked. It only differs how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
+        External macros are defined at a different page that where they are invoked. They only differ how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
     </p>
     <pre>
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list'@macros.html"&gt;
+&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list@macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
+    </pre>
+    <p>
+        Because external macro files are preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
+    </p>
+    <pre>
+&lt;div data-muse-macro="anObject/templateName"&gt;
+    Macro goes here
+&lt;/div&gt;
+    </pre>
+    <p>
+        If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no rederence to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call:
+    </p>
+    <pre>
+zpt.run({
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ 'macros.html', 'moreMacros.html' ]
+});
     </pre>
     
     <a id="formatters"></a>
