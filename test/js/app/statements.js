@@ -5,6 +5,12 @@ var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunitjs' );
 
+// Add some values to dictionary
+dictionary.textareaAttrs = {
+    rows: 10,
+    cols: 100
+};
+
 // Parse template
 zpt.run({
     root: document.body,
@@ -49,4 +55,8 @@ QUnit.test( "Attributes test", function( assert ) {
     assert.equal( $('#t3-1').attr('href') , "http://www.xxx.org" );
     assert.equal( $('#t3-2').attr('title') , "title in string expression" );
     assert.equal( $('#t3-2').attr('href') , "http://www.xxx.org" );
+    assert.equal( $('#t3-3').attr('placeholder') , "Write something here!" );
+    assert.equal( $('#t3-3').attr('rows') , "10" );
+    assert.equal( $('#t3-3').attr('cols') , "100" );
+    assert.equal( $('#t3-3').attr('maxlength') , "200" );
 });

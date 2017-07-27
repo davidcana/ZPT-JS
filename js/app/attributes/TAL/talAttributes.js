@@ -6,6 +6,8 @@
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 
+var $ = require( 'jquery' );
+
 // Attributes which don't support setAttribute()
 var altAttr = {
     className : 1,
@@ -36,36 +38,61 @@ var TALAttributes = function( attributeItemsToApply ) {
             var name = attributeItem.name;
             var value = attributeItem.expression.evaluate( scope );
             
-            if ( value != undefined ) {
-                if ( altAttr[ name ] ) {
-                    switch ( name ) {
-                    case "innerHTML":
-                        throw node; // should use "qtext"
-                    case "disabled":
-                    case "checked":
-                    case "selected":
-                        node[ name ] = !!value;
-                        break;
-                    case "style":
-                        node.style.cssText = value;
-                        break;
-                    /*
-                    case "text":
-                        node[ querySelectorAll ? name : innerText ] = value;
-                        break; // option.text unstable in IE
-                    */
-                    case "class":
-                        name = "className";
-                    default:
-                        node[ name ] = value;
-                    }
-                } else {
-                    node.setAttribute( name, value );
-                }
+            if ( name ){
+                processSimpleAttributeItem( node, name, value );
+            } else {
+                processMapAttributeItem( node, value );
             }
         }
     };
 
+    var processMapAttributeItem = function( node, map ){
+    
+        if ( ! map ){
+            throw 'Invalid attribute undefined value. Object expected.';
+        }
+        
+        if ( ! $.isPlainObject( map ) ){
+            throw 'Invalid attribute value: "' + map + '". Object expected.';
+        }
+        
+        for ( var name in map ){
+            var value = map[ name ];
+            processSimpleAttributeItem( node, name, value );
+        }
+    };
+    
+    var processSimpleAttributeItem = function( node, name, value ){
+        
+        if ( value != undefined ) {
+            if ( altAttr[ name ] ) {
+                switch ( name ) {
+                case "innerHTML":
+                    throw node; // should use "qtext"
+                case "disabled":
+                case "checked":
+                case "selected":
+                    node[ name ] = !!value;
+                    break;
+                case "style":
+                    node.style.cssText = value;
+                    break;
+                /*
+                case "text":
+                    node[ querySelectorAll ? name : innerText ] = value;
+                    break; // option.text unstable in IE
+                */
+                case "class":
+                    name = "className";
+                default:
+                    node[ name ] = value;
+                }
+            } else {
+                node.setAttribute( name, value );
+            }
+        }
+    };
+    
     return {
         process: process
     };
@@ -88,7 +115,11 @@ TALAttributes.build = function( string ) {
         var attribute = tokens.nextToken().trim();
         var space = attribute.indexOf( context.getConf().inAttributeDelimiter );
         if ( space == -1 ) {
-            throw 'Bad attributes expression: ' + attribute;
+            //throw 'Bad attributes expression: ' + attribute;
+            attributeItems.push({
+                name: undefined,
+                expression: expressionBuilder.build( attribute )
+            });
         }
         var name = attribute.substring( 0, space );
         var valueExpression = attribute.substring( space + 1 ).trim();
