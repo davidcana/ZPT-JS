@@ -39,6 +39,10 @@ module.exports = function ( options ) {
 
     var run = function(){
 
+        if ( ! notRemoveGeneratedTags ){
+            removeGeneratedTagsFromAllRootElements( root );
+        }
+        
         if ( ! scope.getResolver().loadRemotePages( 
             scope,
             declaredRemotePageUrls,
@@ -48,6 +52,26 @@ module.exports = function ( options ) {
             
             processAllRootElements( root, scope );
         }
+    };
+        
+    var removeGeneratedTagsFromAllRootElements = function( root ) {
+        
+        // Is multiroot?
+        if ( $.isArray( root ) ){ 
+            // There are several roots
+            for ( var c = 0; c < root.length; c++ ) {
+                removeGeneratedTags( root[ c ], scope );
+            }
+        } else {
+            // There is only one root
+            removeGeneratedTags( root, scope );
+        }
+    };
+    
+    var removeGeneratedTags = function( rootElement ) {
+        
+        removeTags( rootElement, tags.qdup );       // Remove all generated nodes (repeats)
+        removeTags( rootElement, tags.metalMacro ); // Remove all generated nodes (macros)
     };
     
     var removeTags = function( rootElement, tag ){
@@ -59,38 +83,23 @@ module.exports = function ( options ) {
         }
     };
     
-    var removeGeneratedTags = function( rootElement ) {
-        
-        removeTags( rootElement, tags.qdup );       // Remove all generated nodes (repeats)
-        removeTags( rootElement, tags.metalMacro ); // Remove all generated nodes (macros)
-    };
-    
     var processAllRootElements = function( root, scope ) {
         
         // Is multiroot?
         if ( $.isArray( root ) ){ 
             // There are several roots
             for ( var c = 0; c < root.length; c++ ) {
-                processRootElement( root[ c ], scope );
+                process( root[ c ], scope );
             }
         } else {
             // There is only one root
-            processRootElement( root, scope );
+            process( root, scope );
         }
         
         // Process callback
         if ( callback && typeof callback == 'function' ) {
             callback();
         }
-    };
-    
-    var processRootElement = function( rootElement, scope ){
-        
-        if ( ! notRemoveGeneratedTags ){
-            removeGeneratedTags( rootElement );
-        }
-        
-        process( rootElement, scope );
     };
     
     var process = function( node, scope ) {

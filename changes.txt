@@ -1,3 +1,6 @@
+New in 0.13.2
+- Bug fixed: generated tags not removed before loading remote pages.
+
 New in 0.13.1
 - Bug fixed: generated tags not removed when needed.
 
