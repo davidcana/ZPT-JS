@@ -32,61 +32,65 @@ module.exports = function ( options ) {
     
     // Continue with other var inits
     var scope = new Scope( dictionary );
-    var querySelectorAll = !!root.querySelectorAll;
     var tags = context.getTags();
 
     // Optimize comparison check
     var innerText = "innerText" in root? "innerText": "textContent";
 
     var run = function(){
-        if ( ! notRemoveGeneratedTags ){
-            removeGeneratedTags();
-        }
 
         if ( ! scope.getResolver().loadRemotePages( 
             scope,
             declaredRemotePageUrls,
             function (){
-                processRoot( root, scope );
+                processAllRootElements( root, scope );
             })){
-            processRoot( root, scope );
+            
+            processAllRootElements( root, scope );
         }
     };
     
-    var removeTags = function( tag ){
+    var removeTags = function( rootElement, tag ){
         var node;
         var pos = 0;
-        var list = root.querySelectorAll( "*[" + tag + "]" );
+        var list = rootElement.querySelectorAll( "*[" + tag + "]" );
         while ( node = list[ pos++ ] ) {
             node.parentNode.removeChild( node );
         }
     };
     
-    var removeGeneratedTags = function() {
+    var removeGeneratedTags = function( rootElement ) {
         
-        if ( querySelectorAll ) {
-            removeTags( tags.qdup );       // Remove all generated nodes (repeats)
-            removeTags( tags.metalMacro ); // Remove all generated nodes (macros)
-        }
+        removeTags( rootElement, tags.qdup );       // Remove all generated nodes (repeats)
+        removeTags( rootElement, tags.metalMacro ); // Remove all generated nodes (macros)
     };
     
-    var processRoot = function( root, scope ) {
+    var processAllRootElements = function( root, scope ) {
         
         // Is multiroot?
         if ( $.isArray( root ) ){ 
             // There are several roots
             for ( var c = 0; c < root.length; c++ ) {
-                process( root[ c ], scope );
+                processRootElement( root[ c ], scope );
             }
         } else {
             // There is only one root
-            process( root, scope );
+            processRootElement( root, scope );
         }
         
         // Process callback
         if ( callback && typeof callback == 'function' ) {
             callback();
         }
+    };
+    
+    var processRootElement = function( rootElement, scope ){
+        
+        if ( ! notRemoveGeneratedTags ){
+            removeGeneratedTags( rootElement );
+        }
+        
+        process( rootElement, scope );
     };
     
     var process = function( node, scope ) {

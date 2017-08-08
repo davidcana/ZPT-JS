@@ -1,3 +1,6 @@
+New in 0.13.1
+- Bug fixed: generated tags not removed when needed.
+
 New in 0.13.0
 - Added support of multiroot. Root now can be a string or an array of them.
 
