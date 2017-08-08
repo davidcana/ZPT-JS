@@ -70,9 +70,20 @@ module.exports = function ( options ) {
         }
     };
     
-    var processRoot = function( node, scope ) {
-        process( node, scope );
+    var processRoot = function( root, scope ) {
         
+        // Is multiroot?
+        if ( $.isArray( root ) ){ 
+            // There are several roots
+            for ( var c = 0; c < root.length; c++ ) {
+                process( root[ c ], scope );
+            }
+        } else {
+            // There is only one root
+            process( root, scope );
+        }
+        
+        // Process callback
         if ( callback && typeof callback == 'function' ) {
             callback();
         }

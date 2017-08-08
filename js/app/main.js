@@ -2,7 +2,7 @@
     run function
 */
 exports.run = function( options ){
-    /*var Parser = require( './parser.js' );*/
+    
     var Parser = require( './parsers/parser.js' );
     
     var parser =  new Parser( options );
