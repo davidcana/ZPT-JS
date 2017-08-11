@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
+var $ = require( 'jquery' );
 
 var I18NDomain = function( expressionListToApply ) {
     
@@ -22,7 +23,11 @@ var I18NDomain = function( expressionListToApply ) {
                 throw 'Error evaluating domain: ' + expressionList;    
             }
             
-            i18nList.push( i18n );
+            if ( $.isArray( i18n ) ){
+                i18nList = i18nList.concat( i18n );
+            } else {
+                i18nList.push( i18n );
+            }
         }
         
         // Add the domains defined previously

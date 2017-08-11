@@ -792,8 +792,8 @@ zpt.run({
     </p>
     <ul>
         <li>The dictionary must contain at least one instance of <code>I18nBundle</code> class. An instance of this class groups an instance of <code>I18n</code> class per supported language. The constructor of <code>I18n</code> class accepts 2 arguments; the first is the language of the messages and the second is a map (keys are the id of the messages and values the message themselves). The format of the messages must complain <a href="http://userguide.icu-project.org/formatparse/messages">ICU standards</a>.</li>
-        <li>The <code>data-idomain</code> attribute defines the <code>I18nBundle</code> to use.</li>
-        <li>The <code>data-ilanguage</code> attribute defines the current language to use.</li>
+        <li>The <code>data-idomain</code> attribute defines the <code>I18nBundle</code> to use. It also can define one or several <code>I18n</code> instances or an array of them.</li>
+        <li>The <code>data-ilanguage</code> attribute defines the current language to use. It is needed when <code>data-idomain</code> contains a <code>I18nBundle</code> instance, it is useless when we use <code>I18n</code> instances.</li>
         <li>The <code>tr</code> expression  evaluates an expression but then it searches that value into the messages.</li>
         <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg' ( GENDER 'male'; RES 10 )</code> is a little more complex:
             <ol>

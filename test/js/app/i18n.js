@@ -67,6 +67,8 @@ var dictionary = {
     'i18n-EN2': i18nEN2,
     'i18nBundle': i18nBundle,
     'i18nBundle2': i18nBundle2,
+    'i18nESArray': [ i18nES2, i18nES ],
+    'i18nENArray': [ i18nEN2, i18nEN ],
     fireError: function( ){
         //return 1 / 0;
         document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
@@ -382,3 +384,14 @@ QUnit.test( "Datetime (english) with i18nBundle", function( assert ) {
     assert.equal( $('#t21-7-2').html() , "Thursday, December 20, 2012, 4:00:00 AM" );
     assert.equal( $('#t21-8-2').html() , "Friday, December 21, 2012, 4:00:00 AM" );
 });
+
+QUnit.test( "An array with 2 domains in domain definition: [ i18n-ES2 i18n-ES ] (spanish)", function( assert ) {
+    assert.equal( $('#t22-1').html() , "¡¡¡Hola mundo 2!!!" );
+    assert.equal( $('#t22-2').html() , "Él no ha encontrado ningún resultado" );
+});
+
+QUnit.test( "An array with 2 domains in domain definition: [ i18n-EN2 i18n-EN ] (english) ", function( assert ) {
+    assert.equal( $('#t23-1').html() , "Hello world 2.0!!!" );
+    assert.equal( $('#t23-2').html() , "He found no results" );
+});
+
