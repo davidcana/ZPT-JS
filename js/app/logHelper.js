@@ -5,12 +5,11 @@ module.exports = (function() {
     "use strict";
     
     var context = require( './context.js' );
-    var log4javascript = context.getConf().loggingOn? require( 'log4javascript' ): null;
     
-    var logger = undefined;
-    
+    //var log4javascript = context.getConf().loggingOn? require( 'log4javascript' ): null;
+    //var logger = undefined;
+    /*
     var initLogger = function(){
-        
         logger = context.getConf().loggingOn? log4javascript.getDefaultLogger(): undefined;
         
         if ( ! logger ){
@@ -18,11 +17,13 @@ module.exports = (function() {
         }
             
         logger.setLevel( log4javascript.Level.DEBUG );
-        /*logger.removeAllAppenders();*/
-        /*logger.addAppender( new log4javascript.BrowserConsoleAppender( true ) );*/
-    }();
+        //logger.removeAllAppenders();
+        //logger.addAppender( new log4javascript.BrowserConsoleAppender( true ) );
+    }();*/
     
     var trace = function (){
+        
+        var logger = context.getLogger();
         
         if ( ! logger ){
             return;
@@ -33,6 +34,8 @@ module.exports = (function() {
     
     var debug = function (){
         
+        var logger = context.getLogger();
+        
         if ( ! logger ){
             return;
         }
@@ -41,6 +44,8 @@ module.exports = (function() {
     };
     
     var info = function (){
+        
+        var logger = context.getLogger();
         
         if ( ! logger ){
             return;
@@ -51,6 +56,8 @@ module.exports = (function() {
     
     var warn = function (){
         
+        var logger = context.getLogger();
+        
         if ( ! logger ){
             return;
         }
@@ -59,6 +66,8 @@ module.exports = (function() {
     };
     
     var error = function (){
+        
+        var logger = context.getLogger();
         
         if ( ! logger ){
             return;
@@ -69,12 +78,20 @@ module.exports = (function() {
     
     var fatal = function (){
         
+        var logger = context.getLogger();
+        
         if ( ! logger ){
             return;
         }
         
         logger.fatal.apply( logger, arguments );
     };
+    /*
+    var fatalAndThrow = function ( message ){
+        
+        fatal.apply( this, arguments );
+        throw message;
+    };*/
     
     return {
         trace: trace,
@@ -83,5 +100,6 @@ module.exports = (function() {
         warn: warn,
         error: error,
         fatal: fatal
+        //fatalAndThrow: fatalAndThrow
     };
 })();

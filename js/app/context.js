@@ -4,6 +4,8 @@
 module.exports = (function() {
     "use strict";
     
+    var log4javascript = require( 'log4javascript' );
+    
     /* Tags */
     var defaultTags = {
             talCondition:     "data-tcondition",
@@ -117,6 +119,7 @@ module.exports = (function() {
             i18nConfResourceId: '/CONF/',
         
             loggingOn: false,
+            loggingLevel: log4javascript.Level.ERROR,
         
             expressionCacheOn: true,
             attributeCacheOn: true,
@@ -159,6 +162,31 @@ module.exports = (function() {
     };
     /* End conf */
     
+    /* Logger */
+    var logger = undefined;
+    var getDefaultLogger = function (){
+        
+        var defaultLogger = log4javascript.getDefaultLogger();
+        
+        defaultLogger.setLevel( getConf().loggingLevel );
+        //defaultLogger.removeAllAppenders();
+        //defaultLogger.addAppender( new log4javascript.BrowserConsoleAppender( true ) );
+        
+        return defaultLogger;
+    };
+    var getLogger = function (){
+        
+        if ( ! logger && getConf().loggingOn ){
+            logger = getDefaultLogger();
+        }
+        
+        return logger;
+    };
+    var setLogger = function ( loggerToSet ){
+        logger = loggerToSet;
+    };
+    /* End Logger */
+    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -166,6 +194,8 @@ module.exports = (function() {
         getFormatter: getFormatter,
         registerFormatter: registerFormatter,
         getConf: getConf,
-        setConf: setConf
+        setConf: setConf,
+        getLogger: getLogger,
+        setLogger: setLogger
     };
 })();

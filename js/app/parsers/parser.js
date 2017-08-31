@@ -5,6 +5,7 @@ module.exports = function ( options ) {
     "use strict";
     
     var context = require( '../context.js' );
+    var log = require( '../logHelper.js' );
     var Scope = require( '../scope.js' );
     var NodeAttributes = require( '../nodeAttributes.js' );
     var $ = require( 'jquery' );
@@ -209,6 +210,7 @@ module.exports = function ( options ) {
         // Exit if there is no on-error expression defined
         var content = scope.get( context.getConf().onErrorVarName );
         if ( content == null ) {
+            log.fatal( exception );
             return false;
         }
 
@@ -220,11 +222,14 @@ module.exports = function ( options ) {
         scope.set( context.getConf().templateErrorVarName, templateError );
 
         try {
+            log.info( exception );
+            
             // Process content
             var talContent = new TALContent( content );
             return talContent.process( scope, node );
             
         } catch ( e ) {
+            log.fatal( e );
             scope.endElement();
             throw e;
         }

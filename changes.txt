@@ -1,3 +1,10 @@
+New in 0.15.0
+- New exported method: context.
+- Better logging support: 
+    - It can be activated or deactivated setting context.getConf().loggingOn (default is off).
+    - The log level can be customized setting context.getConf().loggingLevel (default is ERROR).
+    - It can be fully customized using context.setLogger( log4javascriptInstance ). See http://log4javascript.org/ for details.
+
 New in 0.14.0
 - Now data-idomain tags can be set to an array of I18n instances.
 
