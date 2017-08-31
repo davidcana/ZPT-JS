@@ -110,11 +110,16 @@ module.exports = function( ) {
         $( "[" + context.getTags().metalUseMacro + "]" ).each( function( index ) {
             var currentMacroUse = $( this );
             var macroKeyExpressionString = currentMacroUse.attr( context.getTags().metalUseMacro );
-            var macroData = getMacroDataUsingExpressionString( macroKeyExpressionString, scope );
+            
+            try {
+                var macroData = getMacroDataUsingExpressionString( macroKeyExpressionString, scope );
 
-            var url = macroData.url;
-            if ( url && remotePageUrls.indexOf( url ) == -1 ){
-                remotePageUrls.push( url );
+                var url = macroData.url;
+                if ( url && remotePageUrls.indexOf( url ) == -1 ){
+                    remotePageUrls.push( url );
+                }
+            } catch ( exception ){
+                // Macrodata could not be resolved, do nothing
             }
         });
                                                               
