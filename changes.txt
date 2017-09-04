@@ -1,3 +1,10 @@
+New in 0.17.0
+- Replace callback functions by promises?
+
+New in 0.16.0
+- Bug fixed: local macros now work when defining one in an external file.
+- Better error messages: error messages now show the source attribute or string expression.
+
 New in 0.15.1
 - Bug fixed: buildRemotePageUrlList could throw an exception trying to resolve an expression which can't be resolved before rendering the document.
 
@@ -18,13 +25,14 @@ New in 0.13.1
 - Bug fixed: generated tags not removed when needed.
 
 New in 0.13.0
-- Added support of multiroot. Root now can be a string or an array of them.
+- Added support of multiroot: root now can be a string or an array of them.
 
 New in 0.12.0
 - Added support of map attributtes.
 
 New in 0.11.0
-- Added support of expressions in use-macro. Default delemiter character in external macros updated from '/'  to '@'.
+- Added support of expressions in use-macro. 
+- Default delemiter character in external macros updated from '/'  to '@'.
 
 New in 0.10.0
 - Added in expressions.

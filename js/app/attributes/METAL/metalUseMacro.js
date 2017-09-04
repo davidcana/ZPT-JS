@@ -21,9 +21,21 @@ var METALUseMacro = function( macroExpressionToApply, defineToApply ) {
         var tags = context.getTags();
         var newNode = scope.getResolver().getNode( macroKey, scope ); 
             
+        // Build define tag
+        var fullDefine = undefined;
+        var macroData = scope.getResolver().getMacroData( macroKey );
+        if ( macroData.url ){
+            var externalMacroUrlDefine = context.getConf().externalMacroUrlVarName + context.getConf().expressionDelimiter + "'" + macroData.url + "'";
+            fullDefine = define? 
+                         define + context.getConf().defineDelimiter + context.getConf().expressionDelimiter + externalMacroUrlDefine: 
+                         externalMacroUrlDefine;
+        } else {
+            fullDefine = define;
+        }
+        
         // Copy talDefine attribute from use-macro tag to the macro tag
-        if ( define ) {
-            newNode.setAttribute( tags.talDefine, define );
+        if ( fullDefine ) {
+            newNode.setAttribute( tags.talDefine, fullDefine );
         }
         
         // Hide use macro node

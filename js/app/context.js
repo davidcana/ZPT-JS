@@ -110,11 +110,12 @@ module.exports = (function() {
             htmlStructureExpressionPrefix:  "html",
             globalVariableExpressionPrefix: "global",
         
-            templateErrorVarName: "error",
-            onErrorVarName:       "on-error",
-            i18nDomainVarName:    "i18nDomain",
-            i18nLanguageVarName:  "i18nLanguage",
-            repeatVarName:        "repeat",
+            templateErrorVarName:    "error",
+            onErrorVarName:          "on-error",
+            i18nDomainVarName:       "i18nDomain",
+            i18nLanguageVarName:     "i18nLanguage",
+            repeatVarName:           "repeat",
+            externalMacroUrlVarName: "externalMacroUrl",
         
             i18nConfResourceId: '/CONF/',
         

@@ -64,21 +64,74 @@ module.exports = function( ) {
     var builDefineMacroSelector = function( macroId ){
         return "[" + context.getTags().metalDefineMacro + "='" + macroId + "']";
     };
-    
+    /*
     var loadNode = function( macroKey, scope ){
-        
+
+        var mustSetInScope = true;
         var macroData = getMacroData( macroKey, scope );
-        
+
         if ( ! macroData.url ){
-            // Node is in this page
-            var macroId = macroData.macroId;
-            var selector = builDefineMacroSelector( macroId );
-            var node = $( selector )[0];
-            
-            return configureNode( 
+            // No url set
+
+            var urlInScope = scope.get( context.getConf().externalMacroUrlVarName );
+            if ( urlInScope ){
+                // Node is in another page but using a previously defined url
+                macroData.url = urlInScope;
+                mustSetInScope = false;
+
+            } else {
+                // Node is in this page
+                var macroId = macroData.macroId;
+                var selector = builDefineMacroSelector( macroId );
+                var node = $( selector )[0];
+
+                if ( ! node ){
+                    throw "Node using selector '" + selector + "' is null!";
+                }
+
+                return configureNode( 
                     node.cloneNode( true ), 
                     macroId,
                     macroKey );
+            }
+        }
+
+        // Node is in another page
+        if ( mustSetInScope ){
+            scope.set( context.getConf().externalMacroUrlVarName, macroData.url, true );
+        }
+        return loadRemoteNode( macroKey, macroData );
+    };*/
+    
+    var loadNode = function( macroKey, scope ){
+        
+        var mustSetInScope = true;
+        var macroData = getMacroData( macroKey, scope );
+        
+        if ( ! macroData.url ){
+            // No url set
+            
+            var urlInScope = scope.get( context.getConf().externalMacroUrlVarName );
+            if ( urlInScope ){
+                // Node is in another page but using a previously defined url
+                macroData.url = urlInScope;
+                mustSetInScope = false;
+                
+            } else {
+                // Node is in this page
+                var macroId = macroData.macroId;
+                var selector = builDefineMacroSelector( macroId );
+                var node = $( selector )[0];
+
+                if ( ! node ){
+                    throw "Node using selector '" + selector + "' is null!";
+                }
+                
+                return configureNode( 
+                        node.cloneNode( true ), 
+                        macroId,
+                        macroKey );
+            }
         }
      
         // Node is in another page
@@ -104,7 +157,6 @@ module.exports = function( ) {
     
     var buildRemotePageUrlList = function( scope, declaredRemotePageUrls ){
         
-        //var remotePageUrls = [];
         var remotePageUrls = declaredRemotePageUrls.slice();
         
         $( "[" + context.getTags().metalUseMacro + "]" ).each( function( index ) {
@@ -195,7 +247,7 @@ module.exports = function( ) {
         getNode: getNode,
         //isRemote: isRemote,
         loadRemotePages: loadRemotePages,
-        //getMacroData: getMacroData,
+        getMacroData: getMacroData,
         getMacroKey: getMacroKey
     };
 };

@@ -60,7 +60,7 @@ zpt.run({
 });
 
 function runTests(){
-
+    
 QUnit.test( "Simple macros test", function( assert ) {
     var t1 = `
         <p>
@@ -407,7 +407,49 @@ QUnit.test( "Not found external macro test using var", function( assert ) {
                 $( '#t11' ).text().replace(/\s+/g, ""), 
                 $( t11 ).text().replace(/\s+/g, ""), 
                 "Passed!" ); 
-    });
+    });          
+
+
+    QUnit.test( "Simple external macros with local calls test", function( assert ) {
+        var t12 = `
+<p>
+Before use macro
+</p>
+<b style="display: none;" data-muse-macro="copyright@externalMacros-definitions.html">
+Macro goes here
+</b>
+<p data-mmacro="copyright">
+Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+</p>
+<p>
+In the middle of 2 macros
+</p>
+<b style="display: none;" data-muse-macro="enhancedCopyright@externalMacros-definitions.html">
+Macro goes here
+</b>
+<div data-mmacro="copyright">
+<p>
+This macro calls another macro.
+</p>
+<p data-muse-macro="'copyright'" style="display: none;">
+Macro goes here
+</p>
+<p data-mmacro="copyright">
+Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+</p>
+</div>
+<p>
+After use macro
+</p>
+`;
+        //assert.htmlEqualExt( '#t12', t12 );
+
+        assert.equal( 
+            $( '#t12' ).text().replace(/\s+/g, ""), 
+            $( t12 ).text().replace(/\s+/g, ""), 
+            "Passed!" ); 
+    });  
+    
 }
 
 function getValues( selector ){
