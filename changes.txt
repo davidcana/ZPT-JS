@@ -1,5 +1,7 @@
 New in 0.17.0
 - Replace callback functions by promises?
+- Make it easy to use ZPT's original attributes?
+- Avoid flashing?
 
 New in 0.16.0
 - Bug fixed: local macros now work when defining one in an external file.

@@ -8,8 +8,9 @@ var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 var $ = require( 'jquery' );
 
-var InExpression = function( expressionListToApply ) {
+var InExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -62,11 +63,16 @@ InExpression.build = function( s ) {
             context.getConf().expressionDelimiter, 
             false );
     if ( segments.countTokens() == 1 ) {
-        throw 'Only one element in in expression, please add at least one more.';
+        throw 'Only one element in in expression "' + string + '", please add at least one more.';
     }
 
     return new InExpression( 
+        string,
         expressionBuilder.buildList( segments ) );
 }
+
+InExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = InExpression;

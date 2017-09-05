@@ -5,8 +5,9 @@
 
 var BooleanLiteral = require( '../../expressions/path/literals/booleanLiteral.js' );
 
-var TALOmitTag = function( expressionToApply ) {
+var TALOmitTag = function( stringToApply, expressionToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var process = function( scope, node ){
@@ -41,7 +42,11 @@ TALOmitTag.build = function( string ) {
             new BooleanLiteral( true ):
             expressionBuilder.build( expressionString );
     
-    return new TALOmitTag( expression );
+    return new TALOmitTag( string, expression );
 }
+
+TALOmitTag.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALOmitTag;

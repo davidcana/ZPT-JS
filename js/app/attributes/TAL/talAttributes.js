@@ -27,8 +27,9 @@ var altAttr = {
     disabled : 1
 };
 
-var TALAttributes = function( attributeItemsToApply ) {
+var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     
+    var string = stringToApply;
     var attributeItems = attributeItemsToApply;
     
     var process = function( scope, node ){
@@ -130,7 +131,11 @@ TALAttributes.build = function( string ) {
         });
     }
     
-    return new TALAttributes( attributeItems );
+    return new TALAttributes( string, attributeItems );
 }
+
+TALAttributes.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALAttributes;

@@ -7,8 +7,9 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var CondExpression = function( expression1ToApply, expression2ToApply, expression3ToApply ) {
+var CondExpression = function( stringToApply, expression1ToApply, expression2ToApply, expression3ToApply ) {
     
+    var string = stringToApply;
     var expression1 = expression1ToApply;
     var expression2 = expression2ToApply;
     var expression3 = expression3ToApply;
@@ -49,9 +50,14 @@ CondExpression.build = function( s ) {
     }
 
     return new CondExpression( 
+        string,
         expressionBuilder.build( segments.nextToken().trim() ), 
         expressionBuilder.build( segments.nextToken().trim() ), 
         expressionBuilder.build( segments.nextToken().trim() ) );
 }
+
+CondExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = CondExpression;

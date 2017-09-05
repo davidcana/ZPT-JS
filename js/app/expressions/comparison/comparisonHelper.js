@@ -22,7 +22,7 @@ module.exports = (function() {
                 context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() != 2 ) {
-            throw 'Wrong number of elements, ' + tag + ' expressions only support two.';
+            throw 'Wrong number of elements in expression "' + string + '", ' + tag + ' expressions only support two.';
         }
 
         var expression1 = expressionBuilder.build( 

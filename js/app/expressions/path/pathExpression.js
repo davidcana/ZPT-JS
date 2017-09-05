@@ -8,8 +8,9 @@ var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var StringLiteral = require( './literals/stringLiteral.js' );
 var PathSegmentExpression = require( './pathSegmentExpression.js' );
 
-var PathExpression = function( expressionListToApply ) {
+var PathExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -75,7 +76,11 @@ PathExpression.build = function( s ) {
                 expressionBuilder.build( 
                     segments.nextToken().trim() ) );
     }
-    return new PathExpression( expressionList );
+    return new PathExpression( string, expressionList );
 }
+
+PathExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = PathExpression;

@@ -4,7 +4,7 @@
 "use strict";
 
 var NumericLiteral = function( literalToApply ) {
-
+    
     var literal = literalToApply;
     
     var evaluate = function( scope ){
@@ -32,5 +32,9 @@ NumericLiteral.build = function( string ) {
 
     return undefined;
 }
+
+NumericLiteral.prototype.toString = function(){
+    return literal;
+};
 
 module.exports = NumericLiteral;

@@ -3,8 +3,9 @@
 */
 "use strict";
 
-var TALCondition = function( expressionToApply ) {
+var TALCondition = function( stringToApply, expressionToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var process = function( scope, node ){
@@ -28,7 +29,12 @@ TALCondition.build = function( string ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new TALCondition( 
+                string,
                 expressionBuilder.build( string.trim() ) );
 }
+
+TALCondition.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALCondition;

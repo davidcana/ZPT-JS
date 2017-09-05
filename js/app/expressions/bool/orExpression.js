@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var OrExpression = function( expressionListToApply ) {
+var OrExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -38,7 +39,11 @@ OrExpression.build = function( string ) {
     
     var expressionList = boolHelper.build( string, 'Or' );
 
-    return new OrExpression( expressionList );
+    return new OrExpression( string, expressionList );
 }
+
+OrExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = OrExpression;

@@ -27,4 +27,8 @@ BooleanLiteral.build = function( string ) {
     return undefined;
 }
 
+BooleanLiteral.prototype.toString = function(){
+    return "" + literal;
+};
+
 module.exports = BooleanLiteral;

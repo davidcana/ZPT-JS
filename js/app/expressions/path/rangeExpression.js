@@ -8,8 +8,9 @@ var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 var NumericLiteral = require( './literals/numericLiteral.js' );
 
-var RangeExpression = function( startExpressionToApply, endExpressionToApply, stepExpressionToApply ) {
+var RangeExpression = function( stringToApply, startExpressionToApply, endExpressionToApply, stepExpressionToApply ) {
     
+    var string = stringToApply;
     var startExpression = startExpressionToApply;
     var endExpression = endExpressionToApply;
     var stepExpression = stepExpressionToApply;
@@ -81,7 +82,11 @@ RangeExpression.build = function( s ) {
             expressionBuilder.build( segments.nextToken().trim() ):
             NumericLiteral.build ( RANGE_DEFAULT_STEP );
     
-    return new RangeExpression( startExpression, endExpression, stepExpression );
+    return new RangeExpression( string, startExpression, endExpression, stepExpression );
 }
+
+RangeExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = RangeExpression;

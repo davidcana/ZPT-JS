@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var arithmethicHelper = require( './arithmethicHelper.js' );
 
-var DivideExpression = function( expressionListToApply ) {
+var DivideExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -39,7 +40,11 @@ DivideExpression.build = function( string ) {
             string,
             DivideExpression.mathOperation );
 
-    return new DivideExpression( expressionList );
+    return new DivideExpression( string, expressionList );
 }
+
+DivideExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = DivideExpression;

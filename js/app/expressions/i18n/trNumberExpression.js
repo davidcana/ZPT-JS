@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var trHelper = require( './trHelper.js' );
 
-var TrNumberExpression = function( expressionToApply, argsExpressionsToApply ) {
+var TrNumberExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     var argsExpressions = argsExpressionsToApply;
     
@@ -41,7 +42,14 @@ TrNumberExpression.build = function( string ) {
             2, 
             false );
 
-    return new TrNumberExpression( trData.expression, trData.argsExpressions );
+    return new TrNumberExpression( 
+            string, 
+            trData.expression, 
+            trData.argsExpressions );
 }
+
+TrNumberExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TrNumberExpression;

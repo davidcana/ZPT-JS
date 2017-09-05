@@ -57,4 +57,8 @@ JqueryExpression.build = function( string ) {
     return new JqueryExpression( string );
 }
 
+JqueryExpression.prototype.toString = function(){
+    return string;
+};
+
 module.exports = JqueryExpression;

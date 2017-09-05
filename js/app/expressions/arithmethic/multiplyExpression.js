@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var arithmethicHelper = require( './arithmethicHelper.js' );
 
-var MultiplyExpression = function( expressionListToApply ) {
+var MultiplyExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -39,7 +40,11 @@ MultiplyExpression.build = function( string ) {
             string,
             MultiplyExpression.mathOperation );
 
-    return new MultiplyExpression( expressionList );
+    return new MultiplyExpression( string, expressionList );
 }
+
+MultiplyExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = MultiplyExpression;

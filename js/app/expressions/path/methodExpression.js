@@ -5,8 +5,9 @@
 
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var MethodExpression = function( nameToApply, argsToApply ) {
+var MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
     
+    var string = stringToApply;
     var name = nameToApply;
     var args = argsToApply;
     
@@ -36,7 +37,11 @@ MethodExpression.build = function( string ) {
     var argsString = string.substring( leftParent + 1, string.length - 1 );
     var args = expressionBuilder.getArgumentsFromString( argsString );
     
-    return new MethodExpression( methodName, args );
+    return new MethodExpression( string, methodName, args );
 }
+
+MethodExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = MethodExpression;

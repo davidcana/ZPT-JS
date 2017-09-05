@@ -26,4 +26,8 @@ StringLiteral.build = function( string ) {
     return undefined;
 }
 
+StringLiteral.prototype.toString = function(){
+    return literal;
+};
+
 module.exports = StringLiteral;

@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
-var I18NLanguage = function( expressionToApply, htmlToApply ) {
+var I18NLanguage = function( stringToApply, expressionToApply, htmlToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var process = function( scope, node ){
@@ -39,7 +40,12 @@ I18NLanguage.build = function( string ) {
     }
     
     return new I18NLanguage( 
+                string,
                 expressionBuilder.build( expressionString ) );
 }
+
+I18NLanguage.prototype.toString = function(){
+    return string;
+};
 
 module.exports = I18NLanguage;

@@ -6,8 +6,10 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
-var TALContent = function( expressionToApply, htmlToApply ) {
+var TALContent = function( stringToApply, expressionToApply, htmlToApply ) {
+//var TALContent = function( expressionToApply, htmlToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     var html = htmlToApply;
     var formInputHasBody = {
@@ -59,8 +61,13 @@ TALContent.build = function( string ) {
     }
     
     return new TALContent( 
+                string,
                 expressionBuilder.build( expressionString ),
                 html );
 }
+
+TALContent.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALContent;

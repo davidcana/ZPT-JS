@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var trHelper = require( './trHelper.js' );
 
-var TrCurrencyExpression = function( expressionToApply, argsExpressionsToApply, subformatToApply ) {
+var TrCurrencyExpression = function( stringToApply, expressionToApply, argsExpressionsToApply, subformatToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     var argsExpressions = argsExpressionsToApply;
     var subformat = subformatToApply;
@@ -42,7 +43,15 @@ TrCurrencyExpression.build = function( string ) {
             3, 
             true );
 
-    return new TrCurrencyExpression( trData.expression, trData.argsExpressions, trData.subformat );
+    return new TrCurrencyExpression( 
+            string, 
+            trData.expression, 
+            trData.argsExpressions, 
+            trData.subformat );
 }
+
+TrCurrencyExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TrCurrencyExpression;

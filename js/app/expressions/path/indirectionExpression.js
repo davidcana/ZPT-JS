@@ -25,4 +25,8 @@ IndirectionExpression.build = function( string ) {
     return new IndirectionExpression( string.substring( 1 ) );
 }
 
+IndirectionExpression.prototype.toString = function(){
+    return '?' + name;
+};
+
 module.exports = IndirectionExpression;

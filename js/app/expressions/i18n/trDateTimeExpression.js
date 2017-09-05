@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var trHelper = require( './trHelper.js' );
 
-var TrDateTimeExpression = function( expressionToApply, argsExpressionsToApply ) {
+var TrDateTimeExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     var argsExpressions = argsExpressionsToApply;
     
@@ -41,7 +42,14 @@ TrDateTimeExpression.build = function( string ) {
             2, 
             false );
 
-    return new TrDateTimeExpression( trData.expression, trData.argsExpressions );
+    return new TrDateTimeExpression( 
+            string, 
+            trData.expression, 
+            trData.argsExpressions );
 }
+
+TrDateTimeExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TrDateTimeExpression;

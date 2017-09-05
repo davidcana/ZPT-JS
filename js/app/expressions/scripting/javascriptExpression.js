@@ -38,4 +38,8 @@ JavascriptExpression.build = function( string ) {
             StringExpression.build( string ) );
 }
 
+JavascriptExpression.prototype.toString = function(){
+    return stringExpression;
+};
+
 module.exports = JavascriptExpression;

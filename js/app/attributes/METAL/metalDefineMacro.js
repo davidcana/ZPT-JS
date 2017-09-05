@@ -26,4 +26,8 @@ METALDefineMacro.build = function( string ) {
     return new METALDefineMacro( string.trim() );
 }
 
+METALDefineMacro.prototype.toString = function(){
+    return name;
+};
+
 module.exports = METALDefineMacro;

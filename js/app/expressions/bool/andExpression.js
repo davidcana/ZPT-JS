@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var AndExpression = function( expressionListToApply ) {
+var AndExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -38,7 +39,11 @@ AndExpression.build = function( string ) {
     
     var expressionList = boolHelper.build( string, 'And' );
 
-    return new AndExpression( expressionList );
+    return new AndExpression( string, expressionList );
 }
+
+AndExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = AndExpression;

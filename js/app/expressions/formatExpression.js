@@ -7,8 +7,9 @@ var context = require( '../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var evaluateHelper = require( './evaluateHelper.js' );
 
-var FormatExpression = function( formatterExpressionToApply, argsExpressionsToApply ) {
+var FormatExpression = function( stringToApply, formatterExpressionToApply, argsExpressionsToApply ) {
     
+    var string = stringToApply;
     var formatterExpression = formatterExpressionToApply;
     var argsExpressions = argsExpressionsToApply;
     
@@ -85,7 +86,11 @@ FormatExpression.build = function( s ) {
         argsExpressions.push( argExpression );
     }
 
-    return new FormatExpression( formatter, argsExpressions );
+    return new FormatExpression( string, formatter, argsExpressions );
 }
+
+FormatExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = FormatExpression;

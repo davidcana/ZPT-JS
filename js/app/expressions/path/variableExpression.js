@@ -20,4 +20,8 @@ VariableExpression.build = function( string ) {
     return new VariableExpression( string );
 }
 
+VariableExpression.prototype.toString = function(){
+    return name;
+};
+
 module.exports = VariableExpression;

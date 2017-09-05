@@ -48,7 +48,7 @@ ArrayExpression.build = function( arrayBase, accessor ) {
         // Array accessor must begin and end with brackets
         var close = accessor.indexOf( ']' );
         if ( accessor.charAt( 0 ) != '[' || close == -1 ) {
-            throw "Bad array accessor for " + token + ": "  + accessor;
+            throw "Bad array accessor: "  + accessor;
         }
 
         // Get index and add to indexes
@@ -146,6 +146,10 @@ ArrayExpression.findArrayAccessor = function( token ) {
     }
 
     return -1;
+};
+
+ArrayExpression.prototype.toString = function(){
+    return arrayBase + '[' + indexes + ']';
 };
 
 module.exports = ArrayExpression;

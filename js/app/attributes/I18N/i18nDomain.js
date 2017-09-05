@@ -7,8 +7,9 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var $ = require( 'jquery' );
 
-var I18NDomain = function( expressionListToApply ) {
+var I18NDomain = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var process = function( scope, node ){
@@ -67,7 +68,11 @@ I18NDomain.build = function( string ) {
             expressionBuilder.build( tokens.nextToken().trim() ) );
     }
 
-    return new I18NDomain( i18nList );
+    return new I18NDomain( string, i18nList );
 }
+
+I18NDomain.prototype.toString = function(){
+    return string;
+};
 
 module.exports = I18NDomain;

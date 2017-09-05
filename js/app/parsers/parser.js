@@ -225,7 +225,9 @@ module.exports = function ( options ) {
             log.info( exception );
             
             // Process content
-            var talContent = new TALContent( content );
+            var talContent = new TALContent( 
+                context.getConf().onErrorVarName,
+                content );
             return talContent.process( scope, node );
             
         } catch ( e ) {

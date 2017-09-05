@@ -9,8 +9,9 @@ var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 
 var $ = require( 'jquery' );
 
-var METALUseMacro = function( macroExpressionToApply, defineToApply ) {
+var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApply ) {
     
+    var string = stringToApply;
     var macroExpression = macroExpressionToApply;
     var define = defineToApply;
     
@@ -100,8 +101,13 @@ METALUseMacro.build = function( string, stringDefine, scope ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new METALUseMacro( 
+            string,
             expressionBuilder.build( string.trim() ),
             stringDefine? stringDefine.trim(): undefined );
 }
+
+METALUseMacro.prototype.toString = function(){
+    return string;
+};
 
 module.exports = METALUseMacro;

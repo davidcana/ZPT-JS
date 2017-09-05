@@ -17,20 +17,22 @@ var IndirectionExpression = require( './indirectionExpression.js' );
 var MethodExpression = require( './methodExpression.js' );
 var PropertyExpression = require( './propertyExpression.js' );
 
-var PathSegmentExpression = function( itemsToApply ) {
+var PathSegmentExpression = function( stringToApply, itemsToApply ) {
     
+    var string = stringToApply;
     var items = itemsToApply;
     
     var evaluate = function( scope ){
         
-        var result = items[ 0 ].evaluate( scope );
-        
+        var token = items[ 0 ];
+        var result = token.evaluate( scope );
         for ( var i = 1; i < items.length; i++ ) {
             // Only last element can be null
             if ( result == null ) {
-                throw token + ' in "' + expression + '" is null';
+                throw 'Error evaluating "' + string + '": '  + token + ' is null';
             }
-            result = items[ i ].evaluate( scope, result );
+            token = items[ i ];
+            result = token.evaluate( scope, result );
         }
         
         return result;
@@ -67,8 +69,8 @@ PathSegmentExpression.build = function( string ) {
         items.push(
             PathSegmentExpression.buildNextPathToken( token ) );
     }
-
-    return new PathSegmentExpression( items );
+    
+    return new PathSegmentExpression( string, items );
 }
 
 
@@ -141,6 +143,10 @@ PathSegmentExpression.buildNextPathToken = function( t ){
     }
 
     return result;
+};
+
+PathSegmentExpression.prototype.toString = function(){
+    return string;
 };
 
 module.exports = PathSegmentExpression;

@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var Loop = require( '../../loop.js' );
 
-var TALRepeat = function( varNameToApply, expressionToApply ) {
+var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
     
+    var string = stringToApply;
     var varName = varNameToApply;
     var expression = expressionToApply;
     
@@ -41,8 +42,13 @@ TALRepeat.build = function( string ) {
     var loopExpression = expressionString.substring( space + 1 );
     
     return new TALRepeat( 
+                string,
                 varName, 
                 expressionBuilder.build( loopExpression ) );
 }
+
+TALRepeat.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALRepeat;

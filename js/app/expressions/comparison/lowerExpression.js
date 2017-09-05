@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var comparisonHelper = require( './comparisonHelper.js' );
 
-var LowerExpression = function( expression1ToApply, expression2ToApply ) {
+var LowerExpression = function( stringToApply, expression1ToApply, expression2ToApply ) {
     
+    var string = stringToApply;
     var expression1 = expression1ToApply;
     var expression2 = expression2ToApply;
     
@@ -31,7 +32,11 @@ LowerExpression.build = function( string ) {
     
     var data = comparisonHelper.build( string, 'lower' );
 
-    return new LowerExpression( data.expression1, data.expression2 );
+    return new LowerExpression( string, data.expression1, data.expression2 );
 }
+
+LowerExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = LowerExpression;

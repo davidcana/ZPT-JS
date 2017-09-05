@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var NotExpression = function( expressionToApply ) {
+var NotExpression = function( stringToApply, expressionToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var evaluate = function( scope ){
@@ -32,7 +33,11 @@ NotExpression.build = function( string ) {
         string, 
         NotExpression.prefix );
     
-    return new NotExpression( expression );
+    return new NotExpression( string, expression );
 }
+
+NotExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = NotExpression;

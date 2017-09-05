@@ -7,8 +7,9 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var EqualsExpression = function( argsToApply ) {
+var EqualsExpression = function( stringToApply, argsToApply ) {
     
+    var string = stringToApply;
     var args = argsToApply;
     
     var evaluate = function( scope ){
@@ -51,11 +52,16 @@ EqualsExpression.build = function( s ) {
             context.getConf().expressionDelimiter, 
             false );
     if ( segments.countTokens() == 1 ) {
-        throw 'Only one element in equals expression, please add at least one more.';
+        throw 'Only one element in equals expression "' + string + '", please add at least one more.';
     }
 
     return new EqualsExpression( 
+        string,
         expressionBuilder.buildList( segments ) );
 }
+
+EqualsExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = EqualsExpression;

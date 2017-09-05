@@ -5,8 +5,9 @@
 
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
-var TALReplace = function( expressionToApply ) {
+var TALReplace = function( stringToApply, expressionToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var process = function( scope, node ){
@@ -33,7 +34,12 @@ TALReplace.build = function( string ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new TALReplace( 
+                string,
                 expressionBuilder.build( string.trim() ) );
 }
+
+TALReplace.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALReplace;

@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
-var FunctionExpression = function( nameToApply, argsToApply ) {
+var FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
     
+    var string = stringToApply;
     var name = nameToApply;
     var args = argsToApply;
     
@@ -37,7 +38,11 @@ FunctionExpression.build = function( string ) {
     var argsString = string.substring( leftParent + 1, string.length - 1 );
     var args = expressionBuilder.getArgumentsFromString( argsString );
 
-    return new FunctionExpression( functionName, args );
+    return new FunctionExpression( string, functionName, args );
 }
+
+FunctionExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = FunctionExpression;

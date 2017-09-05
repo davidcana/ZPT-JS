@@ -5,8 +5,9 @@
 
 var context = require( '../../context.js' );
 
-var TALOnError = function( expressionToApply ) {
+var TALOnError = function( stringToApply, expressionToApply ) {
     
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var process = function( scope, node ){
@@ -26,7 +27,12 @@ TALOnError.build = function( string ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new TALOnError( 
+                string,
                 expressionBuilder.build( string.trim() ) );
 }
+
+TALOnError.prototype.toString = function(){
+    return string;
+};
 
 module.exports = TALOnError;

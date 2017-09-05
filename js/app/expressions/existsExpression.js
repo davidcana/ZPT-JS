@@ -6,7 +6,9 @@
 var context = require( '../context.js' );
 var evaluateHelper = require( './evaluateHelper.js' );
 
-var ExistsExpression = function( expressionToApply ) {    
+var ExistsExpression = function( stringToApply, expressionToApply ) {
+    
+    var string = stringToApply;
     var expression = expressionToApply;
     
     var evaluate = function( scope ){
@@ -33,7 +35,11 @@ ExistsExpression.build = function( string ) {
     var expressionBuilder = require( './expressionBuilder.js' );
     
     var expression = expressionBuilder.build( string );
-    return new ExistsExpression( expression );
+    return new ExistsExpression( string, expression );
 }
+
+ExistsExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = ExistsExpression;

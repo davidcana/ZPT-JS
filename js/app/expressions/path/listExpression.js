@@ -8,8 +8,9 @@ var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 var RangeExpression = require( './rangeExpression.js' );
 var $ = require( 'jquery' );
 
-var ListExpression = function( itemsToApply ) {
+var ListExpression = function( stringToApply, itemsToApply ) {
     
+    var string = stringToApply;
     var items = itemsToApply;
     
     var evaluate = function( scope ){
@@ -59,7 +60,11 @@ ListExpression.build = function( s ) {
             expressionBuilder.build( segment ) );
     }
 
-    return new ListExpression( items );
+    return new ListExpression( string, items );
 }
+
+ListExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = ListExpression;

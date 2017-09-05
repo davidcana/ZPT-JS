@@ -6,8 +6,9 @@
 var context = require( '../../context.js' );
 var arithmethicHelper = require( './arithmethicHelper.js' );
 
-var SubstractExpression = function( expressionListToApply ) {
+var SubstractExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -39,7 +40,11 @@ SubstractExpression.build = function( string ) {
             string,
             SubstractExpression.mathOperation );
 
-    return new SubstractExpression( expressionList );
+    return new SubstractExpression( string, expressionList );
 }
+
+SubstractExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = SubstractExpression;

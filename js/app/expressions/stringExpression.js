@@ -7,8 +7,9 @@ var context = require( '../context.js' );
 var StringLiteral = require( './path/literals/stringLiteral.js' );
 var PathExpression = require( './path/pathExpression.js' );
 
-var StringExpression = function( expressionListToApply ) {
+var StringExpression = function( stringToApply, expressionListToApply ) {
     
+    var string = stringToApply;
     var expressionList = expressionListToApply;
     
     var evaluate = function( scope ){
@@ -135,7 +136,11 @@ StringExpression.build = function( string ) {
                 new StringLiteral( literal ) );
     }
 
-    return new StringExpression( expressionList );
+    return new StringExpression( string, expressionList );
 }
+
+StringExpression.prototype.toString = function(){
+    return string;
+};
 
 module.exports = StringExpression;
