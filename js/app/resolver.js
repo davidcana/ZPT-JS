@@ -62,7 +62,12 @@ module.exports = function( ) {
     };
     
     var builDefineMacroSelector = function( macroId ){
-        return "[" + context.getTags().metalDefineMacro + "='" + macroId + "']";
+        return "[" + filterSelector( context.getTags().metalDefineMacro ) + "='" + macroId + "']";
+    };
+    
+    // Must filter to replace : by \\:
+    var filterSelector = function( selector ){
+        return selector.replace( /:/gi, '\\:' );
     };
     /*
     var loadNode = function( macroKey, scope ){
@@ -159,7 +164,7 @@ module.exports = function( ) {
         
         var remotePageUrls = declaredRemotePageUrls.slice();
         
-        $( "[" + context.getTags().metalUseMacro + "]" ).each( function( index ) {
+        $( "[" + filterSelector( context.getTags().metalUseMacro ) + "]" ).each( function( index ) {
             var currentMacroUse = $( this );
             var macroKeyExpressionString = currentMacroUse.attr( context.getTags().metalUseMacro );
             

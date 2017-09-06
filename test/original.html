@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Original tags tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/original.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <p>
+            Content
+        </p>
+        <ol>
+            <li>
+                user/name = Bob = <span id="t1-1" tal:content="user/name">a name</span>
+            </li>
+        </ol>      
+        <p>
+            Define
+        </p>
+        <ol>
+            <li tal:define="integer1 1">
+                integer1 = 1 = <span id="t2-1" tal:content="integer1">an integer</span>
+            </li>
+        </ol>
+
+        <p>
+            Condition
+        </p>
+        <ol>
+            <li>Condition true 1: <span id="t3-1" tal:condition="true" tal:content="user/name">a name</span></li>
+            <li>Condition false 1: <span id="t3-2" tal:condition="false" tal:content="user/name">a name</span></li>
+        </ol>
+
+        <p>
+            Attributes
+        </p>
+        <ol>
+            <li>
+                Link 1: 
+                <a id="t4-1" tal:attributes="title string:title in string expression; href 'http://www.xxx.org'">a link</a>
+            </li>
+        </ol>
+        
+        <p>
+            Repeat
+        </p>
+        <ol>
+            <li tal:repeat="c ['jaja' 'jeje' 'jiji']">
+                Iterating element <span tal:attributes="class 'cValue1'" tal:content="c">jaja/jeje/jiji</span>
+            </li>
+        </ol>
+        
+        <p>
+            Omit-tag
+        </p>
+        <ol>
+            <li>
+                Void omit-tag: 
+                <span id="t6-1"><span tal:omit-tag="" tal:content="c">Void omit-tag (should omit)</span></span>
+            </li>
+        </ol>
+        
+        <p>
+            Replace
+        </p>
+        <ol>
+            <li>
+                replaced text = <span id="t7-1"><span tal:replace="'replaced text'">should be replaced</span></span>
+            </li>
+        </ol>
+        
+        <p>
+            On-error
+        </p>
+        <ol tal:on-error="string:Oh, noooo!">
+            <li>
+                user/fireError() = Oh, noooo! = <span id="t8-1" tal:content="user/fireError()">must fire error</span>
+            </li>
+        </ol>
+    </body>
+</html>

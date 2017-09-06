@@ -25,6 +25,24 @@ module.exports = (function() {
             i18nDomain:       "data-idomain",
             i18nLanguage:     "data-ilanguage"
     };
+    var originalTags = {
+        talCondition:     "tal:condition",
+        talRepeat:        "tal:repeat",
+        talAttributes:    "tal:attributes",
+        talContent:       "tal:content",
+        talDefine:        "tal:define",
+        talOmitTag:       "tal:omit-tag",
+        talReplace:       "tal:replace",
+        talOnError:       "tal:on-error",
+        qdup:             "data-qdup",
+        metalDefineMacro: "metal:define-macro",
+        metalUseMacro:    "metal:use-macro",
+        metalDefineSlot:  "metal:define-slot",
+        metalFillSlot:    "metal:fill-slot",
+        metalMacro:       "data-mmacro",
+        i18nDomain:       "i18n:domain",
+        i18nLanguage:     "i18n:language"
+    };
     var tags = defaultTags;
     var tal = '';
     //var self = this;
@@ -54,6 +72,9 @@ module.exports = (function() {
         }
         
         return tal;
+    };
+    var useOriginalTags = function(){
+        setTags( originalTags );
     };
     /* End Tags */
     
@@ -197,6 +218,7 @@ module.exports = (function() {
         getConf: getConf,
         setConf: setConf,
         getLogger: getLogger,
-        setLogger: setLogger
+        setLogger: setLogger,
+        useOriginalTags: useOriginalTags
     };
 })();

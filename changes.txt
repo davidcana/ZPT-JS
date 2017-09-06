@@ -1,6 +1,6 @@
 New in 0.17.0
+- Make it easy to use ZPT's original attributes. Added useOriginalTags method to context.
 - Replace callback functions by promises?
-- Make it easy to use ZPT's original attributes?
 - Avoid flashing?
 
 New in 0.16.0

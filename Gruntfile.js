@@ -130,6 +130,15 @@ module.exports = function(grunt) {
                 src: 'test/js/app/on-error.js',
                 dest: 'build/on-error.js'
             },
+            original: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/original.js',
+                dest: 'build/original.js'
+            },
             rerunMacros: {
                 options: {
                     browserifyOptions: {
