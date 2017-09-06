@@ -7,7 +7,6 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
-//var TALDefine = function( defineItemsToApply ) {
     
     var string = stringToApply;
     var defineItems = defineItemsToApply;
@@ -70,12 +69,29 @@ TALDefine.build = function( string ) {
         });
     }
     
-    //return new TALDefine( defineItems );
     return new TALDefine( string, defineItems );
 }
 
 TALDefine.prototype.toString = function(){
     return string;
+};
+
+TALDefine.buildString = function( name, expression, global ) {
+    
+    var result = name + context.getConf().inDefineDelimiter + expression;
+    
+    if ( global ){
+        result += context.getConf().inDefineDelimiter + global;
+    }
+
+    return result;
+};
+
+TALDefine.appendStrings = function( defineString1, defineString2 ) {
+
+    return ! defineString2? 
+           defineString1: 
+           defineString1 + context.getConf().defineDelimiter + defineString2;
 };
 
 module.exports = TALDefine;

@@ -6,6 +6,7 @@
 var context = require( '../../context.js' );
 var Scope = require( '../../scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+var TALDefine = require( '../TAL/talDefine.js' );
 
 var $ = require( 'jquery' );
 
@@ -37,17 +38,17 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         // Add the macro node
         node.parentNode.insertBefore( newNode, node.nextSibling );
     };
-
+    
     var updateTalDefineAttribute = function( scope, macroKey, tags, newNode ){
         
         // Build define tag
         var fullDefine = undefined;
         var macroData = scope.getResolver().getMacroData( macroKey );
         if ( macroData.url ){
-            var externalMacroUrlDefine = context.getConf().externalMacroUrlVarName + context.getConf().expressionDelimiter + "'" + macroData.url + "'";
-            fullDefine = define? 
-                define + context.getConf().defineDelimiter + context.getConf().expressionDelimiter + externalMacroUrlDefine: 
-            externalMacroUrlDefine;
+            var externalMacroUrlDefine = TALDefine.buildString( 
+                    context.getConf().externalMacroUrlVarName, 
+                    "'" + macroData.url + "'" );
+            fullDefine = TALDefine.appendStrings( externalMacroUrlDefine, define );
         } else {
             fullDefine = define;
         }
