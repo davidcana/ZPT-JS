@@ -57,7 +57,7 @@ TALContent.build = function( string ) {
                 content.substr( 1 + context.getConf().htmlStructureExpressionPrefix.length ): 
                 content;
     if ( ! expressionString ){
-        throw 'data-tcontent expression void.';
+        throw 'TALContent expression void.';
     }
     
     return new TALContent( 

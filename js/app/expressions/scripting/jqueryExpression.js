@@ -33,7 +33,7 @@ var JqueryExpression = function( stringToApply ) {
             return texts;
             
         } catch ( e ){
-            return "Jquery expression error!";
+            return 'Jquery expression error in "' + string + '".';
         }
     };
 

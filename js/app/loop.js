@@ -95,7 +95,7 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
         
         // Can't represent any number 4000 or greater
         if ( n >= 4000 ) {
-            return '<overflow>';
+            return 'Overflow formatting roman!';
         }
 
         var buf = '';

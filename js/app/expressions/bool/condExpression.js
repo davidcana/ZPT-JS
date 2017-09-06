@@ -46,7 +46,7 @@ CondExpression.build = function( s ) {
             context.getConf().expressionDelimiter, 
             false );
     if ( segments.countTokens() != 3 ) {
-        throw '3 element are needed in cond expression.';
+        throw 'Syntax error in cond expression "' + string + '". 3 element are needed.';
     }
 
     return new CondExpression( 

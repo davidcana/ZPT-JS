@@ -32,7 +32,7 @@ FunctionExpression.build = function( string ) {
     }
     
     if ( ! expressionBuilder.endsWith( string, ')' ) ) {
-        throw 'Syntax error: bad function call: ' + string;
+        throw 'Syntax error. Bad function call: ' + string;
     }
     var functionName = string.substring( 0, leftParent ).trim();
     var argsString = string.substring( leftParent + 1, string.length - 1 );

@@ -9,12 +9,12 @@ module.exports = (function() {
     var tr = function ( i18nList, id, params, format, subformat, language ){
         
         if ( ! i18nList ) {
-            return "No I18n instance defined!";
+            return 'No I18n instance defined!';
         }
             
         var length = i18nList.length;
         if ( ! length ){
-            return "Void I18n list!";
+            return 'Void I18n list!';
         }
 
         for ( var i = 0; i < length; i++ ) {
@@ -24,7 +24,7 @@ module.exports = (function() {
             }
         }
         
-        return "I18n resource '" + id + "' not found!";
+        return 'I18n resource "' + id + '" not found!';
     };
     
     var loadAsync = function( remoteList, deferred ){

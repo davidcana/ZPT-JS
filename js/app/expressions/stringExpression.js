@@ -122,7 +122,7 @@ StringExpression.build = function( string ) {
 
     // Ended in unclosed bracket
     if ( state == STATE_IN_BRACKETED_EXPRESSION ) {
-        throw 'Unclosed left curly brace: ' + expression;
+        throw 'Unclosed left curly brace: ' + string;
     }
 
     // Ended at expression

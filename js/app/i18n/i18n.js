@@ -47,7 +47,7 @@ module.exports = function( languageId, res ) {
             break;
         } 
         
-        throw 'Format type not supported: ' + format;
+        throw 'I18n format type not supported: ' + format;
     };
     
     var trString = function( id, params ) {

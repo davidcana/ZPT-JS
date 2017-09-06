@@ -21,7 +21,7 @@ module.exports = (function() {
                 context.getConf().expressionDelimiter, 
                 false );
         if ( segments.countTokens() == 1 ) {
-            throw 'Only one element in ' + tag + ' expression, please add at least one more.';
+            throw 'Syntax error in expression "' + string + '". Only one element in ' + tag + ' expression, please add at least one more.';
         }
         
         return expressionBuilder.buildList( segments );

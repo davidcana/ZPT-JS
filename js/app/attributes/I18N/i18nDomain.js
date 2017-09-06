@@ -21,7 +21,7 @@ var I18NDomain = function( stringToApply, expressionListToApply ) {
             var i18n = expression.evaluate( scope );
             
             if ( ! i18n ){
-                throw 'Error evaluating domain: ' + expressionList;    
+                throw 'Null value evaluating i18n domain expression: ' + string;    
             }
             
             if ( $.isArray( i18n ) ){

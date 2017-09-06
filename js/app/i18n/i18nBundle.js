@@ -21,13 +21,13 @@ module.exports = function( ) {
     var tr = function( id, params, format, subformat, language ) {
         
         if ( ! language ){
-            throw "Language not defined! Please, use data-iLanguage to define it before trying to translate anything!";
+            throw 'Language not defined! Please, use data-iLanguage to define it before trying to translate anything!';
         }
         
         var i18n = i18nList[ language ];
         
         if ( ! i18n ){
-            throw "Language '" + language + "' not found in I18nBundle!";
+            throw 'Language "' + language + '" not found in I18nBundle!';
         }
         
         return i18n.tr( id, params, format, subformat );

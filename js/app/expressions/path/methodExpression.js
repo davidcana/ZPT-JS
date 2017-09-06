@@ -30,7 +30,7 @@ MethodExpression.build = function( string ) {
     }
     
     if ( ! expressionBuilder.endsWith( string, ')' ) ) {
-        throw 'Syntax error: bad method call: ' + string;
+        throw 'Syntax error. Bad method call: ' + string;
     }
     
     var methodName = string.substring( 0, leftParent ).trim();

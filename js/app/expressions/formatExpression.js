@@ -44,7 +44,7 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
             return formatter;
         }
         
-        throw 'Formatter expression evaluated to null: ' + expression;
+        throw 'Formatter expression evaluated to null: ' + string;
     };
     
     return {
@@ -72,7 +72,7 @@ FormatExpression.build = function( s ) {
             false );
     var numberOfTokens = segments.countTokens();
     if ( numberOfTokens == 1 ) {
-        throw 'Only one element in format expression, please add at least one more.';
+        throw 'Only one element in format expression: "' + string + '". Please add at least one more.';
     }
 
     // Get formatter

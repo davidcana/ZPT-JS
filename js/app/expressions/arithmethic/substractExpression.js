@@ -14,6 +14,7 @@ var SubstractExpression = function( stringToApply, expressionListToApply ) {
     var evaluate = function( scope ){
 
         return arithmethicHelper.evaluate( 
+            string,
             scope,
             expressionList, 
             SubstractExpression.mathOperation, 

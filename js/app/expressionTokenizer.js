@@ -77,7 +77,7 @@ module.exports = function( exp, delimiter, escape ) {
                 parentLevel--;
                 // If unmatched right parenthesis
                 if ( parentLevel < 0 ) {
-                    throw 'Syntax error: unmatched right parenthesis: ' + expression;
+                    throw 'Syntax error. Unmatched right parenthesis: ' + expression;
                 }
             }
             

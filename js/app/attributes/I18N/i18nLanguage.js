@@ -36,7 +36,7 @@ I18NLanguage.build = function( string ) {
     var expressionString = string.trim();
 
     if ( ! expressionString ){
-        throw 'data-ilanguage expression void.';
+        throw 'I18NLanguage expression void.';
     }
     
     return new I18NLanguage( 

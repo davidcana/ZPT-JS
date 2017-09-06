@@ -24,7 +24,7 @@ module.exports = (function() {
         return expressionBuilder.buildList( segments );
     };
     
-    var evaluate = function( scope, expressionList, mathOperation, arithmethicFunction ) {
+    var evaluate = function( string, scope, expressionList, mathOperation, arithmethicFunction ) {
         
         // Evaluate segments
         var result = 0;
@@ -60,7 +60,7 @@ module.exports = (function() {
         }
         
         if ( c < 2 ) {
-            throw 'Only one element in evaluation of "' + mathOperation 
+            throw 'Error in expression "' + string + '". Only one element in evaluation of "' + mathOperation 
                 + '" expression, please add at least one more.';
         }
         
