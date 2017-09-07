@@ -1,3 +1,6 @@
+
+var context = require( '../../../js/app/context.js' );
+
 module.exports = { 
     nullValue: null,
     aString: "string",
@@ -63,6 +66,7 @@ module.exports = {
     someNumbers: [ 10, 20, 30, 40 ],
     customFormatter: function( value ){
         return "$" + value;
-    }
+    },
+    conf: context.getConf()
 };
 

@@ -17,6 +17,7 @@
         <ol>
             <li>
                 user/name = Bob = <span id="t1-1" tal:content="user/name">a name</span>
+                user/name = a name = <span id="t1-2" data-tcontent="user/name">a name</span>
             </li>
         </ol>      
         <p>
@@ -25,6 +26,7 @@
         <ol>
             <li tal:define="integer1 1">
                 integer1 = 1 = <span id="t2-1" tal:content="integer1">an integer</span>
+                integer1 = an integer = <span id="t2-2" data-tcontent="integer1">an integer</span>
             </li>
         </ol>
 
@@ -34,6 +36,8 @@
         <ol>
             <li>Condition true 1: <span id="t3-1" tal:condition="true" tal:content="user/name">a name</span></li>
             <li>Condition false 1: <span id="t3-2" tal:condition="false" tal:content="user/name">a name</span></li>
+            <li>Condition true 1: <span id="t3-3" data-tcondition="true" data-tcontent="user/name">a name</span></li>
+            <li>Condition false 1: <span id="t3-4" data-tcondition="false" data-tcontent="user/name">a name</span></li>
         </ol>
 
         <p>
@@ -43,6 +47,8 @@
             <li>
                 Link 1: 
                 <a id="t4-1" tal:attributes="title string:title in string expression; href 'http://www.xxx.org'">a link</a>
+                <a id="t4-2" data-tattributes="title string:title in string expression; href 'http://www.xxx.org'"
+                             title ="The title" href="http://www.yyy.org">a link</a>
             </li>
         </ol>
         
@@ -53,6 +59,9 @@
             <li tal:repeat="c ['jaja' 'jeje' 'jiji']">
                 Iterating element <span tal:attributes="class 'cValue1'" tal:content="c">jaja/jeje/jiji</span>
             </li>
+            <li data-trepeat="c ['jaja' 'jeje' 'jiji']">
+                Iterating element <span data-tattributes="class 'cValue2'" data-tcontent="c">jaja/jeje/jiji</span>
+            </li>
         </ol>
         
         <p>
@@ -62,6 +71,7 @@
             <li>
                 Void omit-tag: 
                 <span id="t6-1"><span tal:omit-tag="" tal:content="c">Void omit-tag (should omit)</span></span>
+                <span id="t6-2"><span data-tomit-tag="" data-tcontent="c">Void omit-tag (should NOT omit)</span></span>
             </li>
         </ol>
         
@@ -72,14 +82,58 @@
             <li>
                 replaced text = <span id="t7-1"><span tal:replace="'replaced text'">should be replaced</span></span>
             </li>
+            <li>
+                replaced text = <span id="t7-2"><span data-treplace="'replaced text'">should NOT be replaced</span></span>
+            </li>
         </ol>
         
         <p>
             On-error
         </p>
-        <ol tal:on-error="string:Oh, noooo!">
-            <li>
+        <ol>
+            <li tal:on-error="string:Oh, noooo!">
                 user/fireError() = Oh, noooo! = <span id="t8-1" tal:content="user/fireError()">must fire error</span>
+            </li>
+        </ol>
+        
+        <p>
+            Macros
+        </p>
+        <div metal:define-macro="enhacedSidebar">
+            Links
+            <div metal:define-slot="links">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Products</a></li>
+                    <li><a href="/support">Support</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <span metal:define-slot="additional_info"></span>
+        </div>
+        <div id="t9">
+            <div metal:use-macro="'enhacedSidebar'">
+                <em metal:fill-slot="'additional_info'">
+                    Make sure to check out our <a href="/specials">specials</a>.
+                </em>
+            </div>
+        </div>
+        
+        <p>
+            I18n
+        </p>
+        <ol i18n:domain="i18nBundle">
+            <li>
+                ¡Hola mundo! = 
+                <span id="t10-1" 
+                      i18n:language="'es'"
+                      tal:content="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
+            </li>
+            <li>
+                Hello world! = 
+                <span id="t10-2" 
+                      i18n:language="'en'"
+                      tal:content="tr: 'Hello world!'">Must be Hello world!</span>
             </li>
         </ol>
     </body>

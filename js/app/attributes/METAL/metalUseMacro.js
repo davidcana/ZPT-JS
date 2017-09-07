@@ -7,6 +7,7 @@ var context = require( '../../context.js' );
 var Scope = require( '../../scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
+var Resolver = require( '../../resolver.js' );
 
 var $ = require( 'jquery' );
 
@@ -61,7 +62,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     
     var fillSlots = function( scope, node, tags, newNode ){
         
-        $( node ).find( "[" + tags.metalFillSlot + "]" ).each(
+        $( node ).find( "[" + Resolver.filterSelector( tags.metalFillSlot ) + "]" ).each(
             
             function( index, value ) {
                 
@@ -77,7 +78,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
 
                 var slotContent = $( this )[0].cloneNode( true );
                 var currentNode = $( newNode ).find(
-                    "[" + tags.metalDefineSlot + "='" + slotId + "']")[0];
+                    "[" + Resolver.filterSelector( tags.metalDefineSlot ) + "='" + slotId + "']")[0];
                 if ( ! currentNode ){
                     throw 'Slot "' + slotId + '" in expression "' + slotIdExpressionString +'" not found!';
                 }

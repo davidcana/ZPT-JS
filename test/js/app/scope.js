@@ -41,6 +41,7 @@ QUnit.test( "Nested vars test", function( assert ) {
     assert.equal( $('#t2-21').text() , "1" );
     assert.equal( $('#t2-22').text() , "OK" );
     assert.equal( $('#t2-23').text() , "undefined" );
+    assert.equal( $('#t2-24').text() , "var2 does not exist: OK" );
 });
 
 QUnit.test( "Out of scope var test", function( assert ) {

@@ -119,6 +119,8 @@ module.exports = function ( options ) {
             scope.endElement();
 
         } catch ( e ) {
+            
+            // Try to treat error
             if ( ! treatError( node, scope, e ) ) {
                 throw e;
             }
@@ -213,7 +215,7 @@ module.exports = function ( options ) {
             log.fatal( exception );
             return false;
         }
-
+        
         // Set the error variable
         var templateError = {
             type : typeof exception,
@@ -228,7 +230,10 @@ module.exports = function ( options ) {
             var talContent = new TALContent( 
                 context.getConf().onErrorVarName,
                 content );
-            return talContent.process( scope, node );
+            
+            var result = talContent.process( scope, node );
+            scope.endElement();
+            return result;
             
         } catch ( e ) {
             log.fatal( e );

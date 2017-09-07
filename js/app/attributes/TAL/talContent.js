@@ -7,7 +7,6 @@ var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
 var TALContent = function( stringToApply, expressionToApply, htmlToApply ) {
-//var TALContent = function( expressionToApply, htmlToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
