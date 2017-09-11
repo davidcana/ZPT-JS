@@ -13,6 +13,7 @@ exports.run = function( options ){
 exports.I18n = require( './i18n/i18n.js' );
 exports.i18nHelper = require( './i18n/i18nHelper.js' );
 exports.context = require( './context.js' );
+exports.logHelper = require( './logHelper.js' );
 
 /* Support RequireJS module pattern */
 if ( typeof define === 'function' && define.amd ) {
@@ -20,4 +21,5 @@ if ( typeof define === 'function' && define.amd ) {
     define( 'zpt.I18n', exports.I18n );
     define( 'zpt.i18nHelper', exports.i18nHelper );
     define( 'zpt.context', exports.context );
+    define( 'zpt.logHelper', exports.logHelper );
 }
