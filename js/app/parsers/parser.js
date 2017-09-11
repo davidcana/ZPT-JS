@@ -36,22 +36,28 @@ module.exports = function ( options ) {
     var tags = context.getTags();
 
     // Optimize comparison check
-    var innerText = "innerText" in root? "innerText": "textContent";
+    //var innerText = "innerText" in root? "innerText": "textContent";
 
     var run = function(){
-
-        if ( ! notRemoveGeneratedTags ){
-            removeGeneratedTagsFromAllRootElements( root );
-        }
         
-        if ( ! scope.getResolver().loadRemotePages( 
-            scope,
-            declaredRemotePageUrls,
-            function (){
+        try {
+            if ( ! notRemoveGeneratedTags ){
+                removeGeneratedTagsFromAllRootElements( root );
+            }
+
+            if ( ! scope.getResolver().loadRemotePages( 
+                scope,
+                declaredRemotePageUrls,
+                function (){
+                    processAllRootElements( root, scope );
+                })){
+
                 processAllRootElements( root, scope );
-            })){
+            }
             
-            processAllRootElements( root, scope );
+        } catch( e ){
+            log.fatal( 'Exiting ZPT with errors: ' + e );
+            throw e;
         }
     };
         
@@ -76,6 +82,7 @@ module.exports = function ( options ) {
     };
     
     var removeTags = function( rootElement, tag ){
+        
         var node;
         var pos = 0;
         var list = rootElement.querySelectorAll( "*[" + tag + "]" );
@@ -224,7 +231,7 @@ module.exports = function ( options ) {
         scope.set( context.getConf().templateErrorVarName, templateError );
 
         try {
-            log.info( exception );
+            log.debug( exception );
             
             // Process content
             var talContent = new TALContent( 

@@ -82,29 +82,6 @@ module.exports = (function() {
                 }, 
                 force
         );
-        /*
-        log.info( 
-            'Request building of expression "' + string + '", force "' + force + '"' );
-        
-        // Get from cache if possible
-        if ( ! force && context.getConf().expressionCacheOn ){
-            log.info( 'Cache ON!' );
-            var fromCache = expressionCache.get( string );
-            if ( fromCache ){
-                log.info( 'Found in cache!' );
-                return fromCache;
-            } else {
-                log.info( 'NOT found in cache!' );
-            }
-        } else {
-            log.info( 'Cache OFF!' );
-        }
-        
-        // Force build and put into cache
-        log.info( 'Must build!' );
-        var builded = forceBuild( string );
-        expressionCache.put( string, builded );
-        return builded;*/
     };
     
     var forceBuild = function( string ) {

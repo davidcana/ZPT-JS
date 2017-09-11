@@ -35,26 +35,26 @@ module.exports = (function() {
     
     var getByDetails = function( attribute, string, buildFunction, force ) {
         
-        log.info( 
+        log.debug( 
             'Request building of ZPT attribute "' + string + '", force "' + force + '"' );
         
         // Get from cache if possible
         if ( force || ! context.getConf().attributeCacheOn ){
-            log.info( 'Cache OFF!' );
+            log.debug( 'Cache OFF!' );
             
         } else {
-            log.info( 'Cache ON!' );
+            log.debug( 'Cache ON!' );
             var fromCache = get( attribute, string );
             if ( fromCache ){
-                log.info( 'Found in cache!' );
+                log.debug( 'Found in cache!' );
                 return fromCache;
             } else {
-                log.info( 'NOT found in cache!' );
+                log.debug( 'NOT found in cache!' );
             }
         }
         
         // Force build and put into cache
-        log.info( 'Must build!' );
+        log.debug( 'Must build!' );
         var builded = buildFunction();
         put( attribute, string, builded );
         return builded;

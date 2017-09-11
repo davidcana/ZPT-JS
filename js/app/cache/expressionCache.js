@@ -20,25 +20,25 @@ module.exports = (function() {
     
     var process = function( string, buildFunction, force ) {
         
-        log.info( 
+        log.debug( 
             'Request building of expression "' + string + '", force "' + force + '"' );
         
         // Get from cache if possible
         if ( ! force && context.getConf().expressionCacheOn ){
-            log.info( 'Cache ON!' );
+            log.debug( 'Cache ON!' );
             var fromCache = get( string );
             if ( fromCache ){
-                log.info( 'Found in cache!' );
+                log.debug( 'Found in cache!' );
                 return fromCache;
             } else {
-                log.info( 'NOT found in cache!' );
+                log.debug( 'NOT found in cache!' );
             }
         } else {
-            log.info( 'Cache OFF!' );
+            log.debug( 'Cache OFF!' );
         }
         
         // Force build and put into cache
-        log.info( 'Must build!' );
+        log.debug( 'Must build!' );
         var builded = buildFunction();
         put( string, builded );
         return builded;

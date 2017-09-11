@@ -5,6 +5,8 @@ New in 0.18.0
 New in 0.17.0
 - Make it easy to use ZPT's original attributes. Added useOriginalTags method to context.
 - New exported method: logHelper.
+- Some logs changed from info to debug.
+- Added try-catch to run method in parser.
 
 New in 0.16.0
 - Bug fixed: local macros now work when defining one in an external file.
