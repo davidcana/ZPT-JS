@@ -1004,11 +1004,16 @@ expressionBuilder.register( require( IncExpression ) );
     <pre>
 $ grunt browserify        // Build all test js files; also build a standalone version
 $ grunt browserify:[file] // Build a single js file; use 'standalone' to build a standalone version
-$ npm run start           // Run a beefy server to make it easy to test ZPT-JS without browserifying by hand
+$ npm run start           // Run a beefy server (port 9966) to make it easy to test ZPT-JS without browserifying by hand
+                          // and a HTTP server (port 9000) to serve static files (HTML and CSS files mainly)
 $ grunt compress          // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
     </pre>
     <p>
-        ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open test/index.html with your favourite browser.
+        ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open <code>test/index.html</code> or <code>http://localhost:9000/test/</code> with your favourite browser.
+    </p>
+    
+    <p>
+        All tests passed using last versions of Mozilla Firefox (55.0.2, 64-bit). Perhaps some tests fail using other browsers!
     </p>
     
     <a id="moreExamples"></a>

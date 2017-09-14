@@ -7,22 +7,26 @@ var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
 
-var es1JSONFileName = 'i18n/es1.json';
-var en1JSONFileName = 'i18n/en1.json';
-var es2JSONFileName = 'i18n/es2.json';
-var en2JSONFileName = 'i18n/en2.json';
+/*
+var useHTTP = false;
+var urlPrefix = useHTTP? 'http://localhost:9000/test/': './';*/
+var urlPrefix = './';
+var es1JSONUrl = urlPrefix + 'i18n/es1.json';
+var en1JSONUrl = urlPrefix + 'i18n/en1.json';
+var es2JSONUrl = urlPrefix + 'i18n/es2.json';
+var en2JSONUrl = urlPrefix + 'i18n/en2.json';
 
-var jsonFiles = [ es1JSONFileName , en1JSONFileName, es2JSONFileName , en2JSONFileName ];
+var jsonFiles = [ es1JSONUrl , en1JSONUrl, es2JSONUrl , en2JSONUrl ];
 
 i18nHelper.loadAsync( jsonFiles , callback );
 
 function callback( i18nMap ){
     
     // Create I18n and I18nBundle instances
-    var i18nES =  new I18n( 'es', i18nMap[ es1JSONFileName ] );
-    var i18nES2 = new I18n( 'es', i18nMap[ es2JSONFileName ] );
-    var i18nEN = new I18n( 'en', i18nMap[ en1JSONFileName ] );
-    var i18nEN2 = new I18n( 'en', i18nMap[ en2JSONFileName ] );
+    var i18nES =  new I18n( 'es', i18nMap[ es1JSONUrl ] );
+    var i18nES2 = new I18n( 'es', i18nMap[ es2JSONUrl ] );
+    var i18nEN = new I18n( 'en', i18nMap[ en1JSONUrl ] );
+    var i18nEN2 = new I18n( 'en', i18nMap[ en2JSONUrl ] );
     var i18nBundle = new I18nBundle( i18nES, i18nEN );
     var i18nBundle2 = new I18nBundle( i18nES2, i18nEN2 );
     

@@ -7,6 +7,7 @@ module.exports = function( languageId, res ) {
     
     var MessageFormat = require( 'messageformat' );
     var context = require( '../context.js' );
+    var $ = require( 'jquery' );
     
     var resources = res;
     var mf = new MessageFormat( languageId );
@@ -62,13 +63,21 @@ module.exports = function( languageId, res ) {
         return mfunc( params );
     };
     
+    var getSource = function( params ){
+        
+        return params && $.isFunction( params.toSource )?
+            params.toSource():
+            '';
+    };
+    
     var trNumber = function( value, params ) {
         
-        var numberFormat = numberFormatCache[ params.toSource() ];
+        var source = getSource( params );
+        var numberFormat = numberFormatCache[ source ];
         
         if ( ! numberFormat ){
             numberFormat = new Intl.NumberFormat( getLocale(), params );
-            numberFormatCache[ params.toSource() ] = numberFormat;
+            numberFormatCache[ source ] = numberFormat;
         }
         
         return numberFormat.format( value );
@@ -84,11 +93,12 @@ module.exports = function( languageId, res ) {
     
     var trDateTime = function( value, params ) {
         
-        var dateTimeFormat = dateTimeFormatCache[ params.toSource() ];
+        var source = getSource( params );
+        var dateTimeFormat = dateTimeFormatCache[ source ];
         
         if ( ! dateTimeFormat ){
             dateTimeFormat = new Intl.DateTimeFormat( getLocale(), params );
-            dateTimeFormatCache[ params.toSource() ] = dateTimeFormat;
+            dateTimeFormatCache[ source ] = dateTimeFormat;
         }
         
         return dateTimeFormat.format( value );

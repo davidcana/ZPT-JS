@@ -12,12 +12,13 @@ module.exports = function(grunt) {
         browserify: {
             standalone: {
                 options: {
-		    plugin: [
-                        [ "browserify-derequire" ]
-                    ],
-                    browserifyOptions: {
-                        standalone: 'zpt'
-                    }
+                    plugin: 
+                        [ 
+                            [ "browserify-derequire" ]
+                        ],
+                        browserifyOptions: {
+                            standalone: 'zpt'
+                        }
                 },
                 src: 'js/app/main.js',
                 dest: 'build/standalone.js'
