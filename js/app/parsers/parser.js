@@ -5,6 +5,7 @@ module.exports = function ( options ) {
     "use strict";
     
     var context = require( '../context.js' );
+    var resolver = require( '../resolver.js' );
     var log = require( '../logHelper.js' );
     var Scope = require( '../scope.js' );
     var NodeAttributes = require( '../nodeAttributes.js' );
@@ -35,9 +36,53 @@ module.exports = function ( options ) {
     var scope = new Scope( dictionary );
     var tags = context.getTags();
 
-    // Optimize comparison check
-    //var innerText = "innerText" in root? "innerText": "textContent";
+    var init = function( initCallback ){
+        
+        var currentCallback = initCallback || callback;
+        
+        try {
+            if ( ! notRemoveGeneratedTags ){
+                removeGeneratedTagsFromAllRootElements( root );
+            }
 
+            if ( ! resolver.loadRemotePages( 
+                scope,
+                declaredRemotePageUrls,
+                function (){
+                    processCallback( currentCallback );
+                })){
+
+                processCallback( currentCallback );
+            }
+            
+        } catch( e ){
+            log.fatal( 'Exiting ZPT init with errors: ' + e );
+            throw e;
+        }
+    };
+    
+    var processCallback = function( currentCallback ){
+        
+        if ( currentCallback && typeof currentCallback == 'function' ) {
+            currentCallback();
+        }
+    };
+    
+    var runSync = function(){
+        
+        try {
+            if ( ! notRemoveGeneratedTags ){
+                removeGeneratedTagsFromAllRootElements( root );
+            }
+            
+            processAllRootElements( root, scope );
+            
+        } catch( e ){
+            log.fatal( 'Exiting ZPT runSync with errors: ' + e );
+            throw e;
+        }
+    };
+    
     var run = function(){
         
         try {
@@ -45,7 +90,7 @@ module.exports = function ( options ) {
                 removeGeneratedTagsFromAllRootElements( root );
             }
 
-            if ( ! scope.getResolver().loadRemotePages( 
+            if ( ! resolver.loadRemotePages( 
                 scope,
                 declaredRemotePageUrls,
                 function (){
@@ -451,6 +496,8 @@ module.exports = function ( options ) {
     };
     
     return {
-        run: run
+        run: run,
+        init: init,
+        runSync: runSync
     };
 };

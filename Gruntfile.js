@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                 src: 'test/js/app/expressions.js',
                 dest: 'build/expressions.js'
             },
-	       errors: {
+	        errors: {
                 options: {
                     browserifyOptions: {
                         debug: true
@@ -40,6 +40,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/errors.js',
                 dest: 'build/errors.js'
+            },
+            externalSyncMacros: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/externalSyncMacros.js',
+                dest: 'build/externalSyncMacros.js'
             },
             format: {
                 options: {

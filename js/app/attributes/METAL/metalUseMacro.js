@@ -7,7 +7,7 @@ var context = require( '../../context.js' );
 var Scope = require( '../../scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
-var Resolver = require( '../../resolver.js' );
+var resolver = require( '../../resolver.js' );
 
 var $ = require( 'jquery' );
 
@@ -20,9 +20,9 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     var process = function( scope, node ){
 
         // Init some vars
-        var macroKey = scope.getResolver().getMacroKey( macroExpression, scope );
+        var macroKey = resolver.getMacroKey( macroExpression, scope );
         var tags = context.getTags();
-        var newNode = scope.getResolver().getNode( macroKey, scope ); 
+        var newNode = resolver.getNode( macroKey, scope ); 
         
         // Hide use macro node
         node.style.display = 'none';
@@ -44,7 +44,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         
         // Build define tag
         var fullDefine = undefined;
-        var macroData = scope.getResolver().getMacroData( macroKey );
+        var macroData = resolver.getMacroData( macroKey );
         if ( macroData.url ){
             var externalMacroUrlDefine = TALDefine.buildString( 
                     context.getConf().externalMacroUrlVarName, 
@@ -62,7 +62,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     
     var fillSlots = function( scope, node, tags, newNode ){
         
-        $( node ).find( "[" + Resolver.filterSelector( tags.metalFillSlot ) + "]" ).each(
+        $( node ).find( "[" + resolver.filterSelector( tags.metalFillSlot ) + "]" ).each(
             
             function( index, value ) {
                 
@@ -78,7 +78,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
 
                 var slotContent = $( this )[0].cloneNode( true );
                 var currentNode = $( newNode ).find(
-                    "[" + Resolver.filterSelector( tags.metalDefineSlot ) + "='" + slotId + "']")[0];
+                    "[" + resolver.filterSelector( tags.metalDefineSlot ) + "='" + slotId + "']")[0];
                 if ( ! currentNode ){
                     throw 'Slot "' + slotId + '" in expression "' + slotIdExpressionString +'" not found!';
                 }

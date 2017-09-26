@@ -4,8 +4,6 @@
 module.exports = function( obj ) {
     "use strict";
     
-    var Resolver = require( './resolver.js' );
-    
     // Create a duplicate object which we can add properties to without affecting the original
     var wrapper = function() {};
     wrapper.prototype = obj;
@@ -13,11 +11,6 @@ module.exports = function( obj ) {
     
     var globals = obj;
     var varsStack = [];
-    var resolver = new Resolver();
-    
-    var getResolver = function( ) {
-        return resolver;
-    };
     
     var startElement = function( ) {
         
@@ -86,7 +79,6 @@ module.exports = function( obj ) {
     };
     
     return {
-        getResolver: getResolver,
         startElement: startElement,
         get: get,
         unset: unset,

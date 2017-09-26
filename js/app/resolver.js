@@ -1,7 +1,7 @@
 /* 
-    Class Resolver 
+    resolver singleton class
 */
-var Resolver = function( ) {
+module.exports = (function( ) {
     "use strict";
     
     var $ = require( 'jquery' );
@@ -62,7 +62,7 @@ var Resolver = function( ) {
     };
     
     var builDefineMacroSelector = function( macroId ){
-        return "[" + Resolver.filterSelector( context.getTags().metalDefineMacro ) + "='" + macroId + "']";
+        return "[" + filterSelector( context.getTags().metalDefineMacro ) + "='" + macroId + "']";
     };
     
     /*
@@ -160,7 +160,7 @@ var Resolver = function( ) {
         
         var remotePageUrls = declaredRemotePageUrls.slice();
         
-        $( "[" + Resolver.filterSelector( context.getTags().metalUseMacro ) + "]" ).each( function( index ) {
+        $( "[" + filterSelector( context.getTags().metalUseMacro ) + "]" ).each( function( index ) {
             var currentMacroUse = $( this );
             var macroKeyExpressionString = currentMacroUse.attr( context.getTags().metalUseMacro );
             
@@ -244,18 +244,17 @@ var Resolver = function( ) {
         return macroData.url? macroData.macroId + context.getConf().macroDelimiter + macroData.url: macroData.macroId;
     };
     
+    // Must filter to replace : by \\:
+    var filterSelector = function( selector ){
+        return selector.replace( /:/gi, '\\:' );
+    };
+    
     return {
         getNode: getNode,
         //isRemote: isRemote,
         loadRemotePages: loadRemotePages,
         getMacroData: getMacroData,
-        getMacroKey: getMacroKey
+        getMacroKey: getMacroKey,
+        filterSelector: filterSelector
     };
-};
-
-// Must filter to replace : by \\:
-Resolver.filterSelector = function( selector ){
-    return selector.replace( /:/gi, '\\:' );
-};
-
-module.exports = Resolver;
+})();

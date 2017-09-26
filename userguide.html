@@ -158,6 +158,24 @@ $( 'body' ).zpt({
 });
     </pre>
     
+    <p>
+        If we don't use external macros ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro ZPT-JS needs to load one or more external files using HTTP. This makes ZPT-JS code executes asynchronously. Keep in mind this! An alternative method to deal with this is to call ZPT-JS like this:
+    </p>
+    <pre>
+var zptParser = zpt.buildParser({
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ]
+});
+
+zptParser.init(
+    function(){
+        zptParser.runSync();
+        [ your code here ]
+    }
+);
+    </pre>
+    
     <p>That's OK. But... how can we use ZPT-JS at the server side (using node.js)? node-jsdom is needed when no browser is available:</p>
     <pre>
 "use strict";
