@@ -25,17 +25,27 @@ module.exports = function ( options ) {
     var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
     var TALReplace = require( '../attributes/TAL/talReplace.js' );
     
+    var root;
+    var dictionary = {};
+    var callback;
+    var notRemoveGeneratedTags = false;
+    var declaredRemotePageUrls = [];
+    
     // Get values from options
-    var root = options.root;
-    var dictionary = options.dictionary;
-    var callback = options.callback;
-    var notRemoveGeneratedTags = options.notRemoveGeneratedTags;
-    var declaredRemotePageUrls = options.declaredRemotePageUrls || [];
+    var initFromOptions = function( options ){
+        root = options.root || root;
+        dictionary = options.dictionary || dictionary;
+        callback = options.callback || callback;
+        notRemoveGeneratedTags = options.notRemoveGeneratedTags || notRemoveGeneratedTags;
+        declaredRemotePageUrls = options.declaredRemotePageUrls || declaredRemotePageUrls;
+    };
+    
+    initFromOptions( options || {} );
     
     // Continue with other var inits
     var scope = new Scope( dictionary );
     var tags = context.getTags();
-
+    
     var init = function( initCallback ){
         
         var currentCallback = initCallback || callback;
@@ -68,7 +78,10 @@ module.exports = function ( options ) {
         }
     };
     
-    var runSync = function(){
+    //var runSync = function( options ){
+    var run = function( options ){
+        
+        initFromOptions( options || {} );
         
         try {
             if ( ! notRemoveGeneratedTags ){
@@ -82,7 +95,7 @@ module.exports = function ( options ) {
             throw e;
         }
     };
-    
+    /*
     var run = function(){
         
         try {
@@ -104,7 +117,7 @@ module.exports = function ( options ) {
             log.fatal( 'Exiting ZPT with errors: ' + e );
             throw e;
         }
-    };
+    };*/
         
     var removeGeneratedTagsFromAllRootElements = function( root ) {
         
@@ -497,7 +510,7 @@ module.exports = function ( options ) {
     
     return {
         run: run,
-        init: init,
-        runSync: runSync
+        init: init
+        //runSync: runSync
     };
 };

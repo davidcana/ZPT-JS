@@ -1,6 +1,9 @@
-New in 0.20.0
+New in 0.21.0
 - Replace callback functions by promises?
 - Avoid flashing?
+
+New in 0.20.0
+- Some changes in Parser class: run method removed, runSync method renamed to run. This makes run method is always sync, so all code is in init method.
 
 New in 0.19.0
 - Makes it easy to separate async code (for loading external macros files) from sync code.

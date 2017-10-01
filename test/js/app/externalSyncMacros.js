@@ -61,7 +61,7 @@ var zptParser = zpt.buildParser({
 
 zptParser.init(
     function(){
-        zptParser.runSync();
+        zptParser.run();
         runTests();
     }
 );

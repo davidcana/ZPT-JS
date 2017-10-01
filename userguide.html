@@ -170,7 +170,7 @@ var zptParser = zpt.buildParser({
 
 zptParser.init(
     function(){
-        zptParser.runSync();
+        zptParser.run();
         [ your code here ]
     }
 );
@@ -661,7 +661,23 @@ var dictionary = {
 &lt;/div&gt;
     </pre>
     <p>
-        Because external macro files are preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
+        External macro files must be preloaded before the template is rendered, so code is async:
+    </p>  
+    <pre>
+var zptParser = zpt.buildParser({
+    root: document.body,
+    dictionary: dictionary
+});
+
+zptParser.init(
+    function(){
+        zptParser.run();
+        [ your code here ]
+    }
+);
+    </pre>
+    <p>
+        Because external macro files must be preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
     </p>
     <pre>
 &lt;div data-muse-macro="anObject/templateName"&gt;
@@ -672,11 +688,18 @@ var dictionary = {
         If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no rederence to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call:
     </p>
     <pre>
-zpt.run({
+var zptParser = zpt.buildParser({
     root: document.body,
     dictionary: dictionary,
     declaredRemotePageUrls: [ 'macros.html', 'moreMacros.html' ]
 });
+
+zptParser.init(
+    function(){
+        zptParser.run();
+        [ your code here ]
+    }
+);
     </pre>
     
     <a id="formatters"></a>
