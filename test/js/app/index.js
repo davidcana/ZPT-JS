@@ -12,6 +12,7 @@ QUnit.testSuites([
     { name: "jquery plugin Test Suite", path: "./jqueryPlugin.html" },
     { name: "formatters Test Suite", path: "./format.html" },
     { name: "rerun simple Test Suite", path: "./rerunSimple.html" },
+    { name: "rerun sync simple Test Suite", path: "./rerunSyncSimple.html" },
     { name: "rerun macro Test Suite", path: "./rerunMacros.html" },
     { name: "i18n Test Suite", path: "./i18n.html" },
     //{ name: "i18n async Test Suite", path: "./i18nAsync.html" },
