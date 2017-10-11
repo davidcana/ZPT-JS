@@ -30,6 +30,9 @@ module.exports = function ( options ) {
     var callback;
     var notRemoveGeneratedTags = false;
     var declaredRemotePageUrls = [];
+
+    var scope = undefined;
+    var tags = context.getTags();
     
     // Get values from options
     var initFromOptions = function( options ){
@@ -38,13 +41,11 @@ module.exports = function ( options ) {
         callback = options.callback || callback;
         notRemoveGeneratedTags = options.notRemoveGeneratedTags || notRemoveGeneratedTags;
         declaredRemotePageUrls = options.declaredRemotePageUrls || declaredRemotePageUrls;
+        
+        scope = new Scope( dictionary );
     };
     
     initFromOptions( options || {} );
-    
-    // Continue with other var inits
-    var scope = new Scope( dictionary );
-    var tags = context.getTags();
     
     var init = function( initCallback ){
         
@@ -66,7 +67,7 @@ module.exports = function ( options ) {
             }
             
         } catch( e ){
-            log.fatal( 'Exiting ZPT init with errors: ' + e );
+            log.fatal( 'Exiting init method of ZPT with errors: ' + e );
             throw e;
         }
     };
@@ -78,7 +79,6 @@ module.exports = function ( options ) {
         }
     };
     
-    //var runSync = function( options ){
     var run = function( options ){
         
         initFromOptions( options || {} );
@@ -91,33 +91,10 @@ module.exports = function ( options ) {
             processAllRootElements( root, scope );
             
         } catch( e ){
-            log.fatal( 'Exiting ZPT runSync with errors: ' + e );
+            log.fatal( 'Exiting run method of ZPT with errors: ' + e );
             throw e;
         }
     };
-    /*
-    var run = function(){
-        
-        try {
-            if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllRootElements( root );
-            }
-
-            if ( ! resolver.loadRemotePages( 
-                scope,
-                declaredRemotePageUrls,
-                function (){
-                    processAllRootElements( root, scope );
-                })){
-
-                processAllRootElements( root, scope );
-            }
-            
-        } catch( e ){
-            log.fatal( 'Exiting ZPT with errors: ' + e );
-            throw e;
-        }
-    };*/
         
     var removeGeneratedTagsFromAllRootElements = function( root ) {
         
@@ -511,6 +488,5 @@ module.exports = function ( options ) {
     return {
         run: run,
         init: init
-        //runSync: runSync
     };
 };
