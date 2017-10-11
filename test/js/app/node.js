@@ -42,7 +42,7 @@ jsdom.env(
 	        <p>
 	            Before use macro
 	        </p>
-	        <b data-muse-macro="copyright" style="display: none;">
+	        <b data-muse-macro="'copyright'" style="display: none;">
 	            Macro goes here
 	        </b><p data-mmacro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
@@ -50,7 +50,7 @@ jsdom.env(
 	        <p>
 	            In the middle of 2 macros
 	        </p>
-	        <b data-muse-macro="copyright" style="display: none;">
+	        <b data-muse-macro="'copyright'" style="display: none;">
 	            Macro goes here
 	        </b><p data-mmacro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
@@ -98,7 +98,7 @@ jsdom.env(
 function assert( real, expected ){
     
     if ( real !== expected ){
-        console.log( 'ZPT NOT working properly! Real: ' + real + ', expected: ' + expected );
+        console.log( 'ZPT NOT working properly! \nReal: \n' + real + '\nExpected: \n' + expected );
         process.exit( 1 );
     }
 }
