@@ -31,12 +31,11 @@ jsdom.env(
                 throwError: function(){
                     throw 'An exception';
                 }
-            },
-            callback: function(){
-                console.log( 'Done!' );
             }
         });
-        
+
+        console.log( 'Done!' );
+
         // Some tests
         var t2_1 = `
 	        <p>

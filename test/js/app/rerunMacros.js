@@ -14,10 +14,7 @@ var dictionary = {
 QUnit.test( "Rerun macro tests", function( assert ) {
     zpt.run({
         root: root,
-        dictionary: dictionary,
-        callback: function(){
-            continueTesting( root, counter );
-        }
+        dictionary: dictionary
     });
 
     function continueTesting( root, counter ){
@@ -59,4 +56,6 @@ QUnit.test( "Rerun macro tests", function( assert ) {
 
         assert.equal( $('#t2-6').html().trim() , "counter=" + counter );
     };
+    
+    continueTesting( root, counter );
 });

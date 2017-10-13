@@ -2,6 +2,9 @@ New in 0.21.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.20.2
+- Bug fixed: callback executed in processAllRootElements method of Parser class.
+
 New in 0.20.1
 - Bug fixed: dictionary not updated when calling several times to run method in Parser class.
 - Bug fixed: node test fixed.

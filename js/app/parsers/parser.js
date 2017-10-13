@@ -138,11 +138,6 @@ module.exports = function ( options ) {
             // There is only one root
             process( root, scope );
         }
-        
-        // Process callback
-        if ( callback && typeof callback == 'function' ) {
-            callback();
-        }
     };
     
     var process = function( node, scope ) {

@@ -167,15 +167,6 @@ module.exports = function(grunt) {
                 src: 'test/js/app/rerunSimple.js',
                 dest: 'build/rerunSimple.js'
             },
-            rerunSyncSimple: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/app/rerunSyncSimple.js',
-                dest: 'build/rerunSyncSimple.js'
-            },
             scope: {
                 options: {
                     browserifyOptions: {

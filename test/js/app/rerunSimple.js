@@ -15,10 +15,7 @@ var dictionary = {
 QUnit.test( "Rerun simple tests", function( assert ) {
     zpt.run({
         root: root,
-        dictionary: dictionary,
-        callback: function(){
-            continueTesting( root, counter );
-        }
+        dictionary: dictionary
     });
 
     function continueTesting( root, counter ){
@@ -29,11 +26,9 @@ QUnit.test( "Rerun simple tests", function( assert ) {
             };
             zpt.run({
                 root: root,
-                dictionary: dictionary,
-                callback: function(){
-                    continueTesting( root, counter );
-                }
+                dictionary: dictionary
             });
+            continueTesting( root, counter );
         }
     }
 
@@ -49,4 +44,6 @@ QUnit.test( "Rerun simple tests", function( assert ) {
         assert.equal( $('#t1-3').html() , "counter=" + counter );
         assert.equal( $('#t1-4').html() , "counter=" + counter );
     };
+    
+    continueTesting( root, counter );
 });
