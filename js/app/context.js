@@ -140,8 +140,8 @@ module.exports = (function() {
         
             i18nConfResourceId: '/CONF/',
         
-            loggingOn: false,
-            loggingLevel: log4javascript.Level.ERROR,
+            loggingOn: true,
+            loggingLevel: log4javascript.Level.WARN,
         
             expressionCacheOn: true,
             attributeCacheOn: true,

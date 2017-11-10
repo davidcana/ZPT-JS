@@ -145,5 +145,38 @@
                 data-tattributes="class 'styleTest';
                                   style 'color:blue'">Number</li>
         </ol>
+        <p>
+            Try out all of our loop variables in dynamic loops
+        </p>
+        <table id="dynamicLoop2">
+            <tr>
+                <th>Value</th>
+                <th>Index</th>
+                <th>Number</th>
+                <th>Even index</th>
+                <th>Odd index</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Length</th>
+                <th>Letter</th>
+                <th>Capital Letter</th>
+                <th>Roman</th>
+                <th>Capital Roman</th>
+            </tr>
+            <tr data-trepeat="item tools">
+                <td data-tattributes="class 'd_value'" data-tcontent="item/name">value</td>
+                <td data-tattributes="class 'd_index'" data-tcontent="repeat/item/index()">index</td>
+                <td data-tattributes="class 'd_number'" data-tcontent="repeat/item/number()">number</td>
+                <td data-tattributes="class 'd_isEven'" data-tcontent="repeat/item/even()">even</td>
+                <td data-tattributes="class 'd_isOdd'" data-tcontent="repeat/item/odd()">odd</td>
+                <td data-tattributes="class 'd_isStart'" data-tcontent="repeat/item/start()">start</td>
+                <td data-tattributes="class 'd_isEnd'" data-tcontent="repeat/item/end()">end</td>
+                <td data-tattributes="class 'd_getLength'" data-tcontent="repeat/item/length()">length</td>
+                <td data-tattributes="class 'd_getLetter'" data-tcontent="repeat/item/letter()">letter</td>
+                <td data-tattributes="class 'd_getCapitalLetter'" data-tcontent="repeat/item/Letter()">capital letter</td>
+                <td data-tattributes="class 'd_getRoman'" data-tcontent="repeat/item/roman()">roman</td>
+                <td data-tattributes="class 'd_getCapitalRoman'" data-tcontent="repeat/item/Roman()">capitalRoman</td>
+            </tr>
+        </table>
    </body> 
  </html>

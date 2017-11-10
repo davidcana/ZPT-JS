@@ -163,7 +163,7 @@ module.exports = function ( options ) {
             }
         }
     };
-
+    /*
     var getLoopNextSibling = function( node ){
         
         var nextSibling = node;
@@ -175,20 +175,27 @@ module.exports = function ( options ) {
         } while ( nextSibling.hasAttribute( tags.qdup ) );
         
         return nextSibling;
-        /*
-        var children = node.parentNode.children;
-        for ( var i = 0; i < children.length; i++ ) {
-            var child = children[ i ];
-            if ( ! child.hasAttribute( tags.qdup ) ){
-                return child;
+    };*/
+    
+    var processLoopNextSibling = function( node ){
+
+        var counter = -1;
+        var nextSibling = node;
+        do {
+            ++counter;
+            nextSibling = nextSibling.nextElementSibling;
+            if ( ! nextSibling ){
+                return {
+                    nextSibling: null,
+                    counter: counter
+                };
             }
-        }
-        
-        return child || node;
-        */
-        
-        
-        //return node.nextSibling;
+        } while ( nextSibling.hasAttribute( tags.qdup ) );
+
+        return {
+            nextSibling: nextSibling,
+            counter: counter
+        };
     };
     
     var processLoop = function( node, attributes, scope ) {
@@ -201,10 +208,11 @@ module.exports = function ( options ) {
         node.removeAttribute( 'style' );
         node.setAttribute( tags.qdup, 1 );
 
-        //var lastNode = node;
-        //var nextSibling = node.nextElementSibling;
-        //var nextSibling = null;
-        var nextSibling = getLoopNextSibling( node );
+        //var nextSibling = getLoopNextSibling( node );
+        var nextSiblingData = processLoopNextSibling( node );
+        var nextSibling = nextSiblingData.nextSibling;
+        loop.setOffset( nextSiblingData.counter );
+        //log.warn( 'loop counter: ' + nextSiblingData.counter );
         while ( loop.repeat( scope ) ) {
             // Get tmpNode
             var tmpNode = node.cloneNode( true );
@@ -214,9 +222,6 @@ module.exports = function ( options ) {
 
             // Insert it
             var parentNode = node.parentNode;
-            //parentNode.insertBefore( tmpNode, null );
-            //var nextSibling = lastNode.nextSibling;
-            //lastNode = tmpNode;
             parentNode.insertBefore( tmpNode, nextSibling );
             
             // Process it
@@ -226,17 +231,6 @@ module.exports = function ( options ) {
         }
 
         // Configure repeat node (the original) to enable future reevaluation
-        //$( node ).hide();
-        //$( node ).css( "display", "none" );
-        //node.style = $( 'body' )[0].style;
-        /*
-        var style =  $( 'body' )[0].style;
-        if ( node.style ){
-            node.style.display = 'none';
-        } else {
-            node.style = { display : 'none' };
-        }*/
-        //node.setAttribute( 'style', 'display: none;' );
         node.style.display = 'none';
         node.setAttribute( tags.talRepeat, attributes.talRepeat );
         node.removeAttribute( tags.qdup );

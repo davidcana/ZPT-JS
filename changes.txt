@@ -3,6 +3,10 @@ New in 0.21.0
 - Avoid flashing?
 
 New in 0.20.2
+- Bug fixed: offset added to loops to prevent buggy index properties when using dynamic loops.
+- Updated userguide about web server for testing purposes. (pending)
+
+New in 0.20.2
 - Bug fixed: callback executed in processAllRootElements method of Parser class.
 
 New in 0.20.1

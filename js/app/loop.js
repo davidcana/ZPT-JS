@@ -9,9 +9,14 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
     var items = itemsToIterate;
     var currentIndex = -1;
     var maxIndex = itemsToIterate? itemsToIterate.length - 1: -1;
+    var offset = 0;
     
     var getName = function( ){
         return name;
+    };
+    
+    var setOffset = function( offsetToApply ){
+        offset = offsetToApply;
     };
     
     var repeat = function( scope ){
@@ -30,24 +35,28 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
         return false;
     };
     
+    var currentIndexWithOffset = function(){
+        return offset + currentIndex;
+    };
+    
     var index = function( ) {
-        return currentIndex;
+        return currentIndexWithOffset();
     };
     
     var number = function( ) {
-        return currentIndex + 1;
+        return currentIndexWithOffset() + 1;
     };
     
     var even = function( ) {
-        return currentIndex % 2 == 0;
+        return currentIndexWithOffset() % 2 == 0;
     };
     
     var odd = function ( ) {
-        return currentIndex % 2 == 1;
+        return currentIndexWithOffset() % 2 == 1;
     };
     
     var start = function ( ) {
-        return currentIndex == 0;
+        return currentIndexWithOffset() == 0;
     };
     
     var end = function ( ) {
@@ -55,15 +64,15 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
     };
     
     var length = function () {
-        return items.length;
+        return offset + items.length;
     };
 
     var letter = function () {
-        return formatLetter( currentIndex, 'a' );
+        return formatLetter( currentIndexWithOffset(), 'a' );
     };
     
     var Letter = function () {
-        return formatLetter( currentIndex, 'A' );
+        return formatLetter( currentIndexWithOffset(), 'A' );
     };
     
     var formatLetter = function ( ii, startChar ) {
@@ -83,11 +92,11 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
     };
     
     var roman = function () {
-        return formatRoman( currentIndex + 1, 0 );
+        return formatRoman( currentIndexWithOffset() + 1, 0 );
     };
     
     var Roman = function () {
-        return formatRoman( currentIndex + 1, 1 );
+        return formatRoman( currentIndexWithOffset() + 1, 1 );
     };
     
     var formatRoman = function ( nn, capital ) {
@@ -161,6 +170,7 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
     
     return {
         getName: getName,
+        setOffset: setOffset,
         repeat:repeat,
         index: index,
         number: number,

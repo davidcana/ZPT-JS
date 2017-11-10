@@ -73,6 +73,77 @@ QUnit.test( "array loops test", function( assert ) {
     assert.equal( getAllValues( '.pValue' ) , '1/2/3/4/5' );
     //assert.equal( getAllValues( '.pValue' ) , '1/5/2/3/4' );
 });
+
+QUnit.test( "dynamic loops in table test", function( assert ) {
+    
+    assert.equal( getAllValues( '.d_value' ) , 'tool A/tool B/tool C/tool D'  );
+    assert.equal( getAllValues( '.d_index' ) , '0/1/2/3'  );
+    assert.equal( getAllValues( '.d_number' ) , '1/2/3/4'  );
+    assert.equal( getAllValues( '.d_isEven' ) , 'true/false/true/false'  );
+    assert.equal( getAllValues( '.d_isOdd' ) , 'false/true/false/true'  );
+    assert.equal( getAllValues( '.d_isStart' ) , 'true/false/false/false'  );
+    assert.equal( getAllValues( '.d_isEnd' ) , 'false/false/false/true'  );
+    assert.equal( getAllValues( '.d_getLength' ) , '4/4/4/4'  );
+    assert.equal( getAllValues( '.d_getLetter' ) , 'a/b/c/d'  );
+    assert.equal( getAllValues( '.d_getCapitalLetter' ) , 'A/B/C/D'  );
+    assert.equal( getAllValues( '.d_getRoman' ) , 'i/ii/iii/iv'  );
+    assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV'  );
+
+    // Add a tool
+    var dictionary = {
+        tools: []
+    };
+    dictionary.tools.push( 
+        { name: "tool E", rent_url: "rent?id=1008" } );
+    
+    zpt.run({
+        root: $( '#dynamicLoop2' )[0],
+        dictionary: dictionary,
+        notRemoveGeneratedTags: true
+    });
+    
+    assert.equal( getAllValues( '.d_value' ) , 'tool A/tool B/tool C/tool D/tool E'  );
+    assert.equal( getAllValues( '.d_index' ) , '0/1/2/3/4'  );
+    assert.equal( getAllValues( '.d_number' ) , '1/2/3/4/5'  );
+    assert.equal( getAllValues( '.d_isEven' ) , 'true/false/true/false/true'  );
+    assert.equal( getAllValues( '.d_isOdd' ) , 'false/true/false/true/false'  );
+    assert.equal( getAllValues( '.d_isStart' ) , 'true/false/false/false/false'  );
+    assert.equal( getAllValues( '.d_isEnd' ) , 'false/false/false/true/true'  );
+    assert.equal( getAllValues( '.d_getLength' ) , '4/4/4/4/5'  );
+    assert.equal( getAllValues( '.d_getLetter' ) , 'a/b/c/d/e'  );
+    assert.equal( getAllValues( '.d_getCapitalLetter' ) , 'A/B/C/D/E'  );
+    assert.equal( getAllValues( '.d_getRoman' ) , 'i/ii/iii/iv/v'  );
+    assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV/V'  );
+    
+    // Add a tool
+    var dictionary = {
+        tools: []
+    };
+    dictionary.tools.push( 
+        { name: "tool F", rent_url: "rent?id=1010" } );
+    dictionary.tools.push( 
+        { name: "tool G", rent_url: "rent?id=1012" } );
+    
+    zpt.run({
+        root: $( '#dynamicLoop2' )[0],
+        dictionary: dictionary,
+        notRemoveGeneratedTags: true
+    });
+    
+    assert.equal( getAllValues( '.d_value' ) , 'tool A/tool B/tool C/tool D/tool E/tool F/tool G'  );
+    assert.equal( getAllValues( '.d_index' ) , '0/1/2/3/4/5/6'  );
+    assert.equal( getAllValues( '.d_number' ) , '1/2/3/4/5/6/7'  );
+    assert.equal( getAllValues( '.d_isEven' ) , 'true/false/true/false/true/false/true'  );
+    assert.equal( getAllValues( '.d_isOdd' ) , 'false/true/false/true/false/true/false'  );
+    assert.equal( getAllValues( '.d_isStart' ) , 'true/false/false/false/false/false/false'  );
+    assert.equal( getAllValues( '.d_isEnd' ) , 'false/false/false/true/true/false/true'  );
+    assert.equal( getAllValues( '.d_getLength' ) , '4/4/4/4/5/7/7'  );
+    assert.equal( getAllValues( '.d_getLetter' ) , 'a/b/c/d/e/f/g'  );
+    assert.equal( getAllValues( '.d_getCapitalLetter' ) , 'A/B/C/D/E/F/G'  );
+    assert.equal( getAllValues( '.d_getRoman' ) , 'i/ii/iii/iv/v/vi/vii'  );
+    assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV/V/VI/VII'  );
+});
+
 /*
 function getValues( selector ){
     return $( selector ).map( function( index, element ) {
