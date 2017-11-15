@@ -60,7 +60,7 @@ module.exports = (function() {
         if ( tal == '' ){
             var c = 0;
             var notInclude = tags.qdup;
-            for ( property in tags ) {
+            for ( var property in tags ) {
                 if ( notInclude == tags[ property ] ){
                     continue;
                 }

@@ -1,5 +1,5 @@
 /*
-    exported functions
+    Exported functions
 */
 exports.run = function( options ){
     

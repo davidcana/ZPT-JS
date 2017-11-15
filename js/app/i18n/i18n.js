@@ -36,16 +36,12 @@ module.exports = function( languageId, res ) {
         switch ( format ) {
         case 'string':
             return trString( id, params );
-            break;
         case 'number':
             return trNumber( id, params );
-            break;
         case 'currency':
             return trCurrency( id, params, subformat );
-            break;
         case 'datetime':
             return trDateTime( id, params );
-            break;
         } 
         
         throw 'I18n format type not supported: ' + format;

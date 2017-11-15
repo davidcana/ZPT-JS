@@ -29,7 +29,6 @@ module.exports = (function() {
         // Evaluate segments
         var result = 0;
         var c = 0;
-        var value;
         
         for ( var i = 0; i < expressionList.length; i++ ) {
             var expression = expressionList[ i ];

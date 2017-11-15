@@ -163,19 +163,6 @@ module.exports = function ( options ) {
             }
         }
     };
-    /*
-    var getLoopNextSibling = function( node ){
-        
-        var nextSibling = node;
-        do {
-            nextSibling = nextSibling.nextElementSibling;
-            if ( ! nextSibling ){
-                return null;
-            }
-        } while ( nextSibling.hasAttribute( tags.qdup ) );
-        
-        return nextSibling;
-    };*/
     
     var processLoopNextSibling = function( node ){
 
@@ -208,12 +195,13 @@ module.exports = function ( options ) {
         node.removeAttribute( 'style' );
         node.setAttribute( tags.qdup, 1 );
 
-        //var nextSibling = getLoopNextSibling( node );
         var nextSiblingData = processLoopNextSibling( node );
         var nextSibling = nextSiblingData.nextSibling;
         loop.setOffset( nextSiblingData.counter );
         //log.warn( 'loop counter: ' + nextSiblingData.counter );
+        
         while ( loop.repeat( scope ) ) {
+            
             // Get tmpNode
             var tmpNode = node.cloneNode( true );
             if ( 'form' in tmpNode ) {
@@ -271,9 +259,6 @@ module.exports = function ( options ) {
             scope.endElement();
             throw e;
         }
-
-        scope.endElement();
-        return true;
     };
 
     var processElement = function( node, attributes, scope ) {
@@ -344,7 +329,7 @@ module.exports = function ( options ) {
         return true;
     };
 
-    var defaultContent = function( node, scope, slotStack ) {
+    var defaultContent = function( node, scope ) {
 
         var childNodes = node.childNodes;
         if ( ! childNodes ) {

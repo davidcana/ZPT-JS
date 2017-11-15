@@ -6,21 +6,6 @@ module.exports = (function() {
     
     var context = require( './context.js' );
     
-    //var log4javascript = context.getConf().loggingOn? require( 'log4javascript' ): null;
-    //var logger = undefined;
-    /*
-    var initLogger = function(){
-        logger = context.getConf().loggingOn? log4javascript.getDefaultLogger(): undefined;
-        
-        if ( ! logger ){
-            return;
-        }
-            
-        logger.setLevel( log4javascript.Level.DEBUG );
-        //logger.removeAllAppenders();
-        //logger.addAppender( new log4javascript.BrowserConsoleAppender( true ) );
-    }();*/
-    
     var trace = function (){
         
         var logger = context.getLogger();
@@ -86,6 +71,7 @@ module.exports = (function() {
         
         logger.fatal.apply( logger, arguments );
     };
+    
     /*
     var fatalAndThrow = function ( message ){
         

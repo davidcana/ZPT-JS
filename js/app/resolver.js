@@ -65,48 +65,8 @@ module.exports = (function( ) {
         return "[" + filterSelector( context.getTags().metalDefineMacro ) + "='" + macroId + "']";
     };
     
-    /*
-    var loadNode = function( macroKey, scope ){
-
-        var mustSetInScope = true;
-        var macroData = getMacroData( macroKey, scope );
-
-        if ( ! macroData.url ){
-            // No url set
-
-            var urlInScope = scope.get( context.getConf().externalMacroUrlVarName );
-            if ( urlInScope ){
-                // Node is in another page but using a previously defined url
-                macroData.url = urlInScope;
-                mustSetInScope = false;
-
-            } else {
-                // Node is in this page
-                var macroId = macroData.macroId;
-                var selector = builDefineMacroSelector( macroId );
-                var node = $( selector )[0];
-
-                if ( ! node ){
-                    throw "Node using selector '" + selector + "' is null!";
-                }
-
-                return configureNode( 
-                    node.cloneNode( true ), 
-                    macroId,
-                    macroKey );
-            }
-        }
-
-        // Node is in another page
-        if ( mustSetInScope ){
-            scope.set( context.getConf().externalMacroUrlVarName, macroData.url, true );
-        }
-        return loadRemoteNode( macroKey, macroData );
-    };*/
-    
     var loadNode = function( macroKey, scope ){
         
-        var mustSetInScope = true;
         var macroData = getMacroData( macroKey, scope );
         
         if ( ! macroData.url ){
@@ -116,7 +76,6 @@ module.exports = (function( ) {
             if ( urlInScope ){
                 // Node is in another page but using a previously defined url
                 macroData.url = urlInScope;
-                mustSetInScope = false;
                 
             } else {
                 // Node is in this page
@@ -199,34 +158,10 @@ module.exports = (function( ) {
                     deferred();
                 }
             });
-            /*
-            var element = $( '<div></div>' );
-            element.load( currentPageUrl, function( response, status, xhr ) {
-                remotePages[ currentPageUrl ] = element;
-                var $this = $( this );
-                if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
-                    deferred();
-                }
-            });*/
-            /*
-            var element = $( '<div></div>' );
-            element.load( 
-                currentPageUrl, 
-                makeLoadRemotePageFunction( remotePages, currentPageUrl, pending, deferred ));
-                */
         }
         
         return remotePageUrls.length;
     };
-    /*
-    var makeLoadRemotePageFunction = function( remotePages, currentPageUrl, pending, deferred){
-        return function() {
-            remotePages[ currentPageUrl ] = this;
-            if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
-                deferred();
-            }
-        }
-    };*/
     
     var configureNode = function( node, macroId, macroKey ){
         node.removeAttribute( context.getTags().metalDefineMacro );

@@ -24,7 +24,6 @@ module.exports = (function() {
     };
     
     var unregister = function( expressionsManager, id ) {
-        //expressionManagers[ id ] = undefined;
         delete expressionManagers[ id || expressionsManager.getPrefix() || expressionsManager.getId() ];
     };
     

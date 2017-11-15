@@ -26,7 +26,7 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
             var indexExpression = indexes[ i ];
 
             // Evaluate array access
-            var result = result[ indexExpression.evaluate( scope ) ];
+            result = result[ indexExpression.evaluate( scope ) ];
         }
         
         return result;

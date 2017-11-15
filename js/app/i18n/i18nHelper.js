@@ -52,23 +52,6 @@ module.exports = (function() {
                 }
             });
     };
-    /*
-    var loadAsyncItem = function( map, deferred, remoteList, currentIndex ){
-        var url = remoteList[ currentIndex ];
-        $.getJSON( url )
-            .success(function( data ) {
-                map[ url ] = data;
-                if ( currentIndex > 0 ){
-                    loadAsyncItem( 
-                        map, 
-                        deferred, 
-                        remoteList, 
-                        --currentIndex );
-                } else {
-                    deferred( map );
-                }
-            });
-    };*/
     
     return {
         tr: tr,

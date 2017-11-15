@@ -28,7 +28,7 @@ module.exports = function( obj ) {
         return varsStack[ varsStack.length - 1 ];
     };
     
-    var setLocal = function( name, value, isGlobal ) {
+    var setLocal = function( name, value ) {
         globals[ name ] = value;
     };
     
