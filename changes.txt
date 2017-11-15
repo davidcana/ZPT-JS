@@ -2,6 +2,9 @@ New in 0.21.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.20.4
+- Bug fixed: value of notRemoveGeneratedTags option was not updated when zpt was invoked several times.
+
 New in 0.20.3
 - Bug fixed: offset added to loops to prevent buggy index properties when using dynamic loops.
 - Updated userguide about web server for testing purposes.

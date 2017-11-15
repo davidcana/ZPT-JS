@@ -39,7 +39,7 @@ module.exports = function ( options ) {
         root = options.root || root;
         dictionary = options.dictionary || dictionary;
         callback = options.callback || callback;
-        notRemoveGeneratedTags = options.notRemoveGeneratedTags || notRemoveGeneratedTags;
+        notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: notRemoveGeneratedTags;
         declaredRemotePageUrls = options.declaredRemotePageUrls || declaredRemotePageUrls;
         
         scope = new Scope( dictionary );
