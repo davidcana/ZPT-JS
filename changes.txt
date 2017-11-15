@@ -2,6 +2,9 @@ New in 0.21.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.20.5
+- Problem with version number of npmjs.
+
 New in 0.20.4
 - Bug fixed: value of notRemoveGeneratedTags option was not updated when zpt was invoked several times.
 
