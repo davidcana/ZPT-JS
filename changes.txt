@@ -1,6 +1,9 @@
-New in 0.21.0
+New in 0.22.0
 - Replace callback functions by promises?
 - Avoid flashing?
+
+New in 0.21.0
+- Full support of boolean attributes (checked, compact, declare, defer, disabled, ismap, multiple, nohref, noresize, noshade, nowrap, readonly and selected).
 
 New in 0.20.5
 - Problem with version number of npmjs.

@@ -51,12 +51,12 @@ QUnit.test( "Condition test", function( assert ) {
 });
 
 QUnit.test( "Attributes test", function( assert ) {
-    assert.equal( $('#t3-1').attr('title') , "title in string expression" );
-    assert.equal( $('#t3-1').attr('href') , "http://www.xxx.org" );
-    assert.equal( $('#t3-2').attr('title') , "title in string expression" );
-    assert.equal( $('#t3-2').attr('href') , "http://www.xxx.org" );
-    assert.equal( $('#t3-3').attr('placeholder') , "Write something here!" );
-    assert.equal( $('#t3-3').attr('rows') , "10" );
-    assert.equal( $('#t3-3').attr('cols') , "100" );
-    assert.equal( $('#t3-3').attr('maxlength') , "200" );
+    assert.equal( $('#t3-1').attr('placeholder') , "Write something here!" );
+    assert.equal( $('#t3-1').attr('rows') , "10" );
+    assert.equal( $('#t3-1').attr('cols') , "100" );
+    assert.equal( $('#t3-1').attr('maxlength') , "200" );
+    assert.equal( $('#t4-1').attr('title') , "title in string expression" );
+    assert.equal( $('#t4-1').attr('href') , "http://www.xxx.org" );
+    assert.equal( $('#t4-2').attr('title') , "title in string expression" );
+    assert.equal( $('#t4-2').attr('href') , "http://www.xxx.org" );
 });

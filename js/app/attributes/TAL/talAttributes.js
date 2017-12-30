@@ -8,40 +8,6 @@ var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
 
 var $ = require( 'jquery' );
 
-// Attributes which don't support setAttribute()
-var altAttr = {
-    className : 1,
-    "class" : 1,
-    innerHTML : 1,
-    style : 1,
-    src : 1,
-    href : 1,
-    id : 1,
-    value : 1,
-    checked : 1,
-    selected : 1,
-    label : 1,
-    htmlFor : 1,
-    text : 1,
-    title : 1,
-    disabled : 1
-};
-var booleanAttr = {
-    checked : 1,
-    compact : 1,
-    declare : 1,
-    defer : 1,
-    disabled : 1,
-    ismap : 1,
-    multiple : 1,
-    nohref : 1,
-    noresize : 1,
-    noshade : 1,
-    nowrap : 1,
-    readonly : 1,
-    selected : 1
-};
-
 var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     
     var string = stringToApply;
@@ -80,33 +46,43 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     
     var processSimpleAttributeItem = function( node, name, value ){
         
-        if ( value != undefined ) {
-            if ( altAttr[ name ] ) {
-                switch ( name ) {
-                case "innerHTML":
-                    throw node; // should use "qtext"
-                case "disabled":
-                case "checked":
-                case "selected":
-                    node[ name ] = !!value;
-                    break;
-                case "style":
-                    node.style.cssText = value;
-                    break;
-                /*
-                case "text":
-                    node[ querySelectorAll ? name : innerText ] = value;
-                    break; // option.text unstable in IE
-                */
-                case "class":
-                    name = "className";
-                default:
-                    node[ name ] = value;
-                }
+        // Boolean attributes
+        if ( context.isBooleanAttribute( name ) ){
+            if ( value ){
+                node.setAttribute( name, '' );
             } else {
-                node.setAttribute( name, value );
+                node.removeAttribute( name );
             }
+            return;
         }
+        /*
+        if ( value == undefined ) {
+            return;
+        }*/
+            
+        // Alt attributes
+        if ( context.isAltAttribute( name ) ) {
+            switch ( name ) {
+            case "innerHTML":
+                throw node; // should use "qtext"
+            case "style":
+                node.style.cssText = value;
+                break;
+            /*
+            case "text":
+                node[ querySelectorAll ? name : innerText ] = value;
+                break; // option.text unstable in IE
+            */
+            case "class":
+                name = "className";
+            default:
+                node[ name ] = value;
+            }
+            return;
+        } 
+
+        // Regular attributes
+        node.setAttribute( name, value );
     };
     
     return {
