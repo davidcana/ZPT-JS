@@ -2,6 +2,9 @@ New in 0.22.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.21.1
+- Bug fixed: don't render a attribute with an undefined value.
+
 New in 0.21.0
 - Full support of boolean attributes (checked, compact, declare, defer, disabled, ismap, multiple, nohref, noresize, noshade, nowrap, readonly and selected).
 

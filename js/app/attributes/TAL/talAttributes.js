@@ -55,10 +55,11 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
             }
             return;
         }
-        /*
+        
+        // If value is undefined don't parser the attribute
         if ( value == undefined ) {
             return;
-        }*/
+        }
             
         // Alt attributes
         if ( context.isAltAttribute( name ) ) {
