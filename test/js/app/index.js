@@ -6,7 +6,7 @@ QUnit.testSuites([
 	{ name: "loops Test Suite", path: "./loops.html" },
 	{ name: "nested loops Test Suite", path: "./nestedLoops.html" },
 	{ name: "macros Test Suite", path: "./macros.html" },
-    { name: "external sync macros Test Suite", path: "./externalSyncMacros-calls.html" },
+    { name: "external macros Test Suite", path: "./externalMacros.html" },
     { name: "jquery expressions Test Suite", path: "./jquery.html" },
 	{ name: "on-error tag Test Suite", path: "./on-error.html" },
     { name: "jquery plugin Test Suite", path: "./jqueryPlugin.html" },

@@ -41,14 +41,23 @@ module.exports = function(grunt) {
                 src: 'test/js/app/errors.js',
                 dest: 'build/errors.js'
             },
-            externalSyncMacros: {
+            macros: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                src: 'test/js/app/externalSyncMacros.js',
-                dest: 'build/externalSyncMacros.js'
+                src: 'test/js/app/macros.js',
+                dest: 'build/macros.js'
+            },
+            externalMacros: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/externalMacros.js',
+                dest: 'build/externalMacros.js'
             },
             format: {
                 options: {

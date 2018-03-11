@@ -1,5 +1,9 @@
 "use strict";
 
+var $ = require( 'jquery' );
+var Qunit = require( 'qunitjs' );
+var zpt = require( '../../../js/app/main.js' );
+
 var dictionary = { 
     nullValue: null,
     aString: "string",
@@ -99,12 +103,7 @@ QUnit.test( "Simple macros test", function( assert ) {
     After use macro
 </p>
         `;
-    assert.htmlEqualExt( '#t1', t1 );
-    /*
-    assert.equal( 
-            $('#t1').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-            t1.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-            "Passed!" );*/
+    assertHtml( assert, '#t1', t1 );
 });
 
 QUnit.test( "Dynamic macro", function( assert ) {
@@ -118,17 +117,7 @@ QUnit.test( "Dynamic macro", function( assert ) {
     Dynamic text: <span id=\"t2-1\" data-tcontent=\"string:A test of a dynamic macro\" data-tattributes=\"id string:t2-1\">A test of a dynamic macro</span>
 </p>
     `;
-    assert.htmlEqualExt( '#t2', t2 );
-    /*
-    assert.equal( 
-            $('#t2').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-            t2.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-            "Passed!" );*/
-    /*
-    assert.equal( 
-            $('#t2').html(), 
-            t2, 
-            "Passed!" );*/
+    assertHtml( assert, '#t2', t2 );
 });
 
 QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
@@ -142,18 +131,7 @@ QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
     Var value: <span id=\"t3-1\" data-tcontent=\"var\" data-tattributes=\"id id\">undefined</span>
 </p>
     `;
-    assert.htmlEqualExt( '#t3', t3 );
-    /*
-    assert.equal( 
-            $('#t3').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-            t3.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-            "Passed!" );*/
-            
-    /*
-    assert.equal( 
-            $('#t3').html(), 
-            t3, 
-            "Passed!" );*/
+    assertHtml( assert, '#t3', t3 );
 });
 
 QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
@@ -167,18 +145,7 @@ QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
     Var value: <span id=\"t4-1\" data-tcontent=\"var\" data-tattributes=\"id id\">1</span>
 </p>
     `;
-    assert.htmlEqualExt( '#t4', t4 );
-    /*
-    assert.equal( 
-            $('#t4').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-            t4.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-            "Passed!" );*/
-            
-    /*
-    assert.equal( 
-            $('#t4').html(), 
-            t4, 
-            "Passed!" );*/
+    assertHtml( assert, '#t4', t4 );
 });
 
 QUnit.test( "Dynamic macro reading var (items = [10 20 30]) test", function( assert ) {
@@ -200,18 +167,7 @@ QUnit.test( "Dynamic macro reading var (items = [10 20 30]) test", function( ass
     </li>
 </ul>
         `;
-        assert.htmlEqualExt( '#t5', t5 );
-        /*
-        assert.equal( 
-                $('#t5').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-                t5.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-                "Passed!" );*/
-                
-        /*
-        assert.equal( 
-                $('#t5').html(), 
-                t5, 
-                "Passed!" );*/
+        assertHtml( assert, '#t5', t5 );
 });
 
 QUnit.test( "Macro using 1 slot test", function( assert ) {
@@ -235,18 +191,7 @@ QUnit.test( "Macro using 1 slot test", function( assert ) {
     </em>
 </div>
         `;
-        assert.htmlEqualExt( '#t6', t6 );
-        /*
-        assert.equal( 
-                $('#t6').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-                t6.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-                "Passed!" );*/
-                
-        /*
-        assert.equal( 
-                $('#t6').html(), 
-                t6, 
-                "Passed!" );*/
+        assertHtml( assert, '#t6', t6 );
 });
 
 QUnit.test( "Macro using 2 slots test", function( assert ) {
@@ -276,18 +221,7 @@ QUnit.test( "Macro using 2 slots test", function( assert ) {
     </em>
 </div>
         `;
-        assert.htmlEqualExt( '#t7', t7 );
-        /*
-        assert.equal( 
-                $('#t7').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-                t7.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-                "Passed!" );*/
-                
-        /*
-        assert.equal( 
-                $('#t7').html(), 
-                t7, 
-                "Passed!" );*/
+        assertHtml( assert, '#t7', t7 );
 });
 
 QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
@@ -313,18 +247,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
     </em>
 </div>
         `;
-        assert.htmlEqualExt( '#t8', t8 );
-        /*
-        assert.equal( 
-                $('#t8').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-                t8.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-                "Passed!" );*/
-                
-        /*
-        assert.equal( 
-                $('#t8').html(), 
-                t8, 
-                "Passed!" );*/
+        assertHtml( assert, '#t8', t8 );
 });
 
 QUnit.test( "Dynamic macro using 1 slot (items = [10 20 30]) test", function( assert ) {
@@ -355,18 +278,7 @@ QUnit.test( "Dynamic macro using 1 slot (items = [10 20 30]) test", function( as
     </li>
 </ul>
         `;
-        assert.htmlEqualExt( '#t9', t9 );
-        /*
-        assert.equal( 
-                $('#t9').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
-                t9.replace(/(\r\n|\n|\r|\t| )/gm,""), 
-                "Passed!" );*/
-                
-        /*
-        assert.equal( 
-                $('#t9').html(), 
-                t9, 
-                "Passed!" );*/
+        assertHtml( assert, '#t9', t9 );
 });
 
 QUnit.test( "Using var as macro id test (using copyright)", function( assert ) {
@@ -378,7 +290,7 @@ QUnit.test( "Using var as macro id test (using copyright)", function( assert ) {
     Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
 </p>
         `;
-    assert.htmlEqualExt( '#t10', t10 );
+    assertHtml( assert, '#t10', t10 );
 });
 
 QUnit.test( "Using var as macro id test (using newCopyright)", function( assert ) {
@@ -387,10 +299,10 @@ QUnit.test( "Using var as macro id test (using newCopyright)", function( assert 
     Macro goes here
 </b>
 <p data-mmacro=\"newCopyright\">
-    Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+    Copyright 2017, <em>Foo, Bar, and Associates</em> Inc.
 </p>
         `;
-    assert.htmlEqualExt( '#t11', t11 );
+    assertHtml( assert, '#t11', t11 );
 });
 
 QUnit.test( "Macro using 2 slots test and vars", function( assert ) {
@@ -422,7 +334,7 @@ QUnit.test( "Macro using 2 slots test and vars", function( assert ) {
     </em>
 </div>
         `;
-        assert.htmlEqualExt( '#t12', t12 );
+        assertHtml( assert, '#t12', t12 );
 });
 
 QUnit.test( "Macro using 2 slots test and vars (first is null)", function( assert ) {
@@ -456,11 +368,18 @@ QUnit.test( "Macro using 2 slots test and vars (first is null)", function( asser
     </em>
 </div>
         `;
-        assert.htmlEqualExt( '#t13', t13 );
+        assertHtml( assert, '#t13', t13 );
 });
 
 function getValues( selector ){
     return $( selector ).map( function( index, element ) {
         return this.innerHTML;
     } ).get().join( '/' );
+}
+
+function assertHtml( assert, id1, id2 ){
+    assert.equal( 
+        $( id1 ).text().replace(/\s+/g, ""), 
+        $( id2 ).text().replace(/\s+/g, ""), 
+        "Passed!" ); 
 }

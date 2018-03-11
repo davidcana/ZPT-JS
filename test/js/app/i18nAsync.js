@@ -53,10 +53,12 @@ function callback( i18nMap ){
     });
 
     QUnit.test( "Simple i18n test", function( assert ) {
+        //var done = assert.async();
         assert.equal( $('#t1-1').html() , "¡Hola mundo!" );
         assert.equal( $('#t1-2').html() , "Hello world!" );
+        //done();
     });
-
+    
     QUnit.test( "With parameters (spanish)", function( assert ) {
         assert.equal( $('#t2-1').html() , "Él no ha encontrado ningún resultado" );
         assert.equal( $('#t2-2').html() , "Él ha encontrado un único resultado" );
@@ -68,7 +70,7 @@ function callback( i18nMap ){
         assert.equal( $('#t2-8').html() , "Ellos han encontrado un único resultado" );
         assert.equal( $('#t2-9').html() , "Ellos han encontrado 10 resultados" );
     });
-
+    
     QUnit.test( "With parameters (english)", function( assert ) {
         assert.equal( $('#t3-1').html() , "He found no results" );
         assert.equal( $('#t3-2').html() , "He found 1 result" );
