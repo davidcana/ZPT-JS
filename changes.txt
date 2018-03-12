@@ -1,6 +1,9 @@
-New in 0.22.0
+New in 0.23.0
 - Replace callback functions by promises?
 - Avoid flashing?
+
+New in 0.22.0
+- Version of Jquery updated to 3.0.0.
 
 New in 0.21.1
 - Bug fixed: don't render a attribute with an undefined value.
