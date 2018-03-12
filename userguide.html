@@ -221,6 +221,8 @@ jsdom.env(
     </p>
     
     <a id="tags"></a>
+    
+    <a id="tags.zpt-js"></a>
     <h3>ZPT-JS tags</h3>
     <p>
         The name of tags are not the same because if they were the resulting HTML douments will not be well formed. The list of tags with their equivalences are:
@@ -296,7 +298,61 @@ jsdom.env(
         The tags can be changed. Customize the <code>defaultTag</code> variable in <code>js/app/context.js</code> file. You can also use <code>context.setTags( tags )</code> to define the tags programmatically.
         <br> Important: <strong>after this point we will refer to tags as the ZPT-JS tag name</strong>.
     </p>
+    
+    <a id="tags.originalTags"></a>
+    <h3>Using ZPT's original tags</h3>
+    <p>
+        The <em>data-*</em> attributes is used to store custom data private to the page or application. These are the standard in HTML5. If you prefer to use the original ZPT's attributes use <code>context.useOriginalTags()</code> method:
+    </p>
+    
+    <strong>original-tags-sample.js</strong>
+    <pre>
+"use strict";
 
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    aString: "string",
+    doggy: false,
+    number1: 1,
+    number100: 100,
+    user: {
+        name: "Bob", 
+        age: function( ){
+            return 25;
+        }
+    },
+    items: [ 'item0', 'item1', 'item2' ]
+};
+
+// Don't forget to declare to use original tags!
+zpt.context.useOriginalTags();
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+    </pre>
+    
+    <strong>original-tags-sample.html</strong>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
+
+        &lt;script src="original-tags-sample.js" defer&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Some expressions&lt;/h1&gt;
+        &lt;ol&gt;
+            &lt;li tal:content="user/name"&gt;xxx&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+    
     <a id="evaluationOrder"></a>
     <h3>Evaluation order</h3>
     <p>
