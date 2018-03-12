@@ -4,7 +4,7 @@ var $ = require( 'jquery' );
 require( '../../../js/app/jqueryPlugin.js' );
 
 var dictionary = require( './dictionary.js' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 
 $( '#search' ).zpt({
     dictionary: dictionary

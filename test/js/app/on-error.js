@@ -3,7 +3,7 @@
 var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 
 // Run tests!
 QUnit.test( "Before on-error tag test", function( assert ) {

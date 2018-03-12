@@ -1,7 +1,7 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
@@ -18,47 +18,64 @@ var en2JSONUrl = urlPrefix + 'i18n/en2.json';
 
 var jsonFiles = [ es1JSONUrl , en1JSONUrl, es2JSONUrl , en2JSONUrl ];
 
-i18nHelper.loadAsync( jsonFiles , callback );
-
-function callback( i18nMap ){
+var init = function( assert ){
     
-    // Create I18n and I18nBundle instances
-    var i18nES =  new I18n( 'es', i18nMap[ es1JSONUrl ] );
-    var i18nES2 = new I18n( 'es', i18nMap[ es2JSONUrl ] );
-    var i18nEN = new I18n( 'en', i18nMap[ en1JSONUrl ] );
-    var i18nEN2 = new I18n( 'en', i18nMap[ en2JSONUrl ] );
-    var i18nBundle = new I18nBundle( i18nES, i18nEN );
-    var i18nBundle2 = new I18nBundle( i18nES2, i18nEN2 );
-    
-    // Init dictionary
-    var dictionary = {
-        'i18n-ES':  i18nES,
-        'i18n-ES2': i18nES2,
-        'i18n-EN':  i18nEN,
-        'i18n-EN2': i18nEN2,
-        'i18nBundle': i18nBundle,
-        'i18nBundle2': i18nBundle2,
-        'i18nESArray': [ i18nES2, i18nES ],
-        'i18nENArray': [ i18nEN2, i18nEN ],
-        fireError: function( ){
-            //return 1 / 0;
-            document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
-        },
-        date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
-    };
+    var done = assert.async(); // QUnit's assert.async() function tells the framework to pause all tests until done() is called.
 
-    zpt.run({
-        root: document.body,
-        dictionary: dictionary
-    });
+    i18nHelper.loadAsync( jsonFiles , function( i18nMap ){
+
+        // Create I18n and I18nBundle instances
+        var i18nES =  new I18n( 'es', i18nMap[ es1JSONUrl ] );
+        var i18nES2 = new I18n( 'es', i18nMap[ es2JSONUrl ] );
+        var i18nEN = new I18n( 'en', i18nMap[ en1JSONUrl ] );
+        var i18nEN2 = new I18n( 'en', i18nMap[ en2JSONUrl ] );
+        var i18nBundle = new I18nBundle( i18nES, i18nEN );
+        var i18nBundle2 = new I18nBundle( i18nES2, i18nEN2 );
+
+        // Init dictionary
+        var dictionary = {
+            'i18n-ES':  i18nES,
+            'i18n-ES2': i18nES2,
+            'i18n-EN':  i18nEN,
+            'i18n-EN2': i18nEN2,
+            'i18nBundle': i18nBundle,
+            'i18nBundle2': i18nBundle2,
+            'i18nESArray': [ i18nES2, i18nES ],
+            'i18nENArray': [ i18nEN2, i18nEN ],
+            fireError: function( ){
+                //return 1 / 0;
+                document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
+            },
+            date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
+        };
+
+        var zptParser = zpt.buildParser({
+            root: document.body,
+            dictionary: dictionary
+        });
+
+        zptParser.init(
+            function(){
+                zptParser.run();
+                done();
+            }
+        );
+    });  
+};
+
+QUnit.module( 'module', {  
+    before: function( assert ){
+        init( assert );
+    }
+});
+
+var runTests = function(){
 
     QUnit.test( "Simple i18n test", function( assert ) {
-        //var done = assert.async();
         assert.equal( $('#t1-1').html() , "¡Hola mundo!" );
         assert.equal( $('#t1-2').html() , "Hello world!" );
-        //done();
     });
-    
+
     QUnit.test( "With parameters (spanish)", function( assert ) {
         assert.equal( $('#t2-1').html() , "Él no ha encontrado ningún resultado" );
         assert.equal( $('#t2-2').html() , "Él ha encontrado un único resultado" );
@@ -70,7 +87,7 @@ function callback( i18nMap ){
         assert.equal( $('#t2-8').html() , "Ellos han encontrado un único resultado" );
         assert.equal( $('#t2-9').html() , "Ellos han encontrado 10 resultados" );
     });
-    
+
     QUnit.test( "With parameters (english)", function( assert ) {
         assert.equal( $('#t3-1').html() , "He found no results" );
         assert.equal( $('#t3-2').html() , "He found 1 result" );
@@ -204,7 +221,7 @@ function callback( i18nMap ){
         assert.equal( $('#t21-7').html() , "Thursday, December 20, 2012, 4:00:00 AM" );
         assert.equal( $('#t21-8').html() , "Friday, December 21, 2012, 4:00:00 AM" );
     });
-    
+
     QUnit.test( "Simple i18n test with i18nBundle", function( assert ) {
         assert.equal( $('#t1-1-2').html() , "¡Hola mundo!" );
         assert.equal( $('#t1-2-2').html() , "Hello world!" );
@@ -355,7 +372,7 @@ function callback( i18nMap ){
         assert.equal( $('#t21-7-2').html() , "Thursday, December 20, 2012, 4:00:00 AM" );
         assert.equal( $('#t21-8-2').html() , "Friday, December 21, 2012, 4:00:00 AM" );
     });
-    
+
     QUnit.test( "An array with 2 domains in domain definition: [ i18n-ES2 i18n-ES ] (spanish)", function( assert ) {
         assert.equal( $('#t22-1').html() , "¡¡¡Hola mundo 2!!!" );
         assert.equal( $('#t22-2').html() , "Él no ha encontrado ningún resultado" );
@@ -365,4 +382,4 @@ function callback( i18nMap ){
         assert.equal( $('#t23-1').html() , "Hello world 2.0!!!" );
         assert.equal( $('#t23-2').html() , "He found no results" );
     });
-}
+}();

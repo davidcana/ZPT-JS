@@ -1,7 +1,7 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );

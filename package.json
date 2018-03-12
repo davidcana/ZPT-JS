@@ -46,7 +46,7 @@
         "http-server": "^0.10.0",
         "log4javascript": "^1.4.15",
         "npm-run-all": "^4.1.1",
-        "qunitjs": "~1.19.0"
+        "qunit": "~2.5.1"
     },
     "scripts": {
         "http-server": "http-server -p 9000",

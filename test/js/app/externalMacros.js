@@ -1,7 +1,7 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 
 var dictionary = { 

@@ -2,7 +2,7 @@
 
 var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 
 QUnit.test( "nested loops test", function( assert ) {
     

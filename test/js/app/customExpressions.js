@@ -2,7 +2,7 @@
 
 var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
-var Qunit = require( 'qunitjs' );
+var Qunit = require( 'qunit' );
 var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
 var context = require( '../../../js/app/context.js' );
 
