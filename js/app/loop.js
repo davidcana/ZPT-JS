@@ -21,6 +21,9 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
     
     var repeat = function( scope ){
         if ( currentIndex < maxIndex ) {
+            
+            scope.startElement();
+            
             // Set item variable
             scope.set( itemVariableName, items[ ++currentIndex ] );
             

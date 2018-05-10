@@ -11,129 +11,138 @@
         <div id="qunit"></div>
         <div id="qunit-fixture"></div>
 
-        Not defined var
+        <h2>Not defined var</h2>
         <ul>
             <li>var value: undefined = <span id="t1-1" data-tcontent="var">must be null</span></li>
             <li>var does not exist: <span id="t1-2" data-tcontent="cond: ( exists: var ) 'Error' 'OK'">must be OK</span></li>
-            
+
         </ul>
-        
-        Nested vars <br/>
+
+        <h2>Nested vars</h2>
         data-tdefine="var 1"
         <ul data-tdefine="var 1">
             <li>var value: 1 = <span id="t2-1" data-tcontent="var">must be 1</span></li>
             <li>var exists: <span id="t2-2" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
             <li>check value not: eq: 2: <span id="t2-3" data-tcontent="cond: ( eq: var 2 ) 'Error' 'OK'">must be OK</span></li>
             <li>check value eq: 1: <span id="t2-4" data-tcontent="cond: ( eq: var 1 ) 'OK' 'Error'">must be OK</span></li>
-            
+
             <li>
                 data-tdefine="var 2"
-	            <ul data-tdefine="var 2">
-	                <li>var exists: <span id="t2-5" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t2-6" data-tcontent="cond: ( eq: var 2 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>var value: 2 = <span id="t2-7" data-tcontent="var">must be 2</span></li>
-	                
-	                <li>
-	                data-tdefine="var 'three'; var2 4"
-		                <ul data-tdefine="var 'three'; var2 4">
-		                    <li>var exists: <span id="t2-8" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>check value: <span id="t2-9" data-tcontent="cond: ( eq: var 'three' ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>var value: three = <span id="t2-10" data-tcontent="var">must be three</span></li>
-		                    
-		                    <li>var2 exists: <span id="t2-11" data-tcontent="cond: ( exists: var2 ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>check value: <span id="t2-12" data-tcontent="cond: ( eq: var2 4 ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>var2 value: 4 = <span id="t2-13" data-tcontent="var2">must be 4</span></li>
-		                </ul>
+                <ul data-tdefine="var 2">
+                    <li>var exists: <span id="t2-5" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t2-6" data-tcontent="cond: ( eq: var 2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>var value: 2 = <span id="t2-7" data-tcontent="var">must be 2</span></li>
+
+                    <li>
+                        data-tdefine="var 'three'; var2 4"
+                        <ul data-tdefine="var 'three'; var2 4">
+                            <li>var exists: <span id="t2-8" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
+                            <li>check value: <span id="t2-9" data-tcontent="cond: ( eq: var 'three' ) 'OK' 'Error'">must be OK</span></li>
+                            <li>var value: three = <span id="t2-10" data-tcontent="var">must be three</span></li>
+
+                            <li>var2 exists: <span id="t2-11" data-tcontent="cond: ( exists: var2 ) 'OK' 'Error'">must be OK</span></li>
+                            <li>check value: <span id="t2-12" data-tcontent="cond: ( eq: var2 4 ) 'OK' 'Error'">must be OK</span></li>
+                            <li>var2 value: 4 = <span id="t2-13" data-tcontent="var2">must be 4</span></li>
+                        </ul>
                         <span id="t2-24" data-tcontent="cond: ( exists: var2 ) 'var2 exists: Error' 'var2 does not exist: OK'">must be OK</span>
-	                </li>
-	                
-	                <li>var exists: <span id="t2-14" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t2-15" data-tcontent="cond: ( eq: var 2 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>var value: 2 = <span id="t2-16" data-tcontent="var">must be 2</span></li>
-	                
-	                <li>var2 does not exist: <span id="t2-17" data-tcontent="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
-	                <li>var2 value: undefined = <span id="t2-18" data-tcontent="var2">must be null</span></li>
-	            </ul>
+                    </li>
+
+                    <li>var exists: <span id="t2-14" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t2-15" data-tcontent="cond: ( eq: var 2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>var value: 2 = <span id="t2-16" data-tcontent="var">must be 2</span></li>
+
+                    <li>var2 does not exist: <span id="t2-17" data-tcontent="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
+                    <li>var2 value: undefined = <span id="t2-18" data-tcontent="var2">must be null</span></li>
+                </ul>
             </li>
-            
+
             <li>var exists: <span id="t2-19" data-tcontent="cond: ( exists: var ) 'OK' 'Error'">must be OK</span></li>
             <li>check value: <span id="t2-20" data-tcontent="cond: ( eq: var 1 ) 'OK' 'Error'">must be OK</span></li>
             <li>var value: 1 = <span id="t2-21" data-tcontent="var">must be 1</span></li>
-            
+
             <li>var2 does not exist: <span id="t2-22" data-tcontent="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
             <li>var2 value: undefined = <span id="t2-23" data-tcontent="var2">must be null</span></li>
         </ul>
-        
-        Out of scope var
+
+        <h2>Out of scope var</h2>
         <ul>
             <li>var does not exist: <span id="t3-1" data-tcontent="cond: ( exists: var ) 'Error' 'OK'">must be OK</span></li>
             <li>the var value: undefined = <span id="t3-2" data-tcontent="var">must be null</span></li>
-            
+
             <li>var2 does not exist: <span id="t3-3" data-tcontent="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
             <li>var2 value: undefined = <span id="t3-4" data-tcontent="var2">must be null</span></li>
         </ul>
-    
-        Global vars
+
+        <h2>Global vars</h2>
         <ul>
             <li>globalVar does not exist: <span id="t4-1" data-tcontent="cond: ( exists: globalVar ) 'Error' 'OK'">must be OK</span></li>
             <li>
                 data-tdefine="global globalVar 1"
-	            <ul data-tdefine="global globalVar 1">
-	                <li>globalVar exists: <span id="t4-2" data-tcontent="cond: ( exists: globalVar ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t4-3" data-tcontent="cond: ( eq: globalVar 1 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>globalVar value: 1 = <span id="t4-4" data-tcontent="globalVar">must be 1</span></li>
-	            </ul>
+                <ul data-tdefine="global globalVar 1">
+                    <li>globalVar exists: <span id="t4-2" data-tcontent="cond: ( exists: globalVar ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t4-3" data-tcontent="cond: ( eq: globalVar 1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>globalVar value: 1 = <span id="t4-4" data-tcontent="globalVar">must be 1</span></li>
+                </ul>
             </li>
             <li>
                 (do nothing)
-	            <ul>
-	                <li>globalVar exists: <span id="t4-5" data-tcontent="cond: ( exists: globalVar ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t4-6" data-tcontent="cond: ( eq: globalVar 1 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>globalVar value: 1 = <span id="t4-7" data-tcontent="globalVar">must be 1</span></li>
-	            </ul>
+                <ul>
+                    <li>globalVar exists: <span id="t4-5" data-tcontent="cond: ( exists: globalVar ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t4-6" data-tcontent="cond: ( eq: globalVar 1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>globalVar value: 1 = <span id="t4-7" data-tcontent="globalVar">must be 1</span></li>
+                </ul>
             </li>
-            
+
             <li>globalVar2 does not exist: <span id="t4-8" data-tcontent="cond: ( exists: globalVar2 ) 'Error' 'OK'">must be OK</span></li>
             <li>
                 data-tdefine="global globalVar2 1"
-	            <ul data-tdefine="global globalVar2 1">
-	                <li>globalVar2 exists: <span id="t4-9" data-tcontent="cond: ( exists: globalVar2 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t4-10" data-tcontent="cond: ( eq: globalVar2 1 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>globalVar2 value: 1 = <span id="t4-11" data-tcontent="globalVar2">must be 1</span></li>
-	                <li>
-	                   data-tdefine="global globalVar2 2"
-		                <ul data-tdefine="global globalVar2 2">
-		                    <li>globalVar2 exists: <span id="t4-12" data-tcontent="cond: ( exists: globalVar2 ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>check value: <span id="t4-13" data-tcontent="cond: ( eq: globalVar2 2 ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>globalVar2 value: 2 = <span id="t4-14" data-tcontent="globalVar2">must be 2</span></li>
-		                </ul>
-	                </li>
-	                <li>globalVar2 exists: <span id="t4-15" data-tcontent="cond: ( exists: globalVar2 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t4-16" data-tcontent="cond: ( eq: globalVar2 2 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>globalVar2 value: 2 = <span id="t4-17" data-tcontent="globalVar2">must be 2</span></li>
-	            </ul>
+                <ul data-tdefine="global globalVar2 1">
+                    <li>globalVar2 exists: <span id="t4-9" data-tcontent="cond: ( exists: globalVar2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t4-10" data-tcontent="cond: ( eq: globalVar2 1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>globalVar2 value: 1 = <span id="t4-11" data-tcontent="globalVar2">must be 1</span></li>
+                    <li>
+                        data-tdefine="global globalVar2 2"
+                        <ul data-tdefine="global globalVar2 2">
+                            <li>globalVar2 exists: <span id="t4-12" data-tcontent="cond: ( exists: globalVar2 ) 'OK' 'Error'">must be OK</span></li>
+                            <li>check value: <span id="t4-13" data-tcontent="cond: ( eq: globalVar2 2 ) 'OK' 'Error'">must be OK</span></li>
+                            <li>globalVar2 value: 2 = <span id="t4-14" data-tcontent="globalVar2">must be 2</span></li>
+                        </ul>
+                    </li>
+                    <li>globalVar2 exists: <span id="t4-15" data-tcontent="cond: ( exists: globalVar2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t4-16" data-tcontent="cond: ( eq: globalVar2 2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>globalVar2 value: 2 = <span id="t4-17" data-tcontent="globalVar2">must be 2</span></li>
+                </ul>
             </li>
-            
+
             <li>globalVar3 does not exist: <span id="t4-18" data-tcontent="cond: ( exists: globalVar3 ) 'Error' 'OK'">must be OK</span></li>
             <li>
                 data-tdefine="global globalVar3 1"
-	            <ul data-tdefine="global globalVar3 1">
-	                <li>globalVar3 exists: <span id="t4-19" data-tcontent="cond: ( exists: globalVar3 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t4-20" data-tcontent="cond: ( eq: globalVar3 1 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>globalVar3 value: 1 = <span id="t4-21" data-tcontent="globalVar3">must be 1</span></li>
-	                <li>
-	                   data-tdefine="globalVar3 2"
-		                <ul data-tdefine="globalVar3 2">
-		                    <li>globalVar3 exists: <span id="t4-22" data-tcontent="cond: ( exists: globalVar3 ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>check value: <span id="t4-23" data-tcontent="cond: ( eq: globalVar3 2 ) 'OK' 'Error'">must be OK</span></li>
-		                    <li>globalVar3 value: 2 = <span id="t4-24" data-tcontent="globalVar3">must be 2</span></li>
-		                </ul>
-	                </li>
-	                <li>globalVar3 exists: <span id="t4-25" data-tcontent="cond: ( exists: globalVar3 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>check value: <span id="t4-26" data-tcontent="cond: ( eq: globalVar3 1 ) 'OK' 'Error'">must be OK</span></li>
-	                <li>globalVar3 value: 1 = <span id="t4-27" data-tcontent="globalVar3">must be 1</span></li>
-	            </ul>
+                <ul data-tdefine="global globalVar3 1">
+                    <li>globalVar3 exists: <span id="t4-19" data-tcontent="cond: ( exists: globalVar3 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t4-20" data-tcontent="cond: ( eq: globalVar3 1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>globalVar3 value: 1 = <span id="t4-21" data-tcontent="globalVar3">must be 1</span></li>
+                    <li>
+                        data-tdefine="globalVar3 2"
+                        <ul data-tdefine="globalVar3 2">
+                            <li>globalVar3 exists: <span id="t4-22" data-tcontent="cond: ( exists: globalVar3 ) 'OK' 'Error'">must be OK</span></li>
+                            <li>check value: <span id="t4-23" data-tcontent="cond: ( eq: globalVar3 2 ) 'OK' 'Error'">must be OK</span></li>
+                            <li>globalVar3 value: 2 = <span id="t4-24" data-tcontent="globalVar3">must be 2</span></li>
+                        </ul>
+                    </li>
+                    <li>globalVar3 exists: <span id="t4-25" data-tcontent="cond: ( exists: globalVar3 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check value: <span id="t4-26" data-tcontent="cond: ( eq: globalVar3 1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>globalVar3 value: 1 = <span id="t4-27" data-tcontent="globalVar3">must be 1</span></li>
+                </ul>
             </li>
+        </ul>
+        
+        <h2>Loops</h2>
+        <ul>
+            <li>item must not exist: <span id="t5-1" data-tcontent="cond: ( exists: item ) item 'OK'">must be OK</span></li>
+            <li data-trepeat="item items">
+                <span data-tcontent="item">item</span>
+            </li>
+            <li>item must not exist: <span id="t5-2" data-tcontent="cond: ( exists: item ) item 'OK'">must be OK</span></li>
         </ul>
     </body> 
 </html>

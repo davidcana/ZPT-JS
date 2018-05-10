@@ -188,7 +188,7 @@ var runTests = function(){
 
     QUnit.test( "Currencies (spanish)", function( assert ) {
         assert.equal( $('#t18-1').html() , "1.355,23&nbsp;€" );
-        assert.equal( $('#t18-2').html() , "1.355,23&nbsp;$" );
+        assert.equal( $('#t18-2').html() , "1.355,23&nbsp;US$" );
         assert.equal( $('#t18-3').html() , "1.355,23 euros" );
         assert.equal( $('#t18-4').html() , "1.355,23 dólares estadounidenses" );
     });
@@ -339,7 +339,7 @@ var runTests = function(){
 
     QUnit.test( "Currencies (spanish) with i18nBundle", function( assert ) {
         assert.equal( $('#t18-1-2').html() , "1.355,23&nbsp;€" );
-        assert.equal( $('#t18-2-2').html() , "1.355,23&nbsp;$" );
+        assert.equal( $('#t18-2-2').html() , "1.355,23&nbsp;US$" );
         assert.equal( $('#t18-3-2').html() , "1.355,23 euros" );
         assert.equal( $('#t18-4-2').html() , "1.355,23 dólares estadounidenses" );
     });

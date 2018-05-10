@@ -19,4 +19,5 @@ QUnit.testSuites([
     { name: "errors Test Suite", path: "./errors.html" },
     { name: "multiroot Test Suite", path: "./multiroot.html" },
     { name: "original tags Test Suite", path: "./original.html" },
+    { name: "recursive macros Test Suite", path: "./recursiveMacros.html" }
 ]);

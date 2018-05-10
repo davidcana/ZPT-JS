@@ -81,3 +81,7 @@ QUnit.test( "Global vars test", function( assert ) {
     assert.equal( $('#t4-27').text() , "1" );
 });
 
+QUnit.test( "Loops var test", function( assert ) {
+    assert.equal( $('#t5-1').text() , "OK" );
+    assert.equal( $('#t5-2').text() , "OK" );
+});

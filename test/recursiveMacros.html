@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Recursive macros tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/recursiveMacros.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <h4>Recursive calls</h4>
+        <div id="t1">
+	        <div data-muse-macro="'list'">
+                First macro call here
+	        </div>
+        </div>
+        
+        <!-- Macro definitions -->        
+        <ul data-mdefine-macro="list">
+            <li data-trepeat="item items"
+                data-tdefine="isList (eq: 'list' item/type)">
+                
+                <div data-tcondition="isList">
+                    <span data-tcontent="item/id">An item</span>
+                    <div data-tdefine="items item/items">
+                        <div data-muse-macro="'list'">
+                            Nested macro call here
+                        </div>
+                    </div>
+                </div>
+                <div data-tcondition="not: isList" data-tcontent="item">An item</div>
+            </li>
+        </ul>
+        
+    </body>
+</html>

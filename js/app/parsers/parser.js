@@ -186,7 +186,9 @@ module.exports = function ( options ) {
     };
     
     var processLoop = function( node, attributes, scope ) {
-
+        
+        //scope.startElement();
+        
         // Process repeat
         var talRepeat = TALRepeat.build( attributes.talRepeat );
         var loop = talRepeat.process( scope, node );
@@ -216,13 +218,17 @@ module.exports = function ( options ) {
             if ( ! processElement( tmpNode, attributes, scope ) ) {
                 return false;
             }
+            
+            scope.endElement();
         }
 
         // Configure repeat node (the original) to enable future reevaluation
         node.style.display = 'none';
         node.setAttribute( tags.talRepeat, attributes.talRepeat );
         node.removeAttribute( tags.qdup );
-
+        
+        //scope.endElement();
+        
         return true;
     };
 
@@ -262,7 +268,9 @@ module.exports = function ( options ) {
     };
 
     var processElement = function( node, attributes, scope ) {
-
+        
+        //scope.startElement();
+        
         processOnError( 
             scope, 
             attributes.talOnError );
@@ -325,7 +333,9 @@ module.exports = function ( options ) {
                 scope, 
                 attributes.metalUseMacro, 
                 attributes.talDefine );
-
+        
+        //scope.endElement();
+        
         return true;
     };
 

@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                 src: 'test/js/app/expressions.js',
                 dest: 'build/expressions.js'
             },
-	        errors: {
+            errors: {
                 options: {
                     browserifyOptions: {
                         debug: true
@@ -202,6 +202,15 @@ module.exports = function(grunt) {
                 },
                 src: 'samples/js/app/expressionTester.js',
                 dest: 'build/expressionTester.js'
+            },
+            recursiveMacros: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'samples/js/app/recursiveMacros.js',
+                dest: 'build/recursiveMacros.js'
             }
             
         },
