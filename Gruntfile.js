@@ -211,6 +211,15 @@ module.exports = function(grunt) {
                 },
                 src: 'samples/js/app/recursiveMacros.js',
                 dest: 'build/recursiveMacros.js'
+            },
+            mixedMacros: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'samples/js/app/mixedMacros.js',
+                dest: 'build/mixedMacros.js'
             }
             
         },

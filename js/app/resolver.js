@@ -66,38 +66,41 @@ module.exports = (function( ) {
     };
     
     var loadNode = function( macroKey, scope ){
-        
-        var macroData = getMacroData( macroKey, scope );
-        
-        if ( ! macroData.url ){
-            // No url set
-            
-            var urlInScope = scope.get( context.getConf().externalMacroUrlVarName );
-            if ( urlInScope ){
-                // Node is in another page but using a previously defined url
-                macroData.url = urlInScope;
-                
-            } else {
-                // Node is in this page
-                var macroId = macroData.macroId;
-                var selector = builDefineMacroSelector( macroId );
-                var node = $( selector )[0];
 
-                if ( ! node ){
-                    throw "Node using selector '" + selector + "' is null!";
-                }
-                
-                return configureNode( 
-                        node.cloneNode( true ), 
-                        macroId,
-                        macroKey );
+        var macroData = getMacroData( macroKey, scope );
+
+        if ( macroData.url ){
+            // Node is in another page
+            return loadRemoteNode( macroKey, macroData );
+        }
+        
+        // No url set
+        var urlInScope = scope.get( context.getConf().externalMacroUrlVarName );
+        if ( urlInScope ){
+            // Try to find node in another page but using a previously defined url
+            macroData.url = urlInScope;
+            var remoteNode = loadRemoteNode( macroKey, macroData );
+            if ( remoteNode ){
+                // Node is found in another page
+                return remoteNode;
             }
         }
-     
-        // Node is in another page
-        return loadRemoteNode( macroKey, macroData );
+        
+        // Node is in this page
+        var macroId = macroData.macroId;
+        var selector = builDefineMacroSelector( macroId );
+        var node = $( selector )[0];
+
+        if ( ! node ){
+            throw "Node using selector '" + selector + "' is null!";
+        }
+
+        return configureNode( 
+            node.cloneNode( true ), 
+            macroId,
+            macroKey );
+        
     };
-    
     var loadRemoteNode = function( macroKey, macroData ){
         
         var element = remotePages[ macroData.url ];
@@ -108,6 +111,10 @@ module.exports = (function( ) {
         
         var selector = builDefineMacroSelector( macroData.macroId );
         var node = $( selector, element )[0];
+        
+        if ( ! node ){
+            return undefined;
+        }
         
         return configureNode( 
                     node.cloneNode( true ), 

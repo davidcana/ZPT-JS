@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Mixed macros tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/mixedMacros.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <h4>Mixed macros (copyright2 at remote, copyright1 at local)</h4>
+        <div id="t1">
+            <b data-muse-macro="'copyright-list1@externalMacros-definitions4.html'">
+                Macro goes here
+            </b>
+        </div>
+        
+        <h4>Mixed macros (copyright2 and copyright3 at remote, copyright3 at local not used)</h4>
+        <div id="t2">
+            <b data-muse-macro="'copyright-list2@externalMacros-definitions4.html'">
+                Macro goes here
+            </b>
+        </div>
+        
+        <p data-mdefine-macro="copyright1">
+            Copyright 1 2009, <em>Foo, Bar, and Associates</em> Inc.
+        </p>
+        <p data-mdefine-macro="copyright3">
+            Copyright 3 2009, <em>Foo, Bar, and Associates</em> Inc.
+        </p>
+    </body>
+</html>
