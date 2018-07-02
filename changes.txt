@@ -2,6 +2,9 @@ New in 0.23.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.22.3
+- Bug fixed: macro calls overwrite define attributes of macro definitions.
+
 New in 0.22.2
 - Bug fixed: local macro calls not working properly when using them in remote macros.
 

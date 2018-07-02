@@ -147,6 +147,14 @@
 	        </div>
         </div>
         
+        <h4>Using define tags in macro use and macro call</h4>
+        <div id="t14">
+            <div data-muse-macro="'define'" 
+                 data-tdefine="notInMacroVar 'It also works!'">
+                Macro goes here
+            </div>
+        </div>
+        
         <!-- Macro definitions -->
         <p data-mdefine-macro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
@@ -198,6 +206,12 @@
             <li>
                 <span data-mdefine-slot="additional_info"></span>
             </li>
+        </ul>
+        
+        <ul data-mdefine-macro="define"
+            data-tdefine="inMacroVar 'It works!'">
+            <li>inMacroVar: <span data-tcontent="inMacroVar" data-tattributes="id 't14-1'">Must be 'It works!'</span></li>
+            <li>notInMacroVar: <span data-tcontent="notInMacroVar" data-tattributes="id 't14-2'">Must be 'It also works!'</span></li>
         </ul>
     </body>
 </html>

@@ -339,7 +339,11 @@ After use macro
 `;
         assertHtml( assert, '#t12', t12 );
     });  
-    
+ 
+    QUnit.test( "Using define tags in macro use and macro call", function( assert ) {
+        assert.equal( $('#t13-1').text() , "It works!" );
+        assert.equal( $('#t13-2').text() , "It also works!" );
+    });
 }
 
 function getValues( selector ){

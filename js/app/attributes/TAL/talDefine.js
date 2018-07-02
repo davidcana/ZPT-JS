@@ -87,11 +87,26 @@ TALDefine.buildString = function( name, expression, global ) {
     return result;
 };
 
+/*
 TALDefine.appendStrings = function( defineString1, defineString2 ) {
 
     return ! defineString2? 
            defineString1: 
            defineString1 + context.getConf().defineDelimiter + defineString2;
+};
+*/
+TALDefine.appendStrings = function() {
+    
+    var result = arguments[ 0 ];
+    
+    for ( var c = 1; c < arguments.length; ++c ){
+        var string = arguments[ c ];
+        if ( string ){
+            result = result? result + context.getConf().defineDelimiter + string: string;
+        }
+    }
+    
+    return result;
 };
 
 module.exports = TALDefine;

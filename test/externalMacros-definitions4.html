@@ -28,5 +28,11 @@
         <p data-mdefine-macro="copyright3">
             Copyright 3 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
         </p>
+        <p data-mdefine-macro="copyright4"
+           data-tdefine="inMacroVar 'It works!'">
+            Copyright 4 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
+            <span>inMacroVar: <span data-tcontent="inMacroVar" data-tattributes="id 't13-1'">Must be 'It works!'</span></span>
+            <span>notInMacroVar: <span data-tcontent="notInMacroVar" data-tattributes="id 't13-2'">Must be 'It also works!'</span></span>
+        </p>
     </body>
 </html>

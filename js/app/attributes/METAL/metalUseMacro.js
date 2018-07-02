@@ -45,13 +45,14 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         // Build define tag
         var fullDefine = undefined;
         var macroData = resolver.getMacroData( macroKey );
+        var macroDefine = newNode.getAttribute( tags.talDefine );
         if ( macroData.url ){
             var externalMacroUrlDefine = TALDefine.buildString( 
                     context.getConf().externalMacroUrlVarName, 
                     "'" + macroData.url + "'" );
-            fullDefine = TALDefine.appendStrings( externalMacroUrlDefine, define );
+            fullDefine = TALDefine.appendStrings( externalMacroUrlDefine, define, macroDefine );
         } else {
-            fullDefine = define;
+            fullDefine = TALDefine.appendStrings( define, macroDefine );
         }
 
         // Copy talDefine attribute from use-macro tag to the macro tag

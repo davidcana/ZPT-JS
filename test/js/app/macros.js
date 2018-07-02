@@ -371,6 +371,11 @@ QUnit.test( "Macro using 2 slots test and vars (first is null)", function( asser
         assertHtml( assert, '#t13', t13 );
 });
 
+QUnit.test( "Using define tags in macro use and macro call", function( assert ) {
+    assert.equal( $('#t14-1').text() , "It works!" );
+    assert.equal( $('#t14-2').text() , "It also works!" );
+});
+
 function getValues( selector ){
     return $( selector ).map( function( index, element ) {
         return this.innerHTML;
