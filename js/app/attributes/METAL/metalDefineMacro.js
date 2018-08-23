@@ -15,8 +15,13 @@ var METALDefineMacro = function( nameToApply ) {
         return false;
     };
 
+    var toString = function(){
+        return "METALDefineMacro: " + name;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -24,10 +29,6 @@ METALDefineMacro.id = 'metal:define-macro';
 
 METALDefineMacro.build = function( string ) {
     return new METALDefineMacro( string.trim() );
-}
-
-METALDefineMacro.prototype.toString = function(){
-    return name;
 };
 
 module.exports = METALDefineMacro;

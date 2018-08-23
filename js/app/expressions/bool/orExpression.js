@@ -22,9 +22,14 @@ var OrExpression = function( stringToApply, expressionListToApply ) {
 
         return false;
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -41,9 +46,5 @@ OrExpression.build = function( string ) {
 
     return new OrExpression( string, expressionList );
 }
-
-OrExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = OrExpression;

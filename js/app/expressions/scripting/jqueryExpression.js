@@ -37,8 +37,13 @@ var JqueryExpression = function( stringToApply ) {
         }
     };
 
+    var toString = function(){
+        return string;
+    };
+
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -55,10 +60,6 @@ JqueryExpression.getId = JqueryExpression.getPrefix;
 
 JqueryExpression.build = function( string ) {
     return new JqueryExpression( string );
-}
-
-JqueryExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = JqueryExpression;

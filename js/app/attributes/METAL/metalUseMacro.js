@@ -92,9 +92,14 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
             }
         );
     };
+
+    var toString = function(){
+        return "METALUseMacro: " + string;
+    };
     
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -107,10 +112,6 @@ METALUseMacro.build = function( string, stringDefine, scope ) {
             string,
             expressionBuilder.build( string.trim() ),
             stringDefine? stringDefine.trim(): undefined );
-}
-
-METALUseMacro.prototype.toString = function(){
-    return string;
 };
 
 module.exports = METALUseMacro;

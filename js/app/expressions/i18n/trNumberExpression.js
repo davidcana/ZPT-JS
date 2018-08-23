@@ -21,9 +21,14 @@ var TrNumberExpression = function( stringToApply, expressionToApply, argsExpress
                 null );
         return evaluated;
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -46,10 +51,6 @@ TrNumberExpression.build = function( string ) {
             string, 
             trData.expression, 
             trData.argsExpressions );
-}
-
-TrNumberExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TrNumberExpression;

@@ -27,8 +27,13 @@ var EqualsExpression = function( stringToApply, argsToApply ) {
         return true;
     };
 
+    var toString = function(){
+        return string;
+    };
+
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -59,9 +64,5 @@ EqualsExpression.build = function( s ) {
         string,
         expressionBuilder.buildList( segments ) );
 }
-
-EqualsExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = EqualsExpression;

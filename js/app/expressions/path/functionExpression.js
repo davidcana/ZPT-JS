@@ -18,8 +18,13 @@ var FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
         return ! element? undefined: element.apply( element, evaluatedArgs );
     };
 
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -40,9 +45,5 @@ FunctionExpression.build = function( string ) {
 
     return new FunctionExpression( string, functionName, args );
 }
-
-FunctionExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = FunctionExpression;

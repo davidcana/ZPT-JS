@@ -21,8 +21,13 @@ var CondExpression = function( stringToApply, expression1ToApply, expression2ToA
             expression3.evaluate( scope );
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -55,9 +60,5 @@ CondExpression.build = function( s ) {
         expressionBuilder.build( segments.nextToken().trim() ), 
         expressionBuilder.build( segments.nextToken().trim() ) );
 }
-
-CondExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = CondExpression;

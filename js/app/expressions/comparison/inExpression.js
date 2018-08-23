@@ -37,9 +37,14 @@ var InExpression = function( stringToApply, expressionListToApply ) {
         
         return false;
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -70,9 +75,5 @@ InExpression.build = function( s ) {
         string,
         expressionBuilder.buildList( segments ) );
 }
-
-InExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = InExpression;

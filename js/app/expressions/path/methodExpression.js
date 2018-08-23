@@ -16,8 +16,13 @@ var MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
         return parent[ name ].apply( parent, evaluatedArgs );
     };
 
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -39,9 +44,5 @@ MethodExpression.build = function( string ) {
     
     return new MethodExpression( string, methodName, args );
 }
-
-MethodExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = MethodExpression;

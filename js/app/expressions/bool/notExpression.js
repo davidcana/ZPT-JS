@@ -15,8 +15,13 @@ var NotExpression = function( stringToApply, expressionToApply ) {
         return ! evaluateHelper.evaluateBoolean( scope, expression );
     };
 
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -35,9 +40,5 @@ NotExpression.build = function( string ) {
     
     return new NotExpression( string, expression );
 }
-
-NotExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = NotExpression;

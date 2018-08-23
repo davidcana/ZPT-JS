@@ -85,9 +85,14 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
         // Regular attributes
         node.setAttribute( name, value );
     };
+
+    var toString = function(){
+        return "TALAttributes: " + string;
+    };
     
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -124,10 +129,6 @@ TALAttributes.build = function( string ) {
     }
     
     return new TALAttributes( string, attributeItems );
-}
-
-TALAttributes.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALAttributes;

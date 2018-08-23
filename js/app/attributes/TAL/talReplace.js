@@ -21,9 +21,14 @@ var TALReplace = function( stringToApply, expressionToApply ) {
         
         return true;
     };
-
+    
+    var toString = function(){
+        return 'TALReplace: ' + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -36,10 +41,6 @@ TALReplace.build = function( string ) {
     return new TALReplace( 
                 string,
                 expressionBuilder.build( string.trim() ) );
-}
-
-TALReplace.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALReplace;

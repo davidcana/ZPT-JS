@@ -47,8 +47,13 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
         throw 'Formatter expression evaluated to null: ' + string;
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -87,10 +92,6 @@ FormatExpression.build = function( s ) {
     }
 
     return new FormatExpression( string, formatter, argsExpressions );
-}
-
-FormatExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = FormatExpression;

@@ -23,8 +23,13 @@ var TrCurrencyExpression = function( stringToApply, expressionToApply, argsExpre
         return evaluated;
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -49,9 +54,5 @@ TrCurrencyExpression.build = function( string ) {
             trData.argsExpressions, 
             trData.subformat );
 }
-
-TrCurrencyExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = TrCurrencyExpression;

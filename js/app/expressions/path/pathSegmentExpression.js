@@ -29,7 +29,7 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
         for ( var i = 1; i < items.length; i++ ) {
             // Only last element can be null
             if ( result == null ) {
-                throw 'Error evaluating "' + string + '": '  + token + ' is null';
+                throw 'Error evaluating "' + string + '": "'  + token + '" is null';
             }
             token = items[ i ];
             result = token.evaluate( scope, result );
@@ -37,9 +37,14 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
         
         return result;
     };
-
+    
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -143,10 +148,6 @@ PathSegmentExpression.buildNextPathToken = function( t ){
     }
 
     return result;
-};
-
-PathSegmentExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = PathSegmentExpression;

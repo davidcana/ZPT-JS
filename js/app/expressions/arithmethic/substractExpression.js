@@ -23,8 +23,13 @@ var SubstractExpression = function( stringToApply, expressionListToApply ) {
             } );
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -43,9 +48,5 @@ SubstractExpression.build = function( string ) {
 
     return new SubstractExpression( string, expressionList );
 }
-
-SubstractExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = SubstractExpression;

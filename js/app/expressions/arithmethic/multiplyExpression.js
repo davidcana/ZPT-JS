@@ -22,9 +22,14 @@ var MultiplyExpression = function( stringToApply, expressionListToApply ) {
                 return total * value;
             } );
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -43,9 +48,5 @@ MultiplyExpression.build = function( string ) {
 
     return new MultiplyExpression( string, expressionList );
 }
-
-MultiplyExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = MultiplyExpression;

@@ -16,9 +16,14 @@ var GreaterExpression = function( stringToApply, expression1ToApply, expression2
         var numbers = comparisonHelper.evaluate( scope, expression1, expression2 );
         return numbers.number1 > numbers.number2;
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -34,9 +39,5 @@ GreaterExpression.build = function( string ) {
 
     return new GreaterExpression( string, data.expression1, data.expression2 );
 }
-
-GreaterExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = GreaterExpression;

@@ -11,8 +11,13 @@ var StringLiteral = function( literalToApply ) {
         return literal;
     };
 
+    var toString = function(){
+        return literal;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -24,10 +29,6 @@ StringLiteral.build = function( string ) {
     }
 
     return undefined;
-}
-
-StringLiteral.prototype.toString = function(){
-    return literal;
 };
 
 module.exports = StringLiteral;

@@ -10,9 +10,14 @@ var BooleanLiteral = function( literalToApply ) {
     var evaluate = function( scope ){
         return literal;
     };
-
+    
+    var toString = function(){
+        return "" + literal;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -26,9 +31,5 @@ BooleanLiteral.build = function( string ) {
     }
     return undefined;
 }
-
-BooleanLiteral.prototype.toString = function(){
-    return "" + literal;
-};
 
 module.exports = BooleanLiteral;

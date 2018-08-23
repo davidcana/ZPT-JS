@@ -25,6 +25,18 @@ QUnit.test( "Using null values in expressions test", function( assert ) {
             dictionary: dictionary
         });
     } catch( e ){
-        assert.equal( e , "Error trying doing math operation, value 'null' is not a valid number in expression 'add [object Object]'" );
+        assert.equal( e , "Error trying doing math operation, value 'null' is not a valid number in expression 'add nullValue'" );
+    }
+});
+
+QUnit.test( "Using null values in path expressions test", function( assert ) {
+
+    try {
+        zpt.run({
+            root: $( '#t3' )[0],
+            dictionary: dictionary
+        });
+    } catch( e ){
+        assert.equal( e , "Error evaluating \"nullValue/noWay\": \"nullValue\" is null" );
     }
 });

@@ -22,8 +22,13 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
         return loop;
     };
 
+    var toString = function(){
+        return "TALRepeat: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -45,10 +50,6 @@ TALRepeat.build = function( string ) {
                 string,
                 varName, 
                 expressionBuilder.build( loopExpression ) );
-}
-
-TALRepeat.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALRepeat;

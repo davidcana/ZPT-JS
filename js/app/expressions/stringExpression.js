@@ -24,8 +24,13 @@ var StringExpression = function( stringToApply, expressionListToApply ) {
         return result;
     };
 
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -137,10 +142,6 @@ StringExpression.build = function( string ) {
     }
 
     return new StringExpression( string, expressionList );
-}
-
-StringExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = StringExpression;

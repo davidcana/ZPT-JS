@@ -30,9 +30,14 @@ var ListExpression = function( stringToApply, itemsToApply ) {
 
         return result;
     };
-
+    
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -61,10 +66,6 @@ ListExpression.build = function( s ) {
     }
 
     return new ListExpression( string, items );
-}
-
-ListExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = ListExpression;

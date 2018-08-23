@@ -2,6 +2,9 @@ New in 0.23.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.22.4
+- Bug fixed: all toString methods fixed (improved error messages).
+
 New in 0.22.3
 - Bug fixed: macro calls overwrite define attributes of macro definitions.
 

@@ -36,8 +36,13 @@ var TALContent = function( stringToApply, expressionToApply, htmlToApply ) {
         return true;
     };
 
+    var toString = function(){
+        return "TALContent: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -63,10 +68,6 @@ TALContent.build = function( string ) {
                 string,
                 expressionBuilder.build( expressionString ),
                 html );
-}
-
-TALContent.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALContent;

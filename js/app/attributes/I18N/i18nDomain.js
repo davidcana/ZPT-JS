@@ -40,9 +40,14 @@ var I18NDomain = function( stringToApply, expressionListToApply ) {
         // Add i18nDomainVarName to scope
         scope.set( context.getConf().i18nDomainVarName, i18nList, false );
     };
-
+    
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -69,10 +74,6 @@ I18NDomain.build = function( string ) {
     }
 
     return new I18NDomain( string, i18nList );
-}
-
-I18NDomain.prototype.toString = function(){
-    return string;
 };
 
 module.exports = I18NDomain;

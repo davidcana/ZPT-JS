@@ -10,9 +10,14 @@ var IndirectionExpression = function( nameToApply ) {
     var evaluate = function( scope ){
         return scope.get( name );
     };
-
+    
+    var toString = function(){
+        return '?' + name;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -23,10 +28,6 @@ IndirectionExpression.build = function( string ) {
     }
     
     return new IndirectionExpression( string.substring( 1 ) );
-}
-
-IndirectionExpression.prototype.toString = function(){
-    return '?' + name;
 };
 
 module.exports = IndirectionExpression;

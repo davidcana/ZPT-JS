@@ -10,18 +10,19 @@ var VariableExpression = function( nameToApply ) {
     var evaluate = function( scope ){
         return scope.get( name );
     };
-
+    
+    var toString = function(){
+        return name;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
 VariableExpression.build = function( string ) {
     return new VariableExpression( string );
 }
-
-VariableExpression.prototype.toString = function(){
-    return name;
-};
 
 module.exports = VariableExpression;

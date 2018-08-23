@@ -17,8 +17,14 @@ var TALCondition = function( stringToApply, expressionToApply ) {
         return result;
     };
 
+
+    var toString = function(){
+        return "TALCondition: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -31,10 +37,6 @@ TALCondition.build = function( string ) {
     return new TALCondition( 
                 string,
                 expressionBuilder.build( string.trim() ) );
-}
-
-TALCondition.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALCondition;

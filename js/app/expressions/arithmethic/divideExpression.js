@@ -22,9 +22,14 @@ var DivideExpression = function( stringToApply, expressionListToApply ) {
                 return total / value;
             } );
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -43,9 +48,5 @@ DivideExpression.build = function( string ) {
 
     return new DivideExpression( string, expressionList );
 }
-
-DivideExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = DivideExpression;

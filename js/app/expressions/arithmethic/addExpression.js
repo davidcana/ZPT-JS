@@ -23,8 +23,13 @@ var AddExpression = function( stringToApply, expressionListToApply ) {
             } );
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -43,9 +48,5 @@ AddExpression.build = function( string ) {
 
     return new AddExpression( string, expressionList );
 }
-
-AddExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = AddExpression;

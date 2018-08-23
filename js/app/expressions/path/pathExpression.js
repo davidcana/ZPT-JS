@@ -35,9 +35,14 @@ var PathExpression = function( stringToApply, expressionListToApply ) {
         
         return null;
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -78,9 +83,5 @@ PathExpression.build = function( s ) {
     }
     return new PathExpression( string, expressionList );
 }
-
-PathExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = PathExpression;

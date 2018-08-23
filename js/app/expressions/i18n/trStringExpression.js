@@ -22,8 +22,13 @@ var TrStringExpression = function( stringToApply, expressionToApply, argsExpress
         return evaluated;
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -48,7 +53,4 @@ TrStringExpression.build = function( string ) {
             trData.argsExpressions );
 }
 
-TrStringExpression.prototype.toString = function(){
-    return string;
-};
 module.exports = TrStringExpression;

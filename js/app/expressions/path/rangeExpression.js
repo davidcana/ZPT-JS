@@ -35,8 +35,14 @@ var RangeExpression = function( stringToApply, startExpressionToApply, endExpres
         return result;
     };
 
+
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -84,9 +90,5 @@ RangeExpression.build = function( s ) {
     
     return new RangeExpression( string, startExpression, endExpression, stepExpression );
 }
-
-RangeExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = RangeExpression;

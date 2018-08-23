@@ -21,9 +21,14 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
                     defineItem.global );
         }
     };
-
+    
+    var toString = function(){
+        return "TALDefine: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -70,10 +75,6 @@ TALDefine.build = function( string ) {
     }
     
     return new TALDefine( string, defineItems );
-}
-
-TALDefine.prototype.toString = function(){
-    return string;
 };
 
 TALDefine.buildString = function( name, expression, global ) {

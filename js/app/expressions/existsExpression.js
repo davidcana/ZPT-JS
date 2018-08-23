@@ -19,9 +19,14 @@ var ExistsExpression = function( stringToApply, expressionToApply ) {
             return false;
         }
     };
-
+    
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -36,10 +41,6 @@ ExistsExpression.build = function( string ) {
     
     var expression = expressionBuilder.build( string );
     return new ExistsExpression( string, expression );
-}
-
-ExistsExpression.prototype.toString = function(){
-    return string;
 };
 
 module.exports = ExistsExpression;

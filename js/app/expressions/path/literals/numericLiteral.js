@@ -10,9 +10,14 @@ var NumericLiteral = function( literalToApply ) {
     var evaluate = function( scope ){
         return literal;
     };
-
+    
+    var toString = function(){
+        return literal;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -31,10 +36,6 @@ NumericLiteral.build = function( string ) {
     }
 
     return undefined;
-}
-
-NumericLiteral.prototype.toString = function(){
-    return literal;
 };
 
 module.exports = NumericLiteral;

@@ -16,7 +16,7 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         
         // Evaluate and check array bases and indexes
         var evaluatedArrayBase = arrayBase.evaluate( scope );
-        var evaluatedIndexes = evaluateHelper.evaluateExpressionList( indexes, scope );
+        //var evaluatedIndexes = evaluateHelper.evaluateExpressionList( indexes, scope );
 
         // Iterate indexes
         var result = evaluatedArrayBase;
@@ -32,8 +32,13 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         return result;
     };
 
+    var toString = function(){
+        return arrayBase + '[' + indexes + ']';
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -146,10 +151,6 @@ ArrayExpression.findArrayAccessor = function( token ) {
     }
 
     return -1;
-};
-
-ArrayExpression.prototype.toString = function(){
-    return arrayBase + '[' + indexes + ']';
 };
 
 module.exports = ArrayExpression;

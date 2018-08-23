@@ -23,8 +23,13 @@ var ModExpression = function( stringToApply, expressionListToApply ) {
             } );
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -43,9 +48,5 @@ ModExpression.build = function( string ) {
 
     return new ModExpression( string, expressionList );
 }
-
-ModExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = ModExpression;

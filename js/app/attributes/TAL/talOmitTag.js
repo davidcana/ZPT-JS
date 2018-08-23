@@ -25,9 +25,14 @@ var TALOmitTag = function( stringToApply, expressionToApply ) {
 
         return result;
     };
-
+    
+    var toString = function(){
+        return "TALOmitTag: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -43,10 +48,6 @@ TALOmitTag.build = function( string ) {
             expressionBuilder.build( expressionString );
     
     return new TALOmitTag( string, expression );
-}
-
-TALOmitTag.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALOmitTag;

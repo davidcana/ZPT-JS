@@ -21,9 +21,14 @@ var TrDateTimeExpression = function( stringToApply, expressionToApply, argsExpre
                 null );
         return evaluated;
     };
+
+    var toString = function(){
+        return string;
+    };
     
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -47,9 +52,5 @@ TrDateTimeExpression.build = function( string ) {
             trData.expression, 
             trData.argsExpressions );
 }
-
-TrDateTimeExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = TrDateTimeExpression;

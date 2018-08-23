@@ -17,8 +17,13 @@ var LowerExpression = function( stringToApply, expression1ToApply, expression2To
         return numbers.number1 < numbers.number2;
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -34,9 +39,5 @@ LowerExpression.build = function( string ) {
 
     return new LowerExpression( string, data.expression1, data.expression2 );
 }
-
-LowerExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = LowerExpression;

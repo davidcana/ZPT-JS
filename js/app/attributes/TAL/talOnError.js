@@ -14,9 +14,14 @@ var TALOnError = function( stringToApply, expressionToApply ) {
         scope.set( context.getConf().onErrorVarName, expression );
         return true;
     };
-
+    
+    var toString = function(){
+        return "TALOnError: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -29,10 +34,6 @@ TALOnError.build = function( string ) {
     return new TALOnError( 
                 string,
                 expressionBuilder.build( string.trim() ) );
-}
-
-TALOnError.prototype.toString = function(){
-    return string;
 };
 
 module.exports = TALOnError;

@@ -21,9 +21,14 @@ var I18NLanguage = function( stringToApply, expressionToApply, htmlToApply ) {
 
         return true;
     };
-
+    
+    var toString = function(){
+        return "I18NLanguage: " + string;
+    };
+    
     return {
-        process: process
+        process: process,
+        toString: toString
     };
 };
 
@@ -42,10 +47,6 @@ I18NLanguage.build = function( string ) {
     return new I18NLanguage( 
                 string,
                 expressionBuilder.build( expressionString ) );
-}
-
-I18NLanguage.prototype.toString = function(){
-    return string;
 };
 
 module.exports = I18NLanguage;

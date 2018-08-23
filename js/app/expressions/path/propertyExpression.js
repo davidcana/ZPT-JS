@@ -10,18 +10,19 @@ var PropertyExpression = function( nameToApply ) {
     var evaluate = function( scope, parent ){
         return parent[ name ];
     };
-
+    
+    var toString = function(){
+        return name;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
 PropertyExpression.build = function( string ) {
     return new PropertyExpression( string );
-}
-
-PropertyExpression.prototype.toString = function(){
-    return name;
 };
 
 module.exports = PropertyExpression;

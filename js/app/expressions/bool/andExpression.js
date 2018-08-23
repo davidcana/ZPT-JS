@@ -23,8 +23,13 @@ var AndExpression = function( stringToApply, expressionListToApply ) {
         return true;
     };
     
+    var toString = function(){
+        return string;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -41,9 +46,5 @@ AndExpression.build = function( string ) {
 
     return new AndExpression( string, expressionList );
 }
-
-AndExpression.prototype.toString = function(){
-    return string;
-};
 
 module.exports = AndExpression;

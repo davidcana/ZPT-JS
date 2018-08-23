@@ -16,9 +16,14 @@ var JavascriptExpression = function( expressionToApply ) {
         var evaluatedString = stringExpression.evaluate( scope );
         return eval( evaluatedString );
     };
-
+    
+    var toString = function(){
+        return stringExpression;
+    };
+    
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
@@ -37,9 +42,5 @@ JavascriptExpression.build = function( string ) {
     return new JavascriptExpression(
             StringExpression.build( string ) );
 }
-
-JavascriptExpression.prototype.toString = function(){
-    return stringExpression;
-};
 
 module.exports = JavascriptExpression;
