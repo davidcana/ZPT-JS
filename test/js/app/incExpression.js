@@ -36,6 +36,6 @@ IncExpression.getId = IncExpression.getPrefix;
 
 IncExpression.build = function( string ) {
     return new IncExpression( string.trim() );
-}
+};
 
 module.exports = IncExpression;

@@ -1,4 +1,5 @@
 /* Standalone version of ZPT */
 
-var zpt = require( './main.js' );
-global.window.zpt = zpt;
+global.window.zpt = require( './main.js' );
+global.window.$ = require( 'jquery' );
+require( './jqueryPlugin.js' );

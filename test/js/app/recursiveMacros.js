@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 "use strict";
 
 var $ = require( 'jquery' );
@@ -47,7 +48,7 @@ zpt.run({
 
 // Run tests
 QUnit.test( "Simple macros test", function( assert ) {
-
+    
     var t1 = `
 <div data-muse-macro="'list'" style="display: none;">
     First macro call here

@@ -48,11 +48,10 @@ module.exports = function( obj ) {
         var varsToSet = vars.varsToSet; 
         
         for ( var i = 0; i < varsToUnset.length; ++i ){
-            var name = varsToUnset[ i ];
-            unset( name );
+            unset( varsToUnset[ i ] );
         }
         
-        for ( name in varsToSet ){
+        for ( var name in varsToSet ){
             var value = varsToSet[ name ];
             setLocal( name, value );
         }

@@ -186,7 +186,7 @@ module.exports = (function() {
     /* End conf */
     
     /* Logger */
-    var logger = undefined;
+    var logger;
     var getDefaultLogger = function (){
         
         var defaultLogger = log4javascript.getDefaultLogger();

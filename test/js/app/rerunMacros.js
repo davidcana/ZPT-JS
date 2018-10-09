@@ -55,7 +55,7 @@ QUnit.test( "Rerun macro tests", function( assert ) {
         }
 
         assert.equal( $('#t2-6').html().trim() , "counter=" + counter );
-    };
+    }
     
     continueTesting( root, counter );
 });

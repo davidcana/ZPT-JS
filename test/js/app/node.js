@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 "use strict";
 
 // jsdom: it is needed when no browser is available

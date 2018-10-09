@@ -154,6 +154,7 @@ module.exports = (function( ) {
         for ( var c = 0; c < remotePageUrls.length; c++ ) {
             var currentPageUrl = remotePageUrls[ c ];
             
+            /* jshint loopfunc: true */
             $.ajax({
                 url: currentPageUrl,
                 dataType: 'html'

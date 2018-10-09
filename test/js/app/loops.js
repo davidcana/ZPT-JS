@@ -47,7 +47,7 @@ QUnit.test( "dynamic loops test", function( assert ) {
     //assert.equal( getAllValues( '.nValue1' ) , '10/20/30/40' );
     
     // Replace 10/20/30/40 by 10/20/30
-    var dictionary = {
+    dictionary = {
             someNumbers: [ 10, 20, 30 ]
     };
     zpt.run({
@@ -57,7 +57,7 @@ QUnit.test( "dynamic loops test", function( assert ) {
     assert.equal( getAllValues( '.nValue1' ) , '10/20/30' );
     
     // Add 40/50/60
-    var dictionary = {
+    dictionary = {
             someNumbers: [ 40, 50, 60 ]
     };
     
@@ -90,7 +90,7 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV'  );
 
     // Add a tool
-    var dictionary = {
+    dictionary = {
         tools: []
     };
     dictionary.tools.push( 
@@ -116,7 +116,7 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV/V'  );
     
     // Add a tool
-    var dictionary = {
+    dictionary = {
         tools: []
     };
     dictionary.tools.push( 

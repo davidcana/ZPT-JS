@@ -43,7 +43,7 @@ QUnit.test( "Rerun simple tests", function( assert ) {
 
         assert.equal( $('#t1-3').html() , "counter=" + counter );
         assert.equal( $('#t1-4').html() , "counter=" + counter );
-    };
+    }
     
     continueTesting( root, counter );
 });

@@ -6,7 +6,6 @@ var zpt = require( './main.js' );
 (function ( $ ) {
  
     $.fn.zpt = function( options ) {
-        "use strict";
         
         var defaults = {
             dictionary: {},

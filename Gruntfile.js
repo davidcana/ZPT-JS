@@ -272,12 +272,27 @@ module.exports = function(grunt) {
                         }
                 ]
             }
+        },
+        uglify: {
+            standalone: {
+                files: {
+                    'build/standalone.min.js': [ 'build/standalone.js' ]
+                }
+            }
+        },
+        jshint: {
+            all: [ 'Gruntfile.js', 'js/app/*.js', 'test/js/app/*.js' ],
+            options: {
+                jshintrc: '.jshintrc'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-browserify');
     
     grunt.registerTask('test', ['qunit']);

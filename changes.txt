@@ -2,6 +2,10 @@ New in 0.23.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.22.5
+- Bug fixed: jquery plugin was not working using standalone version.
+- Uglify and jshint tasks added to gruntfile. All files lint free.
+
 New in 0.22.4
 - Bug fixed: all toString methods fixed (improved error messages).
 
