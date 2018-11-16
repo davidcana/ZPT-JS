@@ -583,7 +583,16 @@ zpt.run({
     <p>
         String expressions behave exactly as in ZPT. Python expressions are not supported in ZPT-JS.
     </p>
-
+    
+    <a id="tales.window"></a>
+    <h3>The window object</h3>
+    <p>
+        ZPT-JS register the <em>window</em> object automatically, so global variables defined via javascript can be used easily:
+    </p>
+    <pre>
+&lt;div data-tcontent="window/globalVar"&gt;a string&lt;/div&gt;
+    </pre>
+    
     <a id="tal"></a>
     <h2>TAL Statements</h2>
     <p>

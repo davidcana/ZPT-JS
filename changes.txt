@@ -7,7 +7,7 @@ New in 0.23.1
 - Bug fixed: render elements generated outside the container (macros and loops).
 
 New in 0.23.0
-- Add to dictionary some useful vars (windows).
+- Add to dictionary window object.
 
 New in 0.22.5
 - Bug fixed: jquery plugin was not working using standalone version.

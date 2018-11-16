@@ -5,6 +5,8 @@ var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
 
+window.globalVar = 'It works!';
+
 // Parse template
 zpt.run({
     root: document.body,
@@ -173,4 +175,8 @@ QUnit.test( "Map test", function( assert ) {
     assert.equal( $('#t15-1').html() , "item0" );
     assert.equal( $('#t15-2').html() , "Bob" );
     assert.equal( $('#t15-3').html() , "Bob" );
+});
+
+QUnit.test( "Window object test", function( assert ) {
+    assert.equal( $('#t16-1').html() , 'It works!' );
 });

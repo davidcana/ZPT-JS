@@ -77,6 +77,11 @@ module.exports = function( obj ) {
         setLocal( name, value );
     };
     
+    // Register window object if it exists
+    if ( window ){
+        setLocal( 'window', window );
+    }
+    
     return {
         startElement: startElement,
         get: get,
