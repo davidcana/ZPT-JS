@@ -2,12 +2,12 @@ New in 0.24.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
+New in 0.23.1
+- Bug fixed: undefined attributtes crashes.
+- Bug fixed: render elements generated outside the container (macros and loops).
+
 New in 0.23.0
 - Add to dictionary some useful vars (windows).
-
-New in 0.22.6
-- Bug fixed: render elements generated outside the container (macros and loops).
-- Bug fixed: external macro support of absolute URLs.
 
 New in 0.22.5
 - Bug fixed: jquery plugin was not working using standalone version.

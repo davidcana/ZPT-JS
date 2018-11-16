@@ -756,7 +756,25 @@ zptParser.init(
     }
 );
     </pre>
-    
+    <p>
+        URLs are by default relative to current URL. You can also use absolute URLs:
+    </p>
+    <pre>
+var zptParser = zpt.buildParser({
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ '/path/to/your/macro/macros.html' ]
+});
+...
+    </pre>
+    <p>
+        And in your HTML code:
+    </p>
+    <pre>
+&lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
+    Macro goes here
+&lt;/div&gt;
+    </pre>
     <a id="formatters"></a>
     <h2>Formatters</h2>
     <p>

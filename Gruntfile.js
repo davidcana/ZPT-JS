@@ -220,6 +220,15 @@ module.exports = function(grunt) {
                 },
                 src: 'samples/js/app/mixedMacros.js',
                 dest: 'build/mixedMacros.js'
+            },
+            externalMacrosAbsoluteURLs: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/externalMacros-absoluteURLs.js',
+                dest: 'build/externalMacros-absoluteURLs.js'
             }
             
         },

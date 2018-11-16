@@ -21,5 +21,6 @@ QUnit.testSuites([
     { name: "original tags Test Suite", path: "./original.html" },
     { name: "recursive macros Test Suite", path: "./recursiveMacros.html" },
     { name: "mixed macros Test Suite", path: "./mixedMacros.html" },
-    { name: "standalone Test Suite", path: "./standalone.html" }
+    { name: "standalone Test Suite", path: "./standalone.html" },
+    { name: "External macros with absolute URLs Test Suite", path: "./moreTest/externalMacros-absoluteURLs.html" }
 ]);

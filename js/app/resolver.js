@@ -165,6 +165,10 @@ module.exports = (function( ) {
                 if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
                     deferred();
                 }
+            }).fail( function( jqXHR, textStatus, errorThrown ) {
+                var msg = 'Error trying to get ' + currentPageUrl + ': ' + errorThrown;
+                alert( msg );
+                throw msg;
             });
         }
         

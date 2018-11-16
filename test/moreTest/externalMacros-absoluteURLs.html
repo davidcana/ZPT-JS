@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>External macros with absolute URLs tests</title>
+        <link rel="stylesheet" href="../styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/externalMacros-absoluteURLs.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <h4>Simple macros</h4>
+        <div id="t1">
+            <p>
+                Before use macro
+            </p>
+            <b data-muse-macro="string:copyright@${template}">
+                Macro goes here
+            </b>
+            <p>
+                In the middle of 2 macros
+            </p>
+            <b data-muse-macro="'copyright@/test/externalMacros-definitions.html'">
+                Macro goes here
+            </b>
+            <p>
+                After use macro
+            </p>
+        </div>
+    </body>
+</html>
