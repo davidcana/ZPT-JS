@@ -30,8 +30,9 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
 
     var processMapAttributeItem = function( node, map ){
     
+        // Do nothing if map is null
         if ( ! map ){
-            throw 'Invalid attribute: undefined value. Object expected.';
+            return;
         }
         
         if ( ! $.isPlainObject( map ) ){

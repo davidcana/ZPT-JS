@@ -3,7 +3,7 @@ New in 0.25.0
 - Avoid flashing?
 
 New in 0.24.1
-- Bug fixed: undefined attributtes crashes.
+- Bug fixed: undefined attributtes crashed.
 - Bug fixed: render elements generated outside the container (macros and loops).
 
 New in 0.24.0
