@@ -784,6 +784,16 @@ var zptParser = zpt.buildParser({
     Macro goes here
 &lt;/div&gt;
     </pre>
+    <p>
+        <em>Context</em> object provides a method to set a prefix to all relative URLs:
+    </p>
+    <pre>
+context.setExternalMacroPrefixURL( '/path/to/your/templates/' );
+    </pre>
+    <p>
+        Then if you use an URL like <em>macros.html</em> it will be replaced by <em>/path/to/your/templates/macros.html</em>.
+    </p>
+    
     <a id="formatters"></a>
     <h2>Formatters</h2>
     <p>

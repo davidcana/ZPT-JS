@@ -1,10 +1,13 @@
-New in 0.24.0
+New in 0.25.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
-New in 0.23.1
+New in 0.24.1
 - Bug fixed: undefined attributtes crashes.
 - Bug fixed: render elements generated outside the container (macros and loops).
+
+New in 0.24.0
+- Added setExternalMacroPrefixURL method to context.
 
 New in 0.23.0
 - Add to dictionary window object.

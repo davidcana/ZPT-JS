@@ -57,7 +57,7 @@ module.exports = (function( ) {
             }:
             {
                 macroId: macroKey.substring( 0, index ),
-                url: macroKey.substring( 1 + index )
+                url: buildURL ( macroKey.substring( 1 + index ) )
             };
     };
     
@@ -145,6 +145,11 @@ module.exports = (function( ) {
         return remotePageUrls;
     };
     
+    // Add preffix if the URL is not absolute
+    var buildURL = function( URL ){
+        return URL.startsWith( '/' )? URL: context.getExternalMacroPrefixURL() + URL;
+    };
+    
     var loadRemotePages = function( scope, declaredRemotePageUrls, deferred ){
 
         var remotePageUrls = buildRemotePageUrlList( scope, declaredRemotePageUrls );
@@ -152,7 +157,7 @@ module.exports = (function( ) {
         remotePages = {};
         
         for ( var c = 0; c < remotePageUrls.length; c++ ) {
-            var currentPageUrl = remotePageUrls[ c ];
+            var currentPageUrl = buildURL( remotePageUrls[ c ] );
             
             /* jshint loopfunc: true */
             $.ajax({

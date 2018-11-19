@@ -229,6 +229,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/externalMacros-absoluteURLs.js',
                 dest: 'build/externalMacros-absoluteURLs.js'
+            },
+            externalMacrosPrefixURLs: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/externalMacros-prefixURLs.js',
+                dest: 'build/externalMacros-prefixURLs.js'
             }
             
         },

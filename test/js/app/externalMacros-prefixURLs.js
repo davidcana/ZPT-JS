@@ -4,9 +4,12 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
+var context = require( '../../../js/app/context.js' );
+
+context.setExternalMacroPrefixURL( '/test/' );
 
 var dictionary = { 
-    template: '/test/externalMacros-definitions.html'
+    template: 'externalMacros-definitions.html'
 };
 var zptParser = zpt.buildParser({
     root: document.body,
