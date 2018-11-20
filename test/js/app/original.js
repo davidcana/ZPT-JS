@@ -90,7 +90,7 @@ QUnit.test( "Macros test", function( assert ) {
 <em metal:fill-slot="'additional_info'">
 Make sure to check out our <a href="/specials">specials</a>.
 </em>
-</div><div data-mmacro="enhacedSidebar">
+</div><div data-mmacro="enhacedSidebar" data-qdup="1">
 Links
 <div metal:define-slot="links">
 <ul>

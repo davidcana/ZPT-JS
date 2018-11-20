@@ -28,4 +28,6 @@ module.exports = function( node ) {
     // i18n namespace
     this.i18nDomain = node.getAttribute( tags.i18nDomain );
     this.i18nLanguage = node.getAttribute( tags.i18nLanguage );
+    
+    this.qdup = node.getAttribute( tags.qdup );
 };

@@ -145,7 +145,7 @@ module.exports = function ( options ) {
         try {
             // Get the attributes from the node
             var attributes = new NodeAttributes( node );
-
+            
             scope.startElement();
 
             // Process instructions
@@ -187,16 +187,17 @@ module.exports = function ( options ) {
     
     var processLoop = function( node, attributes, scope ) {
         
-        //scope.startElement();
-        
         // Process repeat
         var talRepeat = TALRepeat.build( attributes.talRepeat );
         var loop = talRepeat.process( scope, node );
 
+        // Configure the node to clone it later
         node.removeAttribute( tags.talRepeat );
         node.removeAttribute( 'style' );
         node.setAttribute( tags.qdup, 1 );
-
+        var nodeId = node.getAttribute( 'id' );
+        node.removeAttribute( 'id' );
+        
         var nextSiblingData = processLoopNextSibling( node );
         var nextSibling = nextSiblingData.nextSibling;
         loop.setOffset( nextSiblingData.counter );
@@ -225,9 +226,10 @@ module.exports = function ( options ) {
         // Configure repeat node (the original) to enable future reevaluation
         node.style.display = 'none';
         node.setAttribute( tags.talRepeat, attributes.talRepeat );
+        if ( nodeId !== '' && nodeId != null ){
+            node.setAttribute( 'id', nodeId );
+        }
         node.removeAttribute( tags.qdup );
-        
-        //scope.endElement();
         
         return true;
     };
@@ -268,8 +270,6 @@ module.exports = function ( options ) {
     };
 
     var processElement = function( node, attributes, scope ) {
-        
-        //scope.startElement();
         
         processOnError( 
             scope, 
@@ -333,8 +333,6 @@ module.exports = function ( options ) {
                 scope, 
                 attributes.metalUseMacro, 
                 attributes.talDefine );
-        
-        //scope.endElement();
         
         return true;
     };
@@ -416,7 +414,11 @@ module.exports = function ( options ) {
         
         // No sense to cache macro uses!
         var metalUseMacro = METALUseMacro.build( string, stringDefine, scope );
-        return metalUseMacro.process( scope, node );
+        var newNode = metalUseMacro.process( scope, node );
+        newNode.setAttribute( tags.qdup, 1 );
+        
+        // Process new node
+        return process( newNode, scope );
     };
 
     var processCondition = function( node, scope, string ) {

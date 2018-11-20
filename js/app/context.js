@@ -17,14 +17,14 @@ module.exports = (function() {
         talOmitTag:       "data-tomit-tag",
         talReplace:       "data-treplace",
         talOnError:       "data-ton-error",
-        qdup:             "data-qdup",
         metalDefineMacro: "data-mdefine-macro",
         metalUseMacro:    "data-muse-macro",
         metalDefineSlot:  "data-mdefine-slot",
         metalFillSlot:    "data-mfill-slot",
         metalMacro:       "data-mmacro",
         i18nDomain:       "data-idomain",
-        i18nLanguage:     "data-ilanguage"
+        i18nLanguage:     "data-ilanguage",
+        qdup:             "data-qdup"
     };
     var originalTags = {
         talCondition:     "tal:condition",
@@ -35,14 +35,14 @@ module.exports = (function() {
         talOmitTag:       "tal:omit-tag",
         talReplace:       "tal:replace",
         talOnError:       "tal:on-error",
-        qdup:             "data-qdup",
         metalDefineMacro: "metal:define-macro",
         metalUseMacro:    "metal:use-macro",
         metalDefineSlot:  "metal:define-slot",
         metalFillSlot:    "metal:fill-slot",
         metalMacro:       "data-mmacro",
         i18nDomain:       "i18n:domain",
-        i18nLanguage:     "i18n:language"
+        i18nLanguage:     "i18n:language",
+        qdup:             "data-qdup"
     };
     var tags = defaultTags;
     var tal = '';

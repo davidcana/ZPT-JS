@@ -38,6 +38,8 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
 
         // Add the macro node
         node.parentNode.insertBefore( newNode, node.nextSibling );
+        
+        return newNode;
     };
     
     var updateTalDefineAttribute = function( scope, macroKey, tags, newNode ){

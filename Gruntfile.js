@@ -238,6 +238,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/externalMacros-prefixURLs.js',
                 dest: 'build/externalMacros-prefixURLs.js'
+            },
+            singleRoot: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/singleRoot.js',
+                dest: 'build/singleRoot.js'
             }
             
         },
