@@ -86,6 +86,15 @@ module.exports = function(grunt) {
                 src: 'test/js/app/i18nAsync.js',
                 dest: 'build/i18nAsync.js'
             },
+            i18nAsyncAuto: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/i18nAsyncAuto.js',
+                dest: 'build/i18nAsyncAuto.js'
+            },
             jquery: {
                 options: {
                     browserifyOptions: {

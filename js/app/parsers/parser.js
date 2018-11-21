@@ -30,7 +30,8 @@ module.exports = function ( options ) {
     var callback;
     var notRemoveGeneratedTags = false;
     var declaredRemotePageUrls = [];
-
+    var i18n;
+    
     var scope = undefined;
     var tags = context.getTags();
     
@@ -41,7 +42,8 @@ module.exports = function ( options ) {
         callback = options.callback || callback;
         notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: notRemoveGeneratedTags;
         declaredRemotePageUrls = options.declaredRemotePageUrls || declaredRemotePageUrls;
-        
+        i18n = options.i18n || i18n;
+            
         scope = new Scope( dictionary );
     };
     
