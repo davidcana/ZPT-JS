@@ -6,13 +6,13 @@ var zpt = require( '../../../js/app/main.js' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
-var i18nAsyncTests = require( './i18nAsyncTests.js' );
+var i18nTests = require( './i18nTests.js' );
 
-var urlPrefix = './';
-var es1JSONUrl = urlPrefix + 'i18n/es1.json';
-var en1JSONUrl = urlPrefix + 'i18n/en1.json';
-var es2JSONUrl = urlPrefix + 'i18n/es2.json';
-var en2JSONUrl = urlPrefix + 'i18n/en2.json';
+var urlPrefix = './i18n/';
+var es1JSONUrl = urlPrefix + 'es1.json';
+var en1JSONUrl = urlPrefix + 'en1.json';
+var es2JSONUrl = urlPrefix + 'es2.json';
+var en2JSONUrl = urlPrefix + 'en2.json';
 
 var jsonFiles = [ es1JSONUrl , en1JSONUrl, es2JSONUrl , en2JSONUrl ];
 
@@ -66,4 +66,4 @@ QUnit.module( 'module', {
     }
 });
 
-i18nAsyncTests();
+i18nTests();

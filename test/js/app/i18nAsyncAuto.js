@@ -5,7 +5,7 @@ var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
-var i18nAsyncTests = require( './i18nAsyncTests.js' );
+var i18nTests = require( './i18nTests.js' );
 
 // Init dictionary
 var dictionary = {
@@ -57,4 +57,4 @@ QUnit.module( 'module', {
     }
 });
 
-i18nAsyncTests();
+i18nTests();
