@@ -987,33 +987,55 @@ zpt.run({
 "use strict";
 
 var zpt = require( '../../../js/app/main.js' );
-var I18n = require( '../../../js/app/i18n/i18n.js' );
-var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
-var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
 
-var esJSONFileName = 'i18n/es1.json';
-var enJSONFileName = 'i18n/en1.json';
+var dictionary = {
+    ...
+};
 
-var jsonFiles = [ esJSONFileName , enJSONFileName ];
+var zptParser = zpt.buildParser({
+    root: document.body,
+    dictionary: dictionary,
+    i18n: {
+        urlPrefix: './i18n/',
+        files: {
+            'es': [ 'es1.json', 'es2.json' ],
+            'en': [ 'en1.json', 'en2.json' ]
+        }
+    }
+});
 
-i18nHelper.loadAsync( jsonFiles , callback );
-
-function callback( i18nMap ){
+zptParser.init(
+    function(){
     
-    var i18nES =  new I18n( 'es', i18nMap[ esJSONFileName ] );
-    var i18nEN = new I18n( 'en', i18nMap[ enJSONFileName ] );
-    var i18nBundle = new I18nBundle( i18nES, i18nEN );
-
-    var dictionary = {
-        'i18nBundle': i18nBundle
-    };
-    
-    zpt.run({
-        root: document.body,
-        dictionary: dictionary
-    });
-}
+        // Add I18nBundle instances to dictionary
+        var dictionaryExtension = {
+            i18nBundle1: new I18nBundle( dictionary.i18nES1, dictionary.i18nEN1 ),
+            i18nBundle2: new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 )
+        };
+        $.extend( true, dictionary, dictionaryExtension );
+            
+        zptParser.run();
+    }
+);
     </pre>
+    <p>
+        ZPT will add to register these vars:
+    </p>
+    <ul>
+        <li><em>i18nES1</em>. Includes all texts from <em>es1.json</em> file.</li>
+        <li><em>i18nES2</em>. Includes all texts from <em>es2.json</em> file.</li>
+        <li><em>i18nEN1</em>. Includes all texts from <em>en1.json</em> file.</li>
+        <li><em>i18nEN2</em>. Includes all texts from <em>en2.json</em> file.</li>
+        <li><em>i18nESArray</em>. An array with all spanish texts, in this example <em>[ i18nES2, i18nES1 ]</em>.</li>
+        <li><em>i18nENArray</em>. An array with all english texts, in this example <em>[ i18nEN2, i18nEN1 ]</em>.</li>
+        <li><em>i18nArray</em>. An array with all texts defined only if only one language is present. In this example it would not be defined, there are 2 languages.</li>
+    </ul>
+    <p>
+        The order in arrays is inverted: first the last files, then the first. 
+    </p>
+    <p>
+        The bundles (<em>i18nBundle1</em> and <em>i18nBundle2</em>) are not required, add to the dictionary if you need them.
+    </p>
     
     <h4>Numbers</h4>
     <p>

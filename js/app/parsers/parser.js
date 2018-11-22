@@ -72,14 +72,6 @@ module.exports = function ( options ) {
                     );
                 }
             );
-            /*
-            resolver.loadRemotePages( 
-                scope,
-                declaredRemotePageUrls,
-                function (){
-                    processCallback( currentCallback );
-                }
-            );*/
             
         } catch( e ){
             log.fatal( 'Exiting init method of ZPT with errors: ' + e );

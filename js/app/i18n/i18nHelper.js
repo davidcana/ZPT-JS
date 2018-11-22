@@ -67,6 +67,7 @@ module.exports = (function() {
         }
         
         // Build jsonFiles array
+        var numberOfLanguages = Object.keys( i18n.files ).length;
         var jsonFiles = [];
         var urlPrefix = i18n.urlPrefix || '';
         for ( var lang in i18n.files ){
@@ -86,11 +87,19 @@ module.exports = (function() {
                 for ( var lang in i18n.files ){
                     var langFiles = i18n.files[ lang ];
                     var i18nInstanceArray = [];
+                    
+                    // Register array vars
                     dictionary[ buildI18nInstanceArrayName( lang ) ] = i18nInstanceArray;
+                    if ( numberOfLanguages == 1 ){
+                        dictionary[ 'i18nArray' ] = i18nInstanceArray;
+                    }
+                    
                     for ( var index in langFiles ){
                         var file = langFiles[ index ];
                         var url = urlPrefix + file;
                         var i18nInstance = new I18n( lang, i18nMap[ url ] );
+                        
+                        // Register i18n instances
                         dictionary[ buildI18nInstanceName( file ) ] = i18nInstance;
                         i18nInstanceArray.unshift( i18nInstance ); // Add to the beginning of the array
                     }
