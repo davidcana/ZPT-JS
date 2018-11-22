@@ -19,15 +19,19 @@ var init = function( assert ){
     
     var done = assert.async(); // QUnit's assert.async() function tells the framework to pause all tests until done() is called.
 
-    i18nHelper.loadAsyncAuto( 
-        dictionary,
-        {
+    var zptParser = zpt.buildParser({
+        root: document.body,
+        dictionary: dictionary,
+        i18n: {
             urlPrefix: './i18n/',
             files: {
                 'es': [ 'es1.json', 'es2.json' ],
                 'en': [ 'en1.json', 'en2.json' ]
             }
-        }, 
+        }
+    });
+
+    zptParser.init(
         function(){
 
             // Add I18nBundle instances to dictionary
@@ -36,28 +40,16 @@ var init = function( assert ){
                 i18nBundle2: new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 )
             };
             $.extend( true, dictionary, dictionaryExtension );
-            
-            var zptParser = zpt.buildParser({
-                root: document.body,
-                dictionary: dictionary,
-                i18n: {
-                    urlPrefix: './i18n/',
-                    files: {
-                        'es': [ 'es1.json', 'es2.json' ],
-                        'en': [ 'en1.json', 'en2.json' ]
-                    }
-                }
-            });
 
-            zptParser.init(
-                function(){
-                    zptParser.run();
-                    done();
-                }
-            );
+            // Run ZPT
+            zptParser.run();
+            
+            // Start tests
+            done();
         }
-    );  
-};
+    );
+}
+
 
 QUnit.module( 'module', {  
     before: function( assert ){

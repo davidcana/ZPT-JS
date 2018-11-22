@@ -11,6 +11,7 @@ module.exports = function ( options ) {
     var NodeAttributes = require( '../nodeAttributes.js' );
     var $ = require( 'jquery' );
     var attributeCache = require( '../cache/attributeCache.js' );
+    var i18nHelper = require( '../i18n/i18nHelper.js' );
     
     var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
     var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -58,13 +59,27 @@ module.exports = function ( options ) {
                 removeGeneratedTagsFromAllRootElements( root );
             }
             
+            i18nHelper.loadAsyncAuto( 
+                dictionary,
+                i18n,
+                function(){
+                    resolver.loadRemotePages( 
+                        scope,
+                        declaredRemotePageUrls,
+                        function (){
+                            processCallback( currentCallback );
+                        }
+                    );
+                }
+            );
+            /*
             resolver.loadRemotePages( 
                 scope,
                 declaredRemotePageUrls,
                 function (){
                     processCallback( currentCallback );
                 }
-            );
+            );*/
             
         } catch( e ){
             log.fatal( 'Exiting init method of ZPT with errors: ' + e );
