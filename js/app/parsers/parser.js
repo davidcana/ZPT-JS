@@ -57,16 +57,14 @@ module.exports = function ( options ) {
             if ( ! notRemoveGeneratedTags ){
                 removeGeneratedTagsFromAllRootElements( root );
             }
-
-            if ( ! resolver.loadRemotePages( 
+            
+            resolver.loadRemotePages( 
                 scope,
                 declaredRemotePageUrls,
                 function (){
                     processCallback( currentCallback );
-                })){
-
-                processCallback( currentCallback );
-            }
+                }
+            );
             
         } catch( e ){
             log.fatal( 'Exiting init method of ZPT with errors: ' + e );

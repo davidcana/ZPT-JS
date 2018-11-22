@@ -58,11 +58,12 @@ module.exports = (function() {
             });
     };
     
-    var loadAsyncAuto = function( dictionary, i18n, deferred ){
+    var loadAsyncAuto = function( dictionary, i18n, callback ){
         
         // Return if it is nothing to do
         if ( ! i18n || ! i18n.files || ! Object.keys( i18n.files ).length ){
-            return 0;
+            callback();
+            return;
         }
         
         // Build jsonFiles array
@@ -95,11 +96,9 @@ module.exports = (function() {
                     }
                 }
                 
-                deferred();
+                callback();
             } 
         );
-        
-        return jsonFiles.length;
     };
     
     var buildI18nInstanceArrayName = function( lang ){

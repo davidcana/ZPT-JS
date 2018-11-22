@@ -150,11 +150,18 @@ module.exports = (function( ) {
         return URL.startsWith( '/' )? URL: context.getExternalMacroPrefixURL() + URL;
     };
     
-    var loadRemotePages = function( scope, declaredRemotePageUrls, deferred ){
+    var loadRemotePages = function( scope, declaredRemotePageUrls, callback ){
 
         var remotePageUrls = buildRemotePageUrlList( scope, declaredRemotePageUrls );
         var pending = remotePageUrls.length;
         remotePages = {};
+        
+        if ( ! pending ){
+            if ( callback && $.isFunction( callback ) ){
+                callback();   
+            }
+            return;
+        }
         
         for ( var c = 0; c < remotePageUrls.length; c++ ) {
             var currentPageUrl = buildURL( remotePageUrls[ c ] );
@@ -167,8 +174,8 @@ module.exports = (function( ) {
                 var element = $( '<div></div>' );
                 element.html( html );
                 remotePages[ this.url ] = element;
-                if ( --pending == 0 && deferred && $.isFunction( deferred ) ){
-                    deferred();
+                if ( --pending == 0 && callback && $.isFunction( callback ) ){
+                    callback();
                 }
             }).fail( function( jqXHR, textStatus, errorThrown ) {
                 var msg = 'Error trying to get ' + currentPageUrl + ': ' + errorThrown;
@@ -176,8 +183,6 @@ module.exports = (function( ) {
                 throw msg;
             });
         }
-        
-        return remotePageUrls.length;
     };
     
     var configureNode = function( node, macroId, macroKey ){
