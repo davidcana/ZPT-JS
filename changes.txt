@@ -1,8 +1,9 @@
-New in 0.25.0
+New in 0.26.0
 - Replace callback functions by promises?
 - Avoid flashing?
 
-New in 0.24.1
+New in 0.25.0
+- Auto load of i18n files at init.
 - Bug fixed: undefined attributtes crashed.
 - Bug fixed: render elements generated outside the container (macros and loops).
 
