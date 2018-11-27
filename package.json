@@ -1,6 +1,6 @@
 {
     "name": "zpt",
-    "version": "0.25.0",
+    "version": "0.26.0",
     "main": "./js/app/main.js",
     "description": "Zenon Page Templates - JS (ZPT-JS)",
     "keywords": [

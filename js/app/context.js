@@ -144,6 +144,8 @@ module.exports = (function() {
         loggingOn: false,
         loggingLevel: log4javascript.Level.ERROR,
 
+        externalMacroPrefixURL: '',
+        
         expressionCacheOn: true,
         attributeCacheOn: true,
 
@@ -273,16 +275,6 @@ module.exports = (function() {
     };
     /* End Alt attributes */
     
-    /* External macro URLs */
-    var externalMacroPrefixURL = '';
-    var setExternalMacroPrefixURL = function ( externalMacroPrefixURLToSet ){
-        externalMacroPrefixURL = externalMacroPrefixURLToSet;
-    };
-    var getExternalMacroPrefixURL = function (){
-        return externalMacroPrefixURL;
-    };
-    /* End of external macro URLs */
-    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -299,8 +291,6 @@ module.exports = (function() {
         isBooleanAttribute: isBooleanAttribute,
         getAltAttributes: getAltAttributes,
         setAltAttributes: setAltAttributes,
-        isAltAttribute: isAltAttribute,
-        setExternalMacroPrefixURL: setExternalMacroPrefixURL,
-        getExternalMacroPrefixURL: getExternalMacroPrefixURL
+        isAltAttribute: isAltAttribute
     };
 })();

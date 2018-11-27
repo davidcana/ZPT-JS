@@ -6,7 +6,7 @@ var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var context = require( '../../../js/app/context.js' );
 
-context.setExternalMacroPrefixURL( '/test/' );
+context.getConf().externalMacroPrefixURL = '/test/';
 
 var dictionary = { 
     template: 'externalMacros-definitions.html'

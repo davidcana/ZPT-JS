@@ -147,7 +147,8 @@ module.exports = (function( ) {
     
     // Add preffix if the URL is not absolute
     var buildURL = function( URL ){
-        return URL.startsWith( '/' )? URL: context.getExternalMacroPrefixURL() + URL;
+        return URL.startsWith( '/' )? URL: context.getConf().externalMacroPrefixURL + URL;
+        //return URL.startsWith( '/' )? URL: context.getExternalMacroPrefixURL() + URL;
     };
     
     var loadRemotePages = function( scope, declaredRemotePageUrls, callback ){
