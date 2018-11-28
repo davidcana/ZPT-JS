@@ -1,6 +1,10 @@
-New in 0.27.0
+New in 0.28.0
 - Replace callback functions by promises?
 - Avoid flashing?
+
+New in 0.27.0
+- Add to dictionary context object.
+- Name of window and context vars in dictionary can be configured in context.
 
 New in 0.26.0
 - setExternalMacroPrefixURL method in context replaced by externalMacroPrefixURL conf property.

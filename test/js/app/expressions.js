@@ -180,3 +180,7 @@ QUnit.test( "Map test", function( assert ) {
 QUnit.test( "Window object test", function( assert ) {
     assert.equal( $('#t16-1').html() , 'It works!' );
 });
+
+QUnit.test( "Context object test", function( assert ) {
+    assert.equal( $('#t17-1').html() , 'context' );
+});

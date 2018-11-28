@@ -138,7 +138,9 @@ module.exports = (function() {
         i18nLanguageVarName:     "i18nLanguage",
         repeatVarName:           "repeat",
         externalMacroUrlVarName: "externalMacroUrl",
-
+        windowVarName:           "window",
+        contextVarName:          "context",
+        
         i18nConfResourceId: '/CONF/',
 
         loggingOn: false,

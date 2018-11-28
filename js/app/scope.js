@@ -3,6 +3,7 @@
 */
 module.exports = function( obj ) {
     "use strict";
+    var context = require( './context.js' );
     
     // Create a duplicate object which we can add properties to without affecting the original
     var wrapper = function() {};
@@ -79,8 +80,11 @@ module.exports = function( obj ) {
     
     // Register window object if it exists
     if ( window ){
-        setLocal( 'window', window );
+        setLocal( context.getConf().windowVarName, window );
     }
+    
+    // Register context
+    setLocal( context.getConf().contextVarName, context );
     
     return {
         startElement: startElement,
