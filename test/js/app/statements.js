@@ -59,7 +59,6 @@ QUnit.test( "Attributes test", function( assert ) {
     assert.equal( $('#t4-1').attr('href') , "http://www.xxx.org" );
     assert.equal( $('#t4-2').attr('title') , "title in string expression" );
     assert.equal( $('#t4-2').attr('href') , "http://www.xxx.org" );
-    //alert( $('#t4-2').attr('href2') );
     assert.equal( $('#t5-1').attr('title'), undefined );
     assert.equal( $('#t5-1').attr('href') , "http://www.xxx.org" );
     assert.equal( $('#t5-2').attr('title') , "title in string expression" );

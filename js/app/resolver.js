@@ -1,12 +1,13 @@
 /* 
     resolver singleton class
 */
+"use strict";
+
+var $ = require( 'jquery' );
+var context = require( './context.js' );
+var expressionBuilder = require( './expressions/expressionBuilder.js' );
+
 module.exports = (function( ) {
-    "use strict";
-    
-    var $ = require( 'jquery' );
-    var context = require( './context.js' );
-    var expressionBuilder = require( './expressions/expressionBuilder.js' );
     
     var macros = {};
     var remotePages = {};
@@ -150,7 +151,7 @@ module.exports = (function( ) {
         return URL.startsWith( '/' )? URL: context.getConf().externalMacroPrefixURL + URL;
     };
     
-    var loadRemotePages = function( scope, declaredRemotePageUrls, callback ){
+    var loadRemotePages = function( scope, declaredRemotePageUrls, callback, failCallback ){
 
         var remotePageUrls = buildRemotePageUrlList( scope, declaredRemotePageUrls );
         var pending = remotePageUrls.length;
@@ -177,10 +178,17 @@ module.exports = (function( ) {
                 if ( --pending == 0 && callback && $.isFunction( callback ) ){
                     callback();
                 }
-            }).fail( function( jqXHR, textStatus, errorThrown ) {
-                var msg = 'Error trying to get ' + currentPageUrl + ': ' + errorThrown;
-                alert( msg );
-                throw msg;
+            }).fail( function( jqXHR, textStatus, error ) {
+                context.asyncError( currentPageUrl, error, failCallback );
+                /*
+                var msg = 'Error trying to get ' + currentPageUrl + ': ' + error;
+                if ( failCallback ){
+                    failCallback( msg );
+                } else {
+                    context.error( msg );
+                }*/
+                //alert( msg );
+                //throw msg;
             });
         }
     };

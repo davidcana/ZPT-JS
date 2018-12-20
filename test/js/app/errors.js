@@ -4,6 +4,7 @@ var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
+var context = require( '../../../js/app/context.js' );
 
 // Unit tests
 QUnit.test( "Non existing expressions test", function( assert ) {
@@ -39,4 +40,55 @@ QUnit.test( "Using null values in path expressions test", function( assert ) {
     } catch( e ){
         assert.equal( e , "Error evaluating \"nullValue/noWay\": \"nullValue\" is null" );
     }
+});
+
+QUnit.test( "External macro in non-existing file test", function( assert ) {
+    
+    var done = assert.async();
+    
+    var zptParser = zpt.buildParser({
+        root: document.body,
+        dictionary: {},
+        declaredRemotePageUrls: []
+    });
+
+    zptParser.init(
+        function(){
+            assert.equal( 0, 1, "Found external file, but it is an error!" );
+            done();
+        },
+        function( msg ){
+            assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
+            done();
+        }
+    );
+});
+
+QUnit.test( "Non-existing i18n file test", function( assert ) {
+
+    var done = assert.async();
+
+    var zptParser = zpt.buildParser({
+        root: document.body,
+        dictionary: {},
+        declaredRemotePageUrls: [],
+        i18n: {
+            urlPrefix: './i18n/',
+            files: {
+                'es': [ 'es1.json', 'es_notFound.json' ],
+                'en': [ 'en1.json', 'en2.json' ]
+            }
+        }
+    });
+
+    zptParser.init(
+        function(){
+            assert.equal( 0, 1, "Found external file, but it is an error!" );
+            done();
+        },
+        function( msg ){
+            assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
+            done();
+        }
+    );
 });

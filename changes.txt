@@ -1,6 +1,10 @@
-New in 0.28.0
+New in 0.29.0
 - Replace callback functions by promises?
 - Avoid flashing?
+
+New in 0.28.0
+- Added setErrorFunction method to context. It manages initialization errors (trying to load external files like external template files or i18n files).
+- Added errorCallback parameter to init method of Parser class. It also manages initialization errors. If an errorCallback is defined is used; otherwise errorFunction in context is used.
 
 New in 0.27.0
 - Add to dictionary context object.

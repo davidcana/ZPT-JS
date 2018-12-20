@@ -35,7 +35,7 @@ var dictionary = {
 };
 
 $( '#evaluate' ).click( function() {
-    //alert('ok');
+
     try {
         var scope = new Scope( dictionary );
         var string = $( '#expression' ).val();

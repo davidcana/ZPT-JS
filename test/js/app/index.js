@@ -25,5 +25,6 @@ QUnit.testSuites([
     { name: "standalone Test Suite", path: "./standalone.html" },
     { name: "external macros with absolute URLs Test Suite", path: "./moreTest/externalMacros-absoluteURLs.html" },
     { name: "external macros with prefix URLs Test Suite", path: "./moreTest/externalMacros-prefixURLs.html" },
-    { name: "single root Test Suite", path: "./singleRoot.html" }
+    { name: "single root Test Suite", path: "./singleRoot.html" },
+    { name: "errors Test Suite", path: "./errors.html" }
 ]);

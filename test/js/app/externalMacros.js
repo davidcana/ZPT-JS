@@ -242,29 +242,8 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
         `;
         assertHtml( assert, '#t8', t8 );
 });
-/*
-QUnit.test( "Not found external macro test using var", function( assert ) {
     
-    assert.equal( 0, 0, "Zero, Zero; equal succeeds" );
-    var done = assert.async();
     
-    try {
-        zpt.run({
-            root: $( '#block2' )[0],
-            dictionary: dictionary,
-            callback: function(){
-                done();
-                throw "Not found external macro test using var: exception not thrown!"; 
-            }
-        });
-    } catch ( e ){
-        assert.equal( 1, 1, "1, 1; equal succeeds" );
-    }
-
-    //'Macros in URL externalMacros-definitions2.html not preloaded!');
-});*/
-    
-
     QUnit.test( "External macro test using var", function( assert ) {
 
         var t10 = `
@@ -277,9 +256,8 @@ QUnit.test( "Not found external macro test using var", function( assert ) {
 `;
         assertHtml( assert, '#t10', t10 );
     });
-
     
-
+    
     QUnit.test( "3 external macros in 3 different external macro files test using var", function( assert ) {
 
         var t11 = `

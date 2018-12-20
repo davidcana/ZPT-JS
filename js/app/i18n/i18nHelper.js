@@ -6,6 +6,7 @@
 var $ = require( 'jquery' );
 var I18n = require( './i18n.js' );
 var I18nBundle = require( './i18nBundle.js' );
+var context = require( '../context.js' );
 
 module.exports = (function() {
     
@@ -30,17 +31,44 @@ module.exports = (function() {
         return 'I18n resource "' + id + '" not found!';
     };
     
-    var loadAsync = function( remoteList, deferred ){
+    var loadAsync = function( remoteList, callback, failCallback ){
         
         loadAsyncItem( 
             {}, 
-            deferred, 
+            callback, 
+            failCallback,
             remoteList, 
             remoteList.length - 1 );
     };
     
-    var loadAsyncItem = function( map, deferred, remoteList, currentIndex ){
+    var loadAsyncItem = function( map, callback, failCallback, remoteList, currentIndex ){
         
+        var url = remoteList[ currentIndex ];
+        $.getJSON( url )
+            .done(
+                function( data ) {
+                    map[ url ] = data;
+                    if ( currentIndex > 0 ){
+                        loadAsyncItem( 
+                            map, 
+                            callback, 
+                            failCallback,
+                            remoteList, 
+                            --currentIndex );
+                    } else {
+                        callback( map );
+                    }
+                }
+            )
+            .fail(
+                function( jqxhr, textStatus, error ) {
+                    context.asyncError( url, error, failCallback );
+                }
+            );
+    };
+    /*
+    var loadAsyncItem = function( map, deferred, remoteList, currentIndex ){
+
         var url = remoteList[ currentIndex ];
         $.getJSON( 
             url,
@@ -57,8 +85,9 @@ module.exports = (function() {
                 }
             });
     };
+    */
     
-    var loadAsyncAuto = function( dictionary, i18n, callback ){
+    var loadAsyncAuto = function( dictionary, i18n, callback, failCallback ){
         
         // Return if it is nothing to do
         if ( ! i18n || ! i18n.files || ! Object.keys( i18n.files ).length ){
@@ -106,7 +135,8 @@ module.exports = (function() {
                 }
                 
                 callback();
-            } 
+            },
+            failCallback 
         );
     };
     

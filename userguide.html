@@ -800,6 +800,24 @@ context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
         Then if you use an URL like <em>macros.html</em> it will be replaced by <em>/path/to/your/templates/macros.html</em>.
     </p>
     
+    <p>
+        Optionally you can add a fail callback function to manage initialization errors:
+    </p>
+    <pre>
+zptParser.init(
+    function(){
+        zptParser.run();
+        [ your code here ]
+    },
+    function( msg ){
+        [ your code to manage initialization errors here ]
+    }
+);
+    </pre>
+    <p>
+        <em>msg</em> is the error message.
+    </p>
+    
     <a id="formatters"></a>
     <h2>Formatters</h2>
     <p>

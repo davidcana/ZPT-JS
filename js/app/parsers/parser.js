@@ -50,7 +50,7 @@ module.exports = function ( options ) {
     
     initFromOptions( options || {} );
     
-    var init = function( initCallback ){
+    var init = function( initCallback, failCallback ){
         
         var currentCallback = initCallback || callback;
         
@@ -68,9 +68,11 @@ module.exports = function ( options ) {
                         declaredRemotePageUrls,
                         function (){
                             processCallback( currentCallback );
-                        }
+                        },
+                        failCallback
                     );
-                }
+                },
+                failCallback
             );
             
         } catch( e ){

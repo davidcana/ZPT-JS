@@ -277,6 +277,28 @@ module.exports = (function() {
     };
     /* End Alt attributes */
     
+    /* Errors */
+    var defaultErrorFunction = function( errorMessage ){
+        alert( errorMessage );
+    };
+    var errorFunction = defaultErrorFunction;
+    var setErrorFunction = function( errorFunctionToSet ){
+        errorFunction = errorFunctionToSet;
+    };
+    var error = function( errorMessage ){
+        return errorFunction( errorMessage );
+    };
+    var asyncError = function( url, error, failCallback ){
+
+        var msg = 'Error trying to get ' + url + ': ' + error;
+        if ( failCallback ){
+            failCallback( msg );
+        } else {
+            error( msg );
+        }
+    };
+    /* End errors */
+    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -293,6 +315,8 @@ module.exports = (function() {
         isBooleanAttribute: isBooleanAttribute,
         getAltAttributes: getAltAttributes,
         setAltAttributes: setAltAttributes,
-        isAltAttribute: isAltAttribute
+        isAltAttribute: isAltAttribute,
+        setErrorFunction: setErrorFunction,
+        asyncError: asyncError
     };
 })();
