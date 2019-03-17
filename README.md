@@ -1,4 +1,6 @@
-Zenon Page Templates - JS (ZPT-JS) is a Javascript implementation of Zope Page Templates (ZPT). Take a look at [Zope2 book](http://docs.zope.org/zope2/zope2book/ZPT.html) to learn about Zope Page Templates.
+# ZPT-JS
+
+**Zenon Page Templates - JS (ZPT-JS)** is a Javascript implementation of Zope Page Templates (ZPT). Take a look at [Zope2 book](http://docs.zope.org/zope2/zope2book/ZPT.html) to learn about Zope Page Templates.
 
 Zenon Page Templates - JS is a Javascript API that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes.
 
@@ -12,21 +14,33 @@ Zenon Page Templates - JS is a Javascript API that makes it easy to modify the D
 There are some important differences between ZPT-JS and ZPT.
 
 Using ZPT we have:
+
 *   the ZPT template (a HTML file with the ZPT tags inside)
 *   the data
 *   the final HTML file (the ZPT template combined with the data)
 
 Using ZPT-JS:
+
 *   the ZPT template (a HTML file with the ZPT tags inside)
 *   the data
 *   the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.
-    
-A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-tcontent`.
+
+A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-tcontent`. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
+
+## Installation
+
+**ZPT-JS** is registered as a package on [npm](https://www.npmjs.com/package/zpt). This is the recomended way of downloading it. You can install the latest version of ZPT-JS and its dependencies with the npm CLI command:
+
+```bash
+npm install zpt
+```
+
+## Usage
 
 An example of ZPT-JS template:
 
-sample.js
-
+*sample.js*
+```javascript
     "use strict";
 
     var zpt = require( 'zpt' );
@@ -49,9 +63,10 @@ sample.js
         root: document.body,
         dictionary: dictionary
     });
+```
 
-sample.html
-
+*sample.html*
+```html
     <!DOCTYPE html>
     <html>
         <head>
@@ -136,5 +151,9 @@ sample.html
             </ul>
         </body>
     </html>
+```
 
 Please, take a look to [the ZPT-JS wiki](https://github.com/davidcana/ZPT-JS/wiki) for more information about ZPT-JS.
+
+## License
+[LGPL](http://www.gnu.org/licenses/lgpl.html)
