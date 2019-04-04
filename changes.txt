@@ -1,6 +1,14 @@
-New in 0.29.0
+New in future versions
 - Replace callback functions by promises?
 - Avoid flashing?
+- Move configurations from context to configuration object?
+- Add data-telse and data-telse-condition tags?
+- Add if: expression (example-> if: isImportant 'important' is equals to cond: isImportant 'important' '')?
+
+New in 0.29.0
+- Save every scope into a cache, set an id to it and put it in HTML using a data-tscope tag to make it easy to re-render?
+- Add data-tbind tag to bind vars in dictionary to update content?
+- Support at data-tattributes tag to bind (example data-tattributes="bind textareaAttrs; bind maxlength maxlength")?
 
 New in 0.28.0
 - Added setErrorFunction method to context. It manages initialization errors (trying to load external files like external template files or i18n files).
