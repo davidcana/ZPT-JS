@@ -1,70 +1,72 @@
 /* 
     Class Scope 
 */
+"use strict";
+
+var context = require( './context.js' );
+
 module.exports = function( obj ) {
-    "use strict";
-    var context = require( './context.js' );
     
     // Create a duplicate object which we can add properties to without affecting the original
     var wrapper = function() {};
     wrapper.prototype = obj;
     obj = new wrapper();
     
-    var globals = obj;
-    var varsStack = [];
+    this.globals = obj;
+    this.varsStack = [];
     
-    var startElement = function( ) {
+    this.startElement = function( ) {
         
         var vars = {
             varsToUnset : [],
             varsToSet : {}
         };
         
-        varsStack.push( vars );
+        this.varsStack.push( vars );
         
         return vars;
     };
     
-    var currentVars = function( ){
-        return varsStack[ varsStack.length - 1 ];
+    this.currentVars = function( ){
+        return this.varsStack[ this.varsStack.length - 1 ];
     };
     
-    var setLocal = function( name, value ) {
-        globals[ name ] = value;
+    this.setLocal = function( name, value ) {
+        this.globals[ name ] = value;
     };
     
-    var get = function( name ) {
-        return globals[ name ];
+    this.get = function( name ) {
+        return this.globals[ name ];
     };
     
-    var unset = function( name ) {
-        delete globals[ name ];
+    this.unset = function( name ) {
+        delete this.globals[ name ];
     };
      
-    var endElement = function ( ) {
+    this.endElement = function ( ) {
         
-        var vars = varsStack.pop(); 
+        var vars = this.varsStack.pop(); 
         
         var varsToUnset = vars.varsToUnset;
         var varsToSet = vars.varsToSet; 
         
         for ( var i = 0; i < varsToUnset.length; ++i ){
-            unset( varsToUnset[ i ] );
+            this.unset( varsToUnset[ i ] );
         }
         
         for ( var name in varsToSet ){
             var value = varsToSet[ name ];
-            setLocal( name, value );
+            this.setLocal( name, value );
         }
     };
     
-    var set = function ( name, value, isGlobal ) {
+    this.set = function ( name, value, isGlobal ) {
         
         if ( ! isGlobal ){
             
             // Local vars
-            var vars = currentVars();
-            var currentValue = get( name );
+            var vars = this.currentVars();
+            var currentValue = this.get( name );
             
             if ( currentValue != null ){
                 vars.varsToSet[ name ] = currentValue;
@@ -75,22 +77,25 @@ module.exports = function( obj ) {
         }
         
         // Common to global and local vars
-        setLocal( name, value );
+        this.setLocal( name, value );
     };
     
     // Register window object if it exists
     if ( window ){
-        setLocal( context.getConf().windowVarName, window );
+        this.setLocal( context.getConf().windowVarName, window );
     }
     
     // Register context
-    setLocal( context.getConf().contextVarName, context );
+    this.setLocal( context.getConf().contextVarName, context );
     
+    return this;
+    /*
     return {
         startElement: startElement,
-        get: get,
-        unset: unset,
         endElement: endElement,
+        get: get,
         set: set
+        //unset: unset
     };
+    */
 };

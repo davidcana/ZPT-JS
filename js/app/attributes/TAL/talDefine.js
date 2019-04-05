@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
+var scopeCache = require( '../../scope/scopeCache.js' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
     
@@ -12,6 +13,9 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
     var defineItems = defineItemsToApply;
     
     var process = function( scope, node ){
+        
+        // Save the scope and set an attribute id
+        scopeCache.put( scope, node );
         
         for ( var i = 0; i < defineItems.length; i++ ) {
             var defineItem = defineItems[ i ];

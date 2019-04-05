@@ -293,7 +293,7 @@ module.exports = function ( options ) {
             return false;
         }
 
-        processDefine( scope, attributes.talDefine );
+        processDefine( scope, attributes.talDefine, node );
         
         processI18nLanguage( scope, attributes.i18nLanguage );
         
@@ -324,9 +324,6 @@ module.exports = function ( options ) {
                     node, 
                     scope, 
                     attributes.talAttributes );
-        }
-
-        if ( ! omittedTag && ! replaced) {
 
             if ( ! processContent(
                     node, 
@@ -342,6 +339,8 @@ module.exports = function ( options ) {
                 scope, 
                 attributes.metalUseMacro, 
                 attributes.talDefine );
+        
+        //processScope( node, scope );
         
         return true;
     };
@@ -374,14 +373,14 @@ module.exports = function ( options ) {
         return talOnError.process( scope );
     };
 
-    var processDefine = function( scope, string ) {
+    var processDefine = function( scope, string, node ) {
 
         if ( ! string ) {
             return;
         }
         
         var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
-        return talDefine.process( scope );
+        return talDefine.process( scope, node );
     };
     
     var processI18nDomain = function( scope, string ) {
@@ -479,6 +478,15 @@ module.exports = function ( options ) {
         var talAttributes = attributeCache.getByAttributeClass( TALAttributes, string );
         return talAttributes.process( scope, node );
     };
+    
+    /*
+    var processScope = function( node, scope ) {
+
+        if ( scope.isDirty() ){
+            node.setAttribute( 'data-scope', '0' );
+        }
+    };
+    */
     
     return {
         run: run,

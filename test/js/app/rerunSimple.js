@@ -1,18 +1,18 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var zpt = require( '../../../js/app/main.js' );
-var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
-
-/* Simple tests */
-var counter = 4;
-var root = $( '#simple' )[0];
-var dictionary = { 
-    counter: counter
-};
+var zpt = require( '../../../js/app/main.js' );
+require( '../../../js/app/jqueryPlugin.js' );
 
 QUnit.test( "Rerun simple tests", function( assert ) {
+    
+    var counter = 4;
+    var root = $( '#simple' )[0];
+    var dictionary = { 
+        counter: counter
+    };
+    
     zpt.run({
         root: root,
         dictionary: dictionary
@@ -47,3 +47,31 @@ QUnit.test( "Rerun simple tests", function( assert ) {
     
     continueTesting( root, counter );
 });
+
+QUnit.test( "Rerun and check dictionary vars", function( assert ) {
+
+    var dictionary = {};
+
+    $( '#ul1' ).zpt({
+        dictionary: dictionary
+    });
+    runTests();
+    /*
+    $( '#ul2' ).zpt({
+        dictionary: dictionary
+    });
+    runTests();
+    */
+    function runTests(){
+        
+        assert.equal( $('#t2-1').html() , "1" );
+        assert.equal( $('#t2-2').html() , "OK" );
+        assert.equal( $('#t2-3').html() , "OK" );
+        assert.equal( $('#t2-4').html() , "OK" );
+        assert.equal( $('#t2-5').html() , "2" );
+        assert.equal( $('#t2-6').html() , "OK" );
+        assert.equal( $('#t2-7').html() , "OK" );
+        assert.equal( $('#t2-8').html() , "OK" );
+    }
+});
+
