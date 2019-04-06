@@ -14,9 +14,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
     
     var process = function( scope, node ){
         
-        // Save the scope and set an attribute id
-        scopeCache.put( scope, node );
-        
+        // Update scope
         for ( var i = 0; i < defineItems.length; i++ ) {
             var defineItem = defineItems[ i ];
             scope.set( 
@@ -24,6 +22,9 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
                     defineItem.expression.evaluate( scope ), 
                     defineItem.global );
         }
+
+        // Save the scope and set an attribute id
+        scopeCache.put( scope, node );
     };
     
     var toString = function(){
