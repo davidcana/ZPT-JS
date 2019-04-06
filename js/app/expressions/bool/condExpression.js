@@ -4,7 +4,7 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
+var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
 var CondExpression = function( stringToApply, expression1ToApply, expression2ToApply, expression3ToApply ) {

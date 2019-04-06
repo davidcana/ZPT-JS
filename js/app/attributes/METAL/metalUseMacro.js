@@ -4,7 +4,7 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var Scope = require( '../../scope.js' );
+var Scope = require( '../../scopes/scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
 var resolver = require( '../../resolver.js' );

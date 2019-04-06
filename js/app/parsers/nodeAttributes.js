@@ -4,7 +4,7 @@
 module.exports = function( node ) {
     "use strict";
     
-    var context = require( './context.js' );
+    var context = require( '../context.js' );
     
     var tags = context.getTags();
     

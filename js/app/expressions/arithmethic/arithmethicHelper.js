@@ -5,7 +5,7 @@ module.exports = (function() {
     "use strict";
     
     var context = require( '../../context.js' );
-    var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
+    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
     var evaluateHelper = require( '../evaluateHelper.js' );
     var $ = require( 'jquery' );
     

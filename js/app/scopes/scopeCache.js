@@ -30,25 +30,32 @@ module.exports = (function() {
         node.setAttribute( getScopeKeyTag(), key );
     };
 
-    var get = function( node ) {
+    var get = function( node, dictionary ) {
         
+        var scope = undefined;
+        
+        // Search scope in cache
         var key = getKey( node );
-        return cache[ key ];
+        if ( key !== undefined ){
+            scope = cache[ key ];
+        } else {
+            scope = new Scope( dictionary );
+        }
+        
+        return scope;
     };
     
     var getKey = function( node ) {
-        /*
-        var key = node.getAttribute( context.getTags().scopeKey );
-        if ( key ){
-            return key;
-        }
-        */
-        var scopeKeyTag = $( node ).closest( "[" + resolver.filterSelector( getScopeKeyTag() ) + "]" );
-        if ( ! scopeKeyTag ){
-            throw 'Scope key not found!';
-        }
+
+        var key = undefined;
+        var attr = resolver.filterSelector( getScopeKeyTag() );
+        var $current = $( node );
+        do {
+            $current = $current.parent();
+            key = $current.attr( attr );
+        } while ( key == undefined && $current );
         
-        return scopeKeyTag.attr( getScopeKeyTag() );
+        return key;
     };
     
     var getScopeKeyTag = function(){

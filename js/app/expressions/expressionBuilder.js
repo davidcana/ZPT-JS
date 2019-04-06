@@ -5,7 +5,7 @@ module.exports = (function() {
     "use strict";
     
     var context = require( '../context.js' );
-    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+    var ExpressionTokenizer = require( './expressionTokenizer.js' );
     var PathExpression = require( './path/pathExpression.js' );
     var expressionCache = require( '../cache/expressionCache.js' );
     /*var log = require( '../logHelper.js' );*/

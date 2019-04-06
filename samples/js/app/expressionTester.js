@@ -1,8 +1,7 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var Scope = require( '../../../js/app/scope.js' );
-/*var expressionEvaluator = require( '../../../js/app/expressionEvaluator.js' );*/
+var Scope = require( '../../../js/app/scopes/scope.js' );
 var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
 
 var dictionary = { 

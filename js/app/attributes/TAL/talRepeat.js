@@ -4,7 +4,7 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var Loop = require( '../../loop.js' );
+var Loop = require( '../../parsers/loop.js' );
 
 var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
     

@@ -4,7 +4,7 @@
 module.exports = function( exp, delimiter, escape ) {
     "use strict";
     
-    var expressionBuilder = require( './expressions/expressionBuilder.js' );
+    var expressionBuilder = require( './expressionBuilder.js' );
     var removeParenthesisIfAny = expressionBuilder.removeParenthesisIfAny;
     
     var expression = exp.trim();

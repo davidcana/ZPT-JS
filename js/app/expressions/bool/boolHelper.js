@@ -5,7 +5,7 @@
 
 module.exports = (function() {    
     var context = require( '../../context.js' );
-    var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
+    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
     var expressionBuilder = require( '../expressionBuilder.js' );
     
     var build = function( s, tag ) {

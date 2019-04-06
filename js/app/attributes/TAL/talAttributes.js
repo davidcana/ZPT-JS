@@ -4,7 +4,7 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
+var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
 
 var $ = require( 'jquery' );
 

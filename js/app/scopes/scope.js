@@ -3,7 +3,7 @@
 */
 "use strict";
 
-var context = require( './context.js' );
+var context = require( '../context.js' );
 
 var Scope = function( dictionary ) {
     

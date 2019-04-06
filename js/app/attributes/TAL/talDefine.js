@@ -4,8 +4,8 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../../expressionTokenizer.js' );
-var scopeCache = require( '../../scope/scopeCache.js' );
+var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+var scopeCache = require( '../../scopes/scopeCache.js' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
     
