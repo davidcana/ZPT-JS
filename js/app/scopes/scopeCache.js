@@ -20,20 +20,21 @@ module.exports = (function() {
     
     var put = function( scope, node ) {
 
-        // Get the key
-        var key = ++c;
+        // Build the key
+        var key = buildKey();
         
         // Put a copy of scope into the cache
-        var newScope = $.extend( true, {}, scope );
-        cache[ key ] = newScope;
+        cache[ key ] = $.extend( true, {}, scope );
         
         // Save the key of the scope as an attribute of the node
         node.setAttribute( getScopeKeyTag(), key );
     };
 
+    var buildKey = function(){
+        return ++c;
+    };
+    
     var get = function( node, dictionary ) {
-        
-        //return new Scope( dictionary );
         
         // Return a new scope if node is the body
         /*
@@ -42,15 +43,19 @@ module.exports = (function() {
         }
         */
         
-        var scope = undefined;
+        var scope = getFromCache( node, dictionary );
+        return scope? scope: new Scope( dictionary );
+    };
+    
+    var getFromCache = function( node, dictionary ) {
         
-        // Search scope in cache
         var key = getKey( node );
-        if ( key !== undefined ){
-            scope = cache[ key ];
-        } else {
-            scope = new Scope( dictionary );
+        if ( key === undefined ){
+            return undefined;
         }
+        
+        var scope = cache[ key ];
+        scope.update( dictionary );
         
         return scope;
     };
