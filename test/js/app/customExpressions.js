@@ -8,24 +8,26 @@ var context = require( '../../../js/app/context.js' );
 
 var IncExpression = require( './incExpression.js' );
 
-var value = 5;
-
-var dictionary = { 
-    aNumber: value
+var buildDictionary = function(){
+    
+    return {
+        aNumber: 5
+    }
 };
 
 var testNotDefinedExpression = function( assert ){
     zpt.run({
             root: document.body,
-            dictionary: dictionary
+            dictionary: buildDictionary()
     });
     assert.equal( $('#t1-1').html() , "undefined" );
+    assert.equal( $('#t1-2').html() , "undefined" );
 };
 
 var testDefinedExpression = function( assert ){
     zpt.run({
             root: document.body,
-            dictionary: dictionary
+            dictionary: buildDictionary()
     });
     assert.equal( $('#t1-1').html() , 6 );
     assert.equal( $('#t1-2').html() , 7 );
@@ -51,5 +53,6 @@ QUnit.test( "Custom expressions test", function( assert ) {
     // Test when the custom expression is registered again
     expressionBuilder.register( IncExpression );
     testDefinedExpression( assert );
+    
 });
 

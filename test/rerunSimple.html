@@ -40,18 +40,23 @@
         <h2>Rerun and check dictionary vars</h2>
         data-tdefine="var1 1"
         <ul data-tdefine="var1 1" id="ul1">
+            
+            <li>var1 value: 1 = <span id="t2-1-1" data-tcontent="var1">must be 1</span></li>
+            <li>var1 exists: <span id="t2-1-2" data-tcontent="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
+            <li>check var1 eq: 1: <span id="t2-1-3" data-tcontent="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
+
+            <li>var2 exists: <span id="t2-2-1" data-tcontent="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
+            
             <li>
                 data-tdefine="var2 2"
                 <ul data-tdefine="var2 2" id="ul2">
-                    <li>var1 value: 1 = <span id="t2-1" data-tcontent="var1">must be 1</span></li>
-                    <li>var1 exists: <span id="t2-2" data-tcontent="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
-                    <li>check var1 not: eq: 2: <span id="t2-3" data-tcontent="cond: ( eq: var1 2 ) 'Error' 'OK'">must be OK</span></li>
-                    <li>check var1 eq: 1: <span id="t2-4" data-tcontent="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>var1 value: 1 = <span id="t2-3-1" data-tcontent="var1">must be 1</span></li>
+                    <li>var1 exists: <span id="t2-3-2" data-tcontent="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check var1 eq: 1: <span id="t2-3-3" data-tcontent="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
                     
-                    <li>var2 value: 2 = <span id="t2-5" data-tcontent="var2">must be 2</span></li>
-                    <li>var2 exists: <span id="t2-6" data-tcontent="cond: ( exists: var2 ) 'OK' 'Error'">must be OK</span></li>
-                    <li>check var2 eq: 2: <span id="t2-7" data-tcontent="cond: ( eq: var2 2 ) 'OK' 'Error'">must be OK</span></li>
-                    <li>check var2 not: eq: 1: <span id="t2-8" data-tcontent="cond: ( eq: var2 1 ) 'Error' 'OK'">must be OK</span></li>
+                    <li>var2 value: 2 = <span id="t2-4-1" data-tcontent="var2">must be 2</span></li>
+                    <li>var2 exists: <span id="t2-4-2" data-tcontent="cond: ( exists: var2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check var2 eq: 2: <span id="t2-4-3" data-tcontent="cond: ( eq: var2 2 ) 'OK' 'Error'">must be OK</span></li>
                 </ul>
             </li>
         </ul>

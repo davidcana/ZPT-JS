@@ -6,6 +6,7 @@
 var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var resolver = require( '../resolver.js' );
+var Scope = require( './scope.js' );
 
 module.exports = (function() {
     
@@ -32,6 +33,15 @@ module.exports = (function() {
 
     var get = function( node, dictionary ) {
         
+        //return new Scope( dictionary );
+        
+        // Return a new scope if node is the body
+        /*
+        if ( node.nodeName == 'BODY'){
+            return new Scope( dictionary );
+        }
+        */
+        
         var scope = undefined;
         
         // Search scope in cache
@@ -53,7 +63,7 @@ module.exports = (function() {
         do {
             $current = $current.parent();
             key = $current.attr( attr );
-        } while ( key == undefined && $current );
+        } while ( key == undefined && $current.length != 0 );
         
         return key;
     };

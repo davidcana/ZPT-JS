@@ -56,22 +56,24 @@ QUnit.test( "Rerun and check dictionary vars", function( assert ) {
         dictionary: dictionary
     });
     runTests();
-    /*
+    
     $( '#ul2' ).zpt({
         dictionary: dictionary
     });
     runTests();
-    */
+    
     function runTests(){
         
-        assert.equal( $('#t2-1').html() , "1" );
-        assert.equal( $('#t2-2').html() , "OK" );
-        assert.equal( $('#t2-3').html() , "OK" );
-        assert.equal( $('#t2-4').html() , "OK" );
-        assert.equal( $('#t2-5').html() , "2" );
-        assert.equal( $('#t2-6').html() , "OK" );
-        assert.equal( $('#t2-7').html() , "OK" );
-        assert.equal( $('#t2-8').html() , "OK" );
+        assert.equal( $('#t2-1-1').html() , "1" );
+        assert.equal( $('#t2-1-2').html() , "OK" );
+        assert.equal( $('#t2-1-3').html() , "OK" );
+        assert.equal( $('#t2-2-1').html() , "OK" );
+        assert.equal( $('#t2-3-1').html() , "1" );
+        assert.equal( $('#t2-3-2').html() , "OK" );
+        assert.equal( $('#t2-3-3').html() , "OK" );
+        assert.equal( $('#t2-4-1').html() , "2" );
+        assert.equal( $('#t2-4-2').html() , "OK" );
+        assert.equal( $('#t2-4-3').html() , "OK" );
     }
 });
 

@@ -6,14 +6,14 @@
 var context = require( '../context.js' );
 var $ = require( 'jquery' );
 
-var Scope = function( dictionary ) {
+var Scope = function( _dictionary ) {
     
     // Create a duplicate object which we can add properties to without affecting the original
-    var wrapper = function() {};
-    wrapper.prototype = dictionary;
-    dictionary = new wrapper();
+    /*var wrapper = function() {};
+    wrapper.prototype = _dictionary;
+    _dictionary = new wrapper();*/
     
-    this.globals = dictionary;
+    this.dictionary = _dictionary;
     this.varsStack = [];
     
     // Register window object if it exists
@@ -42,15 +42,15 @@ Scope.prototype.currentVars = function(){
 };
 
 Scope.prototype.setLocal = function( name, value ) {
-    this.globals[ name ] = value;
+    this.dictionary[ name ] = value;
 };
 
 Scope.prototype.get = function( name ) {
-    return this.globals[ name ];
+    return this.dictionary[ name ];
 };
 
 Scope.prototype.unset = function( name ) {
-    delete this.globals[ name ];
+    delete this.dictionary[ name ];
 };
 
 Scope.prototype.endElement = function ( ) {
@@ -90,8 +90,8 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
     this.setLocal( name, value );
 };
 
-Scope.prototype.update = function( dictionary ){
-    $.extend( true, this.globals, dictionary );
+Scope.prototype.update = function( _dictionary ){
+    $.extend( true, this.dictionary, _dictionary );
 };
 
 module.exports = Scope;

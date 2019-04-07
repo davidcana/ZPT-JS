@@ -7,7 +7,8 @@ module.exports = function ( options ) {
     var context = require( '../context.js' );
     var resolver = require( '../resolver.js' );
     var log = require( '../logHelper.js' );
-    var Scope = require( '../scopes/scope.js' );
+    //var Scope = require( '../scopes/scope.js' );
+    var scopeCache = require( '../scopes/scopeCache.js' );
     var NodeAttributes = require( './nodeAttributes.js' );
     var $ = require( 'jquery' );
     var attributeCache = require( '../cache/attributeCache.js' );
@@ -44,8 +45,8 @@ module.exports = function ( options ) {
         notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: notRemoveGeneratedTags;
         declaredRemotePageUrls = options.declaredRemotePageUrls || declaredRemotePageUrls;
         i18n = options.i18n || i18n;
-            
-        scope = new Scope( dictionary );
+        
+        //scope = new Scope( dictionary );
     };
     
     initFromOptions( options || {} );
@@ -91,6 +92,7 @@ module.exports = function ( options ) {
     var run = function( options ){
         
         initFromOptions( options || {} );
+        scope = scopeCache.get( root, dictionary );
         
         try {
             if ( ! notRemoveGeneratedTags ){
@@ -340,8 +342,6 @@ module.exports = function ( options ) {
                 attributes.metalUseMacro, 
                 attributes.talDefine );
         
-        //processScope( node, scope );
-        
         return true;
     };
 
@@ -478,15 +478,6 @@ module.exports = function ( options ) {
         var talAttributes = attributeCache.getByAttributeClass( TALAttributes, string );
         return talAttributes.process( scope, node );
     };
-    
-    /*
-    var processScope = function( node, scope ) {
-
-        if ( scope.isDirty() ){
-            node.setAttribute( 'data-scope', '0' );
-        }
-    };
-    */
     
     return {
         run: run,
