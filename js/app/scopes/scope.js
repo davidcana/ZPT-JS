@@ -4,6 +4,7 @@
 "use strict";
 
 var context = require( '../context.js' );
+var $ = require( 'jquery' );
 
 var Scope = function( dictionary ) {
     
@@ -87,6 +88,10 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
 
     // Common to global and local vars
     this.setLocal( name, value );
+};
+
+Scope.prototype.update = function( dictionary ){
+    $.extend( true, this.globals, dictionary );
 };
 
 module.exports = Scope;
