@@ -46,15 +46,16 @@ var init = function( assert ){
             date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
         };
 
-        var zptParser = zpt.buildParser({
-            root: document.body,
-            dictionary: dictionary
-        });
-
-        zptParser.init(
-            function(){
-                zptParser.run();
-                done();
+        zpt.run(
+            {
+                root: document.body,
+                dictionary: dictionary,
+                init: {
+                    initCallback: function(){
+                        zpt.run();
+                        done();
+                    }   
+                }
             }
         );
     });  

@@ -8,7 +8,6 @@ var zpt = require( './main.js' );
     $.fn.zpt = function( options ) {
         
         var defaults = {
-            dictionary: {},
             callback: undefined,
             notRemoveGeneratedTags: false
         };

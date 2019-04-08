@@ -44,26 +44,18 @@ QUnit.test( "array loops test", function( assert ) {
 });
 
 QUnit.test( "dynamic loops test", function( assert ) {
-    //assert.equal( getAllValues( '.nValue1' ) , '10/20/30/40' );
     
     // Replace 10/20/30/40 by 10/20/30
-    dictionary = {
-            someNumbers: [ 10, 20, 30 ]
-    };
+    dictionary.someNumbers = [ 10, 20, 30 ];
     zpt.run({
-        root: $( '#dynamicLoop' )[0],
-        dictionary: dictionary
+        root: $( '#dynamicLoop' )[0]
     });
     assert.equal( getAllValues( '.nValue1' ) , '10/20/30' );
     
     // Add 40/50/60
-    dictionary = {
-            someNumbers: [ 40, 50, 60 ]
-    };
+    dictionary.someNumbers = [ 40, 50, 60 ];
     
     zpt.run({
-        root: $( '#dynamicLoop' )[0],
-        dictionary: dictionary,
         notRemoveGeneratedTags: true
     });
     assert.equal( getAllValues( '.nValue1' ) , '10/20/30/40/50/60' );
@@ -71,7 +63,6 @@ QUnit.test( "dynamic loops test", function( assert ) {
 
 QUnit.test( "array loops test", function( assert ) {
     assert.equal( getAllValues( '.pValue' ) , '1/2/3/4/5' );
-    //assert.equal( getAllValues( '.pValue' ) , '1/5/2/3/4' );
 });
 
 QUnit.test( "dynamic loops in table test", function( assert ) {
@@ -90,15 +81,15 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV'  );
 
     // Add a tool
-    dictionary = {
-        tools: []
-    };
-    dictionary.tools.push( 
-        { name: "tool E", rent_url: "rent?id=1008" } );
+    dictionary.tools = [
+        { 
+            name: "tool E", 
+            rent_url: "rent?id=1008" 
+        }
+    ];
     
     zpt.run({
         root: $( '#dynamicLoop2' )[0],
-        dictionary: dictionary,
         notRemoveGeneratedTags: true
     });
     
@@ -115,20 +106,18 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     assert.equal( getAllValues( '.d_getRoman' ) , 'i/ii/iii/iv/v'  );
     assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV/V'  );
     
-    // Add a tool
-    dictionary = {
-        tools: []
-    };
-    dictionary.tools.push( 
-        { name: "tool F", rent_url: "rent?id=1010" } );
-    dictionary.tools.push( 
-        { name: "tool G", rent_url: "rent?id=1012" } );
-    
-    zpt.run({
-        root: $( '#dynamicLoop2' )[0],
-        dictionary: dictionary,
-        notRemoveGeneratedTags: true
-    });
+    // Add 2 tools
+    dictionary.tools = [
+        { 
+            name: "tool F", 
+            rent_url: "rent?id=1010"
+        },
+        { 
+            name: "tool G",
+            rent_url: "rent?id=1012"
+        }
+    ];
+    zpt.run();
     
     assert.equal( getAllValues( '.d_value' ) , 'tool A/tool B/tool C/tool D/tool E/tool F/tool G'  );
     assert.equal( getAllValues( '.d_index' ) , '0/1/2/3/4/5/6'  );
@@ -144,12 +133,6 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV/V/VI/VII'  );
 });
 
-/*
-function getValues( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().slice( 1 ).join( '/' );
-}*/
 function getAllValues( selector ){
     return $( selector ).map( function( index, element ) {
         return this.innerHTML;

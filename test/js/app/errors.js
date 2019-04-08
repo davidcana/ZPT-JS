@@ -46,20 +46,21 @@ QUnit.test( "External macro in non-existing file test", function( assert ) {
     
     var done = assert.async();
     
-    var zptParser = zpt.buildParser({
-        root: document.body,
-        dictionary: {},
-        declaredRemotePageUrls: []
-    });
-
-    zptParser.init(
-        function(){
-            assert.equal( 0, 1, "Found external file, but it is an error!" );
-            done();
-        },
-        function( msg ){
-            assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
-            done();
+    zpt.run(
+        {
+            root: document.body,
+            dictionary: {},
+            declaredRemotePageUrls: [],
+            init: {
+                initCallback: function(){
+                    assert.equal( 0, 1, "Found external file, but it is an error!" );
+                    done();
+                },
+                failCallback: function( msg ){
+                    assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
+                    done();
+                }
+            }
         }
     );
 });
@@ -68,27 +69,28 @@ QUnit.test( "Non-existing i18n file test", function( assert ) {
 
     var done = assert.async();
 
-    var zptParser = zpt.buildParser({
-        root: document.body,
-        dictionary: {},
-        declaredRemotePageUrls: [],
-        i18n: {
-            urlPrefix: './i18n/',
-            files: {
-                'es': [ 'es1.json', 'es_notFound.json' ],
-                'en': [ 'en1.json', 'en2.json' ]
+    zpt.run(
+        {
+            root: document.body,
+            dictionary: {},
+            declaredRemotePageUrls: [],
+            i18n: {
+                urlPrefix: './i18n/',
+                files: {
+                    'es': [ 'es1.json', 'es_notFound.json' ],
+                    'en': [ 'en1.json', 'en2.json' ]
+                }
+            },
+            init: {
+                initCallback: function(){
+                    assert.equal( 0, 1, "Found external file, but it is an error!" );
+                    done();
+                },
+                failCallback: function( msg ){
+                    assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
+                    done();
+                }
             }
-        }
-    });
-
-    zptParser.init(
-        function(){
-            assert.equal( 0, 1, "Found external file, but it is an error!" );
-            done();
-        },
-        function( msg ){
-            assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
-            done();
         }
     );
 });

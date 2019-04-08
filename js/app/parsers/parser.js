@@ -26,11 +26,11 @@ var TALOnError = require( '../attributes/TAL/talOnError.js' );
 var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
 
-module.exports = function ( options ) {
+module.exports = (function() {
     
     var parserOptions = {
         root: undefined,
-        dictionary: {},
+        dictionary: undefined,
         callback: undefined,
         notRemoveGeneratedTags: false,
         declaredRemotePageUrls: [],
@@ -38,18 +38,22 @@ module.exports = function ( options ) {
     };
     var tags = context.getTags();
     
-    // Get values from options
-    var initFromOptions = function( options ){
+    var updateParserOptions = function( options ){
+        
+        if ( options.dictionary ){
+            if ( parserOptions.dictionary ){
+                $.extend( true, parserOptions.dictionary, options.dictionary );
+            } else {
+                parserOptions.dictionary = options.dictionary;
+            }
+        }
         
         parserOptions.root = options.root || parserOptions.root;
-        parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
         parserOptions.callback = options.callback || parserOptions.callback;
         parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: parserOptions.notRemoveGeneratedTags;
         parserOptions.declaredRemotePageUrls = options.declaredRemotePageUrls || parserOptions.declaredRemotePageUrls;
         parserOptions.i18n = options.i18n || parserOptions.i18n;
     };
-    
-    initFromOptions( options || {} );
     
     var init = function( initCallback, failCallback ){
         
@@ -92,9 +96,28 @@ module.exports = function ( options ) {
         }
     };
     
-    var run = function( options ){
+    var run = function( _options ){
         
-        initFromOptions( options || {} );
+        var options = _options || {};
+        
+        // Init parser options
+        updateParserOptions( options );
+    
+        // Call to init if needed
+        var initOptions = options.init;
+        if ( initOptions ){
+            init(
+                initOptions.initCallback,
+                initOptions.failCallback
+            );
+            return;
+        }
+        
+        // Render HTML
+        render();
+    };
+    
+    var render = function(){
         
         try {
             if ( ! parserOptions.notRemoveGeneratedTags ){
@@ -158,7 +181,7 @@ module.exports = function ( options ) {
         process( 
             root, 
             scopeCache.get( 
-                parserOptions.root, 
+                root, 
                 parserOptions.dictionary
             )
         );
@@ -493,7 +516,6 @@ module.exports = function ( options ) {
     };
     
     return {
-        run: run,
-        init: init
+        run: run
     };
-};
+})();

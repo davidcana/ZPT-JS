@@ -4,33 +4,26 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
-require( '../../../js/app/jqueryPlugin.js' );
 
 var dictionary = {};
 
-var zptParser = zpt.buildParser({
-    //root: document.body,
-    root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
-    //root: [ $( '#t3' )[0] ],
-    dictionary: dictionary,
-    declaredRemotePageUrls: []
-});
-
-zptParser.init(
-    function(){
-        zptParser.run();
-        runMacro();
-        runLoop();
+zpt.run(
+    {
+        root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
+        dictionary: dictionary,
+        declaredRemotePageUrls: [],
+        init: {
+            initCallback: function(){
+                zpt.run();
+                runMacro();
+                runLoop();
+            }   
+        }
     }
 );
 
-//runLoop();
-
 function runMacro(){
     
-    /*zptParser.run({
-        root: $( '.m1' )[0]
-    });*/
     QUnit.test( "Dynamic macros test", function( assert ) {
         var t1 = `
 <p>
@@ -52,13 +45,6 @@ After use macro
 
 function runLoop(){
     
-    /*$( '.m2' ).zpt({
-        dictionary: {}
-    });*/
-    /*
-    zptParser.run({
-        root: $( '.m2' )[0]
-    });*/
     QUnit.test( "Dynamic macros test", function( assert ) {
         assert.equal( getAllValues( '.cValue1' ) , '10/20/30' );
     });

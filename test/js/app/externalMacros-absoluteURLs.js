@@ -8,16 +8,18 @@ var zpt = require( '../../../js/app/main.js' );
 var dictionary = { 
     template: '/test/externalMacros-definitions.html'
 };
-var zptParser = zpt.buildParser({
-    root: document.body,
-    dictionary: dictionary,
-    declaredRemotePageUrls: [ dictionary.template ]
-});
 
-zptParser.init(
-    function(){
-        zptParser.run();
-        runTests();
+zpt.run(
+    {
+        root: document.body,
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ dictionary.template ],
+        init: {
+            initCallback: function(){
+                zpt.run();
+                runTests();
+            }   
+        }
     }
 );
 

@@ -7,14 +7,12 @@ require( '../../../js/app/jqueryPlugin.js' );
 
 QUnit.test( "Rerun simple tests", function( assert ) {
     
-    //var root = $( '#simple' )[0];
     var $root = $( '#simple' );
     var dictionary = { 
         counter: 4
     };
     
     $root.zpt({
-        //root: root,
         dictionary: dictionary
     });
 
@@ -48,14 +46,10 @@ QUnit.test( "Rerun simple tests", function( assert ) {
 
 QUnit.test( "Rerun and check dictionary vars", function( assert ) {
 
-    var dictionary = {};
-
-    $( '#ul1' ).zpt({
-        dictionary: dictionary
-    });
+    $( '#ul1' ).zpt();
     runTests();
     
-    $( '#ul2' ).zpt({});
+    $( '#ul2' ).zpt();
     runTests();
     
     function runTests(){
