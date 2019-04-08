@@ -13,7 +13,7 @@ zpt.run(
         dictionary: dictionary,
         declaredRemotePageUrls: [],
         init: {
-            initCallback: function(){
+            callback: function(){
                 zpt.run();
                 runMacro();
                 runLoop();

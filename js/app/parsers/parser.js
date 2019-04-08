@@ -31,7 +31,6 @@ module.exports = (function() {
     var parserOptions = {
         root: undefined,
         dictionary: undefined,
-        callback: undefined,
         notRemoveGeneratedTags: false,
         declaredRemotePageUrls: [],
         i18n: undefined
@@ -41,23 +40,22 @@ module.exports = (function() {
     var updateParserOptions = function( options ){
         
         if ( options.dictionary ){
-            if ( parserOptions.dictionary ){
-                $.extend( true, parserOptions.dictionary, options.dictionary );
-            } else {
+            if ( ! parserOptions.dictionary ){
                 parserOptions.dictionary = options.dictionary;
+            } else {
+                $.extend( true, parserOptions.dictionary, options.dictionary );
             }
         }
         
         parserOptions.root = options.root || parserOptions.root;
-        parserOptions.callback = options.callback || parserOptions.callback;
-        parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: parserOptions.notRemoveGeneratedTags;
+        parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? 
+            options.notRemoveGeneratedTags: 
+            parserOptions.notRemoveGeneratedTags;
         parserOptions.declaredRemotePageUrls = options.declaredRemotePageUrls || parserOptions.declaredRemotePageUrls;
         parserOptions.i18n = options.i18n || parserOptions.i18n;
     };
     
-    var init = function( initCallback, failCallback ){
-        
-        var currentCallback = initCallback || parserOptions.callback;
+    var init = function( callback, failCallback ){
         
         try {
             if ( ! parserOptions.notRemoveGeneratedTags ){
@@ -75,7 +73,7 @@ module.exports = (function() {
                         ),
                         parserOptions.declaredRemotePageUrls,
                         function (){
-                            processCallback( currentCallback );
+                            processCallback( callback );
                         },
                         failCallback
                     );
@@ -107,7 +105,7 @@ module.exports = (function() {
         var initOptions = options.init;
         if ( initOptions ){
             init(
-                initOptions.initCallback,
+                initOptions.callback,
                 initOptions.failCallback
             );
             return;

@@ -18,7 +18,7 @@ zpt.run(
         dictionary: dictionary,
         declaredRemotePageUrls: [ dictionary.template ],
         init: {
-            initCallback: function(){
+            callback: function(){
                 zpt.run();
                 runTests();
             }   

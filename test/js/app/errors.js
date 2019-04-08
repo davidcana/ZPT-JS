@@ -52,7 +52,7 @@ QUnit.test( "External macro in non-existing file test", function( assert ) {
             dictionary: {},
             declaredRemotePageUrls: [],
             init: {
-                initCallback: function(){
+                callback: function(){
                     assert.equal( 0, 1, "Found external file, but it is an error!" );
                     done();
                 },
@@ -82,7 +82,7 @@ QUnit.test( "Non-existing i18n file test", function( assert ) {
                 }
             },
             init: {
-                initCallback: function(){
+                callback: function(){
                     assert.equal( 0, 1, "Found external file, but it is an error!" );
                     done();
                 },

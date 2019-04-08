@@ -51,7 +51,7 @@ var init = function( assert ){
                 root: document.body,
                 dictionary: dictionary,
                 init: {
-                    initCallback: function(){
+                    callback: function(){
                         zpt.run();
                         done();
                     }   

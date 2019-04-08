@@ -63,7 +63,7 @@ zpt.run(
         dictionary: dictionary,
         declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
         init: {
-            initCallback: function(){
+            callback: function(){
                 zpt.run();
                 runTests();
             }   

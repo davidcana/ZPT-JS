@@ -31,7 +31,7 @@ var init = function( assert ){
                 }
             },
             init: {
-                initCallback: function(){
+                callback: function(){
 
                     // Add I18nBundle instances to dictionary
                     var dictionaryExtension = {
