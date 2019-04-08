@@ -7,28 +7,26 @@ require( '../../../js/app/jqueryPlugin.js' );
 
 QUnit.test( "Rerun simple tests", function( assert ) {
     
-    var counter = 4;
-    var root = $( '#simple' )[0];
+    //var root = $( '#simple' )[0];
+    var $root = $( '#simple' );
     var dictionary = { 
-        counter: counter
+        counter: 4
     };
     
-    zpt.run({
-        root: root,
+    $root.zpt({
+        //root: root,
         dictionary: dictionary
     });
 
-    function continueTesting( root, counter ){
-        runTests( counter );
-        if ( counter > 1 ){
-            var dictionary = { 
-                counter: --counter
-            };
-            zpt.run({
-                root: root,
-                dictionary: dictionary
+    function continueTesting( $root, dictionary ){
+        runTests( dictionary.counter );
+        if ( dictionary.counter > 1 ){
+            --dictionary.counter;
+            $root.zpt({
+                //root: root,
+                //dictionary: dictionary
             });
-            continueTesting( root, counter );
+            continueTesting( $root, dictionary );
         }
     }
 
@@ -45,7 +43,7 @@ QUnit.test( "Rerun simple tests", function( assert ) {
         assert.equal( $('#t1-4').html() , "counter=" + counter );
     }
     
-    continueTesting( root, counter );
+    continueTesting( $root, dictionary );
 });
 
 QUnit.test( "Rerun and check dictionary vars", function( assert ) {
@@ -57,9 +55,7 @@ QUnit.test( "Rerun and check dictionary vars", function( assert ) {
     });
     runTests();
     
-    $( '#ul2' ).zpt({
-        dictionary: dictionary
-    });
+    $( '#ul2' ).zpt({});
     runTests();
     
     function runTests(){

@@ -1,72 +1,75 @@
 /* 
     Class Parser 
 */
+"use strict";
+
+var $ = require( 'jquery' );
+
+var context = require( '../context.js' );
+var resolver = require( '../resolver.js' );
+var log = require( '../logHelper.js' );
+var scopeCache = require( '../scopes/scopeCache.js' );
+var NodeAttributes = require( './nodeAttributes.js' );
+var attributeCache = require( '../cache/attributeCache.js' );
+var i18nHelper = require( '../i18n/i18nHelper.js' );
+
+var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
+var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
+var METALDefineMacro = require( '../attributes/METAL/metalDefineMacro.js' );
+var METALUseMacro = require( '../attributes/METAL/metalUseMacro.js' );
+var TALAttributes = require( '../attributes/TAL/talAttributes.js' );
+var TALCondition = require( '../attributes/TAL/talCondition.js' );
+var TALContent = require( '../attributes/TAL/talContent.js' );
+var TALDefine = require( '../attributes/TAL/talDefine.js' );
+var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
+var TALOnError = require( '../attributes/TAL/talOnError.js' );
+var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
+var TALReplace = require( '../attributes/TAL/talReplace.js' );
+
 module.exports = function ( options ) {
-    "use strict";
     
-    var context = require( '../context.js' );
-    var resolver = require( '../resolver.js' );
-    var log = require( '../logHelper.js' );
-    //var Scope = require( '../scopes/scope.js' );
-    var scopeCache = require( '../scopes/scopeCache.js' );
-    var NodeAttributes = require( './nodeAttributes.js' );
-    var $ = require( 'jquery' );
-    var attributeCache = require( '../cache/attributeCache.js' );
-    var i18nHelper = require( '../i18n/i18nHelper.js' );
-    
-    var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
-    var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
-    var METALDefineMacro = require( '../attributes/METAL/metalDefineMacro.js' );
-    var METALUseMacro = require( '../attributes/METAL/metalUseMacro.js' );
-    var TALAttributes = require( '../attributes/TAL/talAttributes.js' );
-    var TALCondition = require( '../attributes/TAL/talCondition.js' );
-    var TALContent = require( '../attributes/TAL/talContent.js' );
-    var TALDefine = require( '../attributes/TAL/talDefine.js' );
-    var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
-    var TALOnError = require( '../attributes/TAL/talOnError.js' );
-    var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
-    var TALReplace = require( '../attributes/TAL/talReplace.js' );
-    
-    var root;
-    var dictionary = {};
-    var callback;
-    var notRemoveGeneratedTags = false;
-    var declaredRemotePageUrls = [];
-    var i18n;
-    
-    var scope = undefined;
+    var parserOptions = {
+        root: undefined,
+        dictionary: {},
+        callback: undefined,
+        notRemoveGeneratedTags: false,
+        declaredRemotePageUrls: [],
+        i18n: undefined
+    };
     var tags = context.getTags();
     
     // Get values from options
     var initFromOptions = function( options ){
-        root = options.root || root;
-        dictionary = options.dictionary || dictionary;
-        callback = options.callback || callback;
-        notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: notRemoveGeneratedTags;
-        declaredRemotePageUrls = options.declaredRemotePageUrls || declaredRemotePageUrls;
-        i18n = options.i18n || i18n;
         
-        //scope = new Scope( dictionary );
+        parserOptions.root = options.root || parserOptions.root;
+        parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
+        parserOptions.callback = options.callback || parserOptions.callback;
+        parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? options.notRemoveGeneratedTags: parserOptions.notRemoveGeneratedTags;
+        parserOptions.declaredRemotePageUrls = options.declaredRemotePageUrls || parserOptions.declaredRemotePageUrls;
+        parserOptions.i18n = options.i18n || parserOptions.i18n;
     };
     
     initFromOptions( options || {} );
     
     var init = function( initCallback, failCallback ){
         
-        var currentCallback = initCallback || callback;
+        var currentCallback = initCallback || parserOptions.callback;
         
         try {
-            if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllRootElements( root );
+            if ( ! parserOptions.notRemoveGeneratedTags ){
+                removeGeneratedTagsFromAllRootElements( parserOptions.root );
             }
             
             i18nHelper.loadAsyncAuto( 
-                dictionary,
-                i18n,
+                parserOptions.dictionary,
+                parserOptions.i18n,
                 function(){
                     resolver.loadRemotePages( 
-                        scope,
-                        declaredRemotePageUrls,
+                        scopeCache.get( 
+                            parserOptions.root, 
+                            parserOptions.dictionary
+                        ),
+                        parserOptions.declaredRemotePageUrls,
                         function (){
                             processCallback( currentCallback );
                         },
@@ -92,14 +95,13 @@ module.exports = function ( options ) {
     var run = function( options ){
         
         initFromOptions( options || {} );
-        scope = scopeCache.get( root, dictionary );
         
         try {
-            if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllRootElements( root );
+            if ( ! parserOptions.notRemoveGeneratedTags ){
+                removeGeneratedTagsFromAllRootElements( parserOptions.root );
             }
             
-            processAllRootElements( root, scope );
+            processAllRootElements( parserOptions.root );
             
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -113,42 +115,53 @@ module.exports = function ( options ) {
         if ( $.isArray( root ) ){ 
             // There are several roots
             for ( var c = 0; c < root.length; c++ ) {
-                removeGeneratedTags( root[ c ], scope );
+                removeGeneratedTags( root[ c ] );
             }
         } else {
             // There is only one root
-            removeGeneratedTags( root, scope );
+            removeGeneratedTags( root );
         }
     };
     
-    var removeGeneratedTags = function( rootElement ) {
+    var removeGeneratedTags = function( root ) {
         
-        removeTags( rootElement, tags.qdup );       // Remove all generated nodes (repeats)
-        removeTags( rootElement, tags.metalMacro ); // Remove all generated nodes (macros)
+        removeTags( root, tags.qdup );       // Remove all generated nodes (repeats)
+        removeTags( root, tags.metalMacro ); // Remove all generated nodes (macros)
     };
     
-    var removeTags = function( rootElement, tag ){
+    var removeTags = function( root, tag ){
         
         var node;
         var pos = 0;
-        var list = rootElement.querySelectorAll( "*[" + tag + "]" );
+        var list = root.querySelectorAll( "*[" + tag + "]" );
         while ( node = list[ pos++ ] ) {
             node.parentNode.removeChild( node );
         }
     };
     
-    var processAllRootElements = function( root, scope ) {
+    var processAllRootElements = function( root ) {
         
         // Is multiroot?
         if ( $.isArray( root ) ){ 
             // There are several roots
             for ( var c = 0; c < root.length; c++ ) {
-                process( root[ c ], scope );
+                processRoot( root[ c ] );
             }
         } else {
             // There is only one root
-            process( root, scope );
+            processRoot( root );
         }
+    };
+    
+    var processRoot = function( root ) {
+        
+        process( 
+            root, 
+            scopeCache.get( 
+                parserOptions.root, 
+                parserOptions.dictionary
+            )
+        );
     };
     
     var process = function( node, scope ) {
