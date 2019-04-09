@@ -11,7 +11,8 @@ New in 0.30.0
 - Support at data-tattributes tag to bind (example data-tattributes="bind textareaAttrs; bind maxlength maxlength")?
 
 New in 0.29.0
-- Save every scope into a cache, set an id to it and put it in HTML using a data-tscope tag to make it easy to re-render?
+- Save every scope into a cache, set an id to it and put it in HTML using a data-tscope tag to make it easy to re-render.
+- Exported method removed: buildParser. The only exported method is run. First invokation preloads external resources (i18n files and external macros files), the next ones parser the DOM. 
 
 New in 0.28.0
 - Added setErrorFunction method to context. It manages initialization errors (trying to load external files like external template files or i18n files).
