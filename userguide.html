@@ -54,7 +54,7 @@
 <body>
     <a id="top"></a>
     <h1>Zenon Page Templates (ZPT-JS): User's guide</h1>
-    <div class="sub">last modified: 2016/15/11</div>
+    <div class="sub">last modified: 2019/09/04</div>
     <div class="sub">author <a href="mailto:david.javapagetemplates@gmail.com">David Cana</a></div>
     <div class="sub">contributed by <a href="mailto:david.javapagetemplates@gmail.com">David Cana</a></div>
 
@@ -159,22 +159,22 @@ $( 'body' ).zpt({
     </pre>
     
     <p>
-        If we don't use external macros ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro ZPT-JS needs to load one or more external files using HTTP. This makes ZPT-JS code executes asynchronously. Keep in mind this! An alternative method to deal with this is to call ZPT-JS like this:
+        If we don't use external macros ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro ZPT-JS needs to load one or more external files using HTTP. This makes ZPT-JS code executes asynchronously. Keep in mind this! To deal with this take a look at:
     </p>
     <pre>
-var zptParser = zpt.buildParser({
+zpt.run({
     root: document.body,
     dictionary: dictionary,
-    declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ]
-});
-
-zptParser.init(
-    function(){
-        zptParser.run();
+    declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
+    callback: function(){
+        zpt.run();
         [ your code here ]
     }
-);
+});
     </pre>
+    <p>
+        First invokation of <em>zpt.run</em> preload <em>externalMacros-definitions2.html</em> and <em>externalMacros-definitions3.html</em>. The second one (inside the callback) renders the HTML after preloading.
+    </p>
     
     <p>That's OK. But... how can we use ZPT-JS at the server side (using node.js)? node-jsdom is needed when no browser is available:</p>
     <pre>
@@ -734,17 +734,14 @@ var dictionary = {
         External macro files must be preloaded before the template is rendered, so code is async:
     </p>  
     <pre>
-var zptParser = zpt.buildParser({
+zpt.run({
     root: document.body,
-    dictionary: dictionary
-});
-
-zptParser.init(
-    function(){
-        zptParser.run();
+    dictionary: dictionary,
+    callback: function(){
+        zpt.run();
         [ your code here ]
     }
-);
+});
     </pre>
     <p>
         Because external macro files must be preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
@@ -758,29 +755,29 @@ zptParser.init(
         If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no rederence to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call:
     </p>
     <pre>
-var zptParser = zpt.buildParser({
+zpt.run({
     root: document.body,
     dictionary: dictionary,
-    declaredRemotePageUrls: [ 'macros.html', 'moreMacros.html' ]
-});
-
-zptParser.init(
-    function(){
-        zptParser.run();
+    declaredRemotePageUrls: [ 'macros.html', 'moreMacros.html' ],
+    callback: function(){
+        zpt.run();
         [ your code here ]
     }
-);
+});
     </pre>
     <p>
         URLs are by default relative to current URL. You can also use absolute URLs:
     </p>
     <pre>
-var zptParser = zpt.buildParser({
+zpt.run({
     root: document.body,
     dictionary: dictionary,
-    declaredRemotePageUrls: [ '/path/to/your/macro/macros.html' ]
+    declaredRemotePageUrls: [ '/path/to/your/macro/macros.html' ],
+    callback: function(){
+        zpt.run();
+        [ your code here ]
+    }
 });
-...
     </pre>
     <p>
         And in your HTML code:
@@ -804,15 +801,17 @@ context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
         Optionally you can add a fail callback function to manage initialization errors:
     </p>
     <pre>
-zptParser.init(
-    function(){
+zpt.run({
+    root: document.body,
+    dictionary: dictionary,
+    callback: function(){
         zptParser.run();
         [ your code here ]
     },
-    function( msg ){
+    failCallback: function( msg ){
         [ your code to manage initialization errors here ]
     }
-);
+});
     </pre>
     <p>
         <em>msg</em> is the error message.
@@ -1024,15 +1023,7 @@ zpt.run({
         ZPT-JS makes it easy loading i18n messages from JSON files:
     </p>
     <pre>
-"use strict";
-
-var zpt = require( '../../../js/app/main.js' );
-
-var dictionary = {
-    ...
-};
-
-var zptParser = zpt.buildParser({
+zpt.run({
     root: document.body,
     dictionary: dictionary,
     i18n: {
@@ -1041,22 +1032,17 @@ var zptParser = zpt.buildParser({
             'es': [ 'es1.json', 'es2.json' ],
             'en': [ 'en1.json', 'en2.json' ]
         }
+    },
+    callback: function(){
+
+        // Add I18nBundle instances to dictionary
+        dictionary.i18nBundle1 = new I18nBundle( dictionary.i18nES1, dictionary.i18nEN1 );
+        dictionary.i18nBundle2 = new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 );
+
+        // Run ZPT
+        zpt.run();
     }
 });
-
-zptParser.init(
-    function(){
-    
-        // Add I18nBundle instances to dictionary
-        var dictionaryExtension = {
-            i18nBundle1: new I18nBundle( dictionary.i18nES1, dictionary.i18nEN1 ),
-            i18nBundle2: new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 )
-        };
-        $.extend( true, dictionary, dictionaryExtension );
-            
-        zptParser.run();
-    }
-);
     </pre>
     <p>
         ZPT will add to dictionary these vars:

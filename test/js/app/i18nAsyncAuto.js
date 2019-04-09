@@ -33,11 +33,8 @@ var init = function( assert ){
             callback: function(){
 
                 // Add I18nBundle instances to dictionary
-                var dictionaryExtension = {
-                    i18nBundle1: new I18nBundle( dictionary.i18nES1, dictionary.i18nEN1 ),
-                    i18nBundle2: new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 )
-                };
-                $.extend( true, dictionary, dictionaryExtension );
+                dictionary.i18nBundle1 = new I18nBundle( dictionary.i18nES1, dictionary.i18nEN1 );
+                dictionary.i18nBundle2 = new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 );
 
                 // Run ZPT
                 zpt.run();
