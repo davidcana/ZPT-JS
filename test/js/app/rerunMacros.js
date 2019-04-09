@@ -5,10 +5,9 @@ var zpt = require( '../../../js/app/main.js' );
 var Qunit = require( 'qunit' );
 
 /* Macro tests */
-var counter = 4;
 var root = $( '#macro' )[0];
 var dictionary = { 
-    counter: counter
+    counter: 4
 };
 
 QUnit.test( "Rerun macro tests", function( assert ) {
@@ -17,19 +16,11 @@ QUnit.test( "Rerun macro tests", function( assert ) {
         dictionary: dictionary
     });
 
-    function continueTesting( root, counter ){
-        runTests( counter );
-        if ( counter > 1 ){
-            var dictionary = { 
-                counter: --counter
-            };
-            zpt.run({
-                root: root,
-                dictionary: dictionary,
-                callback: function(){
-                    continueTesting( root, counter );
-                }
-            });
+    function continueTesting(){
+        runTests( dictionary.counter );
+        if ( dictionary.counter-- > 1 ){
+            zpt.run();
+            continueTesting();
         }
     }
 
@@ -57,5 +48,5 @@ QUnit.test( "Rerun macro tests", function( assert ) {
         assert.equal( $('#t2-6').html().trim() , "counter=" + counter );
     }
     
-    continueTesting( root, counter );
+    continueTesting();
 });

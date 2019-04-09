@@ -51,15 +51,13 @@ QUnit.test( "External macro in non-existing file test", function( assert ) {
             root: document.body,
             dictionary: {},
             declaredRemotePageUrls: [],
-            init: {
-                callback: function(){
-                    assert.equal( 0, 1, "Found external file, but it is an error!" );
-                    done();
-                },
-                failCallback: function( msg ){
-                    assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
-                    done();
-                }
+            callback: function(){
+                assert.equal( 0, 1, "Found external file, but it is an error!" );
+                done();
+            },
+            failCallback: function( msg ){
+                assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
+                done();
             }
         }
     );
@@ -81,15 +79,13 @@ QUnit.test( "Non-existing i18n file test", function( assert ) {
                     'en': [ 'en1.json', 'en2.json' ]
                 }
             },
-            init: {
-                callback: function(){
-                    assert.equal( 0, 1, "Found external file, but it is an error!" );
-                    done();
-                },
-                failCallback: function( msg ){
-                    assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
-                    done();
-                }
+            callback: function(){
+                assert.equal( 0, 1, "Found external file, but it is an error!" );
+                done();
+            },
+            failCallback: function( msg ){
+                assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
+                done();
             }
         }
     );

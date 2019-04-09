@@ -102,11 +102,10 @@ module.exports = (function() {
         updateParserOptions( options );
     
         // Call to init if needed
-        var initOptions = options.init;
-        if ( initOptions ){
+        if ( options.callback ){
             init(
-                initOptions.callback,
-                initOptions.failCallback
+                options.callback,
+                options.failCallback
             );
             return;
         }

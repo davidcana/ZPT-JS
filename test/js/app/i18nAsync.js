@@ -50,11 +50,9 @@ var init = function( assert ){
             {
                 root: document.body,
                 dictionary: dictionary,
-                init: {
-                    callback: function(){
-                        zpt.run();
-                        done();
-                    }   
+                callback: function(){
+                    zpt.run();
+                    done();
                 }
             }
         );

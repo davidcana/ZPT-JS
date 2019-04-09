@@ -5,19 +5,13 @@ var zpt = require( './main.js' );
 
 (function ( $ ) {
  
-    $.fn.zpt = function( options ) {
+    $.fn.zpt = function( userOptions ) {
         
-        var defaults = {
-            callback: undefined,
-            notRemoveGeneratedTags: false
-        };
-    
-        var settings = $.extend( {}, defaults, options );
-        settings.root = this[0];
-        
-        zpt.run( settings );
+        var options = userOptions || {};
+        options.root = this[0];
+        zpt.run( options );
 
         return this;
     };
- 
+
 }( $ )); 

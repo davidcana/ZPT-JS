@@ -16,15 +16,11 @@ QUnit.test( "Rerun simple tests", function( assert ) {
         dictionary: dictionary
     });
 
-    function continueTesting( $root, dictionary ){
+    function continueTesting(){
         runTests( dictionary.counter );
-        if ( dictionary.counter > 1 ){
-            --dictionary.counter;
-            $root.zpt({
-                //root: root,
-                //dictionary: dictionary
-            });
-            continueTesting( $root, dictionary );
+        if ( dictionary.counter-- > 1 ){
+            $root.zpt();
+            continueTesting();
         }
     }
 
@@ -41,7 +37,7 @@ QUnit.test( "Rerun simple tests", function( assert ) {
         assert.equal( $('#t1-4').html() , "counter=" + counter );
     }
     
-    continueTesting( $root, dictionary );
+    continueTesting();
 });
 
 QUnit.test( "Rerun and check dictionary vars", function( assert ) {

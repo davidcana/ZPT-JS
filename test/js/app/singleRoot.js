@@ -12,12 +12,10 @@ zpt.run(
         root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
         dictionary: dictionary,
         declaredRemotePageUrls: [],
-        init: {
-            callback: function(){
-                zpt.run();
-                runMacro();
-                runLoop();
-            }   
+        callback: function(){
+            zpt.run();
+            runMacro();
+            runLoop();
         }
     }
 );
