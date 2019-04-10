@@ -43,8 +43,10 @@ module.exports = (function() {
             if ( ! parserOptions.dictionary ){
                 parserOptions.dictionary = options.dictionary;
             } else {
-                $.extend( true, parserOptions.dictionary, options.dictionary );
+                $.extend( parserOptions.dictionary, options.dictionary );
             }
+        } else if ( ! parserOptions.dictionary ){
+            parserOptions.dictionary = {};
         }
         
         parserOptions.root = options.root || parserOptions.root;
@@ -512,7 +514,12 @@ module.exports = (function() {
         return talAttributes.process( scope, node );
     };
     
+    var getOptions = function(){
+        return parserOptions;
+    };
+    
     return {
-        run: run
+        run: run,
+        getOptions: getOptions
     };
 })();

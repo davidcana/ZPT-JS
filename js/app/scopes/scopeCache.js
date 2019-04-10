@@ -24,7 +24,7 @@ module.exports = (function() {
         var key = buildKey();
         
         // Put a copy of scope into the cache
-        cache[ key ] = $.extend( true, {}, scope );
+        cache[ key ] = scope.copy();
         
         // Save the key of the scope as an attribute of the node
         node.setAttribute( getScopeKeyTag(), key );
@@ -43,11 +43,16 @@ module.exports = (function() {
         }
         */
         
-        var scope = getFromCache( node, dictionary );
-        return scope? scope: new Scope( dictionary );
+        var scope = getFromCache( node );
+        if ( scope ){
+            scope.setCommonVars();
+            return scope;
+        }
+        
+        return new Scope( dictionary, true );
     };
     
-    var getFromCache = function( node, dictionary ) {
+    var getFromCache = function( node ) {
         
         var key = getKey( node );
         if ( key === undefined ){
@@ -55,7 +60,6 @@ module.exports = (function() {
         }
         
         var scope = cache[ key ];
-        scope.update( dictionary );
         
         return scope;
     };

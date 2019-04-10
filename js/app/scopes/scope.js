@@ -6,21 +6,46 @@
 var context = require( '../context.js' );
 var $ = require( 'jquery' );
 
-var Scope = function( _dictionary ) {
-    
-    // Create a duplicate object which we can add properties to without affecting the original
-    /*var wrapper = function() {};
-    wrapper.prototype = _dictionary;
-    _dictionary = new wrapper();*/
+var Scope = function( _dictionary, addCommonVars ) {
     
     this.dictionary = _dictionary;
     this.varsStack = [];
+    
+    if ( addCommonVars ){
+        this.setCommonVars();
+    }
+};
+
+// Build a deep copy of this instance excluding common vars in dicionary
+Scope.prototype.copy = function(){
+
+    // notToCopy must contain all the vars that must not be copied
+    var notToCopy = {};
+    notToCopy[ context.getConf().windowVarName ] = true;
+    notToCopy[ context.getConf().contextVarName ] = true;
+    
+    // Copy all the dictionary entries not included in notToCopy to newDictionary
+    var newDictionary = {};
+    for ( var i in this.dictionary ){
+        if ( ! notToCopy[ i ] ){
+            newDictionary[ i ] = this.dictionary[ i ];
+        }
+    }
+    
+    // Create a new instance of Scope with the newDictionary and the current varsStack
+    var newScope = new Scope( newDictionary, false );
+    newScope.varsStack = $.extend( true, [], this.varsStack );
+    
+    return newScope;
+};
+
+Scope.prototype.setCommonVars = function(){
     
     // Register window object if it exists
     if ( window ){
         this.setLocal( context.getConf().windowVarName, window );
     }
-    
+
     // Register context
     this.setLocal( context.getConf().contextVarName, context );
 };
@@ -91,7 +116,7 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
 };
 
 Scope.prototype.update = function( _dictionary ){
-    $.extend( true, this.dictionary, _dictionary );
+    $.extend( this.dictionary, _dictionary );
 };
 
 module.exports = Scope;
