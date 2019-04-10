@@ -30,11 +30,11 @@ var TALReplace = require( '../attributes/TAL/talReplace.js' );
 module.exports = (function() {
     
     var parserOptions = {
+        command: undefined, // preload, fullRender or partialRender
         root: undefined,
         dictionary: undefined,
-        notRemoveGeneratedTags: false,
-        target: undefined,
-        command: 'fullRender' // preload, fullRender or partialRender
+        //notRemoveGeneratedTags,
+        //target,
         //declaredRemotePageUrls,
         //i18n,
         //callback,
@@ -43,6 +43,8 @@ module.exports = (function() {
     var tags = context.getTags();
     
     var updateParserOptions = function( options ){
+        
+        parserOptions.command = options.command || 'fullRender';
         
         if ( options.dictionary ){
             if ( ! parserOptions.dictionary ){
@@ -55,16 +57,18 @@ module.exports = (function() {
         }
         
         parserOptions.root = options.root || parserOptions.root;
-        parserOptions.target = options.target || parserOptions.root;
+        //parserOptions.target = options.target || parserOptions.root;
+        /*
         parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? 
             options.notRemoveGeneratedTags: 
             parserOptions.notRemoveGeneratedTags;
+        */
     };
     
-    var preload = function( callback, failCallback, declaredRemotePageUrls, i18n ){
+    var preload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags ){
         
         try {
-            if ( ! parserOptions.notRemoveGeneratedTags ){
+            if ( ! notRemoveGeneratedTags ){
                 removeGeneratedTagsFromAllRootElements( parserOptions.root );
             }
             
@@ -110,19 +114,23 @@ module.exports = (function() {
                 options.callback,
                 options.failCallback,
                 options.declaredRemotePageUrls || [],
-                options.i18n
+                options.i18n,
+                options.notRemoveGeneratedTags
             );
             return;
         } 
         
         // command == 'partialRender' or command == 'fullRender'
-        render( options.command == 'partialRender'? parserOptions.target: parserOptions.root );
+        render( 
+            options.command == 'partialRender'? options.target: parserOptions.root,
+            options.notRemoveGeneratedTags
+        );
     };
     
-    var render = function( root ){
+    var render = function( root, notRemoveGeneratedTags ){
         
         try {
-            if ( ! parserOptions.notRemoveGeneratedTags ){
+            if ( ! notRemoveGeneratedTags ){
                 removeGeneratedTagsFromAllRootElements( root );
             }
             

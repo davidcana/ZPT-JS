@@ -117,7 +117,9 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
             rent_url: "rent?id=1012"
         }
     ];
-    zpt.run();
+    zpt.run({
+        notRemoveGeneratedTags: true
+    });
     
     assert.equal( getAllValues( '.d_value' ) , 'tool A/tool B/tool C/tool D/tool E/tool F/tool G'  );
     assert.equal( getAllValues( '.d_index' ) , '0/1/2/3/4/5/6'  );
