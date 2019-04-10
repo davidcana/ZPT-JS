@@ -57,17 +57,16 @@ var dictionary = {
     }
 };
 
-zpt.run(
-    {
-        root: document.body,
-        dictionary: dictionary,
-        declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
-        callback: function(){
-            zpt.run();
-            runTests();
-        }
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
+    callback: function(){
+        zpt.run();
+        runTests();
     }
-);
+});
 
 function runTests(){
 

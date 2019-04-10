@@ -7,18 +7,17 @@ var zpt = require( '../../../js/app/main.js' );
 
 var dictionary = {};
 
-zpt.run(
-    {
-        root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
-        dictionary: dictionary,
-        declaredRemotePageUrls: [],
-        callback: function(){
-            zpt.run();
-            runMacro();
-            runLoop();
-        }
+zpt.run({
+    command: 'preload',
+    root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
+    dictionary: dictionary,
+    declaredRemotePageUrls: [],
+    callback: function(){
+        zpt.run();
+        runMacro();
+        runLoop();
     }
-);
+});
 
 function runMacro(){
     

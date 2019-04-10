@@ -5,7 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-var scopeCache = require( '../../scopes/scopeCache.js' );
+//var scopeCache = require( '../../scopes/scopeCache.js' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
     
@@ -24,7 +24,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
         }
 
         // Save the scope and set an attribute id
-        scopeCache.put( scope, node );
+        //scopeCache.put( scope, node );
     };
     
     var toString = function(){

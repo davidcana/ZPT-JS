@@ -8,7 +8,8 @@ var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var resolver = require( '../resolver.js' );
 var log = require( '../logHelper.js' );
-var scopeCache = require( '../scopes/scopeCache.js' );
+//var scopeCache = require( '../scopes/scopeCache.js' );
+var Scope = require( '../scopes/scope.js' );
 var NodeAttributes = require( './nodeAttributes.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
@@ -32,8 +33,12 @@ module.exports = (function() {
         root: undefined,
         dictionary: undefined,
         notRemoveGeneratedTags: false,
-        declaredRemotePageUrls: [],
-        i18n: undefined
+        target: undefined,
+        command: 'fullRender' // preload, fullRender or partialRender
+        //declaredRemotePageUrls,
+        //i18n,
+        //callback,
+        //failCallback,
     };
     var tags = context.getTags();
     
@@ -50,14 +55,13 @@ module.exports = (function() {
         }
         
         parserOptions.root = options.root || parserOptions.root;
+        parserOptions.target = options.target || parserOptions.root;
         parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? 
             options.notRemoveGeneratedTags: 
             parserOptions.notRemoveGeneratedTags;
-        parserOptions.declaredRemotePageUrls = options.declaredRemotePageUrls || parserOptions.declaredRemotePageUrls;
-        parserOptions.i18n = options.i18n || parserOptions.i18n;
     };
     
-    var init = function( callback, failCallback ){
+    var preload = function( callback, failCallback, declaredRemotePageUrls, i18n ){
         
         try {
             if ( ! parserOptions.notRemoveGeneratedTags ){
@@ -66,14 +70,11 @@ module.exports = (function() {
             
             i18nHelper.loadAsyncAuto( 
                 parserOptions.dictionary,
-                parserOptions.i18n,
+                i18n,
                 function(){
                     resolver.loadRemotePages( 
-                        scopeCache.get( 
-                            parserOptions.root, 
-                            parserOptions.dictionary
-                        ),
-                        parserOptions.declaredRemotePageUrls,
+                        new Scope( parserOptions.dictionary, true ),
+                        declaredRemotePageUrls,
                         function (){
                             processCallback( callback );
                         },
@@ -103,27 +104,29 @@ module.exports = (function() {
         // Init parser options
         updateParserOptions( options );
     
-        // Call to init if needed
-        if ( options.callback ){
-            init(
+        // command == 'preload'
+        if ( options.command == 'preload' ){
+            preload(
                 options.callback,
-                options.failCallback
+                options.failCallback,
+                options.declaredRemotePageUrls || [],
+                options.i18n
             );
             return;
-        }
+        } 
         
-        // Render HTML
-        render();
+        // command == 'partialRender' or command == 'fullRender'
+        render( options.command == 'partialRender'? parserOptions.target: parserOptions.root );
     };
     
-    var render = function(){
+    var render = function( root ){
         
         try {
             if ( ! parserOptions.notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllRootElements( parserOptions.root );
+                removeGeneratedTagsFromAllRootElements( root );
             }
             
-            processAllRootElements( parserOptions.root );
+            processAllRootElements( root );
             
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -179,10 +182,11 @@ module.exports = (function() {
         
         process( 
             root, 
-            scopeCache.get( 
+            new Scope( parserOptions.dictionary, true )
+            /*scopeCache.get( 
                 root, 
                 parserOptions.dictionary
-            )
+            )*/
         );
     };
     

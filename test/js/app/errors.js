@@ -46,47 +46,45 @@ QUnit.test( "External macro in non-existing file test", function( assert ) {
     
     var done = assert.async();
     
-    zpt.run(
-        {
-            root: document.body,
-            dictionary: {},
-            declaredRemotePageUrls: [],
-            callback: function(){
-                assert.equal( 0, 1, "Found external file, but it is an error!" );
-                done();
-            },
-            failCallback: function( msg ){
-                assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
-                done();
-            }
+    zpt.run({
+        command: 'preload',
+        root: document.body,
+        dictionary: {},
+        declaredRemotePageUrls: [],
+        callback: function(){
+            assert.equal( 0, 1, "Found external file, but it is an error!" );
+            done();
+        },
+        failCallback: function( msg ){
+            assert.equal( msg, "Error trying to get notFoundFile.html: Not Found" );
+            done();
         }
-    );
+    });
 });
 
 QUnit.test( "Non-existing i18n file test", function( assert ) {
 
     var done = assert.async();
 
-    zpt.run(
-        {
-            root: document.body,
-            dictionary: {},
-            declaredRemotePageUrls: [],
-            i18n: {
-                urlPrefix: './i18n/',
-                files: {
-                    'es': [ 'es1.json', 'es_notFound.json' ],
-                    'en': [ 'en1.json', 'en2.json' ]
-                }
-            },
-            callback: function(){
-                assert.equal( 0, 1, "Found external file, but it is an error!" );
-                done();
-            },
-            failCallback: function( msg ){
-                assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
-                done();
+    zpt.run({
+        command: 'preload',
+        root: document.body,
+        dictionary: {},
+        declaredRemotePageUrls: [],
+        i18n: {
+            urlPrefix: './i18n/',
+            files: {
+                'es': [ 'es1.json', 'es_notFound.json' ],
+                'en': [ 'en1.json', 'en2.json' ]
             }
+        },
+        callback: function(){
+            assert.equal( 0, 1, "Found external file, but it is an error!" );
+            done();
+        },
+        failCallback: function( msg ){
+            assert.equal( msg, "Error trying to get ./i18n/es_notFound.json: Not Found" );
+            done();
         }
-    );
+    });
 });

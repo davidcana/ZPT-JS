@@ -46,16 +46,15 @@ var init = function( assert ){
             date : new Date( Date.UTC( 2012, 11, 20, 3, 0, 0 ) )
         };
 
-        zpt.run(
-            {
-                root: document.body,
-                dictionary: dictionary,
-                callback: function(){
-                    zpt.run();
-                    done();
-                }
+        zpt.run({
+            command: 'preload',
+            root: document.body,
+            dictionary: dictionary,
+            callback: function(){
+                zpt.run();
+                done();
             }
-        );
+        });
     });  
 };
 

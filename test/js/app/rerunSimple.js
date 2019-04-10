@@ -45,7 +45,9 @@ QUnit.test( "Rerun and check dictionary vars", function( assert ) {
     $( '#ul1' ).zpt();
     runTests();
     
-    $( '#ul2' ).zpt();
+    $( '#ul2' ).zpt({
+        command: 'partialRender'
+    });
     runTests();
     
     function runTests(){

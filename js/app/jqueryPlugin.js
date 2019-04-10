@@ -8,7 +8,13 @@ var zpt = require( './main.js' );
     $.fn.zpt = function( userOptions ) {
         
         var options = userOptions || {};
-        options.root = this[0];
+        
+        if ( options.command == 'partialRender' ){
+            options.target = this[0];
+        } else {
+            options.root = this[0];            
+        }
+
         zpt.run( options );
 
         return this;

@@ -17,6 +17,7 @@ var Scope = function( _dictionary, addCommonVars ) {
 };
 
 // Build a deep copy of this instance excluding common vars in dicionary
+/*
 Scope.prototype.copy = function(){
 
     // notToCopy must contain all the vars that must not be copied
@@ -38,7 +39,7 @@ Scope.prototype.copy = function(){
     
     return newScope;
 };
-
+*/
 Scope.prototype.setCommonVars = function(){
     
     // Register window object if it exists
@@ -115,8 +116,8 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
     this.setLocal( name, value );
 };
 
-Scope.prototype.update = function( _dictionary ){
-    $.extend( this.dictionary, _dictionary );
+Scope.prototype.update = function(){
+
 };
 
 module.exports = Scope;

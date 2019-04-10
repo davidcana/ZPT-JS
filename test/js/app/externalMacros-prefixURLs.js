@@ -12,17 +12,16 @@ var dictionary = {
     template: 'externalMacros-definitions.html'
 };
 
-zpt.run(
-    {
-        root: document.body,
-        dictionary: dictionary,
-        declaredRemotePageUrls: [ dictionary.template ],
-        callback: function(){
-            zpt.run();
-            runTests();
-        }
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ dictionary.template ],
+    callback: function(){
+        zpt.run();
+        runTests();
     }
-);
+});
 
 function runTests(){
     
