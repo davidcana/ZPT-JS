@@ -89,14 +89,6 @@ TALDefine.buildString = function( name, expression, global ) {
     return result;
 };
 
-/*
-TALDefine.appendStrings = function( defineString1, defineString2 ) {
-
-    return ! defineString2? 
-           defineString1: 
-           defineString1 + context.getConf().defineDelimiter + defineString2;
-};
-*/
 TALDefine.appendStrings = function() {
     
     var result = arguments[ 0 ];
@@ -109,6 +101,21 @@ TALDefine.appendStrings = function() {
     }
     
     return result;
+};
+
+TALDefine.updateAttribute = function( node, currentDefine, newVarName, newVarValue ){
+
+    var tags = context.getTags();
+    var macroDefine = node.getAttribute( tags.talDefine );
+    var newDefine = newVarValue?
+        TALDefine.buildString( newVarName, newVarValue ):
+        undefined;
+    var fullDefine = TALDefine.appendStrings( currentDefine, macroDefine, newDefine );
+
+    // Copy talDefine attribute from use-macro tag to the macro tag
+    if ( fullDefine ) {
+        node.setAttribute( tags.talDefine, fullDefine );
+    }
 };
 
 module.exports = TALDefine;

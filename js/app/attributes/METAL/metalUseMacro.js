@@ -8,7 +8,6 @@ var Scope = require( '../../scopes/scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
 var resolver = require( '../../resolver.js' );
-
 var $ = require( 'jquery' );
 
 var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApply ) {
@@ -31,7 +30,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         newNode.removeAttribute( 'style' );
 
         // Set tal define
-        updateTalDefineAttribute( scope, macroKey, tags, newNode );
+        updateThisTalDefineAttribute( macroKey, newNode );
         
         // Fill slots
         fillSlots( scope, node, tags, newNode );
@@ -42,25 +41,17 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         return newNode;
     };
     
-    var updateTalDefineAttribute = function( scope, macroKey, tags, newNode ){
-        
-        // Build define tag
-        var fullDefine = undefined;
-        var macroData = resolver.getMacroData( macroKey );
-        var macroDefine = newNode.getAttribute( tags.talDefine );
-        if ( macroData.url ){
-            var externalMacroUrlDefine = TALDefine.buildString( 
-                    context.getConf().externalMacroUrlVarName, 
-                    "'" + macroData.url + "'" );
-            fullDefine = TALDefine.appendStrings( externalMacroUrlDefine, define, macroDefine );
-        } else {
-            fullDefine = TALDefine.appendStrings( define, macroDefine );
-        }
+    var updateThisTalDefineAttribute = function( macroKey, newNode ){
 
-        // Copy talDefine attribute from use-macro tag to the macro tag
-        if ( fullDefine ) {
-            newNode.setAttribute( tags.talDefine, fullDefine );
+        var newVarName, newVarValue;
+        var macroData = resolver.getMacroData( macroKey );
+        
+        if ( macroData.url ){
+            newVarName = context.getConf().externalMacroUrlVarName;
+            newVarValue = "'" + macroData.url + "'";
         }
+        
+        TALDefine.updateAttribute( newNode, define, newVarName, newVarValue );
     };
     
     var fillSlots = function( scope, node, tags, newNode ){
