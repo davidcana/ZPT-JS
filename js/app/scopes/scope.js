@@ -9,7 +9,8 @@ var $ = require( 'jquery' );
 var Scope = function( _dictionary, addCommonVars ) {
     
     this.dictionary = _dictionary;
-    this.varsStack = [];
+    this.vars = {};
+    this.changesStack = [];
     
     if ( addCommonVars ){
         this.setCommonVars();
@@ -33,9 +34,9 @@ Scope.prototype.copy = function(){
         }
     }
     
-    // Create a new instance of Scope with the newDictionary and the current varsStack
+    // Create a new instance of Scope with the newDictionary and the current changesStack
     var newScope = new Scope( newDictionary, false );
-    newScope.varsStack = $.extend( true, [], this.varsStack );
+    newScope.changesStack = $.extend( true, [], this.changesStack );
     
     return newScope;
 };
@@ -44,11 +45,11 @@ Scope.prototype.setCommonVars = function(){
     
     // Register window object if it exists
     if ( window ){
-        this.setLocal( context.getConf().windowVarName, window );
+        this.setVar( context.getConf().windowVarName, window );
     }
 
     // Register context
-    this.setLocal( context.getConf().contextVarName, context );
+    this.setVar( context.getConf().contextVarName, context );
 };
 
 Scope.prototype.startElement = function(){
@@ -58,30 +59,32 @@ Scope.prototype.startElement = function(){
         varsToSet : {}
     };
 
-    this.varsStack.push( vars );
+    this.changesStack.push( vars );
 
     return vars;
 };
 
 Scope.prototype.currentVars = function(){
-    return this.varsStack[ this.varsStack.length - 1 ];
+    return this.changesStack[ this.changesStack.length - 1 ];
 };
 
-Scope.prototype.setLocal = function( name, value ) {
-    this.dictionary[ name ] = value;
+Scope.prototype.setVar = function( name, value ) {
+    this.vars[ name ] = value;
 };
 
 Scope.prototype.get = function( name ) {
-    return this.dictionary[ name ];
+    
+    var valueFromVars = this.vars[ name ];
+    return valueFromVars !== undefined? valueFromVars: this.dictionary[ name ];
 };
 
 Scope.prototype.unset = function( name ) {
-    delete this.dictionary[ name ];
+    delete this.vars[ name ];
 };
 
 Scope.prototype.endElement = function ( ) {
 
-    var vars = this.varsStack.pop(); 
+    var vars = this.changesStack.pop(); 
 
     var varsToUnset = vars.varsToUnset;
     var varsToSet = vars.varsToSet; 
@@ -92,7 +95,7 @@ Scope.prototype.endElement = function ( ) {
 
     for ( var name in varsToSet ){
         var value = varsToSet[ name ];
-        this.setLocal( name, value );
+        this.setVar( name, value );
     }
 };
 
@@ -113,7 +116,7 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
     }
 
     // Common to global and local vars
-    this.setLocal( name, value );
+    this.setVar( name, value );
 };
 
 Scope.prototype.update = function(){

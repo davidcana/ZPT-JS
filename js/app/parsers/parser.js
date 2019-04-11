@@ -33,7 +33,7 @@ module.exports = (function() {
     var parserOptions = {
         command: undefined, // preload, fullRender or partialRender
         root: undefined,
-        dictionary: undefined,
+        dictionary: {},
         //notRemoveGeneratedTags,
         //target,
         //declaredRemotePageUrls,
@@ -46,7 +46,16 @@ module.exports = (function() {
     var updateParserOptions = function( options ){
         
         parserOptions.command = options.command || 'fullRender';
-        
+        parserOptions.root = options.root || parserOptions.root;
+        parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
+        /*
+        if ( options.dictionary ){
+            parserOptions.dictionary = options.dictionary;
+            
+        } else if ( ! parserOptions.dictionary ){
+            parserOptions.dictionary = {};
+        }*/
+        /*
         if ( options.dictionary ){
             if ( ! parserOptions.dictionary ){
                 parserOptions.dictionary = options.dictionary;
@@ -55,9 +64,8 @@ module.exports = (function() {
             }
         } else if ( ! parserOptions.dictionary ){
             parserOptions.dictionary = {};
-        }
+        }*/
         
-        parserOptions.root = options.root || parserOptions.root;
         //parserOptions.target = options.target || parserOptions.root;
         /*
         parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? 
@@ -191,7 +199,7 @@ module.exports = (function() {
         
         process( 
             target, 
-            scopeBuilder.build( parserOptions, target )
+            scopeBuilder.build( parserOptions, target, self )
         );
     };
     
@@ -417,14 +425,14 @@ module.exports = (function() {
         return talOnError.process( scope );
     };
 
-    var processDefine = function( scope, string, node ) {
+    var processDefine = function( scope, string, node, forceGlobal ) {
 
         if ( ! string ) {
             return;
         }
         
         var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
-        return talDefine.process( scope, node );
+        return talDefine.process( scope, node, forceGlobal );
     };
     
     var processI18nDomain = function( scope, string ) {
@@ -527,8 +535,11 @@ module.exports = (function() {
         return parserOptions;
     };
     
-    return {
+    var self = {
         run: run,
-        getOptions: getOptions
+        getOptions: getOptions,
+        processDefine: processDefine
     };
+    
+    return self;
 })();

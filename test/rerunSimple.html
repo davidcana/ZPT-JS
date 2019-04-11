@@ -60,5 +60,35 @@
                 </ul>
             </li>
         </ul>
+        
+        <h2>Rerun and check dictionary vars (more complex)</h2>
+        data-tdefine="var1 1; var2 2"
+        <ul data-tdefine="var1 1; var2 2" id="ul2-1">
+
+            <li>var1 value: 1 = <span id="t3-1-1" data-tcontent="var1">must be 1</span></li>
+            <li>var2 value: 2 = <span id="t3-1-2" data-tcontent="var2">must be 2</span></li>
+            <li>var value: 10 = <span id="t3-1-3" data-tcontent="var">must be 10</span></li>
+            <li>
+                data-tdefine="added +: var1 var2 var"
+                <ul data-tdefine="added +: var1 var2 var" id="ul2-2">
+                    
+                    <li>var1 value: 1 = <span id="t3-2-1" data-tcontent="var1">must be 1</span></li>
+                    <li>var2 value: 1 = <span id="t3-2-2" data-tcontent="var2">must be 2</span></li>
+                    <li>var value: 1 = <span id="t3-2-3" data-tcontent="var">must be 10 or 20</span></li>
+                    <li>added value: 3 = <span id="t3-2-4" data-tcontent="added">must be 13 or 23</span></li>
+                    <li>
+                        data-tdefine="substracted -: added var1"
+                        <ul data-tdefine="substracted -: added var1" id="ul2-3">
+                            <li>var1 value: 1 = <span id="t3-3-1" data-tcontent="var1">must be 1</span></li>
+                            <li>var2 value: 1 = <span id="t3-3-2" data-tcontent="var2">must be 2</span></li>
+                            <li>var value: 1 = <span id="t3-3-3" data-tcontent="var">must be 10, 20 or 30</span></li>
+                            <li>added value: 3 = <span id="t3-3-4" data-tcontent="added">must be 13, 23 or 33</span></li>
+                            <li>substract value: 2 = <span id="t3-3-5" data-tcontent="substracted">must be 12, 22 or 32</span></li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </body>
 </html>

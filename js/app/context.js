@@ -24,7 +24,8 @@ module.exports = (function() {
         metalMacro:       "data-mmacro",
         i18nDomain:       "data-idomain",
         i18nLanguage:     "data-ilanguage",
-        scopeKey:         "data-scope-key",
+        //scopeKey:         "data-scope-key",
+        rootKey:          "data-root-key",
         qdup:             "data-qdup"
     };
     var originalTags = {
@@ -43,7 +44,8 @@ module.exports = (function() {
         metalMacro:       "data-mmacro",
         i18nDomain:       "i18n:domain",
         i18nLanguage:     "i18n:language",
-        scopeKey:         "data-scope-key",
+        //scopeKey:         "data-scope-key",
+        rootKey:          "data-root-key",
         qdup:             "data-qdup"
     };
     var tags = defaultTags;

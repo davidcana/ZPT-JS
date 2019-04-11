@@ -65,3 +65,45 @@ QUnit.test( "Rerun and check dictionary vars", function( assert ) {
     }
 });
 
+QUnit.test( "Rerun and check dictionary vars (more complex)", function( assert ) {
+    
+    var dictionary = { 
+        var: 10
+    };
+    
+    $( '#ul2-1' ).zpt({
+        dictionary: dictionary
+    });
+    runTests( 10, 10, 10 );
+
+    dictionary.var = 20;
+    $( '#ul2-2' ).zpt({
+        command: 'partialRender'
+    });
+    runTests( 10, 20, 20 );
+    
+    dictionary.var = 30;
+    $( '#ul2-3' ).zpt({
+        command: 'partialRender'
+    });
+    runTests( 10, 20, 30 );
+    
+    function runTests( value1, value2, value3 ){
+
+        assert.equal( $('#t3-1-1').html() , "1" );
+        assert.equal( $('#t3-1-2').html() , "2" );
+        assert.equal( $('#t3-1-3').html() , "" + value1 );
+        
+        assert.equal( $('#t3-2-1').html() , "1" );
+        assert.equal( $('#t3-2-2').html() , "2" );
+        assert.equal( $('#t3-2-3').html() , "" + value2 );
+        assert.equal( $('#t3-2-4').html() , "" + (value2 + 1 + 2) );
+        
+        assert.equal( $('#t3-3-1').html() , "1" );
+        assert.equal( $('#t3-3-2').html() , "2" );
+        assert.equal( $('#t3-3-3').html() , "" + value3 );
+        assert.equal( $('#t3-3-4').html() , "" + (value3 + 1 + 2) );
+        assert.equal( $('#t3-3-5').html() , "" + (value3 + 2) );
+    }
+});
+

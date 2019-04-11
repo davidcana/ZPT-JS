@@ -8,6 +8,10 @@ var VariableExpression = function( nameToApply ) {
     var name = nameToApply;
     
     var evaluate = function( scope ){
+        return scope.get( name );
+    };
+    /*
+    var evaluate = function( scope ){
         
         // Try to get the value from the scope
         var result = scope.get( name );
@@ -19,6 +23,7 @@ var VariableExpression = function( nameToApply ) {
         scope.update();
         return scope.get( name );
     };
+    */
     
     var toString = function(){
         return name;

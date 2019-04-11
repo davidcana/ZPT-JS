@@ -5,14 +5,13 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-//var scopeCache = require( '../../scopes/scopeCache.js' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
     
     var string = stringToApply;
     var defineItems = defineItemsToApply;
     
-    var process = function( scope, node ){
+    var process = function( scope, node, forceGlobal ){
         
         // Update scope
         for ( var i = 0; i < defineItems.length; i++ ) {
@@ -20,11 +19,8 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
             scope.set( 
                     defineItem.name, 
                     defineItem.expression.evaluate( scope ), 
-                    defineItem.global );
+                    forceGlobal || defineItem.global );
         }
-
-        // Save the scope and set an attribute id
-        //scopeCache.put( scope, node );
     };
     
     var toString = function(){
