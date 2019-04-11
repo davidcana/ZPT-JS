@@ -10,6 +10,7 @@ var resolver = require( '../resolver.js' );
 var log = require( '../logHelper.js' );
 //var scopeCache = require( '../scopes/scopeCache.js' );
 var Scope = require( '../scopes/scope.js' );
+var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var NodeAttributes = require( './nodeAttributes.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
@@ -69,7 +70,7 @@ module.exports = (function() {
         
         try {
             if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllRootElements( parserOptions.root );
+                removeGeneratedTagsFromAllTargetElements( parserOptions.root );
             }
             
             i18nHelper.loadAsyncAuto( 
@@ -121,20 +122,20 @@ module.exports = (function() {
         } 
         
         // command == 'partialRender' or command == 'fullRender'
-        render( 
-            options.command == 'partialRender'? options.target: parserOptions.root,
+        render(
+            parserOptions.command == 'partialRender'? options.target: parserOptions.root,
             options.notRemoveGeneratedTags
         );
     };
     
-    var render = function( root, notRemoveGeneratedTags ){
+    var render = function( target, notRemoveGeneratedTags ){
         
         try {
             if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllRootElements( root );
+                removeGeneratedTagsFromAllTargetElements( target );
             }
             
-            processAllRootElements( root );
+            processAllTargetElements( target );
             
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -142,59 +143,55 @@ module.exports = (function() {
         }
     };
         
-    var removeGeneratedTagsFromAllRootElements = function( root ) {
+    var removeGeneratedTagsFromAllTargetElements = function( target ) {
         
         // Is multiroot?
-        if ( $.isArray( root ) ){ 
+        if ( $.isArray( target ) ){ 
             // There are several roots
-            for ( var c = 0; c < root.length; c++ ) {
-                removeGeneratedTags( root[ c ] );
+            for ( var c = 0; c < target.length; c++ ) {
+                removeGeneratedTags( target[ c ] );
             }
         } else {
             // There is only one root
-            removeGeneratedTags( root );
+            removeGeneratedTags( target );
         }
     };
     
-    var removeGeneratedTags = function( root ) {
+    var removeGeneratedTags = function( target ) {
         
-        removeTags( root, tags.qdup );       // Remove all generated nodes (repeats)
-        removeTags( root, tags.metalMacro ); // Remove all generated nodes (macros)
+        removeTags( target, tags.qdup );       // Remove all generated nodes (repeats)
+        removeTags( target, tags.metalMacro ); // Remove all generated nodes (macros)
     };
     
-    var removeTags = function( root, tag ){
+    var removeTags = function( target, tag ){
         
         var node;
         var pos = 0;
-        var list = root.querySelectorAll( "*[" + tag + "]" );
+        var list = target.querySelectorAll( "*[" + tag + "]" );
         while ( node = list[ pos++ ] ) {
             node.parentNode.removeChild( node );
         }
     };
     
-    var processAllRootElements = function( root ) {
+    var processAllTargetElements = function( target ) {
         
         // Is multiroot?
-        if ( $.isArray( root ) ){ 
+        if ( $.isArray( target ) ){ 
             // There are several roots
-            for ( var c = 0; c < root.length; c++ ) {
-                processRoot( root[ c ] );
+            for ( var c = 0; c < target.length; c++ ) {
+                processTarget( target[ c ] );
             }
         } else {
             // There is only one root
-            processRoot( root );
+            processTarget( target );
         }
     };
     
-    var processRoot = function( root ) {
+    var processTarget = function( target ) {
         
         process( 
-            root, 
-            new Scope( parserOptions.dictionary, true )
-            /*scopeCache.get( 
-                root, 
-                parserOptions.dictionary
-            )*/
+            target, 
+            scopeBuilder.build( parserOptions, target )
         );
     };
     
