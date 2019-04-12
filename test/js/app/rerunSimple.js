@@ -145,3 +145,29 @@ QUnit.test( "Rerun and check dictionary vars (multiple target)", function( asser
         assert.equal( $('#t4-3-4-6').html() , "" + arguments[14] );
     }
 });
+
+QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", function( assert ) {
+
+    var dictionary = { 
+        var: 10
+    };
+    zpt.run({
+        root: [ $( '#ul5-1' )[0], $( '#ul5-2' )[0] ],
+        dictionary: dictionary
+    });
+    runTests( 1, 11, 2, 12 );
+    
+    dictionary.var = 11;
+    $( '#t5-2-2' ).zpt({
+        command: 'partialRender'
+    });
+    runTests( 1, 11, 2, 13 );
+    
+    function runTests(){
+
+        assert.equal( $('#t5-1-1').html() , "" + arguments[0] );
+        assert.equal( $('#t5-1-2').html() , "" + arguments[1] );
+        assert.equal( $('#t5-2-1').html() , "" + arguments[2] );
+        assert.equal( $('#t5-2-2').html() , "" + arguments[3] );
+    }
+});

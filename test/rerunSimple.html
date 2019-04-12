@@ -129,5 +129,17 @@
                 </ul>
             </li>
         </ul>
+        
+        <h2>Rerun and check dictionary vars (multiple root, one target)</h2>
+        data-tdefine="var1 1; added +: 100 var"
+        <ul data-tdefine="var1 1; added +: var1 var" id="ul5-1">
+            <li>var1 value: 1 = <span id="t5-1-1" data-tcontent="var1">must be 1</span></li>
+            <li>added value = <span id="t5-1-2" data-tcontent="added">must be 11</span></li>
+        </ul>
+        data-tdefine="var2 2 added +: 100 var"
+        <ul data-tdefine="var1 2; added +: var1 var" id="ul5-2">
+            <li>var1 value: 2 = <span id="t5-2-1" data-tcontent="var1">must be 2</span></li>
+            <li>added value = <span id="t5-2-2" data-tcontent="added">must be 12 or 13</span></li>
+        </ul>
     </body>
 </html>
