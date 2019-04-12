@@ -8,7 +8,6 @@ var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var resolver = require( '../resolver.js' );
 var log = require( '../logHelper.js' );
-//var scopeCache = require( '../scopes/scopeCache.js' );
 var Scope = require( '../scopes/scope.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var NodeAttributes = require( './nodeAttributes.js' );

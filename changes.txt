@@ -5,10 +5,14 @@ New in future versions
 - Add data-telse and data-telse-condition tags?
 - Add if: expression (example-> if: isImportant 'important' is equals to cond: isImportant 'important' '')?
 
-New in 0.30.0
+New in 0.31.0
 - Add options.bind (boolean) to set if the properties will be bind?
 - Add data-tbind tag to bind vars in dictionary to update content?
 - Support at data-tattributes tag to bind (example data-tattributes="bind textareaAttrs; bind maxlength maxlength")?
+
+New in 0.30.0
+- scopeCache class removed, replaced by scopeBuilder: it traverses the DOM from a node to its parents to get all data-tdefine tags and execute them in reverse order.
+- Added command configuration option. Valid values are preload, fullRender or partialRender.
 
 New in 0.29.0
 - Save every scope into a cache, set an id to it and put it in HTML using a data-tscope tag to make it easy to re-render.
