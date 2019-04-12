@@ -119,7 +119,10 @@ QUnit.test( "Rerun and check dictionary vars (multiple target)", function( asser
     
     dictionary.var = 11;
     zpt.run({
-        target: [ $( '#ul3-2' )[0], $( '#ul3-4' )[0] ],
+        target: [ 
+            document.getElementById( 'ul3-2' ), 
+            document.getElementById( 'ul3-4' )
+        ],
         command: 'partialRender'
     });
     runTests( 1, 110, 1, 2, 13, 111, 1, 3, 13, 110, 1, 3, 4, 15, 111 );

@@ -163,6 +163,7 @@ $( 'body' ).zpt({
     </p>
     <pre>
 zpt.run({
+    command: 'preload',
     root: document.body,
     dictionary: dictionary,
     declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
@@ -176,7 +177,31 @@ zpt.run({
         First invokation of <em>zpt.run</em> preload <em>externalMacros-definitions2.html</em> and <em>externalMacros-definitions3.html</em>. The second one (inside the callback) renders the HTML after preloading.
     </p>
     
-    <p>That's OK. But... how can we use ZPT-JS at the server side (using node.js)? node-jsdom is needed when no browser is available:</p>
+    <p>
+        Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way:
+    </p>
+    <pre>
+    // First execution: render the body
+    zpt.run({
+        root: document.body,
+        dictionary: dictionary
+    });
+
+    [ your code here ]
+    
+    // Second execution: render only some elements
+    zpt.run({
+        command: 'partialRender',
+        target: [ 
+            document.getElementById( 'id1' ), 
+            document.getElementById( 'id2' )
+        ]
+    });
+    </pre>
+    
+    <p>
+        That's OK. But... how can we use ZPT-JS at the server side (using node.js)? node-jsdom is needed when no browser is available:
+    </p>
     <pre>
 "use strict";
 
@@ -735,6 +760,7 @@ var dictionary = {
     </p>  
     <pre>
 zpt.run({
+    command: 'preload',
     root: document.body,
     dictionary: dictionary,
     callback: function(){
@@ -756,6 +782,7 @@ zpt.run({
     </p>
     <pre>
 zpt.run({
+    command: 'preload',
     root: document.body,
     dictionary: dictionary,
     declaredRemotePageUrls: [ 'macros.html', 'moreMacros.html' ],
@@ -770,6 +797,7 @@ zpt.run({
     </p>
     <pre>
 zpt.run({
+    command: 'preload',
     root: document.body,
     dictionary: dictionary,
     declaredRemotePageUrls: [ '/path/to/your/macro/macros.html' ],
@@ -802,6 +830,7 @@ context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
     </p>
     <pre>
 zpt.run({
+    command: 'preload',
     root: document.body,
     dictionary: dictionary,
     callback: function(){
@@ -1024,6 +1053,7 @@ zpt.run({
     </p>
     <pre>
 zpt.run({
+    command: 'preload',
     root: document.body,
     dictionary: dictionary,
     i18n: {
