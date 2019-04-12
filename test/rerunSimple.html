@@ -90,5 +90,44 @@
                 </ul>
             </li>
         </ul>
+        
+        <h2>Rerun and check dictionary vars (multiple target)</h2>
+        data-tdefine="var1 1"
+        <ul data-tdefine="var1 1; added +: 100 var" id="ul3-1">
+            <li>var1 value: 1 = <span id="t4-1-1" data-tcontent="var1">must be 1</span></li>
+            <li>added value = <span id="t4-1-2" data-tcontent="added">must be 110 or 111</span></li>
+            
+            <li>
+                data-tdefine="var2 2"
+                <ul data-tdefine="var2 2" id="ul3-2">
+                    <li>var1 value: 1 = <span id="t4-2-1" data-tcontent="var1">must be 1</span></li>
+                    <li>var2 value: 2 = <span id="t4-2-2" data-tcontent="var2">must be 2</span></li>
+                    <li>+: var var2 = <span id="t4-2-3" data-tcontent="+: var var2">must be 12</span></li>
+                    <li>added value = <span id="t4-2-4" data-tcontent="added">must be 110 or 111</span></li>
+                </ul>
+            </li>
+            
+            <li>
+                data-tdefine="var3 3"
+                <ul data-tdefine="var3 3" id="ul3-3">
+                    <li>var1 value: 1 = <span id="t4-3-1" data-tcontent="var1">must be 1</span></li>
+                    <li>var2 value: 2 = <span id="t4-3-2" data-tcontent="var2">must be undefined</span></li>
+                    <li>var3 value: 3 = <span id="t4-3-3" data-tcontent="var3">must be 3</span></li>
+                    <li>+: var var3 = <span id="t4-3-4" data-tcontent="+: var var3">must be 13</span></li>
+                    <li>added value = <span id="t4-3-5" data-tcontent="added">must be 110 or 111</span></li>
+                    <li>
+                        data-tdefine="var4 4"
+                        <ul data-tdefine="var4 4" id="ul3-4">
+                            <li>var1 value: 1 = <span id="t4-3-4-1" data-tcontent="var1">must be 1</span></li>
+                            <li>var2 value: 2 = <span id="t4-3-4-2" data-tcontent="var2">must be undefined</span></li>
+                            <li>var3 value: 3 = <span id="t4-3-4-3" data-tcontent="var3">must be 3</span></li>
+                            <li>var4 value: 4 = <span id="t4-3-4-4" data-tcontent="var4">must be 4</span></li>
+                            <li>+: var var4 = <span id="t4-3-4-5" data-tcontent="+: var var4">must be 14 or 15</span></li>
+                            <li>added value = <span id="t4-3-4-6" data-tcontent="added">must be 110 or 111</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </body>
 </html>

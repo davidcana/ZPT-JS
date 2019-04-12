@@ -107,3 +107,41 @@ QUnit.test( "Rerun and check dictionary vars (more complex)", function( assert )
     }
 });
 
+QUnit.test( "Rerun and check dictionary vars (multiple target)", function( assert ) {
+    
+    var dictionary = { 
+        var: 10
+    };
+    $( '#ul3-1' ).zpt({
+        dictionary: dictionary
+    });
+    runTests( 1, 110, 1, 2, 12, 110, 1, 3, 13, 110, 1, 3, 4, 14, 110 );
+    
+    dictionary.var = 11;
+    zpt.run({
+        target: [ $( '#ul3-2' )[0], $( '#ul3-4' )[0] ],
+        command: 'partialRender'
+    });
+    runTests( 1, 110, 1, 2, 13, 111, 1, 3, 13, 110, 1, 3, 4, 15, 111 );
+    
+    function runTests(){
+
+        assert.equal( $('#t4-1-1').html() , "" + arguments[0] );
+        assert.equal( $('#t4-1-2').html() , "" + arguments[1] );
+        assert.equal( $('#t4-2-1').html() , "" + arguments[2] );
+        assert.equal( $('#t4-2-2').html() , "" + arguments[3] );
+        assert.equal( $('#t4-2-3').html() , "" + arguments[4] );
+        assert.equal( $('#t4-2-4').html() , "" + arguments[5] );
+        assert.equal( $('#t4-3-1').html() , "" + arguments[6] );
+        assert.equal( $('#t4-3-2').html() , "undefined" );
+        assert.equal( $('#t4-3-3').html() , "" + arguments[7] );
+        assert.equal( $('#t4-3-4').html() , "" + arguments[8] );
+        assert.equal( $('#t4-3-5').html() , "" + arguments[9] );
+        assert.equal( $('#t4-3-4-1').html() , "" + arguments[10] );
+        assert.equal( $('#t4-3-4-2').html() , "undefined" );
+        assert.equal( $('#t4-3-4-3').html() , "" + arguments[11] );
+        assert.equal( $('#t4-3-4-4').html() , "" + arguments[12] );
+        assert.equal( $('#t4-3-4-5').html() , ""  + arguments[13] );
+        assert.equal( $('#t4-3-4-6').html() , "" + arguments[14] );
+    }
+});
