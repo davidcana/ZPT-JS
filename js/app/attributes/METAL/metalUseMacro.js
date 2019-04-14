@@ -49,9 +49,9 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         if ( macroData.url ){
             newVarName = context.getConf().externalMacroUrlVarName;
             newVarValue = "'" + macroData.url + "'";
+            
+            TALDefine.updateAttribute( newNode, define, newVarName, newVarValue );
         }
-        
-        TALDefine.updateAttribute( newNode, define, newVarName, newVarValue );
     };
     
     var fillSlots = function( scope, node, tags, newNode ){
