@@ -346,11 +346,11 @@ module.exports = (function() {
             return false;
         }
 
-        processDefine( scope, attributes.talDefine, node );
-        
         processI18nLanguage( scope, attributes.i18nLanguage );
-        
+
         processI18nDomain( scope, attributes.i18nDomain );
+        
+        processDefine( scope, attributes.talDefine, node );
         
         if ( ! processCondition(
                 node, 
