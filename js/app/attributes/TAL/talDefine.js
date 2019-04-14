@@ -105,17 +105,18 @@ TALDefine.appendStrings = function() {
 
 TALDefine.updateAttribute = function( node, currentDefine, newVarName, newVarValue ){
 
+    if ( ! newVarName ){
+        return;
+    }
+    
     var tags = context.getTags();
-    var macroDefine = node.getAttribute( tags.talDefine );
+    var nodeDefine = node.getAttribute( tags.talDefine );
     var newDefine = newVarValue?
         TALDefine.buildString( newVarName, newVarValue ):
         undefined;
-    var fullDefine = TALDefine.appendStrings( currentDefine, macroDefine, newDefine );
+    var fullDefine = TALDefine.appendStrings( currentDefine, nodeDefine, newDefine );
 
-    // Copy talDefine attribute from use-macro tag to the macro tag
-    if ( fullDefine ) {
-        node.setAttribute( tags.talDefine, fullDefine );
-    }
+    node.setAttribute( tags.talDefine, fullDefine );
 };
 
 module.exports = TALDefine;
