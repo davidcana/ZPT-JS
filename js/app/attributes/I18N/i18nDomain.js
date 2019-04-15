@@ -5,6 +5,8 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+var TALDefine = require( '../TAL/talDefine.js' );
+var VariableExpression = require( '../../expressions/path/variableExpression.js' );
 var $ = require( 'jquery' );
 
 var I18NDomain = function( stringToApply, expressionListToApply ) {
@@ -12,33 +14,32 @@ var I18NDomain = function( stringToApply, expressionListToApply ) {
     var string = stringToApply;
     var expressionList = expressionListToApply;
     
-    var process = function( scope, node ){
-        
-        var i18nList = [];
-        
-        for ( var i = 0; i < expressionList.length; i++ ) {
-            var expression = expressionList[ i ];
-            var i18n = expression.evaluate( scope );
-            
-            if ( ! i18n ){
-                throw 'Null value evaluating i18n domain expression: ' + string;    
-            }
-            
-            if ( $.isArray( i18n ) ){
-                i18nList = i18nList.concat( i18n );
-            } else {
-                i18nList.push( i18n );
-            }
-        }
+    var process = function( node, scope, stringDefine ){
+
+        var currentExpressionList = expressionList;
         
         // Add the domains defined previously
-        var previousI18nList = scope.get( context.getConf().i18nDomainVarName );
-        if ( previousI18nList ) {
-            i18nList = i18nList.concat( previousI18nList );
+        var previousValue = scope.get( context.getConf().i18nDomainVarName );
+        if ( previousValue ) {
+            var currentValueExpression = new VariableExpression( context.getConf().i18nDomainVarName );
+            currentExpressionList = currentExpressionList.concat( currentValueExpression );
         }
         
         // Add i18nDomainVarName to scope
-        scope.set( context.getConf().i18nDomainVarName, i18nList, false );
+        updateThisTalDefineAttribute( currentExpressionList, node, stringDefine );
+    };
+    
+    var updateThisTalDefineAttribute = function( i18nList, node, stringDefine ){
+
+        var newVarName = context.getConf().i18nDomainVarName;
+        var newVarValue = i18nList;
+
+        TALDefine.updateAttribute( 
+            node, 
+            stringDefine, 
+            newVarName, 
+            newVarValue
+        );
     };
     
     var toString = function(){

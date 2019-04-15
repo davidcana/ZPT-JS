@@ -4,6 +4,8 @@ var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 require( '../../../js/app/jqueryPlugin.js' );
+var I18n = require( '../../../js/app/i18n/i18n.js' );
+var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 
 QUnit.test( "Rerun simple tests", function( assert ) {
     
@@ -174,3 +176,119 @@ QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", funct
         assert.equal( $('#t5-2-2').html() , "" + arguments[3] );
     }
 });
+
+QUnit.test( "Rerun using data-idomain", function( assert ) {
+
+    // Render #ul6-1 and run tests
+    $( '#ul6-1' ).zpt({
+        dictionary: buildDictionaryForI18n()
+    });
+    runTests();
+
+    $( '#t6-2' ).zpt({
+        command: 'partialRender'
+    });
+    runTests();
+    
+    function runTests(){
+
+        assert.equal( $('#t6-1').html() , "¡¡¡Hola mundo 2!!!" );
+        assert.equal( $('#t6-2').html() , "Él no ha encontrado ningún resultado" );
+    }
+    
+});
+
+QUnit.test( "Rerun using data-idomain", function( assert ) {
+
+    // Render #ul6-1 and run tests
+    var dictionary = buildDictionaryForI18n();
+    dictionary.language = 'es';
+    $( '#ul7-1' ).zpt({
+        dictionary: dictionary
+    });
+    runTests( '¡Hola mundo!' );
+    
+    /*
+    $( '#t7-2' ).zpt({
+        command: 'partialRender'
+    });
+    runTests('Hello world!');
+    */
+    
+    function runTests( value ){
+
+        assert.equal( $('#t7-1-1').html() , "¡Hola mundo!" );
+        assert.equal( $('#t7-2-1').html() , value );
+    }
+
+});
+
+var buildDictionaryForI18n = function(){
+    
+    /* I18n maps init */
+    var msg1 = {
+        en : {},
+        es : {}
+    };
+    var msg2 = {
+        en : {},
+        es : {}
+    };
+
+    /* English i18n messages */
+    msg1.en[ '/CONF/' ] = {
+        language: 'en',
+        locale: 'en-US'
+    };
+    msg1.en[ 'Hello world!' ] = 'Hello world!';
+    msg1.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }' +
+        ' found ' +
+        '{RES, plural, =0{no results} one{1 result} other{# results} }';
+    msg1.en[ 'Oh, noooo!' ] = 'Error found... Oh, noooo!';
+    msg2.en[ '/CONF/' ] = {
+        language: 'en',
+        locale: 'en-US'
+    };
+    msg2.en[ 'Hello world!' ] = 'Hello world 2.0!!!';
+
+    /* Spanish i18n messages */
+    msg1.es[ '/CONF/' ] = {
+        language: 'es',
+        locale: 'es-ES'
+    };
+    msg1.es[ 'Hello world!' ] = '¡Hola mundo!';
+    msg1.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos} }' +
+        ' ' +
+        '{ RES, plural, =0{no } other{} }' +
+        '{ GENDER, select, male{ha} female{ha} other{han} }' +
+        ' encontrado ' +
+        '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
+    msg1.es[ 'Oh, noooo!' ] = 'Error encontrado... Oh, noooo!';
+    msg2.es[ '/CONF/' ] = {
+        language: 'es',
+        locale: 'es-ES'
+    };
+    msg2.es[ 'Hello world!' ] = '¡¡¡Hola mundo 2!!!';
+
+    // Create I18n and I18nBundle instances
+    var i18nES1 = new I18n( 'es', msg1[ 'es' ] );
+    var i18nES2 = new I18n( 'es', msg2[ 'es' ] );
+    var i18nEN1 = new I18n( 'en', msg1[ 'en' ] );
+    var i18nEN2 = new I18n( 'en', msg2[ 'en' ] );
+    var i18nBundle1 = new I18nBundle( i18nES1, i18nEN1 );
+    var i18nBundle2 = new I18nBundle( i18nES2, i18nEN2 );
+
+    // Init dictionary
+    var dictionary = {
+        'i18nES1':  i18nES1,
+        'i18nES2': i18nES2,
+        'i18nEN1':  i18nEN1,
+        'i18nEN2': i18nEN2,
+        'i18nBundle1': i18nBundle1,
+        'i18nBundle2': i18nBundle2,
+        'i18nESArray': [ i18nES2, i18nES1 ],
+        'i18nENArray': [ i18nEN2, i18nEN1 ]
+    };
+    
+    return dictionary;
+};

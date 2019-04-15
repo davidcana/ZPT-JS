@@ -348,8 +348,14 @@ module.exports = (function() {
 
         processI18nLanguage( scope, attributes.i18nLanguage );
 
-        processI18nDomain( scope, attributes.i18nDomain );
+        processI18nDomain( 
+            node, 
+            scope, 
+            attributes.i18nDomain, 
+            attributes.talDefine
+        );
         
+        attributes.updateTalDefine();
         processDefine( scope, attributes.talDefine, node );
         
         if ( ! processCondition(
@@ -434,14 +440,14 @@ module.exports = (function() {
         return talDefine.process( scope, node, forceGlobal );
     };
     
-    var processI18nDomain = function( scope, string ) {
+    var processI18nDomain = function( node, scope, string, stringDefine ) {
         
         if ( ! string ) {
             return;
         }
         
         var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string );
-        return i18nDomain.process( scope );
+        return i18nDomain.process( node, scope, stringDefine );
     };
     
     var processI18nLanguage = function( scope, string ) {

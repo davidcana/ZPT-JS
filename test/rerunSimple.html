@@ -141,5 +141,38 @@
             <li>var1 value: 2 = <span id="t5-2-1" data-tcontent="var1">must be 2</span></li>
             <li>added value = <span id="t5-2-2" data-tcontent="added">must be 12 or 13</span></li>
         </ul>
+        
+        <h2>Rerun using data-idomain</h2>
+        <ul data-idomain="i18nES2 i18nES1" id="ul6-1">
+            <li>
+                (in i18nES2) ¡¡¡Hola mundo 2!!! = 
+                <span id="t6-1" 
+                      data-tcontent="tr: 'Hello world!'">Must be ¡¡¡Hola mundo 2!!!</span>
+            </li>
+            <li>
+                <ul id="ul6-2">
+                    <li>
+                        (in i18nES1) Él no ha encontrado ningún resultado = 
+                        <span id="t6-2" 
+                              data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 0 )">Must be 'Él no ha encontrado ningún resultado'</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h2>Rerun using data-language</h2>
+        <ul data-idomain="i18nBundle1"
+            data-ilanguage="language" id="ul7-1">
+            <li>
+                ¡Hola mundo! = 
+                <span id="t7-1-1" 
+                      data-tcontent="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
+            </li>
+            <li id="t7-2">
+                Hello world! = 
+                <span id="t7-2-1" 
+                      data-tcontent="tr: 'Hello world!'">Must be ¡Hola mundo! or Hello world!</span>
+            </li>
+        </ul>
     </body>
 </html>

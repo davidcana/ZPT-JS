@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+var $ = require( 'jquery' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
     
@@ -78,9 +79,23 @@ TALDefine.build = function( string ) {
     return new TALDefine( string, defineItems );
 };
 
-TALDefine.buildString = function( name, expression, global ) {
+TALDefine.buildStringFromArray = function( value ) {
     
-    var result = name + context.getConf().inDefineDelimiter + expression;
+    var result = '';
+    for ( var i = 0; i < value.length; ++i ){
+        if ( i > 0 ){
+            result += ' ';
+        }
+        result += value[ i ];
+    }
+    
+    return '[' + result + ']';
+};
+
+TALDefine.buildString = function( name, _value, global ) {
+    
+    var value = $.isArray( _value )? TALDefine.buildStringFromArray( _value ): _value;
+    var result = name + context.getConf().inDefineDelimiter + value;
     
     if ( global ){
         result += context.getConf().inDefineDelimiter + global;
@@ -111,9 +126,7 @@ TALDefine.updateAttribute = function( node, currentDefine, newVarName, newVarVal
     
     var tags = context.getTags();
     var nodeDefine = node.getAttribute( tags.talDefine );
-    var newDefine = newVarValue?
-        TALDefine.buildString( newVarName, newVarValue ):
-        undefined;
+    var newDefine = TALDefine.buildString( newVarName, newVarValue );
     var fullDefine = TALDefine.appendStrings( currentDefine, nodeDefine, newDefine );
 
     node.setAttribute( tags.talDefine, fullDefine );
