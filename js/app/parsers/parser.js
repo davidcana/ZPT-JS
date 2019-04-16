@@ -13,6 +13,7 @@ var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var NodeAttributes = require( './nodeAttributes.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
+var TalDefineHelper = require( './talDefineHelper.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -333,35 +334,48 @@ module.exports = (function() {
 
     var processElement = function( node, attributes, scope ) {
         
+        var talDefineHelper = new TalDefineHelper();
+        
         processOnError( 
             scope, 
             attributes.talOnError );
 
-        if ( ! processDefineMacro(
+        if ( ! processMETALDefineMacro(
                 node, 
                 scope, 
-                attributes.metalDefineMacro ) ) {
+                attributes.metalDefineMacro 
+        ) ) {
 
             // Stop processing the rest of this node as it is invisible
             return false;
         }
 
-        processI18nLanguage( scope, attributes.i18nLanguage );
-
-        processI18nDomain( 
+        processI18nLanguage( 
             node, 
             scope, 
-            attributes.i18nDomain, 
+            attributes.i18nLanguage, 
             attributes.talDefine
         );
+
+        processI18nDomain(  
+            scope, 
+            attributes.i18nDomain, 
+            talDefineHelper
+        );
         
-        attributes.updateTalDefine();
-        processDefine( scope, attributes.talDefine, node );
+        processDefine( 
+            scope, 
+            attributes.talDefine, 
+            node, 
+            false,
+            talDefineHelper
+        );
         
         if ( ! processCondition(
                 node, 
                 scope, 
-                attributes.talCondition ) ) {
+                attributes.talCondition 
+        ) ) {
 
             // Stop processing the rest of this node as it is invisible
             return false;
@@ -370,19 +384,22 @@ module.exports = (function() {
         var omittedTag = processOmitTag(
                 node, 
                 scope, 
-                attributes.talOmitTag );
+                attributes.talOmitTag 
+        );
 
         var replaced = processReplace(
                 node, 
                 scope, 
-                attributes.talReplace );
+                attributes.talReplace 
+        );
 
         if ( ! omittedTag && ! replaced ) {
             
             processAttributes(
                     node, 
                     scope, 
-                    attributes.talAttributes );
+                    attributes.talAttributes 
+            );
 
             if ( ! processContent(
                     node, 
@@ -393,11 +410,12 @@ module.exports = (function() {
             }
         }
 
-        processUseMacro(
+        processMETALUseMacro(
                 node, 
                 scope, 
                 attributes.metalUseMacro, 
-                attributes.talDefine );
+                attributes.talDefine
+        );
         
         return true;
     };
@@ -430,8 +448,11 @@ module.exports = (function() {
         return talOnError.process( scope );
     };
 
-    var processDefine = function( scope, string, node, forceGlobal ) {
+    var processDefine = function( scope, defineString, node, forceGlobal, talDefineHelper ) {
 
+        var string = talDefineHelper? 
+            talDefineHelper.update( node, defineString ): 
+            defineString;
         if ( ! string ) {
             return;
         }
@@ -439,28 +460,28 @@ module.exports = (function() {
         var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
         return talDefine.process( scope, node, forceGlobal );
     };
-    
-    var processI18nDomain = function( node, scope, string, stringDefine ) {
-        
+
+    var processI18nDomain = function( scope, string, talDefineHelper ) {
+
         if ( ! string ) {
             return;
         }
-        
+
         var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string );
-        return i18nDomain.process( node, scope, stringDefine );
+        return i18nDomain.putToTalDefineHelper( scope, talDefineHelper );
     };
     
-    var processI18nLanguage = function( scope, string ) {
+    var processI18nLanguage = function( node, scope, string, stringDefine ) {
         
         if ( ! string ) {
             return;
         }
         
         var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string );
-        return i18nLanguage.process( scope );
+        return i18nLanguage.process( node, scope, stringDefine );
     };
 
-    var processDefineMacro = function( node, scope, string ) {
+    var processMETALDefineMacro = function( node, scope, string ) {
 
         if ( ! string ) {
             return true;
@@ -471,7 +492,7 @@ module.exports = (function() {
         return metalDefineMacro.process( scope, node );
     };
 
-    var processUseMacro = function( node, scope, string, stringDefine ) {
+    var processMETALUseMacro = function( node, scope, string, stringDefine ) {
 
         if ( ! string ) {
             return;

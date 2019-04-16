@@ -30,8 +30,4 @@ module.exports = function( node ) {
     this.i18nLanguage = node.getAttribute( tags.i18nLanguage );
     
     this.qdup = node.getAttribute( tags.qdup );
-    
-    this.updateTalDefine = function(){
-        this.talDefine = node.getAttribute( tags.talDefine );
-    };
 };

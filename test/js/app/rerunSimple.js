@@ -212,9 +212,8 @@ QUnit.test( "Rerun using data-idomain", function( assert ) {
     $( '#t7-2' ).zpt({
         command: 'partialRender'
     });
-    runTests('Hello world!');
+    runTests( 'Hello world!' );
     */
-    
     function runTests( value ){
 
         assert.equal( $('#t7-1-1').html() , "¡Hola mundo!" );

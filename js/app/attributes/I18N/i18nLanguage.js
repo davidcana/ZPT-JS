@@ -5,13 +5,14 @@
 
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+//var TALDefine = require( '../TAL/talDefine.js' );
 
 var I18NLanguage = function( stringToApply, expressionToApply, htmlToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
     
-    var process = function( scope, node ){
+    var process = function( node, scope, stringDefine ){
         
         // Evaluate
         var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
@@ -21,7 +22,20 @@ var I18NLanguage = function( stringToApply, expressionToApply, htmlToApply ) {
 
         return true;
     };
-    
+    /*
+    var updateThisTalDefineAttribute = function( expression, node, stringDefine ){
+
+        var newVarName = context.getConf().i18nLanguageVarName;
+        var newVarValue = expression;
+
+        TALDefine.updateAttribute( 
+            node, 
+            stringDefine, 
+            newVarName, 
+            newVarValue
+        );
+    };
+    */
     var toString = function(){
         return "I18NLanguage: " + string;
     };

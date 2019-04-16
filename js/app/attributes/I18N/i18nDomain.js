@@ -4,50 +4,40 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-var TALDefine = require( '../TAL/talDefine.js' );
-var VariableExpression = require( '../../expressions/path/variableExpression.js' );
-var $ = require( 'jquery' );
 
-var I18NDomain = function( stringToApply, expressionListToApply ) {
+var I18NDomain = function( stringToApply ) {
     
     var string = stringToApply;
-    var expressionList = expressionListToApply;
     
-    var process = function( node, scope, stringDefine ){
-
-        var currentExpressionList = expressionList;
+    var putToTalDefineHelper = function( scope, talDefineHelper ){
+        
+        var newString = string;
+        var conf = context.getConf();
         
         // Add the domains defined previously
-        var previousValue = scope.get( context.getConf().i18nDomainVarName );
+        var previousValue = scope.get( conf.i18nDomainVarName );
         if ( previousValue ) {
-            var currentValueExpression = new VariableExpression( context.getConf().i18nDomainVarName );
-            currentExpressionList = currentExpressionList.concat( currentValueExpression );
+            newString += conf.inDefineDelimiter + conf.i18nDomainVarName;
         }
         
-        // Add i18nDomainVarName to scope
-        updateThisTalDefineAttribute( currentExpressionList, node, stringDefine );
-    };
-    
-    var updateThisTalDefineAttribute = function( i18nList, node, stringDefine ){
-
-        var newVarName = context.getConf().i18nDomainVarName;
-        var newVarValue = i18nList;
-
-        TALDefine.updateAttribute( 
-            node, 
-            stringDefine, 
-            newVarName, 
-            newVarValue
+        // Add brackets if not present
+        if ( newString[ 0 ] != '[' ){
+            newString = '[' + newString + ']'
+        }
+        
+        // Add i18nDomainVarName to the talDefineHelper
+        talDefineHelper.put(
+            conf.i18nDomainVarName,
+            newString
         );
     };
-    
+
     var toString = function(){
         return string;
     };
     
     return {
-        process: process,
+        putToTalDefineHelper: putToTalDefineHelper,
         toString: toString
     };
 };
@@ -55,26 +45,7 @@ var I18NDomain = function( stringToApply, expressionListToApply ) {
 I18NDomain.id = 'i18n:domain';
 
 I18NDomain.build = function( string ) {
-    
-    if ( ! string ){
-        return null;
-    }
-    
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-    var i18nList = [];
-
-    // Add the domains in this tag
-    var tokens = new ExpressionTokenizer( 
-            string, 
-            context.getConf().domainDelimiter, 
-            true );
-
-    while ( tokens.hasMoreTokens() ) {
-        i18nList.push( 
-            expressionBuilder.build( tokens.nextToken().trim() ) );
-    }
-
-    return new I18NDomain( string, i18nList );
+    return string? new I18NDomain( string ): null;
 };
 
 module.exports = I18NDomain;
