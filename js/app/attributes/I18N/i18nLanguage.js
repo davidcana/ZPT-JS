@@ -4,44 +4,26 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
-//var TALDefine = require( '../TAL/talDefine.js' );
 
-var I18NLanguage = function( stringToApply, expressionToApply, htmlToApply ) {
+var I18NLanguage = function( stringToApply ) {
     
     var string = stringToApply;
-    var expression = expressionToApply;
     
-    var process = function( node, scope, stringDefine ){
-        
-        // Evaluate
-        var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
-        
-        // Add i18nLanguageVarName to scope
-        scope.set( context.getConf().i18nLanguageVarName, evaluated, false );
+    var putToTalDefineHelper = function( talDefineHelper ){
 
-        return true;
-    };
-    /*
-    var updateThisTalDefineAttribute = function( expression, node, stringDefine ){
-
-        var newVarName = context.getConf().i18nLanguageVarName;
-        var newVarValue = expression;
-
-        TALDefine.updateAttribute( 
-            node, 
-            stringDefine, 
-            newVarName, 
-            newVarValue
+        // Add i18nLanguageVarName to the talDefineHelper
+        talDefineHelper.put(
+            context.getConf().i18nLanguageVarName,
+            string
         );
     };
-    */
+    
     var toString = function(){
         return "I18NLanguage: " + string;
     };
     
     return {
-        process: process,
+        putToTalDefineHelper: putToTalDefineHelper,
         toString: toString
     };
 };
@@ -49,18 +31,7 @@ var I18NLanguage = function( stringToApply, expressionToApply, htmlToApply ) {
 I18NLanguage.id = 'i18n:language';
 
 I18NLanguage.build = function( string ) {
-
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-    
-    var expressionString = string.trim();
-
-    if ( ! expressionString ){
-        throw 'I18NLanguage expression void.';
-    }
-    
-    return new I18NLanguage( 
-                string,
-                expressionBuilder.build( expressionString ) );
+    return string? new I18NLanguage( string ): null;
 };
 
 module.exports = I18NLanguage;

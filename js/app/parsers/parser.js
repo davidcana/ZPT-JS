@@ -338,7 +338,8 @@ module.exports = (function() {
         
         processOnError( 
             scope, 
-            attributes.talOnError );
+            attributes.talOnError
+        );
 
         if ( ! processMETALDefineMacro(
                 node, 
@@ -351,12 +352,10 @@ module.exports = (function() {
         }
 
         processI18nLanguage( 
-            node, 
-            scope, 
-            attributes.i18nLanguage, 
-            attributes.talDefine
+            attributes.i18nLanguage,
+            talDefineHelper
         );
-
+        
         processI18nDomain(  
             scope, 
             attributes.i18nDomain, 
@@ -471,14 +470,14 @@ module.exports = (function() {
         return i18nDomain.putToTalDefineHelper( scope, talDefineHelper );
     };
     
-    var processI18nLanguage = function( node, scope, string, stringDefine ) {
-        
+    var processI18nLanguage = function( string, talDefineHelper ) {
+
         if ( ! string ) {
             return;
         }
-        
+
         var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string );
-        return i18nLanguage.process( node, scope, stringDefine );
+        return i18nLanguage.putToTalDefineHelper( talDefineHelper );
     };
 
     var processMETALDefineMacro = function( node, scope, string ) {

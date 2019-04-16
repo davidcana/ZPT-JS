@@ -198,7 +198,7 @@ QUnit.test( "Rerun using data-idomain", function( assert ) {
     
 });
 
-QUnit.test( "Rerun using data-idomain", function( assert ) {
+QUnit.test( "Rerun using data-language", function( assert ) {
 
     // Render #ul6-1 and run tests
     var dictionary = buildDictionaryForI18n();
@@ -208,12 +208,12 @@ QUnit.test( "Rerun using data-idomain", function( assert ) {
     });
     runTests( '¡Hola mundo!' );
     
-    /*
+    dictionary.language = 'en';
     $( '#t7-2' ).zpt({
         command: 'partialRender'
     });
     runTests( 'Hello world!' );
-    */
+    
     function runTests( value ){
 
         assert.equal( $('#t7-1-1').html() , "¡Hola mundo!" );
