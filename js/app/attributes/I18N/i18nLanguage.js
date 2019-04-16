@@ -31,7 +31,7 @@ var I18NLanguage = function( stringToApply ) {
 I18NLanguage.id = 'i18n:language';
 
 I18NLanguage.build = function( string ) {
-    return string? new I18NLanguage( string ): null;
+    return string? new I18NLanguage( string.trim() ): null;
 };
 
 module.exports = I18NLanguage;

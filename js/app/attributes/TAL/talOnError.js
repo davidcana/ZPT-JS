@@ -5,22 +5,25 @@
 
 var context = require( '../../context.js' );
 
-var TALOnError = function( stringToApply, expressionToApply ) {
+var TALOnError = function( stringToApply ) {
     
     var string = stringToApply;
-    var expression = expressionToApply;
     
-    var process = function( scope, node ){
-        scope.set( context.getConf().onErrorVarName, expression );
-        return true;
+    var putToTalDefineHelper = function( talDefineHelper ){
+
+        // Add onErrorVarName to the talDefineHelper
+        talDefineHelper.put(
+            context.getConf().onErrorVarName,
+            'nocall:' + string
+        );
     };
-    
+
     var toString = function(){
         return "TALOnError: " + string;
     };
     
     return {
-        process: process,
+        putToTalDefineHelper: putToTalDefineHelper,
         toString: toString
     };
 };
@@ -28,12 +31,7 @@ var TALOnError = function( stringToApply, expressionToApply ) {
 TALOnError.id = 'tal:on-error';
 
 TALOnError.build = function( string ) {
-
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-    
-    return new TALOnError( 
-                string,
-                expressionBuilder.build( string.trim() ) );
+    return string? new TALOnError( string.trim() ): null;
 };
 
 module.exports = TALOnError;

@@ -45,7 +45,7 @@ var I18NDomain = function( stringToApply ) {
 I18NDomain.id = 'i18n:domain';
 
 I18NDomain.build = function( string ) {
-    return string? new I18NDomain( string ): null;
+    return string? new I18NDomain( string.trim() ): null;
 };
 
 module.exports = I18NDomain;

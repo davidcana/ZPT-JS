@@ -333,24 +333,23 @@ module.exports = (function() {
     };
 
     var processElement = function( node, attributes, scope ) {
+
+        if ( ! processMETALDefineMacro(
+            node, 
+            scope, 
+            attributes.metalDefineMacro 
+        ) ) {
+            // Stop processing the rest of this node as it is invisible
+            return false;
+        }
         
         var talDefineHelper = new TalDefineHelper();
         
         processOnError( 
-            scope, 
-            attributes.talOnError
+            attributes.talOnError,
+            talDefineHelper
         );
-
-        if ( ! processMETALDefineMacro(
-                node, 
-                scope, 
-                attributes.metalDefineMacro 
-        ) ) {
-
-            // Stop processing the rest of this node as it is invisible
-            return false;
-        }
-
+        
         processI18nLanguage( 
             attributes.i18nLanguage,
             talDefineHelper
@@ -375,7 +374,6 @@ module.exports = (function() {
                 scope, 
                 attributes.talCondition 
         ) ) {
-
             // Stop processing the rest of this node as it is invisible
             return false;
         }
@@ -437,16 +435,16 @@ module.exports = (function() {
         }
     };
     
-    var processOnError = function( scope, string ) {
-        
-        if ( ! string ){
-            return false;
-        }
-        
-        var talOnError = attributeCache.getByAttributeClass( TALOnError, string );
-        return talOnError.process( scope );
-    };
+    var processOnError = function( string, talDefineHelper ) {
 
+        if ( ! string ) {
+            return;
+        }
+
+        var talOnError = attributeCache.getByAttributeClass( TALOnError, string );
+        return talOnError.putToTalDefineHelper( talDefineHelper );
+    };
+    
     var processDefine = function( scope, defineString, node, forceGlobal, talDefineHelper ) {
 
         var string = talDefineHelper? 

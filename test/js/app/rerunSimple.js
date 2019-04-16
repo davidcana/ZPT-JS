@@ -222,6 +222,46 @@ QUnit.test( "Rerun using data-language", function( assert ) {
 
 });
 
+QUnit.test( "Rerun using on-error", function( assert ) {
+
+    // Build dictionary
+    var c = 0;
+    var dictionary = {
+        treatErrors: function(){
+            return 'Error number ' + (++c);
+        },
+        fireError: function( ){
+            document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
+        },
+        divBy0: function( ){
+            return 1 / 0;
+        }
+    };
+    
+    // Render #ul8-1 and run tests
+    $( '#ul8-1' ).zpt({
+        dictionary: dictionary
+    });
+    runTests( 'Error number 1', 'Error number 2' );
+    
+    // Partial render #ul8-2 and run tests again
+    $( '#ul8-2' ).zpt({
+        command: 'partialRender'
+    });
+    runTests( 'Error number 1', 'Error number 3' );
+    
+    function runTests( error1, error2 ){
+
+        assert.equal( $('#t8-1-1').text() , "true" );
+        assert.equal( $('#t8-1-2').text() , error1 );
+        assert.equal( $('#t8-1-3').text() , "Infinity" );
+        assert.equal( $('#t8-2-1').text() , "true" );
+        assert.equal( $('#t8-2-2').text() , error2 );
+        assert.equal( $('#t8-2-3').text() , "Infinity" );
+    }
+
+});
+
 var buildDictionaryForI18n = function(){
     
     /* I18n maps init */
