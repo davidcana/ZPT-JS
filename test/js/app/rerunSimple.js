@@ -6,6 +6,7 @@ var zpt = require( '../../../js/app/main.js' );
 require( '../../../js/app/jqueryPlugin.js' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
+var utils = require( './utils.js' );
 
 QUnit.test( "Rerun simple tests", function( assert ) {
     
@@ -262,6 +263,38 @@ QUnit.test( "Rerun using on-error", function( assert ) {
 
 });
 
+QUnit.test( "Rerun using loops", function( assert ) {
+    
+    var dictionary = { 
+        tools: [ 
+            {name: "tool A", rent_url: "rent?id=1000"}, 
+            {name: "tool B", rent_url: "rent?id=1002"}, 
+            {name: "tool C", rent_url: "rent?id=1004"},
+            {name: "tool D", rent_url: "rent?id=1006"}
+        ]
+    };
+    
+    var startDate = new Date();
+    $( '#t9' ).zpt({
+        dictionary: dictionary
+    });
+    console.log( 'Rerun using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
+    
+    assert.equal( utils.getAllValues( '.value' ) , 'tool A/tool B/tool C/tool D'  );
+    assert.equal( utils.getAllValues( '.index' ) , '0/1/2/3'  );
+    assert.equal( utils.getAllValues( '.number' ) , '1/2/3/4'  );
+    assert.equal( utils.getAllValues( '.isEven' ) , 'true/false/true/false'  );
+    assert.equal( utils.getAllValues( '.isOdd' ) , 'false/true/false/true'  );
+    assert.equal( utils.getAllValues( '.isStart' ) , 'true/false/false/false'  );
+    assert.equal( utils.getAllValues( '.isEnd' ) , 'false/false/false/true'  );
+    assert.equal( utils.getAllValues( '.getLength' ) , '4/4/4/4'  );
+    assert.equal( utils.getAllValues( '.getLetter' ) , 'a/b/c/d'  );
+    assert.equal( utils.getAllValues( '.getCapitalLetter' ) , 'A/B/C/D'  );
+    assert.equal( utils.getAllValues( '.getRoman' ) , 'i/ii/iii/iv'  );
+    assert.equal( utils.getAllValues( '.getCapitalRoman' ) , 'I/II/III/IV'  );
+});
+
+
 var buildDictionaryForI18n = function(){
     
     /* I18n maps init */
@@ -331,3 +364,4 @@ var buildDictionaryForI18n = function(){
     
     return dictionary;
 };
+

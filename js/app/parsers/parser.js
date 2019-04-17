@@ -266,7 +266,8 @@ module.exports = (function() {
         loop.setOffset( nextSiblingData.counter );
         //log.warn( 'loop counter: ' + nextSiblingData.counter );
         
-        while ( loop.repeat( scope ) ) {
+        var talDefineHelper;
+        while ( talDefineHelper = loop.repeat( scope ) ) {
             
             // Get tmpNode
             var tmpNode = node.cloneNode( true );
@@ -279,7 +280,7 @@ module.exports = (function() {
             parentNode.insertBefore( tmpNode, nextSibling );
             
             // Process it
-            if ( ! processElement( tmpNode, attributes, scope ) ) {
+            if ( ! processElement( tmpNode, attributes, scope, talDefineHelper ) ) {
                 return false;
             }
             
@@ -332,7 +333,7 @@ module.exports = (function() {
         }
     };
 
-    var processElement = function( node, attributes, scope ) {
+    var processElement = function( node, attributes, scope, _talDefineHelper ) {
 
         if ( ! processMETALDefineMacro(
             node, 
@@ -343,7 +344,7 @@ module.exports = (function() {
             return false;
         }
         
-        var talDefineHelper = new TalDefineHelper();
+        var talDefineHelper = _talDefineHelper || new TalDefineHelper();
         
         processOnError( 
             attributes.talOnError,

@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var context = require( '../../context.js' );
 var Loop = require( '../../parsers/loop.js' );
 
 var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
@@ -14,11 +13,9 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
     
     var process = function( scope ){
         
-        var fullName = context.getConf().repeatVarName;
         var items = expression.evaluate( scope );
+        var loop = new Loop( varName, items );
         
-        var loop = new Loop( fullName, varName, items );
-
         return loop;
     };
 
@@ -49,7 +46,8 @@ TALRepeat.build = function( string ) {
     return new TALRepeat( 
                 string,
                 varName, 
-                expressionBuilder.build( loopExpression ) );
+                expressionBuilder.build( loopExpression ) 
+    );
 };
 
 module.exports = TALRepeat;

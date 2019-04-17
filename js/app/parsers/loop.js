@@ -1,41 +1,56 @@
 /* 
     Class Loop 
 */
-module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate ) {
-    "use strict";
+"use strict";
+
+var context = require( '../context.js' );
+var TalDefineHelper = require( './talDefineHelper.js' );
+
+module.exports = function ( _itemVariableName, _items ) {
     
-    var name = nameOfLoop;
-    var itemVariableName = itemVariableNameToApply;
-    var items = itemsToIterate;
+    var itemVariableName = _itemVariableName;
+    var items = _items;
     var currentIndex = -1;
-    var maxIndex = itemsToIterate? itemsToIterate.length - 1: -1;
+    var maxIndex = items? items.length - 1: -1;
     var offset = 0;
-    
-    var getName = function( ){
-        return name;
-    };
     
     var setOffset = function( offsetToApply ){
         offset = offsetToApply;
     };
     
     var repeat = function( scope ){
-        if ( currentIndex < maxIndex ) {
+        
+        if ( currentIndex++ < maxIndex ) {
             
             scope.startElement();
             
+            var talDefineHelper = new TalDefineHelper();
+            
+            // 
+            talDefineHelper.put(
+                itemVariableName + '-index',
+                currentIndex
+            );
+            /*talDefineHelper.put(
+                itemVariableName + '2',
+                currentIndex
+            );*/
+            
             // Set item variable
-            scope.set( itemVariableName, items[ ++currentIndex ] );
+            scope.set( itemVariableName, items[ currentIndex ] );
             
             // Set repeat variable
             var repeatVar = {};
             repeatVar[ itemVariableName ] = this;
-            scope.set( name, repeatVar );
+            scope.set( 
+                context.getConf().repeatVarName, 
+                repeatVar
+            );
             
-            return true;
+            return talDefineHelper;
         }
         
-        return false;
+        return null;
     };
     
     var currentIndexWithOffset = function(){
@@ -172,7 +187,6 @@ module.exports = function ( nameOfLoop, itemVariableNameToApply, itemsToIterate 
     ];
     
     return {
-        getName: getName,
         setOffset: setOffset,
         repeat:repeat,
         index: index,
