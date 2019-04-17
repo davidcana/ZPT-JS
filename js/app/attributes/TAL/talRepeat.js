@@ -5,12 +5,18 @@
 
 var Loop = require( '../../parsers/loop.js' );
 
-var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
+var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply ) {
+//var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
     
     var string = stringToApply;
     var varName = varNameToApply;
-    var expression = expressionToApply;
+    var expressionString = expressionStringToApply;
+    //var expression = expressionToApply;
     
+    var process = function( scope ){
+        return new Loop( varName, expressionString, scope );
+    };
+    /*
     var process = function( scope ){
         
         var items = expression.evaluate( scope );
@@ -18,7 +24,8 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionToApply ) {
         
         return loop;
     };
-
+    */
+    
     var toString = function(){
         return "TALRepeat: " + string;
     };
@@ -33,7 +40,7 @@ TALRepeat.id = 'tal:repeat';
 
 TALRepeat.build = function( string ) {
 
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     var expressionString = string.trim();
     var space = expressionString.indexOf( ' ' );
@@ -43,11 +50,13 @@ TALRepeat.build = function( string ) {
     var varName = expressionString.substring( 0, space );
     var loopExpression = expressionString.substring( space + 1 );
     
+    return new TALRepeat( string, varName, loopExpression );
+    /*
     return new TALRepeat( 
                 string,
                 varName, 
                 expressionBuilder.build( loopExpression ) 
-    );
+    );*/
 };
 
 module.exports = TALRepeat;

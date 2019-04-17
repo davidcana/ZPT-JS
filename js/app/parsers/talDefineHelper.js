@@ -49,8 +49,16 @@ module.exports = function () {
         return string;
     };
     
+    var updateNode = function( node ){
+
+        if ( buffer ){
+            node.setAttribute( context.getTags().talAutoDefine, buffer );
+        }
+    };
+    
     return {
         put: put,
-        update: update
+        update: update,
+        updateNode: updateNode
     };
 };

@@ -5,11 +5,19 @@
 
 var context = require( '../context.js' );
 var TalDefineHelper = require( './talDefineHelper.js' );
+var expressionsUtils = require( '../expressions/expressionsUtils.js' );
+var expressionBuilder = require( '../expressions/expressionBuilder.js' );
+var $ = require( 'jquery' );
 
-module.exports = function ( _itemVariableName, _items ) {
+module.exports = function ( _itemVariableName, _expressionString, scope ) {
+//module.exports = function ( _itemVariableName, _items ) {
     
     var itemVariableName = _itemVariableName;
-    var items = _items;
+    var expressionString = _expressionString;
+    var expression = expressionBuilder.build( expressionString );
+    var items = expression.evaluate( scope );
+    //var items = _items;
+    
     var currentIndex = -1;
     var maxIndex = items? items.length - 1: -1;
     var offset = 0;
@@ -31,13 +39,27 @@ module.exports = function ( _itemVariableName, _items ) {
                 itemVariableName + '-index',
                 currentIndex
             );
-            /*talDefineHelper.put(
+            
+            talDefineHelper.put(
+                itemVariableName + '-all',
+                expressionString
+            );
+            talDefineHelper.put(
+                itemVariableName,
+                itemVariableName + '-all' + '[' + itemVariableName + '-index' + ']'
+            );
+            /*
+            var itemValue = items[ currentIndex ];
+            talDefineHelper.put(
                 itemVariableName + '2',
-                currentIndex
-            );*/
+                $.isPlainObject( itemValue )?
+                    expression + '[' + itemVariableName + '-index' + ']':
+                    expressionsUtils.buildLiteral( itemValue )
+            );
+            */
             
             // Set item variable
-            scope.set( itemVariableName, items[ currentIndex ] );
+            //scope.set( itemVariableName, items[ currentIndex ] );
             
             // Set repeat variable
             var repeatVar = {};

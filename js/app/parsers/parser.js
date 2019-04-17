@@ -362,6 +362,12 @@ module.exports = (function() {
             talDefineHelper
         );
         
+        processAutoDefine( 
+            scope, 
+            node, 
+            talDefineHelper
+        );
+        
         processDefine( 
             scope, 
             attributes.talDefine, 
@@ -444,6 +450,18 @@ module.exports = (function() {
 
         var talOnError = attributeCache.getByAttributeClass( TALOnError, string );
         return talOnError.putToTalDefineHelper( talDefineHelper );
+    };
+    
+    var processAutoDefine = function( scope, node, talDefineHelper ) {
+        
+        var string = talDefineHelper.updateNode( node );
+        if ( ! string ) {
+            return;
+        }
+        /*
+        var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
+        return talDefine.process( scope, node, false );
+        */
     };
     
     var processDefine = function( scope, defineString, node, forceGlobal, talDefineHelper ) {
