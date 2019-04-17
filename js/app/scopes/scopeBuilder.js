@@ -32,18 +32,23 @@ module.exports = (function() {
         var rootKey =  root.getAttribute( rootKeyTag );
         
         var talDefineTag = context.getTags().talDefine;
+        var talAutoDefineTag = context.getTags().talAutoDefine;
         
         var node = target.parentNode;
         var c = 0;
         var itemsList = [];
         
         do {
+            // Add talDefine
             var talDefine = node.getAttribute( talDefineTag );
             if ( talDefine ){
-                itemsList.push({
-                    talDefine: talDefine,
-                    node: node
-                });
+                itemsList.push( talDefine );
+            }
+            
+            // Add talAutoDefine
+            var talAutoDefine = node.getAttribute( talAutoDefineTag );
+            if ( talAutoDefine ){
+                itemsList.push( talAutoDefine );
             }
             
             var nodeKey = node.getAttribute( rootKeyTag );
@@ -61,11 +66,10 @@ module.exports = (function() {
     var processListOfDefines = function( parser, scope, itemsList ){
         
         for ( var c = itemsList.length - 1; c >= 0; c-- ) {
-            var item = itemsList[ c ];
+            var talDefine = itemsList[ c ];
             parser.processDefine( 
                 scope, 
-                item.talDefine, 
-                item.node, 
+                talDefine, 
                 true
             );
         }

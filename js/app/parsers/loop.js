@@ -10,13 +10,11 @@ var expressionBuilder = require( '../expressions/expressionBuilder.js' );
 var $ = require( 'jquery' );
 
 module.exports = function ( _itemVariableName, _expressionString, scope ) {
-//module.exports = function ( _itemVariableName, _items ) {
     
     var itemVariableName = _itemVariableName;
     var expressionString = _expressionString;
     var expression = expressionBuilder.build( expressionString );
     var items = expression.evaluate( scope );
-    //var items = _items;
     
     var currentIndex = -1;
     var maxIndex = items? items.length - 1: -1;
@@ -34,12 +32,11 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
             
             var talDefineHelper = new TalDefineHelper();
             
-            // 
+            // Declare item-index, item-all, item and item-repeat variables
             talDefineHelper.put(
                 itemVariableName + '-index',
                 currentIndex
             );
-            
             talDefineHelper.put(
                 itemVariableName + '-all',
                 expressionString
@@ -48,15 +45,13 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
                 itemVariableName,
                 itemVariableName + '-all' + '[' + itemVariableName + '-index' + ']'
             );
-            /*
-            var itemValue = items[ currentIndex ];
             talDefineHelper.put(
-                itemVariableName + '2',
-                $.isPlainObject( itemValue )?
-                    expression + '[' + itemVariableName + '-index' + ']':
-                    expressionsUtils.buildLiteral( itemValue )
+                itemVariableName + '-repeat',
+                "nocall:context/repeat(" 
+                    + itemVariableName + "-index" + ","
+                    + items.length
+                    + ")"
             );
-            */
             
             // Set item variable
             //scope.set( itemVariableName, items[ currentIndex ] );

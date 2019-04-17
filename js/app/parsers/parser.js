@@ -370,10 +370,8 @@ module.exports = (function() {
         
         processDefine( 
             scope, 
-            attributes.talDefine, 
-            node, 
-            false,
-            talDefineHelper
+            attributes.talDefine,  
+            false
         );
         
         if ( ! processCondition(
@@ -458,23 +456,19 @@ module.exports = (function() {
         if ( ! string ) {
             return;
         }
-        /*
+        
         var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
-        return talDefine.process( scope, node, false );
-        */
+        return talDefine.process( scope, false );
     };
     
-    var processDefine = function( scope, defineString, node, forceGlobal, talDefineHelper ) {
+    var processDefine = function( scope, string, forceGlobal ) {
 
-        var string = talDefineHelper? 
-            talDefineHelper.update( node, defineString ): 
-            defineString;
         if ( ! string ) {
             return;
         }
         
         var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
-        return talDefine.process( scope, node, forceGlobal );
+        return talDefine.process( scope, forceGlobal );
     };
 
     var processI18nDomain = function( scope, string, talDefineHelper ) {

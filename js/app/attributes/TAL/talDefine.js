@@ -12,7 +12,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
     var string = stringToApply;
     var defineItems = defineItemsToApply;
     
-    var process = function( scope, node, forceGlobal ){
+    var process = function( scope, forceGlobal ){
         
         // Update scope
         for ( var i = 0; i < defineItems.length; i++ ) {
