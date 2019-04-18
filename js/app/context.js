@@ -1,11 +1,13 @@
 /* 
     context singleton class
 */
+"use strict";
+
+var log4javascript = require( 'log4javascript' );
+var $ = require( 'jquery' );
+var LoopItem = require( './parsers/loopItem.js' );
+
 module.exports = (function() {
-    "use strict";
-    
-    var log4javascript = require( 'log4javascript' );
-    var $ = require( 'jquery' );
     
     /* Tags */
     var defaultTags = {
@@ -305,6 +307,12 @@ module.exports = (function() {
     };
     /* End errors */
     
+    /* Repeat */
+    var repeat = function( index, length, offset ){
+        return new LoopItem( index, length, offset );
+    };
+    /* End repeat*/
+    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -323,6 +331,7 @@ module.exports = (function() {
         setAltAttributes: setAltAttributes,
         isAltAttribute: isAltAttribute,
         setErrorFunction: setErrorFunction,
-        asyncError: asyncError
+        asyncError: asyncError,
+        repeat: repeat
     };
 })();

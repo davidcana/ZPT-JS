@@ -266,6 +266,7 @@ QUnit.test( "Rerun using on-error", function( assert ) {
 QUnit.test( "Rerun using loops", function( assert ) {
     
     var dictionary = { 
+        number: 0,
         tools: [ 
             {name: "tool A", rent_url: "rent?id=1000"}, 
             {name: "tool B", rent_url: "rent?id=1002"}, 
@@ -274,24 +275,39 @@ QUnit.test( "Rerun using loops", function( assert ) {
         ]
     };
     
+    // Render #t9-1 and run tests
     var startDate = new Date();
-    $( '#t9' ).zpt({
+    $( '#t9-1' ).zpt({
         dictionary: dictionary
     });
-    console.log( 'Rerun using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
+    console.log( 'Run using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
+    runTests( '0/1/2/3' );
     
-    assert.equal( utils.getAllValues( '.value' ) , 'tool A/tool B/tool C/tool D'  );
-    assert.equal( utils.getAllValues( '.index' ) , '0/1/2/3'  );
-    assert.equal( utils.getAllValues( '.number' ) , '1/2/3/4'  );
-    assert.equal( utils.getAllValues( '.isEven' ) , 'true/false/true/false'  );
-    assert.equal( utils.getAllValues( '.isOdd' ) , 'false/true/false/true'  );
-    assert.equal( utils.getAllValues( '.isStart' ) , 'true/false/false/false'  );
-    assert.equal( utils.getAllValues( '.isEnd' ) , 'false/false/false/true'  );
-    assert.equal( utils.getAllValues( '.getLength' ) , '4/4/4/4'  );
-    assert.equal( utils.getAllValues( '.getLetter' ) , 'a/b/c/d'  );
-    assert.equal( utils.getAllValues( '.getCapitalLetter' ) , 'A/B/C/D'  );
-    assert.equal( utils.getAllValues( '.getRoman' ) , 'i/ii/iii/iv'  );
-    assert.equal( utils.getAllValues( '.getCapitalRoman' ) , 'I/II/III/IV'  );
+    // Partial render #t9-2 and run tests again
+    dictionary.number = 100;
+    startDate = new Date();
+    $( '#t9-1-3' ).zpt({
+        command: 'partialRender'
+    });
+    console.log( 'Rerun using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
+    runTests( '0/1/102/3' );
+    
+    function runTests( added ){
+        
+        assert.equal( utils.getAllValues( '.value' ) , 'tool A/tool B/tool C/tool D'  );
+        assert.equal( utils.getAllValues( '.index' ) , '0/1/2/3'  );
+        assert.equal( utils.getAllValues( '.number' ) , '1/2/3/4'  );
+        assert.equal( utils.getAllValues( '.isEven' ) , 'true/false/true/false'  );
+        assert.equal( utils.getAllValues( '.isOdd' ) , 'false/true/false/true'  );
+        assert.equal( utils.getAllValues( '.isStart' ) , 'true/false/false/false'  );
+        assert.equal( utils.getAllValues( '.isEnd' ) , 'false/false/false/true'  );
+        assert.equal( utils.getAllValues( '.getLength' ) , '4/4/4/4'  );
+        assert.equal( utils.getAllValues( '.getLetter' ) , 'a/b/c/d'  );
+        assert.equal( utils.getAllValues( '.getCapitalLetter' ) , 'A/B/C/D'  );
+        assert.equal( utils.getAllValues( '.getRoman' ) , 'i/ii/iii/iv'  );
+        assert.equal( utils.getAllValues( '.getCapitalRoman' ) , 'I/II/III/IV'  );
+        assert.equal( utils.getAllValues( '.added' ) , added  );   
+    }
 });
 
 

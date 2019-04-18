@@ -195,7 +195,7 @@
         </ul>
         
         <h2>Rerun using loops</h2>
-        <table id="t9">
+        <table id="t9-1">
             <tr>
                 <th>Value</th>
                 <th>Index</th>
@@ -209,20 +209,22 @@
                 <th>Capital Letter</th>
                 <th>Roman</th>
                 <th>Capital Roman</th>
+                <th>Added value</th>
             </tr>
             <tr data-trepeat="item tools">
                 <td data-tattributes="class 'value'" data-tcontent="item/name">value</td>
-                <td data-tattributes="class 'index'" data-tcontent="repeat/item/index()">index</td>
-                <td data-tattributes="class 'number'" data-tcontent="repeat/item/number()">number</td>
-                <td data-tattributes="class 'isEven'" data-tcontent="repeat/item/even()">even</td>
-                <td data-tattributes="class 'isOdd'" data-tcontent="repeat/item/odd()">odd</td>
-                <td data-tattributes="class 'isStart'" data-tcontent="repeat/item/start()">start</td>
-                <td data-tattributes="class 'isEnd'" data-tcontent="repeat/item/end()">end</td>
-                <td data-tattributes="class 'getLength'" data-tcontent="repeat/item/length()">length</td>
-                <td data-tattributes="class 'getLetter'" data-tcontent="repeat/item/letter()">letter</td>
-                <td data-tattributes="class 'getCapitalLetter'" data-tcontent="repeat/item/Letter()">capital letter</td>
-                <td data-tattributes="class 'getRoman'" data-tcontent="repeat/item/roman()">roman</td>
-                <td data-tattributes="class 'getCapitalRoman'" data-tcontent="repeat/item/Roman()">capitalRoman</td>
+                <td data-tattributes="class 'index'" data-tcontent="item-repeat/index()">index</td>
+                <td data-tattributes="class 'number'" data-tcontent="item-repeat/number()">number</td>
+                <td data-tattributes="class 'isEven'" data-tcontent="item-repeat/even()">even</td>
+                <td data-tattributes="class 'isOdd'" data-tcontent="item-repeat/odd()">odd</td>
+                <td data-tattributes="class 'isStart'" data-tcontent="item-repeat/start()">start</td>
+                <td data-tattributes="class 'isEnd'" data-tcontent="item-repeat/end()">end</td>
+                <td data-tattributes="class 'getLength'" data-tcontent="item-repeat/length()">length</td>
+                <td data-tattributes="class 'getLetter'" data-tcontent="item-repeat/letter()">letter</td>
+                <td data-tattributes="class 'getCapitalLetter'" data-tcontent="item-repeat/Letter()">capital letter</td>
+                <td data-tattributes="class 'getRoman'" data-tcontent="item-repeat/roman()">roman</td>
+                <td data-tattributes="class 'getCapitalRoman'" data-tcontent="item-repeat/Roman()">capitalRoman</td>
+                <td data-tattributes="class 'added';id string:t9-1-${item-repeat/number()}" data-tcontent="+: number item-repeat/index()">index</td>
             </tr>
         </table>
     </body>

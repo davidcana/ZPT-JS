@@ -117,17 +117,17 @@ An example of ZPT-JS template:
                 </tr>
                 <tr data-trepeat="item tools">
                     <td class="value" data-tcontent="item/name">value</td>
-                    <td class="index" data-tcontent="repeat/item/index()">index</td>
-                    <td class="number" data-tcontent="repeat/item/number()">number</td>
-                    <td class="isEven" data-tcontent="repeat/item/even()">even</td>
-                    <td class="isOdd" data-tcontent="repeat/item/odd()">odd</td>
-                    <td class="isStart" data-tcontent="repeat/item/start()">start</td>
-                    <td class="isEnd" data-tcontent="repeat/item/end()">end</td>
-                    <td class="getLength" data-tcontent="repeat/item/length()">length</td>
-                    <td class="getLetter" data-tcontent="repeat/item/letter()">letter</td>
-                    <td class="getCapitalLetter" data-tcontent="repeat/item/Letter()">capital letter</td>
-                    <td class="getRoman" data-tcontent="repeat/item/roman()">roman</td>
-                    <td class="getCapitalRoman" data-tcontent="repeat/item/Roman()">capitalRoman</td>
+                    <td class="index" data-tcontent="item-repeat/index()">index</td>
+                    <td class="number" data-tcontent="item-repeat/number()">number</td>
+                    <td class="isEven" data-tcontent="item-repeat/even()">even</td>
+                    <td class="isOdd" data-tcontent="item-repeat/odd()">odd</td>
+                    <td class="isStart" data-tcontent="item-repeat/start()">start</td>
+                    <td class="isEnd" data-tcontent="item-repeat/end()">end</td>
+                    <td class="getLength" data-tcontent="item-repeat/length()">length</td>
+                    <td class="getLetter" data-tcontent="item-repeat/letter()">letter</td>
+                    <td class="getCapitalLetter" data-tcontent="item-repeat/Letter()">capital letter</td>
+                    <td class="getRoman" data-tcontent="item-repeat/roman()">roman</td>
+                    <td class="getCapitalRoman" data-tcontent="item-repeat/Roman()">capitalRoman</td>
                 </tr>
             </table>
             

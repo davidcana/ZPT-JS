@@ -423,7 +423,8 @@ zpt.run({
         A variable is either predefined, defined via a <code>data-tdefine</code> attribute, or passed in to the template at runtime. The following variables are predefined:
     </p>
     <ul>
-        <li><code>repeat</code> see <code><a href="https://docs.zope.org/zope2/zope2book/AppendixC.html#repeat-repeat-an-element">ZPT reference</a></code></li>
+        <li><code>context</code>. An object with some utility methods. Mainly for internal use.</li>
+        <li><code>window</code>. The window object.</li>
     </ul>
     <p>
         The <code>here</code> variable (the context) is not defined in ZPT-JS; it is implicit. The scope of all variables in dictionary is global. Take a look to <a href="#invocation">Invoking ZPT-JS</a> to understand how you can define variables of the dictionary.
@@ -449,8 +450,7 @@ zpt.run({
     </pre>
     <p>
         The following variables are defined in ZPT but not in ZPT-JS:
-        <code>here, template, resolver, options, CONTEXTS, root, container, request, user, modules</code>. The following variables are defined in ZPT but aren't yet implemented in ZPT-JS:
-        <code>nothing, default, attrs</code>. If you need these, holler.
+        <code>here, template, resolver, options, CONTEXTS, root, container, request, user, modules</code>. The following variables are defined in ZPT but aren't yet implemented in ZPT-JS: <code>nothing, default, attrs</code>.
     </p>
 
     <a id="tales.path.traversal"></a>
@@ -630,7 +630,6 @@ zpt.run({
         All TAL statements behave almost exactly as in ZPT, except:
     </p>
     <ul>
-        <li><code>tal:no-call</code>: not yet implemented</li>
         <li><code>data-tcondition</code> and <code>data-tomit-tag</code>: must cast their expression to a boolean, which follows the rules described for <a href="#tales.not">Not expressions</a>.</li>
         <li><code>data-treplace</code> and <code>data-tomit-tag</code>: because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are REMOVED when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-treplace</code> and <code>data-tomit-tag</code> inside a macro definition and invoke it. See <a href="#metal">macros</a>.</li>
     </ul>
@@ -638,9 +637,45 @@ zpt.run({
     <a id="tal.repeat"></a>
     <h3>Repeat expressions</h3>
     <p>
-        There are a few minor variations for <code>tal:repeat</code>. The repeat expression must evaluate to an array.
+        There are a few minor variations for <code>tal:repeat</code>:
     </p>
-
+    <ul>
+        <li>The repeat expression must evaluate to an array.</li>
+        <li>The repeat variable does not exist, use <code>[item-name]-repeat</code> variable:</li>
+    </ul>
+    <pre>
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Value&lt;/th&gt;
+        &lt;th&gt;Index&lt;/th&gt;
+        &lt;th&gt;Number&lt;/th&gt;
+        &lt;th&gt;Even index&lt;/th&gt;
+        &lt;th&gt;Odd index&lt;/th&gt;
+        &lt;th&gt;Start&lt;/th&gt;
+        &lt;th&gt;End&lt;/th&gt;
+        &lt;th&gt;Length&lt;/th&gt;
+        &lt;th&gt;Letter&lt;/th&gt;
+        &lt;th&gt;Capital Letter&lt;/th&gt;
+        &lt;th&gt;Roman&lt;/th&gt;
+        &lt;th&gt;Capital Roman&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr data-trepeat="item tools"&gt;
+        &lt;td class="value" data-tcontent="item/name"&gt;value&lt;/td&gt;
+        &lt;td class="index" data-tcontent="item-repeat/index()"&gt;index&lt;/td&gt;
+        &lt;td class="number" data-tcontent="item-repeat/number()"&gt;number&lt;/td&gt;
+        &lt;td class="isEven" data-tcontent="item-repeat/even()"&gt;even&lt;/td&gt;
+        &lt;td class="isOdd" data-tcontent="item-repeat/odd()"&gt;odd&lt;/td&gt;
+        &lt;td class="isStart" data-tcontent="item-repeat/start()"&gt;start&lt;/td&gt;
+        &lt;td class="isEnd" data-tcontent="item-repeat/end()"&gt;end&lt;/td&gt;
+        &lt;td class="getLength" data-tcontent="item-repeat/length()"&gt;length&lt;/td&gt;
+        &lt;td class="getLetter" data-tcontent="item-repeat/letter()"&gt;letter&lt;/td&gt;
+        &lt;td class="getCapitalLetter" data-tcontent="item-repeat/Letter()"&gt;capital letter&lt;/td&gt;
+        &lt;td class="getRoman" data-tcontent="item-repeat/roman()"&gt;roman&lt;/td&gt;
+        &lt;td class="getCapitalRoman" data-tcontent="item-repeat/Roman()"&gt;capitalRoman&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+    </pre>
+    
     <a id="tal.range"></a>
     <h3>Lists expressions</h3>
     <p>

@@ -17,30 +17,6 @@ var Scope = function( _dictionary, addCommonVars ) {
     }
 };
 
-// Build a deep copy of this instance excluding common vars in dicionary
-/*
-Scope.prototype.copy = function(){
-
-    // notToCopy must contain all the vars that must not be copied
-    var notToCopy = {};
-    notToCopy[ context.getConf().windowVarName ] = true;
-    notToCopy[ context.getConf().contextVarName ] = true;
-    
-    // Copy all the dictionary entries not included in notToCopy to newDictionary
-    var newDictionary = {};
-    for ( var i in this.dictionary ){
-        if ( ! notToCopy[ i ] ){
-            newDictionary[ i ] = this.dictionary[ i ];
-        }
-    }
-    
-    // Create a new instance of Scope with the newDictionary and the current changesStack
-    var newScope = new Scope( newDictionary, false );
-    newScope.changesStack = $.extend( true, [], this.changesStack );
-    
-    return newScope;
-};
-*/
 Scope.prototype.setCommonVars = function(){
     
     // Register window object if it exists
@@ -119,8 +95,10 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
     this.setVar( name, value );
 };
 
+/*
 Scope.prototype.update = function(){
 
 };
+*/
 
 module.exports = Scope;

@@ -139,6 +139,10 @@ module.exports = (function() {
     var render = function( target, notRemoveGeneratedTags ){
         
         try {
+            if ( ! target ){
+                throw 'No target defined!';
+            }
+            
             if ( ! notRemoveGeneratedTags ){
                 removeGeneratedTagsFromAllTargetElements( target );
             }
@@ -267,7 +271,9 @@ module.exports = (function() {
         //log.warn( 'loop counter: ' + nextSiblingData.counter );
         
         var talDefineHelper;
-        while ( talDefineHelper = loop.repeat( scope ) ) {
+        while ( talDefineHelper = loop.repeat() ) {
+            
+            scope.startElement();
             
             // Get tmpNode
             var tmpNode = node.cloneNode( true );
@@ -281,6 +287,7 @@ module.exports = (function() {
             
             // Process it
             if ( ! processElement( tmpNode, attributes, scope, talDefineHelper ) ) {
+                scope.endElement();
                 return false;
             }
             
@@ -312,7 +319,10 @@ module.exports = (function() {
             type : typeof exception,
             value : exception
         };
-        scope.set( context.getConf().templateErrorVarName, templateError );
+        scope.set( 
+            context.getConf().templateErrorVarName, 
+            templateError 
+        );
 
         try {
             log.debug( exception );
@@ -320,7 +330,8 @@ module.exports = (function() {
             // Process content
             var talContent = new TALContent( 
                 context.getConf().onErrorVarName,
-                content );
+                content 
+            );
             
             var result = talContent.process( scope, node );
             scope.endElement();
