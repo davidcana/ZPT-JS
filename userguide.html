@@ -1188,48 +1188,108 @@ zpt.run({
     <a id="customExpressions"></a>
     <h3>Custom expressions</h3>
     <p>
-        ZPT-JS makes it easy to register custom expression managers. For example, we want to develop an expression manager that operates similarly to the <code>++</code> C operator. First we must implement the class (incExpression.js file):
+        ZPT-JS makes it easy to register custom expression managers. For example, we want to develop an expression manager that returns the arithmetic average of the values in the expression. First we must implement the class (averageExpression.js file):
     </p>
     <pre>
 "use strict";
 
 var context = require( '../../../js/app/context.js' );
 var evaluateHelper = require( '../../../js/app/expressions/evaluateHelper.js' );
+var ExpressionTokenizer = require( '../../../js/app/expressions/expressionTokenizer.js' );
 var $ = require( 'jquery' );
 
-var IncExpression = function( varNameToApply ) {
-    
-    var varName = varNameToApply;
-    
+var AverageExpression = function( _string, _expressionList ) {
+
+    var string = _string;
+    var expressionList = _expressionList;
+
     var evaluate = function( scope ){
-        
-        var value = scope.get( varName );
-        
-        if ( ! evaluateHelper.isNumber( value ) ) {
-            throw 'Error trying to inc number, not a number!';
+
+        // Evaluate segments
+        var result = 0;
+        var c = 0;
+
+        for ( var i = 0; i &lt; expressionList.length; i++ ) {
+            var expression = expressionList[ i ];
+            var evaluated = expression.evaluate( scope );
+
+            if ( ! $.isArray( evaluated ) ){ 
+                // Process numeric value
+                result = processInteger( 
+                    c++, 
+                    evaluated, 
+                    result, 
+                    expression 
+                );
+
+            } else {
+                // Process array of numeric
+                for ( var j = 0; j &lt; evaluated.length; j++ ) {
+                    result = processInteger( 
+                        c++, 
+                        evaluated[ j ], 
+                        result, 
+                        expression 
+                    );
+                }
+            }
         }
-        
-        scope.set( varName, ++value, true );
-        
-        return value;
+
+        if ( c &lt; 2 ) {
+            throw 'Error in expression "' + string + '". Only one element in evaluation of Average ' 
+                + ' expression, please add at least one more.';
+        }
+
+        return result / c;
     };
-    
+
+    var processInteger = function( c, value, result, expression ){
+
+        if ( ! evaluateHelper.isNumber( value ) ) {
+            throw "Error trying to do math operation, value '" + value 
+                    + "' is not a valid number in average expression '" + expression + "'";
+        }
+
+        return c == 0? Number( value ): result + Number( value );
+    };
+
+    var toString = function(){
+        return string;
+    };
+
     return {
-        evaluate: evaluate
+        evaluate: evaluate,
+        toString: toString
     };
 };
 
-IncExpression.removePrefix = true;
-IncExpression.getPrefix = function() {
-    return '++' + context.getConf().expressionSuffix;
+AverageExpression.removePrefix = true;
+AverageExpression.getPrefix = function() {
+    return 'avg' + context.getConf().expressionSuffix;
 };
-IncExpression.getId = IncExpression.getPrefix;
+AverageExpression.getId = AverageExpression.getPrefix;
 
-IncExpression.build = function( string ) {
-    return new IncExpression( string.trim() );
+AverageExpression.build = function( string ) {
+
+    var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
+
+    if ( string.length == 0 ) {
+        throw AverageExpression.getPrefix + " expression void.";
+    }
+
+    var segments = new ExpressionTokenizer( 
+            string, 
+            context.getConf().expressionDelimiter, 
+            false 
+    );
+
+    return new AverageExpression( 
+        string, 
+        expressionBuilder.buildList( segments )
+    );
 }
 
-module.exports = IncExpression;
+module.exports = AverageExpression;
     </pre>
     
     <p>
@@ -1237,9 +1297,9 @@ module.exports = IncExpression;
     </p>
     <pre>
 var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
-var IncExpression = require( './incExpression.js' );
+var AverageExpression = require( './averageExpression.js' );
 
-expressionBuilder.register( require( IncExpression ) );
+expressionBuilder.register( AverageExpression );
     </pre>
     
     <a id="grunt"></a>

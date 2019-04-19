@@ -12,13 +12,14 @@
         <div id="qunit-fixture"></div>
         
         <p>
-            This test shows how custom expressions can be added to ZPT-JS. We have written a custom expression class, <code>IncExpression</code>, available using <em>++:</em>. It adds 1 to the related variable and returns it.
+            This test shows how custom expressions can be added to ZPT-JS. We have written a custom expression class, <code>AverageExpression</code>, available using <em>avg:</em>. It returns the arithmetic average of the values in the expression.
         </p>
         
         <ol>
             <li>aNumber = 5</li>
-            <li>++: aNumber = 6 = <span id="t1-1" data-tcontent="++: aNumber">5 + 1 = 6</span></li>
-            <li>++: aNumber = 7 = <span id="t1-2" data-tcontent="++: aNumber">6 + 1 = 7</span></li>
+            <li>from1To3 = [1 2 3]</li>
+            <li>avg: aNumber 1 = (5 + 1) / 2 = 3 = <span id="t1-1" data-tcontent="avg: aNumber 1">(5 + 1) / 2 = 3</span></li>
+            <li>avg: aNumber 9 from1To3 = (5 + 9 + 1 + 2 + 3) / 5 = 4 = <span id="t1-2" data-tcontent="avg: aNumber 9 from1To3">(5 + 4 + 1 + 2 + 3) / 4 = 4</span></li>
         </ol>
     </body>
 </html>

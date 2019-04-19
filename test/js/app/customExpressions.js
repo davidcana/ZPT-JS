@@ -6,16 +6,18 @@ var Qunit = require( 'qunit' );
 var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
 var context = require( '../../../js/app/context.js' );
 
-var IncExpression = require( './incExpression.js' );
+var AverageExpression = require( './averageExpression.js' );
 
 var buildDictionary = function(){
     
     return {
-        aNumber: 5
+        aNumber: 5,
+        from1To3: [ 1, 2, 3 ]
     }
 };
 
 var testNotDefinedExpression = function( assert ){
+    
     zpt.run({
             root: document.body,
             dictionary: buildDictionary()
@@ -25,15 +27,17 @@ var testNotDefinedExpression = function( assert ){
 };
 
 var testDefinedExpression = function( assert ){
+    
     zpt.run({
             root: document.body,
             dictionary: buildDictionary()
     });
-    assert.equal( $('#t1-1').html() , 6 );
-    assert.equal( $('#t1-2').html() , 7 );
+    assert.equal( $('#t1-1').html() , 3 );
+    assert.equal( $('#t1-2').html() , 4 );
 };
 
 QUnit.test( "Custom expressions test", function( assert ) {
+    
     
     // Set all cache off
     context.getConf().attributeCacheOn = false;
@@ -43,16 +47,15 @@ QUnit.test( "Custom expressions test", function( assert ) {
     testNotDefinedExpression( assert );
     
     // Test when the custom expression is registered
-    expressionBuilder.register( IncExpression );
+    expressionBuilder.register( AverageExpression );
     testDefinedExpression( assert );
     
     // Test when the custom expression is unregistered
-    expressionBuilder.unregister( IncExpression );
+    expressionBuilder.unregister( AverageExpression );
     testNotDefinedExpression( assert );
     
     // Test when the custom expression is registered again
-    expressionBuilder.register( IncExpression );
+    expressionBuilder.register( AverageExpression );
     testDefinedExpression( assert );
     
 });
-
