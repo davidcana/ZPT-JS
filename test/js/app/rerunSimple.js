@@ -310,6 +310,34 @@ QUnit.test( "Rerun using loops", function( assert ) {
     }
 });
 
+QUnit.test( "Rerun using internal macros", function( assert ) {
+
+    var dictionary = { 
+        number: 10,
+    };
+
+    // Render #t10-1 and run tests
+    $( '#t10-1' ).zpt({
+        dictionary: dictionary
+    });
+    runTests( 15 );
+
+    // Partial render #t10-2 and run tests again
+    dictionary.number = 11;
+    $( '#t10-1b' ).zpt({
+        command: 'partialRender'
+    });
+    runTests( 16 );
+
+    function runTests( value ){
+        
+        assert.equal( $('#t10-2').text() , "10" );
+        assert.equal( $('#t10-3').text() , "2" );
+        assert.equal( $('#t10-4').text() , "3" );
+        assert.equal( $('#t10-5').text() , "" + value );
+    }
+});
+
 
 var buildDictionaryForI18n = function(){
     

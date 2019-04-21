@@ -227,5 +227,28 @@
                 <td data-tattributes="class 'added';id string:t9-1-${item-repeat/number()}" data-tcontent="+: number item-repeat/index()">index</td>
             </tr>
         </table>
+        
+        <h2>Rerun using internal macros</h2>
+        <div id="t10-1">
+            <div data-tdefine="number2 2" data-muse-macro="'dynamicMacroReadingVar'">
+                Macro goes here
+            </div>
+        </div>
+        <div data-mdefine-macro="dynamicMacroReadingVar" data-tdefine="number3 3" style="display: none">
+            <ul data-tattributes="id string:t10-1b">
+                <li>
+                    number = <span data-tcontent="number" data-tattributes="id string:t10-2">The number value</span>
+                </li>
+                <li>
+                    number2 = <span data-tcontent="number2" data-tattributes="id string:t10-3">The number2 value</span>
+                </li>
+                <li>
+                    number3 = <span data-tcontent="number3" data-tattributes="id string:t10-4">The number3 value</span>
+                </li>
+                <li>
+                    +: number number2 number3 = <span data-tcontent="+: number number2 number3" data-tattributes="id string:t10-5">The added value</span>
+                </li>
+            </ul>
+        </div>
     </body>
 </html>
