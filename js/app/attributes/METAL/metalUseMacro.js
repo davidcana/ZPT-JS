@@ -16,7 +16,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     var macroExpression = macroExpressionToApply;
     var define = defineToApply;
     
-    var process = function( scope, node ){
+    var process = function( scope, node, talDefineHelper ){
 
         // Init some vars
         var macroKey = resolver.getMacroKey( macroExpression, scope );
@@ -30,7 +30,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         newNode.removeAttribute( 'style' );
 
         // Set tal define
-        updateThisTalDefineAttribute( macroKey, newNode );
+        updateThisTalDefineAttribute( macroKey, newNode, talDefineHelper );
         
         // Fill slots
         fillSlots( scope, node, tags, newNode );
@@ -41,16 +41,19 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         return newNode;
     };
     
-    var updateThisTalDefineAttribute = function( macroKey, newNode ){
+    var updateThisTalDefineAttribute = function( macroKey, newNode, talDefineHelper ){
 
-        var newVarName, newVarValue;
-        var macroData = resolver.getMacroData( macroKey );
+        // Update the talDefine attribute
+        TALDefine.updateAttribute( newNode, define );
         
+        // Update the talAutoDefine attribute
+        var macroData = resolver.getMacroData( macroKey );
         if ( macroData.url ){
-            newVarName = context.getConf().externalMacroUrlVarName;
-            newVarValue = "'" + macroData.url + "'";
-            
-            TALDefine.updateAttribute( newNode, define, newVarName, newVarValue );
+            talDefineHelper.put( 
+                context.getConf().externalMacroUrlVarName, 
+                "'" + macroData.url + "'"
+            );
+            talDefineHelper.updateNode( newNode );
         }
     };
     
@@ -104,7 +107,8 @@ METALUseMacro.build = function( string, stringDefine, scope ) {
     return new METALUseMacro( 
             string,
             expressionBuilder.build( string.trim() ),
-            stringDefine? stringDefine.trim(): undefined );
+            stringDefine? stringDefine.trim(): undefined
+    );
 };
 
 module.exports = METALUseMacro;

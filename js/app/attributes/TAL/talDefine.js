@@ -23,76 +23,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
                     forceGlobal || defineItem.global );
         }
     };
-    /*
-    var updateAttribute = function( node, talDefineHelper ){
-        
-        var newDefineItems = buildDefineItems( talDefineHelper );
-        var newDefineAttr = buildDefineAttr( newDefineItems );
-        node.setAttribute( 
-            context.getTags().talDefine, 
-            newDefineAttr 
-        );
-        return newDefineAttr;
-    };
-    
-    var buildDefineAttr = function( defineItems ){
 
-        var result = '';
-        var delimiter = context.getConf().defineDelimiter;
-
-        for ( var i = 0; i < defineItems.length; i++ ) {
-            var defineItem = defineItems[ i ];
-            var newDefine = TALDefine.buildString( 
-                defineItem.name, 
-                defineItem.expression
-            );
-
-            if ( i > 0 ){
-                result += delimiter;
-            }
-            result += newDefine;
-        }
-
-        return result;
-    };
-    
-    var buildDefineItems = function( talDefineHelper ){
-        
-        var map = {};
-        
-        // Add all the items in the define
-        for ( var i = 0; i < defineItems.length; i++ ) {
-            var defineItem = defineItems[ i ];
-            map.put(
-                defineItem.name, 
-                defineItem
-            );
-        }
-        
-        // Add all the items in the talDefineHelper
-        var moreDefineItems = talDefineHelper.getAll();
-        for ( i in moreDefineItems ) {
-            defineItem = defineItems[ i ];
-            map.put(
-                defineItem.name, 
-                defineItem
-            );
-        }
-        
-        return toArray( map );
-    };
-    
-    var toArray = function( map ){
-        
-        var result = [];
-        
-        for ( var i in map ) {
-            result.push( defineItems[ i ] );
-        }
-        
-        return result;
-    };
-    */
     var toString = function(){
         return "TALDefine: " + string;
     };
@@ -145,54 +76,7 @@ TALDefine.build = function( string ) {
         });
     }
     
-    defineItems = TALDefine.removeRepeatedItems( defineItems );
-    
     return new TALDefine( string, defineItems );
-};
-
-TALDefine.removeRepeatedItems = function( defineItems ) {
-    
-    var filtered = [];
-    var nameMap = {};
-    
-    for ( var i = defineItems.length - 1; i >= 0; i-- ) {
-        var defineItem = defineItems[ i ];
-        var name = defineItem.name;
-        if ( nameMap[ name ] ){
-            continue;
-        }
-        nameMap[ name ] = true;
-        filtered.push( defineItem );
-    }
-    
-    filtered.reverse();
-    
-    return filtered;
-};
-
-TALDefine.buildStringFromArray = function( value ) {
-    
-    var result = '';
-    for ( var i = 0; i < value.length; ++i ){
-        if ( i > 0 ){
-            result += ' ';
-        }
-        result += value[ i ];
-    }
-    
-    return '[' + result + ']';
-};
-
-TALDefine.buildString = function( name, _value, global ) {
-    
-    var value = $.isArray( _value )? TALDefine.buildStringFromArray( _value ): _value;
-    var result = name + context.getConf().inDefineDelimiter + value;
-    
-    if ( global ){
-        result += context.getConf().inDefineDelimiter + global;
-    }
-
-    return result;
 };
 
 TALDefine.appendStrings = function() {
@@ -209,18 +93,15 @@ TALDefine.appendStrings = function() {
     return result;
 };
 
-TALDefine.updateAttribute = function( node, currentDefine, newVarName, newVarValue ){
+TALDefine.updateAttribute = function( node, defineToAdd ){
 
-    if ( ! newVarName ){
-        return;
-    }
-    
     var tags = context.getTags();
     var nodeDefine = node.getAttribute( tags.talDefine );
-    var newDefine = TALDefine.buildString( newVarName, newVarValue );
-    var fullDefine = TALDefine.appendStrings( currentDefine, nodeDefine, newDefine );
+    var fullDefine = TALDefine.appendStrings( defineToAdd, nodeDefine );
 
-    node.setAttribute( tags.talDefine, fullDefine );
+    if ( fullDefine ){
+        node.setAttribute( tags.talDefine, fullDefine );
+    }
 };
 
 module.exports = TALDefine;

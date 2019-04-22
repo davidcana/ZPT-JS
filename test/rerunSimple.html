@@ -230,11 +230,11 @@
         
         <h2>Rerun using internal macros</h2>
         <div id="t10-1">
-            <div data-tdefine="number2 2" data-muse-macro="'dynamicMacroReadingVar'">
+            <div data-tdefine="number2 2" data-muse-macro="'internalMacro1'">
                 Macro goes here
             </div>
         </div>
-        <div data-mdefine-macro="dynamicMacroReadingVar" data-tdefine="number3 3" style="display: none">
+        <div data-mdefine-macro="internalMacro1" data-tdefine="number3 3" style="display: none">
             <ul data-tattributes="id string:t10-1b">
                 <li>
                     number = <span data-tcontent="number" data-tattributes="id string:t10-2">The number value</span>
@@ -249,6 +249,13 @@
                     +: number number2 number3 = <span data-tcontent="+: number number2 number3" data-tattributes="id string:t10-5">The added value</span>
                 </li>
             </ul>
+        </div>
+        
+        <h2>Rerun using external macros</h2>
+        <div id="t11-1">
+            <div data-tdefine="number2 2; testNumber 11" data-muse-macro="'rerunMacro1@externalMacros-definitions.html'">
+                Macro goes here
+            </div>
         </div>
     </body>
 </html>

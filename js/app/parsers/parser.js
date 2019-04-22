@@ -355,7 +355,7 @@ module.exports = (function() {
             return false;
         }
         
-        var talDefineHelper = _talDefineHelper || new TalDefineHelper();
+        var talDefineHelper = _talDefineHelper || new TalDefineHelper( node );
         
         processOnError( 
             attributes.talOnError,
@@ -427,7 +427,8 @@ module.exports = (function() {
                 node, 
                 scope, 
                 attributes.metalUseMacro, 
-                attributes.talDefine
+                attributes.talDefine,
+                talDefineHelper
         );
         
         return true;
@@ -513,7 +514,7 @@ module.exports = (function() {
         return metalDefineMacro.process( scope, node );
     };
 
-    var processMETALUseMacro = function( node, scope, string, stringDefine ) {
+    var processMETALUseMacro = function( node, scope, string, stringDefine, talDefineHelper ) {
 
         if ( ! string ) {
             return;
@@ -521,7 +522,7 @@ module.exports = (function() {
         
         // No sense to cache macro uses!
         var metalUseMacro = METALUseMacro.build( string, stringDefine, scope );
-        var newNode = metalUseMacro.process( scope, node );
+        var newNode = metalUseMacro.process( scope, node, talDefineHelper );
         newNode.setAttribute( tags.qdup, 1 );
         
         // Process new node

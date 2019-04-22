@@ -313,31 +313,56 @@ QUnit.test( "Rerun using loops", function( assert ) {
 QUnit.test( "Rerun using internal macros", function( assert ) {
 
     var dictionary = { 
-        number: 10,
+        number: 10
     };
 
+    macroTests( assert, dictionary, 10 );
+});
+
+QUnit.test( "Rerun using external macros", function( assert ) {
+
+    var dictionary = { 
+        number: 10
+    };
+    
+    var done = assert.async();
+    
+    zpt.run({
+        command: 'preload',
+        root: document.getElementById( 't11-1' ),
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
+        callback: function(){
+            zpt.run();
+            macroTests( assert, dictionary, 11 );
+            done();
+        }
+    });
+});
+
+var macroTests = function( assert, dictionary, testNumber ){
+    
     // Render #t10-1 and run tests
-    $( '#t10-1' ).zpt({
+    $( '#t' + testNumber + '-1' ).zpt({
         dictionary: dictionary
     });
-    runTests( 15 );
+    runMacroTests( 10, 15 );
 
     // Partial render #t10-2 and run tests again
     dictionary.number = 11;
-    $( '#t10-1b' ).zpt({
+    $( '#t' + testNumber + '-1b' ).zpt({
         command: 'partialRender'
     });
-    runTests( 16 );
+    runMacroTests( 11, 16 );
 
-    function runTests( value ){
-        
-        assert.equal( $('#t10-2').text() , "10" );
-        assert.equal( $('#t10-3').text() , "2" );
-        assert.equal( $('#t10-4').text() , "3" );
-        assert.equal( $('#t10-5').text() , "" + value );
+    function runMacroTests( value1, value2 ){
+
+        assert.equal( $('#t' + testNumber + '-2').text() , "" + value1 );
+        assert.equal( $('#t' + testNumber + '-3').text() , "2" );
+        assert.equal( $('#t' + testNumber + '-4').text() , "3" );
+        assert.equal( $('#t' + testNumber + '-5').text() , "" + value2 );
     }
-});
-
+};
 
 var buildDictionaryForI18n = function(){
     

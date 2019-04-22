@@ -6,12 +6,16 @@
 var context = require( '../context.js' );
 var TALDefine = require( '../attributes/TAL/talDefine.js' );
 
-module.exports = function () {
-
-    var buffer = '';
-    var c = 0;
+module.exports = function ( node ) {
+    
     var defineDelimiter = context.getConf().defineDelimiter;
     var inDefineDelimiter = context.getConf().inDefineDelimiter;
+    var talAutoDefine = context.getTags().talAutoDefine;
+    var c = 0;
+    var buffer = '';
+    if ( node && node.getAttribute( talAutoDefine ) ){
+        buffer = node.getAttribute( talAutoDefine );
+    }
     
     var put = function( name, string ){
         
@@ -52,7 +56,7 @@ module.exports = function () {
     var updateNode = function( node ){
 
         if ( buffer ){
-            node.setAttribute( context.getTags().talAutoDefine, buffer );
+            node.setAttribute( talAutoDefine, buffer );
             return buffer;
         }
     };
