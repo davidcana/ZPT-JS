@@ -3,7 +3,7 @@
 */
 "use strict";
 
-var TalDefineHelper = require( './talDefineHelper.js' );
+var AutoDefineHelper = require( './autoDefineHelper.js' );
 var expressionBuilder = require( '../expressions/expressionBuilder.js' );
 
 module.exports = function ( _itemVariableName, _expressionString, scope ) {
@@ -25,22 +25,22 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
         
         if ( currentIndex++ < maxIndex ) {
             
-            var talDefineHelper = new TalDefineHelper();
+            var autoDefineHelper = new AutoDefineHelper();
             
             // Declare item-index, item-all, item and item-repeat variables
-            talDefineHelper.put(
+            autoDefineHelper.put(
                 itemVariableName + '-index',
                 currentIndex
             );
-            talDefineHelper.put(
+            autoDefineHelper.put(
                 itemVariableName + '-all',
                 expressionString
             );
-            talDefineHelper.put(
+            autoDefineHelper.put(
                 itemVariableName,
                 itemVariableName + '-all' + '[' + itemVariableName + '-index' + ']'
             );
-            talDefineHelper.put(
+            autoDefineHelper.put(
                 itemVariableName + '-repeat',
                 "context/repeat(" 
                     + itemVariableName + "-index" + ","
@@ -49,7 +49,7 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
                     + ")"
             );
             
-            return talDefineHelper;
+            return autoDefineHelper;
         }
         
         return null;

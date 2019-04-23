@@ -13,7 +13,7 @@ var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var NodeAttributes = require( './nodeAttributes.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
-var TalDefineHelper = require( './talDefineHelper.js' );
+var AutoDefineHelper = require( './autoDefineHelper.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -270,8 +270,8 @@ module.exports = (function() {
         loop.setOffset( nextSiblingData.counter );
         //log.warn( 'loop counter: ' + nextSiblingData.counter );
         
-        var talDefineHelper;
-        while ( talDefineHelper = loop.repeat() ) {
+        var autoDefineHelper;
+        while ( autoDefineHelper = loop.repeat() ) {
             
             scope.startElement();
             
@@ -286,7 +286,7 @@ module.exports = (function() {
             parentNode.insertBefore( tmpNode, nextSibling );
             
             // Process it
-            if ( ! processElement( tmpNode, attributes, scope, talDefineHelper ) ) {
+            if ( ! processElement( tmpNode, attributes, scope, autoDefineHelper ) ) {
                 scope.endElement();
                 return false;
             }
@@ -307,13 +307,47 @@ module.exports = (function() {
 
     var treatError = function( node, scope, exception ) {
 
+        try {
+            // Exit if there is no on-error expression defined
+            var content = scope.get( context.getConf().onErrorVarName );
+            if ( content == null ) {
+                log.fatal( exception );
+                return false;
+            }
+
+            // Set the error variable
+            var templateError = {
+                type : typeof exception,
+                value : exception
+            };
+            scope.set( 
+                context.getConf().templateErrorVarName, 
+                templateError 
+            );
+            
+            log.debug( exception );
+            
+            scope.endElement();
+            
+            node.innerHTML = content;
+            return content;
+            
+        } catch ( e ) {
+            log.fatal( e );
+            scope.endElement();
+            throw e;
+        }
+    };
+    /*
+    var treatError = function( node, scope, exception ) {
+
         // Exit if there is no on-error expression defined
         var content = scope.get( context.getConf().onErrorVarName );
         if ( content == null ) {
             log.fatal( exception );
             return false;
         }
-        
+
         // Set the error variable
         var templateError = {
             type : typeof exception,
@@ -326,25 +360,26 @@ module.exports = (function() {
 
         try {
             log.debug( exception );
-            
+
             // Process content
             var talContent = new TALContent( 
                 context.getConf().onErrorVarName,
                 content 
             );
-            
+
             var result = talContent.process( scope, node );
             scope.endElement();
             return result;
-            
+
         } catch ( e ) {
             log.fatal( e );
             scope.endElement();
             throw e;
         }
     };
-
-    var processElement = function( node, attributes, scope, _talDefineHelper ) {
+    */
+    
+    var processElement = function( node, attributes, scope, _autoDefineHelper ) {
 
         if ( ! processMETALDefineMacro(
             node, 
@@ -355,28 +390,28 @@ module.exports = (function() {
             return false;
         }
         
-        var talDefineHelper = _talDefineHelper || new TalDefineHelper( node );
+        var autoDefineHelper = _autoDefineHelper || new AutoDefineHelper( node );
         
         processOnError( 
             attributes.talOnError,
-            talDefineHelper
+            autoDefineHelper
         );
         
         processI18nLanguage( 
             attributes.i18nLanguage,
-            talDefineHelper
+            autoDefineHelper
         );
         
         processI18nDomain(  
             scope, 
             attributes.i18nDomain, 
-            talDefineHelper
+            autoDefineHelper
         );
         
         processAutoDefine( 
             scope, 
             node, 
-            talDefineHelper
+            autoDefineHelper
         );
         
         processDefine( 
@@ -428,7 +463,7 @@ module.exports = (function() {
                 scope, 
                 attributes.metalUseMacro, 
                 attributes.talDefine,
-                talDefineHelper
+                autoDefineHelper
         );
         
         return true;
@@ -452,19 +487,19 @@ module.exports = (function() {
         }
     };
     
-    var processOnError = function( string, talDefineHelper ) {
+    var processOnError = function( string, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
         }
 
         var talOnError = attributeCache.getByAttributeClass( TALOnError, string );
-        return talOnError.putToTalDefineHelper( talDefineHelper );
+        return talOnError.putToAutoDefineHelper( autoDefineHelper );
     };
     
-    var processAutoDefine = function( scope, node, talDefineHelper ) {
+    var processAutoDefine = function( scope, node, autoDefineHelper ) {
         
-        var string = talDefineHelper.updateNode( node );
+        var string = autoDefineHelper.updateNode( node );
         if ( ! string ) {
             return;
         }
@@ -483,24 +518,24 @@ module.exports = (function() {
         return talDefine.process( scope, forceGlobal );
     };
 
-    var processI18nDomain = function( scope, string, talDefineHelper ) {
+    var processI18nDomain = function( scope, string, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
         }
 
         var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string );
-        return i18nDomain.putToTalDefineHelper( scope, talDefineHelper );
+        return i18nDomain.putToAutoDefineHelper( scope, autoDefineHelper );
     };
     
-    var processI18nLanguage = function( string, talDefineHelper ) {
+    var processI18nLanguage = function( string, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
         }
 
         var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string );
-        return i18nLanguage.putToTalDefineHelper( talDefineHelper );
+        return i18nLanguage.putToAutoDefineHelper( autoDefineHelper );
     };
 
     var processMETALDefineMacro = function( node, scope, string ) {
@@ -514,7 +549,7 @@ module.exports = (function() {
         return metalDefineMacro.process( scope, node );
     };
 
-    var processMETALUseMacro = function( node, scope, string, stringDefine, talDefineHelper ) {
+    var processMETALUseMacro = function( node, scope, string, stringDefine, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
@@ -522,7 +557,7 @@ module.exports = (function() {
         
         // No sense to cache macro uses!
         var metalUseMacro = METALUseMacro.build( string, stringDefine, scope );
-        var newNode = metalUseMacro.process( scope, node, talDefineHelper );
+        var newNode = metalUseMacro.process( scope, node, autoDefineHelper );
         newNode.setAttribute( tags.qdup, 1 );
         
         // Process new node

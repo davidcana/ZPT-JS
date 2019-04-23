@@ -19,8 +19,10 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
             var defineItem = defineItems[ i ];
             scope.set( 
                     defineItem.name, 
-                    defineItem.expression.evaluate( scope ), 
-                    forceGlobal || defineItem.global );
+                    defineItem.nocall? defineItem.expression: defineItem.expression.evaluate( scope ), 
+                    forceGlobal || defineItem.global,
+                    defineItem.nocall
+            );
         }
     };
 
@@ -36,6 +38,60 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
 
 TALDefine.id = 'tal:define';
 
+TALDefine.build = function( string ) {
+
+    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+
+    var defineItems = [];
+    var expressionString = string.trim();
+    var tokens = new ExpressionTokenizer( 
+        expressionString, 
+        context.getConf().defineDelimiter, 
+        true );
+
+    while ( tokens.hasMoreTokens() ) {
+        var variable = tokens.nextToken().trim();
+        var space = variable.indexOf( context.getConf().inDefineDelimiter );
+        if ( space == -1 ) {
+            throw 'Bad variable definition: ' + variable;
+        }
+
+        var nocall = false;
+        var global = false;
+        var currentToken = variable.substring( 0, space );
+        var nextTokens = variable.substring( space + 1 ).trim();
+        var tokenDone = false;
+        do {
+            var specialToken = false;
+            if ( context.getConf().globalVariableExpressionPrefix === currentToken ){
+                global = true;
+                specialToken = true;
+            } else if ( context.getConf().nocallVariableExpressionPrefix === currentToken ){
+                nocall = true;  
+                specialToken = true;
+            } 
+            
+            if ( specialToken ){
+                space = nextTokens.indexOf( context.getConf().inDefineDelimiter );
+                currentToken = nextTokens.substring( 0, space );
+                nextTokens = nextTokens.substring( space + 1 ).trim();
+                
+            } else {
+                defineItems.push({
+                    name: currentToken,
+                    expression: expressionBuilder.build( nextTokens ),
+                    global: global,
+                    nocall: nocall
+                });
+                tokenDone = true;
+            }
+
+        } while( ! tokenDone && space != -1 );
+    }
+
+    return new TALDefine( string, defineItems );
+};
+/*
 TALDefine.build = function( string ) {
     
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
@@ -78,6 +134,7 @@ TALDefine.build = function( string ) {
     
     return new TALDefine( string, defineItems );
 };
+*/
 
 TALDefine.appendStrings = function() {
     

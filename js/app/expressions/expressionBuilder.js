@@ -31,7 +31,6 @@ module.exports = (function() {
         register( require( './existsExpression.js' ) );
         register( require( './formatExpression.js' ) );
         register( require( './stringExpression.js' ) );
-        register( require( './noCallExpression.js' ) );
         register( require( './path/pathExpression.js' ) );
     };
     var registerComparison = function(){

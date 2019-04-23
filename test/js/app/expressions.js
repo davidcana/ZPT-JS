@@ -7,6 +7,11 @@ var Qunit = require( 'qunit' );
 
 window.globalVar = 'It works!';
 
+var c = 10;
+dictionary.method = function(){
+    return c++;
+};
+
 // Parse template
 zpt.run({
     root: document.body,
@@ -184,3 +189,9 @@ QUnit.test( "Window object test", function( assert ) {
 QUnit.test( "Context object test", function( assert ) {
     assert.equal( $('#t17-1').html() , 'context' );
 });
+
+QUnit.test( "Nocall expressions test", function( assert ) {
+    assert.equal( $('#t18-1').html() , '10' );
+    assert.equal( $('#t18-2').html() , '11' );
+});
+

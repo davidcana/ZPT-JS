@@ -1,5 +1,5 @@
 /* 
-    Class TalDefineHelper 
+    Class AutoDefineHelper 
 */
 "use strict";
 
@@ -10,49 +10,23 @@ module.exports = function ( node ) {
     
     var defineDelimiter = context.getConf().defineDelimiter;
     var inDefineDelimiter = context.getConf().inDefineDelimiter;
+    var nocallExpressionPrefix = context.getConf().nocallVariableExpressionPrefix;
     var talAutoDefine = context.getTags().talAutoDefine;
+
     var c = 0;
     var buffer = '';
     if ( node && node.getAttribute( talAutoDefine ) ){
         buffer = node.getAttribute( talAutoDefine );
     }
     
-    var put = function( name, string ){
+    var put = function( name, string, nocall ){
         
         if ( c++ > 0 ){
             buffer += defineDelimiter;
         }
-        buffer += name + inDefineDelimiter + string;
+        buffer += (nocall? nocallExpressionPrefix + inDefineDelimiter: '') + name + inDefineDelimiter + string;
     };
-    
-    var putAtFirst = function( string ){
 
-        if ( c++ > 0 ){
-            buffer = string + defineDelimiter + buffer;
-        } else {
-            buffer = string;
-        }
-    };
-    /*
-    var buildTotal = function( defineString ){
-        
-        if ( defineString ){
-            putAtFirst( defineString );
-        }
-        
-        return buffer;
-    };
-    
-    var update = function( node, defineString ){
-        
-        var string = buildTotal( defineString );
-        if ( string ){
-            node.setAttribute( context.getTags().talDefine, string );
-        }
-        
-        return string;
-    };
-    */
     var updateNode = function( node ){
 
         if ( buffer ){
@@ -63,7 +37,6 @@ module.exports = function ( node ) {
     
     return {
         put: put,
-        //update: update,
         updateNode: updateNode
     };
 };

@@ -9,12 +9,13 @@ var TALOnError = function( stringToApply ) {
     
     var string = stringToApply;
     
-    var putToTalDefineHelper = function( talDefineHelper ){
+    var putToAutoDefineHelper = function( autoDefineHelper ){
 
-        // Add onErrorVarName to the talDefineHelper
-        talDefineHelper.put(
+        // Add onErrorVarName to the autoDefineHelper
+        autoDefineHelper.put(
             context.getConf().onErrorVarName,
-            'nocall:' + string
+            string,
+            true
         );
     };
 
@@ -23,7 +24,7 @@ var TALOnError = function( stringToApply ) {
     };
     
     return {
-        putToTalDefineHelper: putToTalDefineHelper,
+        putToAutoDefineHelper: putToAutoDefineHelper,
         toString: toString
     };
 };

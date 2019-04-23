@@ -139,7 +139,8 @@ module.exports = (function() {
 
         htmlStructureExpressionPrefix:  "html",
         globalVariableExpressionPrefix: "global",
-
+        nocallVariableExpressionPrefix: "nocall",
+        
         templateErrorVarName:    "error",
         onErrorVarName:          "on-error",
         i18nDomainVarName:       "i18nDomain",
@@ -162,7 +163,7 @@ module.exports = (function() {
         expressionSuffix: EXPRESSION_SUFFIX,
         stringExpression: "string" + EXPRESSION_SUFFIX,
         existsExpression: "exists" + EXPRESSION_SUFFIX,
-        noCallExpression: "nocall" + EXPRESSION_SUFFIX,
+        //noCallExpression: "nocall" + EXPRESSION_SUFFIX,
         notExpression: "not" + EXPRESSION_SUFFIX,
         javaScriptExpression: "js" + EXPRESSION_SUFFIX,
         equalsExpression: "eq" + EXPRESSION_SUFFIX,

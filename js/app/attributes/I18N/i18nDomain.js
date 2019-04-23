@@ -9,7 +9,7 @@ var I18NDomain = function( stringToApply ) {
     
     var string = stringToApply;
     
-    var putToTalDefineHelper = function( scope, talDefineHelper ){
+    var putToAutoDefineHelper = function( scope, autoDefineHelper ){
         
         var newString = string;
         var conf = context.getConf();
@@ -25,8 +25,8 @@ var I18NDomain = function( stringToApply ) {
             newString = '[' + newString + ']'
         }
         
-        // Add i18nDomainVarName to the talDefineHelper
-        talDefineHelper.put(
+        // Add i18nDomainVarName to the autoDefineHelper
+        autoDefineHelper.put(
             conf.i18nDomainVarName,
             newString
         );
@@ -37,7 +37,7 @@ var I18NDomain = function( stringToApply ) {
     };
     
     return {
-        putToTalDefineHelper: putToTalDefineHelper,
+        putToAutoDefineHelper: putToAutoDefineHelper,
         toString: toString
     };
 };

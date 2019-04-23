@@ -253,12 +253,10 @@ QUnit.test( "Rerun using on-error", function( assert ) {
     
     function runTests( error1, error2 ){
 
-        assert.equal( $('#t8-1-1').text() , "true" );
-        assert.equal( $('#t8-1-2').text() , error1 );
-        assert.equal( $('#t8-1-3').text() , "Infinity" );
-        assert.equal( $('#t8-2-1').text() , "true" );
-        assert.equal( $('#t8-2-2').text() , error2 );
-        assert.equal( $('#t8-2-3').text() , "Infinity" );
+        assert.equal( $('#t8-1-1').text() , error1 );
+        assert.equal( $('#t8-1-2').text() , "Infinity" );
+        assert.equal( $('#t8-2-1').text() , error2 );
+        assert.equal( $('#t8-2-2').text() , "Infinity" );
     }
 
 });

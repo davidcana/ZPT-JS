@@ -9,10 +9,10 @@ var I18NLanguage = function( stringToApply ) {
     
     var string = stringToApply;
     
-    var putToTalDefineHelper = function( talDefineHelper ){
+    var putToAutoDefineHelper = function( autoDefineHelper ){
 
-        // Add i18nLanguageVarName to the talDefineHelper
-        talDefineHelper.put(
+        // Add i18nLanguageVarName to the autoDefineHelper
+        autoDefineHelper.put(
             context.getConf().i18nLanguageVarName,
             string
         );
@@ -23,7 +23,7 @@ var I18NLanguage = function( stringToApply ) {
     };
     
     return {
-        putToTalDefineHelper: putToTalDefineHelper,
+        putToAutoDefineHelper: putToAutoDefineHelper,
         toString: toString
     };
 };

@@ -11,6 +11,7 @@ var Scope = function( _dictionary, addCommonVars ) {
     this.dictionary = _dictionary;
     this.vars = {};
     this.changesStack = [];
+    this.nocallVars = {};
     
     if ( addCommonVars ){
         this.setCommonVars();
@@ -48,10 +49,23 @@ Scope.prototype.setVar = function( name, value ) {
     this.vars[ name ] = value;
 };
 
-Scope.prototype.get = function( name ) {
-    
+Scope.prototype.getWithoutEvaluating = function( name ) {
+
     var valueFromVars = this.vars[ name ];
     return valueFromVars !== undefined? valueFromVars: this.dictionary[ name ];
+};
+
+Scope.prototype.get = function( name ) {
+
+    var value = this.getWithoutEvaluating( name );
+    
+    if ( ! this.nocallVars[ name ] ){
+        return value;
+    }
+    
+    return value && $.isFunction( value.evaluate )?
+        value.evaluate( this ): 
+        'Error evaluating property "' + name + '": ' + value;
 };
 
 Scope.prototype.unset = function( name ) {
@@ -75,13 +89,13 @@ Scope.prototype.endElement = function ( ) {
     }
 };
 
-Scope.prototype.set = function ( name, value, isGlobal ) {
-
+Scope.prototype.set = function ( name, value, isGlobal, nocall ) {
+    
     if ( ! isGlobal ){
 
         // Local vars
         var vars = this.currentVars();
-        var currentValue = this.get( name );
+        var currentValue = this.getWithoutEvaluating( name );
 
         if ( currentValue != null ){
             vars.varsToSet[ name ] = currentValue;
@@ -93,12 +107,11 @@ Scope.prototype.set = function ( name, value, isGlobal ) {
 
     // Common to global and local vars
     this.setVar( name, value );
+    
+    // Add to nocallVars if needed
+    if ( nocall ){
+        this.nocallVars[ name ] = true;
+    }
 };
-
-/*
-Scope.prototype.update = function(){
-
-};
-*/
 
 module.exports = Scope;

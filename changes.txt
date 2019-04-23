@@ -2,13 +2,17 @@ New in future versions
 - Replace callback functions by promises?
 - Avoid flashing?
 - Move configurations from context to configuration object?
-- Add data-telse and data-telse-condition tags?
 - Add if: expression (example-> if: isImportant 'important' is equals to cond: isImportant 'important' '')?
+- Add data-telse and data-telse-condition tags?
+- Add data-tswitch expression and data-tcase expression?
+
+New in 0.32.0
+- Add new command: update?
+- Add options.bind (boolean) to set the list of properties to bind?
 
 New in 0.31.0
-- Add options.bind (boolean) to set if the properties will be bind?
-- Add data-tbind tag to bind vars in dictionary to update content?
-- Support at data-tattributes tag to bind (example data-tattributes="bind textareaAttrs; bind maxlength maxlength")?
+- Nocall expression replaced by suffix in data-tdefine.
+- Rerun bugs fixed using data-idomain, data-ilanguage, data-ton-error, data-trepeat, internal and external macros.
 
 New in 0.30.0
 - scopeCache class removed, replaced by scopeBuilder: it traverses the DOM from a node to its parents to get all data-tdefine tags and execute them in reverse order.

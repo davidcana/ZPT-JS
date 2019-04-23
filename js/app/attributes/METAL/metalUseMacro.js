@@ -16,7 +16,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     var macroExpression = macroExpressionToApply;
     var define = defineToApply;
     
-    var process = function( scope, node, talDefineHelper ){
+    var process = function( scope, node, autoDefineHelper ){
 
         // Init some vars
         var macroKey = resolver.getMacroKey( macroExpression, scope );
@@ -29,8 +29,8 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         // Remove style attribute to force showing the new node
         newNode.removeAttribute( 'style' );
 
-        // Set tal define
-        updateThisTalDefineAttribute( macroKey, newNode, talDefineHelper );
+        // Update define and autoDefine attributes of the new node
+        updateNewNodeAttributes( macroKey, newNode, autoDefineHelper );
         
         // Fill slots
         fillSlots( scope, node, tags, newNode );
@@ -41,7 +41,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         return newNode;
     };
     
-    var updateThisTalDefineAttribute = function( macroKey, newNode, talDefineHelper ){
+    var updateNewNodeAttributes = function( macroKey, newNode, autoDefineHelper ){
 
         // Update the talDefine attribute
         TALDefine.updateAttribute( newNode, define );
@@ -49,11 +49,11 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         // Update the talAutoDefine attribute
         var macroData = resolver.getMacroData( macroKey );
         if ( macroData.url ){
-            talDefineHelper.put( 
+            autoDefineHelper.put( 
                 context.getConf().externalMacroUrlVarName, 
                 "'" + macroData.url + "'"
             );
-            talDefineHelper.updateNode( newNode );
+            autoDefineHelper.updateNode( newNode );
         }
     };
     
