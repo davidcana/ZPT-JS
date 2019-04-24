@@ -10,6 +10,9 @@ New in 0.32.0
 - Add new command: update?
 - Add options.bind (boolean) to set the list of properties to bind?
 
+New in 0.31.1
+- Bug fixed: malformed auto define tag in autoDefineHelper in some cases.
+
 New in 0.31.0
 - Nocall expression replaced by suffix in data-tdefine.
 - Rerun bugs fixed using data-idomain, data-ilanguage, data-ton-error, data-trepeat, internal and external macros.

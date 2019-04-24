@@ -13,7 +13,6 @@ module.exports = function ( node ) {
     var nocallExpressionPrefix = context.getConf().nocallVariableExpressionPrefix;
     var talAutoDefine = context.getTags().talAutoDefine;
 
-    var c = 0;
     var buffer = '';
     if ( node && node.getAttribute( talAutoDefine ) ){
         buffer = node.getAttribute( talAutoDefine );
@@ -21,7 +20,7 @@ module.exports = function ( node ) {
     
     var put = function( name, string, nocall ){
         
-        if ( c++ > 0 ){
+        if ( buffer !== '' ){
             buffer += defineDelimiter;
         }
         buffer += (nocall? nocallExpressionPrefix + inDefineDelimiter: '') + name + inDefineDelimiter + string;
