@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dictionary extension tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/dictionaryExtension.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <h2>Dictionary extension tests</h2>
+        <ul id="t1">
+            <li>var1 value = 11 = <span id="t1-1" data-tcontent="var1">must be 11</span></li>
+            <li>var2 value = undefined or 22 or 2 = <span id="t1-2" data-tcontent="var2">must be undefined or 22 or 2 </span></li>
+            <li>added value = NaN or 33 or 13 = <span id="t1-3" data-tcontent="+: var1 var2">must be NaN or 33 or 13</span></li>
+        </ul>
+    </body>
+</html>

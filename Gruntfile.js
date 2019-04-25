@@ -256,6 +256,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/singleRoot.js',
                 dest: 'build/singleRoot.js'
+            },
+            dictionaryExtension: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/dictionaryExtension.js',
+                dest: 'build/dictionaryExtension.js'
             }
             
         },

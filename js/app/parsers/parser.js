@@ -86,7 +86,11 @@ module.exports = (function() {
                 i18n,
                 function(){
                     resolver.loadRemotePages( 
-                        new Scope( parserOptions.dictionary, true ),
+                        new Scope( 
+                            parserOptions.dictionary, 
+                            parserOptions.dictionaryExtension, 
+                            true 
+                        ),
                         declaredRemotePageUrls,
                         function (){
                             processCallback( callback );
@@ -132,11 +136,12 @@ module.exports = (function() {
         // command == 'partialRender' or command == 'fullRender'
         render(
             parserOptions.command == 'partialRender'? options.target: parserOptions.root,
+            options.dictionaryExtension,
             options.notRemoveGeneratedTags
         );
     };
     
-    var render = function( target, notRemoveGeneratedTags ){
+    var render = function( target, dictionaryExtension, notRemoveGeneratedTags ){
         
         try {
             if ( ! target ){
@@ -147,7 +152,7 @@ module.exports = (function() {
                 removeGeneratedTagsFromAllTargetElements( target );
             }
             
-            processAllTargetElements( target );
+            processAllTargetElements( target, dictionaryExtension );
             
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -185,25 +190,30 @@ module.exports = (function() {
         }
     };
     
-    var processAllTargetElements = function( target ) {
+    var processAllTargetElements = function( target, dictionaryExtension ) {
         
         // Is multiroot?
         if ( $.isArray( target ) ){ 
             // There are several roots
             for ( var c = 0; c < target.length; c++ ) {
-                processTarget( target[ c ] );
+                processTarget( target[ c ], dictionaryExtension );
             }
         } else {
             // There is only one root
-            processTarget( target );
+            processTarget( target, dictionaryExtension );
         }
     };
     
-    var processTarget = function( target ) {
+    var processTarget = function( target, dictionaryExtension ) {
         
         process( 
             target, 
-            scopeBuilder.build( parserOptions, target, self )
+            scopeBuilder.build( 
+                parserOptions, 
+                target, 
+                self, 
+                dictionaryExtension 
+            )
         );
     };
     

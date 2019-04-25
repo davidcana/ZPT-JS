@@ -6,9 +6,12 @@ New in future versions
 - Add data-telse and data-telse-condition tags?
 - Add data-tswitch expression and data-tcase expression?
 
-New in 0.32.0
+New in 0.33.0
 - Add new command: update?
 - Add options.bind (boolean) to set the list of properties to bind?
+
+New in 0.32.0
+- New configuration option added: dictionaryExtension.
 
 New in 0.31.1
 - Bug fixed: malformed auto define tag in autoDefineHelper in some cases.

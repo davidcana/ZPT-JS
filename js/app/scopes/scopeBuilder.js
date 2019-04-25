@@ -12,9 +12,13 @@ module.exports = (function() {
     
     var keyLength = 6;
     
-    var build = function( parserOptions, target, parser ) {
+    var build = function( parserOptions, target, parser, dictionaryExtension ) {
 
-        var scope = new Scope( parserOptions.dictionary, true );
+        var scope = new Scope( 
+            parserOptions.dictionary, 
+            dictionaryExtension, 
+            true 
+        );
         
         if ( parserOptions.command == 'partialRender' ){
             updateForPartialRender( parserOptions, target, scope, parser );

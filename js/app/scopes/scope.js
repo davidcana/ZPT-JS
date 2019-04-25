@@ -6,9 +6,10 @@
 var context = require( '../context.js' );
 var $ = require( 'jquery' );
 
-var Scope = function( _dictionary, addCommonVars ) {
+var Scope = function( _dictionary, _dictionaryExtension, addCommonVars ) {
     
-    this.dictionary = _dictionary;
+    this.dictionary = _dictionary || {};
+    this.dictionaryExtension = _dictionaryExtension || {};
     this.vars = {};
     this.changesStack = [];
     this.nocallVars = {};
@@ -52,8 +53,21 @@ Scope.prototype.setVar = function( name, value ) {
 Scope.prototype.getWithoutEvaluating = function( name ) {
 
     var valueFromVars = this.vars[ name ];
+    if ( valueFromVars !== undefined ){
+        return valueFromVars;
+    }
+    
+    return this.dictionaryExtension[ name ] !== undefined? 
+        this.dictionaryExtension[ name ]: 
+        this.dictionary[ name ];
+};
+/*
+Scope.prototype.getWithoutEvaluating = function( name ) {
+
+    var valueFromVars = this.vars[ name ];
     return valueFromVars !== undefined? valueFromVars: this.dictionary[ name ];
 };
+*/
 
 Scope.prototype.get = function( name ) {
 
