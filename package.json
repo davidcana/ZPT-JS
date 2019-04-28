@@ -18,9 +18,7 @@
     "bugs": "david.javapagetemplates@gmail.com",
     "license": "LGPL-3.0",
     "author": "David Cana Lopez",
-    "contributors": [
-        ""
-    ],
+    "contributors": [],
     "repository": {
         "type": "git",
         "url": "https://github.com/davidcana/ZPT-JS"
@@ -49,7 +47,9 @@
         "qunit": "~2.5.1"
     },
     "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
         "http-server": "http-server -p 9000",
+        "web": "cd ./docs; http-server -p 9001",
         "beefy": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js ../../../samples/js/app/performance.js:performance.js",
         "start": "npm-run-all -p -r beefy http-server"
     }

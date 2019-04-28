@@ -1,0 +1,399 @@
+/* HTML tags*/
+body {
+    background-color: white;
+    color: black;
+    font-family: arial, helvetica, verdana;
+}
+
+.header1Div {
+    background: url('./images/home-background.jpg');
+    padding-bottom: 2em;
+    /*margin: 0 1em 0 1em;*/
+}
+
+h1 {
+    padding: .75em 2em .75em 2em;
+    border-bottom: 0;
+    text-align: center;
+    font-size: 300%;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: darkcyan;
+    &:visited: {
+        color: darkcyan;
+    }
+}
+
+p.subheader,
+p.linkButton {
+    text-align: center;
+    font-size: 120%;
+    margin-top: 2em;
+}
+
+p.linkButton a {
+    padding: 1em;
+    background-color: darkcyan;
+    color: white;
+}
+
+a:hover,
+p.linkButton a:hover {
+    background-color: #9dc00e;
+    color: white;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: bold;
+    border-bottom: 0;
+    color: darkcyan;
+}
+
+aside {
+    width: 30%;
+    float: right;
+    border: 1px solid darkcyan;
+    border-style: solid;
+    padding: 0em 1em 0em 1em;
+    white-space: nowrap;
+    border-radius: 8px;
+}
+
+aside section header {
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: darkcyan;
+}
+
+aside section header,
+aside section ul {
+    margin: .5em;
+}
+
+fieldset {
+    margin: 0 1em 0 1em !important;
+}
+
+code {
+    color: red;
+}
+pre {
+    padding-top: 1em;
+    padding-left: 4em;
+}
+p {
+    margin: .5em;
+}
+
+ul {
+    margin-top: .25em;
+    margin-bottom: .5em;
+}
+li {
+    margin-bottom: .25em;
+}
+
+/* Tables */
+table.comparison,
+table.comparison th,
+table.comparison td {
+    border: 1px solid black;
+}
+table.comparison {
+    background-color: white;
+}
+table.comparison tbody tr:nth-child(odd)  {
+    background-color: #f4f4f4;
+}
+table.comparison tbody tr:hover {
+    background-color: #ddd;
+}
+table.comparison th,
+table.comparison td {
+    padding: .25em;
+}
+
+/* Container */
+#container {
+    margin: .5em;
+    padding: .5em;
+    background-color: #afe0e0;
+}
+
+/* Differences with jTable */
+#zcrud-jtable-differences {
+    border-collapse: collapse;
+    border-style: solid;
+}
+#zcrud-jtable-differences .zcrud,
+#zcrud-jtable-differences .jtable {
+    width: 40%;
+}
+
+/* pre classes */
+pre.console {
+    background-color: darkcyan;
+    color: white;
+}
+pre.js {
+    background-color: blue;
+    color: white;
+}
+
+/* Field option list */
+ul.fieldOptionList {
+    list-style-type: none;
+}
+ul.fieldOptionList>li {
+    margin-bottom: 1em;
+}
+ul.fieldOptionList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.fieldOptionList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.fieldOptionList>li .header .dataType:before {
+    margin-left: 2em;
+    content: "dataType: ";
+}
+ul.fieldOptionList>li .header .appliesTo:before {
+    margin-left: 2em;
+    content: "applies to: ";
+}
+ul.fieldOptionList>li .header .default:before {
+    margin-left: 2em;
+    content: "default: ";
+}
+
+/* Field type list */
+ul.fieldTypeList {
+    list-style-type: none;
+}
+ul.fieldTypeList>li {
+    margin-bottom: 1em;
+}
+ul.fieldTypeList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.fieldTypeList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.fieldTypeList>li .header .dataType:before {
+    margin-left: 2em;
+    content: "dataType: ";
+}
+ul.fieldTypeList>li .header .customOptions:before {
+    margin-left: 2em;
+    content: "customOptions: ";
+}
+ul.fieldTypeList a {
+    color: White;
+}
+
+/* General option list */
+ul.generalOptionList {
+    list-style-type: none;
+}
+ul.generalOptionList>li {
+    margin-bottom: 1em;
+}
+ul.generalOptionList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.generalOptionList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.generalOptionList>li .header .dataType:before {
+    margin-left: 2em;
+    content: "dataType: ";
+}
+ul.generalOptionList>li .header .default:before {
+    margin-left: 2em;
+    content: "default: ";
+}
+
+/* Event list */
+ul.eventList {
+    list-style-type: none;
+}
+ul.eventList>li {
+    margin-bottom: 1em;
+}
+ul.eventList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.eventList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.eventList>li .header .return:before {
+    margin-left: 2em;
+    content: "return: ";
+}
+
+/* Method list */
+ul.methodList {
+    list-style-type: none;
+}
+ul.methodList>li {
+    margin-bottom: 1em;
+}
+ul.methodList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.methodList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.methodList>li .header .return:before {
+    margin-left: 2em;
+    content: "return: ";
+}
+
+/* Button type list */
+ul.buttonTypeList {
+    list-style-type: none;
+}
+ul.buttonTypeList>li {
+    margin-bottom: 1em;
+}
+ul.buttonTypeList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.buttonTypeList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.buttonTypeList>li .header .bindableTo:before {
+    margin-left: 2em;
+    content: "bindable to: ";
+}
+
+/* Button option list */
+ul.buttonOptionList {
+    list-style-type: none;
+}
+ul.buttonOptionList>li {
+    margin-bottom: 1em;
+}
+ul.buttonOptionList>li .header {
+    background: darkcyan;
+    color: white;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: .5em;
+}
+ul.buttonOptionList>li .header .name {
+    font-weight: bold;
+    font-size: 130%;
+}
+ul.buttonOptionList>li .header .dataType:before {
+    margin-left: 2em;
+    content: "dataType: ";
+}
+ul.buttonOptionList>li .header .default:before {
+    margin-left: 2em;
+    content: "default: ";
+}
+
+/* Menu */
+nav.menu {
+    background-color: darkcyan;
+    text-align: center;
+    /*margin: 0 1em 0 1em;*/
+}
+
+nav.menu ul {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav.menu ul li {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+nav.menu ul li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 1em 1em;
+    text-decoration: none;
+    border-bottom: 5px solid darkcyan;
+}
+
+nav.menu ul li a.selected {
+    border-bottom: 5px solid #9dc00e;
+    color: #cfec58;
+}
+
+nav.menu ul li a:hover {
+    background-color: #9dc00e;
+    color: white;
+}
+
+nav.menu ul.leftPart li {
+    margin: 0 4em 0 4em;
+    font-weight: bold;
+}
+
+nav.menu div.centerPart {
+    text-align: center;
+    display: contents;
+}
+
+nav.menu div.centerPart ul {
+    display: inline-block;
+}
+
+nav.menu ul.leftPart {
+    float: left;
+}
+
+nav.menu ul.rightPart {
+    float: right;
+    font-weight: bold;
+}
+
+nav.menu span.rightPart {
+    color: white;
+    float: right;
+}
+
+footer {
+    margin-top: 2em;
+    text-align: center;
+}
+
+footer .smallerFooter {
+    font-size: 80%;
+}

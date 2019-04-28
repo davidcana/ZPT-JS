@@ -276,45 +276,51 @@ module.exports = function(grunt) {
                 },
                 expand: true,
                 files: [
-                        {
+                    {
                         cwd: 'test/',
                         expand: true,
                         src: ['**/*', '!**/*~'],
                         dest: 'test'
-                        }, 
-                        {
+                    }, 
+                    {
                         cwd: 'samples/',
                         expand: true,
                         src: ['**/*', '!**/*~'],
                         dest: 'samples'
-                        }, 
-                        {
+                    }, 
+                    {
                         cwd: 'js/',
                         expand: true,
                         src: ['**/*', '!**/*~'],
                         dest: 'js'
-                        },
-                        {
+                    },
+                    {
+                        cwd: 'docs/',
+                        expand: true,
+                        src: ['**/*', '!**/*~'],
+                        dest: 'docs'
+                    },
+                    {
                         src: ['changes.txt']
-                        },
-                        {
+                    },
+                    {
                         src: ['CONTRIBUTORS.txt']
-                        },
-                        {
+                    },
+                    {
                         src: ['Gruntfile.js']
-                        }, 
-                        {
+                    }, 
+                    {
                         src: ['LICENSE.txt']
-                        }, 
-                        {
+                    }, 
+                    {
                         src: ['package.json']
-                        },
-                        {
+                    },
+                    {
                         src: ['README.txt']
-                        }, 
-                        {
+                    }, 
+                    {
                         src: ['userguide.html']
-                        }
+                    }
                 ]
             }
         },
@@ -323,6 +329,16 @@ module.exports = function(grunt) {
                 files: {
                     'build/standalone.min.js': [ 'build/standalone.js' ]
                 }
+            }
+        },
+        copy: {
+            standalone: {
+                src: 'build/standalone.js',
+                dest: 'docs/lib/zpt.js'
+            },
+            standaloneMin: {
+                src: 'build/standalone.min.js',
+                dest: 'docs/lib/zpt.min.js'
             }
         },
         jshint: {
