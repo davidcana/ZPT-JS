@@ -100,6 +100,10 @@ li {
 }
 
 /* Tables */
+table.comparison {
+    border-collapse: collapse;
+    border-style: solid;
+}
 table.comparison,
 table.comparison th,
 table.comparison td {
@@ -127,10 +131,6 @@ table.comparison td {
 }
 
 /* Differences with jTable */
-#zcrud-jtable-differences {
-    border-collapse: collapse;
-    border-style: solid;
-}
 #zcrud-jtable-differences .zcrud,
 #zcrud-jtable-differences .jtable {
     width: 40%;

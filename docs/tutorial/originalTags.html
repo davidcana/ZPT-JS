@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Using ZPT's original tags</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div id="commonHeader" data-muse-macro="'header@templates.html'">
+            <!-- The header -->
+        </div>
+        
+        <div class="header1Div">
+            <h1>ZPT-JS tutorial - Using ZPT's original tags</h1>
+        </div>
+        
+        <p>
+            The <em>data-*</em> attributes is used to store custom data private to the page or application. These are the standard in HTML5. If you prefer to use the original ZPT's attributes use <code>context.useOriginalTags()</code> method:
+        </p>
+
+        <strong>original-tags-sample.js</strong>
+        <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    aString: "string",
+    doggy: false,
+    number1: 1,
+    number100: 100,
+    user: {
+        name: "Bob", 
+        age: function( ){
+            return 25;
+        }
+    },
+    items: [ 'item0', 'item1', 'item2' ]
+};
+
+// Don't forget to declare to use original tags!
+zpt.context.useOriginalTags();
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+        </pre>
+
+        <strong>original-tags-sample.html</strong>
+        <pre class="brush: html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Some ZPT-JS examples&lt;/title&gt;
+
+        &lt;script src="original-tags-sample.js" defer&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Some expressions&lt;/h1&gt;
+        &lt;ol&gt;
+            &lt;li tal:content="user/name"&gt;xxx&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+        
+        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
+            The footer
+        </div>
+    </body>
+</html>
