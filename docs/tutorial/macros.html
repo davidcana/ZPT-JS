@@ -25,14 +25,12 @@
             </ul>
         </div>
         
-        <a id="metal"></a>
-        <h3>METAL</h3>
+        <h3 id="metal">METAL</h3>
         <p>
             METAL statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. Use-macro tag uses expressions (ZPT's version does not, it uses literals).
         </p>
 
-        <a id="local"></a>
-        <h3>Local macros</h3>
+        <h3 id="local">Local macros</h3>
         <p>
             Local macros are defined at the same HTML file where they are invoked. An example of definition of a local macro:
         </p>
@@ -60,8 +58,7 @@
 &lt;/div&gt;
         </pre>
 
-        <a id="external"></a>
-        <h3>External macros</h3>
+        <h3 id="external">External macros</h3>
         <p>
             External macros are defined at a different page that where they are invoked. They only differ how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
         </p>

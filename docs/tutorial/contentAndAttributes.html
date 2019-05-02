@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Replacing content and attributes</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Replacing content and attributes</h1>
+                <ul>
+                    <li><a href="#content">Replacing content</a>.</li>
+                    <li><a href="#attributes">Replacing attributes</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'content'">Replacing content</h2>
+                <p>
+                    Let's see how we can replace the content of any tag by a value. Take a look at this template:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-tcontent="title"&gt;the title&lt;/span&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    Now we declare the dictionary and invoke ZPT:
+                </p>
+                <strong>sample.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    title: "hello world!"
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-tcontent="title"&gt;hello world!&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    ZPT-JS has replaced the content of the <em>span</em> element by the value of the <em>title</em> in the dictionary (the value of <em>dictionary.title</em>).
+                </p>
+                
+                <h2 data-tattributes="id 'attributes'">Replacing attributes</h2>
+                <p>
+                    Now let's see how to replace the value of the attributes. Take a look at this template:
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;a data-tattributes="href url"&gt;a link&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    Now we declare the dictionary and invoke ZPT:
+                </p>
+                <strong>sample.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    url: "https://www.gnu.org/"
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;a href="https://www.gnu.org/" data-tattributes="href url"&gt;a link&lt;/a&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    <em>data-tattributes</em> supports more than one attribute (separated by <em>;</em>):
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;a data-tattributes="href url; title theTitle"&gt;a link&lt;/a&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+
+                <p>
+                    Now we declare the dictionary and invoke ZPT:
+                </p>
+                <strong>sample.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    url: "https://www.gnu.org/",
+    theTitle: "GNU"
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;a href="https://www.gnu.org/" title="GNU" data-tattributes="href url; title theTitle"&gt;a link&lt;/a&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

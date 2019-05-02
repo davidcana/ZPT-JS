@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>OmitTag and replace</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - OmitTag and replace</h1>
+                <ul>
+                    <li><a href="#omit">Omiting</a>.</li>
+                    <li><a href="#replace">Replacing</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                
+                <h2 data-tattributes="id 'omit'">Omiting a tag</h2>
+                <p>
+                    Sometimes we want to omit the surrounding start and end tags but evaluating his contents. It can be done using <em>data-tomit-tag</em> attribute. If we want to do this unconditionally:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [3]">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;div data-tdefine="user 'John'" data-tomit-tag=""&gt;
+            &lt;p&gt;
+                User: &lt;span data-tcontent="user"&gt;the user&lt;/span&gt;
+            &lt;/p&gt;
+            &lt;p&gt;
+                Message: &lt;span data-tcontent="string: hello, ${user}!"&gt;hello, user!&lt;/span&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            User: &lt;span data-tcontent="user"&gt;John&lt;/span&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            Message: &lt;span data-tcontent="string: hello, ${user}!"&gt;hello, John!&lt;/span&gt;
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    If we want to do this depending on a condition:
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [3]">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;div data-tdefine="user 'John'" data-tomit-tag="omitDiv"&gt;
+            &lt;p&gt;
+                User: &lt;span data-tcontent="user"&gt;the user&lt;/span&gt;
+            &lt;/p&gt;
+            &lt;p&gt;
+                Message: &lt;span data-tcontent="string: hello, ${user}!"&gt;hello, user!&lt;/span&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    The above example will omit the <em>div</em> tag if the variable <em>omitDiv</em> is true.
+                </p>
+                
+                <h2 data-tattributes="id 'replace'">Replacing</h2>
+                <p>
+                    The <em>data-treplace</em> attribute is similar to <em>data-tcontent</em>, but the first one removes the surrounding start and end tags:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-treplace="title"&gt;the title&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is hello world!
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

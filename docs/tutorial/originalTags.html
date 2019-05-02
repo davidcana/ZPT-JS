@@ -25,23 +25,18 @@
         </p>
 
         <strong>original-tags-sample.js</strong>
-        <pre class="brush: js">
+        <pre class="brush: js; highlight: [15]">
 "use strict";
 
 var zpt = require( 'zpt' );
 
 var dictionary = { 
-    aString: "string",
-    doggy: false,
-    number1: 1,
-    number100: 100,
     user: {
         name: "Bob", 
         age: function( ){
             return 25;
         }
-    },
-    items: [ 'item0', 'item1', 'item2' ]
+    }
 };
 
 // Don't forget to declare to use original tags!
@@ -66,7 +61,7 @@ zpt.run({
     &lt;body&gt;
         &lt;h1&gt;Some expressions&lt;/h1&gt;
         &lt;ol&gt;
-            &lt;li tal:content="user/name"&gt;xxx&lt;/li&gt;
+            &lt;li tal:content="user/name"&gt;the name&lt;/li&gt;
         &lt;/ol&gt;
     &lt;/body&gt;
 &lt;/html&gt;
