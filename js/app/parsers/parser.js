@@ -391,7 +391,8 @@ module.exports = (function() {
     
     var processElement = function( node, attributes, scope, _autoDefineHelper ) {
 
-        if ( ! processMETALDefineMacro(
+        // If it is defined a metalFillSlot or a metalDefineMacro do nothing
+        if ( attributes.metalFillSlot || ! processMETALDefineMacro(
             node, 
             scope, 
             attributes.metalDefineMacro 

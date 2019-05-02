@@ -322,6 +322,16 @@ After use macro
         assert.equal( $('#t13-1').text() , "It works!" );
         assert.equal( $('#t13-2').text() , "It also works!" );
     });
+    
+    QUnit.test( "Slot evaluation", function( assert ) {
+        assert.equal( count( '[href="/sales"]' ) , 1  );
+    });
+}
+
+function count( selector ){
+    return $( selector ).map( function( index, element ) {
+        return this.innerHTML;
+    } ).get().length;
 }
 
 function getValues( selector ){
