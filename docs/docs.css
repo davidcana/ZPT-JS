@@ -146,6 +146,12 @@ pre.js {
     color: white;
 }
 
+/* Changes */
+.changes-date {
+    color: darkseagreen;
+    font-size: 60%;
+}
+
 /* Field option list */
 ul.fieldOptionList {
     list-style-type: none;

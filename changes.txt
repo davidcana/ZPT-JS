@@ -5,10 +5,14 @@ New in future versions
 - Add if: expression (example-> if: isImportant 'important' is equals to cond: isImportant 'important' '')?
 - Add data-telse and data-telse-condition tags?
 - Add data-tswitch expression and data-tcase expression?
+- Implement adquisition?
 
 New in 0.33.0
 - Add new command: update?
 - Add options.bind (boolean) to set the list of properties to bind?
+
+New in 0.32.1
+- Bug fixed: contents of metalFillSlot must not be evaluated.
 
 New in 0.32.0
 - New configuration option added: dictionaryExtension.
