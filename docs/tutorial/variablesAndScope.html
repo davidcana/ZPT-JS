@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Variables and scope</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Variables and scope</h1>
+                <ul>
+                    <li><a href="#directory">The directory</a>.</li>
+                    <li><a href="#defining">Defining variables</a>.</li>
+                    <li><a href="#redefining">Redefining variables</a>.</li>
+                    <li><a href="#global">Defining global variables</a>.</li>
+                    <li><a href="#nocall">Defining nocall variables</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'directory'">The directory</h2>
+                <p>
+                    Take a look again to the dictionary:
+                </p>
+                <strong>sample.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    msg: "hello world!"
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    In this example we define a variable called <em>msg</em> in the dictionary. The scope of all the variables in the dictionary is global: this means it will be accesible by any ZPT-JS attribute in the template.
+                </p>
+                
+                <h2 data-tattributes="id 'defining'">Defining variables</h2>
+                <p>
+                    Take a look again to this template:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p id="p1"&gt;
+            ...
+        &lt;/p&gt;
+        &lt;p id="p2" data-tdefine="var 1"&gt;
+            ...
+        &lt;/p&gt;
+        &lt;p id="p3"&gt;
+            ...
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    The <em>msg</em> variable is accesible in the entire document, but the <em>var</em> one is only inside <em>p2</em>: Inside <em>p1</em> (not defined yet) or <em>p3</em> (out of scope) it is not accesible.
+                </p>
+                
+                <h2 data-tattributes="id 'redefining'">Redefining variables</h2>
+                <p>
+                    Now we are going to define the same variable twice. Take a look again to this template:
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;div data-tdefine="var 1"&gt;
+            var = &lt;span data-tcontent="var"&gt;must be 1&lt;/span&gt;
+            &lt;div data-tdefine="var 2"&gt;
+                var = &lt;span data-tcontent="var"&gt;must be 2&lt;/span&gt;
+            &lt;/div&gt;
+            var = &lt;span data-tcontent="var"&gt;must be 1&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                <p>
+                    Here the <em>var</em> variable is evaluated 3 times. What value will result?
+                </p>
+                <ol>
+                    <li>Must be 1. The variable is defined just in the parent node with the value <em>1</em>.</li>
+                    <li>Must be 2. The variable is redefined just in the parent node with the value <em>2</em>.</li>
+                    <li>Must be 1. The redefinition is out of scope and the value is <em>1</em> again.</li>
+                </ol>
+                
+                <h2 data-tattributes="id 'global'">Defining global variables</h2>
+                <p>
+                    Sometimes is useful to define global variables in a template. How?
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p id="p1"&gt;
+            ...
+        &lt;/p&gt;
+        &lt;p id="p2" data-tdefine="global var 1"&gt;
+            ...
+        &lt;/p&gt;
+        &lt;p id="p3"&gt;
+            ...
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                <p>
+                    The <em>var</em> variable is accesible after its declaration in <em>p2</em> (accesible inside <em>p2</em> and <em>p3</em>): Inside <em>p1</em> (not defined yet) it is not accesible.
+                </p>
+                
+                <h2 data-tattributes="id 'nocall'">Defining nocall variables</h2>
+                <p>
+                    When ZPT-JS finds a <em>data-tdefine</em> attribute it defines the variable and set its value with the evaluated value. After that, every time the variable appears ZPT-JS will evaluate it with that value, always the same value.
+                </p>
+                <p>
+                    But sometimes we need the expression is reevaluated every time a variable appears. How?
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p data-tdefine="nocall run counter()"&gt;
+            &lt;span data-tcontent="run"&gt;must be 1&lt;/span&gt;
+            &lt;span data-tcontent="run"&gt;must be 2&lt;/span&gt;
+            &lt;span data-tcontent="run"&gt;must be 3&lt;/span&gt;
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                <p>
+                    Suppose <em>counter()</em> function returns an increased value starting with <em>1</em>. Then every time <em>run</em> value is required <em>counter()</em> function will be executed.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>
