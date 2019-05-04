@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Managing errors</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Managing errors</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <p>
+                    Errors happen. ZPT-JS manages errors using <em>data-ton-error</em> attribute. Let's see an example:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;p data-ton-error="'Oh, noooo!'"&gt;
+    ...
+&lt;/p&gt;
+                </pre>
+                <p>
+                    If an error occurs inside the <em>p</em> tag the full tag is replaced by the <em>Oh, noooo</em> string.
+                </p>
+                
+                <p>
+                    The <em>data-ton-error</em> attribute supports any type of expression, so you can use for example a <em>function expression</em> to invoke a function to treat the error:
+                </p>
+                <pre class="brush: html">
+&lt;p data-ton-error="errorManager()"&gt;
+    ...
+&lt;/p&gt;
+                </pre>
+                
+            </article>
+        </div>
+    </body>
+</html>

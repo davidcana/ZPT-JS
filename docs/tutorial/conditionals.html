@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Conditionals</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Conditionals</h1>
+                <ul>
+                    <li><a href="#simple">Simple conditionals</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'simple'">Simple conditionals</h2>
+                <p>
+                    Sometimes we want to show some HTML elements depending on a condition. This can be done using <em>data-tcondition</em> attribute. Using it the element and its content will be shown only if the condition is evaluated to <code>true</code>. Let's see an example:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;p data-tcondition="user/isLogged"&gt;
+    ...
+&lt;/p&gt;
+                </pre>
+                
+                <p>
+                    ZPT-JS evaluates the <em>user/isLogged</em> expression: only if it evaluated to <code>true</code> the <em>p</em> tag will be shown. Otherwise it will be hidden.
+                </p>
+                
+                <p>
+                    But... when does an expression evaluate to <code>true</code>? If an expression evaluates to any of the next:
+                </p>
+                <ul>
+                    <li><code>undefined</code></li>
+                    <li><code>null</code></li>
+                    <li><code>'false'</code></li>
+                    <li><code>false</code></li>
+                    <li><code>0</code></li>
+                </ul>
+                <p>
+                    the expression evaluates to <code>false</code>. Otherwise the expression evaluates to <code>true</code>. If an exception is thrown trying to evaluate the expression, it evaluates to <code>false</code>.
+                </p>
+                
+            </article>
+        </div>
+    </body>
+</html>
