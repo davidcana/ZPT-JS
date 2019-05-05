@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>OmitTag and replace</title>
+        <title>Omiting and replacing</title>
         
         <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
         <script type="text/javascript" src="../js/zp2.js" defer></script>
@@ -14,7 +14,7 @@
     <body>
         <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
             <div data-mfill-slot="'page-header'">
-                <h1>ZPT-JS tutorial - OmitTag and replace</h1>
+                <h1>ZPT-JS tutorial - Omiting and replacing</h1>
                 <ul>
                     <li><a href="#omit">Omiting</a>.</li>
                     <li><a href="#replace">Replacing</a>.</li>
@@ -22,7 +22,7 @@
             </div>
             <article data-mfill-slot="'article'">
                 
-                <h2 data-tattributes="id 'omit'">Omiting a tag</h2>
+                <h2 data-tattributes="id 'omit'">Omiting</h2>
                 <p>
                     Sometimes we want to omit the surrounding start and end tags but evaluating his contents. It can be done using <em>data-tomit-tag</em> attribute. If we want to do this unconditionally:
                 </p>
@@ -80,7 +80,7 @@
                 </pre>
                 
                 <p>
-                    The above example will omit the <em>div</em> tag if the variable <em>omitDiv</em> is true.
+                    The above example will omit the <em>div</em> tag if the variable <em>omitDiv</em> evaluates to <code>true</code>: rules to this are the same than <a href="conditionals.html">conditional's</a>
                 </p>
                 
                 <h2 data-tattributes="id 'replace'">Replacing</h2>

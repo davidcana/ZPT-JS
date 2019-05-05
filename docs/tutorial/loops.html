@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Conditionals</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@template2.html'" data-tdefine="footer-macro 'tutorialFooter'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Loops</h1>
+                <ul>
+                    <li><a href="#intro">Intro</a>.</li>
+                    <li><a href="#advanced">Advanced repetition</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'intro'">Intro</h2>
+                <p>
+                    Now we are going to iterate through an array of objects to show its contents. Let's see the template:
+                </p>
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Price&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr data-trepeat="item tools"&gt;
+        &lt;td data-tcontent="item/name"&gt;the name&lt;/td&gt;
+        &lt;td data-tcontent="item/price"&gt;the price&lt;/td&gt;
+        &lt;td data-tcontent="item/description"&gt;the description&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                </pre>
+                
+                <p>
+                    And now the javascript code:
+                </p>
+                <strong>sample.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    tools: [
+        {
+            name: "Hammer",
+            price: 15,
+            description: "Tool with a heavy metal head mounted at right angles at the end of a handle, used for jobs such as breaking things and driving in nails."
+        },
+        {
+            name: "Saw",
+            price: 25,
+            description: "A hand tool for cutting wood or other hard materials, typically with a long, thin serrated blade and operated using a backwards and forwards movement."
+        },
+        {
+            name: "Screwdriver",
+            price: 20,
+            description: "A tool with a flattened or cross-shaped tip that fits into the head of a screw to turn it."
+        }
+    ]
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <h2 data-tattributes="id 'advanced'">Advanced repetition</h2>
+                <p>
+                    There are a few minor variations for <code>tal:repeat</code>:
+                </p>
+                <ul>
+                    <li>The repeat expression must evaluate to an array.</li>
+                    <li>The repeat variable does not exist, use <code>[item-name]-repeat</code> variable:</li>
+                </ul>
+                <p>
+                    Repeat variables provide information about the current repetition. The following attributes are available on ‘repeat’ variables:
+                </p>
+                <ul>
+                    <li><em>index</em>. Repetition number, starting from zero.</li>
+                    <li><em>number</em>. Repetition number, starting from one.</li>
+                    <li><em>even</em>. True for even-indexed repetitions (0, 2, 4, …).</li>
+                    <li><em>odd</em>. True for odd-indexed repetitions (1, 3, 5, …).</li>
+                    <li><em>start</em>. True for the starting repetition (index 0).</li>
+                    <li><em>end</em>. True for the ending, or final, repetition.</li>
+                    <li><em>length</em>. Length of the sequence, which will be the total number of repetitions.</li>
+                    <li><em>letter</em>. Repetition letter, starting from a.</li>
+                    <li><em>Letter</em>. Repetition letter, starting from A.</li>
+                    <li><em>roman</em>. Repetition roman number, starting from i.</li>
+                    <li><em>Roman</em>. Repetition roman number, starting from I.</li>
+                </ul>
+
+                <pre class="brush: html">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Value&lt;/th&gt;
+        &lt;th&gt;Index&lt;/th&gt;
+        &lt;th&gt;Number&lt;/th&gt;
+        &lt;th&gt;Even index&lt;/th&gt;
+        &lt;th&gt;Odd index&lt;/th&gt;
+        &lt;th&gt;Start&lt;/th&gt;
+        &lt;th&gt;End&lt;/th&gt;
+        &lt;th&gt;Length&lt;/th&gt;
+        &lt;th&gt;Letter&lt;/th&gt;
+        &lt;th&gt;Capital Letter&lt;/th&gt;
+        &lt;th&gt;Roman&lt;/th&gt;
+        &lt;th&gt;Capital Roman&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr data-trepeat="item tools"&gt;
+        &lt;td data-tcontent="item/name"&gt;value&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/index()"&gt;index&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/number()"&gt;number&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/even()"&gt;even&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/odd()"&gt;odd&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/start()"&gt;start&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/end()"&gt;end&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/length()"&gt;length&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/letter()"&gt;letter&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/Letter()"&gt;capital letter&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/roman()"&gt;roman&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/Roman()"&gt;capitalRoman&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

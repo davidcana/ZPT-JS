@@ -27,7 +27,7 @@
         
         <h3 id="metal">METAL</h3>
         <p>
-            METAL statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. Use-macro tag uses expressions (ZPT's version does not, it uses literals).
+            Macro tag attributes are called <em>Macro Expansion Tag Attribute Language (METAL)</em> statements. <em>METAL</em> statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. <em>Use-macro</em> tag uses expressions (ZPT's version does not, it uses literals).
         </p>
 
         <h3 id="local">Local macros</h3>
@@ -122,7 +122,7 @@ zpt.run({
         <p>
             And in your HTML code:
         </p>
-        <pre class="brush: js">
+        <pre class="brush: html">
 &lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
@@ -130,9 +130,9 @@ zpt.run({
         <p>
             <em>Context</em> object provides a conf property to set a prefix to all relative URLs:
         </p>
-        <pre>
+        <pre class="brush: js">
 context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
-    </pre>
+        </pre>
         <p>
             Then if you use an URL like <em>macros.html</em> it will be replaced by <em>/path/to/your/templates/macros.html</em>.
         </p>

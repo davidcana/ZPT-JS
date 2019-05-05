@@ -21,9 +21,17 @@
         </div>
         
         <p>
-            The <em>data-*</em> attributes is used to store custom data private to the page or application. These are the standard in HTML5. If you prefer to use the original ZPT's attributes use <code>context.useOriginalTags()</code> method:
+            A ZPT template is a not well formed HTML document. This is not important because ZPT is on server side. The generated HTML documents do not include ZPT tags, so they are well formed HTML documents.
         </p>
-
+        <p>
+            However, this does not work this way using ZPT-JS. ZPT-JS is on client side: the template and the generated HTML document are the same file, so ZPT tags break HTML and make HTML documents not well formed.
+        </p>
+        <p>
+            The default configuration of ZPT-JS use the standard way of extend HTML: the <em>data-*</em> attributes. So <em>tal:content</em> (a ZPT attribute) is replaced by <em>data-tcontent</em>. The complete list of replacing is at <a href="tags.html">Tags page</a>.
+        </p>
+        <p>
+            If you prefer to use the original ZPT's attributes invoke <code>zpt.context.useOriginalTags()</code> method before <code>run</code> method:
+        </p>
         <strong>original-tags-sample.js</strong>
         <pre class="brush: js; highlight: [15]">
 "use strict";

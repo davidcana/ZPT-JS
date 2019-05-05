@@ -19,8 +19,8 @@
                     <li><a href="#directory">The directory</a>.</li>
                     <li><a href="#defining">Defining variables</a>.</li>
                     <li><a href="#redefining">Redefining variables</a>.</li>
-                    <li><a href="#global">Defining global variables</a>.</li>
-                    <li><a href="#nocall">Defining nocall variables</a>.</li>
+                    <li><a href="#global">Global variables</a>.</li>
+                    <li><a href="#nocall">Nocall variables</a>.</li>
                 </ul>
             </div>
             <article data-mfill-slot="'article'">
@@ -102,7 +102,7 @@ zpt.run({
                     <li>Must be 1. The redefinition is out of scope and the value is <em>1</em> again.</li>
                 </ol>
                 
-                <h2 data-tattributes="id 'global'">Defining global variables</h2>
+                <h2 data-tattributes="id 'global'">Global variables</h2>
                 <p>
                     Sometimes is useful to define global variables in a template. How?
                 </p>
@@ -127,7 +127,7 @@ zpt.run({
                     The <em>var</em> variable is accesible after its declaration in <em>p2</em> (accesible inside <em>p2</em> and <em>p3</em>): Inside <em>p1</em> (not defined yet) it is not accesible.
                 </p>
                 
-                <h2 data-tattributes="id 'nocall'">Defining nocall variables</h2>
+                <h2 data-tattributes="id 'nocall'">Nocall variables</h2>
                 <p>
                     When ZPT-JS finds a <em>data-tdefine</em> attribute it defines the variable and set its value with the evaluated value. After that, every time the variable appears ZPT-JS will evaluate it with that value, always the same value.
                 </p>

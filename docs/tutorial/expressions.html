@@ -64,7 +64,7 @@
                 <p>
                     
                 <p>
-                    Every <strong>path expressions</strong> starts with a variable name. The available variable names refer either to objects or variables defined in the dictionary or within the Page Template. Let's see some examples of path expressions!
+                    Every <strong>path expression</strong> starts with a variable name. The available variable names refer either to objects or variables defined in the dictionary or within the Page Template. Let's see some examples of path expressions!
                 </p>
                 
                 <pre class="brush: html">
@@ -88,6 +88,16 @@
                     To evaluate <em>user/birth()</em>, ZPT-JS identifies first <em>user</em> as an object, then searchs its <em>birth</em> method, then evaluates their arguments (in this case there is none) and run it. This is a <strong>method expression</strong>.
                 </p>
                 
+                <p>
+                    Path expressions can be as complex as you wish:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="user/getData('personal')/day"&gt;a day&lt;/span&gt;
+                </pre>
+                <p>
+                    ZPT-JS evaluates first <em>user</em> as an object, then searchs its <em>getData</em> method, then evaluates their arguments (in this case a string literal: <em>personal</em>), run it and then get the <em>day</em> property of the resulting object.
+                </p>
+                
                 <pre class="brush: html">
 &lt;span data-tcontent="myFunction( 'an argument' )"&gt;birth&lt;/span&gt;
                 </pre>
@@ -104,7 +114,7 @@
                     These are some examples of <strong>array expressions</strong>. The first one evaluates to the first element of the <em>items</em> array. The second one evaluates to an array with elements 1, 5, 99 and number.
                 </p>
                 <p>
-                    The third one includes a <strong>range expressions</strong>: <em>4:8:2</em>. The first argument (4) defines the number to start, the second one (8) the number to stop and the third one (2) the step. It evaluates to 4, 6, 8.
+                    The third one includes a <strong>range expression</strong>: <em>4:8:2</em>. The first argument (4) defines the number to start, the second one (8) the number to stop and the third one (2) the step. It evaluates to 4, 6, 8. So the full expression evaluates to 4, 6, 8 and number.
                 </p>
                 
                 <h2 data-tattributes="id 'arithmethic'">Arithmethic expressions</h2>
@@ -150,7 +160,7 @@
                 </pre>
                 
                 <p>
-                    The first 4 use these math operations: equals (eq:), not (not:), greater than (gt:) and lesser than (lt:). The last one uses the in operator (in:): it evaluates to true if the first element is included into the next elements.
+                    The first 4 use these comparison operations: equals (eq:), not (not:), greater than (gt:) and lesser than (lt:). The last one uses the <em>in</em> operator (in:): it evaluates to true if the first element is included into the next elements.
                 </p>
                 
                 <h2 data-tattributes="id 'scripting'">Scripting expressions</h2>
@@ -159,7 +169,7 @@
                 </p>
                 <pre class="brush: html">
 &lt;span data-tcontent="js: ${number100} + 1"&gt;must be 101&lt;/span&gt;
-&lt;span data-tcontent="$('#number100')"&gt;must be 100&lt;/span&gt;
+&lt;span data-tcontent="$('#myId')"&gt;search an id called myId in the DOM&lt;/span&gt;
                 </pre>
                 <p>
                     The first one is a <strong>javascript expression</strong>: ZPT-JS evaluates the expressions (starting by <em>$</em> and surrounded by <em>{}</em>) and then execute the resulting string as javascript code.
@@ -168,9 +178,9 @@
                     The second one is a <strong>jquery expression</strong>: it evaluates the string surrounded by parenthesis as a jquery selector.
                 </p>
                 
-                <h2 data-tattributes="id 'mis'">Misc expressions</h2>
+                <h2 data-tattributes="id 'misc'">Misc expressions</h2>
                 <p>
-                    This category includes <strong>exists</strong> and <strong>string</strong> expressions.
+                    This category includes <strong>exists</strong>, <strong>string</strong> and <strong>format</strong> expressions.
                 </p>
                 <pre class="brush: html">
 &lt;span data-tcontent="exists: existingVar"&gt;must be true&lt;/span&gt;
@@ -182,8 +192,18 @@
                     The first and the second expressions are <strong>exists expressions</strong>. The evaluate to true if the arguments is not undefined (the first one). If a path is provided it evaluates the full path must exist to be evaluated as true (the second one).
                 </p>
                 <p>
-                    The third one is a <strong>string expression</strong>. They support to combine strings and aother expressions to build a string.
+                    The third one is a <strong>string expression</strong>. They support to combine strings and other expressions to build a string.
                 </p>
+                
+                <p>
+                    <strong>Format expressions</strong> use components called <strong>formatters</strong> to format the evaluation of an expression. ZPT-JS includes some built-in formatters:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="format: lowerCase 'Test'"&gt;must be test&lt;/span&gt;
+&lt;span data-tcontent="format: upperCase 'Test'"&gt;must be TEST&lt;/span&gt;
+&lt;span data-tcontent="format: fix 1.371 2"&gt;must be 1.37&lt;/span&gt;
+&lt;span data-tcontent="format: fix (/: 1 3) 2"&gt;must be 0.33&lt;/span&gt;
+                </pre>
             </article>
         </div>
     </body>
