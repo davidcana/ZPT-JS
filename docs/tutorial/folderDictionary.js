@@ -2,5 +2,5 @@
 
 //
 var folderDictionary = {
-    'footer-macro': 'tutorialFooter@template2.html'
+    'footer-macro': 'tutorialFooter@templates.html'
 };

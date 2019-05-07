@@ -10,134 +10,130 @@
         <link rel="stylesheet" type="text/css" href="../docs.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS reference</h1>
-        </div>
+        <div data-muse-macro="'page@templates.html'" data-tdefine="footer-macro 'footer@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2>Configuration options</h2>
+                <ul>
+                    <li><a href="configuration-command.html">command</a>. .</li>
+                    <li><a href="configuration-declaredRemotePageUrls.html">declaredRemotePageUrls</a>. .</li>
+                    <li><a href="configuration-dictionary.html">dictionary</a>. .</li>
+                    <li><a href="configuration-i18n.html">i18n</a>. .</li>
+                    <li><a href="configuration-maxFolderDictionaries.html">maxFolderDictionaries</a>. .</li>
+                    <li><a href="configuration-root.html">root</a>. .</li>
+                    <li><a href="configuration-target.html">target</a>. .</li>
+                    <li><a href="configuration-notRemoveGeneratedTags.html">notRemoveGeneratedTags</a>. .</li>
+                </ul>
 
-        <h2>Configuration options</h2>
-        <ul>
-            <li><a href="configuration-command.html">command</a>. .</li>
-            <li><a href="configuration-declaredRemotePageUrls.html">declaredRemotePageUrls</a>. .</li>
-            <li><a href="configuration-dictionary.html">dictionary</a>. .</li>
-            <li><a href="configuration-i18n.html">i18n</a>. .</li>
-            <li><a href="configuration-root.html">root</a>. .</li>
-            <li><a href="configuration-target.html">target</a>. .</li>
-            <li><a href="configuration-notRemoveGeneratedTags.html">notRemoveGeneratedTags</a>. .</li>
-        </ul>
-        
-        <h2>Attributes</h2>
-        <ul>
-            <li>
-                <a href="attributes-all.html">All the attributes</a>. The complete list of ZPT-JS attributes and their ZPT attributes.
-            </li>
-            <li>
-                <a href="attributes-evaluationOrder.html">Evaluation order</a>. .
-            </li>
-            <li>
-                <em>TAL</em>. 
-                Template Attribute Language (TAL).
+                <h2>Attributes</h2>
                 <ul>
-                    <li><a href="attributes-TALAttributes.html">TALAttributes</a>. .</li>
-                    <li><a href="attributes-TALCondition.html">TALCondition</a>. .</li>
-                    <li><a href="attributes-TALContent.html">TALContent</a>. .</li>
-                    <li><a href="attributes-TALDefine.html">TALDefine</a>. .</li>
-                    <li><a href="attributes-TALOmitTag.html">TALOmitTag</a>. .</li>
-                    <li><a href="attributes-TALOnError.html">TALOnError</a>. .</li>
-                    <li><a href="attributes-TALRepeat.html">TALRepeat</a>. .</li>
-                    <li><a href="attributes-TALReplace.html">TALReplace</a>. .</li>
-                </ul>
-            </li>
-            <li>
-                <em>METAL</em>. 
-                Macro Expansion Tag Attribute Language.
+                    <li>
+                        <a href="attributes-all.html">All the attributes</a>. The complete list of ZPT-JS attributes and their ZPT attributes.
+                    </li>
+                    <li>
+                        <a href="attributes-evaluationOrder.html">Evaluation order</a>. .
+                    </li>
+                    <li>
+                        <em>TAL</em>. 
+                        Template Attribute Language (TAL).
+                        <ul>
+                            <li><a href="attributes-TALAttributes.html">TALAttributes</a>. .</li>
+                            <li><a href="attributes-TALCondition.html">TALCondition</a>. .</li>
+                            <li><a href="attributes-TALContent.html">TALContent</a>. .</li>
+                            <li><a href="attributes-TALDefine.html">TALDefine</a>. .</li>
+                            <li><a href="attributes-TALOmitTag.html">TALOmitTag</a>. .</li>
+                            <li><a href="attributes-TALOnError.html">TALOnError</a>. .</li>
+                            <li><a href="attributes-TALRepeat.html">TALRepeat</a>. .</li>
+                            <li><a href="attributes-TALReplace.html">TALReplace</a>. .</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <em>METAL</em>. 
+                        Macro Expansion Tag Attribute Language.
+                        <ul>
+                            <li><a href="attributes-METALDEfineMacro.html">METALDEfineMacro</a>. .</li>
+                            <li><a href="attributes-METALUseMacro.html">METALUseMacro</a>. .</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <em>I18N</em>. 
+                        I18N attributes.
+                        <ul>
+                            <li><a href="attributes-I18nDomain.html">I18nDomain</a>. .</li>
+                            <li><a href="attributes-I18nLanguage.html">I18nLanguage</a>. .</li>
+                        </ul>
+                    </li>
+                </ul>     
+
+                <h2>Expressions</h2>
                 <ul>
-                    <li><a href="attributes-METALDEfineMacro.html">METALDEfineMacro</a>. .</li>
-                    <li><a href="attributes-METALUseMacro.html">METALUseMacro</a>. .</li>
+                    <li>
+                        <a href="expressions-arithmethic.html">Arithmethic expressions</a>.
+                        <ul>
+                            <li>+:</li>
+                            <li>-:</li>
+                            <li>*:</li>
+                            <li>/:</li>
+                            <li>%:</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="expressions-boolean.html">Boolean expressions</a>.
+                        <ul>
+                            <li>and:</li>
+                            <li>cond:</li>
+                            <li>not:</li>
+                            <li>or:</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="expressions-comparison.html">Comparison expressions</a>.
+                        <ul>
+                            <li>eq:</li>
+                            <li>gt:</li>
+                            <li>in:</li>
+                            <li>lt:</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="expressions-i18n.html">I18n expressions</a>.
+                        <ul>
+                            <li>tr:</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="expressions-path.html">Path expressions</a>.
+                        <ul>
+                            <li>Array expressions</li>
+                            <li>Function expressions</li>
+                            <li>Indirection expressions</li>
+                            <li>List expressions</li>
+                            <li>Literal expressions</li>
+                            <li>Method expressions</li>
+                            <li>Property expressions</li>
+                            <li>Range expressions</li>
+                            <li>Variable expressions</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="expressions-scripting.html">Scripting expressions</a>.
+                        <ul>
+                            <li>Javascript expressions</li>
+                            <li>Jquery expressions</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <em>Misc expressions</em>.
+                        <ul>
+                            <li><a href="expressions-exists.html">exists:</a>. .</li>
+                            <li><a href="expressions-format.html">format:</a>. .</li>
+                            <li><a href="expressions-string.html">string:</a>. .</li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-            <li>
-                <em>I18N</em>. 
-                I18N attributes.
-                <ul>
-                    <li><a href="attributes-I18nDomain.html">I18nDomain</a>. .</li>
-                    <li><a href="attributes-I18nLanguage.html">I18nLanguage</a>. .</li>
-                </ul>
-            </li>
-        </ul>     
-        
-        <h2>Expressions</h2>
-        <ul>
-            <li>
-                <a href="expressions-arithmethic.html">Arithmethic expressions</a>.
-                <ul>
-                    <li>+:</li>
-                    <li>-:</li>
-                    <li>*:</li>
-                    <li>/:</li>
-                    <li>%:</li>
-                </ul>
-            </li>
-            <li>
-                <a href="expressions-boolean.html">Boolean expressions</a>.
-                <ul>
-                    <li>and:</li>
-                    <li>cond:</li>
-                    <li>not:</li>
-                    <li>or:</li>
-                </ul>
-            </li>
-            <li>
-                <a href="expressions-comparison.html">Comparison expressions</a>.
-                <ul>
-                    <li>eq:</li>
-                    <li>gt:</li>
-                    <li>in:</li>
-                    <li>lt:</li>
-                </ul>
-            </li>
-            <li>
-                <a href="expressions-i18n.html">I18n expressions</a>.
-                <ul>
-                    <li>tr:</li>
-                </ul>
-            </li>
-            <li>
-                <a href="expressions-path.html">Path expressions</a>.
-                <ul>
-                    <li>Array expressions</li>
-                    <li>Function expressions</li>
-                    <li>Indirection expressions</li>
-                    <li>List expressions</li>
-                    <li>Literal expressions</li>
-                    <li>Method expressions</li>
-                    <li>Property expressions</li>
-                    <li>Range expressions</li>
-                    <li>Variable expressions</li>
-                </ul>
-            </li>
-            <li>
-                <a href="expressions-scripting.html">Scripting expressions</a>.
-                <ul>
-                    <li>Javascript expressions</li>
-                    <li>Jquery expressions</li>
-                </ul>
-            </li>
-            <li>
-                <em>Misc expressions</em>.
-                <ul>
-                    <li><a href="expressions-exists.html">exists:</a>. .</li>
-                    <li><a href="expressions-format.html">format:</a>. .</li>
-                    <li><a href="expressions-string.html">string:</a>. .</li>
-                </ul>
-            </li>
-        </ul>
-        
-        <div id="commonFooter" data-muse-macro="'footer@templates.html'">
-            <!-- The footer -->
+            </article>
         </div>
     </body>
 </html>

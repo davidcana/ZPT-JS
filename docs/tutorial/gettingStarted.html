@@ -12,76 +12,65 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS tutorial - Getting started</h1>
-            <ul>
-                <li><a href="#downloading">Downloading ZPT-JS and its dependencies</a>.</li>
-                <li><a href="#header">Configuring the HTML header</a>.</li>
-                <li><a href="#template">Write the template</a>.</li>
-                <li><a href="#dictionary">Build the dictionary</a>.</li>
-                <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
-                <li><a href="#demo">Demo</a>.</li>
-            </ul>
-        </div>
-        
-        <a id="downloading"></a>
-        <h2>Downloading ZPT-JS and its dependencies</h2>
-        <p>
-            Go to <a href="../download.html">Download</a> section and follow the instructions to download ZPT-JS and its dependencies.
-        </p>
-        
-        <a id="header"></a>
-        <h2>Configuring the HTML header</h2>
-        <p>
-            You must add to your web page the javascript code of ZPT-JS (and its dependencies):
-        </p>
-        <pre class="brush: html">
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Getting started</h1>
+                <ul>
+                    <li><a href="#downloading">Downloading ZPT-JS and its dependencies</a>.</li>
+                    <li><a href="#header">Configuring the HTML header</a>.</li>
+                    <li><a href="#template">Write the template</a>.</li>
+                    <li><a href="#dictionary">Build the dictionary</a>.</li>
+                    <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
+                    <li><a href="#demo">Demo</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'downloading'">Downloading ZPT-JS and its dependencies</h2>
+                <p>
+                    Go to <a href="../download.html">Download</a> section and follow the instructions to download ZPT-JS and its dependencies.
+                </p>
+
+                <h2 data-tattributes="id 'header'">Configuring the HTML header</h2>
+                <p>
+                    You must add to your web page the javascript code of ZPT-JS (and its dependencies):
+                </p>
+                <pre class="brush: html">
 &lt;head&gt;
     ...
     &lt;script src="/zpt/zpt.min.js" type="text/javascript"&gt;&lt;/script&gt;
     ...
 &lt;/head&gt;
-        </pre>
-        
-        <a id="template"></a>
-        <h2>Write the template</h2>
-        <p>
-            :
-        </p>
-        <pre class="brush: html">
+                </pre>
 
-        </pre>
-        
-        <a id="dictionary"></a>
-        <h2>Build the dictionary</h2>
-        <p>
-            
-        </p>
-        <pre class="brush: js">
+                <h2 data-tattributes="id 'template'">Write the template</h2>
+                <p>
+                    :
+                </p>
+                <pre class="brush: html">
 
-        </pre>
-        
-        <a id="invoke"></a>
-        <h2>Invoke ZPT-JS</h2>
-        <p>
+                </pre>
 
-        </p>
-        <pre class="brush: js">
+                <h2 data-tattributes="id 'dictionary'">Build the dictionary</h2>
+                <p>
 
-        </pre>
-        
-        <a id="demo"></a>
-        <h2>Demo</h2>
-        <p>
-            Let's take a look at ZPT-JS in action:
-        </p>
-        
-        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
-            <!-- The footer -->
+                </p>
+                <pre class="brush: js">
+
+                </pre>
+
+                <h2 data-tattributes="id 'invoke'">Invoke ZPT-JS</h2>
+                <p>
+
+                </p>
+                <pre class="brush: js">
+
+                </pre>
+
+                <h2 data-tattributes="id 'demo'">Demo</h2>
+                <p>
+                    Let's take a look at ZPT-JS in action:
+                </p>
+            </article>
         </div>
     </body>
 </html>

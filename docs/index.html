@@ -10,67 +10,59 @@
         <link rel="stylesheet" type="text/css" href="docs.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>Zenon Page Templates - JS (ZPT-JS)</h1>
-            <p class="subheader">
-                A javascript implementation of <strong>Zope Page Templates (ZPT)</strong>.
-            </p>
-            <p class="linkButton">
-                <a href="tutorial/gettingStarted.html" title="A quick start guide for ZPT-JS">Getting started</a>
-            </p>
-        </div>
-        
-        <article>
-            <h2>What is ZPT-JS</h2>
-            <p>
-                <strong>Zenon Page Templates - JS (ZPT-JS)</strong> is a <em>Javascript API</em> that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes. <strong>ZPT-JS</strong> is a javascript implementation of Zope Page Templates (ZPT). Take a look at <a href="http://docs.zope.org/zope2/zope2book/ZPT.html">Zope2 book</a> to learn about Zope Page Templates.
-            </p>
-            <p>
-                Core features of <strong>ZPT-JS</strong> are:
-            </p>
-            <ul>
-                <li>Easy to learn; clean, simple and consistent syntax.</li>
-                <li>A rich and powerful group of expressions available (string, Jquery, logical, math, arrays, lists, ranges, function, method expressions...).</li>
-                <li>Don't break HTML! The HTML documents using ZPT-JS are valid HTML documents.</li>
-                <li>Makes it easy to designers maintain pages without having to abandon their tools.</li>
-                <li>Internal macro support; external asynchronous macro loading support.</li>
-                <li>I18n and L10n support using standards <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> and <a href="http://userguide.icu-project.org/formatparse/messages">ICU</a>.</li>
-            </ul>
-            
-            <h2>ZPT-JS and ZPT: similar but not equal</h2>
-            <p>
-                ZPT-JS is based on ZPT but it does not implement it at 100%: there are some important differences between ZPT-JS and ZPT.
-            </p>
-            <p>
-                Using ZPT we have:
-            </p>
-            <ul>
-                <li>the ZPT template (a HTML file with the ZPT tags inside)</li>
-                <li>the data</li>
-                <li>the final HTML file (the ZPT template combined with the data)</li>
-            </ul>
-            
-            <p>
-                Using ZPT-JS:
-            </p>
-            <ul>
-                <li>the ZPT template (a HTML file with the ZPT tags inside)</li>
-                <li>the data</li>
-                <li>the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.</li>
-            </ul>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>Zenon Page Templates - JS (ZPT-JS)</h1>
+                <p class="subheader">
+                    A javascript implementation of <strong>Zope Page Templates (ZPT)</strong>.
+                </p>
+                <p class="linkButton">
+                    <a href="tutorial/gettingStarted.html" title="A quick start guide for ZPT-JS">Getting started</a>
+                </p>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2>What is ZPT-JS</h2>
+                <p>
+                    <strong>Zenon Page Templates - JS (ZPT-JS)</strong> is a <em>Javascript API</em> that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes. <strong>ZPT-JS</strong> is a javascript implementation of Zope Page Templates (ZPT). Take a look at <a href="http://docs.zope.org/zope2/zope2book/ZPT.html">Zope2 book</a> to learn about Zope Page Templates.
+                </p>
+                <p>
+                    Core features of <strong>ZPT-JS</strong> are:
+                </p>
+                <ul>
+                    <li>Easy to learn; clean, simple and consistent syntax.</li>
+                    <li>A rich and powerful group of expressions available (string, Jquery, logical, math, arrays, lists, ranges, function, method expressions...).</li>
+                    <li>Don't break HTML! The HTML documents using ZPT-JS are valid HTML documents.</li>
+                    <li>Makes it easy to designers maintain pages without having to abandon their tools.</li>
+                    <li>Internal macro support; external asynchronous macro loading support.</li>
+                    <li>I18n and L10n support using standards <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> and <a href="http://userguide.icu-project.org/formatparse/messages">ICU</a>.</li>
+                </ul>
 
-            <p>
-                A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-tcontent`. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
-            </p>
-            
-        </article>
-        
-        <div id="commonFooter" data-muse-macro="'footer@templates.html'">
-            <!-- The footer -->
+                <h2>ZPT-JS and ZPT: similar but not equal</h2>
+                <p>
+                    ZPT-JS is based on ZPT but it does not implement it at 100%: there are some important differences between ZPT-JS and ZPT.
+                </p>
+                <p>
+                    Using ZPT we have:
+                </p>
+                <ul>
+                    <li>the ZPT template (a HTML file with the ZPT tags inside)</li>
+                    <li>the data</li>
+                    <li>the final HTML file (the ZPT template combined with the data)</li>
+                </ul>
+
+                <p>
+                    Using ZPT-JS:
+                </p>
+                <ul>
+                    <li>the ZPT template (a HTML file with the ZPT tags inside)</li>
+                    <li>the data</li>
+                    <li>the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.</li>
+                </ul>
+
+                <p>
+                    A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-tcontent`. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
+                </p>
+            </article>
         </div>
     </body>
 </html>

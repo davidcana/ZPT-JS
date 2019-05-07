@@ -12,65 +12,62 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS tutorial - Macros</h1>
-            <ul>
-                <li><a href="#metal">METAL</a>.</li>
-                <li><a href="#local">Local macros</a>.</li>
-                <li><a href="#external">External macros</a>.</li>
-            </ul>
-        </div>
-        
-        <h3 id="metal">METAL</h3>
-        <p>
-            Macro tag attributes are called <em>Macro Expansion Tag Attribute Language (METAL)</em> statements. <em>METAL</em> statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. <em>Use-macro</em> tag uses expressions (ZPT's version does not, it uses literals).
-        </p>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Macros</h1>
+                <ul>
+                    <li><a href="#metal">METAL</a>.</li>
+                    <li><a href="#local">Local macros</a>.</li>
+                    <li><a href="#external">External macros</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'metal'">METAL</h2>
+                <p>
+                    Macro tag attributes are called <em>Macro Expansion Tag Attribute Language (METAL)</em> statements. <em>METAL</em> statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. <em>Use-macro</em> tag uses expressions (ZPT's version does not, it uses literals).
+                </p>
 
-        <h3 id="local">Local macros</h3>
-        <p>
-            Local macros are defined at the same HTML file where they are invoked. An example of definition of a local macro:
-        </p>
-        <pre class="brush: html">
+                <h2 data-tattributes="id 'local'">Local macros</h2>
+                <p>
+                    Local macros are defined at the same HTML file where they are invoked. An example of definition of a local macro:
+                </p>
+                <pre class="brush: html">
 &lt;ul data-mdefine-macro="list"&gt;
     &lt;li data-trepeat="item items"&gt;
         &lt;span data-tcontent="item"&gt;An item&lt;/span&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
-        </pre>
-        <p>
-            That macro generates an unordered list iterating through the <code>items</code> variable. Let's invoke them; to do this, the next HTML code must be at the same file.
-        </p>
-        <pre class="brush: html">
+                </pre>
+                <p>
+                    That macro generates an unordered list iterating through the <code>items</code> variable. Let's invoke them; to do this, the next HTML code must be at the same file.
+                </p>
+                <pre class="brush: html">
 &lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list'"&gt;
     Macro goes here
 &lt;/div&gt;
-        </pre>
-        <p>
-            ZPT-JS allows to uses expressions when using macros. The next HTML code invokes the same macro if the value of <code>listMacro</code> variable is <code>list</code>:
-        </p>
-        <pre class="brush: html">
+                </pre>
+                <p>
+                    ZPT-JS allows to uses expressions when using macros. The next HTML code invokes the same macro if the value of <code>listMacro</code> variable is <code>list</code>:
+                </p>
+                <pre class="brush: html">
 &lt;div data-tdefine="items [10 20 30]" data-muse-macro="'listMacro'"&gt;
     Macro goes here
 &lt;/div&gt;
-        </pre>
+                </pre>
 
-        <h3 id="external">External macros</h3>
-        <p>
-            External macros are defined at a different page that where they are invoked. They only differ how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
-        </p>
-        <pre class="brush: html">
+                <h2 data-tattributes="id 'external'">External macros</h2>
+                <p>
+                    External macros are defined at a different page that where they are invoked. They only differ how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
+                </p>
+                <pre class="brush: html">
 &lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list@macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
-        </pre>
-        <p>
-            External macro files must be preloaded before the template is rendered, so code is async:
-        </p>  
-        <pre class="brush: js">
+                </pre>
+                <p>
+                    External macro files must be preloaded before the template is rendered, so code is async:
+                </p>  
+                <pre class="brush: js">
 zpt.run({
     command: 'preload',
     root: document.body,
@@ -80,19 +77,19 @@ zpt.run({
         [ your code here ]
     }
 });
-        </pre>
-        <p>
-            Because external macro files must be preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
-        </p>
-        <pre class="brush: html">
+                </pre>
+                <p>
+                    Because external macro files must be preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
+                </p>
+                <pre class="brush: html">
 &lt;div data-muse-macro="anObject/templateName"&gt;
     Macro goes here
 &lt;/div&gt;
-        </pre>
-        <p>
-            If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no rederence to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call:
-        </p>
-        <pre class="brush: js">
+                </pre>
+                <p>
+                    If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no rederence to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call:
+                </p>
+                <pre class="brush: js">
 zpt.run({
     command: 'preload',
     root: document.body,
@@ -103,11 +100,11 @@ zpt.run({
         [ your code here ]
     }
 });
-        </pre>
-        <p>
-            URLs are by default relative to current URL. You can also use absolute URLs:
-        </p>
-        <pre class="brush: js">
+                </pre>
+                <p>
+                    URLs are by default relative to current URL. You can also use absolute URLs:
+                </p>
+                <pre class="brush: js">
 zpt.run({
     command: 'preload',
     root: document.body,
@@ -118,29 +115,29 @@ zpt.run({
         [ your code here ]
     }
 });
-        </pre>
-        <p>
-            And in your HTML code:
-        </p>
-        <pre class="brush: html">
+                </pre>
+                <p>
+                    And in your HTML code:
+                </p>
+                <pre class="brush: html">
 &lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
-        </pre>
-        <p>
-            <em>Context</em> object provides a conf property to set a prefix to all relative URLs:
-        </p>
-        <pre class="brush: js">
+                </pre>
+                <p>
+                    <em>Context</em> object provides a conf property to set a prefix to all relative URLs:
+                </p>
+                <pre class="brush: js">
 context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
         </pre>
-        <p>
-            Then if you use an URL like <em>macros.html</em> it will be replaced by <em>/path/to/your/templates/macros.html</em>.
-        </p>
+                <p>
+                    Then if you use an URL like <em>macros.html</em> it will be replaced by <em>/path/to/your/templates/macros.html</em>.
+                </p>
 
-        <p>
-            Optionally you can add a fail callback function to manage initialization errors:
-        </p>
-        <pre class="brush: js">
+                <p>
+                    Optionally you can add a fail callback function to manage initialization errors:
+                </p>
+                <pre class="brush: js">
 zpt.run({
     command: 'preload',
     root: document.body,
@@ -153,13 +150,11 @@ zpt.run({
         [ your code to manage initialization errors here ]
     }
 });
-        </pre>
-        <p>
-            <em>msg</em> is the error message.
-        </p>
-        
-        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
-            <!-- The footer -->
+                </pre>
+                <p>
+                    <em>msg</em> is the error message.
+                </p>
+            </article>
         </div>
     </body>
 </html>

@@ -12,28 +12,25 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS tutorial - Using ZPT's original tags</h1>
-        </div>
-        
-        <p>
-            A ZPT template is a not well formed HTML document. This is not important because ZPT is on server side. The generated HTML documents do not include ZPT tags, so they are well formed HTML documents.
-        </p>
-        <p>
-            However, this does not work this way using ZPT-JS. ZPT-JS is on client side: the template and the generated HTML document are the same file, so ZPT tags break HTML and make HTML documents not well formed.
-        </p>
-        <p>
-            The default configuration of ZPT-JS use the standard way of extend HTML: the <em>data-*</em> attributes. So <em>tal:content</em> (a ZPT attribute) is replaced by <em>data-tcontent</em>. The complete list of replacing is at <a href="tags.html">Tags page</a>.
-        </p>
-        <p>
-            If you prefer to use the original ZPT's attributes invoke <code>zpt.context.useOriginalTags()</code> method before <code>run</code> method:
-        </p>
-        <strong>original-tags-sample.js</strong>
-        <pre class="brush: js; highlight: [15]">
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Using ZPT's original tags</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <p>
+                    A ZPT template is a not well formed HTML document. This is not important because ZPT is on server side. The generated HTML documents do not include ZPT tags, so they are well formed HTML documents.
+                </p>
+                <p>
+                    However, this does not work this way using ZPT-JS. ZPT-JS is on client side: the template and the generated HTML document are the same file, so ZPT tags break HTML and make HTML documents not well formed.
+                </p>
+                <p>
+                    The default configuration of ZPT-JS use the standard way of extend HTML: the <em>data-*</em> attributes. So <em>tal:content</em> (a ZPT attribute) is replaced by <em>data-tcontent</em>. The complete list of replacing is at <a href="tags.html">Tags page</a>.
+                </p>
+                <p>
+                    If you prefer to use the original ZPT's attributes invoke <code>zpt.context.useOriginalTags()</code> method before <code>run</code> method:
+                </p>
+                <strong>original-tags-sample.js</strong>
+                <pre class="brush: js; highlight: [15]">
 "use strict";
 
 var zpt = require( 'zpt' );
@@ -54,10 +51,10 @@ zpt.run({
     root: document.body,
     dictionary: dictionary
 });
-        </pre>
+                </pre>
 
-        <strong>original-tags-sample.html</strong>
-        <pre class="brush: html">
+                <strong>original-tags-sample.html</strong>
+                <pre class="brush: html">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
@@ -73,10 +70,10 @@ zpt.run({
         &lt;/ol&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-        </pre>
-        
-        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
-            <!-- The footer -->
+                </pre>
+            </article>
         </div>
+        
+
     </body>
 </html>

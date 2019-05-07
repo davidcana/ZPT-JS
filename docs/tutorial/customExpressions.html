@@ -12,20 +12,18 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS tutorial - Custom expressions</h1>
-        </div>
-        <p>
-            ZPT-JS makes it easy to register custom expression managers. For example, we want to develop an expression manager that returns the arithmetic average of the values in the expression. 
-        </p>
-        <p>
-            First we must implement the class (<em>averageExpression.js</em> file):
-        </p>
-        <pre class="brush: js">
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Custom expressions</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <p>
+                    ZPT-JS makes it easy to register custom expression managers. For example, we want to develop an expression manager that returns the arithmetic average of the values in the expression. 
+                </p>
+                <p>
+                    First we must implement the class (<em>averageExpression.js</em> file):
+                </p>
+                <pre class="brush: js">
 "use strict";
 
 var context = require( '../../../js/app/context.js' );
@@ -125,20 +123,19 @@ AverageExpression.build = function( string ) {
 }
 
 module.exports = AverageExpression;
-    </pre>
+                </pre>
 
-        <p>
-            Don't forget to register that class!
-        </p>
-        <pre class="brush: js">
+                <p>
+                    Don't forget to register that class!
+                </p>
+                <pre class="brush: js">
 var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
 var AverageExpression = require( './averageExpression.js' );
 
 expressionBuilder.register( AverageExpression );
-        </pre>
-        
-        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
-            <!-- The footer -->
+                </pre>
+
+            </article>
         </div>
     </body>
 </html>

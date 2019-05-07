@@ -12,52 +12,47 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS tutorial - Formatters</h1>
-        </div>
-        
-        <p>
-            A <code>formatter</code> allows to format the evaluation of an expression. ZPT-JS includes some formatters:
-        </p>
-        <ul>
-            <li><code>format: lowerCase 'Test'</code> evaluates as 'test'</li>
-            <li><code>format: upperCase 'Test'</code> evaluates as 'TEST'</li>
-            <li><code>format: fix 1.371 2</code> evaluates as '1.37'</li>
-            <li><code>format: fix (/: 1 3) 2</code> evaluates as '0.33'</li>
-        </ul>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Formatters</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <p>
+                    A <code>formatter</code> allows to format the evaluation of an expression. ZPT-JS includes some formatters:
+                </p>
+                <ul>
+                    <li><code>format: lowerCase 'Test'</code> evaluates as 'test'</li>
+                    <li><code>format: upperCase 'Test'</code> evaluates as 'TEST'</li>
+                    <li><code>format: fix 1.371 2</code> evaluates as '1.37'</li>
+                    <li><code>format: fix (/: 1 3) 2</code> evaluates as '0.33'</li>
+                </ul>
 
-        <p>
-            You can register other formatters of your own:
-        </p>
-        <pre class="brush: js">
+                <p>
+                    You can register other formatters of your own:
+                </p>
+                <pre class="brush: js">
 context.registerFormatter( 
     'myCustomFormatter', 
     function( value ){
         return "$" + value;
     }
 );
-        </pre>
-        <p>
-            After registering it you will be able to use it as usual:
-        </p>
-        <ul>
-            <li><code>format: myCustomFormatter aNumber</code></li>
-        </ul>
+                </pre>
+                <p>
+                    After registering it you will be able to use it as usual:
+                </p>
+                <ul>
+                    <li><code>format: myCustomFormatter aNumber</code></li>
+                </ul>
 
-        <p>
-            It is possible to run custom formatters without registering them. They must be functions defined in the dictionary:
-        </p>
-        <ul>
-            <li><code>format: customFormatter aNumber</code> formats aNumber using a function in the dictionary called <code>customFormatter</code></li>
-            <li><code>format: customFormatterName aNumber</code> formats aNumber using a function in the dictionary called as the value of the <code>customFormatterName</code> variable</li>
-        </ul>
-        
-        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
-            <!-- The footer -->
+                <p>
+                    It is possible to run custom formatters without registering them. They must be functions defined in the dictionary:
+                </p>
+                <ul>
+                    <li><code>format: customFormatter aNumber</code> formats aNumber using a function in the dictionary called <code>customFormatter</code></li>
+                    <li><code>format: customFormatterName aNumber</code> formats aNumber using a function in the dictionary called as the value of the <code>customFormatterName</code> variable</li>
+                </ul>
+            </article>
         </div>
     </body>
 </html>

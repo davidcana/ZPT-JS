@@ -12,34 +12,30 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS tutorial - Building and testing</h1>
-        </div>
-        
-        <p>
-            At first use the next command to initialize a <a href="http://didact.us/beefy/">beefy server</a> (port 9966) to make it easy to test ZPT-JS without browserifying by hand and a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve static files (HTML, CSS and JSON files).
-        </p>
-        <pre class="console">
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Building and testing</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <p>
+                    At first use the next command to initialize a <a href="http://didact.us/beefy/">beefy server</a> (port 9966) to make it easy to test ZPT-JS without browserifying by hand and a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve static files (HTML, CSS and JSON files).
+                </p>
+                <pre class="console">
 $ npm run start
-        </pre>   
-        <p>
-            ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open <code>test/index.html</code> or <a href="http://localhost:9000/test/">http://localhost:9000/test/</a> with your favourite browser. All tests passed using last versions of Mozilla Firefox (55.0.2, 64-bit). Perhaps some tests fail using other browsers!
-        </p>
-        <p>
-            ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:
-        </p>
-        <pre class="console">
+                </pre>   
+                <p>
+                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open <code>test/index.html</code> or <a href="http://localhost:9000/test/">http://localhost:9000/test/</a> with your favourite browser. All tests passed using last versions of Mozilla Firefox (55.0.2, 64-bit). Perhaps some tests fail using other browsers!
+                </p>
+                <p>
+                    ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:
+                </p>
+                <pre class="console">
 $ grunt browserify        // Build all test js files; also build a standalone version
 $ grunt browserify:[file] // Build a single js file; use 'standalone' to build a standalone version
 $ grunt compress          // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
-        </pre>
-        
-        <div id="commonFooter" data-muse-macro="'tutorialFooter@templates.html'">
-            <!-- The footer -->
+                </pre>
+
+            </article>
         </div>
     </body>
 </html>

@@ -2,5 +2,5 @@
 
 //
 var folderDictionary = {
-    'footer-macro': 'referenceFooter@template2.html'
+    'footer-macro': 'referenceFooter@templates.html'
 };

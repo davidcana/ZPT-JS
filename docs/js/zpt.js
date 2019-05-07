@@ -5,12 +5,10 @@ zpt.context.getConf().externalMacroPrefixURL = location.pathname.startsWith( '/Z
 zpt.run(
     {
         command: 'preload',
-        root: [ 
-            document.getElementById( 'commonHeader' ), 
-            document.getElementById( 'commonFooter' )
-        ],
+        root: document.body,
         dictionary: {},
         declaredRemotePageUrls: [ 'templates.html' ],
+        maxFolderDictionaries: 5,
         callback: function(){
             zpt.run();
         }
