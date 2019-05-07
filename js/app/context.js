@@ -314,6 +314,16 @@ module.exports = (function() {
     };
     /* End repeat*/
     
+    /* Folder dictionaries */
+    var folderDictionaries = [];
+    var setFolderDictionaries = function( _folderDictionaries ){
+        folderDictionaries = _folderDictionaries;
+    };
+    var getFolderDictionaries = function(){
+        return folderDictionaries;
+    };
+    /* End folder dictionaries */
+    
     return {
         getTags: getTags,
         setTags: setTags,
@@ -333,6 +343,8 @@ module.exports = (function() {
         isAltAttribute: isAltAttribute,
         setErrorFunction: setErrorFunction,
         asyncError: asyncError,
-        repeat: repeat
+        repeat: repeat,
+        setFolderDictionaries: setFolderDictionaries,
+        getFolderDictionaries: getFolderDictionaries
     };
 })();

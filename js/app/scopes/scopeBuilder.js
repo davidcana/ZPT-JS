@@ -17,7 +17,8 @@ module.exports = (function() {
         var scope = new Scope( 
             parserOptions.dictionary, 
             dictionaryExtension, 
-            true 
+            true,
+            context.getFolderDictionaries()
         );
         
         if ( parserOptions.command == 'partialRender' ){

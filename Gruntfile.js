@@ -265,8 +265,25 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/dictionaryExtension.js',
                 dest: 'build/dictionaryExtension.js'
+            },
+            folderDictionaries: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/folderDictionaries.js',
+                dest: 'build/folderDictionaries.js'
+            },
+            folderDictionaries2: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/folderDictionaries2.js',
+                dest: 'build/folderDictionaries2.js'
             }
-            
         },
         compress: {
             main: {
@@ -359,4 +376,5 @@ module.exports = function(grunt) {
     
     grunt.registerTask('test', ['qunit']);
     grunt.registerTask('default', ['browserify']);
+    grunt.registerTask('updateWeb', ['browserify:standalone', 'uglify', 'copy:standaloneMin', 'copy:standalone']);
 };

@@ -74,31 +74,41 @@ module.exports = (function() {
         */
     };
     
-    var preload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags ){
+    var preload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags, maxFolderDictionaries ){
         
         try {
             if ( ! notRemoveGeneratedTags ){
                 removeGeneratedTagsFromAllTargetElements( parserOptions.root );
             }
             
-            i18nHelper.loadAsyncAuto( 
-                parserOptions.dictionary,
-                i18n,
+            var scope = new Scope( 
+                parserOptions.dictionary, 
+                parserOptions.dictionaryExtension, 
+                true 
+            );
+            
+            scope.loadFolderDictionariesAsync( 
+                maxFolderDictionaries, 
+                window.location,
                 function(){
-                    resolver.loadRemotePages( 
-                        new Scope( 
-                            parserOptions.dictionary, 
-                            parserOptions.dictionaryExtension, 
-                            true 
-                        ),
-                        declaredRemotePageUrls,
-                        function (){
-                            processCallback( callback );
+                    context.setFolderDictionaries( scope.folderDictionaries );
+                    
+                    i18nHelper.loadAsyncAuto( 
+                        parserOptions.dictionary,
+                        i18n,
+                        function(){
+                            resolver.loadRemotePages( 
+                                scope,
+                                declaredRemotePageUrls,
+                                function (){
+                                    processCallback( callback );
+                                },
+                                failCallback
+                            );
                         },
                         failCallback
                     );
-                },
-                failCallback
+                } 
             );
             
         } catch( e ){
@@ -128,7 +138,8 @@ module.exports = (function() {
                 options.failCallback,
                 options.declaredRemotePageUrls || [],
                 options.i18n,
-                options.notRemoveGeneratedTags
+                options.notRemoveGeneratedTags,
+                options.maxFolderDictionaries
             );
             return;
         } 
@@ -212,7 +223,7 @@ module.exports = (function() {
                 parserOptions, 
                 target, 
                 self, 
-                dictionaryExtension 
+                dictionaryExtension
             )
         );
     };
@@ -348,46 +359,6 @@ module.exports = (function() {
             throw e;
         }
     };
-    /*
-    var treatError = function( node, scope, exception ) {
-
-        // Exit if there is no on-error expression defined
-        var content = scope.get( context.getConf().onErrorVarName );
-        if ( content == null ) {
-            log.fatal( exception );
-            return false;
-        }
-
-        // Set the error variable
-        var templateError = {
-            type : typeof exception,
-            value : exception
-        };
-        scope.set( 
-            context.getConf().templateErrorVarName, 
-            templateError 
-        );
-
-        try {
-            log.debug( exception );
-
-            // Process content
-            var talContent = new TALContent( 
-                context.getConf().onErrorVarName,
-                content 
-            );
-
-            var result = talContent.process( scope, node );
-            scope.endElement();
-            return result;
-
-        } catch ( e ) {
-            log.fatal( e );
-            scope.endElement();
-            throw e;
-        }
-    };
-    */
     
     var processElement = function( node, attributes, scope, _autoDefineHelper ) {
 

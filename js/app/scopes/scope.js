@@ -5,14 +5,16 @@
 
 var context = require( '../context.js' );
 var $ = require( 'jquery' );
+var loadjs = require( 'loadjs' );
 
-var Scope = function( _dictionary, _dictionaryExtension, addCommonVars ) {
+var Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderDictionaries ) {
     
     this.dictionary = _dictionary || {};
     this.dictionaryExtension = _dictionaryExtension || {};
     this.vars = {};
     this.changesStack = [];
     this.nocallVars = {};
+    this.folderDictionaries = _folderDictionaries || [];
     
     if ( addCommonVars ){
         this.setCommonVars();
@@ -51,21 +53,44 @@ Scope.prototype.setVar = function( name, value ) {
 };
 
 Scope.prototype.getWithoutEvaluating = function( name ) {
-
-    var valueFromVars = this.vars[ name ];
-    if ( valueFromVars !== undefined ){
-        return valueFromVars;
+    
+    var value;
+    
+    value = this.vars[ name ];
+    if ( value !== undefined ){
+        return value;
     }
     
-    return this.dictionaryExtension[ name ] !== undefined? 
-        this.dictionaryExtension[ name ]: 
-        this.dictionary[ name ];
+    value = this.dictionaryExtension[ name ];
+    if ( value !== undefined ){
+        return value;
+    }
+    
+    value = this.dictionary[ name ];
+    if ( value !== undefined ){
+        return value;
+    }
+    
+    for ( var i = 0; i < this.folderDictionaries.length; ++i ){
+        value = this.folderDictionaries[ i ][ name ];
+        if ( value !== undefined ){
+            return value;
+        }
+    }
+    
+    return undefined;
 };
 /*
 Scope.prototype.getWithoutEvaluating = function( name ) {
 
     var valueFromVars = this.vars[ name ];
-    return valueFromVars !== undefined? valueFromVars: this.dictionary[ name ];
+    if ( valueFromVars !== undefined ){
+        return valueFromVars;
+    }
+
+    return this.dictionaryExtension[ name ] !== undefined? 
+        this.dictionaryExtension[ name ]: 
+        this.dictionary[ name ];
 };
 */
 
@@ -126,6 +151,80 @@ Scope.prototype.set = function ( name, value, isGlobal, nocall ) {
     if ( nocall ){
         this.nocallVars[ name ] = true;
     }
+};
+
+Scope.prototype.loadFolderDictionariesAsync = function ( maxFolderDictionaries, location, callback ) {
+    
+    if ( ! maxFolderDictionaries ) {
+        callback();
+        return;
+    }
+    
+    var urlList = this.buildUrlListOfFolderDictionaries( maxFolderDictionaries, location );
+    this.loadFolderDictionary(
+        maxFolderDictionaries,
+        callback,
+        urlList, 
+        0
+    );
+};
+
+Scope.prototype.loadFolderDictionary = function ( maxFolderDictionaries, callback, urlList, i ) {
+    
+    var instance = this;
+    
+    var loadjsCallback = function( url, success ){
+        
+        // Treat js file only if load is sucessfull
+        if ( success && window.folderDictionary ){
+            instance.folderDictionaries.push( window.folderDictionary );
+        }
+            
+        // Run callback and return if the urlList is over
+        if ( i == urlList.length){
+            callback();
+            return;
+        }
+
+        // Continue, the urlList is not over
+        instance.loadFolderDictionary(
+            maxFolderDictionaries, 
+            callback,
+            urlList, 
+            i
+        )
+    };
+    
+    var url = urlList[ i++ ];
+    loadjs(
+        url, 
+        {
+            success: function() { 
+                loadjsCallback( url, true );
+            },
+            error: function() { 
+                loadjsCallback( url, false );
+            }
+        }
+    );
+};
+
+Scope.prototype.buildUrlListOfFolderDictionaries = function ( maxFolderDictionaries, location ) {
+    
+    var result = [];
+    
+    var c = 0;
+    var path = location.pathname;
+    var lastIndex = path.lastIndexOf( '/' );
+    while ( lastIndex != -1 && ++c <= maxFolderDictionaries ){
+        var parent = path.substr( 0, lastIndex );
+        result.push( 
+            location.origin + parent + '/' + 'folderDictionary.js' 
+        );
+        lastIndex = parent.lastIndexOf( '/' );
+    }
+    
+    return result;
 };
 
 module.exports = Scope;

@@ -8,6 +8,7 @@ zpt.run(
         root: document.body,
         dictionary: {},
         declaredRemotePageUrls: [ 'template2.html' ],
+        maxFolderDictionaries: 5,
         callback: function(){
             zpt.run();
         }

@@ -5,98 +5,94 @@
         <title>ZPT-JS tags</title>
         
         <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
-        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../js/zp2.js" defer></script>
         
         <link rel="stylesheet" type="text/css" href="../docs.css">
     </head>
     <body>
-        <div id="commonHeader" data-muse-macro="'header@templates.html'">
-            <!-- The header -->
-        </div>
-        
-        <div class="header1Div">
-            <h1>ZPT-JS reference - ZPT-JS tags</h1>
-        </div>
-        
-        <p>
-            The name of tags are not the same because if they were the resulting HTML documents will not be well formed. The list of tags with their equivalences are:
-        </p>
-        <table class="comparison">
-            <tr>
-                <th>ZPT tag name</th>
-                <th>ZPT-JS tag name</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>metal:define-macro</td>
-                <td>data-mdefine-macro</td>
-                <td>Defines a macro</td>
-            </tr>
-            <tr>
-                <td>metal:define-slot</td>
-                <td>data-mdefine-slot</td>
-                <td>Defines a slot to make possible to fill it later</td>
-            </tr>
-            <tr>
-                <td>metal:fill-slot</td>
-                <td>data-mfill-slot</td>
-                <td>Fills a slot</td>
-            </tr>
-            <tr>
-                <td>metal:use-macro</td>
-                <td>data-muse-macro</td>
-                <td>Invokes a macro</td>
-            </tr>
-            <tr>
-                <td>tal:attributes</td>
-                <td>data-tattributes</td>
-                <td>Replace the value of one or more attributes</td>
-            </tr>
-            <tr>
-                <td>tal:condition</td>
-                <td>data-tcondition</td>
-                <td>Display or hide nodes depending on a condition</td>
-            </tr>
-            <tr>
-                <td>tal:content</td>
-                <td>data-tcontent</td>
-                <td>Replace the content of the element</td>
-            </tr>
-            <tr>
-                <td>tal:define</td>
-                <td>data-tdefine</td>
-                <td>Define one or more variables</td>
-            </tr>
-            <tr>
-                <td>tal:on-error</td>
-                <td>data-ton-error</td>
-                <td>Handle errors</td>
-            </tr>
-            <tr>
-                <td>tal:omit-tag</td>
-                <td>data-tomit-tag</td>
-                <td>Remove an element, leaving the content of the element</td>
-            </tr>
-            <tr>
-                <td>tal:repeat</td>
-                <td>data-trepeat</td>
-                <td>Repeat an element</td>
-            </tr>
-            <tr>
-                <td>tal:replace</td>
-                <td>data-treplace</td>
-                <td>Replace the content of an element and remove the element leaving the content</td>
-            </tr>
-        </table>
-        <p>
-            The tags can be changed. Customize the <code>defaultTag</code> variable in <code>js/app/context.js</code> file. You can also use <code>context.setTags( tags )</code> to define the tags programmatically.
-        </p>
-        <p>
-            Important: <strong>after this point we will refer to tags as the ZPT-JS tag name</strong>.
-        </p>
-        
-        <div id="commonFooter" data-muse-macro="'referenceFooter@templates.html'">
-            <!-- The footer -->
+        <div data-muse-macro="'page@template2.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - ZPT-JS tags</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+
+                <p>
+                    The name of tags are not the same because if they were the resulting HTML documents will not be well formed. The list of tags with their equivalences are:
+                </p>
+                <table class="comparison">
+                    <tr>
+                        <th>ZPT tag name</th>
+                        <th>ZPT-JS tag name</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>metal:define-macro</td>
+                        <td>data-mdefine-macro</td>
+                        <td>Defines a macro</td>
+                    </tr>
+                    <tr>
+                        <td>metal:define-slot</td>
+                        <td>data-mdefine-slot</td>
+                        <td>Defines a slot to make possible to fill it later</td>
+                    </tr>
+                    <tr>
+                        <td>metal:fill-slot</td>
+                        <td>data-mfill-slot</td>
+                        <td>Fills a slot</td>
+                    </tr>
+                    <tr>
+                        <td>metal:use-macro</td>
+                        <td>data-muse-macro</td>
+                        <td>Invokes a macro</td>
+                    </tr>
+                    <tr>
+                        <td>tal:attributes</td>
+                        <td>data-tattributes</td>
+                        <td>Replace the value of one or more attributes</td>
+                    </tr>
+                    <tr>
+                        <td>tal:condition</td>
+                        <td>data-tcondition</td>
+                        <td>Display or hide nodes depending on a condition</td>
+                    </tr>
+                    <tr>
+                        <td>tal:content</td>
+                        <td>data-tcontent</td>
+                        <td>Replace the content of the element</td>
+                    </tr>
+                    <tr>
+                        <td>tal:define</td>
+                        <td>data-tdefine</td>
+                        <td>Define one or more variables</td>
+                    </tr>
+                    <tr>
+                        <td>tal:on-error</td>
+                        <td>data-ton-error</td>
+                        <td>Handle errors</td>
+                    </tr>
+                    <tr>
+                        <td>tal:omit-tag</td>
+                        <td>data-tomit-tag</td>
+                        <td>Remove an element, leaving the content of the element</td>
+                    </tr>
+                    <tr>
+                        <td>tal:repeat</td>
+                        <td>data-trepeat</td>
+                        <td>Repeat an element</td>
+                    </tr>
+                    <tr>
+                        <td>tal:replace</td>
+                        <td>data-treplace</td>
+                        <td>Replace the content of an element and remove the element leaving the content</td>
+                    </tr>
+                </table>
+                <p>
+                    The tags can be changed. Customize the <code>defaultTag</code> variable in <code>js/app/context.js</code> file. You can also use <code>context.setTags( tags )</code> to define the tags programmatically.
+                </p>
+                <p>
+                    Important: <strong>after this point we will refer to tags as the ZPT-JS tag name</strong>.
+                </p>
+            </article>
         </div>
     </body>
 </html>

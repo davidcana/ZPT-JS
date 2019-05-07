@@ -27,5 +27,7 @@ QUnit.testSuites([
     { name: "external macros with prefix URLs Test Suite", path: "./moreTest/externalMacros-prefixURLs.html" },
     { name: "single root Test Suite", path: "./singleRoot.html" },
     { name: "errors Test Suite", path: "./errors.html" },
-    { name: "dictionary extension Test Suite", path: "./dictionaryExtension.html" }
+    { name: "dictionary extension Test Suite", path: "./dictionaryExtension.html" },
+    { name: "Folder dictionary Test Suite", path: "./folderDictionaries.html" },
+    { name: "Folder dictionary level 2 Test Suite", path: "./moreTest/folderDictionaries2.html" }
 ]);
