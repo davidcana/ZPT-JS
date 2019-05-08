@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - TALCondition</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - TALCondition</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument ::= expression
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-tcondition</em> statement includes the statement element in the template only if the condition is met, and omits it otherwise. If its expression evaluates to a <code>true</code> value, then normal processing of the element continues, otherwise the statement element is immediately removed from the template.
+                </p>
+                <p>
+                    If an expression evaluates to any of the next:
+                </p>
+                <ul>
+                    <li><code>undefined</code></li>
+                    <li><code>null</code></li>
+                    <li><code>'false'</code></li>
+                    <li><code>false</code></li>
+                    <li><code>0</code></li>
+                </ul>
+                <p>
+                    the expression evaluates to <code>false</code>. Otherwise the expression evaluates to <code>true</code>.
+                </p>
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#condition-conditionally-insert-or-remove-an-element">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    None.
+                </p>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Test a variable before inserting it (the first example tests for existence and truth, while the second only tests for existence):
+                </p>
+                <pre class="brush: html">
+                    &lt;p datat-condition="myObject/message"
+                       data-tcontent="myObject/message"&gt;
+                       Message goes here
+                    &lt;/p>
+
+                    &lt;p datat-condition="exists: myObject/message"
+                       data-tcontent="myObject/message"&gt;
+                       Message goes here
+                    &lt;/p>
+                </pre>
+                
+                <p>
+                    Test for alternate conditions:
+                </p>
+                
+                <pre class="brush: html">
+                    &lt;div data-trepeat="item [1:10]"&gt;
+                        &lt;p datat-condition="item-repeat/even">Even&lt;/p&gt;
+                        &lt;p datat-condition="item-repeat/odd">Odd&lt;/p&gt;
+                    &lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#condition-conditionally-insert-or-remove-an-element">Zope Page Templates Reference</a>.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

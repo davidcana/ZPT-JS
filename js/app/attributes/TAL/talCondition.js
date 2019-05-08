@@ -3,6 +3,8 @@
 */
 "use strict";
 
+var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+
 var TALCondition = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
@@ -10,8 +12,9 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     
     var process = function( scope, node ){
         
-        var result = expression.evaluate( scope );
-        
+        //var result = expression.evaluate( scope );
+        var result = evaluateHelper.evaluateBoolean( scope, expression );
+            
         node.style.display = result ? '' : 'none';
         
         return result;

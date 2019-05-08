@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - TALAttributes</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - TALAttributes</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument                   ::= (attribute_simple_statement | attribute_map_statement) [';' (attribute_simple_statement | attribute_map_statement) ]*
+attribute_simple_statement ::= attribute_name expression
+attribute_name             ::= Name
+attribute_map_statement    ::= Name
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-tattributes</em> statement replaces the value of an attribute (or creates an attribute) with a dynamic value. The value of each expression is converted to a string, if necessary.
+                </p>
+                <p>
+                    If the expression associated with an attribute assignment evaluates to <code>undefined</code>, then that attribute is deleted from the statement element. Each attribute assignment is independent, so attributes may be assigned in the same statement in which some attributes are deleted and others are left alone.
+                </p>
+                <p>
+                    If you use <em>data-tattributes</em> on an element with an active <a href="attributes-TALReplace.html">data-treplace</a> command, the <em>data-tattributes</em> statement is ignored.
+                </p>
+                <p>
+                    If you use <em>data-tattributes</em> on an element with a <a href="attributes-TALRepeat.html">data-trepeat</a> statement, the replacement is made on each repetition of the element, and the replacement expression is evaluated fresh for each repetition.
+                </p>
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#attributes-replace-element-attributes">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    The <em>attribute_map_statement</em> part is not present in ZPT.
+                </p>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Replacing a link:
+                </p>
+                <pre class="brush: html">
+                    &lt;a href="/sample/link.html" data-tattributes="href myObject/getUrl()"&gt;
+                       My link
+                    &lt;/a&gt;
+                </pre>
+                
+                <p>
+                    Replacing two attributes:
+                </p>
+                <pre class="brush: html">
+                       &lt;textarea data-tattributes="rows textareaRows; cols textareaCols"&gt;
+                       &lt;/textarea&gt;
+                </pre>
+                
+                <p>
+                    Replacing attributes using an <em>attribute_map_statement</em>:
+                </p>
+                <pre class="brush: html">
+                       &lt;textarea data-tattributes="textareaAttrs"&gt;
+                       &lt;/textarea&gt;
+                </pre>
+                <p>
+                    We must define an object as value for <em>textareaAttrs</em> in scope, for example using the dictionary:
+                </p>
+                <pre class="brush: js">
+var dictionary = { 
+    textareaAttrs: {
+        rows: 10,
+        cols: 100
+    }
+};
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

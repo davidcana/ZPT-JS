@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - TALReplace</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - TALReplace</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument ::= ('structure') expression
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-treplace</em> statement replaces an element with dynamic content. It replaces the statement element with either text or a structure (unescaped markup). The body of the statement is an expression with an optional type prefix. The value of the expression is converted into an escaped string if you prefix the expression with text or omit the prefix, and is inserted unchanged if you prefix it with structure. Escaping consists of converting “&amp;” to “&amp;amp;”, “&lt;” to “&amp;lt;”, and “&gt;” to “&amp;gt;”.                
+                </p>
+                <p>
+                    If the value is <em>false</em>, then the element is simply removed. If the value is <em>true</em>, then the element is left unchanged.
+                </p>
+
+                <p>
+                    If an expression evaluates to any of the next:
+                </p>
+                <ul>
+                    <li><code>undefined</code></li>
+                    <li><code>null</code></li>
+                    <li><code>'false'</code></li>
+                    <li><code>false</code></li>
+                    <li><code>0</code></li>
+                </ul>
+                <p>
+                    the expression evaluates to <code>false</code>. Otherwise the expression evaluates to <code>true</code>.
+                </p>
+                
+                <p>
+                    Note: zome parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#replace-replace-an-element">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <ul>
+                    <li>
+                        This attribute can make some attributes not to work because they depend on an enclosing tag: <em>data-trepeat</em> is one of them.
+                    </li>
+                    <li>
+                        Because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are <strong>REMOVED</strong> when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-treplace</code> inside a macro definition and invoke it.
+                    </li>
+                </ul>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Inserting the title of a template:
+                </p>
+                <pre class="brush: html">
+                    &lt;span tal:replace="myObject/title">Title&lt;/span&gt;
+                </pre>
+                
+                <p>
+                    Inserting HTML/XML:
+                </p>
+                <pre class="brush: html">
+                    &lt;div tal:replace="structure table" /&gt;
+                </pre>
+                
+                <p>
+                    Inserting nothing:
+                </p>
+                <pre class="brush: html">
+                    &lt;div tal:replace="nothing"&gt;
+                        This element is a comment.
+                    &lt;/div&gt;
+                </pre>
+
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#replace-replace-an-element">Zope Page Templates Reference</a>.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

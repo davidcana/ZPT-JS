@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - TALDefine</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - TALDefine</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument       ::= define_scope [';' define_scope]*
+define_scope   ::= ('global') ('nocall') define_var
+define_var     ::= variable_name expression
+variable_name  ::= Name
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The tal:define statement defines variables.
+                </p>
+                <p>
+                    You can define two different kinds of TAL variables: <em>local</em> and <em>global</em>. When you define a <em>local</em> variable in a statement element, you can only use that variable in that element and the elements it contains. If you redefine a local variable in a contained element, the new definition hides the outer element’s definition within the inner element. When you define a <em>global</em> variable, you can use it in any element processed after the defining element. If you redefine a global variable, you replace its definition for the rest of the template. Local variables are the default.
+                </p>
+                <p>
+                    <em>Nocall</em> definitions avoid rendering the results of a path expression. An ordinary path expression tries to render the object that it fetches. This means that if the object is a function, method or some other kind of executable thing, then expression will evaluate to the result of calling the object. This is usually what you want, but not always. For example, if you want to put a function into a variable so that you can refer to invoke it, you can’t use a normal definition (non nocall) because it will invoke the function only once (at the <em>data-tdefine</em>).
+                </p>
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-define-variables">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <ul>
+                    <li>
+                        <em>Local</em> prefix not supported (local variables are the default, use <em>global</em> to declare global variables).
+                    </li>
+                    <li>
+                        In ZPT <em>nocall</em> is a type of expression. In ZPT-JS it can only be used in <em>data-tdefine</em> attributes.
+                    </li>
+                </ul>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Defining a global variable:
+                </p>
+                <pre class="brush: html">
+data-tdefine="global companyName 'Zope Corp, Inc.'"
+                </pre>
+                
+                <p>
+                    Defining two local variables, where the second depends on the first:
+                </p>
+                <pre class="brush: html">
+data-tdefine="myTitle myObject/title; 
+              tlen myTitle/length"
+                </pre>
+
+                <p>
+                    Defining a nocall variable:
+                </p>
+                <pre class="brush: html">
+data-tdefine="nocall myFunction myObject/myFunction()"
+                </pre>
+                
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-define-variables">Zope Page Templates Reference</a>.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

@@ -145,6 +145,10 @@ pre.js {
     background-color: blue;
     color: white;
 }
+pre.syntax {
+    background-color: #eeffcc;
+    color: black;
+}
 
 /* Changes */
 .changes-date {

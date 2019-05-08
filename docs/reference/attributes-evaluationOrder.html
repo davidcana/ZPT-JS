@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Evaluation order</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Evaluation order</h1>
+            </div>
+            <article data-mfill-slot="'article'">
+                <p>
+                    The order evaluation of attributes in ZPT-JS is not equal than ZPT's. The new order is:
+                </p>
+                <ol>
+                    <li><code>data-trepeat</code></li>
+                    <li><code>data-ton-error</code></li>
+                    <li><code>data-mdefine-macro</code></li>
+                    <li><code>data-tdefine</code></li>
+                    <li><code>data-tcondition</code></li>
+                    <li><code>data-tomit-tag</code></li>
+                    <li><code>data-treplace</code></li>
+                    <li><code>data-tattributes</code></li>
+                    <li><code>data-tcontent</code></li>
+                    <li>content</li>
+                    <li><code>data-muse-macro</code></li>
+                </ol>
+            </article>
+        </div>
+    </body>
+</html>

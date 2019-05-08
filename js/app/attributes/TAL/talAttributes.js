@@ -114,7 +114,6 @@ TALAttributes.build = function( string ) {
         var attribute = tokens.nextToken().trim();
         var space = attribute.indexOf( context.getConf().inAttributeDelimiter );
         if ( space == -1 ) {
-            //throw 'Bad attributes expression: ' + attribute;
             attributeItems.push({
                 name: undefined,
                 expression: expressionBuilder.build( attribute )
