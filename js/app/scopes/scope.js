@@ -19,17 +19,39 @@ var Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderD
     if ( addCommonVars ){
         this.setCommonVars();
     }
+    this.setMandatoryVars();
+};
+
+Scope.prototype.setMandatoryVars = function(){
+
+    // Register nothing var
+    this.setVar( 
+        context.getConf().nothingVarName, 
+        context.getConf().nothingVarValue 
+    );
+    
+    // Register default var
+    this.setVar( 
+        context.getConf().defaultVarName, 
+        context.getConf().defaultVarValue 
+    );
 };
 
 Scope.prototype.setCommonVars = function(){
     
     // Register window object if it exists
     if ( window ){
-        this.setVar( context.getConf().windowVarName, window );
+        this.setVar( 
+            context.getConf().windowVarName, 
+            window 
+        );
     }
 
     // Register context
-    this.setVar( context.getConf().contextVarName, context );
+    this.setVar( 
+        context.getConf().contextVarName, 
+        context 
+    );
 };
 
 Scope.prototype.startElement = function(){

@@ -3,6 +3,8 @@
 */
 "use strict";
 
+var context = require( '../context.js' );
+
 module.exports = (function() {
     
     var evaluateToNotNull = function( scope, expression ) {
@@ -72,6 +74,13 @@ module.exports = (function() {
         return result;
     };
     
+    var isDefault = function( value ){
+        return value === context.getConf().defaultVarValue;
+    };
+    var isNothing = function( value ){
+        return value === context.getConf().nothingVarValue;
+    };
+    
     return {
         evaluateToNotNull: evaluateToNotNull,
         evaluateBoolean: evaluateBoolean,
@@ -79,6 +88,8 @@ module.exports = (function() {
         //evaluateInteger: evaluateInteger,
         isNumber: isNumber,
         //isInteger: isInteger,
-        evaluateExpressionList: evaluateExpressionList
+        evaluateExpressionList: evaluateExpressionList,
+        isDefault: isDefault,
+        isNothing: isNothing
     };
 })();

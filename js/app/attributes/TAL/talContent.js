@@ -25,9 +25,19 @@ var TALContent = function( stringToApply, expressionToApply, structureToApply ) 
         // Evaluate
         var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
         
+        // Check default
+        if ( evaluateHelper.isDefault( evaluated ) ){
+            return true;
+        }
+        
+        // Check nothing
+        if ( evaluateHelper.isNothing( evaluated ) ){
+            evaluated = "";
+        }
+        
         // Add it to node
         node.innerHTML = evaluated;
-        if (  ! structure ) {
+        if ( ! structure ) {
             node[ "form" in node && !formInputHasBody[ node.tagName ] ? "value": "innerText" ] = evaluated;
         }
 

@@ -17,6 +17,16 @@ var TALReplace = function( stringToApply, expressionToApply, structureToApply ) 
         // Evaluate
         var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
         
+        // Check default
+        if ( evaluateHelper.isDefault( evaluated ) ){
+            return true;
+        }
+
+        // Check nothing
+        if ( evaluateHelper.isNothing( evaluated ) ){
+            evaluated = "";
+        }
+        
         if ( structure ){
             // Replace HTML
             node.outerHTML = evaluated;

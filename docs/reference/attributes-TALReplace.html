@@ -30,24 +30,10 @@ argument ::= ('structure') expression
                 
                 <h2 data-tattributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-treplace</em> statement replaces an element with dynamic content. It replaces the statement element with either text or a structure (unescaped markup). The body of the statement is an expression with an optional type prefix. The value of the expression is converted into an escaped string if you prefix the expression with text or omit the prefix, and is inserted unchanged if you prefix it with structure. Escaping consists of converting “&amp;” to “&amp;amp;”, “&lt;” to “&amp;lt;”, and “&gt;” to “&amp;gt;”.                
+                    The <em>data-treplace</em> statement replaces an element with dynamic content. It replaces the statement element with either text or a structure (unescaped markup). The value of the expression is converted into an escaped string if you omit the prefix, and is inserted unchanged if you prefix it with structure. Escaping consists of converting “&amp;” to “&amp;amp;”, “&lt;” to “&amp;lt;”, and “&gt;” to “&amp;gt;”.                
                 </p>
                 <p>
-                    If the value is <em>false</em>, then the element is simply removed. If the value is <em>true</em>, then the element is left unchanged.
-                </p>
-
-                <p>
-                    If an expression evaluates to any of the next:
-                </p>
-                <ul>
-                    <li><code>undefined</code></li>
-                    <li><code>null</code></li>
-                    <li><code>'false'</code></li>
-                    <li><code>false</code></li>
-                    <li><code>0</code></li>
-                </ul>
-                <p>
-                    the expression evaluates to <code>false</code>. Otherwise the expression evaluates to <code>true</code>.
+                    If the value is <code>nothing</code>, then the element is simply removed. If the value is <code>default</code>, then the element is left unchanged.
                 </p>
                 
                 <p>
@@ -56,6 +42,9 @@ argument ::= ('structure') expression
                 
                 <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
+                    <li>
+                        <em>text</em> prefix not supported but not needed, it is the default behaviour.
+                    </li>
                     <li>
                         This attribute can make some attributes not to work because they depend on an enclosing tag: <em>data-trepeat</em> is one of them.
                     </li>
@@ -69,21 +58,21 @@ argument ::= ('structure') expression
                     Inserting the title of a template:
                 </p>
                 <pre class="brush: html">
-                    &lt;span tal:replace="myObject/title">Title&lt;/span&gt;
+                    &lt;span data-treplace="myObject/title">Title&lt;/span&gt;
                 </pre>
                 
                 <p>
                     Inserting HTML/XML:
                 </p>
                 <pre class="brush: html">
-                    &lt;div tal:replace="structure table" /&gt;
+                    &lt;div data-treplace="structure table" /&gt;
                 </pre>
                 
                 <p>
                     Inserting nothing:
                 </p>
                 <pre class="brush: html">
-                    &lt;div tal:replace="nothing"&gt;
+                    &lt;div data-treplace="nothing"&gt;
                         This element is a comment.
                     &lt;/div&gt;
                 </pre>

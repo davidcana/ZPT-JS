@@ -149,9 +149,13 @@ module.exports = (function() {
         externalMacroUrlVarName: "externalMacroUrl",
         windowVarName:           "window",
         contextVarName:          "context",
+        nothingVarName:          "nothing",
+        defaultVarName:          "default",
+        i18nConfResourceId:      '/CONF/',
         
-        i18nConfResourceId: '/CONF/',
-
+        nothingVarValue:         "___nothing___",
+        defaultVarValue:         "___default___",
+        
         loggingOn: false,
         loggingLevel: log4javascript.Level.ERROR,
 

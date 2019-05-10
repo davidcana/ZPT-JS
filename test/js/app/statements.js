@@ -71,9 +71,13 @@ QUnit.test( "Attributes test", function( assert ) {
 QUnit.test( "Content test", function( assert ) {
     assert.equal( $('#t6-1').html() , "This is a &lt;strong&gt;formatted&lt;/strong&gt; text" );
     assert.equal( $('#t6-2').html() , "This is a <strong>formatted</strong> text" );
+    assert.equal( $('#t6-3').html() , "a formatted text" );
+    assert.equal( $('#t6-4').html() , "" );
 });
 
 QUnit.test( "Replace test", function( assert ) {
     assert.equal( $('#t7-1').html() , "This is a &lt;strong&gt;formatted&lt;/strong&gt; text" );
     assert.equal( $('#t7-2').html() , "This is a <strong>formatted</strong> text" );
+    assert.equal( $('#t7-3').html() , "<span data-treplace=\"default\">a formatted text</span>" );
+    assert.equal( $('#t7-4').html() , "" );
 });
