@@ -10,6 +10,7 @@ dictionary.textareaAttrs = {
     rows: 10,
     cols: 100
 };
+dictionary.formatted = 'This is a <strong>formatted</strong> text';
 
 // Parse template
 zpt.run({
@@ -65,4 +66,14 @@ QUnit.test( "Attributes test", function( assert ) {
     assert.equal( $('#t5-2').attr('href') , "http://www.xxx.org" );
     assert.equal( $('#t5-3').attr('placeholder') , "Write something here!" );
     assert.equal( $('#t5-3').attr('maxlength') , "200" );
+});
+
+QUnit.test( "Content test", function( assert ) {
+    assert.equal( $('#t6-1').html() , "This is a &lt;strong&gt;formatted&lt;/strong&gt; text" );
+    assert.equal( $('#t6-2').html() , "This is a <strong>formatted</strong> text" );
+});
+
+QUnit.test( "Replace test", function( assert ) {
+    assert.equal( $('#t7-1').html() , "This is a &lt;strong&gt;formatted&lt;/strong&gt; text" );
+    assert.equal( $('#t7-2').html() , "This is a <strong>formatted</strong> text" );
 });

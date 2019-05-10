@@ -4,20 +4,28 @@
 "use strict";
 
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+var contentHelper = require( './contentHelper.js' );
 
-var TALReplace = function( stringToApply, expressionToApply ) {
+var TALReplace = function( stringToApply, expressionToApply, structureToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
+    var structure = structureToApply;
     
     var process = function( scope, node ){
         
         // Evaluate
         var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
         
-        // Append text node
-        var textNode = node.ownerDocument.createTextNode( evaluated );
-        node.parentNode.replaceChild( textNode, node );
+        if ( structure ){
+            // Replace HTML
+            node.outerHTML = evaluated;
+            
+        } else {
+            // Replace original node by new text node
+            var textNode = node.ownerDocument.createTextNode( evaluated );
+            node.parentNode.replaceChild( textNode, node );
+        }
         
         return true;
     };
@@ -35,12 +43,14 @@ var TALReplace = function( stringToApply, expressionToApply ) {
 TALReplace.id = 'tal:replace';
 
 TALReplace.build = function( string ) {
-    
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-    
-    return new TALReplace( 
-                string,
-                expressionBuilder.build( string.trim() ) );
+
+    return contentHelper.build( 
+        'TALReplace',
+        string,
+        function( _string, _expression, _structure ){
+            return new TALReplace( _string, _expression, _structure );
+        }
+    );
 };
 
 module.exports = TALReplace;

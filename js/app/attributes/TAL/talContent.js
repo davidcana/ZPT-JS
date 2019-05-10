@@ -5,12 +5,13 @@
 
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+var contentHelper = require( './contentHelper.js' );
 
-var TALContent = function( stringToApply, expressionToApply, htmlToApply ) {
+var TALContent = function( stringToApply, expressionToApply, structureToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
-    var html = htmlToApply;
+    var structure = structureToApply;
     var formInputHasBody = {
         BUTTON : 1,
         LABEL : 1,
@@ -25,11 +26,8 @@ var TALContent = function( stringToApply, expressionToApply, htmlToApply ) {
         var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
         
         // Add it to node
-        if ( html ) {
-            node.innerHTML = evaluated;
-        } else {
-            /*node.value = evaluated;*/
-            node.innerHTML = evaluated;
+        node.innerHTML = evaluated;
+        if (  ! structure ) {
             node[ "form" in node && !formInputHasBody[ node.tagName ] ? "value": "innerText" ] = evaluated;
         }
 
@@ -49,25 +47,14 @@ var TALContent = function( stringToApply, expressionToApply, htmlToApply ) {
 TALContent.id = 'tal:content';
 
 TALContent.build = function( string ) {
-
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
-    // Process it
-    var content = string.trim();
-    
-    // Check if is an HTML expression
-    var html = content.indexOf( context.getConf().htmlStructureExpressionPrefix + ' ' ) == 0;
-    var expressionString = html? 
-                content.substr( 1 + context.getConf().htmlStructureExpressionPrefix.length ): 
-                content;
-    if ( ! expressionString ){
-        throw 'TALContent expression void.';
-    }
-    
-    return new TALContent( 
-                string,
-                expressionBuilder.build( expressionString ),
-                html );
+    return contentHelper.build( 
+        'TALContent',
+        string,
+        function( _string, _expression, _structure ){
+            return new TALContent( _string, _expression, _structure );
+        }
+    );
 };
 
 module.exports = TALContent;

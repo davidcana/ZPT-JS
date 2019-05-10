@@ -137,7 +137,7 @@ module.exports = (function() {
         argumentsDelimiter:     ',',
         macroDelimiter:         '@',
 
-        htmlStructureExpressionPrefix:  "html",
+        htmlStructureExpressionPrefix:  "structure",
         globalVariableExpressionPrefix: "global",
         nocallVariableExpressionPrefix: "nocall",
         
