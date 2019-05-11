@@ -14,6 +14,7 @@ var NodeAttributes = require( './nodeAttributes.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
 var AutoDefineHelper = require( './autoDefineHelper.js' );
+var evaluateHelper = require( '../expressions/evaluateHelper.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -279,6 +280,12 @@ module.exports = (function() {
         var talRepeat = TALRepeat.build( attributes.talRepeat );
         var loop = talRepeat.process( scope, node );
 
+        // Check default
+        if ( evaluateHelper.isDefault( loop.getItems() ) ){
+            processElement( node, attributes, scope );
+            return true;
+        }
+        
         // Configure the node to clone it later
         node.removeAttribute( tags.talRepeat );
         node.removeAttribute( 'style' );

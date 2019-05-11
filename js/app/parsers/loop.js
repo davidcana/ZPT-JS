@@ -11,12 +11,16 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
     var itemVariableName = _itemVariableName;
     var expressionString = _expressionString;
     var expression = expressionBuilder.build( expressionString );
+    
     var items = expression.evaluate( scope );
+    var getItems = function(){
+        return items;
+    };
     
     var currentIndex = -1;
     var maxIndex = items? items.length - 1: -1;
-    var offset = 0;
     
+    var offset = 0;
     var setOffset = function( _offset ){
         offset = _offset;
     };
@@ -57,6 +61,7 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
 
     return {
         setOffset: setOffset,
-        repeat:repeat
+        repeat:repeat,
+        getItems: getItems
     };
 };

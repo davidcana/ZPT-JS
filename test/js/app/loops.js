@@ -5,6 +5,9 @@ var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
 
+// Add vars to dictionary
+dictionary.emptyArray = [];
+
 // Parse template
 zpt.run({
     root: document.body,
@@ -133,6 +136,14 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     assert.equal( getAllValues( '.d_getCapitalLetter' ) , 'A/B/C/D/E/F/G'  );
     assert.equal( getAllValues( '.d_getRoman' ) , 'i/ii/iii/iv/v/vi/vii'  );
     assert.equal( getAllValues( '.d_getCapitalRoman' ) , 'I/II/III/IV/V/VI/VII'  );
+});
+
+QUnit.test( "default loop test", function( assert ) {
+    assert.equal( getAllValues( '.lValue' ) , 'Default item' );
+});
+
+QUnit.test( "empty loop test", function( assert ) {
+    assert.equal( getAllValues( '.eValue' ) , 'First item' );
 });
 
 function getAllValues( selector ){
