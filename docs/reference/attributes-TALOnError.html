@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - TALOnError</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - TALOnError</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument ::= ('structure') expression
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-ton-error</em> statement provides error handling for your template. When a TAL statement produces an error, the TAL interpreter searches for a <em>data-ton-error</em> statement on the same element, then on the enclosing element, and so forth. The first <em>data-ton-error</em> found is invoked. It is treated as a <em>data-tcontent</em> statement.
+                </p>
+                <p>
+                    A local variable error is set. This variable has these attributes:
+                </p>
+                <ul>
+                    <li><em>type</em>. The exception type.</li>
+                    <li><em>value</em>. The exception instance.</li>
+                    <li><em>traceback</em>. The traceback object.</li>
+                </ul>
+
+                <p>
+                    The simplest sort of <em>data-ton-error</em> statement has a literal error string or <code>nothing</code> for an expression. A more complex handler may call a script that examines the error and either emits error text or raises an exception to propagate the error outwards.
+                </p>
+                
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#on-error-handle-errors">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <ul>
+                    <li>
+                        <em>text</em> prefix not supported but not needed, it is the default behaviour.
+                    </li>
+                </ul>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Simple error message:
+                </p>
+
+                <pre class="brush: html">
+                    &lt;div data-ton-error="'Error trying to get user name!'"
+                         data-tcontent="myObject/getUsername()"&gt;
+                        Ishmael
+                    &lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Removing elements with errors:
+                </p>
+                
+                <pre class="brush: html">
+                    &lt;div data-ton-error="nothing"
+                         data-tcontent="myObject/getUsername()"&gt;
+                        Ishmael
+                    &lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Calling an error-handling script:
+                </p>
+                
+                <pre class="brush: html">
+                    &lt;div data-ton-error="structure myObject/errorScript()"&gt;
+                    ...
+                    &lt;/div&gt;
+                </pre>
+
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#on-error-handle-errors">Zope Page Templates Reference</a>.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>
