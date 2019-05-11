@@ -13,6 +13,7 @@ New in 0.34.0
 
 New in 0.33.0
 - Added support of folder dictionaries.
+- Added nothing and default variables to all scopes. Added support of them to data-tcontent, data-treplace and data-trepeat.
 
 New in 0.32.1
 - Bug fixed: contents of metalFillSlot must not be evaluated.

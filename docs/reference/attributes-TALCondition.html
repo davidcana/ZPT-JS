@@ -73,13 +73,24 @@ argument ::= expression
                 <p>
                     Test for alternate conditions:
                 </p>
-                
                 <pre class="brush: html">
-                    &lt;div data-trepeat="item [1:10]"&gt;
-                        &lt;p datat-condition="item-repeat/even">Even&lt;/p&gt;
-                        &lt;p datat-condition="item-repeat/odd">Odd&lt;/p&gt;
-                    &lt;/div&gt;
+                &lt;div data-trepeat="item [1:10]"&gt;
+                    &lt;span data-treplace="item-repeat/index()"&gt;1&lt;/span&gt;
+                    is 
+                    &lt;span data-tcondition="item-repeat/even()"&gt;even&lt;/span&gt;
+                    &lt;span data-tcondition="item-repeat/odd()"&gt;odd&lt;/span&gt;
+                &lt;/div&gt;
                 </pre>
+                
+                <p>
+                    Test for alternate conditions in action:
+                </p>
+                <div data-trepeat="item [1:10]">
+                    <span data-treplace="item-repeat/index()">1</span>
+                    is 
+                    <span data-tcondition="item-repeat/even()">even</span>
+                    <span data-tcondition="item-repeat/odd()">odd</span>
+                </div>
                 
                 <p>
                     Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#condition-conditionally-insert-or-remove-an-element">Zope Page Templates Reference</a>.

@@ -31,7 +31,7 @@ variable_name ::= Name
                 
                 <h2 data-tattributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-trepeat</em> statement replicates a sub-tree of your document once for each item in a sequence. The expression should evaluate to an array. If the array is empty, then the statement element is deleted, otherwise it is repeated for each value in the sequence. If the expression is <code>default</code>, then the element is left unchanged, and no new variables are defined.            
+                    The <em>data-trepeat</em> statement replicates a sub-tree of your document once for each item in an array. The expression should evaluate to an array. If the array is empty, then the statement element is deleted, otherwise it is repeated for each value in the sequence. If the expression is <code>default</code>, then the element is left unchanged, and no new variables are defined.            
                 </p>
                 <p>
                     The <em>variable_name</em> is used to define a local variable and a repeat variable. For each repetition, the local variable is set to the current sequence element, and the repeat variable is set to an iteration object. 
@@ -45,17 +45,17 @@ variable_name ::= Name
                     The following information is available from the repeat variable:
                 </p>
                 <ul>
-                    <li><em>index</em>. Repetition number, starting from zero.</li>
-                    <li><em>number</em>. Repetition number, starting from one.</li>
-                    <li><em>even</em>. True for even-indexed repetitions (0, 2, 4, …).</li>
-                    <li><em>odd</em>. True for odd-indexed repetitions (1, 3, 5, …).</li>
-                    <li><em>start</em>. True for the starting repetition (index 0).</li>
-                    <li><em>end</em>. True for the ending, or final, repetition.</li>
-                    <li><em>length</em>. Length of the sequence, which will be the total number of repetitions.</li>
-                    <li><em>letter</em>. Repetition letter, starting from a.</li>
-                    <li><em>Letter</em>. Repetition letter, starting from A.</li>
-                    <li><em>roman</em>. Repetition roman number, starting from i.</li>
-                    <li><em>Roman</em>. Repetition roman number, starting from I.</li>
+                    <li><em>index()</em>. Repetition number, starting from zero.</li>
+                    <li><em>number()</em>. Repetition number, starting from one.</li>
+                    <li><em>even()</em>. True for even-indexed repetitions (0, 2, 4, …).</li>
+                    <li><em>odd()</em>. True for odd-indexed repetitions (1, 3, 5, …).</li>
+                    <li><em>start()</em>. True for the starting repetition (index 0).</li>
+                    <li><em>end()</em>. True for the ending, or final, repetition.</li>
+                    <li><em>length()</em>. Length of the sequence, which will be the total number of repetitions.</li>
+                    <li><em>letter()</em>. Repetition letter, starting from a.</li>
+                    <li><em>Letter()</em>. Repetition letter, starting from A.</li>
+                    <li><em>roman()</em>. Repetition roman number, starting from i.</li>
+                    <li><em>Roman()</em>. Repetition roman number, starting from I.</li>
                 </ul>
 
                 <p>
@@ -69,6 +69,9 @@ variable_name ::= Name
                     </li>
                     <li>
                         The built-in variable <code>repeat</code> does not exist. The name of the repeat variable is built appending <em>-repeat</em> to the local variable name.
+                    </li>
+                    <li>
+                        The available data in the repeat variable are functions (must use parenthesis to access them). In ZPT are simple properties (must NOT use parenthesis).
                     </li>
                 </ul>
                 
@@ -90,7 +93,7 @@ variable_name ::= Name
                 <pre class="brush: html">
 &lt;table&gt;
     &lt;tr data-trepeat="item myObject/cart"&gt;
-        &lt;td data-tcontent="item-repeat/number"&gt;1&lt;/td&gt;
+        &lt;td data-tcontent="item-repeat/number()"&gt;1&lt;/td&gt;
         &lt;td data-tcontent="item/description"&gt;Widget&lt;/td&gt;
         &lt;td data-tcontent="item/price"&gt;$1.50&lt;/td&gt;
     &lt;/tr&gt;

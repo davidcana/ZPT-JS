@@ -17,14 +17,14 @@
             <article data-mfill-slot="'article'">
                 <h2>Configuration options</h2>
                 <ul>
-                    <li><a href="configuration-command.html">command</a>. .</li>
-                    <li><a href="configuration-declaredRemotePageUrls.html">declaredRemotePageUrls</a>. .</li>
-                    <li><a href="configuration-dictionary.html">dictionary</a>. .</li>
-                    <li><a href="configuration-i18n.html">i18n</a>. .</li>
-                    <li><a href="configuration-maxFolderDictionaries.html">maxFolderDictionaries</a>. .</li>
-                    <li><a href="configuration-root.html">root</a>. .</li>
-                    <li><a href="configuration-target.html">target</a>. .</li>
-                    <li><a href="configuration-notRemoveGeneratedTags.html">notRemoveGeneratedTags</a>. .</li>
+                    <li><a href="configuration-command.html">command</a>. The action to run. Available options are <code>preload</code>, <code>partialRender</code> and <code>fullRender</code> (default).</li>
+                    <li><a href="configuration-declaredRemotePageUrls.html">declaredRemotePageUrls</a>. A list of URLs within external macros.</li>
+                    <li><a href="configuration-dictionary.html">dictionary</a>. An object containing key/values pairs accesible by the template.</li>
+                    <li><a href="configuration-i18n.html">i18n</a>. An object to configure some setting about i18n.</li>
+                    <li><a href="configuration-maxFolderDictionaries.html">maxFolderDictionaries</a>. Sets the number of folder dictionaries to read.</li>
+                    <li><a href="configuration-root.html">root</a>. The node(s) of the DOM to use as the root to process.</li>
+                    <li><a href="configuration-target.html">target</a>. The node(s) of the DOM to use to process for partial rendering.</li>
+                    <li><a href="configuration-notRemoveGeneratedTags.html">notRemoveGeneratedTags</a>. Set whether ZPT-JS will remove the previously generated tags before processing.</li>
                 </ul>
 
                 <h2>Attributes</h2>
@@ -33,20 +33,20 @@
                         <a href="attributes-all.html">All the attributes</a>. The complete list of ZPT-JS attributes and their ZPT attributes.
                     </li>
                     <li>
-                        <a href="attributes-evaluationOrder.html">Evaluation order</a>. .
+                        <a href="attributes-evaluationOrder.html">Evaluation order</a>. The order used by ZPT-JS to evaluate each attribute.
                     </li>
                     <li>
                         <em>TAL</em>. 
                         Template Attribute Language (TAL).
                         <ul>
-                            <li><a href="attributes-TALAttributes.html">TALAttributes</a>. .</li>
-                            <li><a href="attributes-TALCondition.html">TALCondition</a>. .</li>
-                            <li><a href="attributes-TALContent.html">TALContent</a>. .</li>
-                            <li><a href="attributes-TALDefine.html">TALDefine</a>. .</li>
-                            <li><a href="attributes-TALOmitTag.html">TALOmitTag</a>. .</li>
+                            <li><a href="attributes-TALAttributes.html">TALAttributes</a>. Replaces the value of an attribute (or creates an attribute) with a dynamic value.</li>
+                            <li><a href="attributes-TALCondition.html">TALCondition</a>. Includes the statement element in the template only if the condition is met, and omits it otherwise..</li>
+                            <li><a href="attributes-TALContent.html">TALContent</a>. Inserts text or structure in place of its childre.</li>
+                            <li><a href="attributes-TALDefine.html">TALDefine</a>. Defines variables.</li>
+                            <li><a href="attributes-TALOmitTag.html">TALOmitTag</a>. Leaves the contents of an element in place while omitting the surrounding start and end tags.</li>
                             <li><a href="attributes-TALOnError.html">TALOnError</a>. .</li>
-                            <li><a href="attributes-TALRepeat.html">TALRepeat</a>. .</li>
-                            <li><a href="attributes-TALReplace.html">TALReplace</a>. .</li>
+                            <li><a href="attributes-TALRepeat.html">TALRepeat</a>. Replicates a sub-tree of your document once for each item in an array.</li>
+                            <li><a href="attributes-TALReplace.html">TALReplace</a>. Replaces an element with dynamic content..</li>
                         </ul>
                     </li>
                     <li>
@@ -54,6 +54,8 @@
                         Macro Expansion Tag Attribute Language.
                         <ul>
                             <li><a href="attributes-METALDEfineMacro.html">METALDEfineMacro</a>. .</li>
+                            <li><a href="attributes-METALDEfineSlot.html">METALDEfineSlot</a>. .</li>
+                            <li><a href="attributes-METALFillSlot.html">METALFillSlot</a>. .</li>
                             <li><a href="attributes-METALUseMacro.html">METALUseMacro</a>. .</li>
                         </ul>
                     </li>
@@ -70,41 +72,19 @@
                 <h2>Expressions</h2>
                 <ul>
                     <li>
-                        <a href="expressions-arithmethic.html">Arithmethic expressions</a>.
-                        <ul>
-                            <li>+:</li>
-                            <li>-:</li>
-                            <li>*:</li>
-                            <li>/:</li>
-                            <li>%:</li>
-                        </ul>
+                        <a href="expressions-arithmethic.html">Arithmethic expressions</a>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> and <code>%</code>.
                     </li>
                     <li>
-                        <a href="expressions-boolean.html">Boolean expressions</a>.
-                        <ul>
-                            <li>and:</li>
-                            <li>cond:</li>
-                            <li>not:</li>
-                            <li>or:</li>
-                        </ul>
+                        <a href="expressions-boolean.html">Boolean expressions</a>: <code>and</code>, <code>cond</code>, <code>not</code> and <code>or</code>.
                     </li>
                     <li>
-                        <a href="expressions-comparison.html">Comparison expressions</a>.
-                        <ul>
-                            <li>eq:</li>
-                            <li>gt:</li>
-                            <li>in:</li>
-                            <li>lt:</li>
-                        </ul>
+                        <a href="expressions-comparison.html">Comparison expressions</a>: <code>eq</code>, <code>gt</code>, <code>in</code> and <code>lt</code>.
                     </li>
                     <li>
-                        <a href="expressions-i18n.html">I18n expressions</a>.
-                        <ul>
-                            <li>tr:</li>
-                        </ul>
+                        <a href="expressions-i18n.html">I18n expressions</a>: <code>tr</code>.
                     </li>
                     <li>
-                        <a href="expressions-path.html">Path expressions</a>.
+                        <a href="expressions-path.html">Path expressions</a>:
                         <ul>
                             <li>Array expressions</li>
                             <li>Function expressions</li>
@@ -118,11 +98,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="expressions-scripting.html">Scripting expressions</a>.
-                        <ul>
-                            <li>Javascript expressions</li>
-                            <li>Jquery expressions</li>
-                        </ul>
+                        <a href="expressions-scripting.html">Scripting expressions</a>: <code>Javascript</code> and <code>Jquery</code>.
                     </li>
                     <li>
                         <em>Misc expressions</em>.
@@ -132,6 +108,11 @@
                             <li><a href="expressions-string.html">string:</a>. .</li>
                         </ul>
                     </li>
+                </ul>
+                
+                <h2>Misc</h2>
+                <ul>
+                    <li><a href="context.html">The context object</a>. The context groups some important general settings.</li>
                 </ul>
             </article>
         </div>
