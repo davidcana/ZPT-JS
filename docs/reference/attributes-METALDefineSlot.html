@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - METALDefineSlot</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - METALDefineSlot</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument ::= Name
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-mdefine-slot</em> statement defines a macro customization point or slot. When a macro is used, its slots can be replaced, in order to customize the macro. Slot definitions provide default content for the slot. You will get the default slot contents if you decide not to customize the macro when using it.
+                </p>
+                
+                <p>
+                    The <em>data-mdefine-slot</em> statement must be used inside a <a href="attributes-METALDefineMacro.html">data-mdefine-macro</a> statement.
+                </p>
+                
+                <p>
+                    Slot names must be unique within a macro.
+                </p>
+
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-slot-define-a-macro-customization-point">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    None.
+                </p>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Macro with 1 slot (<em>additional_info</em>):
+                </p>
+                <pre class="brush: html">
+        &lt;div data-mdefine-macro="enhacedSidebar"&gt;
+            Links
+            &lt;div&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/products"&gt;Products&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/support"&gt;Support&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/contact"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;span data-mdefine-slot="additional_info"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+                </pre>
+
+                <p>
+                    Macro with 2 slots (<em>links</em> and <em>additional_info</em>):
+                </p>
+                <pre class="brush: html">
+        &lt;div data-mdefine-macro="enhacedSidebar"&gt;
+            Links
+            &lt;div data-mdefine-slot="links"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/products"&gt;Products&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/support"&gt;Support&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="/contact"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            &lt;span data-mdefine-slot="additional_info"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

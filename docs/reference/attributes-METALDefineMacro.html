@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - METALDefineMacro</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - METALDefineMacro</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument ::= expression
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-mdefine-macro</em> statement defines a macro. The macro is named by the statement expression, and is defined as the element and its sub-tree. Macros makes it easy to write it once and use it several times.
+                </p>
+
+                <p>
+                    In ZPT-JS, there are 2 types of macros:
+                </p>
+                <ul>
+                    <li><em>Internal macros</em>. They are defined in the same file where they are invoked.</li>
+                    <li><em>External macros</em>. They are defined in another file.</li>
+                </ul>
+                
+                <p>
+                    An example of internal macro: to access a macro named <em>copyright</em> in the same file you could use the path expression:
+                </p>
+                <pre class="syntax">
+'copyright'
+                </pre>
+                
+                <p>
+                    An example of external macro: to access a macro named <em>copyright</em> in a file named <em>macros.html</em>, you could use the path expression:
+                </p>
+                <pre class="syntax">
+'copyright@macros.html'
+                </pre>
+
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-macro-define-a-macro">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <ul>
+                    <li>
+                        In ZPT the syntax is <em>argument ::= Name</em>, so all invokations are literals. ZPT-JS uses expressions.
+                    </li>
+                    <li>
+                        Syntax of external macro invokation.
+                    </li>
+                </ul>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Simple macro definition:
+                </p>
+                <pre class="brush: html">
+&lt;p data-mdefine-macro="copyright"&gt;
+    Copyright 2019, &lt;em&gt;Foo, Bar, and Associates&lt;/em&gt; Inc.
+&lt;/p&gt;
+                </pre>
+
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-macro-define-a-macro">Zope Page Templates Reference</a>.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>
