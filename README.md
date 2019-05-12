@@ -1,17 +1,19 @@
 # ZPT-JS
 
-**Zenon Page Templates - JS (ZPT-JS)** is a Javascript implementation of Zope Page Templates (ZPT). Take a look at [Zope2 book](http://docs.zope.org/zope2/zope2book/ZPT.html) to learn about Zope Page Templates.
+**Zenon Page Templates - JS (ZPT-JS)** is a Javascript API that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes. **ZPT-JS** is a javascript implementation of Zope Page Templates (ZPT). It is not a fully compliant implementation: there are some differences. Take a look at [Zope2 book](http://docs.zope.org/zope2/zope2book/ZPT.html) to learn about Zope Page Templates.
 
-Zenon Page Templates - JS is a Javascript API that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes.
+Core features of **ZPT-JS** are:
 
 *   Easy to learn; clean, simple and consistent syntax.
 *   A rich and powerful group of expressions available (string, Jquery, logical, math, arrays, lists, ranges, function, method expressions...).
 *   Don't break HTML! The HTML documents using ZPT-JS are valid HTML documents.
 *   Makes it easy to designers maintain pages without having to abandon their tools.
 *   Internal macro support; external asynchronous macro loading support.
-*   I18n and L10n support using standards ([Intl](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl) and [ICU](http://userguide.icu-project.org/formatparse/messages)).
+*   I18n and L10n support using standards ([Intl](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl) and [ICU](http://userguide.icu-project.org/formatparse/messages)). External asynchronous i18n files loading support.
 
-There are some important differences between ZPT-JS and ZPT.
+## ZPT-JS and ZPT: similar but not equal
+
+ZPT-JS is based on ZPT but it does not implement it at 100%: there are some important differences between ZPT-JS and ZPT.
 
 Using ZPT we have:
 
@@ -46,8 +48,6 @@ An example of ZPT-JS template:
     var zpt = require( 'zpt' );
 
     var dictionary = { 
-        aString: "string",
-        doggy: false,
         number1: 1,
         number100: 100,
         user: {
@@ -56,7 +56,13 @@ An example of ZPT-JS template:
                 return 25;
             }
         },
-        items: [ 'item0', 'item1', 'item2' ]
+        user2: {
+            name: "Mary", 
+            age: function( ){
+                return 29;
+            }
+        },
+        tools: [ 'tool0', 'tool1', 'tool2' ]
     };
 
     zpt.run({
@@ -76,30 +82,32 @@ An example of ZPT-JS template:
             <script src="zpt.js"></script>
         </head>
         <body>
-            <h1>Some expressions</h1>
+            <h1>Some ZPT-JS examples</h1>
+    
+            <h2>Some expressions</h2>
             <ol>
-                <li data-tcontent="user/name">a name</li>
-                <li data-tcontent="string:help my ${user/name}">message with the same name</li>
+                <li data-tcontent="user/name">a property expresion</li>
+                <li data-tcontent="string:help my ${user/name}">a string expression</li>
                 <li>
-                    <a data-tattributes="href string:www.yoursite.org;
-                                         title 'a title for your site'">A link</a>
+                    <a data-tattributes="href 'www.yoursite.org';
+                                         title 'a title for your site'">A link using string literals in a data-tattributes</a>
                 </li>
                 <li data-tcondition="eq: number1 number100">
-                    change number1 or number100 to show this!
+                    a condition: change number1 or number100 to show this!
                 </li>
                 <li>
-                    <span data-treplace="user/name | string:no friends">
+                    <span data-treplace="user/name | 'no friends'">
                         any friends?
                     </span>
                 </li>
-                <li data-tcontent="user2/name | string:no friends">
+                <li data-tcontent="user2/name | 'no friends'">
                     any friends?
                 </li>
-                <li data-tcontent="items[0]">an item</li>
-                <li data-tcontent="user/age()">user/age()</li>
+                <li data-tcontent="tools[0]">an item of an array</li>
+                <li data-tcontent="user/age()">a method invokation</li>
             </ol>
             
-            <h1>Loops</h1>
+            <h2>Loops</h2>
             <table>
                 <tr>
                     <th>Value</th>
@@ -116,31 +124,31 @@ An example of ZPT-JS template:
                     <th>Capital Roman</th>
                 </tr>
                 <tr data-trepeat="item tools">
-                    <td class="value" data-tcontent="item/name">value</td>
-                    <td class="index" data-tcontent="item-repeat/index()">index</td>
-                    <td class="number" data-tcontent="item-repeat/number()">number</td>
-                    <td class="isEven" data-tcontent="item-repeat/even()">even</td>
-                    <td class="isOdd" data-tcontent="item-repeat/odd()">odd</td>
-                    <td class="isStart" data-tcontent="item-repeat/start()">start</td>
-                    <td class="isEnd" data-tcontent="item-repeat/end()">end</td>
-                    <td class="getLength" data-tcontent="item-repeat/length()">length</td>
-                    <td class="getLetter" data-tcontent="item-repeat/letter()">letter</td>
-                    <td class="getCapitalLetter" data-tcontent="item-repeat/Letter()">capital letter</td>
-                    <td class="getRoman" data-tcontent="item-repeat/roman()">roman</td>
-                    <td class="getCapitalRoman" data-tcontent="item-repeat/Roman()">capitalRoman</td>
+                    <td data-tcontent="item">the item</td>
+                    <td data-tcontent="item-repeat/index()">index</td>
+                    <td data-tcontent="item-repeat/number()">number</td>
+                    <td data-tcontent="item-repeat/even()">even</td>
+                    <td data-tcontent="item-repeat/odd()">odd</td>
+                    <td data-tcontent="item-repeat/start()">start</td>
+                    <td data-tcontent="item-repeat/end()">end</td>
+                    <td data-tcontent="item-repeat/length()">length</td>
+                    <td data-tcontent="item-repeat/letter()">letter</td>
+                    <td data-tcontent="item-repeat/Letter()">capital letter</td>
+                    <td data-tcontent="item-repeat/roman()">roman</td>
+                    <td data-tcontent="item-repeat/Roman()">capital roman</td>
                 </tr>
             </table>
             
-            <h1>Macros</h1>
+            <h2>Macros</h2>
             
-            <h2>Macro invokation - Dynamic macro using 1 slot (items = [10 20 30])</h2>
+            <h3>Macro invokation - Dynamic macro using 1 slot (items = [10 20 30])</h3>
             <div data-tdefine="items [10 20 30]" data-muse-macro="dynamicListWith1Slot">
                 <em data-mfill-slot="additional_info">
                     Make sure to check out our <a href="/specials">specials</a>.
                 </em>
             </div>
             
-            <h2>Macro definition - Dynamic macro using 1 slot</h2>
+            <h3>Macro definition - Dynamic macro using 1 slot</h3>
             <ul data-mdefine-macro="dynamicListWith1Slot">
                 <li data-trepeat="item items">
                     <span data-tcontent="item">An item</span>
