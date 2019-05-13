@@ -47,5 +47,32 @@
                 user/fireError() = Oh, noooo! = <span id="t3-2" data-tcontent="user/fireError()">must fire error</span>
             </li>
         </ul>
+        
+        <p>
+            Try out on-error object
+        </p>
+        <ul id="group4" data-ton-error="treatError( error )">
+            <li>number1 = 1 = <span id="t4-2" data-tcontent="number1">must be 1</span></li>
+            <li>user/fireError() = Oh, noooo! = <span id="t4-3" data-tcontent="user/fireError()">must fire error</span></li>
+            <li>yes = yes = <span id="t4-4" data-tcontent="yes">must be yes</span></li>
+            <li>divBy0() = Infinity = <span id="t4-5" data-tcontent="divBy0()">1 / 0</span></li>
+        </ul>
+        
+        <p>
+            Try out on-error object
+        </p>
+        <ul id="group5" data-ton-error="nothing">
+            <li>user/fireError() = Oh, noooo! = <span id="t5-1" data-tcontent="user/fireError()">must fire error</span></li>
+        </ul>
+        
+        <p>
+            Try out literal structure on-error
+        </p>
+        <ul id="group6" data-ton-error="'<strong>Oh, noooo!</strong>'">
+            <li>user/fireError() = Oh, noooo! = <span id="t6-1" data-tcontent="user/fireError()">must fire error</span></li>
+        </ul>
+        <ul id="group7" data-ton-error="structure '<strong>Oh, noooo!</strong>'">
+            <li>user/fireError() = Oh, noooo! = <span id="t7-1" data-tcontent="user/fireError()">must fire error</span></li>
+        </ul>
     </body> 
 </html>

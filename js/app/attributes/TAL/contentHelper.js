@@ -5,9 +5,18 @@
 
 var context = require( '../../context.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
 module.exports = (function() {
 
+    var formInputHasBody = {
+        BUTTON : 1,
+        LABEL : 1,
+        LEGEND : 1,
+        FIELDSET : 1,
+        OPTION : 1
+    };
+    
     var build = function( tag, string, constructorFunction ) {
 
         // Process it
@@ -25,11 +34,34 @@ module.exports = (function() {
         return constructorFunction(
             string,
             expressionBuilder.build( expressionString ),
-            structure 
+            structure,
+            expressionString
         );
     };
     
+    var updateNode = function( node, structure, evaluated ){
+
+        // Check default
+        if ( evaluateHelper.isDefault( evaluated ) ){
+            return true;
+        }
+
+        // Check nothing
+        if ( evaluateHelper.isNothing( evaluated ) ){
+            evaluated = "";
+        }
+
+        // Add it to node
+        node.innerHTML = evaluated;
+        if ( ! structure ) {
+            node[ "form" in node && !formInputHasBody[ node.tagName ] ? "value": "innerText" ] = evaluated;
+        }
+
+        return true;
+    };
+    
     return {
-        build: build
+        build: build,
+        updateNode: updateNode
     };
 })();

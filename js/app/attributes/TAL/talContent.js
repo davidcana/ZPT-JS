@@ -12,36 +12,14 @@ var TALContent = function( stringToApply, expressionToApply, structureToApply ) 
     var string = stringToApply;
     var expression = expressionToApply;
     var structure = structureToApply;
-    var formInputHasBody = {
-        BUTTON : 1,
-        LABEL : 1,
-        LEGEND : 1,
-        FIELDSET : 1,
-        OPTION : 1
-    };
     
     var process = function( scope, node ){
         
-        // Evaluate
-        var evaluated = evaluateHelper.evaluateToNotNull( scope, expression );
-        
-        // Check default
-        if ( evaluateHelper.isDefault( evaluated ) ){
-            return true;
-        }
-        
-        // Check nothing
-        if ( evaluateHelper.isNothing( evaluated ) ){
-            evaluated = "";
-        }
-        
-        // Add it to node
-        node.innerHTML = evaluated;
-        if ( ! structure ) {
-            node[ "form" in node && !formInputHasBody[ node.tagName ] ? "value": "innerText" ] = evaluated;
-        }
-
-        return true;
+        return contentHelper.updateNode( 
+            node, 
+            structure, 
+            evaluateHelper.evaluateToNotNull( scope, expression ) 
+        );
     };
 
     var toString = function(){

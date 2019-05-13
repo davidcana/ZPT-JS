@@ -4,10 +4,12 @@
 "use strict";
 
 var context = require( '../../context.js' );
+var contentHelper = require( './contentHelper.js' );
 
-var TALOnError = function( stringToApply ) {
+var TALOnError = function( stringToApply, structureToApply ) {
     
     var string = stringToApply;
+    var structure = false || structureToApply;
     
     var putToAutoDefineHelper = function( autoDefineHelper ){
 
@@ -16,6 +18,13 @@ var TALOnError = function( stringToApply ) {
             context.getConf().onErrorVarName,
             string,
             true
+        );
+        
+        // Add onErrorStructureVarName to the autoDefineHelper
+        autoDefineHelper.put(
+            context.getConf().onErrorStructureVarName,
+            structure,
+            false
         );
     };
 
@@ -32,7 +41,14 @@ var TALOnError = function( stringToApply ) {
 TALOnError.id = 'tal:on-error';
 
 TALOnError.build = function( string ) {
-    return string? new TALOnError( string.trim() ): null;
+
+    return contentHelper.build( 
+        'TALOnError',
+        string,
+        function( _string, _expression, _structure, _expressionString ){
+            return new TALOnError( _expressionString, _structure );
+        }
+    );
 };
 
 module.exports = TALOnError;

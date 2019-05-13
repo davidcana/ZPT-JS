@@ -28,6 +28,7 @@ var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
 var TALOnError = require( '../attributes/TAL/talOnError.js' );
 var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
+var contentHelper = require( '../attributes/TAL/contentHelper.js' );
 
 module.exports = (function() {
     
@@ -336,28 +337,34 @@ module.exports = (function() {
     var treatError = function( node, scope, exception ) {
 
         try {
-            // Exit if there is no on-error expression defined
-            var content = scope.get( context.getConf().onErrorVarName );
-            if ( content == null ) {
-                log.fatal( exception );
-                return false;
-            }
-
             // Set the error variable
             var templateError = {
-                type : typeof exception,
-                value : exception
+                type: exception.name,
+                value: exception.message,
+                traceback: exception.stack
             };
             scope.set( 
                 context.getConf().templateErrorVarName, 
                 templateError 
             );
             
-            log.debug( exception );
+            // Exit if there is no on-error expression defined
+            var content = scope.get( context.getConf().onErrorVarName );
+            if ( content == null ) {
+                log.fatal( exception );
+                scope.endElement();
+                return false;
+            }
             
+            log.error( exception );
             scope.endElement();
             
-            node.innerHTML = content;
+            contentHelper.updateNode( 
+                node, 
+                scope.get( context.getConf().onErrorStructureVarName ), 
+                content 
+            );
+            
             return content;
             
         } catch ( e ) {

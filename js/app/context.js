@@ -143,6 +143,7 @@ module.exports = (function() {
         
         templateErrorVarName:    "error",
         onErrorVarName:          "on-error",
+        onErrorStructureVarName: "on-error-structure",
         i18nDomainVarName:       "i18nDomain",
         i18nLanguageVarName:     "i18nLanguage",
         repeatVarName:           "repeat",
