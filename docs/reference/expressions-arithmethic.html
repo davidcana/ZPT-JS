@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Arithmethic expressions</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Arithmethic expressions</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+arithmethic_expressions ::= ( '+:' | '-:' | '*:' | '/:' | '%:' ) expression expression [ expression ]*
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    Some math operations can be done using <em>arithmethic expressions</em>:
+                </p>
+                <ul>
+                    <li><code>+: x y</code> -> add x and y</li>
+                    <li><code>-: x y</code> -> subtract y from x</li>
+                    <li><code>*: x y</code> -> multiply x and y</li>
+                    <li><code>/: x y</code> -> divide x by y</li>
+                    <li><code>%: x y</code> -> x mod y</li>
+                </ul>
+                
+                <p>
+                    You can use more than 2 values to operate. Parenthesis can be used.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    This expressions does not exist in ZPT.
+                </p>
+
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Some examples in <em>data-tcontent</em>:
+                </p>
+                <pre class="brush: html">
+&lt;div data-tcontent="-: assets liabilities"&gt;using vars&lt;/div&gt;
+&lt;div data-tcontent="*: 2 children"&gt;using a literal and a var&lt;/div&gt;
+&lt;div data-tcontent="+: 1 number1 number2"&gt;using more than 2 values&lt;/div&gt;
+&lt;div data-tcontent="+: 1 ( *: number1 number2 )"&gt;using parenthesis&lt;/div&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

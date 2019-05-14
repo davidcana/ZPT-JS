@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - I18nDomain</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - I18nDomain</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument ::= expression [ expression ]*
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-idomain</em> statement defines one or more expressions that evaluate to one or more sources of i18n resources. If only one expression is defined this is the source of i18n resources; if more than one expression is defined ZPT-JS will look for the resources using the order of the list of expressions: it will try to find the resource in the first expression, if it is not found it will try with the second and so on.
+                </p>
+                
+                <p>
+                    ZPT-JS provides 2 classes that work as source of i18n resources:
+                </p>
+                <p>
+                    <em>I18n</em> class is the most basic of them. It represents a set of translations using a language. The constructor of <em>I18n</em> class accepts 2 parameters: the language (a string) and the translations (an object with strings). An example:
+                </p>
+                <pre class="brush: js">
+var zpt = require( 'zpt' );
+var i18nES = new zpt.I18n(
+    'es', 
+    { 
+        'Hello world!': '¡Hola mundo!'
+    }
+);
+
+// Init dictionary
+var dictionary = {
+    'i18nES': i18nES
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    <em>I18nBundle</em> class is a little bit more complex. It groups several <em>I18n</em> instances with the same translations using different languages. The constructor of <em>I18nBundle</em> class accepts one or more <em>I18n</em> instances. ZPT-JS will use the <em>I18n</em> instance depending of the value defined using a <a href="attributes-I18nLanguage.html">data-ilanguage</a> statement. An example:
+                </p>
+                <pre class="brush: js">
+var zpt = require( 'zpt' );
+var i18nES = new zpt.I18n(
+    'es', 
+    { 
+        'Hello world!': '¡Hola mundo!'
+    }
+);
+var i18nEN = new zpt.I18n(
+    'en', 
+    { 
+        'Hello world!': 'Hello world!'
+    }
+);
+var i18nBundle = new zpt.I18nBundle( i18nES, i18nEN );
+
+// Init dictionary
+var dictionary = {
+    'i18nBundle': i18nBundle
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    To make it easy the i18n initialization ZPT-JS provides a configuration option: <a href="configuration-i18n.html">i18n</a>.
+                </p>
+                
+                <p>
+                    ZPT-JS uses the <a href="expressions-i18n.html">tr</a> expression to make it easy to translate text, number, dates...
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    This statement does not exist in ZPT.
+                </p>
+
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Using an <em>I18n</em> instance:
+                </p>
+                <pre class="brush: html">
+&lt;div data-idomain="i18nES"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+
+                <p>
+                    Using 2 <em>I18n</em> instances:
+                </p>
+                <pre class="brush: html">
+&lt;div data-idomain="i18nES2 i18nES1"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Using an <em>I18nBundle</em> instance:
+                </p>
+                <pre class="brush: html">
+&lt;div data-idomain="i18nBundle"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Using 2 <em>I18nBundle</em> instances:
+                </p>
+                <pre class="brush: html">
+&lt;div data-idomain="i18nBundle2 i18nBundle1"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

@@ -17,6 +17,7 @@ exports.logHelper = require( './logHelper.js' );
 if ( typeof define === 'function' && define.amd ) {
     define( 'zpt.run', exports.run );
     define( 'zpt.I18n', exports.I18n );
+    define( 'zpt.I18nBundle', exports.I18nBundle );
     define( 'zpt.i18nHelper', exports.i18nHelper );
     define( 'zpt.context', exports.context );
     define( 'zpt.logHelper', exports.logHelper );

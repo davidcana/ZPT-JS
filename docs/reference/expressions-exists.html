@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Exists expressions</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Exists expressions</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+exists_expressions ::= 'exists:' expression
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    <em>Exists</em> expressions test for the existence of paths. An exists expression returns <code>true</code> when the path expressions following it expression returns a value. It is <code>false</code> when the path expression cannot locate an object.
+                </p>
+                
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#tales-exists-expressions">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    None.
+                </p>
+
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Testing for the existence of a property:
+                </p>
+                <pre class="brush: html">
+&lt;div data-tcondition="not: exists: myObject/name"&gt;
+    Name not set!
+&lt;/div&gt;
+                </pre>
+
+                <p>
+                    Note that in this case you can’t use the expression, <code>not:myObject/name</code>, since that expression will be <code>true</code> if the number variable exists and is zero.
+                </p>
+
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#tales-exists-expressions">Zope Page Templates Reference</a>.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

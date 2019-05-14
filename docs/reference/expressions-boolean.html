@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Boolean expressions</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Boolean expressions</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                
+                <p><em>or</em> and <em>and</em> syntax:</p>
+                <pre class="syntax">
+or_and_expressions ::= ( 'or:' | 'and:' ) expression expression [ expression ]*
+                </pre>
+                
+                <p><em>cond</em> syntax:</p>
+                <pre class="syntax">
+cond_expressions ::= 'cond:' expression expression expression
+                </pre>
+                
+                <p><em>not</em> syntax:</p>
+                <pre class="syntax">
+not_expressions ::= 'not:' expression
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The list of available <em>boolean expressions</em> is:
+                </p>
+                <ul>
+                    <li><code>or: x y</code> -> boolean or of expressions x and y</li>
+                    <li><code>and: x y</code> -> boolean and of expressions x and y</li>
+                    <li><code>cond: x y z</code> -> evaluate as boolean x; if true return y, otherwise return z</li>
+                    <li><code>not: x</code> -> if x then false else true</li>
+                </ul>
+
+                <p>
+                    All operators uses lazy evaluation. <em>or</em> and <em>and</em> expressions support 2 or more operators. <em>cond</em> expressions only support 3. <em>not</em> expressions only support 1. Parenthesis can be used.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    This expressions does not exist in ZPT.
+                </p>
+
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Some examples in <em>data-tcondition</em> and <em>data-tcontent</em>:
+                </p>
+                
+                <pre class="brush: html">
+&lt;p data-tcondition="or: isFridayNight isSaturday isSunday"&gt;
+    Yeah!
+&lt;/p&gt;
+&lt;p data-tcondition="and: ( exists:pets()/dog() ) ( not:pets()/dog()/badDog() )"&gt;
+    Good dog!
+&lt;/p&gt;
+&lt;p data-tcontent="cond: partyToday 'Yeah!' 'Oh!'"&gt;
+    Party?
+&lt;/p&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>
