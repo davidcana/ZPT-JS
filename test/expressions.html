@@ -28,11 +28,15 @@
             Exists expressions
         </p>
         <ol>
-            <li>exists: doggy should be false = <span id="t2-1" data-tcontent="exists: doggy">not true</span></li>
-            <li>not: exists: doggy should be true = <span id="t2-2" data-tcontent="not: exists: doggy">not false</span></li>
+            <li>exists: doggy should be true = <span id="t2-1" data-tcontent="exists: doggy">not false</span></li>
+            <li>not: exists: doggy should be false = <span id="t2-2" data-tcontent="not: exists: doggy">not true</span></li>
             <li>exists: aString should be true = <span id="t2-3" data-tcontent="exists: aString">not false</span></li>
             <li>exists: user/name should be true = <span id="t2-4" data-tcontent="exists: user/name">not false</span></li>
             <li>exists: non/existing/path should be false = <span id="t2-5" data-tcontent="exists: non/existing/path">not true</span></li>
+            <li>exists: user/isAMan should be true = <span id="t2-6" data-tcontent="exists: user/isAMan()">not false</span></li>
+            <li>exists: user/isAWoman should be true = <span id="t2-7" data-tcontent="exists: user/isAWoman()">not false</span></li>
+            <li>exists: user/isADog should be false = <span id="t2-8" data-tcontent="exists: user/isADog()">not true</span></li>
+            <li>exists: user/undefValue should be false = <span id="t2-9" data-tcontent="exists: user/undefValue">not true</span></li>
         </ol>
         
         <p>

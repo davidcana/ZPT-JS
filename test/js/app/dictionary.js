@@ -37,7 +37,14 @@ module.exports = {
         fireError: function( ){
             //return 1 / 0;
             document.getElementById("mydiv").innerHTML='Success'; //assuming "mydiv" is undefined
-        }
+        },
+        isAMan: function(){
+            return true;
+        },
+        isAWoman: function(){
+            return false;
+        },
+        undefValue: undefined
     }, 
     tools: [ 
         {name: "tool A", rent_url: "rent?id=1000"}, 

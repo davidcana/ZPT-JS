@@ -30,10 +30,15 @@ QUnit.test( "String expressions test", function( assert ) {
 });
 
 QUnit.test( "Exists expressions test", function( assert ) {
-    assert.equal( $('#t2-1').html() , "false" );
-    assert.equal( $('#t2-2').html() , "true" );
+    assert.equal( $('#t2-1').html() , "true" );
+    assert.equal( $('#t2-2').html() , "false" );
     assert.equal( $('#t2-3').html() , "true" );
     assert.equal( $('#t2-4').html() , "true" );
+    assert.equal( $('#t2-5').html() , "false" );
+    assert.equal( $('#t2-6').html() , "true" );
+    assert.equal( $('#t2-7').html() , "true" );
+    assert.equal( $('#t2-8').html() , "false" );
+    assert.equal( $('#t2-9').html() , "false" );
 });
 
 QUnit.test( "Not expressions test", function( assert ) {

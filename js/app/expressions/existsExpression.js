@@ -4,7 +4,6 @@
 "use strict";
 
 var context = require( '../context.js' );
-var evaluateHelper = require( './evaluateHelper.js' );
 
 var ExistsExpression = function( stringToApply, expressionToApply ) {
     
@@ -14,11 +13,13 @@ var ExistsExpression = function( stringToApply, expressionToApply ) {
     var evaluate = function( scope ){
         
         try {
-            return evaluateHelper.evaluateBoolean( scope, expression );
+            return undefined !== expression.evaluate( scope );
+            
         } catch ( e ){
             return false;
         }
     };
+
     
     var toString = function(){
         return string;

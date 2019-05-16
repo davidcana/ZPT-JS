@@ -30,7 +30,7 @@ exists_expressions ::= 'exists:' expression
                 
                 <h2 data-tattributes="id 'description'">Description</h2>
                 <p>
-                    <em>Exists</em> expressions test for the existence of paths. An exists expression returns <code>true</code> when the path expressions following it expression returns a value. It is <code>false</code> when the path expression cannot locate an object.
+                    <em>Exists</em> expressions test for the existence of paths. An exists expression returns <code>true</code> when the path expressions following its expression returns a value and it is not <code>undefined</code>. It is <code>false</code> when the path expression cannot locate an object or if it evaluates to <code>undefined</code>.
                 </p>
                 
                 <p>
@@ -39,7 +39,7 @@ exists_expressions ::= 'exists:' expression
                 
                 <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
                 <p>
-                    None.
+                    In ZPT if an expression evaluates to <code>undefined</code> exists returns <code>true</code>; ZPT-JS returns <code>false</code>.
                 </p>
 
                 <h2 data-tattributes="id 'examples'">Examples</h2>
