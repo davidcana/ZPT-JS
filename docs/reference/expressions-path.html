@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Path expressions</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Path expressions</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+PathExpression        ::= Expression [ '|' Expression ]*
+PathSegmentExpression ::= FirstPathToken [ '/' NextPathToken ]*
+FirstPathToken        ::= StringLiteral | NumericLiteral | BooleanLiteral | ListExpression | FunctionExpression | VariableExpression | ArrayExpression
+StringLiteral         ::= '/'' StringLiteralChar* '/''
+StringLiteralChar     ::= any character except '''
+NumericLiteral        ::= Numeric+
+BooleanLiteral        ::= true | false
+ListExpression        ::= '[' Expression ']'
+RangeExpression       ::= Numeric* ':' Numeric+ [ ':' Numeric+ ]
+FunctionExpression    ::= Name '(' [ ArgumentList ] ')'
+VariableExpression    ::= Name
+ArrayExpression       ::= Expression ArrayAccessor
+ArrayAccessor          ::= '[' Expression+ ']'
+NextPathToken         ::= IndirectionExpression | MethodExpression | PropertyExpression | ArrayAccessor
+IndirectionExpression ::= '?' Name
+MethodExpression      ::= Name '(' [ ArgumentList ] ')'
+PropertyExpression    ::= Name
+ArgumentList          ::= Expression [ ',' Expression ]*
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    A <em>path expression</em> consists of a path optionally followed by a vertical bar (|) and alternate expression. A <em>path</em> consists of one or more non-empty strings separated by slashes. 
+                </p>
+                
+                <p>
+                    The first string must be one of these:
+                </p>
+                <ul>
+                    <li>a string literal,</li>
+                    <li>a numeric literal,</li>
+                    <li>a boolean literal,</li>
+                    <li>a list expression,</li>
+                    <li>a function expression,</li>
+                    <li>an array expression,</li>
+                    <li>or a variable name (a built-in variable or a user defined variable).</li>
+                </ul>
+                
+                <p>
+                    The remaining strings, the path segments, may be:
+                </p>
+                <ul>
+                    <li>an indirection,</li>
+                    <li>a method name,</li>
+                    <li>an array accessor,</li>
+                    <li>or a property name.</li>
+                </ul>
+                
+                <p>
+                    When a path expression is evaluated, ZPT-JS attempts to traverse the path, from left to right, until it succeeds or runs out of paths segments. To traverse a path, it first fetches the object stored in the variable. For each path segment, it traverses from the current object to the sub-object named by the path segment.
+                </p>
+                
+                <p>
+                    Once a path has been successfully traversed, the resulting object is the value of the expression. If it is a callable object, such as a method or function, it is called.
+                </p>
+                
+                <p>
+                    If a traversal step fails, and no alternate expression has been specified, an error results. Otherwise, the alternate expression is evaluated.
+                </p>
+                
+                <p>
+                    The alternate expression can be any TALES expression. For example:
+                </p>
+                <pre class="syntax">
+user/name | 'Anonymous Coward'
+                </pre>
+                
+                <p>
+                    is a valid path expression. This is useful chiefly for providing default values, such as strings and numbers, which are not expressible as path expressions. Since the alternate expression can be a path expression, it is possible to <em>chain</em> path expressions, as in:
+                </p>
+                <pre class="syntax">
+first | second | third | nothing
+                </pre>
+                <p>
+                    If no path is given the result is <code>nothing</code>.
+                </p>
+                
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#tales-path-expressions">Zope Page Templates Reference</a>.
+                </p>
+                
+                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <ul>
+                    <li>
+                        ZPT-JS includes more types of path expressions, such as <em>method</em>, <em>array</em>, <em>list</em> or <em>range expressions</em>.
+                    </li>
+                    <li>
+                        ZPT uses <em>python expressions</em> for a lot of tasks, but these are not supported in ZPT-JS.
+                    </li>
+                </ul>
+
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                
+                <p>
+                    The neccesary javascript code:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    number100: 100,
+    aString: "string",
+    function3: function( ){
+        return 3;
+    },
+    add: function( a, b ){
+        return a + b;
+    },
+    user: {
+        name: "Bob", 
+        age: function(){
+            return 25;
+        },
+        birth: function(){
+            return {
+                day: 3,
+                month: 3,
+                year: 1977,
+                aFunction: function(){
+                    return {
+                        another: 'yes!'
+                    };
+                }
+            };
+        },
+        addMethod: function( a, b ){
+            return a + b;
+        }
+    },
+    items: [ 'first', 'second', 'third' ],
+    from1To3: [ 1, 2, 3 ],
+    property: "name"
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <h3>Literals</h3>
+                <p>
+                    <em>Literals</em> are constant values. They can be number, string or boolean values:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="'this is a string literal'"&gt;a string&lt;/span&gt;
+&lt;span data-tcontent="123"&gt;an integer&lt;/span&gt;
+&lt;span data-tcontent="123.45"&gt;a float&lt;/span&gt;
+&lt;span data-tcontent="true"&gt;not false&lt;/span&gt;
+&lt;span data-tcontent="false"&gt;not true&lt;/span&gt;
+                </pre>
+                
+                <h3>Functions</h3>
+                <p>
+                    Invoking <em>functions</em>:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="function3()"&gt;must be 3&lt;/span&gt;
+&lt;span data-tcontent="add( 1, 2 )"&gt;must be 1 + 2 = 3&lt;/span&gt;
+&lt;span data-tcontent="add( 1, number100 )"&gt;must be 1 + number100 = 101&lt;/span&gt;
+&lt;span data-tcontent="add( 1, (*: 2 2 ) )"&gt;must be 1 + 2 * 2 = 5&lt;/span&gt;
+                </pre>
+                
+                <h3>Variables</h3>
+                <p>
+                    Using simple <em>variables</em>:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="number100"&gt;must be 100&lt;/span&gt;
+&lt;span data-tcontent="aString"&gt;must be string&lt;/span&gt;
+                </pre>
+                
+                <h3>Properties</h3>
+                <p>
+                    Using <em>properties</em> of objects:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="user/name"&gt;must be Bob&lt;/span&gt;
+                </pre>
+                
+                <h3>Methods</h3>
+                <p>
+                    Using <em>methods</em> of objects:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="user/age()"&gt;must be 25&lt;/span&gt;
+&lt;span data-tcontent="user/addMethod( 1, 2 )"&gt;must be 1 + 2 = 3&lt;/span&gt;
+                </pre>
+                
+                <h3>Arrays</h3>
+                <p>
+                    <em>Arrays</em> are supported too:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="items[2]"&gt;must be third&lt;/span&gt;
+&lt;span data-tcontent="items"&gt;must be first, second, third&lt;/span&gt;
+&lt;span data-tcontent="+: from1To3 4"&gt;must be 1 + 2 + 3 + 4 = 10&lt;/span&gt;
+                </pre>
+                
+                <h3>Maps</h3>
+                <p>
+                    <em>Maps</em> support makes it easy to access defined in variables properties:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="user['name']"&gt;must be Bob&lt;/span&gt;
+&lt;span data-tdefine="property 'name'" data-tcontent="user[ property ]"&gt;must be Bob again&lt;/span&gt;
+                </pre>
+                
+                <h3>Lists</h3>
+                <p>
+                    <em>Lists</em> are very versatile:
+                </p>
+                <pre class="brush: html">
+&lt;span data-tcontent="[1 20 3 number100]"&gt;must be 1,20,3,100&lt;/span&gt;
+&lt;span data-tcontent="+: [1 20 3 number100]"&gt;must be 1 + 20 + 3 + 100 = 124&lt;/span&gt;
+&lt;ol&gt;
+    &lt;li data-trepeat="c [1 20 3 number100]"&gt;
+        Iterating element &lt;span data-tcontent="c"&gt;1/20/3/100&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+    &lt;li data-trepeat="c [1 'a string' number100]"&gt;
+        Iterating element &lt;span data-tcontent="c"&gt;1/a string/100&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+                </pre>
+                
+                <h3>Ranges</h3>
+                <p>
+                    <em>Ranges</em> makes it easy buildin numeric lists:
+                </p>
+                <pre class="brush: html">
+&lt;ol&gt;
+    &lt;li data-trepeat="c [1:5]"&gt;
+        Iterating element &lt;span data-tcontent="c"&gt;1/2/3/4/5&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+    &lt;li data-trepeat="c [1:7:2]"&gt;
+        Iterating element &lt;span data-tcontent="c"&gt;1/3/5/7&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+    &lt;li data-trepeat="c [:5]"&gt;
+        Iterating element &lt;span data-tcontent="c"&gt;0/1/2/3/4/5&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+                </pre>
+                
+                <h3>Indirections</h3>
+                <pre class="brush: html">
+&lt;span data-tcontent="user/?property"&gt;must be Bob if property is name&lt;/span&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>
