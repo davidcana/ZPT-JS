@@ -7,8 +7,8 @@ var IndirectionExpression = function( nameToApply ) {
     
     var name = nameToApply;
     
-    var evaluate = function( scope ){
-        return scope.get( name );
+    var evaluate = function( scope, parent ){
+        return parent[ scope.get( name ) ];
     };
     
     var toString = function(){

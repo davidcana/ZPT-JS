@@ -200,3 +200,7 @@ QUnit.test( "Nocall expressions test", function( assert ) {
     assert.equal( $('#t18-2').html() , '11' );
 });
 
+QUnit.test( "Indirection test", function( assert ) {
+    assert.equal( $('#t19-1').html() , "item0" );
+    assert.equal( $('#t19-2').html() , "Bob" );
+});

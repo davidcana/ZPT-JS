@@ -21,16 +21,17 @@ var dictionary = {
                 year: 1977,
                 aFunction: function(){
                     return {
-                        another: 'yes!'
+                        another: "yes!"
                     };
                 }
             };
         }
     },
-    items: [ 'item0', 'item1', 'item2' ],
+    items: [ "item0", "item1", "item2" ],
     return3: function( ){
         return 3;
-    }
+    },
+    property: "name"
 };
 
 $( '#evaluate' ).click( function() {
