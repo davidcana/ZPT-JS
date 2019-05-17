@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - command</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - command</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+command ::= 'preload' | 'fullRender' | 'partialRender'
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    Defines the action to run. The default is <em>fullRender</em>. Possible values are:
+                </p>
+                <ul>
+                    <li>
+                        <em>preload</em>. Loads resources using HTTP asynchronously. These resocurces must be preloaded before using them. These resources include:
+                        <ul>
+                            <li><em>Folder dictionaries</em>. Each folder can contain a file (usually named <em>folderDictionary.js</em>) with value/key pairs. To activate this preload set <a href="configuration-maxFolderDictionaries.html">maxFolderDictionaries</a> configuration option to a number greater than 0.</li>
+                            <li><em>I18n files</em>. Files containing i18n resources for translating texts, i18n and l10n. To activate this preload set <a href="configuration-i18n.html">i18n</a> configuration option.</li>
+                            <li><em>HTML files including external macros</em>. ZPT-JS will search the files to preload, but some files must be declared using <a href="configuration-declaredRemotePageUrls.html">declaredRemotePageUrls</a> configuration option.</li>
+                        </ul>
+                    </li>
+                    <li><em>fullRender</em>. Do a render of the <a href="configuration-root.html">root</a> element(s).</li>
+                    <li><em>partialRender</em>. Do a render of the <a href="configuration-target.html">target</a> element(s).</li>
+                </ul>
+
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    An example of <em>fullRender</em>:
+                </p>
+                <pre class="brush: js; highlight: [13]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary,
+    command: 'fullRender'
+});
+                </pre>
+                <p>
+                    This is exactly equivalent to the next example (without setting command, <em>fullRender</em> is the default command):
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way:
+                </p>
+                <pre class="brush: js; highlight: [19]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: render only some elements
+zpt.run({
+    command: 'partialRender',
+    target: [ 
+        document.getElementById( 'id1' ), 
+        document.getElementById( 'id2' )
+    ]
+});
+                </pre>
+                
+                <p>
+                    If we don't use external macros ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro ZPT-JS needs to load one or more external files using HTTP. This makes ZPT-JS code executes asynchronously. Keep in mind this! To deal with this take a look at:
+                </p>
+                <pre class="brush: js; highlight: [10]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ 'externalMacros-definitions1.html', 'externalMacros-definitions2.html' ],
+    callback: function(){
+        zpt.run();
+        [ your code here ]
+    }
+});
+    </pre>
+                <p>
+                    First invokation of <em>zpt.run</em> preload <em>externalMacros-definitions1.html</em> and <em>externalMacros-definitions2.html</em>. The second one (inside the callback) renders the HTML after preloading.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

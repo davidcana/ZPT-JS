@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - dictionary</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - dictionary</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+dictionary ::= a javascript object
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <code>dictionary</code> is used to define global variables; all the variables that you define using the <em>dictionary</em> are available in all the template. It is a javascript object.
+                </p>
+
+                <p>
+                    Declaring a <em>dictionary</em> is not mandatory, but in practice we always declare it.
+                </p>
+
+                <p>
+                    A <em>dictionary</em> usually is declared once. You declare at the first invokation of ZPT-JS and ZPT-JS will use the same dictionary the rest of the invokations. A full replace of the dictionary is supported, although is not normal.
+                </p>
+                
+                <p>
+                    A <em>dictionary</em> can be modified by the programmer. Changes will be effective in the template after doing a partial or a full render.
+                </p>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    An example of <em>fullRender</em>:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    aString: "string",
+    doggy: false,
+    number: 23,
+    user: {
+        name: "Bob", 
+        age: function( ){
+            return 25;
+        }
+    },
+    items: [ "item0", "item1", "item2" ]
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    If we invoke ZPT-JS a second time we must not declare the dictionary again. The next code do a full render using the same <em>dictionary</em>:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+zpt.run();
+                </pre>
+                
+                <p>
+                    You can update the <em>dictionary</em> and do a full render:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+dictionary.number = 100;
+zpt.run();
+                </pre>
+                
+                <p>
+                    You can update the <em>dictionary</em> and do a partial render:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+dictionary.number = 1;
+zpt.run({
+    command: 'partialRender'
+});
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>
