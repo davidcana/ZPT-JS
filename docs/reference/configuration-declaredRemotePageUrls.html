@@ -78,6 +78,50 @@ zpt.run({
                 <p>
                     First invokation of <em>zpt.run</em> preload <em>externalMacros-definitions1.html</em> and <em>externalMacros-definitions2.html</em>. The second one (inside the callback) renders the HTML after preloading.
                 </p>
+                
+                <p>
+                    URLs are by default relative to current URL. You can also use absolute URLs:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ '/path/to/your/macro/macros.html' ],
+    callback: function(){
+        zpt.run();
+        [ your code here ]
+    }
+});
+                </pre>
+                <p>
+                    And in your HTML code:
+                </p>
+                <pre class="brush: html">
+&lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
+    Macro goes here
+&lt;/div&gt;
+                </pre>
+                <p>
+                    <em>Context</em> object provides a conf property to set a prefix to all relative URLs:
+                </p>
+                <pre class="brush: js">
+context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
+
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    declaredRemotePageUrls: [ 'macros.html' ],
+    callback: function(){
+        zpt.run();
+        [ your code here ]
+    }
+});
+                </pre>
+                <p>
+                    Then if you use an URL like <em>macros.html</em> it will be replaced by <em>/path/to/your/templates/macros.html</em>.
+                </p>
             </article>
         </div>
     </body>

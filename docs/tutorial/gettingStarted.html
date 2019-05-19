@@ -21,7 +21,7 @@
                     <li><a href="#template">Write the template</a>.</li>
                     <li><a href="#dictionary">Build the dictionary</a>.</li>
                     <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
-                    <li><a href="#demo">Demo</a>.</li>
+                    <li><a href="#result">The result</a>.</li>
                 </ul>
             </div>
             <article data-mfill-slot="'article'">
@@ -32,43 +32,109 @@
 
                 <h2 data-tattributes="id 'header'">Configuring the HTML header</h2>
                 <p>
-                    You must add to your web page the javascript code of ZPT-JS (and its dependencies):
+                    You must add to your web page the javascript code of ZPT-JS and its dependencies(<em>zpt.min.js</em>). Don't forget to add the reference of the javascript file with the invokation to ZPT-JS (for example <em>gettingStarted.js</em>):
                 </p>
                 <pre class="brush: html">
 &lt;head&gt;
     ...
-    &lt;script src="/zpt/zpt.min.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="/zpt/zpt.min.js" type="text/javascript" defer&gt;&lt;/script&gt;
+    &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
     ...
 &lt;/head&gt;
                 </pre>
 
                 <h2 data-tattributes="id 'template'">Write the template</h2>
                 <p>
-                    :
+                    Customize the body of your HTML document with some of the provided by ZPT-JS statements. One of these is <em>data-tcontent</em>:
                 </p>
                 <pre class="brush: html">
-
+&lt;body&gt;
+    &lt;p data-tcontent="message"&gt;
+        the message
+    &lt;/p&gt;
+&lt;/body&gt;
                 </pre>
 
+                <p>
+                    The resulting HTML document is:
+                </p>
+                <pre class="brush: html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt; 
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Getting started&lt;/title&gt;
+
+        &lt;script src="/zpt/zpt.min.js" defer&gt;&lt;/script&gt;
+        &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p data-tcontent="message"&gt;
+            the message
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
                 <h2 data-tattributes="id 'dictionary'">Build the dictionary</h2>
                 <p>
-
+                    Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template:
                 </p>
                 <pre class="brush: js">
-
+var dictionary = { 
+    message: "Hello, world!"
+};
                 </pre>
 
                 <h2 data-tattributes="id 'invoke'">Invoke ZPT-JS</h2>
                 <p>
-
+                    Invoke the <code>run</code> method of ZPT:
                 </p>
                 <pre class="brush: js">
+var zpt = require( 'zpt' );
 
+...
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
                 </pre>
 
-                <h2 data-tattributes="id 'demo'">Demo</h2>
                 <p>
-                    Let's take a look at ZPT-JS in action:
+                    The resulting Javascript file (<em>gettingStarted.js</em>) is:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    message: "Hello, world!"
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                <p>
+                    That's all!
+                </p>
+                
+                <h2 data-tattributes="id 'result'">The result</h2>
+                <p>
+                    The resulting <code>body</code> element is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-tcontent="message"&gt;
+        Hello, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
+                
+                <p>
+                    The <em>data-tcontent</em> attribute is ignored by browsers: all the <em>data-*</em> attributes are completely ignored by the user agent.
                 </p>
             </article>
         </div>

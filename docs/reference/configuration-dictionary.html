@@ -90,12 +90,16 @@ zpt.run();
                 </pre>
                 
                 <p>
-                    You can update the <em>dictionary</em> and do a partial render:
+                    ..or you can update the <em>dictionary</em> and do a partial render:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-dictionary.number = 1;
+                <pre class="brush: js">
+dictionary.number = 100;
 zpt.run({
-    command: 'partialRender'
+    command: 'partialRender',
+    target: [ 
+        document.getElementById( 'id1' ), 
+        document.getElementById( 'id2' )
+    ]
 });
                 </pre>
             </article>
