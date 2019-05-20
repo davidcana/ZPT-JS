@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - i18n</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - i18n</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+i18n        ::= a javascript object containing urlPrefix and files
+urlPrefix   ::= a string
+files       ::= an javascript object using files_key and files_value as key and value
+files_key   ::= a string
+files_value ::= an array of JSON file names
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <code>i18n</code> makes it easy the preloading of I18n resources. It is a javascript object containing:
+                </p>
+                <ul>
+                    <li><em>urlPrefix</em>. A string ZPT-JS will use as a prefix for the URLs of the files to download. </li>
+                    <li><em>files</em>. A javascript object formed with the language id as key and an array of JSON file names as value.</li>
+                </ul>
+                
+                <p>
+                    Take a look at this example:
+                </p>
+                <pre class="syntax">
+i18n: {
+    urlPrefix: './i18n/',
+    files: {
+        'es': [ 'es1.json', 'es2.json' ],
+        'en': [ 'en1.json', 'en2.json' ]
+    }
+}
+                </pre>
+                <p>
+                    Then ZPT will preload some files using the next URLs:
+                </p>
+                <ul>
+                    <li><em>./i18n/es1.json</em> as the first file of <em>es</em> language.</li>
+                    <li><em>./i18n/es2.json</em> as the second file of <em>es</em> language.</li>
+                    <li><em>./i18n/en1.json</em> as the first file of <em>en</em> language.</li>
+                    <li><em>./i18n/en2.json</em> as the second file of <em>en</em> language.</li>
+                </ul>
+                
+                <p>
+                    After preloading i18n files ZPT-JS defines some variables in the dictionary:
+                </p>
+                <ul>
+                    <li><code>i18n(fileWithoutExtension.toUpperCase)</code>, for example <code>i18nES1</code>. An instance of I18n class per file.</li>
+                    <li><code>i18n(lang.toUpperCase)Array</code>, for example <code>i18nESArray</code>. An array of instances of I18n class.</li>
+                    <li><code>i18nArray</code>. An array of instances of I18n class but only if there is 1 declared language.</li>
+                </ul>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    An example preloading only one language:
+                </p>
+                <pre class="brush: js; highlight: [13]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    i18n: {
+        urlPrefix: './i18n/',
+        files: {
+            'es': [ 'es1.json', 'es2.json' ]
+        }
+    },
+    callback: function(){
+        zpt.run();
+    }
+});
+                </pre>
+                
+                <p>
+                    And in the template:
+                </p>
+                <pre class="brush: html">
+&lt;div data-idomain="i18nESArray"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+                <p>
+                    As the i18n domain forces to use spanish there is no ned to use a <em>data-ilanguage</em> attribute to set the language.
+                </p>
+                
+                <p>
+                    If we configure only 1 language we also can use:
+                </p>
+                <pre class="brush: html">
+&lt;div data-idomain="i18nArray"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    An example using preloading 2 languages (and using I18nBundle to group i18n resources):
+                </p>
+                <pre class="brush: js; highlight: [13]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    i18n: {
+        urlPrefix: './i18n/',
+        files: {
+            'es': [ 'es1.json', 'es2.json' ],
+            'en': [ 'en1.json', 'en2.json' ]
+        }
+    },
+    callback: function(){
+
+        // Add I18nBundle instances to dictionary
+        dictionary.i18nBundle1 = new I18nBundle( dictionary.i18nES1, dictionary.i18nEN1 );
+        dictionary.i18nBundle2 = new I18nBundle( dictionary.i18nES2, dictionary.i18nEN2 );
+
+        // Run ZPT
+        zpt.run();
+    }
+});
+                </pre>
+                
+                <p>
+                    And in the template:
+                </p>
+                <pre class="brush: html">
+&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
+    ...
+&lt;/div&gt;
+                </pre>
+                <p>
+                    Don't forget to declare the language if you use an <em>i18nBundle</em> instance! ZPT-JS needs a <em>data-ilanguage</em> attribute to choose the right i18n resources.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

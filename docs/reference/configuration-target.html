@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - target</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - target</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+target         ::= target_element || Array of target_element
+target_element ::= a DOM node
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <code>target</code> is used to define the node or nodes where ZPT-JS will search its custom attributes in a partial render. As <a href="configuration-root.html">root</a> it can be a simple DOM node or an array of DOM nodes.
+                </p>
+                
+                <p>
+                    It is very similar to <a href="configuration-root.html">root</a>. The difference is that <em>targets</em> refers to updates of nodes using partial renders. The first invokation of ZPT-JS needs a <em>root</em> definition.
+                </p>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Using the configuration option:
+                </p>
+                <pre class="brush: js; highlight: [20]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: render only some elements
+zpt.run({
+    command: 'partialRender',
+    target: [ 
+        document.getElementById( 'id1' ), 
+        document.getElementById( 'id2' )
+    ]
+});
+                </pre>
+
+                <p>
+                    Using ZPT as a jquery plugin:
+                </p>
+                <pre class="brush: js; highlight: [17]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// First execution: render the body
+$( 'body' ).zpt({
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: render only an element
+$( '#id1' ).zpt({
+    command: 'partialRender'
+});
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

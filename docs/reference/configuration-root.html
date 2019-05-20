@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - root</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - root</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+root         ::= root_element || Array of root_element
+root_element ::= a DOM node
+                </pre>
+                
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <code>root</code> is used to define the node or nodes where ZPT-JS will search its custom attributes in a full render. It can be a simple DOM node or an array of DOM nodes. It is mandatory to set at least a <code>root</code> element the first time ZPT-JS is invoked.
+                </p>
+
+                <p>
+                    It can be defined as a configuration option or using ZPT-JS as a jquery plugin, but if the root is an array it can be only defined as a configuration option.
+                </p>
+                
+                <p>
+                    The first invokation of ZPT using ZPT-JS as a jquery plugin makes ZPT-JS uses the selection as the root. The root defines the limits of the DOM where ZPT-JS will work.
+                </p>
+                <p>
+                    Next invokations makes ZPT-JS uses the selection as the root when the command is a full render. If the command is a partial render then the selection will work as the <em>target</em>. The <em>target</em> defines the limits of the update, but a previous definition of the <em>root</em> is needed by ZPT-JS.
+                </p>
+                
+                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <p>
+                    Using the configuration option:
+                </p>
+                <pre class="brush: js; highlight: [11]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+zpt.run({
+    root: document.getElementById( 'id1' ),
+    dictionary: dictionary
+});
+                </pre>
+
+                <p>
+                    Using ZPT as a jquery plugin:
+                </p>
+                <pre class="brush: js; highlight: [10]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+$( '#id1' ).zpt({
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    Using an array as a configuration option (the only way):
+                </p>
+                <pre class="brush: js; highlight: [11]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+zpt.run({
+    root: [
+        document.getElementById( 'id1' ),
+        document.getElementById( 'id2' ),
+    ]
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    Using ZPT as a jquery plugin using all the body:
+                </p>
+                <pre class="brush: js; highlight: [10]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+$( 'body' ).zpt({
+    dictionary: dictionary
+});
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

@@ -18,7 +18,6 @@
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
                     <li><a href="#description">Description</a>.</li>
-                    <li><a href="#differences">Differences with ZPT</a>.</li>
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
@@ -46,7 +45,7 @@ StringLiteralChar      ::= any character except '''
 &lt;div data-muse-macro="anObject/templateName"&gt;
     Macro goes here
 &lt;/div&gt;
-    </pre>
+                </pre>
                 <p>
                     If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no reference to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call.
                 </p>
@@ -82,7 +81,15 @@ zpt.run({
                 <p>
                     URLs are by default relative to current URL. You can also use absolute URLs:
                 </p>
-                <pre class="brush: js; highlight: [5]">
+                <pre class="brush: js; highlight: [13]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
 zpt.run({
     command: 'preload',
     root: document.body,
@@ -105,8 +112,16 @@ zpt.run({
                 <p>
                     <em>Context</em> object provides a conf property to set a prefix to all relative URLs:
                 </p>
-                <pre class="brush: js">
-context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
+                <pre class="brush: js; highlight: [9]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.context.getConf().externalMacroPrefixURL = '/path/to/your/templates/';
 
 zpt.run({
     command: 'preload',
