@@ -68,7 +68,7 @@ variable_name ::= Name
                         The expression should evaluate to an array. In ZPT should evaluate to a sequence.
                     </li>
                     <li>
-                        The built-in variable <code>repeat</code> does not exist. The name of the repeat variable is built appending <em>-repeat</em> to the local variable name.
+                        The built-in variable <code>repeat</code> does not exist. The name of the repeat variable is built appending <em>-repeat</em> to the local variable name. For example, if the local variable name of the loop is <code>item</code> the repeat variable is <code>item-repeat</code>.
                     </li>
                     <li>
                         The available data in the repeat variable are functions (must use parenthesis to access them). In ZPT are simple properties (must NOT use parenthesis).

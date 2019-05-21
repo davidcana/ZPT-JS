@@ -21,6 +21,7 @@
                     <li><a href="#redefining">Redefining variables</a>.</li>
                     <li><a href="#global">Global variables</a>.</li>
                     <li><a href="#nocall">Nocall variables</a>.</li>
+                    <li><a href="#variables">Built-in variables</a>.</li>
                 </ul>
             </div>
             <article data-mfill-slot="'article'">
@@ -150,6 +151,22 @@ zpt.run({
                 <p>
                     Suppose <em>counter()</em> function returns an increased value starting with <em>1</em>. Then every time <em>run</em> value is required <em>counter()</em> function will be executed.
                 </p>
+                
+                <h2 data-tattributes="id 'variables'">Built-in variables</h2>
+                <p>
+                    So a variable is either a in dictionary variable (built-in or defined by the user), or defined via a <code>data-tdefine</code> attribute. The following variables are built-in:
+                </p>
+                <ul>
+                    <li><code>context</code>. An object with some utility methods. For internal use and for customization. See <a href="../reference/context.html">context reference page</a> for details.</li>
+                    <li><code>window</code>. The window object.</li>
+                </ul>
+                
+                <p>
+                    As ZPT-JS register the <em>window</em> object automatically, so global variables defined via javascript can be used easily:
+                </p>
+                <pre class="brush: html">
+&lt;div data-tcontent="window/globalVar"&gt;a string&lt;/div&gt;
+                </pre>
             </article>
         </div>
     </body>

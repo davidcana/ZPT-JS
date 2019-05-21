@@ -17,12 +17,12 @@
             <article data-mfill-slot="'article'">
 
                 <p>
-                    The name of tags are not the same because if they were the resulting HTML documents will not be well formed. The list of tags with their equivalences are:
+                    The name of attributes are not the same because if they were the resulting HTML documents will not be well formed. The list of attributes with their equivalences are:
                 </p>
                 <table class="comparison">
                     <tr>
-                        <th>ZPT tag name</th>
-                        <th>ZPT-JS tag name</th>
+                        <th>ZPT attribute name</th>
+                        <th>ZPT-JS attribute name</th>
                         <th>Description</th>
                     </tr>
                     <tr>
@@ -86,9 +86,11 @@
                         <td>Replace the content of an element and remove the element leaving the content</td>
                     </tr>
                 </table>
+                
                 <p>
-                    The tags can be changed. Customize the <code>defaultTag</code> variable in <code>js/app/context.js</code> file. You can also use <code>context.setTags( tags )</code> to define the tags programmatically.
+                    ZPT-JS allows using the original tags from ZPT, even customizing them totally. See <a href="context.html#tags">Tags in context</a> page for details.
                 </p>
+
                 <p>
                     Important: <strong>after this point we will refer to tags as the ZPT-JS tag name</strong>.
                 </p>

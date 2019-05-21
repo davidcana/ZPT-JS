@@ -22,6 +22,7 @@
                     <li><a href="#dictionary">Build the dictionary</a>.</li>
                     <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
                     <li><a href="#result">The result</a>.</li>
+                    <li><a href="#node">Using ZPT-JS and node.js</a>.</li>
                 </ul>
             </div>
             <article data-mfill-slot="'article'">
@@ -136,6 +137,49 @@ zpt.run({
                 <p>
                     The <em>data-tcontent</em> attribute is ignored by browsers: all the <em>data-*</em> attributes are completely ignored by the user agent.
                 </p>
+                
+                <h2 data-tattributes="id 'node'">Using ZPT-JS and node.js</h2>
+                <p>
+                    That's OK. But... how can we use ZPT-JS at the server side (using <a href="https://nodejs.org/">node.js</a>)? <a href="https://www.npmjs.com/package/node-jsdom">node-jsdom</a> is needed when no browser is available:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var jsdom = require( 'node-jsdom' ).jsdom;
+
+jsdom.env(
+    '&lt;!doctype html&gt;'
+	+ '&lt;html&gt;'
+	+ '&lt;body&gt;&lt;h1 data-tcontent="'hello, world!'"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
+	+ '&lt;/html&gt;', 
+    [ 'http://code.jquery.com/jquery.min.js' ], 
+    function( err, window ) {
+
+        // Check if an error occurs
+        if ( err ) {
+            console.error( err );
+            return 1;
+        }
+
+        // Copy window to global
+        global.window = window;
+
+        // Copy from window to local vars
+        var $ = window.$;
+        var document = window.document;
+
+        // Parse template
+        var zpt = require( 'zpt' );
+
+        zpt.run({
+            root: document.body,
+            dictionary: {}
+        });
+
+        console.log( 'Done!' );
+    }
+);
+    </pre>
             </article>
         </div>
     </body>

@@ -38,6 +38,9 @@
                 <p>
                     Some settings related to the custom attributes used by ZPT-JS.
                 </p>
+                <p>
+                    The <em>data-*</em> attributes is used to store custom data private inside the HTML document. These are the standard in HTML5. If you prefer to use the original ZPT's attributes use <code>zpt.context.useOriginalTags()</code> method. You can also use your custom attributes.
+                </p>
                 <ul>
                     <li><code>getTags()</code>. Returns an object with all the custom attributes.</li>
                     <li><code>setTags( tags )</code>. Sets the custom attributes.</li>
@@ -120,6 +123,25 @@ zpt.context.setTags({
 
 [ your zpt invokation here ]
                 </pre>
+                
+                <p>
+                    An example of template using the original ZPT's attributes:
+                </p>
+                <strong>original-tags-sample.html</strong>
+                <pre class="brush: html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Example using ZPT's attributes&lt;/title&gt;
+
+        &lt;script src="original-tags-sample.js" defer&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p tal:content="user/name"&gt;xxx&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </pre>
                 
                 <h2 data-tattributes="id 'formatters'">Formatters</h2>
                 <p>
