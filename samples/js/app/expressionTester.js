@@ -37,7 +37,7 @@ var dictionary = {
 $( '#evaluate' ).click( function() {
 
     try {
-        var scope = new Scope( dictionary );
+        var scope = new Scope( dictionary, undefined, true );
         var string = $( '#expression' ).val();
         /*var evaluated = expressionEvaluator.evaluateToNotNull( scope, string );*/
         var expression = expressionBuilder.build( string );

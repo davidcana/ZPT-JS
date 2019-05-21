@@ -21,14 +21,36 @@
             <article data-mfill-slot="'article'">
                 <h2 data-tattributes="id 'common'">Common features</h2>
                 <p>
-                    ZPT-JS and ZPT share a lot of features. Some of them are:
+                    The goal of <em>Page Templates</em> is to allow designers and programmers to work together easily. A designer can use a WYSIWYG HTML editor to create a template, then a programmer can edit it to make it part of an application. If required, the designer can load the template back into his editor and make further changes to its structure and appearance. By taking reasonable steps to preserve the changes made by the programmer, the designer will not disrupt the application.
                 </p>
-                <ul>
-                    <li>
+                <p>
+                    Page Templates aim at this goal by adopting three principles:
+                </p>
+                <ol>
+                    <li>Play nicely with editing tools.</li>
+                    <li>What you see is very similar to what you get.</li>
+                    <li>Keep code out of templates, except for structural logic.</li>
+                </ol>
+                <p>
+                    A <em>Page Template</em> is like a model of the pages that it will generate. In particular, it is parseable by most HTML tools.
+                </p>
+                <p>
+                    To the HTML designer using a WYSIWYG tool, the dynamic headline example is perfectly parseable HTML, and shows up in their editor looking like a headline should look like. In other words, <em>Page Templates</em> play nicely with editing tools.
+                </p>
 
-                    </li>
-                </ul>
+                <p>
+                    This example also demonstrates the principle that “What you see is very similar to what you get”. When you view the template in an editor, the headline text will act as a placeholder for the dynamic headline text. The template provides an example of how generated documents will look.
+                </p>
 
+                <p>
+                    There are template statements for replacing entire tags, their contents, or just some of their attributes. You can repeat a tag several times or omit it entirely. You can join parts of several templates together, and specify simple error handling. All of these capabilities are used to generate document structures. Despite these capabilities, you can’t create subroutines or classes, perform complex flow control, or easily express complex algorithms using a <em>Page Template</em>. For these tasks, you should use Scripts or application components.
+                </p>
+                <p>
+                    The <em>Page Template</em> language is deliberately not as powerful and general-purpose as it could be. Other objects handle business logic and tasks unrelated to page layout. For instance, template language would be useful for rendering an invoice page, generating one row for each line item, and inserting the description, quantity, price, and so on into the text for each row. It would not be used to create the invoice record in a database or to interact with a credit card processing facility.
+                </p>
+                <p>
+                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/ZPT.html#using-zope-page-templates">The Zope Book</a>.
+                </p>
                 <h2 data-tattributes="id 'differences'">Differences</h2>
                 <p>
                     But they also differ in some other features. Some of them are:
@@ -50,7 +72,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                HTML code is valid (w3c compliant)
+                                Template code is valid HTML code (w3c compliant)
                             </td>
                             <td>
                                 Yes, using the default configuration
@@ -79,6 +101,39 @@
                             </td>
                             <td>
                                 Yes, it is an expression
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Map support in data-tattributes
+                            </td>
+                            <td>
+                                Yes
+                            </td>
+                            <td>
+                                No, only key/value pairs are supported
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Support of expressions in <em>data-muse-macro</em> and <em>data-mfill-slot</em>
+                            </td>
+                            <td>
+                                Yes
+                            </td>
+                            <td>
+                                No, only string literals are supported
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Script language
+                            </td>
+                            <td>
+                                Javascript
+                            </td>
+                            <td>
+                                Python
                             </td>
                         </tr>
                         <tr>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Context</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-muse-macro="'page@templates.html'">
+            <div data-mfill-slot="'page-header'">
+                <h1>ZPT-JS reference - Context</h1>
+                <ul>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#tags">Tags</a>.</li>
+                    <li><a href="#formatters">Formatters</a>.</li>
+                    <li><a href="#conf">Conf</a>.</li>
+                    <li><a href="#loggers">Loggers</a>.</li>
+                    <li><a href="#booleanAttributes">Boolean attributes</a>.</li>
+                    <li><a href="#altAttributes">Alt attributes</a>.</li>
+                    <li><a href="#errors">Errors</a>.</li>
+                    <li><a href="#repeat">Repeat</a>.</li>
+                    <li><a href="#folderDictionaries">Folder dictionaries</a>.</li>
+                </ul>
+            </div>
+            <article data-mfill-slot="'article'">
+                <h2 data-tattributes="id 'description'">Description</h2>
+                <p>
+                    The <code>context</code> groups some important general settings. It makes it easy to customize some settings.
+                </p>
+
+                <h2 data-tattributes="id 'tags'">Tags</h2>
+                <p>
+                    Some settings related to the custom attributes used by ZPT-JS.
+                </p>
+                <ul>
+                    <li><code>getTags()</code>. Returns an object with all the custom attributes.</li>
+                    <li><code>setTags( tags )</code>. Sets the custom attributes.</li>
+                    <li><code>useOriginalTags()</code>. Forces ZPT-JS to use the attributes of ZPT.</li>
+                </ul>
+                
+                <p>
+                    Removing first character of attributes:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+zpt.context.setTags({
+        talCondition:     "data-condition",
+        talRepeat:        "data-repeat",
+        talAttributes:    "data-attributes",
+        talContent:       "data-content",
+        talDefine:        "data-define",
+        talAutoDefine:    "data-auto-define",
+        talOmitTag:       "data-omit-tag",
+        talReplace:       "data-replace",
+        talOnError:       "data-on-error",
+        metalDefineMacro: "data-define-macro",
+        metalUseMacro:    "data-use-macro",
+        metalDefineSlot:  "data-define-slot",
+        metalFillSlot:    "data-fill-slot",
+        metalMacro:       "data-macro",
+        i18nDomain:       "data-domain",
+        i18nLanguage:     "data-language",
+        rootKey:          "data-root-key",
+        qdup:             "data-qdup"
+});
+
+[ your zpt invokation here ]
+                </pre>
+                
+                <p>
+                    Using attributes of ZPT:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+zpt.context.useOriginalTags();
+
+[ your zpt invokation here ]
+                </pre>
+                
+                <p>
+                    ... that is equivalent to do:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+zpt.context.setTags({
+        talCondition:     "tal:condition",
+        talRepeat:        "tal:repeat",
+        talAttributes:    "tal:attributes",
+        talContent:       "tal:content",
+        talDefine:        "tal:define",
+        talAutoDefine:    "tal:auto-define",
+        talOmitTag:       "tal:omit-tag",
+        talReplace:       "tal:replace",
+        talOnError:       "tal:on-error",
+        metalDefineMacro: "metal:define-macro",
+        metalUseMacro:    "metal:use-macro",
+        metalDefineSlot:  "metal:define-slot",
+        metalFillSlot:    "metal:fill-slot",
+        metalMacro:       "data-mmacro",
+        i18nDomain:       "i18n:domain",
+        i18nLanguage:     "i18n:language",
+        rootKey:          "data-root-key",
+        qdup:             "data-qdup"
+});
+
+[ your zpt invokation here ]
+                </pre>
+                
+                <h2 data-tattributes="id 'formatters'">Formatters</h2>
+                <p>
+                    Support of getting and registering <a href="../tutorial/formatters.html">formatters</a>.
+                </p>
+                <ul>
+                    <li><code>getFormatter()</code>. Returns a formatter by id.</li>
+                    <li><code>registerFormatter( id, formatter )</code>. Register a formatter using an id.</li>
+                </ul>
+                
+                <p>
+                    Registering <em>myCustomFormatter</em>:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+zpt.context.registerFormatter( 
+    'myCustomFormatter', 
+    function( value ){
+        return "$" + value;
+    }
+);
+
+[ your zpt invokation here ]
+                </pre>
+                
+                <h2 data-tattributes="id 'conf'">Conf</h2>
+                <p>
+                    The <code>conf</code> object includes some key/value pairs related to low level details about ZPT-JS, such as delimiters, built-in variable names, expression ids, ...
+                </p>
+                <ul>
+                    <li><code>getConf()</code>. Returns an object with all the configuration.</li>
+                    <li><code>setConf( conf )</code>. Sets the <code>conf</code> object.</li>
+                </ul>
+                <p>
+                    <strong>WARN:</strong> Be careful with this, you can break ZPT-JS!
+                </p>
+                
+                <p>
+                    Getting the value of <em>conf</em> object:
+                </p>
+                <pre class="brush: js; highlight: [5]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var conf = zpt.context.getConf();
+                </pre>
+                
+                <p>
+                    The default value of <em>conf</em> object is:
+                </p>
+                <pre class="brush: js">
+var conf = {
+    pathDelimiter:          '|',
+    pathSegmentDelimiter:   '/',
+    expressionDelimiter:    ' ',
+    intervalDelimiter:      ':',
+    propertyDelimiter:      '/',
+    defineDelimiter:        ';',
+    inDefineDelimiter:      ' ',
+    attributeDelimiter:     ';',
+    inAttributeDelimiter:   ' ',
+    domainDelimiter:        ' ',
+    i18nOptionsDelimiter:   ';',
+    inI18nOptionsDelimiter: ' ',
+    argumentsDelimiter:     ',',
+    macroDelimiter:         '@',
+
+    htmlStructureExpressionPrefix:  "structure",
+    globalVariableExpressionPrefix: "global",
+    nocallVariableExpressionPrefix: "nocall",
+
+    templateErrorVarName:    "error",
+    onErrorVarName:          "on-error",
+    onErrorStructureVarName: "on-error-structure",
+    i18nDomainVarName:       "i18nDomain",
+    i18nLanguageVarName:     "i18nLanguage",
+    repeatVarName:           "repeat",
+    externalMacroUrlVarName: "externalMacroUrl",
+    windowVarName:           "window",
+    contextVarName:          "context",
+    nothingVarName:          "nothing",
+    defaultVarName:          "default",
+    i18nConfResourceId:      '/CONF/',
+
+    nothingVarValue:         "___nothing___",
+    defaultVarValue:         "___default___",
+
+    loggingOn: false,
+    loggingLevel: log4javascript.Level.ERROR,
+
+    externalMacroPrefixURL: '',
+
+    expressionCacheOn: true,
+    attributeCacheOn: true,
+
+    expressionSuffix: EXPRESSION_SUFFIX,
+    stringExpression: "string" + EXPRESSION_SUFFIX,
+    existsExpression: "exists" + EXPRESSION_SUFFIX,
+    notExpression: "not" + EXPRESSION_SUFFIX,
+    javaScriptExpression: "js" + EXPRESSION_SUFFIX,
+    equalsExpression: "eq" + EXPRESSION_SUFFIX,
+    greaterExpression: "gt" + EXPRESSION_SUFFIX,
+    lowerExpression: "lt" + EXPRESSION_SUFFIX,
+    addExpression: "+" + EXPRESSION_SUFFIX,
+    subExpression: "-" + EXPRESSION_SUFFIX,
+    mulExpression: "*" + EXPRESSION_SUFFIX,
+    divExpression: "/" + EXPRESSION_SUFFIX,
+    modExpression: "%" + EXPRESSION_SUFFIX,
+    orExpression: "or" + EXPRESSION_SUFFIX,
+    andExpression: "and" + EXPRESSION_SUFFIX,
+    condExpression: "cond" + EXPRESSION_SUFFIX,
+    formatExpression: "format" + EXPRESSION_SUFFIX,
+    trExpression: "tr" + EXPRESSION_SUFFIX,
+    trNumberExpression: "trNumber" + EXPRESSION_SUFFIX,
+    trCurrencyExpression: "trCurrency" + EXPRESSION_SUFFIX,
+    trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
+    inExpression: "in" + EXPRESSION_SUFFIX,
+    pathExpression: "",
+    jqueryExpression: "$"
+}
+                </pre>
+                
+                <h2 data-tattributes="id 'loggers'">Loggers</h2>
+                <ul>
+                    <li><code>getLogger()</code>. Gets the current logger.</li>
+                    <li><code>setLogger( logger )</code>. Sets a new logger.</li>
+                </ul>
+                
+                <h2 data-tattributes="id 'booleanAttributes'">Boolean attributes</h2>
+                <p>
+                    The presence of a boolean attribute on an element represents the <code>true</code> value, and the absence of the attribute represents the <code>false</code> value. The <code>booleanAttributes</code> is an object with the boolean attributes as keys and 1 as values.
+                </p>
+                <ul>
+                    <li><code>getBooleanAttributes()</code>. Returns the boolean attributes object.</li>
+                    <li><code>setBooleanAttributes( booleanAttributes )</code>. Sets a new boolean attributes object.</li>
+                    <li><code>isBooleanAttribute( attribute )</code>. Returns <code>true</code> is the attribute is boolean, <code>false</code> otherwise.</li>
+                </ul>
+                <p>
+                    <strong>WARN:</strong> Be careful with this, you can break ZPT-JS!
+                </p>
+                
+                <p>
+                    The default value of the boolean attributes object is:
+                </p>
+                <pre class="brush: js">
+var booleanAttributes = {
+    "checked" : 1,
+    "compact" : 1,
+    "declare" : 1,
+    "defer" : 1,
+    "disabled" : 1,
+    "ismap" : 1,
+    "multiple" : 1,
+    "nohref" : 1,
+    "noresize" : 1,
+    "noshade" : 1,
+    "nowrap" : 1,
+    "readonly" : 1,
+    "selected" : 1
+}
+                </pre>
+                
+                <h2 data-tattributes="id 'altAttributes'">Alt attributes</h2>
+                <p>
+                    Attributes which don't support <code>setAttribute()</code>. The <code>altAttributes</code> is an object with the alt attributes as keys and 1 as values.
+                </p>
+                <ul>
+                    <li><code>getAltAttributes()</code>. Returns the alt attributes object.</li>
+                    <li><code>setAltAttributes( altAttributes )</code>. Sets a new alt attributes object.</li>
+                    <li><code>isAltAttribute( attribute )</code>. Returns <code>true</code> is the attribute is alt, <code>false</code> otherwise.</li>
+                </ul>
+                <p>
+                    <strong>WARN:</strong> Be careful with this, you can break ZPT-JS!
+                </p>
+                
+                <p>
+                    The default value of the alt attributes object is:
+                </p>
+                <pre class="brush: js">
+var altAttributes = {
+    "className" : 1,
+    "class" : 1,
+    "href" : 1,
+    "htmlFor" : 1,
+    "id" : 1,
+    "innerHTML" : 1,
+    "label" : 1,
+    "style" : 1,
+    "src" : 1,
+    "text" : 1,
+    "title" : 1,
+    "value" : 1
+}
+                </pre>
+                
+                <h2 data-tattributes="id 'errors'">Errors</h2>
+                <p>
+                    Some methods about errors and their customization.
+                </p>
+                <ul>
+                    <li><code>setErrorFunction( errorFunction )</code>. Sets a function that will be invoked if there is an error and no failCallback is set.</li>
+                    <li><code>asyncError( ( url, error, failCallback ) )</code>. Methos invoked by ZPT when an asynchronous action fails. Used internally: there is no need to invoke it explicitly by users of ZPT-JS.</li>
+                </ul>
+                
+                <p>
+                    Setting an error function to count errors:
+                </p>
+                <pre class="brush: js; highlight: [6]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var errorCounter = 0;
+zpt.context.setErrorFunction(
+    function( errorMessage ){
+        ++errorCounter;
+        alert( 'Another error: ' + errorMessage );
+    }
+);
+
+[ your zpt invokation here ]
+                </pre>
+                
+                <h2 data-tattributes="id 'repeat'">Repeat</h2>
+                <p>
+                    The <code>repeat</code> method is used by ZPT-JS internally to implement loops using <a href="attributes-TALRepeat.html">data-trepeat</a> attributes. There is no need to invoke it explicitly by users of ZPT-JS.
+                </p>
+                <ul>
+                    <li><code>repeat( index, length, offset )</code>. Returns a new instance of <code>LoopItem</code>.</li>
+                </ul>
+                
+                <h2 data-tattributes="id 'folderDictionaries'">Folder dictionaries</h2>
+                <p>
+                    <em>Folder dictionaries</em> is an array of objects preloaded by ZPT-JS at the first invokation of ZPT. Used internally: there is no need to invoke it explicitly by users of ZPT-JS.
+                </p>
+                <ul>
+                    <li><code>getFolderDictionaries()</code>. Returns the folder dictionaries.</li>
+                    <li><code>setFolderDictionaries( folderDictionaries )</code>. Sets the folder dictionaries.</li>
+                </ul>
+                
+            </article>
+        </div>
+    </body>
+</html>

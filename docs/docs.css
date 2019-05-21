@@ -120,7 +120,7 @@ table.comparison tbody tr:hover {
 }
 table.comparison th,
 table.comparison td {
-    padding: .25em;
+    padding: .5em;
 }
 
 /* Container */
@@ -128,12 +128,6 @@ table.comparison td {
     margin: .5em;
     padding: .5em;
     background-color: #afe0e0;
-}
-
-/* Differences with jTable */
-#zcrud-jtable-differences .zcrud,
-#zcrud-jtable-differences .jtable {
-    width: 40%;
 }
 
 /* pre classes */
@@ -154,183 +148,6 @@ pre.syntax {
 .changes-date {
     color: darkseagreen;
     font-size: 60%;
-}
-
-/* Field option list */
-ul.fieldOptionList {
-    list-style-type: none;
-}
-ul.fieldOptionList>li {
-    margin-bottom: 1em;
-}
-ul.fieldOptionList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.fieldOptionList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.fieldOptionList>li .header .dataType:before {
-    margin-left: 2em;
-    content: "dataType: ";
-}
-ul.fieldOptionList>li .header .appliesTo:before {
-    margin-left: 2em;
-    content: "applies to: ";
-}
-ul.fieldOptionList>li .header .default:before {
-    margin-left: 2em;
-    content: "default: ";
-}
-
-/* Field type list */
-ul.fieldTypeList {
-    list-style-type: none;
-}
-ul.fieldTypeList>li {
-    margin-bottom: 1em;
-}
-ul.fieldTypeList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.fieldTypeList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.fieldTypeList>li .header .dataType:before {
-    margin-left: 2em;
-    content: "dataType: ";
-}
-ul.fieldTypeList>li .header .customOptions:before {
-    margin-left: 2em;
-    content: "customOptions: ";
-}
-ul.fieldTypeList a {
-    color: White;
-}
-
-/* General option list */
-ul.generalOptionList {
-    list-style-type: none;
-}
-ul.generalOptionList>li {
-    margin-bottom: 1em;
-}
-ul.generalOptionList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.generalOptionList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.generalOptionList>li .header .dataType:before {
-    margin-left: 2em;
-    content: "dataType: ";
-}
-ul.generalOptionList>li .header .default:before {
-    margin-left: 2em;
-    content: "default: ";
-}
-
-/* Event list */
-ul.eventList {
-    list-style-type: none;
-}
-ul.eventList>li {
-    margin-bottom: 1em;
-}
-ul.eventList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.eventList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.eventList>li .header .return:before {
-    margin-left: 2em;
-    content: "return: ";
-}
-
-/* Method list */
-ul.methodList {
-    list-style-type: none;
-}
-ul.methodList>li {
-    margin-bottom: 1em;
-}
-ul.methodList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.methodList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.methodList>li .header .return:before {
-    margin-left: 2em;
-    content: "return: ";
-}
-
-/* Button type list */
-ul.buttonTypeList {
-    list-style-type: none;
-}
-ul.buttonTypeList>li {
-    margin-bottom: 1em;
-}
-ul.buttonTypeList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.buttonTypeList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.buttonTypeList>li .header .bindableTo:before {
-    margin-left: 2em;
-    content: "bindable to: ";
-}
-
-/* Button option list */
-ul.buttonOptionList {
-    list-style-type: none;
-}
-ul.buttonOptionList>li {
-    margin-bottom: 1em;
-}
-ul.buttonOptionList>li .header {
-    background: darkcyan;
-    color: white;
-    padding: 0.5em 1em 0.5em 1em;
-    margin-bottom: .5em;
-}
-ul.buttonOptionList>li .header .name {
-    font-weight: bold;
-    font-size: 130%;
-}
-ul.buttonOptionList>li .header .dataType:before {
-    margin-left: 2em;
-    content: "dataType: ";
-}
-ul.buttonOptionList>li .header .default:before {
-    margin-left: 2em;
-    content: "default: ";
 }
 
 /* Menu */
