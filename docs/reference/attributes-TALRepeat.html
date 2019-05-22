@@ -57,7 +57,7 @@ variable_name ::= Name
                     <li><em>roman()</em>. Repetition roman number, starting from i.</li>
                     <li><em>Roman()</em>. Repetition roman number, starting from I.</li>
                 </ul>
-
+                
                 <p>
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#repeat-repeat-an-element">Zope Page Templates Reference</a>.
                 </p>
@@ -136,7 +136,28 @@ variable_name ::= Name
                 </table>
                 
                 <p>
-                    Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#repeat-repeat-an-element">Zope Page Templates Reference</a>.
+                    An important issue about using id attribute: don't set id attribute without using <em>data-tattributtes</em>, ZPT-JS copies several times the node inside the repeat so you will have got several HTML elements with the same id. So don't do:
+                </p>
+                <pre class="brush: html">
+&lt;table&gt;
+    &lt;tr id="cart" data-trepeat="item myObject/cart"&gt;
+        &lt;td data-tcontent="item/description"&gt;Widget&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                </pre>
+                <p>
+                    We can fix it using <em>data-tattributtes</em>:
+                </p>
+                <pre class="brush: html">
+&lt;table&gt;
+    &lt;tr data-trepeat="item myObject/cart" data-tattributes="id string:cart${item-repeat/number()}"&gt;
+        &lt;td data-tcontent="item/description"&gt;Widget&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                </pre>
+                
+                <p>
+                    Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#repeat-repeat-an-element">Zope Page Templates Reference</a>.
                 </p>
             </article>
         </div>

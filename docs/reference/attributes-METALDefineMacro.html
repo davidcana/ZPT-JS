@@ -83,6 +83,23 @@ argument ::= expression
                 </pre>
 
                 <p>
+                    An important issue about using id attribute: don't set id attribute without using <em>data-tattributtes</em>, ZPT-JS copies the node inside the macro definition so you are at risk of having got several HTML elements with the same id. So don't do:
+                </p>
+                <pre class="brush: html">
+&lt;p data-mdefine-macro="copyright"&gt;
+    Copyright <span id="year">2019</span>
+&lt;/p&gt;
+                </pre>
+                <p>
+                    We can fix it using <em>data-tattributtes</em> and defining different values for <code>year-suffix</code> variable:
+                </p>
+                <pre class="brush: html">
+&lt;p data-mdefine-macro="copyright"&gt;
+    Copyright <span data-tattributes="id string:year${year-suffix}">2019</span>
+&lt;/p&gt;
+                </pre>
+                
+                <p>
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-macro-define-a-macro">Zope Page Templates Reference</a>.
                 </p>
             </article>

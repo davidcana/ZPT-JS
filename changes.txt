@@ -21,6 +21,7 @@ New in 0.34.0
     - exports.expressionBuilder
     - exports.evaluateHelper
     - exports.ExpressionTokenizer
+- Simplify name of tags?
 
 New in 0.33.0
 - Added support of folder dictionaries.
