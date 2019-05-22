@@ -3,6 +3,7 @@
 */
 "use strict";
 
+var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var ExpressionTokenizer = require( './expressionTokenizer.js' );
 var evaluateHelper = require( './evaluateHelper.js' );
@@ -30,21 +31,34 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
         var formatter = context.getFormatter( expression );
         
         // Try to get a function with a name
-        if ( ! formatter ){
+        if ( ! isValidFormatter( formatter ) ){
             formatter = scope.get( expression );
         }
-        
+    
         // Try to get a function evaluating the expression
-        if ( ! formatter ){
-            formatter = scope.get( 
-                evaluate( scope, expression ) );
-        }
+        if ( ! isValidFormatter( formatter ) ){
+            try {
+                var expressionBuilder = require( './expressionBuilder.js' );
+                var formatterExpression = expressionBuilder.build( expression );
+                var value = formatterExpression.evaluate( scope );
                 
-        if ( formatter ){
+                return evaluateFormatter( scope, value );
+
+            } catch( e ){
+                // Nothing to do
+            }
+        }
+        
+        // Return the formatter only if it is valid
+        if ( isValidFormatter( formatter ) ){
             return formatter;
         }
         
-        throw 'Formatter expression evaluated to null: ' + string;
+        throw 'No valid formatter found: ' + string;
+    };
+    
+    var isValidFormatter = function( formatter ){
+        return formatter && $.isFunction( formatter );
     };
     
     var toString = function(){

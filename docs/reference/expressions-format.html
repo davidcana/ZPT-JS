@@ -44,6 +44,24 @@ format_arguments   ::= [expression]*
                 </ul>
                 
                 <p>
+                    How are <em>formatters</em> found by ZPT-JS? When ZPT-JS finds a format expression it tries to locate the formatter following this order:
+                </p>
+                <ol>
+                    <li>
+                        First it tries to get it from the context. It uses the <code>context.getFormatter()</code> method to try to find it.
+                    </li>
+                    <li>
+                        If the <em>formatter</em> is not found, it tries to get it from the scope using the <em>formatter</em> as a function name.
+                    </li>
+                    <li>
+                        If the <em>formatter</em> is not found, it evaluates the <em>formatter</em> as an expression and then it tries to get it from the scope using the resulting value as a function name.
+                    </li>
+                    <li>
+                        If the <em>formatter</em> is not found, an exception is thrown.
+                    </li>
+                </ol>
+                
+                <p>
                     You can add your custom <em>formatters</em> simply adding a function with the same name to the dictionary.
                 </p>
                 
@@ -70,7 +88,7 @@ format_arguments   ::= [expression]*
                 </pre>
                 
                 <p>
-                    Custom formatters
+                    Custom formatters using dictionary
                 </p>
                 
                 <p>
@@ -102,6 +120,40 @@ zpt.run({
                 <pre class="brush: html">
 &lt;div data-tcontent="format: myCustomFormatter 1.55"&gt;must be $1.55&lt;/div&gt;
                 </pre>
+                
+                <p>
+                    Custom formatters using context
+                </p>
+
+                <p>
+                    The javascript code:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var $ = require( 'jquery' );
+var zpt = require( 'zpt' );
+
+var dictionary = {};
+
+// To register customFormatter add it to the context
+zpt.context.registerFormatter( 
+    'customFormatter', 
+    function( value ){
+        return "$" + value;
+    }
+);
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    ...and the invokation is exactly equal. 
+                </p>
             </article>
         </div>
     </body>

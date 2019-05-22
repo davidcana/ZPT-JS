@@ -71,9 +71,9 @@ module.exports = {
         return 1 / 0;
     },
     someNumbers: [ 10, 20, 30, 40 ],
-    customFormatter: function( value ){
+    /*customFormatter: function( value ){
         return "$" + value;
-    },
+    },*/
     conf: context.getConf()
 };
 

@@ -117,6 +117,9 @@ module.exports = (function() {
     var registerFormatter = function ( id, formatter ){
         formatters[ id ] = formatter;
     };
+    var unregisterFormatter = function ( id ){
+        delete formatters[ id ];
+    };
     /* End Formatters */
     
     /* Conf */
@@ -335,6 +338,7 @@ module.exports = (function() {
         getTal: getTal,
         getFormatter: getFormatter,
         registerFormatter: registerFormatter,
+        unregisterFormatter: unregisterFormatter,
         getConf: getConf,
         setConf: setConf,
         getLogger: getLogger,
