@@ -3,9 +3,9 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
-var I18n = require( '../../../js/app/i18n/i18n.js' );
-var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
-var i18nHelper = require( '../../../js/app/i18n/i18nHelper.js' );
+var I18n = zpt.I18n;
+var I18nBundle = zpt.I18nBundle;
+var i18nHelper = zpt.i18nHelper;
 var i18nTests = require( './i18nTests.js' );
 
 var urlPrefix = './i18n/';

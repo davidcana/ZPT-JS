@@ -1,10 +1,10 @@
 "use strict";
 
 var $ = require( 'jquery' );
-var zpt = require( '../../../js/app/main.js' );
 var Qunit = require( 'qunit' );
-var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
-var context = require( '../../../js/app/context.js' );
+var zpt = require( '../../../js/app/main.js' );
+var expressionBuilder = zpt.expressionBuilder;
+var context = zpt.context;
 
 var AverageExpression = require( './averageExpression.js' );
 

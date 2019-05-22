@@ -7,12 +7,20 @@ New in future versions
 - Add data-tswitch expression and data-tcase expression?
 - Implement adquisition?
 
-New in 0.35.0
+New in 0.36.0
 - Add new command: update?
 - Add options.bind (boolean) to set the list of properties to bind?
 
+New in 0.35.0
+- Add new tag: check?
+
 New in 0.34.0
 - Now exists expression returns true when the path expressions following its expression returns a value and it is not undefined. It is false when the path expression cannot locate an object or if it evaluates to undefined.
+- Some exports added:
+    - exports.I18nBundle
+    - exports.expressionBuilder
+    - exports.evaluateHelper
+    - exports.ExpressionTokenizer
 
 New in 0.33.0
 - Added support of folder dictionaries.

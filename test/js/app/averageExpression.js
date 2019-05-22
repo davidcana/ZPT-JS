@@ -3,10 +3,12 @@
 */
 "use strict";
 
-var context = require( '../../../js/app/context.js' );
-var evaluateHelper = require( '../../../js/app/expressions/evaluateHelper.js' );
-var ExpressionTokenizer = require( '../../../js/app/expressions/expressionTokenizer.js' );
 var $ = require( 'jquery' );
+var zpt = require( '../../../js/app/main.js' );
+var context = zpt.context;
+var evaluateHelper = zpt.evaluateHelper;
+var ExpressionTokenizer = zpt.ExpressionTokenizer;
+var expressionBuilder = zpt.expressionBuilder;
 
 var AverageExpression = function( _string, _expressionList ) {
     
@@ -80,8 +82,6 @@ AverageExpression.getPrefix = function() {
 AverageExpression.getId = AverageExpression.getPrefix;
 
 AverageExpression.build = function( string ) {
-    
-    var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
     
     if ( string.length == 0 ) {
         throw AverageExpression.getPrefix + " expression void.";
