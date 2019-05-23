@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALReplace</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= ('structure') expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-treplace</em> statement replaces an element with dynamic content. It replaces the statement element with either text or a structure (unescaped markup). The value of the expression is converted into an escaped string if you omit the prefix, and is inserted unchanged if you prefix it with structure. Escaping consists of converting “&amp;” to “&amp;amp;”, “&lt;” to “&amp;lt;”, and “&gt;” to “&amp;gt;”.                
+                    The <em>data-replace</em> statement replaces an element with dynamic content. It replaces the statement element with either text or a structure (unescaped markup). The value of the expression is converted into an escaped string if you omit the prefix, and is inserted unchanged if you prefix it with structure. Escaping consists of converting “&amp;” to “&amp;amp;”, “&lt;” to “&amp;lt;”, and “&gt;” to “&amp;gt;”.                
                 </p>
                 <p>
                     If the value is <code>nothing</code>, then the element is simply removed. If the value is <code>default</code>, then the element is left unchanged.
@@ -40,39 +40,39 @@ argument ::= ('structure') expression
                     Note: zome parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#replace-replace-an-element">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
                     <li>
                         <em>text</em> prefix not supported but not needed, it is the default behaviour.
                     </li>
                     <li>
-                        This attribute can make some attributes not to work because they depend on an enclosing tag: <em>data-trepeat</em> is one of them.
+                        This attribute can make some attributes not to work because they depend on an enclosing tag: <em>data-repeat</em> is one of them.
                     </li>
                     <li>
-                        Because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are <strong>REMOVED</strong> when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-treplace</code> inside a macro definition and invoke it.
+                        Because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are <strong>REMOVED</strong> when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-replace</code> inside a macro definition and invoke it.
                     </li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Inserting the title of a template:
                 </p>
                 <pre class="brush: html">
-                    &lt;span data-treplace="myObject/title">Title&lt;/span&gt;
+                    &lt;span data-replace="myObject/title">Title&lt;/span&gt;
                 </pre>
                 
                 <p>
                     Inserting HTML/XML:
                 </p>
                 <pre class="brush: html">
-                    &lt;div data-treplace="structure table" /&gt;
+                    &lt;div data-replace="structure table" /&gt;
                 </pre>
                 
                 <p>
                     Inserting nothing:
                 </p>
                 <pre class="brush: html">
-                    &lt;div data-treplace="nothing"&gt;
+                    &lt;div data-replace="nothing"&gt;
                         This element is a comment.
                     &lt;/div&gt;
                 </pre>

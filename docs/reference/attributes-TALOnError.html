@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALOnError</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= ('structure') expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-ton-error</em> statement provides error handling for your template. When a TAL statement produces an error, the TAL interpreter searches for a <em>data-ton-error</em> statement on the same element, then on the enclosing element, and so forth. The first <em>data-ton-error</em> found is invoked. It is treated as a <em>data-tcontent</em> statement.
+                    The <em>data-on-error</em> statement provides error handling for your template. When a TAL statement produces an error, the TAL interpreter searches for a <em>data-on-error</em> statement on the same element, then on the enclosing element, and so forth. The first <em>data-on-error</em> found is invoked. It is treated as a <em>data-content</em> statement.
                 </p>
                 <p>
                     A local variable error is set. This variable has these attributes:
@@ -42,28 +42,28 @@ argument ::= ('structure') expression
                 </ul>
 
                 <p>
-                    The simplest sort of <em>data-ton-error</em> statement has a literal error string or <code>nothing</code> for an expression. A more complex handler may call a script that examines the error and either emits error text or raises an exception to propagate the error outwards.
+                    The simplest sort of <em>data-on-error</em> statement has a literal error string or <code>nothing</code> for an expression. A more complex handler may call a script that examines the error and either emits error text or raises an exception to propagate the error outwards.
                 </p>
                 
                 <p>
                     Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#on-error-handle-errors">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
                     <li>
                         <em>text</em> prefix not supported but not needed, it is the default behaviour.
                     </li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Simple error message:
                 </p>
 
                 <pre class="brush: html">
-                    &lt;div data-ton-error="'Error trying to get user name!'"
-                         data-tcontent="myObject/getUsername()"&gt;
+                    &lt;div data-on-error="'Error trying to get user name!'"
+                         data-content="myObject/getUsername()"&gt;
                         Ishmael
                     &lt;/div&gt;
                 </pre>
@@ -73,8 +73,8 @@ argument ::= ('structure') expression
                 </p>
                 
                 <pre class="brush: html">
-                    &lt;div data-ton-error="nothing"
-                         data-tcontent="myObject/getUsername()"&gt;
+                    &lt;div data-on-error="nothing"
+                         data-content="myObject/getUsername()"&gt;
                         Ishmael
                     &lt;/div&gt;
                 </pre>
@@ -84,7 +84,7 @@ argument ::= ('structure') expression
                 </p>
                 
                 <pre class="brush: html">
-                    &lt;div data-ton-error="structure myObject/errorScript()"&gt;
+                    &lt;div data-on-error="structure myObject/errorScript()"&gt;
                     ...
                     &lt;/div&gt;
                 </pre>

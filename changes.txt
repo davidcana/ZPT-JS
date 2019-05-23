@@ -21,7 +21,21 @@ New in 0.34.0
     - exports.expressionBuilder
     - exports.evaluateHelper
     - exports.ExpressionTokenizer
-- Simplify name of tags?
+- Name of tags simplified. The new name of attributes are:
+    - talCondition:     "data-condition"
+    - talRepeat:        "data-repeat"
+    - talAttributes:    "data-attributes"
+    - talContent:       "data-content"
+    - talDefine:        "data-define"
+    - talOmitTag:       "data-omit-tag"
+    - talReplace:       "data-replace"
+    - talOnError:       "data-on-error"
+    - metalDefineMacro: "data-define-macro"
+    - metalUseMacro:    "data-use-macro"
+    - metalDefineSlot:  "data-define-slot"
+    - metalFillSlot:    "data-fill-slot"
+    - i18nDomain:       "data-domain"
+    - i18nLanguage:     "data-language"
 
 New in 0.33.0
 - Added support of folder dictionaries.

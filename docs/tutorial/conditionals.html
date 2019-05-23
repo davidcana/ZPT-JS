@@ -12,22 +12,22 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Conditionals</h1>
                 <ul>
                     <li><a href="#simple">Simple conditionals</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'simple'">Simple conditionals</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'simple'">Simple conditionals</h2>
                 <p>
-                    Sometimes we want to show some HTML elements depending on a condition. This can be done using <em>data-tcondition</em> attribute. Using it the element and its content will be shown only if the condition is evaluated to <code>true</code>. Let's see an example:
+                    Sometimes we want to show some HTML elements depending on a condition. This can be done using <em>data-condition</em> attribute. Using it the element and its content will be shown only if the condition is evaluated to <code>true</code>. Let's see an example:
                 </p>
                 
                 <strong>sample.html</strong>
                 <pre class="brush: html">
-&lt;p data-tcondition="user/isLogged()"&gt;
+&lt;p data-condition="user/isLogged()"&gt;
     ...
 &lt;/p&gt;
                 </pre>

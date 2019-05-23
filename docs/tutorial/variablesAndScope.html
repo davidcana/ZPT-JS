@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Variables and scope</h1>
                 <ul>
                     <li><a href="#directory">The directory</a>.</li>
@@ -24,8 +24,8 @@
                     <li><a href="#variables">Built-in variables</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'directory'">The directory</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'directory'">The directory</h2>
                 <p>
                     Take a look again to the dictionary:
                 </p>
@@ -49,7 +49,7 @@ zpt.run({
                     In this example we define a variable called <em>msg</em> in the dictionary. The scope of all the variables in the dictionary is global: this means it will be accesible by any ZPT-JS attribute in the template.
                 </p>
                 
-                <h2 data-tattributes="id 'defining'">Defining variables</h2>
+                <h2 data-attributes="id 'defining'">Defining variables</h2>
                 <p>
                     Take a look again to this template:
                 </p>
@@ -61,7 +61,7 @@ zpt.run({
         &lt;p id="p1"&gt;
             ...
         &lt;/p&gt;
-        &lt;p id="p2" data-tdefine="var 1"&gt;
+        &lt;p id="p2" data-define="var 1"&gt;
             ...
         &lt;/p&gt;
         &lt;p id="p3"&gt;
@@ -75,7 +75,7 @@ zpt.run({
                     The <em>msg</em> variable is accesible in the entire document, but the <em>var</em> one is only inside <em>p2</em>: Inside <em>p1</em> (not defined yet) or <em>p3</em> (out of scope) it is not accesible.
                 </p>
                 
-                <h2 data-tattributes="id 'redefining'">Redefining variables</h2>
+                <h2 data-attributes="id 'redefining'">Redefining variables</h2>
                 <p>
                     Now we are going to define the same variable twice. Take a look again to this template:
                 </p>
@@ -84,12 +84,12 @@ zpt.run({
                 <pre class="brush: html">
 &lt;html&gt;
     &lt;body&gt;
-        &lt;div data-tdefine="var 1"&gt;
-            var = &lt;span data-tcontent="var"&gt;must be 1&lt;/span&gt;
-            &lt;div data-tdefine="var 2"&gt;
-                var = &lt;span data-tcontent="var"&gt;must be 2&lt;/span&gt;
+        &lt;div data-define="var 1"&gt;
+            var = &lt;span data-content="var"&gt;must be 1&lt;/span&gt;
+            &lt;div data-define="var 2"&gt;
+                var = &lt;span data-content="var"&gt;must be 2&lt;/span&gt;
             &lt;/div&gt;
-            var = &lt;span data-tcontent="var"&gt;must be 1&lt;/span&gt;
+            var = &lt;span data-content="var"&gt;must be 1&lt;/span&gt;
         &lt;/div&gt;
     &lt;/body&gt;
 &lt;/html&gt;
@@ -103,7 +103,7 @@ zpt.run({
                     <li>Must be 1. The redefinition is out of scope and the value is <em>1</em> again.</li>
                 </ol>
                 
-                <h2 data-tattributes="id 'global'">Global variables</h2>
+                <h2 data-attributes="id 'global'">Global variables</h2>
                 <p>
                     Sometimes is useful to define global variables in a template. How?
                 </p>
@@ -115,7 +115,7 @@ zpt.run({
         &lt;p id="p1"&gt;
             ...
         &lt;/p&gt;
-        &lt;p id="p2" data-tdefine="global var 1"&gt;
+        &lt;p id="p2" data-define="global var 1"&gt;
             ...
         &lt;/p&gt;
         &lt;p id="p3"&gt;
@@ -128,9 +128,9 @@ zpt.run({
                     The <em>var</em> variable is accesible after its declaration in <em>p2</em> (accesible inside <em>p2</em> and <em>p3</em>): Inside <em>p1</em> (not defined yet) it is not accesible.
                 </p>
                 
-                <h2 data-tattributes="id 'nocall'">Nocall variables</h2>
+                <h2 data-attributes="id 'nocall'">Nocall variables</h2>
                 <p>
-                    When ZPT-JS finds a <em>data-tdefine</em> attribute it defines the variable and set its value with the evaluated value. After that, every time the variable appears ZPT-JS will evaluate it with that value, always the same value.
+                    When ZPT-JS finds a <em>data-define</em> attribute it defines the variable and set its value with the evaluated value. After that, every time the variable appears ZPT-JS will evaluate it with that value, always the same value.
                 </p>
                 <p>
                     But sometimes we need the expression is reevaluated every time a variable appears. How?
@@ -140,10 +140,10 @@ zpt.run({
                 <pre class="brush: html">
 &lt;html&gt;
     &lt;body&gt;
-        &lt;p data-tdefine="nocall run counter()"&gt;
-            &lt;span data-tcontent="run"&gt;must be 1&lt;/span&gt;
-            &lt;span data-tcontent="run"&gt;must be 2&lt;/span&gt;
-            &lt;span data-tcontent="run"&gt;must be 3&lt;/span&gt;
+        &lt;p data-define="nocall run counter()"&gt;
+            &lt;span data-content="run"&gt;must be 1&lt;/span&gt;
+            &lt;span data-content="run"&gt;must be 2&lt;/span&gt;
+            &lt;span data-content="run"&gt;must be 3&lt;/span&gt;
         &lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;
@@ -152,9 +152,9 @@ zpt.run({
                     Suppose <em>counter()</em> function returns an increased value starting with <em>1</em>. Then every time <em>run</em> value is required <em>counter()</em> function will be executed.
                 </p>
                 
-                <h2 data-tattributes="id 'variables'">Built-in variables</h2>
+                <h2 data-attributes="id 'variables'">Built-in variables</h2>
                 <p>
-                    So a variable is either a in dictionary variable (built-in or defined by the user), or defined via a <code>data-tdefine</code> attribute. The following variables are built-in:
+                    So a variable is either a in dictionary variable (built-in or defined by the user), or defined via a <code>data-define</code> attribute. The following variables are built-in:
                 </p>
                 <ul>
                     <li><code>context</code>. An object with some utility methods. For internal use and for customization. See <a href="../reference/context.html">context reference page</a> for details.</li>
@@ -165,7 +165,7 @@ zpt.run({
                     As ZPT-JS register the <em>window</em> object automatically, so global variables defined via javascript can be used easily:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="window/globalVar"&gt;a string&lt;/div&gt;
+&lt;div data-content="window/globalVar"&gt;a string&lt;/div&gt;
                 </pre>
             </article>
         </div>

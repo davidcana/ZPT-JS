@@ -103,6 +103,7 @@ li {
 table.comparison {
     border-collapse: collapse;
     border-style: solid;
+    margin: .5em 2em 1em 2em;
 }
 table.comparison,
 table.comparison th,

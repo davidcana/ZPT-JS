@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Macros</h1>
                 <ul>
                     <li><a href="#metal">METAL</a>.</li>
@@ -21,20 +21,20 @@
                     <li><a href="#external">External macros</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'metal'">METAL</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'metal'">METAL</h2>
                 <p>
                     Macro tag attributes are called <em>Macro Expansion Tag Attribute Language (METAL)</em> statements. <em>METAL</em> statements behave exactly as in ZPT. The main difference, which is really a difference in Path expressions, is the means of finding another template which contains macros. There is no Zope tree in which to locate templates. <em>Use-macro</em> tag uses expressions (ZPT's version does not, it uses literals).
                 </p>
 
-                <h2 data-tattributes="id 'local'">Local macros</h2>
+                <h2 data-attributes="id 'local'">Local macros</h2>
                 <p>
                     Local macros are defined at the same HTML file where they are invoked. An example of definition of a local macro:
                 </p>
                 <pre class="brush: html">
-&lt;ul data-mdefine-macro="list"&gt;
-    &lt;li data-trepeat="item items"&gt;
-        &lt;span data-tcontent="item"&gt;An item&lt;/span&gt;
+&lt;ul data-define-macro="list"&gt;
+    &lt;li data-repeat="item items"&gt;
+        &lt;span data-content="item"&gt;An item&lt;/span&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
                 </pre>
@@ -42,7 +42,7 @@
                     That macro generates an unordered list iterating through the <code>items</code> variable. Let's invoke them; to do this, the next HTML code must be at the same file.
                 </p>
                 <pre class="brush: html">
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list'"&gt;
+&lt;div data-define="items [10 20 30]" data-use-macro="'list'"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>
@@ -50,17 +50,17 @@
                     ZPT-JS allows to uses expressions when using macros. The next HTML code invokes the same macro if the value of <code>listMacro</code> variable is <code>list</code>:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'listMacro'"&gt;
+&lt;div data-define="items [10 20 30]" data-use-macro="'listMacro'"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>
 
-                <h2 data-tattributes="id 'external'">External macros</h2>
+                <h2 data-attributes="id 'external'">External macros</h2>
                 <p>
                     External macros are defined at a different page that where they are invoked. They only differ how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list@macros.html'"&gt;
+&lt;div data-define="items [10 20 30]" data-use-macro="'list@macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>
@@ -82,7 +82,7 @@ zpt.run({
                     Because external macro files must be preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
                 </p>
                 <pre class="brush: html">
-&lt;div data-muse-macro="anObject/templateName"&gt;
+&lt;div data-use-macro="anObject/templateName"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>
@@ -120,7 +120,7 @@ zpt.run({
                     And in your HTML code:
                 </p>
                 <pre class="brush: html">
-&lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
+&lt;div data-use-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>

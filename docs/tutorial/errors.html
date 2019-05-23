@@ -12,18 +12,18 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Managing errors</h1>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
                 <p>
-                    Errors happen. ZPT-JS manages errors using <em>data-ton-error</em> attribute. Let's see an example:
+                    Errors happen. ZPT-JS manages errors using <em>data-on-error</em> attribute. Let's see an example:
                 </p>
                 
                 <strong>sample.html</strong>
                 <pre class="brush: html">
-&lt;p data-ton-error="'Oh, noooo!'"&gt;
+&lt;p data-on-error="'Oh, noooo!'"&gt;
     ...
 &lt;/p&gt;
                 </pre>
@@ -32,10 +32,10 @@
                 </p>
                 
                 <p>
-                    The <em>data-ton-error</em> attribute supports any type of expression, so you can use for example a <em>function expression</em> to invoke a function to treat the error:
+                    The <em>data-on-error</em> attribute supports any type of expression, so you can use for example a <em>function expression</em> to invoke a function to treat the error:
                 </p>
                 <pre class="brush: html">
-&lt;p data-ton-error="errorManager()"&gt;
+&lt;p data-on-error="errorManager()"&gt;
     ...
 &lt;/p&gt;
                 </pre>

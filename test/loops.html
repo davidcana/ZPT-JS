@@ -33,19 +33,19 @@
                 <th>Roman</th>
                 <th>Capital Roman</th>
             </tr>
-            <tr data-trepeat="item tools">
-                <td data-tattributes="class 'value'" data-tcontent="item/name">value</td>
-                <td data-tattributes="class 'index'" data-tcontent="item-repeat/index()">index</td>
-                <td data-tattributes="class 'number'" data-tcontent="item-repeat/number()">number</td>
-                <td data-tattributes="class 'isEven'" data-tcontent="item-repeat/even()">even</td>
-                <td data-tattributes="class 'isOdd'" data-tcontent="item-repeat/odd()">odd</td>
-                <td data-tattributes="class 'isStart'" data-tcontent="item-repeat/start()">start</td>
-                <td data-tattributes="class 'isEnd'" data-tcontent="item-repeat/end()">end</td>
-                <td data-tattributes="class 'getLength'" data-tcontent="item-repeat/length()">length</td>
-                <td data-tattributes="class 'getLetter'" data-tcontent="item-repeat/letter()">letter</td>
-                <td data-tattributes="class 'getCapitalLetter'" data-tcontent="item-repeat/Letter()">capital letter</td>
-                <td data-tattributes="class 'getRoman'" data-tcontent="item-repeat/roman()">roman</td>
-                <td data-tattributes="class 'getCapitalRoman'" data-tcontent="item-repeat/Roman()">capitalRoman</td>
+            <tr data-repeat="item tools">
+                <td data-attributes="class 'value'" data-content="item/name">value</td>
+                <td data-attributes="class 'index'" data-content="item-repeat/index()">index</td>
+                <td data-attributes="class 'number'" data-content="item-repeat/number()">number</td>
+                <td data-attributes="class 'isEven'" data-content="item-repeat/even()">even</td>
+                <td data-attributes="class 'isOdd'" data-content="item-repeat/odd()">odd</td>
+                <td data-attributes="class 'isStart'" data-content="item-repeat/start()">start</td>
+                <td data-attributes="class 'isEnd'" data-content="item-repeat/end()">end</td>
+                <td data-attributes="class 'getLength'" data-content="item-repeat/length()">length</td>
+                <td data-attributes="class 'getLetter'" data-content="item-repeat/letter()">letter</td>
+                <td data-attributes="class 'getCapitalLetter'" data-content="item-repeat/Letter()">capital letter</td>
+                <td data-attributes="class 'getRoman'" data-content="item-repeat/roman()">roman</td>
+                <td data-attributes="class 'getCapitalRoman'" data-content="item-repeat/Roman()">capitalRoman</td>
             </tr>
         </table>
 
@@ -53,79 +53,79 @@
             Try out loops using array expressions
         </p>
         <ol>
-            <li data-trepeat="c [10 20 30]">
-                Iterating element <span data-tattributes="class 'cValue1'" data-tcontent="c">10/20/30</span>
+            <li data-repeat="c [10 20 30]">
+                Iterating element <span data-attributes="class 'cValue1'" data-content="c">10/20/30</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c ['jaja' 'jeje' 'jiji']">
-                Iterating element <span data-tattributes="class 'cValue2'" data-tcontent="c">jaja/jeje/jiji</span>
+            <li data-repeat="c ['jaja' 'jeje' 'jiji']">
+                Iterating element <span data-attributes="class 'cValue2'" data-content="c">jaja/jeje/jiji</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c ['jaja' number100 2]">
-                Iterating element <span data-tattributes="class 'cValue3'" data-tcontent="c">jaja/100/2</span>
+            <li data-repeat="c ['jaja' number100 2]">
+                Iterating element <span data-attributes="class 'cValue3'" data-content="c">jaja/100/2</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c ['jaja' number100 (+: 2 3)]">
-                Iterating element <span data-tattributes="class 'cValue4'" data-tcontent="c">jaja/100/5</span>
+            <li data-repeat="c ['jaja' number100 (+: 2 3)]">
+                Iterating element <span data-attributes="class 'cValue4'" data-content="c">jaja/100/5</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c [1:5]">
-                Iterating element <span data-tattributes="class 'cValue5'" data-tcontent="c">1/2/3/4/5</span>
+            <li data-repeat="c [1:5]">
+                Iterating element <span data-attributes="class 'cValue5'" data-content="c">1/2/3/4/5</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c [1:7:2]">
-                Iterating element <span data-tattributes="class 'cValue6'" data-tcontent="c">1/3/5/7</span>
+            <li data-repeat="c [1:7:2]">
+                Iterating element <span data-attributes="class 'cValue6'" data-content="c">1/3/5/7</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c [7:1:-2]">
-                Iterating element <span data-tattributes="class 'cValue7'" data-tcontent="c">7/5/3/1</span>
+            <li data-repeat="c [7:1:-2]">
+                Iterating element <span data-attributes="class 'cValue7'" data-content="c">7/5/3/1</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c [:5]">
-                Iterating element <span data-tattributes="class 'cValue8'" data-tcontent="c">0/1/2/3/4/5</span>
+            <li data-repeat="c [:5]">
+                Iterating element <span data-attributes="class 'cValue8'" data-content="c">0/1/2/3/4/5</span>
             </li>
         </ol>
-        <ol data-tdefine="start 2; end 8; step 2">
-            <li data-trepeat="c [start:end:step]">
-                Iterating element <span data-tattributes="class 'cValue9'" data-tcontent="c">2/4/6/8</span>
+        <ol data-define="start 2; end 8; step 2">
+            <li data-repeat="c [start:end:step]">
+                Iterating element <span data-attributes="class 'cValue9'" data-content="c">2/4/6/8</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c ['jaja' :2 'jeje']">
-                Iterating element <span data-tattributes="class 'cValue10'" data-tcontent="c">jaja/0/1/2/jeje</span>
+            <li data-repeat="c ['jaja' :2 'jeje']">
+                Iterating element <span data-attributes="class 'cValue10'" data-content="c">jaja/0/1/2/jeje</span>
             </li>
         </ol>
         <ol>
             <li>Next elements void evaluating [1:7:-1]</li>
-            <li data-trepeat="c [1:7:-1]">
-                Iterating element <span data-tattributes="class 'cValue11'" data-tcontent="c">[void]</span>
+            <li data-repeat="c [1:7:-1]">
+                Iterating element <span data-attributes="class 'cValue11'" data-content="c">[void]</span>
             </li>
         </ol>
         <ol>
             <li>Next elements void evaluating [7:1:1]</li>
-            <li data-trepeat="c [7:1:1]">
-                Iterating element <span data-tattributes="class 'cValue12'" data-tcontent="c">[void]</span>
+            <li data-repeat="c [7:1:1]">
+                Iterating element <span data-attributes="class 'cValue12'" data-content="c">[void]</span>
             </li>
         </ol>
         <ol>
             <li>Next elements void evaluating a non defined variable</li>
-            <li data-trepeat="c nonDefined">
-                Iterating element <span data-tattributes="class 'cValue13'" data-tcontent="c">[void]</span>
+            <li data-repeat="c nonDefined">
+                Iterating element <span data-attributes="class 'cValue13'" data-content="c">[void]</span>
             </li>
         </ol>
         <p>
             Try out dynamic loops
         </p>
         <ol id="dynamicLoop">
-            <li data-trepeat="c someNumbers">
-                Iterating element <span data-tattributes="class 'nValue1'" data-tcontent="c">10/20/30</span>
+            <li data-repeat="c someNumbers">
+                Iterating element <span data-attributes="class 'nValue1'" data-content="c">10/20/30</span>
             </li>
         </ol>
         <p>
@@ -133,16 +133,16 @@
         </p>
         <ol>
             <li class="pValue">1</li>
-            <li data-trepeat="p [2:4]" data-tcontent="p" data-tattributes="class 'pValue'">Number</li>
+            <li data-repeat="p [2:4]" data-content="p" data-attributes="class 'pValue'">Number</li>
             <li class="pValue">5</li>
         </ol>
         <p>
             Test style property
         </p>
         <ol>
-            <li data-trepeat="p [1:4]" 
-                data-tcontent="p" 
-                data-tattributes="class 'styleTest';
+            <li data-repeat="p [1:4]" 
+                data-content="p" 
+                data-attributes="class 'styleTest';
                                   style 'color:blue'">Number</li>
         </ol>
         <p>
@@ -163,19 +163,19 @@
                 <th>Roman</th>
                 <th>Capital Roman</th>
             </tr>
-            <tr data-trepeat="item tools">
-                <td data-tattributes="class 'd_value'" data-tcontent="item/name">value</td>
-                <td data-tattributes="class 'd_index'" data-tcontent="item-repeat/index()">index</td>
-                <td data-tattributes="class 'd_number'" data-tcontent="item-repeat/number()">number</td>
-                <td data-tattributes="class 'd_isEven'" data-tcontent="item-repeat/even()">even</td>
-                <td data-tattributes="class 'd_isOdd'" data-tcontent="item-repeat/odd()">odd</td>
-                <td data-tattributes="class 'd_isStart'" data-tcontent="item-repeat/start()">start</td>
-                <td data-tattributes="class 'd_isEnd'" data-tcontent="item-repeat/end()">end</td>
-                <td data-tattributes="class 'd_getLength'" data-tcontent="item-repeat/length()">length</td>
-                <td data-tattributes="class 'd_getLetter'" data-tcontent="item-repeat/letter()">letter</td>
-                <td data-tattributes="class 'd_getCapitalLetter'" data-tcontent="item-repeat/Letter()">capital letter</td>
-                <td data-tattributes="class 'd_getRoman'" data-tcontent="item-repeat/roman()">roman</td>
-                <td data-tattributes="class 'd_getCapitalRoman'" data-tcontent="item-repeat/Roman()">capitalRoman</td>
+            <tr data-repeat="item tools">
+                <td data-attributes="class 'd_value'" data-content="item/name">value</td>
+                <td data-attributes="class 'd_index'" data-content="item-repeat/index()">index</td>
+                <td data-attributes="class 'd_number'" data-content="item-repeat/number()">number</td>
+                <td data-attributes="class 'd_isEven'" data-content="item-repeat/even()">even</td>
+                <td data-attributes="class 'd_isOdd'" data-content="item-repeat/odd()">odd</td>
+                <td data-attributes="class 'd_isStart'" data-content="item-repeat/start()">start</td>
+                <td data-attributes="class 'd_isEnd'" data-content="item-repeat/end()">end</td>
+                <td data-attributes="class 'd_getLength'" data-content="item-repeat/length()">length</td>
+                <td data-attributes="class 'd_getLetter'" data-content="item-repeat/letter()">letter</td>
+                <td data-attributes="class 'd_getCapitalLetter'" data-content="item-repeat/Letter()">capital letter</td>
+                <td data-attributes="class 'd_getRoman'" data-content="item-repeat/roman()">roman</td>
+                <td data-attributes="class 'd_getCapitalRoman'" data-content="item-repeat/Roman()">capitalRoman</td>
             </tr>
         </table>
         
@@ -183,7 +183,7 @@
             Try out default
         </p>
         <ul>
-            <li data-trepeat="item default" data-tattributes="class 'lValue'">Default item</li>
+            <li data-repeat="item default" data-attributes="class 'lValue'">Default item</li>
         </ul>
         
         <p>
@@ -191,7 +191,7 @@
         </p>
         <ul>
             <li class="eValue">First item</li>
-            <li data-trepeat="item emptyArray" data-tattributes="class 'eValue'">Default item</li>
+            <li data-repeat="item emptyArray" data-attributes="class 'eValue'">Default item</li>
         </ul>
    </body> 
  </html>

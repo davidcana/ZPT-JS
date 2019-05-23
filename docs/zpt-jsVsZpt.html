@@ -10,16 +10,16 @@
         <link rel="stylesheet" type="text/css" href="docs.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS vs ZPT</h1>
                 <ul>
                     <li><a href="#common">Common features</a>.</li>
                     <li><a href="#differences">Differences</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'common'">Common features</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'common'">Common features</h2>
                 <p>
                     The goal of <em>Page Templates</em> is to allow designers and programmers to work together easily. A designer can use a WYSIWYG HTML editor to create a template, then a programmer can edit it to make it part of an application. If required, the designer can load the template back into his editor and make further changes to its structure and appearance. By taking reasonable steps to preserve the changes made by the programmer, the designer will not disrupt the application.
                 </p>
@@ -51,7 +51,7 @@
                 <p>
                     Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/ZPT.html#using-zope-page-templates">The Zope Book</a>.
                 </p>
-                <h2 data-tattributes="id 'differences'">Differences</h2>
+                <h2 data-attributes="id 'differences'">Differences</h2>
                 <p>
                     Because ZPT-JS isn't running in the context of Zope and isn't written with Python, there are necessarily some important differences between ZPT-JS and ZPT. Some of them are:
                 </p>
@@ -97,7 +97,7 @@
                                 Nocall support
                             </td>
                             <td>
-                                Yes, it is a suffix in data-tdefine
+                                Yes, it is a suffix in data-define
                             </td>
                             <td>
                                 Yes, it is an expression
@@ -105,7 +105,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Map support in data-tattributes
+                                Map support in data-attributes
                             </td>
                             <td>
                                 Yes
@@ -116,7 +116,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Support of expressions in <em>data-muse-macro</em> and <em>data-mfill-slot</em>
+                                Support of expressions in <em>data-use-macro</em> and <em>data-fill-slot</em>
                             </td>
                             <td>
                                 Yes
@@ -141,7 +141,7 @@
                                 Last release
                             </td>
                             <td>
-                                <span data-tcontent="versionDate">25 April 2019</span>
+                                <span data-content="versionDate">25 April 2019</span>
                             </td>
                             <td>
                                 ?

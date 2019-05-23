@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Configuration - maxFolderDictionaries</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -21,13 +21,13 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 maxFolderDictionaries ::= Integer
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     The <code>maxFolderDictionaries</code> defines the maximum number of <em>folder dictionaries</em> to preload. It is an integer value.
                 </p>
@@ -55,7 +55,7 @@ var folderDictionary = {
                     When ZPT-JS search for a value in the folder directories it iterates through all folder dictionaries until it finds a value. ZPT-JS first tries with the folder dictionary in the same folder. If there is a match it returns this value; if not, ZPT-JS tries with the folder dictionary of the parent folder. It continues until it finds a matching value, the folder is the root of the web site or the number of checked folder dicionaries is equal to the maximum. 
                 </p>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Let's define 2 folder dictionaries. The URL of the first one is at <em>/folder/folderDictionary.js</em>:
                 </p>
@@ -83,10 +83,10 @@ var folderDictionary = {
                     Our template is:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="var1"&gt;
+&lt;div data-content="var1"&gt;
     value of var1
 &lt;/div&gt;
-&lt;div data-tcontent="var2"&gt;
+&lt;div data-content="var2"&gt;
     value of var2
 &lt;/div&gt;
                 </pre>
@@ -124,7 +124,7 @@ var folderDictionary = {
                     Our template is:
                 </p>
                 <pre class="brush: html">
-&lt;div data-muse-macro="footer-macro"&gt;
+&lt;div data-use-macro="footer-macro"&gt;
     the footer
 &lt;/div&gt;
                 </pre>

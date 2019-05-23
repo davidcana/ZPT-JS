@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - I18nLanguage</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,32 +22,32 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-ilanguage</em> statement defines an expression that evaluates to the current language to use in translations. After using a <em>data-ilanguage</em> statement you will be able to use <em>i18nBundle</em> instances in <a href="attributes-I18nDomain.html">data-idomain</a> attributes.
+                    The <em>data-language</em> statement defines an expression that evaluates to the current language to use in translations. After using a <em>data-language</em> statement you will be able to use <em>i18nBundle</em> instances in <a href="attributes-I18nDomain.html">data-domain</a> attributes.
                 </p>
                 
                 <p>
                     ZPT-JS uses the <a href="expressions-i18n.html">tr</a> expression to make it easy to translate text, number, dates...
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     This statement does not exist in ZPT.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Using a literal:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'"&gt;
+&lt;div data-language="'es'"&gt;
     ...
 &lt;/div&gt;
                 </pre>
@@ -56,7 +56,7 @@ argument ::= expression
                     Using a path expression:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="myObject/getLanguage()"&gt;
+&lt;div data-language="myObject/getLanguage()"&gt;
     ...
 &lt;/div&gt;
                 </pre>

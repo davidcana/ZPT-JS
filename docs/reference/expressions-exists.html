@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Exists expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,13 +22,13 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 exists_expressions ::= 'exists:' expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     <em>Exists</em> expressions test for the existence of paths. An exists expression returns <code>true</code> when the path expressions following its expression returns a value and it is not <code>undefined</code>. It is <code>false</code> when the path expression cannot locate an object or if it evaluates to <code>undefined</code>.
                 </p>
@@ -37,17 +37,17 @@ exists_expressions ::= 'exists:' expression
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#tales-exists-expressions">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     In ZPT if an expression evaluates to <code>undefined</code> exists returns <code>true</code>; ZPT-JS returns <code>false</code>.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Testing for the existence of a property:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcondition="not: exists: myObject/name"&gt;
+&lt;div data-condition="not: exists: myObject/name"&gt;
     Name not set!
 &lt;/div&gt;
                 </pre>

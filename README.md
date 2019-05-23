@@ -27,7 +27,7 @@ Using ZPT-JS:
 *   the data
 *   the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.
 
-A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-tcontent`. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
+A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-content`. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
 
 ## Installation
 
@@ -86,25 +86,25 @@ An example of ZPT-JS template:
     
             <h2>Some expressions</h2>
             <ol>
-                <li data-tcontent="user/name">a property expresion</li>
-                <li data-tcontent="string:help my ${user/name}">a string expression</li>
+                <li data-content="user/name">a property expresion</li>
+                <li data-content="string:help my ${user/name}">a string expression</li>
                 <li>
-                    <a data-tattributes="href 'www.yoursite.org';
-                                         title 'a title for your site'">A link using string literals in a data-tattributes</a>
+                    <a data-attributes="href 'www.yoursite.org';
+                                         title 'a title for your site'">A link using string literals in a data-attributes</a>
                 </li>
-                <li data-tcondition="eq: number1 number100">
+                <li data-condition="eq: number1 number100">
                     a condition: change number1 or number100 to show this!
                 </li>
                 <li>
-                    <span data-treplace="user/name | 'no friends'">
+                    <span data-replace="user/name | 'no friends'">
                         any friends?
                     </span>
                 </li>
-                <li data-tcontent="user2/name | 'no friends'">
+                <li data-content="user2/name | 'no friends'">
                     any friends?
                 </li>
-                <li data-tcontent="tools[0]">an item of an array</li>
-                <li data-tcontent="user/age()">a method invokation</li>
+                <li data-content="tools[0]">an item of an array</li>
+                <li data-content="user/age()">a method invokation</li>
             </ol>
             
             <h2>Loops</h2>
@@ -123,38 +123,38 @@ An example of ZPT-JS template:
                     <th>Roman</th>
                     <th>Capital Roman</th>
                 </tr>
-                <tr data-trepeat="item tools">
-                    <td data-tcontent="item">the item</td>
-                    <td data-tcontent="item-repeat/index()">index</td>
-                    <td data-tcontent="item-repeat/number()">number</td>
-                    <td data-tcontent="item-repeat/even()">even</td>
-                    <td data-tcontent="item-repeat/odd()">odd</td>
-                    <td data-tcontent="item-repeat/start()">start</td>
-                    <td data-tcontent="item-repeat/end()">end</td>
-                    <td data-tcontent="item-repeat/length()">length</td>
-                    <td data-tcontent="item-repeat/letter()">letter</td>
-                    <td data-tcontent="item-repeat/Letter()">capital letter</td>
-                    <td data-tcontent="item-repeat/roman()">roman</td>
-                    <td data-tcontent="item-repeat/Roman()">capital roman</td>
+                <tr data-repeat="item tools">
+                    <td data-content="item">the item</td>
+                    <td data-content="item-repeat/index()">index</td>
+                    <td data-content="item-repeat/number()">number</td>
+                    <td data-content="item-repeat/even()">even</td>
+                    <td data-content="item-repeat/odd()">odd</td>
+                    <td data-content="item-repeat/start()">start</td>
+                    <td data-content="item-repeat/end()">end</td>
+                    <td data-content="item-repeat/length()">length</td>
+                    <td data-content="item-repeat/letter()">letter</td>
+                    <td data-content="item-repeat/Letter()">capital letter</td>
+                    <td data-content="item-repeat/roman()">roman</td>
+                    <td data-content="item-repeat/Roman()">capital roman</td>
                 </tr>
             </table>
             
             <h2>Macros</h2>
             
             <h3>Macro invokation - Dynamic macro using 1 slot (items = [10 20 30])</h3>
-            <div data-tdefine="items [10 20 30]" data-muse-macro="dynamicListWith1Slot">
-                <em data-mfill-slot="additional_info">
+            <div data-define="items [10 20 30]" data-use-macro="dynamicListWith1Slot">
+                <em data-fill-slot="additional_info">
                     Make sure to check out our <a href="/specials">specials</a>.
                 </em>
             </div>
             
             <h3>Macro definition - Dynamic macro using 1 slot</h3>
-            <ul data-mdefine-macro="dynamicListWith1Slot">
-                <li data-trepeat="item items">
-                    <span data-tcontent="item">An item</span>
+            <ul data-define-macro="dynamicListWith1Slot">
+                <li data-repeat="item items">
+                    <span data-content="item">An item</span>
                 </li>
                 <li>
-                    <span data-mdefine-slot="additional_info"></span>
+                    <span data-define-slot="additional_info"></span>
                 </li>
             </ul>
         </body>

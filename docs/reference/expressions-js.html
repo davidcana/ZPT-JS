@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Javascript expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,13 +22,13 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 js_expression ::= 'js:' string_expression_item
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     <em>Javascript expressions</em> evaluate arbitrary javascript code. Nowadays it is implemented using the <em>eval</em> function but this can change. Any legal Javascript expression may be evaluated.
                 </p>
@@ -36,15 +36,15 @@ js_expression ::= 'js:' string_expression_item
                     The suplied expression is evaluated first as a <em>string expression</em> and the evaluated as javascript code.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     <em>Javascript</em> expressions does not exist in ZPT. <em>Javascript expressions</em> work just like Python expressions in ZPT except that the Javascript language is used instead of Python.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <pre class="brush: html">
-&lt;div data-tcontent="js: 4 + 5"&gt;returns the int 9&lt;/div&gt;
-&lt;div data-tcontent="js: ${aNumber} + 1"&gt;returns the result of adding 1 to the value of aNumber variable&lt;/div&gt;
+&lt;div data-content="js: 4 + 5"&gt;returns the int 9&lt;/div&gt;
+&lt;div data-content="js: ${aNumber} + 1"&gt;returns the result of adding 1 to the value of aNumber variable&lt;/div&gt;
                 </pre>
 
             </article>

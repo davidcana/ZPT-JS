@@ -12,16 +12,16 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Loops</h1>
                 <ul>
                     <li><a href="#intro">Intro</a>.</li>
                     <li><a href="#advanced">Advanced repetition</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'intro'">Intro</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'intro'">Intro</h2>
                 <p>
                     Now we are going to iterate through an array of objects to show its contents. Let's see the template:
                 </p>
@@ -33,10 +33,10 @@
         &lt;th&gt;Price&lt;/th&gt;
         &lt;th&gt;Description&lt;/th&gt;
     &lt;/tr&gt;
-    &lt;tr data-trepeat="item tools"&gt;
-        &lt;td data-tcontent="item/name"&gt;the name&lt;/td&gt;
-        &lt;td data-tcontent="item/price"&gt;the price&lt;/td&gt;
-        &lt;td data-tcontent="item/description"&gt;the description&lt;/td&gt;
+    &lt;tr data-repeat="item tools"&gt;
+        &lt;td data-content="item/name"&gt;the name&lt;/td&gt;
+        &lt;td data-content="item/price"&gt;the price&lt;/td&gt;
+        &lt;td data-content="item/description"&gt;the description&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
                 </pre>
@@ -76,7 +76,7 @@ zpt.run({
 });
                 </pre>
                 
-                <h2 data-tattributes="id 'advanced'">Advanced repetition</h2>
+                <h2 data-attributes="id 'advanced'">Advanced repetition</h2>
                 <p>
                     There are a few minor variations for <code>tal:repeat</code>:
                 </p>
@@ -117,19 +117,19 @@ zpt.run({
         &lt;th&gt;Roman&lt;/th&gt;
         &lt;th&gt;Capital Roman&lt;/th&gt;
     &lt;/tr&gt;
-    &lt;tr data-trepeat="item tools"&gt;
-        &lt;td data-tcontent="item/name"&gt;value&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/index()"&gt;index&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/number()"&gt;number&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/even()"&gt;even&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/odd()"&gt;odd&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/start()"&gt;start&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/end()"&gt;end&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/length()"&gt;length&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/letter()"&gt;letter&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/Letter()"&gt;capital letter&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/roman()"&gt;roman&lt;/td&gt;
-        &lt;td data-tcontent="item-repeat/Roman()"&gt;capitalRoman&lt;/td&gt;
+    &lt;tr data-repeat="item tools"&gt;
+        &lt;td data-content="item/name"&gt;value&lt;/td&gt;
+        &lt;td data-content="item-repeat/index()"&gt;index&lt;/td&gt;
+        &lt;td data-content="item-repeat/number()"&gt;number&lt;/td&gt;
+        &lt;td data-content="item-repeat/even()"&gt;even&lt;/td&gt;
+        &lt;td data-content="item-repeat/odd()"&gt;odd&lt;/td&gt;
+        &lt;td data-content="item-repeat/start()"&gt;start&lt;/td&gt;
+        &lt;td data-content="item-repeat/end()"&gt;end&lt;/td&gt;
+        &lt;td data-content="item-repeat/length()"&gt;length&lt;/td&gt;
+        &lt;td data-content="item-repeat/letter()"&gt;letter&lt;/td&gt;
+        &lt;td data-content="item-repeat/Letter()"&gt;capital letter&lt;/td&gt;
+        &lt;td data-content="item-repeat/roman()"&gt;roman&lt;/td&gt;
+        &lt;td data-content="item-repeat/Roman()"&gt;capitalRoman&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
                 </pre>

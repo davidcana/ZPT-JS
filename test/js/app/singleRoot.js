@@ -26,10 +26,10 @@ function runMacro(){
 <p>
 Before use macro
 </p>
-<b id="m1" data-muse-macro="'dynamicMacro@externalMacros-definitions.html'" style="display: none;">
+<b id="m1" data-use-macro="'dynamicMacro@externalMacros-definitions.html'" style="display: none;">
 Macro goes here
-</b><p data-mmacro="dynamicMacro" data-tdefine="externalMacroUrl 'externalMacros-definitions.html'">
-Dynamic text: <span data-tcontent="string:A test of a dynamic macro" data-tattributes="id string:t2-1">A test of a dynamic macro</span>
+</b><p data-mmacro="dynamicMacro" data-define="externalMacroUrl 'externalMacros-definitions.html'">
+Dynamic text: <span data-content="string:A test of a dynamic macro" data-attributes="id string:t2-1">A test of a dynamic macro</span>
 </p>
 <p>
 After use macro

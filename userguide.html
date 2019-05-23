@@ -120,15 +120,15 @@ zpt.run({
     &lt;body&gt;
         &lt;h1&gt;Some expressions&lt;/h1&gt;
         &lt;ol&gt;
-            &lt;li data-tcontent="user/name"&gt;xxx&lt;/li&gt;
-            &lt;li data-tcontent="string:help my ${user/name}"&gt;xxx&lt;/li&gt;
-            &lt;li data-tcontent="doggy"&gt;not false&lt;/li&gt;
-            &lt;li data-tcontent="not:doggy"&gt;not false&lt;/li&gt;
-            &lt;li data-tcontent="eq: number1 number100"&gt;not true&lt;/li&gt;
-            &lt;li data-tcontent="user/name | string:no friends"&gt;any friends?&lt;/li&gt;
-            &lt;li data-tcontent="user2/name | string:no friends"&gt;any friends?&lt;/li&gt;
-            &lt;li data-tcontent="items[0]"&gt;an item&lt;/li&gt;
-            &lt;li data-tcontent="user/age()"&gt;user/age()&lt;/li&gt;
+            &lt;li data-content="user/name"&gt;xxx&lt;/li&gt;
+            &lt;li data-content="string:help my ${user/name}"&gt;xxx&lt;/li&gt;
+            &lt;li data-content="doggy"&gt;not false&lt;/li&gt;
+            &lt;li data-content="not:doggy"&gt;not false&lt;/li&gt;
+            &lt;li data-content="eq: number1 number100"&gt;not true&lt;/li&gt;
+            &lt;li data-content="user/name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-content="user2/name | string:no friends"&gt;any friends?&lt;/li&gt;
+            &lt;li data-content="items[0]"&gt;an item&lt;/li&gt;
+            &lt;li data-content="user/age()"&gt;user/age()&lt;/li&gt;
         &lt;/ol&gt;
     &lt;/body&gt;
 &lt;/html&gt;
@@ -210,7 +210,7 @@ var jsdom = require( 'node-jsdom' ).jsdom;
 jsdom.env(
     '&lt;!doctype html&gt;'
 	+ '&lt;html&gt;'
-	+ '&lt;body&gt;&lt;h1 id="t1" data-tcontent="string:hello"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
+	+ '&lt;body&gt;&lt;h1 id="t1" data-content="string:hello"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
 	+ '&lt;/html&gt;', 
     [ 'http://code.jquery.com/jquery.min.js' ], 
     function( err, window ) {
@@ -260,62 +260,62 @@ jsdom.env(
         </tr>
         <tr>
             <td>metal:define-macro</td>
-            <td>data-mdefine-macro</td>
+            <td>data-define-macro</td>
             <td>Defines a macro</td>
         </tr>
         <tr>
             <td>metal:define-slot</td>
-            <td>data-mdefine-slot</td>
+            <td>data-define-slot</td>
             <td>Defines a slot to make possible to fill it later</td>
         </tr>
         <tr>
             <td>metal:fill-slot</td>
-            <td>data-mfill-slot</td>
+            <td>data-fill-slot</td>
             <td>Fills a slot</td>
         </tr>
         <tr>
             <td>metal:use-macro</td>
-            <td>data-muse-macro</td>
+            <td>data-use-macro</td>
             <td>Invokes a macro</td>
         </tr>
         <tr>
             <td>tal:attributes</td>
-            <td>data-tattributes</td>
+            <td>data-attributes</td>
             <td>Replace the value of one or more attributes</td>
         </tr>
         <tr>
             <td>tal:condition</td>
-            <td>data-tcondition</td>
+            <td>data-condition</td>
             <td>Display or hide nodes depending on a condition</td>
         </tr>
         <tr>
             <td>tal:content</td>
-            <td>data-tcontent</td>
+            <td>data-content</td>
             <td>Replace the content of the element</td>
         </tr>
         <tr>
             <td>tal:define</td>
-            <td>data-tdefine</td>
+            <td>data-define</td>
             <td>Define one or more variables</td>
         </tr>
         <tr>
             <td>tal:on-error</td>
-            <td>data-ton-error</td>
+            <td>data-on-error</td>
             <td>Handle errors</td>
         </tr>
         <tr>
             <td>tal:omit-tag</td>
-            <td>data-tomit-tag</td>
+            <td>data-omit-tag</td>
             <td>Remove an element, leaving the content of the element</td>
         </tr>
         <tr>
             <td>tal:repeat</td>
-            <td>data-trepeat</td>
+            <td>data-repeat</td>
             <td>Repeat an element</td>
         </tr>
         <tr>
             <td>tal:replace</td>
-            <td>data-treplace</td>
+            <td>data-replace</td>
             <td>Replace the content of an element and remove the element leaving the content</td>
         </tr>
     </table>
@@ -384,17 +384,17 @@ zpt.run({
         The order evaluation of attributes in ZPT-JS is not equal than ZPT's. The new order is:
     </p>
     <ol>
-        <li><code>data-trepeat</code></li>
-        <li><code>data-ton-error</code></li>
-        <li><code>data-mdefine-macro</code></li>
-        <li><code>data-tdefine</code></li>
-        <li><code>data-tcondition</code></li>
-        <li><code>data-tomit-tag</code></li>
-        <li><code>data-treplace</code></li>
-        <li><code>data-tattributes</code></li>
-        <li><code>data-tcontent</code></li>
+        <li><code>data-repeat</code></li>
+        <li><code>data-on-error</code></li>
+        <li><code>data-define-macro</code></li>
+        <li><code>data-define</code></li>
+        <li><code>data-condition</code></li>
+        <li><code>data-omit-tag</code></li>
+        <li><code>data-replace</code></li>
+        <li><code>data-attributes</code></li>
+        <li><code>data-content</code></li>
         <li>content</li>
-        <li><code>data-muse-macro</code></li>
+        <li><code>data-use-macro</code></li>
     </ol>
 
     <a id="tales"></a>
@@ -420,7 +420,7 @@ zpt.run({
     <a id="tales.variables"></a>
     <h4>Variables</h4>
     <p>
-        A variable is either predefined, defined via a <code>data-tdefine</code> attribute, or passed in to the template at runtime. The following variables are predefined:
+        A variable is either predefined, defined via a <code>data-define</code> attribute, or passed in to the template at runtime. The following variables are predefined:
     </p>
     <ul>
         <li><code>context</code>. An object with some utility methods. Mainly for internal use.</li>
@@ -429,13 +429,13 @@ zpt.run({
     <p>
         The <code>here</code> variable (the context) is not defined in ZPT-JS; it is implicit. The scope of all variables in dictionary is global. Take a look to <a href="#invocation">Invoking ZPT-JS</a> to understand how you can define variables of the dictionary.
         <br /> 
-        The scope of the variables defined via a <code>data-tdefine</code> attribute is local. An example:
+        The scope of the variables defined via a <code>data-define</code> attribute is local. An example:
     </p>
     <pre>
-&lt;div data-tdefine="a number"&gt;
-    &lt;span data-treplace="a">5&lt;/span&gt;
+&lt;div data-define="a number"&gt;
+    &lt;span data-replace="a">5&lt;/span&gt;
 &lt;/div&gt;
-&lt;span data-treplace="a">null&lt;/span&gt;
+&lt;span data-replace="a">null&lt;/span&gt;
     </pre>
     <p>
     At the first replace the value in <code>number</code> will be used. At the second replace, a <code>null</code> value (the <code>a</code> variable is out of scope).
@@ -443,10 +443,10 @@ zpt.run({
     Global variables are also implemented. Their scope is all document after their definition:
     </p>
     <pre>
-&lt;div data-tdefine="global a number"&gt;
-    &lt;span data-treplace="a">5&lt;/span&gt;
+&lt;div data-define="global a number"&gt;
+    &lt;span data-replace="a">5&lt;/span&gt;
 &lt;/div&gt;
-&lt;span data-treplace="a">5&lt;/span&gt;
+&lt;span data-replace="a">5&lt;/span&gt;
     </pre>
     <p>
         The following variables are defined in ZPT but not in ZPT-JS:
@@ -554,11 +554,11 @@ zpt.run({
         All operators uses lazy evaluation. OR and AND expressions support 2 or more operators. COND expression only support 3. An example:
     </p>
     <ul>
-        <li><code>&lt;p data-tcondition="and: ( exists:pets()/dog() ) ( not:pets()/dog()/badDog() )"&gt;
+        <li><code>&lt;p data-condition="and: ( exists:pets()/dog() ) ( not:pets()/dog()/badDog() )"&gt;
               Good Dog&lt;/p&gt;</code></li>
-        <li><code>&lt;p data-tcondition="or: isFridayNight isSaturday isSunday"&gt;
+        <li><code>&lt;p data-condition="or: isFridayNight isSaturday isSunday"&gt;
               Yeah!&lt;/p&gt;</code></li>
-        <li><code>&lt;p data-tcontent="cond: isFridayNight 'Yeah!' 'Oh!'"&gt;
+        <li><code>&lt;p data-content="cond: isFridayNight 'Yeah!' 'Oh!'"&gt;
               What?&lt;/p&gt;</code></li>
     </ul>
 
@@ -596,10 +596,10 @@ zpt.run({
 &lt;/div&gt;
 
 &lt;div&gt;
-    &lt;div data-tcontent="$('#value1')"&gt;must be 10&lt;/div&gt;
-    &lt;div data-tcontent="$('.values')"&gt;must be 10,20,30&lt;/div&gt;
-    &lt;div data-tcontent="+: $('.values')"&gt;must be 10 + 20 + 30 = 60&lt;/div&gt;
-    &lt;div data-tcontent="+: 100 $( '.values' )"&gt;must be 100 + 10 + 20 + 30 = 160&lt;/div&gt;
+    &lt;div data-content="$('#value1')"&gt;must be 10&lt;/div&gt;
+    &lt;div data-content="$('.values')"&gt;must be 10,20,30&lt;/div&gt;
+    &lt;div data-content="+: $('.values')"&gt;must be 10 + 20 + 30 = 60&lt;/div&gt;
+    &lt;div data-content="+: 100 $( '.values' )"&gt;must be 100 + 10 + 20 + 30 = 160&lt;/div&gt;
 &lt;/div&gt;
     </pre>
 
@@ -615,13 +615,13 @@ zpt.run({
         ZPT-JS register the <em>window</em> object automatically, so global variables defined via javascript can be used easily:
     </p>
     <pre>
-&lt;div data-tcontent="window/globalVar"&gt;a string&lt;/div&gt;
+&lt;div data-content="window/globalVar"&gt;a string&lt;/div&gt;
     </pre>
     <p>
         ZPT-JS also register the <em>context</em> object automatically, so ZPT's configuration is available too:
     </p>
     <pre>
-&lt;div data-tcontent="context/getConf()/externalMacroPrefixURL"&gt;a string&lt;/div&gt;
+&lt;div data-content="context/getConf()/externalMacroPrefixURL"&gt;a string&lt;/div&gt;
     </pre>
     
     <a id="tal"></a>
@@ -630,8 +630,8 @@ zpt.run({
         All TAL statements behave almost exactly as in ZPT, except:
     </p>
     <ul>
-        <li><code>data-tcondition</code> and <code>data-tomit-tag</code>: must cast their expression to a boolean, which follows the rules described for <a href="#tales.not">Not expressions</a>.</li>
-        <li><code>data-treplace</code> and <code>data-tomit-tag</code>: because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are REMOVED when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-treplace</code> and <code>data-tomit-tag</code> inside a macro definition and invoke it. See <a href="#metal">macros</a>.</li>
+        <li><code>data-condition</code> and <code>data-omit-tag</code>: must cast their expression to a boolean, which follows the rules described for <a href="#tales.not">Not expressions</a>.</li>
+        <li><code>data-replace</code> and <code>data-omit-tag</code>: because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are REMOVED when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-replace</code> and <code>data-omit-tag</code> inside a macro definition and invoke it. See <a href="#metal">macros</a>.</li>
     </ul>
 
     <a id="tal.repeat"></a>
@@ -659,19 +659,19 @@ zpt.run({
         &lt;th&gt;Roman&lt;/th&gt;
         &lt;th&gt;Capital Roman&lt;/th&gt;
     &lt;/tr&gt;
-    &lt;tr data-trepeat="item tools"&gt;
-        &lt;td class="value" data-tcontent="item/name"&gt;value&lt;/td&gt;
-        &lt;td class="index" data-tcontent="item-repeat/index()"&gt;index&lt;/td&gt;
-        &lt;td class="number" data-tcontent="item-repeat/number()"&gt;number&lt;/td&gt;
-        &lt;td class="isEven" data-tcontent="item-repeat/even()"&gt;even&lt;/td&gt;
-        &lt;td class="isOdd" data-tcontent="item-repeat/odd()"&gt;odd&lt;/td&gt;
-        &lt;td class="isStart" data-tcontent="item-repeat/start()"&gt;start&lt;/td&gt;
-        &lt;td class="isEnd" data-tcontent="item-repeat/end()"&gt;end&lt;/td&gt;
-        &lt;td class="getLength" data-tcontent="item-repeat/length()"&gt;length&lt;/td&gt;
-        &lt;td class="getLetter" data-tcontent="item-repeat/letter()"&gt;letter&lt;/td&gt;
-        &lt;td class="getCapitalLetter" data-tcontent="item-repeat/Letter()"&gt;capital letter&lt;/td&gt;
-        &lt;td class="getRoman" data-tcontent="item-repeat/roman()"&gt;roman&lt;/td&gt;
-        &lt;td class="getCapitalRoman" data-tcontent="item-repeat/Roman()"&gt;capitalRoman&lt;/td&gt;
+    &lt;tr data-repeat="item tools"&gt;
+        &lt;td class="value" data-content="item/name"&gt;value&lt;/td&gt;
+        &lt;td class="index" data-content="item-repeat/index()"&gt;index&lt;/td&gt;
+        &lt;td class="number" data-content="item-repeat/number()"&gt;number&lt;/td&gt;
+        &lt;td class="isEven" data-content="item-repeat/even()"&gt;even&lt;/td&gt;
+        &lt;td class="isOdd" data-content="item-repeat/odd()"&gt;odd&lt;/td&gt;
+        &lt;td class="isStart" data-content="item-repeat/start()"&gt;start&lt;/td&gt;
+        &lt;td class="isEnd" data-content="item-repeat/end()"&gt;end&lt;/td&gt;
+        &lt;td class="getLength" data-content="item-repeat/length()"&gt;length&lt;/td&gt;
+        &lt;td class="getLetter" data-content="item-repeat/letter()"&gt;letter&lt;/td&gt;
+        &lt;td class="getCapitalLetter" data-content="item-repeat/Letter()"&gt;capital letter&lt;/td&gt;
+        &lt;td class="getRoman" data-content="item-repeat/roman()"&gt;roman&lt;/td&gt;
+        &lt;td class="getCapitalRoman" data-content="item-repeat/Roman()"&gt;capitalRoman&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
     </pre>
@@ -689,16 +689,16 @@ zpt.run({
         You can iterate through lists using loops:
     </p>
     <ul>
-        <li><code>data-trepeat="c [10 20 30]"</code> iterates using <code>c</code> through 10, 20 and 30</li>
-        <li><code>data-trepeat="mixed ['yes!' 'no!' aNumber]"</code> iterates using <code>mixed</code></li>
+        <li><code>data-repeat="c [10 20 30]"</code> iterates using <code>c</code> through 10, 20 and 30</li>
+        <li><code>data-repeat="mixed ['yes!' 'no!' aNumber]"</code> iterates using <code>mixed</code></li>
     </ul>
     <p>
         Another ways of using lists is as range expressions:
     </p>
     <ul>
-        <li><code>data-trepeat="c [1:5]"</code> iterates using <code>c</code> through 1,2,3,4 and 5</li>
-        <li><code>data-trepeat="c [1:7:2]"</code> iterates using <code>c</code> through 1,3,5 and 7</li>
-        <li><code>data-trepeat="c [:5]"</code> iterates using <code>c</code> through 0,1,2,3,4 and 5</li>
+        <li><code>data-repeat="c [1:5]"</code> iterates using <code>c</code> through 1,2,3,4 and 5</li>
+        <li><code>data-repeat="c [1:7:2]"</code> iterates using <code>c</code> through 1,3,5 and 7</li>
+        <li><code>data-repeat="c [:5]"</code> iterates using <code>c</code> through 0,1,2,3,4 and 5</li>
     </ul>
     
     <p>
@@ -726,7 +726,7 @@ zpt.run({
     <h3>Attributes</h3>
     
     <p>
-        ZPT's version of <code>data-tattributes</code> forces to uses key/values pairs. ZPT-JS also allows to use javascript objects. If we define a dictionary this way:
+        ZPT's version of <code>data-attributes</code> forces to uses key/values pairs. ZPT-JS also allows to use javascript objects. If we define a dictionary this way:
     </p>
     <pre>
 var dictionary = { 
@@ -740,7 +740,7 @@ var dictionary = {
         ...we can use this in a template:
     </p>
     <pre>
-&lt;textarea data-tattributes="placeholder 'Write something here!';
+&lt;textarea data-attributes="placeholder 'Write something here!';
                             textareaAttrs;
                             maxlength 200"&gt;&lt;/textarea&gt;
     </pre>
@@ -757,9 +757,9 @@ var dictionary = {
         Local macros are defined at the same HTML file where they are invoked. An example of definition of a local macro:
     </p>
     <pre>
-&lt;ul data-mdefine-macro="list"&gt;
-    &lt;li data-trepeat="item items"&gt;
-        &lt;span data-tcontent="item"&gt;An item&lt;/span&gt;
+&lt;ul data-define-macro="list"&gt;
+    &lt;li data-repeat="item items"&gt;
+        &lt;span data-content="item"&gt;An item&lt;/span&gt;
     &lt;/li&gt;
 &lt;/ul&gt;
     </pre>
@@ -767,7 +767,7 @@ var dictionary = {
         That macro generates an unordered list iterating through the <code>items</code> variable. Let's invoke them; to do this, the next HTML code must be at the same file.
     </p>
     <pre>
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list'"&gt;
+&lt;div data-define="items [10 20 30]" data-use-macro="'list'"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
@@ -775,7 +775,7 @@ var dictionary = {
         ZPT-JS allows to uses expressions when using macros. The next HTML code invokes the same macro if the value of <code>listMacro</code> variable is <code>list</code>:
     </p>
     <pre>
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'listMacro'"&gt;
+&lt;div data-define="items [10 20 30]" data-use-macro="'listMacro'"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
@@ -786,7 +786,7 @@ var dictionary = {
         External macros are defined at a different page that where they are invoked. They only differ how they are invoked; if we want to invoke the macro <code>list</code> defined in <code>macros.html</code> file:
     </p>
     <pre>
-&lt;div data-tdefine="items [10 20 30]" data-muse-macro="'list@macros.html'"&gt;
+&lt;div data-define="items [10 20 30]" data-use-macro="'list@macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
@@ -808,7 +808,7 @@ zpt.run({
         Because external macro files must be preloaded before the template is rendered, ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
     </p>
     <pre>
-&lt;div data-muse-macro="anObject/templateName"&gt;
+&lt;div data-use-macro="anObject/templateName"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
@@ -846,7 +846,7 @@ zpt.run({
         And in your HTML code:
     </p>
     <pre>
-&lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
+&lt;div data-use-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
     </pre>
@@ -993,14 +993,14 @@ zpt.run({
     &lt;/head&gt;
     &lt;body&gt;
         &lt;h1&gt;Some I18n expressions&lt;/h1&gt;
-        &lt;ol data-ilanguage="'en'" data-idomain="i18nBundle"&gt;
+        &lt;ol data-language="'en'" data-domain="i18nBundle"&gt;
             &lt;li&gt;
                ¡Hola mundo! = 
-               &lt;span data-tcontent="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
+               &lt;span data-content="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
             &lt;/li&gt;
             &lt;li&gt;
                Él ha encontrado 10 resultados = 
-                &lt;span data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 10 )"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
+                &lt;span data-content="tr: 'Results msg' ( GENDER 'male'; RES 10 )"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
             &lt;/li&gt;
         &lt;/ol&gt;
     &lt;/body&gt;
@@ -1018,8 +1018,8 @@ zpt.run({
                 <li>An instance of <code>I18nBundle</code> class. An instance of this class groups an instance of <code>I18n</code> class per supported language. They are useful to support using several languages in a template.</li>
             </ul>    
         </li>
-        <li>The <code>data-idomain</code> attribute defines the source of i18n resources to use. It can be one or several instances of <code>I18n</code> or <code>I18nBundle</code> classes or an array of them.</li>
-        <li>The <code>data-ilanguage</code> attribute defines the current language to use. It is needed when <code>data-idomain</code> contains a <code>I18nBundle</code> instance, it is useless when we use <code>I18n</code> instances.</li>
+        <li>The <code>data-domain</code> attribute defines the source of i18n resources to use. It can be one or several instances of <code>I18n</code> or <code>I18nBundle</code> classes or an array of them.</li>
+        <li>The <code>data-language</code> attribute defines the current language to use. It is needed when <code>data-domain</code> contains a <code>I18nBundle</code> instance, it is useless when we use <code>I18n</code> instances.</li>
         <li>The <code>tr</code> expression  evaluates an expression but then it searches that value into the messages.</li>
         <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg' ( GENDER 'male'; RES 10 )</code> is a little more complex:
             <ol>
@@ -1036,50 +1036,50 @@ zpt.run({
     </p>
     <ul>
         <li>
-            <code>&lt;img src="image.png" data-tattributes="title tr: 'Hello world!'"&gt;</code> adds an i18n title to the image.
+            <code>&lt;img src="image.png" data-attributes="title tr: 'Hello world!'"&gt;</code> adds an i18n title to the image.
         </li>
         <li>
-            <code>&lt;li data-tdefine="msg tr: 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
+            <code>&lt;li data-define="msg tr: 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
         </li>
         <li>
-            <code>&lt;body data-ton-error="tr: 'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
+            <code>&lt;body data-on-error="tr: 'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
         </li>
-        <li><code>&lt;span data-treplace="tr: 'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
+        <li><code>&lt;span data-replace="tr: 'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
     </ul>
     <p>
-        Some examples of valid <code>data-idomain</code> attributes:
+        Some examples of valid <code>data-domain</code> attributes:
     </p>
     <ul>
-        <li><code>data-idomain="i18nES1"</code> Defines an instance of <code>I18n</code> class as the source of i18n strings.</li>
-        <li><code>data-idomain="i18nES2 i18nES1"</code> Defines 2 instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the <em>i18nES2</em> instance first; if the string is not found will be use <em>i18nES1</em> instance.</li>
-        <li><code>data-idomain="i18nBundle1"</code> Defines an instance of <code>I18nBundle</code> class as the source of i18n strings.</li>
-        <li><code>data-idomain="i18nBundle2 i18nBundle1"</code>Defines 2 instances of <code>I18nBundle</code> class as the source of i18n strings.</li>
-        <li><code>data-idomain="i18nESArray"</code> Defines an array of instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the first instance in the array; if the string is not found will be use the next instance until it is found.</li>
+        <li><code>data-domain="i18nES1"</code> Defines an instance of <code>I18n</code> class as the source of i18n strings.</li>
+        <li><code>data-domain="i18nES2 i18nES1"</code> Defines 2 instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the <em>i18nES2</em> instance first; if the string is not found will be use <em>i18nES1</em> instance.</li>
+        <li><code>data-domain="i18nBundle1"</code> Defines an instance of <code>I18nBundle</code> class as the source of i18n strings.</li>
+        <li><code>data-domain="i18nBundle2 i18nBundle1"</code>Defines 2 instances of <code>I18nBundle</code> class as the source of i18n strings.</li>
+        <li><code>data-domain="i18nESArray"</code> Defines an array of instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the first instance in the array; if the string is not found will be use the next instance until it is found.</li>
     </ul>
     
     <h4>Working with domains</h4>
     <p>
-        In the previous example the domain was a simple <code>I18nBundle</code> instance. This forces to use big maps with all the messages of one language. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>I18nBundle</code> instances, so the messages will be searched in the same order.
+        In the previous example the domain was a simple <code>I18nBundle</code> instance. This forces to use big maps with all the messages of one language. This can be awful if the amount of messages is big. <code>data-domain</code> tag supports also a list of <code>I18nBundle</code> instances, so the messages will be searched in the same order.
     </p>
     <p>
-        Therefore, <code>data-idomain="i18nBundle1 i18nBundle2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
+        Therefore, <code>data-domain="i18nBundle1 i18nBundle2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
     </p>
     
     <p>
-        <code>data-idomain</code> also supports nested definitions:
+        <code>data-domain</code> also supports nested definitions:
     </p>
     <pre>
-&lt;div data-idomain="i18nBundle1"&gt;
-   &lt;span data-tcontent="tr: 'Hello world!'"&gt;
+&lt;div data-domain="i18nBundle1"&gt;
+   &lt;span data-content="tr: 'Hello world!'"&gt;
         ¡Hola mundo!
    &lt;/span&gt;
-   &lt;span data-idomain="i18nBundle2" data-tcontent="tr: 'Hello world!'"&gt;
+   &lt;span data-domain="i18nBundle2" data-content="tr: 'Hello world!'"&gt;
         ¡¡¡Hola mundo 2!!!
    &lt;/span&gt;
 &lt;/div&gt; 
     </pre>
     <p>
-        The first <code>data-tcontent</code> will search only in <code>i18nBundle1</code>. The second one will search first in <code>i18nBundle2</code> and if it is not found will search in <code>i18nBundle1</code>.
+        The first <code>data-content</code> will search only in <code>i18nBundle1</code>. The second one will search first in <code>i18nBundle2</code> and if it is not found will search in <code>i18nBundle1</code>.
     </p>
     
     <h4>Loading messages from JSON files</h4>
@@ -1134,13 +1134,13 @@ zpt.run({
     </p>
     <ul>
         <li>
-            <code>&lt;span data-tcontent="trNumber: 1355.23"&gt;</code> formats that number depending on the active i18n domain (<em>1,355.23</em> in english, <em>1.355,23</em> in spanish...).
+            <code>&lt;span data-content="trNumber: 1355.23"&gt;</code> formats that number depending on the active i18n domain (<em>1,355.23</em> in english, <em>1.355,23</em> in spanish...).
         </li>
         <li>
-            <code>&lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits (<em>1,355.236</em> in english, <em>1.355,236</em> in spanish...).
+            <code>&lt;span data-content="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits (<em>1,355.236</em> in english, <em>1.355,236</em> in spanish...).
         </li>
         <li>
-            <code>&lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits and a minimum of 6 integer digits (<em>001,355.236</em> in english, <em>001.355,236</em> in spanish...).
+            <code>&lt;span data-content="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits and a minimum of 6 integer digits (<em>001,355.236</em> in english, <em>001.355,236</em> in spanish...).
         </li>
     </ul>
     
@@ -1154,10 +1154,10 @@ zpt.run({
     </p>
     <ul>
         <li>
-            <code>&lt;span data-tcontent="trCurrency: 'EUR' 1355.23"&gt;</code> formats that number depending on the active i18n domain and using that currency (<em>€ 1,355.23</em> in english, <em>1.355,23 €</em> in spanish...).
+            <code>&lt;span data-content="trCurrency: 'EUR' 1355.23"&gt;</code> formats that number depending on the active i18n domain and using that currency (<em>€ 1,355.23</em> in english, <em>1.355,23 €</em> in spanish...).
         </li>
         <li>
-            <code>&lt;span data-tcontent="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;</code> uses the name of the currency (<em>1,355.23 US dollars</em> in english, <em>1.355,23 € dólares estadounidenses</em> in spanish...).
+            <code>&lt;span data-content="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;</code> uses the name of the currency (<em>1,355.23 US dollars</em> in english, <em>1.355,23 € dólares estadounidenses</em> in spanish...).
         </li>
     </ul>
     
@@ -1171,13 +1171,13 @@ zpt.run({
     </p>
     <ul>
         <li>
-            <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;</code> formats that date depending on the active i18n domain (<em>12/21/2012</em> in english, <em>21/12/2012</em> in spanish...).
+            <code>&lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;</code> formats that date depending on the active i18n domain (<em>12/21/2012</em> in english, <em>21/12/2012</em> in spanish...).
         </li>
         <li>
-            <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) (  weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;</code> formats that date with some options (<em>Friday, December 21, 2012</em> in english, <em>viernes, 21 de diciembre de 2012</em> in spanish...).
+            <code>&lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) (  weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;</code> formats that date with some options (<em>Friday, December 21, 2012</em> in english, <em>viernes, 21 de diciembre de 2012</em> in spanish...).
         </li>
         <li>
-            <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( hour 'numeric'; minute 'numeric';  second 'numeric' )"&gt;</code> formats that date with some options (<em>4:00:00 AM</em> in english, <em>4:00:00</em> in spanish...).
+            <code>&lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( hour 'numeric'; minute 'numeric';  second 'numeric' )"&gt;</code> formats that date with some options (<em>4:00:00 AM</em> in english, <em>4:00:00</em> in spanish...).
         </li>
     </ul>
     

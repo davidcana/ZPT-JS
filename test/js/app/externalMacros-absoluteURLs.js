@@ -27,7 +27,7 @@ QUnit.test( "Simple macros test", function( assert ) {
         <p>
     Before use macro
 </p>
-<b style="display: none;" data-muse-macro="copyright/externalMacros-definitions.html">
+<b style="display: none;" data-use-macro="copyright/externalMacros-definitions.html">
     Macro goes here
 </b>
 <p data-mmacro="copyright">
@@ -36,7 +36,7 @@ QUnit.test( "Simple macros test", function( assert ) {
 <p>
     In the middle of 2 macros
 </p>
-<b style="display: none;" data-muse-macro="copyright/externalMacros-definitions.html">
+<b style="display: none;" data-use-macro="copyright/externalMacros-definitions.html">
     Macro goes here
 </b>
 <p data-mmacro="copyright">

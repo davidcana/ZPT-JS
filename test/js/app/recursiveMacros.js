@@ -50,100 +50,100 @@ zpt.run({
 QUnit.test( "Simple macros test", function( assert ) {
     
     var t1 = `
-<div data-muse-macro="'list'" style="display: none;">
+<div data-use-macro="'list'" style="display: none;">
     First macro call here
 </div>
 <ul data-mmacro="list">
-	<li data-tdefine="isList (eq: 'list' item/type)" data-trepeat="item items" style="display: none;">
-		<div data-tcondition="isList">
-		    <span data-tcontent="item/id">An item</span>
-		    <div data-tdefine="items item/items">
-		        <div data-muse-macro="'list'">
+	<li data-define="isList (eq: 'list' item/type)" data-repeat="item items" style="display: none;">
+		<div data-condition="isList">
+		    <span data-content="item/id">An item</span>
+		    <div data-define="items item/items">
+		        <div data-use-macro="'list'">
 		            Nested macro call here
 		        </div>
 		    </div>
 		</div>
-		<div data-tcondition="not: isList" data-tcontent="item">An item</div>
+		<div data-condition="not: isList" data-content="item">An item</div>
 	</li>
-	<li data-tdefine="isList (eq: 'list' item/type)" data-qdup="1">
-		<div data-tcondition="isList" style="display: none;">
-		    <span data-tcontent="item/id">An item</span>
-		    <div data-tdefine="items item/items">
-		        <div data-muse-macro="'list'">
+	<li data-define="isList (eq: 'list' item/type)" data-qdup="1">
+		<div data-condition="isList" style="display: none;">
+		    <span data-content="item/id">An item</span>
+		    <div data-define="items item/items">
+		        <div data-use-macro="'list'">
 		            Nested macro call here
 		        </div>
 		    </div>
 		</div>
-		<div data-tcondition="not: isList" data-tcontent="item">item0</div>
+		<div data-condition="not: isList" data-content="item">item0</div>
 	</li>
-	<li data-tdefine="isList (eq: 'list' item/type)" data-qdup="1">
-		<div data-tcondition="isList" style="display: none;">
-		    <span data-tcontent="item/id">An item</span>
-		    <div data-tdefine="items item/items">
-		        <div data-muse-macro="'list'">
+	<li data-define="isList (eq: 'list' item/type)" data-qdup="1">
+		<div data-condition="isList" style="display: none;">
+		    <span data-content="item/id">An item</span>
+		    <div data-define="items item/items">
+		        <div data-use-macro="'list'">
 		            Nested macro call here
 		        </div>
 		    </div>
 		</div>
-		<div data-tcondition="not: isList" data-tcontent="item">item1</div>
+		<div data-condition="not: isList" data-content="item">item1</div>
 	</li>
-	<li data-tdefine="isList (eq: 'list' item/type)" data-qdup="1">
-		<div data-tcondition="isList">
-		    <span data-tcontent="item/id">item2</span>
-		    <div data-tdefine="items item/items">
-		        <div data-muse-macro="'list'" style="display: none;">
+	<li data-define="isList (eq: 'list' item/type)" data-qdup="1">
+		<div data-condition="isList">
+		    <span data-content="item/id">item2</span>
+		    <div data-define="items item/items">
+		        <div data-use-macro="'list'" style="display: none;">
 		            Nested macro call here
 		        </div>
 				<ul data-mmacro="list">
-					<li data-tdefine="isList (eq: 'list' item/type)" data-trepeat="item items" style="display: none;">
-						<div data-tcondition="isList">
-							<span data-tcontent="item/id">An item</span>
-							<div data-tdefine="items item/items">
-								<div data-muse-macro="'list'">
+					<li data-define="isList (eq: 'list' item/type)" data-repeat="item items" style="display: none;">
+						<div data-condition="isList">
+							<span data-content="item/id">An item</span>
+							<div data-define="items item/items">
+								<div data-use-macro="'list'">
 									Nested macro call here
 								</div>
 							</div>
 						</div>
-						<div data-tcondition="not: isList" data-tcontent="item">An item</div>
+						<div data-condition="not: isList" data-content="item">An item</div>
 					</li>
-					<li data-tdefine="isList (eq: 'list' item/type)" data-qdup="1">
-						<div data-tcondition="isList" style="display: none;">
-							<span data-tcontent="item/id">An item</span>
-							<div data-tdefine="items item/items">
-								<div data-muse-macro="'list'">
+					<li data-define="isList (eq: 'list' item/type)" data-qdup="1">
+						<div data-condition="isList" style="display: none;">
+							<span data-content="item/id">An item</span>
+							<div data-define="items item/items">
+								<div data-use-macro="'list'">
 									Nested macro call here
 								</div>
 							</div>
 						</div>
-						<div data-tcondition="not: isList" data-tcontent="item">item21</div>
+						<div data-condition="not: isList" data-content="item">item21</div>
 					</li>
-					<li data-tdefine="isList (eq: 'list' item/type)" data-qdup="1">
+					<li data-define="isList (eq: 'list' item/type)" data-qdup="1">
 		
-						<div data-tcondition="isList" style="display: none;">
-							<span data-tcontent="item/id">An item</span>
-							<div data-tdefine="items item/items">
-								<div data-muse-macro="'list'">
+						<div data-condition="isList" style="display: none;">
+							<span data-content="item/id">An item</span>
+							<div data-define="items item/items">
+								<div data-use-macro="'list'">
 									Nested macro call here
 								</div>
 							</div>
 						</div>
-						<div data-tcondition="not: isList" data-tcontent="item">item22</div>
+						<div data-condition="not: isList" data-content="item">item22</div>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<div data-tcondition="not: isList" data-tcontent="item" style="display: none;">An item</div>
+		<div data-condition="not: isList" data-content="item" style="display: none;">An item</div>
 	</li>
-	<li data-tdefine="isList (eq: 'list' item/type)" data-qdup="1">		
-		<div data-tcondition="isList" style="display: none;">
-		    <span data-tcontent="item/id">An item</span>
-		    <div data-tdefine="items item/items">
-		        <div data-muse-macro="'list'">
+	<li data-define="isList (eq: 'list' item/type)" data-qdup="1">		
+		<div data-condition="isList" style="display: none;">
+		    <span data-content="item/id">An item</span>
+		    <div data-define="items item/items">
+		        <div data-use-macro="'list'">
 		            Nested macro call here
 		        </div>
 		    </div>
 		</div>
-		<div data-tcondition="not: isList" data-tcontent="item">item3</div>
+		<div data-condition="not: isList" data-content="item">item3</div>
 	</li>
 </ul>
     `;

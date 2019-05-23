@@ -53,7 +53,7 @@ QUnit.test( "After on-error tag test", function( assert ) {
 QUnit.test( "on-error object tag test", function( assert ) {
     
     dictionary.treatError = function( error ){
-        return error.type + '/' + error.value + '/' + error.traceback.substring( 0, 50 );
+        return error.type + '/' + error.value + '/' + error.traceback.substring( 0, 44 );
     };
     
     zpt.run({
@@ -65,8 +65,8 @@ QUnit.test( "on-error object tag test", function( assert ) {
     assert.equal( $('#t4-2').text() , "1" );
     //assert.equal( $('#t4-3').text() , "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' of null" );
     assert.ok( 
-        $('#t4-3').text() == "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' of null" 
-        || $('#t4-3').text() == "TypeError/document.getElementById(...) is null/fireError@http://127.0.0.1:9966/on-error.js:28638:"
+        $('#t4-3').text() == "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' o" 
+        || $('#t4-3').text() == "TypeError/document.getElementById(...) is null/fireError@http://127.0.0.1:9966/on-error.js:"
     );
     assert.equal( $('#t4-4').text() , "yes" );
     assert.equal( $('#t4-5').text() , "Infinity" );

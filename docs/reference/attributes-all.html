@@ -10,11 +10,11 @@
         <link rel="stylesheet" type="text/css" href="../docs.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - All the attributes</h1>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
 
                 <p>
                     The name of attributes are not the same because if they were the resulting HTML documents will not be well formed. The list of attributes with their equivalences are:
@@ -27,62 +27,62 @@
                     </tr>
                     <tr>
                         <td>metal:define-macro</td>
-                        <td>data-mdefine-macro</td>
+                        <td>data-define-macro</td>
                         <td>Defines a macro</td>
                     </tr>
                     <tr>
                         <td>metal:define-slot</td>
-                        <td>data-mdefine-slot</td>
+                        <td>data-define-slot</td>
                         <td>Defines a slot to make possible to fill it later</td>
                     </tr>
                     <tr>
                         <td>metal:fill-slot</td>
-                        <td>data-mfill-slot</td>
+                        <td>data-fill-slot</td>
                         <td>Fills a slot</td>
                     </tr>
                     <tr>
                         <td>metal:use-macro</td>
-                        <td>data-muse-macro</td>
+                        <td>data-use-macro</td>
                         <td>Invokes a macro</td>
                     </tr>
                     <tr>
                         <td>tal:attributes</td>
-                        <td>data-tattributes</td>
+                        <td>data-attributes</td>
                         <td>Replace the value of one or more attributes</td>
                     </tr>
                     <tr>
                         <td>tal:condition</td>
-                        <td>data-tcondition</td>
+                        <td>data-condition</td>
                         <td>Display or hide nodes depending on a condition</td>
                     </tr>
                     <tr>
                         <td>tal:content</td>
-                        <td>data-tcontent</td>
+                        <td>data-content</td>
                         <td>Replace the content of the element</td>
                     </tr>
                     <tr>
                         <td>tal:define</td>
-                        <td>data-tdefine</td>
+                        <td>data-define</td>
                         <td>Define one or more variables</td>
                     </tr>
                     <tr>
                         <td>tal:on-error</td>
-                        <td>data-ton-error</td>
+                        <td>data-on-error</td>
                         <td>Handle errors</td>
                     </tr>
                     <tr>
                         <td>tal:omit-tag</td>
-                        <td>data-tomit-tag</td>
+                        <td>data-omit-tag</td>
                         <td>Remove an element, leaving the content of the element</td>
                     </tr>
                     <tr>
                         <td>tal:repeat</td>
-                        <td>data-trepeat</td>
+                        <td>data-repeat</td>
                         <td>Repeat an element</td>
                     </tr>
                     <tr>
                         <td>tal:replace</td>
-                        <td>data-treplace</td>
+                        <td>data-replace</td>
                         <td>Replace the content of an element and remove the element leaving the content</td>
                     </tr>
                 </table>

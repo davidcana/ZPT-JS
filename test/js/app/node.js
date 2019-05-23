@@ -42,7 +42,7 @@ jsdom.env(
 	        <p>
 	            Before use macro
 	        </p>
-	        <b data-muse-macro="'copyright'" style="display: none;">
+	        <b data-use-macro="'copyright'" style="display: none;">
 	            Macro goes here
 	        </b><p data-mmacro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
@@ -50,7 +50,7 @@ jsdom.env(
 	        <p>
 	            In the middle of 2 macros
 	        </p>
-	        <b data-muse-macro="'copyright'" style="display: none;">
+	        <b data-use-macro="'copyright'" style="display: none;">
 	            Macro goes here
 	        </b><p data-mmacro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
@@ -80,7 +80,7 @@ jsdom.env(
         
         assert( $('#t7-1').html() , "(should omit)" );
         assert( $('#t7-2').html() , "not: lt: 1 0 (should omit)" );
-        assert( $('#t7-3').html() , "<span data-tomit-tag=\"lt: 1 0\">lt: 1 0 (should not omit)</span>" );
+        assert( $('#t7-3').html() , "<span data-omit-tag=\"lt: 1 0\">lt: 1 0 (should not omit)</span>" );
         
         assert( $('#t8-1').text() , "1" );
         assert( $('#t8-2').text() , "Oh, noooo!" );

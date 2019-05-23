@@ -10,8 +10,8 @@
         <link rel="stylesheet" type="text/css" href="docs.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>Zenon Page Templates - JS (ZPT-JS)</h1>
                 <p class="subheader">
                     A javascript implementation of <strong>Zope Page Templates (ZPT)</strong>.
@@ -20,7 +20,7 @@
                     <a href="tutorial/gettingStarted.html" title="A quick start guide for ZPT-JS">Getting started</a>
                 </p>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
                 <h2>What is ZPT-JS</h2>
                 <p>
                     <strong>Zenon Page Templates - JS (ZPT-JS)</strong> is a <em>Javascript API</em> that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes. <strong>ZPT-JS</strong> is a javascript implementation of Zope Page Templates (ZPT). It is not a fully compliant implementation: there are some differences. Take a look at <a href="http://docs.zope.org/zope2/zope2book/ZPT.html">Zope2 book</a> to learn about <em>Zope Page Templates</em>.
@@ -60,7 +60,7 @@
                 </ul>
 
                 <p>
-                    A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way <em>tal:content</em> attribute is replaced by <em>data-tcontent</em>. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
+                    A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way <em>tal:content</em> attribute is replaced by <em>data-content</em>. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
                 </p>
             </article>
         </div>

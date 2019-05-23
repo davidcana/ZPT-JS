@@ -122,7 +122,7 @@ function conditionTest( assert, preffix ) {
     assert.equal( $('#t' + preffix + '-2-8').html() , "a name" );
     assert.equal( $('#t' + preffix + '-2-9').html().trim() , "Bob" );
     assert.ok( $('#t' + preffix + '-2-9').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-10').html().trim() , "<span data-treplace=\"user/name\">a name</span>" );
+    assert.equal( $('#t' + preffix + '-2-10').html().trim() , "<span data-replace=\"user/name\">a name</span>" );
     assert.notOk( $('#t' + preffix + '-2-10').is(':visible') );
 }
 

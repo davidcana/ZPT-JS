@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Comparison expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,13 +22,13 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 comparison_expressions ::= ( 'eq:' | 'gt:' | 'lt:' | 'in:' ) expression expression [ expression ]*
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     The available comparison expressions are:
                 </p>
@@ -43,33 +43,33 @@ comparison_expressions ::= ( 'eq:' | 'gt:' | 'lt:' | 'in:' ) expression expressi
                     All operators uses lazy evaluation. All expressions support 2 or more operators. Parenthesis can be used.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     This expressions does not exist in ZPT.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
-                    Some examples in <em>data-tcondition</em>:
+                    Some examples in <em>data-condition</em>:
                 </p>
                 
                 <pre class="brush: html">
-&lt;p data-tcondition="eq: assets liabilities anObject"&gt;
+&lt;p data-condition="eq: assets liabilities anObject"&gt;
     true if assets, liabilities and anObject are all equals
 &lt;/p&gt;
-&lt;p data-tcondition="gt: 10 ( +: children pets )"&gt;
+&lt;p data-condition="gt: 10 ( +: children pets )"&gt;
     true if 10 &gt; ( children + pets)
 &lt;/p&gt;
-&lt;p data-tcondition="lt: 10 ( +: children pets )"&gt;
+&lt;p data-condition="lt: 10 ( +: children pets )"&gt;
     true if 10 &lt; ( children + pets)
 &lt;/p&gt;
-&lt;p data-tcondition="in: value 'option1' 'option2' 'option3'"&gt;
+&lt;p data-condition="in: value 'option1' 'option2' 'option3'"&gt;
     true if value is 'option1', 'option2' or 'option3'
 &lt;/p&gt;
-&lt;p data-tcondition="in: value array"&gt;
+&lt;p data-condition="in: value array"&gt;
     true if value is an item of array
 &lt;/p&gt;
-&lt;p data-tcondition="in: value 'option1' 'option2' array"&gt;
+&lt;p data-condition="in: value 'option1' 'option2' array"&gt;
     true if value is 'option1', 'option2' or an item of array
 &lt;/p&gt;
                 </pre>

@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - I18nDomain</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= expression [ expression ]*
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-idomain</em> statement defines one or more expressions that evaluate to one or more sources of i18n resources. If only one expression is defined this is the source of i18n resources; if more than one expression is defined ZPT-JS will look for the resources using the order of the list of expressions: it will try to find the resource in the first expression, if it is not found it will try with the second and so on.
+                    The <em>data-domain</em> statement defines one or more expressions that evaluate to one or more sources of i18n resources. If only one expression is defined this is the source of i18n resources; if more than one expression is defined ZPT-JS will look for the resources using the order of the list of expressions: it will try to find the resource in the first expression, if it is not found it will try with the second and so on.
                 </p>
                 
                 <p>
@@ -61,7 +61,7 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    <em>I18nBundle</em> class is a little bit more complex. It groups several <em>I18n</em> instances with the same translations using different languages. The constructor of <em>I18nBundle</em> class accepts one or more <em>I18n</em> instances. ZPT-JS will use the <em>I18n</em> instance depending of the value defined using a <a href="attributes-I18nLanguage.html">data-ilanguage</a> statement. An example:
+                    <em>I18nBundle</em> class is a little bit more complex. It groups several <em>I18n</em> instances with the same translations using different languages. The constructor of <em>I18nBundle</em> class accepts one or more <em>I18n</em> instances. ZPT-JS will use the <em>I18n</em> instance depending of the value defined using a <a href="attributes-I18nLanguage.html">data-language</a> statement. An example:
                 </p>
                 <pre class="brush: js">
 var zpt = require( 'zpt' );
@@ -99,17 +99,17 @@ zpt.run({
                     ZPT-JS uses the <a href="expressions-i18n.html">tr</a> expression to make it easy to translate text, number, dates...
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     This statement does not exist in ZPT.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Using an <em>I18n</em> instance:
                 </p>
                 <pre class="brush: html">
-&lt;div data-idomain="i18nES"&gt;
+&lt;div data-domain="i18nES"&gt;
     ...
 &lt;/div&gt;
                 </pre>
@@ -118,7 +118,7 @@ zpt.run({
                     Using 2 <em>I18n</em> instances:
                 </p>
                 <pre class="brush: html">
-&lt;div data-idomain="i18nES2 i18nES1"&gt;
+&lt;div data-domain="i18nES2 i18nES1"&gt;
     ...
 &lt;/div&gt;
                 </pre>
@@ -127,7 +127,7 @@ zpt.run({
                     Using an <em>I18nBundle</em> instance:
                 </p>
                 <pre class="brush: html">
-&lt;div data-idomain="i18nBundle"&gt;
+&lt;div data-domain="i18nBundle"&gt;
     ...
 &lt;/div&gt;
                 </pre>
@@ -136,7 +136,7 @@ zpt.run({
                     Using 2 <em>I18nBundle</em> instances:
                 </p>
                 <pre class="brush: html">
-&lt;div data-idomain="i18nBundle2 i18nBundle1"&gt;
+&lt;div data-domain="i18nBundle2 i18nBundle1"&gt;
     ...
 &lt;/div&gt;
                 </pre>

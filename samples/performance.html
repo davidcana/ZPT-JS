@@ -8,16 +8,16 @@
     <body>
         <h2>Some statements</h2>
         <ol id="statements">
-            <li data-tcontent="cond: ( eq: number1 number100 ) 'Not working!' 'It works!'">xxx</li>
-            <li data-tcontent="user/name">xxx</li>
-            <li data-tcontent="string: help my ${user/name}">xxx</li>
-            <li data-tcontent="doggy">not false</li>
-            <li data-tcontent="not: doggy">not false</li>
-            <li data-tcontent="eq: number1 number100">not true</li>
-            <li data-tcontent="user/name | string:no friends">any friends?</li>
-            <li data-tcontent="user2/name | string:no friends">any friends?</li>
-            <li data-tcontent="user/age()">user/age()</li>
-            <li data-tcontent="items[0]">an item</li>
+            <li data-content="cond: ( eq: number1 number100 ) 'Not working!' 'It works!'">xxx</li>
+            <li data-content="user/name">xxx</li>
+            <li data-content="string: help my ${user/name}">xxx</li>
+            <li data-content="doggy">not false</li>
+            <li data-content="not: doggy">not false</li>
+            <li data-content="eq: number1 number100">not true</li>
+            <li data-content="user/name | string:no friends">any friends?</li>
+            <li data-content="user2/name | string:no friends">any friends?</li>
+            <li data-content="user/age()">user/age()</li>
+            <li data-content="items[0]">an item</li>
         </ol>
         
         <h2>Short loop</h2>
@@ -36,19 +36,19 @@
                 <th>Roman</th>
                 <th>Capital Roman</th>
             </tr>
-            <tr data-trepeat="item tools">
-                <td data-tcontent="item/name">value</td>
-                <td data-tcontent="item-repeat/index()">index</td>
-                <td data-tcontent="item-repeat/number()">number</td>
-                <td data-tcontent="item-repeat/even()">even</td>
-                <td data-tcontent="item-repeat/odd()">odd</td>
-                <td data-tcontent="item-repeat/start()">start</td>
-                <td data-tcontent="item-repeat/end()">end</td>
-                <td data-tcontent="item-repeat/length()">length</td>
-                <td data-tcontent="item-repeat/letter()">letter</td>
-                <td data-tcontent="item-repeat/Letter()">capital letter</td>
-                <td data-tcontent="item-repeat/roman()">roman</td>
-                <td data-tcontent="item-repeat/Roman()">capitalRoman</td>
+            <tr data-repeat="item tools">
+                <td data-content="item/name">value</td>
+                <td data-content="item-repeat/index()">index</td>
+                <td data-content="item-repeat/number()">number</td>
+                <td data-content="item-repeat/even()">even</td>
+                <td data-content="item-repeat/odd()">odd</td>
+                <td data-content="item-repeat/start()">start</td>
+                <td data-content="item-repeat/end()">end</td>
+                <td data-content="item-repeat/length()">length</td>
+                <td data-content="item-repeat/letter()">letter</td>
+                <td data-content="item-repeat/Letter()">capital letter</td>
+                <td data-content="item-repeat/roman()">roman</td>
+                <td data-content="item-repeat/Roman()">capitalRoman</td>
             </tr>
         </table>
         
@@ -68,19 +68,19 @@
                 <th>Roman</th>
                 <th>Capital Roman</th>
             </tr>
-            <tr data-trepeat="item [ 1:100 ]">
-                <td data-tcontent="item">value</td>
-                <td data-tcontent="item-repeat/index()">index</td>
-                <td data-tcontent="item-repeat/number()">number</td>
-                <td data-tcontent="item-repeat/even()">even</td>
-                <td data-tcontent="item-repeat/odd()">odd</td>
-                <td data-tcontent="item-repeat/start()">start</td>
-                <td data-tcontent="item-repeat/end()">end</td>
-                <td data-tcontent="item-repeat/length()">length</td>
-                <td data-tcontent="item-repeat/letter()">letter</td>
-                <td data-tcontent="item-repeat/Letter()">capital letter</td>
-                <td data-tcontent="item-repeat/roman()">roman</td>
-                <td data-tcontent="item-repeat/Roman()">capitalRoman</td>
+            <tr data-repeat="item [ 1:100 ]">
+                <td data-content="item">value</td>
+                <td data-content="item-repeat/index()">index</td>
+                <td data-content="item-repeat/number()">number</td>
+                <td data-content="item-repeat/even()">even</td>
+                <td data-content="item-repeat/odd()">odd</td>
+                <td data-content="item-repeat/start()">start</td>
+                <td data-content="item-repeat/end()">end</td>
+                <td data-content="item-repeat/length()">length</td>
+                <td data-content="item-repeat/letter()">letter</td>
+                <td data-content="item-repeat/Letter()">capital letter</td>
+                <td data-content="item-repeat/roman()">roman</td>
+                <td data-content="item-repeat/Roman()">capitalRoman</td>
             </tr>
         </table>
     </body>

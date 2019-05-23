@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Configuration - notRemoveGeneratedTags</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -21,13 +21,13 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 notRemoveGeneratedTags ::= a boolean value
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     The <code>notRemoveGeneratedTags</code> sets whether ZPT-JS will remove the previously generated tags before processing. It must be a boolean value. The default value is <code>false</code> (to remove them).
                 </p>
@@ -36,11 +36,11 @@ notRemoveGeneratedTags ::= a boolean value
                     ZPT-JS generates new HTML tags if the template uses:
                 </p>
                 <ul>
-                    <li><a href="attributes-TALRepeat.html">data-trepeat</a>. Loops: ZPT-JS copies the node to repeat several times.</li>
-                    <li><a href="attributes-METALUseMacro.html">data-muse-macro</a>. Macros: ZPT-JS copies the node of the macro once.</li>
+                    <li><a href="attributes-TALRepeat.html">data-repeat</a>. Loops: ZPT-JS copies the node to repeat several times.</li>
+                    <li><a href="attributes-METALUseMacro.html">data-use-macro</a>. Macros: ZPT-JS copies the node of the macro once.</li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     We are goint to invoke ZPT-JS twice, setting <code>notRemoveGeneratedTags</code> to <code>true</code> the second time:
                 </p>
@@ -75,8 +75,8 @@ zpt.run({
                 <pre class="brush: html">
 &lt;body&gt;
     &lt;ol&gt;
-        &lt;li data-trepeat="c someNumbers"&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;a number&lt;/span&gt;
+        &lt;li data-repeat="c someNumbers"&gt;
+            Iterating element &lt;span data-content="c"&gt;a number&lt;/span&gt;
         &lt;/li&gt;
     &lt;/ol&gt;
 &lt;/body&gt;
@@ -89,13 +89,13 @@ zpt.run({
 &lt;body&gt;
     &lt;ol&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;10&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;10&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;20&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;20&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;30&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;30&lt;/span&gt;
         &lt;/li&gt;
     &lt;/ol&gt;
 &lt;/body&gt;
@@ -108,19 +108,19 @@ zpt.run({
 &lt;body&gt;
     &lt;ol&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;10&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;10&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;20&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;20&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;30&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;30&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;40&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;40&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;50&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;50&lt;/span&gt;
         &lt;/li&gt;
     &lt;/ol&gt;
 &lt;/body&gt;
@@ -133,10 +133,10 @@ zpt.run({
 &lt;body&gt;
     &lt;ol&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;40&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;40&lt;/span&gt;
         &lt;/li&gt;
         &lt;li&gt;
-            Iterating element &lt;span data-tcontent="c"&gt;50&lt;/span&gt;
+            Iterating element &lt;span data-content="c"&gt;50&lt;/span&gt;
         &lt;/li&gt;
     &lt;/ol&gt;
 &lt;/body&gt;

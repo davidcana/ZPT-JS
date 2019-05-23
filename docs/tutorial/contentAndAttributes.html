@@ -12,16 +12,16 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Replacing content and attributes</h1>
                 <ul>
                     <li><a href="#content">Replacing content</a>.</li>
                     <li><a href="#attributes">Replacing attributes</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'content'">Replacing content</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'content'">Replacing content</h2>
                 <p>
                     Let's see how we can replace the content of any tag by a value. Take a look at this template:
                 </p>
@@ -31,7 +31,7 @@
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;span data-tcontent="title"&gt;the title&lt;/span&gt;.
+      This is &lt;span data-content="title"&gt;the title&lt;/span&gt;.
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
@@ -63,7 +63,7 @@ zpt.run({
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;span data-tcontent="title"&gt;hello world!&lt;/span&gt;
+      This is &lt;span data-content="title"&gt;hello world!&lt;/span&gt;
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
@@ -73,7 +73,7 @@ zpt.run({
                     ZPT-JS has replaced the content of the <em>span</em> element by the value of the <em>title</em> in the dictionary (the value of <em>dictionary.title</em>).
                 </p>
                 
-                <h2 data-tattributes="id 'attributes'">Replacing attributes</h2>
+                <h2 data-attributes="id 'attributes'">Replacing attributes</h2>
                 <p>
                     Now let's see how to replace the value of the attributes. Take a look at this template:
                 </p>
@@ -83,7 +83,7 @@ zpt.run({
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;a data-tattributes="href url"&gt;a link&lt;/a&gt;
+      This is &lt;a data-attributes="href url"&gt;a link&lt;/a&gt;
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
@@ -115,14 +115,14 @@ zpt.run({
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;a href="https://www.gnu.org/" data-tattributes="href url"&gt;a link&lt;/a&gt;.
+      This is &lt;a href="https://www.gnu.org/" data-attributes="href url"&gt;a link&lt;/a&gt;.
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
                 </pre>
                 
                 <p>
-                    <em>data-tattributes</em> supports more than one attribute (separated by <em>;</em>):
+                    <em>data-attributes</em> supports more than one attribute (separated by <em>;</em>):
                 </p>
 
                 <strong>sample.html</strong>
@@ -130,7 +130,7 @@ zpt.run({
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;a data-tattributes="href url; title theTitle"&gt;a link&lt;/a&gt;.
+      This is &lt;a data-attributes="href url; title theTitle"&gt;a link&lt;/a&gt;.
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
@@ -163,7 +163,7 @@ zpt.run({
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;a href="https://www.gnu.org/" title="GNU" data-tattributes="href url; title theTitle"&gt;a link&lt;/a&gt;.
+      This is &lt;a href="https://www.gnu.org/" title="GNU" data-attributes="href url; title theTitle"&gt;a link&lt;/a&gt;.
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;

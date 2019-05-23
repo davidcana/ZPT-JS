@@ -1,5 +1,5 @@
 // This is needed to make the git pages work
-zpt.context.getConf().externalMacroPrefixURL = location.pathname.startsWith( '/Zcrud' )? '/Zcrud/': '/';
+zpt.context.getConf().externalMacroPrefixURL = location.pathname.startsWith( '/ZPT-JS' )? '/ZPT-JS/': '/';
 
 // Invoke ZPT
 zpt.run(

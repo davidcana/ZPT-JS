@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Jquery expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,23 +22,23 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 jquery_expression ::= '$(' string ')'
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     <em>Jquery expressions</em> evaluate arbitrary Jquery expressions.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     <em>Jquery</em> expressions does not exist in ZPT.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <pre class="brush: html">
 &lt;div&gt;
     &lt;div&gt;value1 = &lt;span id="value1" class="values"&gt;10&lt;/span&gt;&lt;/div&gt;
@@ -47,10 +47,10 @@ jquery_expression ::= '$(' string ')'
 &lt;/div&gt;
 
 &lt;div&gt;
-    &lt;div&gt;$('#value1') = &lt;span data-tcontent="$('#value1')"&gt;must be 10&lt;/span&gt;&lt;/div&gt;
-    &lt;div&gt;$('.values') = &lt;span data-tcontent="$('.values')"&gt;must be 10,20,30&lt;/span&gt;&lt;/div&gt;
-    &lt;div&gt;+: $('.values') = &lt;span data-tcontent="+: $('.values')"&gt;must be 10 + 20 + 30 = 60&lt;/span&gt;&lt;/div&gt;
-    &lt;div&gt;+: 100 $('.values') = &lt;span data-tcontent="+: 100 $('.values')"&gt;must be 100 + 10 + 20 + 30 = 160&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;$('#value1') = &lt;span data-content="$('#value1')"&gt;must be 10&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;$('.values') = &lt;span data-content="$('.values')"&gt;must be 10,20,30&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;+: $('.values') = &lt;span data-content="+: $('.values')"&gt;must be 10 + 20 + 30 = 60&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;+: 100 $('.values') = &lt;span data-content="+: 100 $('.values')"&gt;must be 100 + 10 + 20 + 30 = 160&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;
                 </pre>
 

@@ -5,14 +5,14 @@
         <title>Templates of ZCrud web</title>
     </head>
     <body>
-        <header data-mdefine-macro="header">
-            <nav class="menu" data-tdefine="prefix context/getConf()/externalMacroPrefixURL;
+        <header data-define-macro="header">
+            <nav class="menu" data-define="prefix context/getConf()/externalMacroPrefixURL;
                                             pathname window/location/pathname">
                 <ul class="leftPart">
                     <li>
                         <a href="/" 
                            title="Home page"
-                           data-tattributes="href string:${prefix};
+                           data-attributes="href string:${prefix};
                                              class cond: (in: pathname prefix) 'selected' ''">ZPT-JS</a>
                     </li>
                 </ul>
@@ -22,25 +22,25 @@
                         <li>
                             <a href="/tutorial/index.html"
                                title="Articles with demos"
-                               data-tattributes="href string:${prefix}tutorial/index.html;
+                               data-attributes="href string:${prefix}tutorial/index.html;
                                                  class cond: (pathname/startsWith(string:${prefix}tutorial/)) 'selected' ''">Tutorial</a>
                         </li>
                         <li>
                             <a href="/reference/index.html"
                                title="Complete ZCrud reference documentation. Includes all methods, events, options and more."
-                               data-tattributes="href string:${prefix}reference/index.html;
+                               data-attributes="href string:${prefix}reference/index.html;
                                                  class cond: (pathname/startsWith(string:${prefix}reference/)) 'selected' ''">Reference</a>
                         </li>
                         <li>
                             <a href="/zpt-jsVsZpt.html" 
                                title="In-depth comparison"
-                               data-tattributes="href string:${prefix}zpt-jsVsZpt.html;
+                               data-attributes="href string:${prefix}zpt-jsVsZpt.html;
                                                  class cond: (pathname/startsWith(string:${prefix}zpt-jsVsZpt.html)) 'selected' ''">ZPT-JS vs ZPT</a>
                         </li>
                         <li>
                             <a href="/download.html" 
                                title="Download and install instructions"
-                               data-tattributes="href string:${prefix}download.html;
+                               data-attributes="href string:${prefix}download.html;
                                                  class cond: (pathname/startsWith(string:${prefix}download.html)) 'selected' ''">Download</a>
                         </li>
                     </ul>
@@ -50,14 +50,14 @@
                     <li>
                         <a href="/changes.html" 
                            title="A list of changes on all ZCrud versions"
-                           data-tattributes="href string:${prefix}changes.html;
-                                             class cond: (pathname/startsWith(string:${prefix}changes.html)) 'selected' ''"><span data-tcontent="versionNumber">0.32.0</span> (<span data-tcontent="versionDate">25 April 2019</span>)</a>
+                           data-attributes="href string:${prefix}changes.html;
+                                             class cond: (pathname/startsWith(string:${prefix}changes.html)) 'selected' ''"><span data-content="versionNumber">0.32.0</span> (<span data-content="versionDate">25 April 2019</span>)</a>
                     </li>
                 </ul>
             </nav>
         </header>
         
-        <footer data-mdefine-macro="footer">
+        <footer data-define-macro="footer">
             <p class="smallerFooter">
                 Code license: <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">LGPL 3</a><br>
                 Header texture: Free for commercial use with attribution
@@ -65,37 +65,37 @@
             </p>
         </footer>
         
-        <footer data-mdefine-macro="tutorialFooter">
+        <footer data-define-macro="tutorialFooter">
             <p class="linkButton">
                 <a href="index.html" title="Continue tutorial">Continue tutorial</a>
             </p>
-            <div data-muse-macro="'footer'">
+            <div data-use-macro="'footer'">
                 <!-- The footer -->
             </div>
         </footer>
         
-        <footer data-mdefine-macro="referenceFooter">
+        <footer data-define-macro="referenceFooter">
             <p class="linkButton">
                 <a href="index.html" title="Continue reference">Continue reference</a>
             </p>
-            <div data-muse-macro="'footer'">
+            <div data-use-macro="'footer'">
                 <!-- The footer -->
             </div>
         </footer>
         
-        <div data-mdefine-macro="page">
-            <div data-muse-macro="'header'">
+        <div data-define-macro="page">
+            <div data-use-macro="'header'">
                 <!-- The header -->
             </div>
             <div class="header1Div">
-                <div data-mdefine-slot="page-header">
+                <div data-define-slot="page-header">
                     <!-- The page header -->
                 </div>
             </div>
-            <article data-mdefine-slot="article">
+            <article data-define-slot="article">
                 <!-- The article -->
             </article>
-            <div data-muse-macro="footer-macro">
+            <div data-use-macro="footer-macro">
                 <!-- The footer -->
             </div>
         </div>

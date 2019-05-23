@@ -178,7 +178,7 @@ QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", funct
     }
 });
 
-QUnit.test( "Rerun using data-idomain", function( assert ) {
+QUnit.test( "Rerun using data-domain", function( assert ) {
 
     // Render #ul6-1 and run tests
     $( '#ul6-1' ).zpt({

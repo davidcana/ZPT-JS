@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALAttributes</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,8 +22,8 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument                   ::= (attribute_simple_statement | attribute_map_statement) [';' (attribute_simple_statement | attribute_map_statement) ]*
 attribute_simple_statement ::= attribute_name expression
@@ -31,34 +31,34 @@ attribute_name             ::= Name
 attribute_map_statement    ::= Name
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-tattributes</em> statement replaces the value of an attribute (or creates an attribute) with a dynamic value. The value of each expression is converted to a string, if necessary.
+                    The <em>data-attributes</em> statement replaces the value of an attribute (or creates an attribute) with a dynamic value. The value of each expression is converted to a string, if necessary.
                 </p>
                 <p>
                     If the expression associated with an attribute assignment evaluates to <code>undefined</code>, then that attribute is deleted from the statement element. Each attribute assignment is independent, so attributes may be assigned in the same statement in which some attributes are deleted and others are left alone.
                 </p>
                 <p>
-                    If you use <em>data-tattributes</em> on an element with an active <a href="attributes-TALOmitTag.html">data-tomit-tag</a> or <a href="attributes-TALReplace.html">data-treplace</a> command, the <em>data-tattributes</em> statement is ignored.
+                    If you use <em>data-attributes</em> on an element with an active <a href="attributes-TALOmitTag.html">data-omit-tag</a> or <a href="attributes-TALReplace.html">data-replace</a> command, the <em>data-attributes</em> statement is ignored.
                 </p>
                 <p>
-                    If you use <em>data-tattributes</em> on an element with a <a href="attributes-TALRepeat.html">data-trepeat</a> statement, the replacement is made on each repetition of the element, and the replacement expression is evaluated fresh for each repetition.
+                    If you use <em>data-attributes</em> on an element with a <a href="attributes-TALRepeat.html">data-repeat</a> statement, the replacement is made on each repetition of the element, and the replacement expression is evaluated fresh for each repetition.
                 </p>
                 <p>
                     Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#attributes-replace-element-attributes">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     The <em>attribute_map_statement</em> part is not present in ZPT.
                 </p>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Replacing a link:
                 </p>
                 <pre class="brush: html">
-                    &lt;a href="/sample/link.html" data-tattributes="href myObject/getUrl()"&gt;
+                    &lt;a href="/sample/link.html" data-attributes="href myObject/getUrl()"&gt;
                        My link
                     &lt;/a&gt;
                 </pre>
@@ -67,7 +67,7 @@ attribute_map_statement    ::= Name
                     Replacing two attributes:
                 </p>
                 <pre class="brush: html">
-                       &lt;textarea data-tattributes="rows textareaRows; cols textareaCols"&gt;
+                       &lt;textarea data-attributes="rows textareaRows; cols textareaCols"&gt;
                        &lt;/textarea&gt;
                 </pre>
                 
@@ -75,7 +75,7 @@ attribute_map_statement    ::= Name
                     Replacing attributes using an <em>attribute_map_statement</em>:
                 </p>
                 <pre class="brush: html">
-                       &lt;textarea data-tattributes="textareaAttrs"&gt;
+                       &lt;textarea data-attributes="textareaAttrs"&gt;
                        &lt;/textarea&gt;
                 </pre>
                 <p>
@@ -94,7 +94,7 @@ var dictionary = {
                     The resulting visible HTML is:
                 </p>
                 <pre class="brush: html">
-                       &lt;textarea data-tattributes="rows 10; cols 100"&gt;
+                       &lt;textarea data-attributes="rows 10; cols 100"&gt;
                        &lt;/textarea&gt;
                 </pre>
             </article>

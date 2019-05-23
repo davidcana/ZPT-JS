@@ -10,26 +10,26 @@
         <link rel="stylesheet" type="text/css" href="../docs.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Evaluation order</h1>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
                 <p>
                     The order evaluation of attributes in ZPT-JS is not equal than ZPT's. The new order is:
                 </p>
                 <ol>
-                    <li><code>data-trepeat</code></li>
-                    <li><code>data-ton-error</code></li>
-                    <li><code>data-mdefine-macro</code></li>
-                    <li><code>data-tdefine</code></li>
-                    <li><code>data-tcondition</code></li>
-                    <li><code>data-tomit-tag</code></li>
-                    <li><code>data-treplace</code></li>
-                    <li><code>data-tattributes</code></li>
-                    <li><code>data-tcontent</code></li>
+                    <li><code>data-repeat</code></li>
+                    <li><code>data-on-error</code></li>
+                    <li><code>data-define-macro</code></li>
+                    <li><code>data-define</code></li>
+                    <li><code>data-condition</code></li>
+                    <li><code>data-omit-tag</code></li>
+                    <li><code>data-replace</code></li>
+                    <li><code>data-attributes</code></li>
+                    <li><code>data-content</code></li>
                     <li>content</li>
-                    <li><code>data-muse-macro</code></li>
+                    <li><code>data-use-macro</code></li>
                 </ol>
             </article>
         </div>

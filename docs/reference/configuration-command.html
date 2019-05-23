@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Configuration - command</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -21,13 +21,13 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 command ::= 'preload' | 'fullRender' | 'partialRender'
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     Defines the action to run. The default is <em>fullRender</em>. Possible values are:
                 </p>
@@ -44,7 +44,7 @@ command ::= 'preload' | 'fullRender' | 'partialRender'
                     <li><em>partialRender</em>. Do a render of the <a href="configuration-target.html">target</a> element(s).</li>
                 </ul>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     An example of <em>fullRender</em>:
                 </p>

@@ -17,7 +17,7 @@
         <ol>
             <li>
                 user/name = Bob = <span id="t1-1" tal:content="user/name">a name</span>
-                user/name = a name = <span id="t1-2" data-tcontent="user/name">a name</span>
+                user/name = a name = <span id="t1-2" data-content="user/name">a name</span>
             </li>
         </ol>      
         <p>
@@ -26,7 +26,7 @@
         <ol>
             <li tal:define="integer1 1">
                 integer1 = 1 = <span id="t2-1" tal:content="integer1">an integer</span>
-                integer1 = an integer = <span id="t2-2" data-tcontent="integer1">an integer</span>
+                integer1 = an integer = <span id="t2-2" data-content="integer1">an integer</span>
             </li>
         </ol>
 
@@ -36,8 +36,8 @@
         <ol>
             <li>Condition true 1: <span id="t3-1" tal:condition="true" tal:content="user/name">a name</span></li>
             <li>Condition false 1: <span id="t3-2" tal:condition="false" tal:content="user/name">a name</span></li>
-            <li>Condition true 1: <span id="t3-3" data-tcondition="true" data-tcontent="user/name">a name</span></li>
-            <li>Condition false 1: <span id="t3-4" data-tcondition="false" data-tcontent="user/name">a name</span></li>
+            <li>Condition true 1: <span id="t3-3" data-condition="true" data-content="user/name">a name</span></li>
+            <li>Condition false 1: <span id="t3-4" data-condition="false" data-content="user/name">a name</span></li>
         </ol>
 
         <p>
@@ -47,7 +47,7 @@
             <li>
                 Link 1: 
                 <a id="t4-1" tal:attributes="title string:title in string expression; href 'http://www.xxx.org'">a link</a>
-                <a id="t4-2" data-tattributes="title string:title in string expression; href 'http://www.xxx.org'"
+                <a id="t4-2" data-attributes="title string:title in string expression; href 'http://www.xxx.org'"
                              title ="The title" href="http://www.yyy.org">a link</a>
             </li>
         </ol>
@@ -59,8 +59,8 @@
             <li tal:repeat="c ['jaja' 'jeje' 'jiji']">
                 Iterating element <span tal:attributes="class 'cValue1'" tal:content="c">jaja/jeje/jiji</span>
             </li>
-            <li data-trepeat="c ['jaja' 'jeje' 'jiji']">
-                Iterating element <span data-tattributes="class 'cValue2'" data-tcontent="c">jaja/jeje/jiji</span>
+            <li data-repeat="c ['jaja' 'jeje' 'jiji']">
+                Iterating element <span data-attributes="class 'cValue2'" data-content="c">jaja/jeje/jiji</span>
             </li>
         </ol>
         
@@ -71,7 +71,7 @@
             <li>
                 Void omit-tag: 
                 <span id="t6-1"><span tal:omit-tag="" tal:content="c">Void omit-tag (should omit)</span></span>
-                <span id="t6-2"><span data-tomit-tag="" data-tcontent="c">Void omit-tag (should NOT omit)</span></span>
+                <span id="t6-2"><span data-omit-tag="" data-content="c">Void omit-tag (should NOT omit)</span></span>
             </li>
         </ol>
         
@@ -83,7 +83,7 @@
                 replaced text = <span id="t7-1"><span tal:replace="'replaced text'">should be replaced</span></span>
             </li>
             <li>
-                replaced text = <span id="t7-2"><span data-treplace="'replaced text'">should NOT be replaced</span></span>
+                replaced text = <span id="t7-2"><span data-replace="'replaced text'">should NOT be replaced</span></span>
             </li>
         </ol>
         

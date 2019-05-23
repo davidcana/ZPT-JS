@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Configuration - root</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -21,14 +21,14 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 root         ::= root_element || Array of root_element
 root_element ::= a DOM node
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     The <code>root</code> is used to define the node or nodes where ZPT-JS will search its custom attributes in a full render. It can be a simple DOM node or an array of DOM nodes. It is mandatory to set at least a <code>root</code> element the first time ZPT-JS is invoked.
                 </p>
@@ -44,7 +44,7 @@ root_element ::= a DOM node
                     Next invokations makes ZPT-JS uses the selection as the root when the command is a full render. If the command is a partial render then the selection will work as the <em>target</em>. The <em>target</em> defines the limits of the update, but a previous definition of the <em>root</em> is needed by ZPT-JS.
                 </p>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Using the configuration option:
                 </p>

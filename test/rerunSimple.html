@@ -15,22 +15,22 @@
         <ol id="simple">
             <li>Attribute: 
                 <a id="t1-1" 
-                   data-tattributes="title string:counter=${counter}"
+                   data-attributes="title string:counter=${counter}"
                    href ="http://www.xxx.org">a link</a>
             </li>
             <li>Condition: 
-                <span id="t1-2" data-tcondition="eq: 0 ( %: counter 2 )">
+                <span id="t1-2" data-condition="eq: 0 ( %: counter 2 )">
                     yes!
                 </span>
             </li>
             <li>Content:
-                <span id="t1-3" data-tcontent="string:counter=${counter}">
+                <span id="t1-3" data-content="string:counter=${counter}">
                     counter=number
                 </span>
             </li>
             <li>Define: 
-                <span data-tdefine="var string:counter=${counter}">
-                    <span id="t1-4" data-tcontent="var">
+                <span data-define="var string:counter=${counter}">
+                    <span id="t1-4" data-content="var">
                         counter=number
                     </span>
                 </span>
@@ -38,52 +38,52 @@
         </ol>
         
         <h2>Rerun and check dictionary vars</h2>
-        data-tdefine="var1 1"
-        <ul data-tdefine="var1 1" id="ul1">
+        data-define="var1 1"
+        <ul data-define="var1 1" id="ul1">
             
-            <li>var1 value: 1 = <span id="t2-1-1" data-tcontent="var1">must be 1</span></li>
-            <li>var1 exists: <span id="t2-1-2" data-tcontent="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
-            <li>check var1 eq: 1: <span id="t2-1-3" data-tcontent="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
+            <li>var1 value: 1 = <span id="t2-1-1" data-content="var1">must be 1</span></li>
+            <li>var1 exists: <span id="t2-1-2" data-content="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
+            <li>check var1 eq: 1: <span id="t2-1-3" data-content="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
 
-            <li>var2 exists: <span id="t2-2-1" data-tcontent="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
+            <li>var2 exists: <span id="t2-2-1" data-content="cond: ( exists: var2 ) 'Error' 'OK'">must be OK</span></li>
             
             <li>
-                data-tdefine="var2 2"
-                <ul data-tdefine="var2 2" id="ul2">
-                    <li>var1 value: 1 = <span id="t2-3-1" data-tcontent="var1">must be 1</span></li>
-                    <li>var1 exists: <span id="t2-3-2" data-tcontent="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
-                    <li>check var1 eq: 1: <span id="t2-3-3" data-tcontent="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
+                data-define="var2 2"
+                <ul data-define="var2 2" id="ul2">
+                    <li>var1 value: 1 = <span id="t2-3-1" data-content="var1">must be 1</span></li>
+                    <li>var1 exists: <span id="t2-3-2" data-content="cond: ( exists: var1 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check var1 eq: 1: <span id="t2-3-3" data-content="cond: ( eq: var1 1 ) 'OK' 'Error'">must be OK</span></li>
                     
-                    <li>var2 value: 2 = <span id="t2-4-1" data-tcontent="var2">must be 2</span></li>
-                    <li>var2 exists: <span id="t2-4-2" data-tcontent="cond: ( exists: var2 ) 'OK' 'Error'">must be OK</span></li>
-                    <li>check var2 eq: 2: <span id="t2-4-3" data-tcontent="cond: ( eq: var2 2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>var2 value: 2 = <span id="t2-4-1" data-content="var2">must be 2</span></li>
+                    <li>var2 exists: <span id="t2-4-2" data-content="cond: ( exists: var2 ) 'OK' 'Error'">must be OK</span></li>
+                    <li>check var2 eq: 2: <span id="t2-4-3" data-content="cond: ( eq: var2 2 ) 'OK' 'Error'">must be OK</span></li>
                 </ul>
             </li>
         </ul>
         
         <h2>Rerun and check dictionary vars (more complex)</h2>
-        data-tdefine="var1 1; var2 2"
-        <ul data-tdefine="var1 1; var2 2" id="ul2-1">
+        data-define="var1 1; var2 2"
+        <ul data-define="var1 1; var2 2" id="ul2-1">
 
-            <li>var1 value: 1 = <span id="t3-1-1" data-tcontent="var1">must be 1</span></li>
-            <li>var2 value: 2 = <span id="t3-1-2" data-tcontent="var2">must be 2</span></li>
-            <li>var value: 10 = <span id="t3-1-3" data-tcontent="var">must be 10</span></li>
+            <li>var1 value: 1 = <span id="t3-1-1" data-content="var1">must be 1</span></li>
+            <li>var2 value: 2 = <span id="t3-1-2" data-content="var2">must be 2</span></li>
+            <li>var value: 10 = <span id="t3-1-3" data-content="var">must be 10</span></li>
             <li>
-                data-tdefine="added +: var1 var2 var"
-                <ul data-tdefine="added +: var1 var2 var" id="ul2-2">
+                data-define="added +: var1 var2 var"
+                <ul data-define="added +: var1 var2 var" id="ul2-2">
                     
-                    <li>var1 value: 1 = <span id="t3-2-1" data-tcontent="var1">must be 1</span></li>
-                    <li>var2 value: 1 = <span id="t3-2-2" data-tcontent="var2">must be 2</span></li>
-                    <li>var value: 1 = <span id="t3-2-3" data-tcontent="var">must be 10 or 20</span></li>
-                    <li>added value: 3 = <span id="t3-2-4" data-tcontent="added">must be 13 or 23</span></li>
+                    <li>var1 value: 1 = <span id="t3-2-1" data-content="var1">must be 1</span></li>
+                    <li>var2 value: 1 = <span id="t3-2-2" data-content="var2">must be 2</span></li>
+                    <li>var value: 1 = <span id="t3-2-3" data-content="var">must be 10 or 20</span></li>
+                    <li>added value: 3 = <span id="t3-2-4" data-content="added">must be 13 or 23</span></li>
                     <li>
-                        data-tdefine="substracted -: added var1"
-                        <ul data-tdefine="substracted -: added var1" id="ul2-3">
-                            <li>var1 value: 1 = <span id="t3-3-1" data-tcontent="var1">must be 1</span></li>
-                            <li>var2 value: 1 = <span id="t3-3-2" data-tcontent="var2">must be 2</span></li>
-                            <li>var value: 1 = <span id="t3-3-3" data-tcontent="var">must be 10, 20 or 30</span></li>
-                            <li>added value: 3 = <span id="t3-3-4" data-tcontent="added">must be 13, 23 or 33</span></li>
-                            <li>substract value: 2 = <span id="t3-3-5" data-tcontent="substracted">must be 12, 22 or 32</span></li>
+                        data-define="substracted -: added var1"
+                        <ul data-define="substracted -: added var1" id="ul2-3">
+                            <li>var1 value: 1 = <span id="t3-3-1" data-content="var1">must be 1</span></li>
+                            <li>var2 value: 1 = <span id="t3-3-2" data-content="var2">must be 2</span></li>
+                            <li>var value: 1 = <span id="t3-3-3" data-content="var">must be 10, 20 or 30</span></li>
+                            <li>added value: 3 = <span id="t3-3-4" data-content="added">must be 13, 23 or 33</span></li>
+                            <li>substract value: 2 = <span id="t3-3-5" data-content="substracted">must be 12, 22 or 32</span></li>
                         </ul>
                         
                     </li>
@@ -92,38 +92,38 @@
         </ul>
         
         <h2>Rerun and check dictionary vars (multiple target)</h2>
-        data-tdefine="var1 1"
-        <ul data-tdefine="var1 1; added +: 100 var" id="ul3-1">
-            <li>var1 value: 1 = <span id="t4-1-1" data-tcontent="var1">must be 1</span></li>
-            <li>added value = <span id="t4-1-2" data-tcontent="added">must be 110 or 111</span></li>
+        data-define="var1 1"
+        <ul data-define="var1 1; added +: 100 var" id="ul3-1">
+            <li>var1 value: 1 = <span id="t4-1-1" data-content="var1">must be 1</span></li>
+            <li>added value = <span id="t4-1-2" data-content="added">must be 110 or 111</span></li>
             
             <li>
-                data-tdefine="var2 2"
-                <ul data-tdefine="var2 2" id="ul3-2">
-                    <li>var1 value: 1 = <span id="t4-2-1" data-tcontent="var1">must be 1</span></li>
-                    <li>var2 value: 2 = <span id="t4-2-2" data-tcontent="var2">must be 2</span></li>
-                    <li>+: var var2 = <span id="t4-2-3" data-tcontent="+: var var2">must be 12</span></li>
-                    <li>added value = <span id="t4-2-4" data-tcontent="added">must be 110 or 111</span></li>
+                data-define="var2 2"
+                <ul data-define="var2 2" id="ul3-2">
+                    <li>var1 value: 1 = <span id="t4-2-1" data-content="var1">must be 1</span></li>
+                    <li>var2 value: 2 = <span id="t4-2-2" data-content="var2">must be 2</span></li>
+                    <li>+: var var2 = <span id="t4-2-3" data-content="+: var var2">must be 12</span></li>
+                    <li>added value = <span id="t4-2-4" data-content="added">must be 110 or 111</span></li>
                 </ul>
             </li>
             
             <li>
-                data-tdefine="var3 3"
-                <ul data-tdefine="var3 3" id="ul3-3">
-                    <li>var1 value: 1 = <span id="t4-3-1" data-tcontent="var1">must be 1</span></li>
-                    <li>var2 value: 2 = <span id="t4-3-2" data-tcontent="var2">must be undefined</span></li>
-                    <li>var3 value: 3 = <span id="t4-3-3" data-tcontent="var3">must be 3</span></li>
-                    <li>+: var var3 = <span id="t4-3-4" data-tcontent="+: var var3">must be 13</span></li>
-                    <li>added value = <span id="t4-3-5" data-tcontent="added">must be 110 or 111</span></li>
+                data-define="var3 3"
+                <ul data-define="var3 3" id="ul3-3">
+                    <li>var1 value: 1 = <span id="t4-3-1" data-content="var1">must be 1</span></li>
+                    <li>var2 value: 2 = <span id="t4-3-2" data-content="var2">must be undefined</span></li>
+                    <li>var3 value: 3 = <span id="t4-3-3" data-content="var3">must be 3</span></li>
+                    <li>+: var var3 = <span id="t4-3-4" data-content="+: var var3">must be 13</span></li>
+                    <li>added value = <span id="t4-3-5" data-content="added">must be 110 or 111</span></li>
                     <li>
-                        data-tdefine="var4 4"
-                        <ul data-tdefine="var4 4" id="ul3-4">
-                            <li>var1 value: 1 = <span id="t4-3-4-1" data-tcontent="var1">must be 1</span></li>
-                            <li>var2 value: 2 = <span id="t4-3-4-2" data-tcontent="var2">must be undefined</span></li>
-                            <li>var3 value: 3 = <span id="t4-3-4-3" data-tcontent="var3">must be 3</span></li>
-                            <li>var4 value: 4 = <span id="t4-3-4-4" data-tcontent="var4">must be 4</span></li>
-                            <li>+: var var4 = <span id="t4-3-4-5" data-tcontent="+: var var4">must be 14 or 15</span></li>
-                            <li>added value = <span id="t4-3-4-6" data-tcontent="added">must be 110 or 111</span></li>
+                        data-define="var4 4"
+                        <ul data-define="var4 4" id="ul3-4">
+                            <li>var1 value: 1 = <span id="t4-3-4-1" data-content="var1">must be 1</span></li>
+                            <li>var2 value: 2 = <span id="t4-3-4-2" data-content="var2">must be undefined</span></li>
+                            <li>var3 value: 3 = <span id="t4-3-4-3" data-content="var3">must be 3</span></li>
+                            <li>var4 value: 4 = <span id="t4-3-4-4" data-content="var4">must be 4</span></li>
+                            <li>+: var var4 = <span id="t4-3-4-5" data-content="+: var var4">must be 14 or 15</span></li>
+                            <li>added value = <span id="t4-3-4-6" data-content="added">must be 110 or 111</span></li>
                         </ul>
                     </li>
                 </ul>
@@ -131,59 +131,59 @@
         </ul>
         
         <h2>Rerun and check dictionary vars (multiple root, one target)</h2>
-        data-tdefine="var1 1; added +: 100 var"
-        <ul data-tdefine="var1 1; added +: var1 var" id="ul5-1">
-            <li>var1 value: 1 = <span id="t5-1-1" data-tcontent="var1">must be 1</span></li>
-            <li>added value = <span id="t5-1-2" data-tcontent="added">must be 11</span></li>
+        data-define="var1 1; added +: 100 var"
+        <ul data-define="var1 1; added +: var1 var" id="ul5-1">
+            <li>var1 value: 1 = <span id="t5-1-1" data-content="var1">must be 1</span></li>
+            <li>added value = <span id="t5-1-2" data-content="added">must be 11</span></li>
         </ul>
-        data-tdefine="var2 2 added +: 100 var"
-        <ul data-tdefine="var1 2; added +: var1 var" id="ul5-2">
-            <li>var1 value: 2 = <span id="t5-2-1" data-tcontent="var1">must be 2</span></li>
-            <li>added value = <span id="t5-2-2" data-tcontent="added">must be 12 or 13</span></li>
+        data-define="var2 2 added +: 100 var"
+        <ul data-define="var1 2; added +: var1 var" id="ul5-2">
+            <li>var1 value: 2 = <span id="t5-2-1" data-content="var1">must be 2</span></li>
+            <li>added value = <span id="t5-2-2" data-content="added">must be 12 or 13</span></li>
         </ul>
         
-        <h2>Rerun using data-idomain</h2>
-        <ul data-idomain="i18nES2 i18nES1" id="ul6-1">
+        <h2>Rerun using data-domain</h2>
+        <ul data-domain="i18nES2 i18nES1" id="ul6-1">
             <li>
                 (in i18nES2) ¡¡¡Hola mundo 2!!! = 
                 <span id="t6-1" 
-                      data-tcontent="tr: 'Hello world!'">Must be ¡¡¡Hola mundo 2!!!</span>
+                      data-content="tr: 'Hello world!'">Must be ¡¡¡Hola mundo 2!!!</span>
             </li>
             <li>
                 <ul id="ul6-2">
                     <li>
                         (in i18nES1) Él no ha encontrado ningún resultado = 
                         <span id="t6-2" 
-                              data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 0 )">Must be 'Él no ha encontrado ningún resultado'</span>
+                              data-content="tr: 'Results msg' ( GENDER 'male'; RES 0 )">Must be 'Él no ha encontrado ningún resultado'</span>
                     </li>
                 </ul>
             </li>
         </ul>
         
-        <h2>Rerun using data-ilanguage</h2>
-        <ul data-idomain="i18nBundle1"
-            data-ilanguage="language" id="ul7-1">
+        <h2>Rerun using data-language</h2>
+        <ul data-domain="i18nBundle1"
+            data-language="language" id="ul7-1">
             <li>
                 ¡Hola mundo! = 
                 <span id="t7-1-1" 
-                      data-tcontent="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
+                      data-content="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
             </li>
             <li id="t7-2">
                 Hello world! = 
                 <span id="t7-2-1" 
-                      data-tcontent="tr: 'Hello world!'">Must be ¡Hola mundo! or Hello world!</span>
+                      data-content="tr: 'Hello world!'">Must be ¡Hola mundo! or Hello world!</span>
             </li>
         </ul>
         
-        <h2>Rerun using data-ton-error tag</h2>
-        <ul id="ul8-1" data-ton-error="treatErrors()">
-            <li>user/fireError() = Oh, noooo! = <span id="t8-1-1" data-tcontent="fireError()">must fire error</span></li>
-            <li>divBy0() = Infinity = <span id="t8-1-2" data-tcontent="divBy0()">1 / 0</span></li>
+        <h2>Rerun using data-on-error tag</h2>
+        <ul id="ul8-1" data-on-error="treatErrors()">
+            <li>user/fireError() = Oh, noooo! = <span id="t8-1-1" data-content="fireError()">must fire error</span></li>
+            <li>divBy0() = Infinity = <span id="t8-1-2" data-content="divBy0()">1 / 0</span></li>
             
             <li>
                 <ul id="ul8-2">
-                    <li>user/fireError() = Oh, noooo! = <span id="t8-2-1" data-tcontent="fireError()">must fire error</span></li>
-                    <li>divBy0() = Infinity = <span id="t8-2-2" data-tcontent="divBy0()">1 / 0</span></li>
+                    <li>user/fireError() = Oh, noooo! = <span id="t8-2-1" data-content="fireError()">must fire error</span></li>
+                    <li>divBy0() = Infinity = <span id="t8-2-2" data-content="divBy0()">1 / 0</span></li>
                 </ul>
             </li>
         </ul>
@@ -205,49 +205,49 @@
                 <th>Capital Roman</th>
                 <th>Added value</th>
             </tr>
-            <tr data-trepeat="item tools">
-                <td data-tattributes="class 'value'" data-tcontent="item/name">value</td>
-                <td data-tattributes="class 'index'" data-tcontent="item-repeat/index()">index</td>
-                <td data-tattributes="class 'number'" data-tcontent="item-repeat/number()">number</td>
-                <td data-tattributes="class 'isEven'" data-tcontent="item-repeat/even()">even</td>
-                <td data-tattributes="class 'isOdd'" data-tcontent="item-repeat/odd()">odd</td>
-                <td data-tattributes="class 'isStart'" data-tcontent="item-repeat/start()">start</td>
-                <td data-tattributes="class 'isEnd'" data-tcontent="item-repeat/end()">end</td>
-                <td data-tattributes="class 'getLength'" data-tcontent="item-repeat/length()">length</td>
-                <td data-tattributes="class 'getLetter'" data-tcontent="item-repeat/letter()">letter</td>
-                <td data-tattributes="class 'getCapitalLetter'" data-tcontent="item-repeat/Letter()">capital letter</td>
-                <td data-tattributes="class 'getRoman'" data-tcontent="item-repeat/roman()">roman</td>
-                <td data-tattributes="class 'getCapitalRoman'" data-tcontent="item-repeat/Roman()">capitalRoman</td>
-                <td data-tattributes="class 'added';id string:t9-1-${item-repeat/number()}" data-tcontent="+: number item-repeat/index()">index</td>
+            <tr data-repeat="item tools">
+                <td data-attributes="class 'value'" data-content="item/name">value</td>
+                <td data-attributes="class 'index'" data-content="item-repeat/index()">index</td>
+                <td data-attributes="class 'number'" data-content="item-repeat/number()">number</td>
+                <td data-attributes="class 'isEven'" data-content="item-repeat/even()">even</td>
+                <td data-attributes="class 'isOdd'" data-content="item-repeat/odd()">odd</td>
+                <td data-attributes="class 'isStart'" data-content="item-repeat/start()">start</td>
+                <td data-attributes="class 'isEnd'" data-content="item-repeat/end()">end</td>
+                <td data-attributes="class 'getLength'" data-content="item-repeat/length()">length</td>
+                <td data-attributes="class 'getLetter'" data-content="item-repeat/letter()">letter</td>
+                <td data-attributes="class 'getCapitalLetter'" data-content="item-repeat/Letter()">capital letter</td>
+                <td data-attributes="class 'getRoman'" data-content="item-repeat/roman()">roman</td>
+                <td data-attributes="class 'getCapitalRoman'" data-content="item-repeat/Roman()">capitalRoman</td>
+                <td data-attributes="class 'added';id string:t9-1-${item-repeat/number()}" data-content="+: number item-repeat/index()">index</td>
             </tr>
         </table>
         
         <h2>Rerun using internal macros</h2>
         <div id="t10-1">
-            <div data-tdefine="number2 2" data-muse-macro="'internalMacro1'">
+            <div data-define="number2 2" data-use-macro="'internalMacro1'">
                 Macro goes here
             </div>
         </div>
-        <div data-mdefine-macro="internalMacro1" data-tdefine="number3 3" style="display: none">
-            <ul data-tattributes="id string:t10-1b">
+        <div data-define-macro="internalMacro1" data-define="number3 3" style="display: none">
+            <ul data-attributes="id string:t10-1b">
                 <li>
-                    number = <span data-tcontent="number" data-tattributes="id string:t10-2">The number value</span>
+                    number = <span data-content="number" data-attributes="id string:t10-2">The number value</span>
                 </li>
                 <li>
-                    number2 = <span data-tcontent="number2" data-tattributes="id string:t10-3">The number2 value</span>
+                    number2 = <span data-content="number2" data-attributes="id string:t10-3">The number2 value</span>
                 </li>
                 <li>
-                    number3 = <span data-tcontent="number3" data-tattributes="id string:t10-4">The number3 value</span>
+                    number3 = <span data-content="number3" data-attributes="id string:t10-4">The number3 value</span>
                 </li>
                 <li>
-                    +: number number2 number3 = <span data-tcontent="+: number number2 number3" data-tattributes="id string:t10-5">The added value</span>
+                    +: number number2 number3 = <span data-content="+: number number2 number3" data-attributes="id string:t10-5">The added value</span>
                 </li>
             </ul>
         </div>
         
         <h2>Rerun using external macros</h2>
         <div id="t11-1">
-            <div data-tdefine="number2 2; testNumber 11" data-muse-macro="'rerunMacro1@externalMacros-definitions.html'">
+            <div data-define="number2 2; testNumber 11" data-use-macro="'rerunMacro1@externalMacros-definitions.html'">
                 Macro goes here
             </div>
         </div>

@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - I18n expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,8 +22,8 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <p>
                     <em>tr</em>, <em>trNumber</em> and <em>trDate</em> syntax:
                 </p>
@@ -43,7 +43,7 @@ tr_currency_expressions :: = 'trCurrency:' currency expression (tr_argument_list
 currency                :: = expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     ZPT-JS provide some expressions to make it easy i18n and l18n. The complete list is:
                 </p>
@@ -58,12 +58,12 @@ currency                :: = expression
                     I18n and L10n support is implemented using standards <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> and <a href="http://userguide.icu-project.org/formatparse/messages">ICU</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     This statement does not exist in ZPT.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Some necessary javascript code:
                 </p>
@@ -130,8 +130,8 @@ zpt.run({
                     Translate using a literal:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;span data-tcontent="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;span data-content="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
 &lt;/div&gt;
                 </pre>
                 
@@ -139,8 +139,8 @@ zpt.run({
                     Translate using a variable:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;span data-tcontent="tr: hello"&gt;Must be ¡Hola mundo!&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;span data-content="tr: hello"&gt;Must be ¡Hola mundo!&lt;/span&gt;
 &lt;/div&gt;
                 </pre>
                 
@@ -148,11 +148,11 @@ zpt.run({
                     Using parameters:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;span data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 0 )"&gt;Must be 'Él no ha encontrado ningún resultado'&lt;/span&gt;
-    &lt;span data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 1 )"&gt;Must be 'Él ha encontrado un único resultado'&lt;/span&gt;
-    &lt;span data-tcontent="tr: 'Results msg' ( GENDER 'female'; RES 10 )"&gt;Must be 'Ella ha encontrado 10 resultados'&lt;/span&gt;
-    &lt;span data-tcontent="tr: 'Results msg' ( RES 0 )"&gt;Must be 'Ellos no han encontrado ningún resultado'&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;span data-content="tr: 'Results msg' ( GENDER 'male'; RES 0 )"&gt;Must be 'Él no ha encontrado ningún resultado'&lt;/span&gt;
+    &lt;span data-content="tr: 'Results msg' ( GENDER 'male'; RES 1 )"&gt;Must be 'Él ha encontrado un único resultado'&lt;/span&gt;
+    &lt;span data-content="tr: 'Results msg' ( GENDER 'female'; RES 10 )"&gt;Must be 'Ella ha encontrado 10 resultados'&lt;/span&gt;
+    &lt;span data-content="tr: 'Results msg' ( RES 0 )"&gt;Must be 'Ellos no han encontrado ningún resultado'&lt;/span&gt;
 &lt;/div&gt;
                 </pre>
 
@@ -160,10 +160,10 @@ zpt.run({
                     Working with numbers:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;span data-tcontent="trNumber: 1355.23"&gt;Must be 1.355,23&lt;/span&gt;
-    &lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;Must be 1.355,236&lt;/span&gt;
-    &lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;Must be 001.355,236&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;span data-content="trNumber: 1355.23"&gt;Must be 1.355,23&lt;/span&gt;
+    &lt;span data-content="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;Must be 1.355,236&lt;/span&gt;
+    &lt;span data-content="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;Must be 001.355,236&lt;/span&gt;
 &lt;/div&gt;
                 </pre>
 
@@ -171,11 +171,11 @@ zpt.run({
                     Currencies:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;span data-tcontent="trCurrency: 'EUR' 1355.23"&gt;Must be 1.355,23 €&lt;/span&gt;
-    &lt;span data-tcontent="trCurrency: 'USD' 1355.23"&gt;Must be 1.355,23 $&lt;/span&gt;
-    &lt;span data-tcontent="trCurrency: 'EUR' 1355.23 ( currencyDisplay 'name' )"&gt;Must be 1.355,23 euros&lt;/span&gt;
-    &lt;span data-tcontent="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;Must be 1.355,23 dólares estadounidenses&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;span data-content="trCurrency: 'EUR' 1355.23"&gt;Must be 1.355,23 €&lt;/span&gt;
+    &lt;span data-content="trCurrency: 'USD' 1355.23"&gt;Must be 1.355,23 $&lt;/span&gt;
+    &lt;span data-content="trCurrency: 'EUR' 1355.23 ( currencyDisplay 'name' )"&gt;Must be 1.355,23 euros&lt;/span&gt;
+    &lt;span data-content="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;Must be 1.355,23 dólares estadounidenses&lt;/span&gt;
 &lt;/div&gt;
                 </pre>
                 
@@ -183,13 +183,13 @@ zpt.run({
                     Datetimes:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;span data-tcontent="trDate: date"&gt;Must be 20/12/2012&lt;/span&gt;
-    &lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;Must be 20/12/2012&lt;/span&gt;
-    &lt;span data-tcontent="trDate: date ( weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;Must be jueves, 20 de diciembre de 2012&lt;/span&gt;
-    &lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;Must be jueves, 21 de diciembre de 2012&lt;/span&gt;
-    &lt;span data-tcontent="trDate: date ( hour 'numeric'; minute 'numeric'; second 'numeric' )"&gt;Must be 4:00:00&lt;/span&gt;
-    &lt;span data-tcontent="trDate: date ( weekday 'long'; year 'numeric'; month 'long'; day 'numeric'; hour 'numeric'; minute 'numeric'; second 'numeric' )"&gt;Must be jueves, 21 de diciembre de 2012 4:00:00&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;span data-content="trDate: date"&gt;Must be 20/12/2012&lt;/span&gt;
+    &lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;Must be 20/12/2012&lt;/span&gt;
+    &lt;span data-content="trDate: date ( weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;Must be jueves, 20 de diciembre de 2012&lt;/span&gt;
+    &lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;Must be jueves, 21 de diciembre de 2012&lt;/span&gt;
+    &lt;span data-content="trDate: date ( hour 'numeric'; minute 'numeric'; second 'numeric' )"&gt;Must be 4:00:00&lt;/span&gt;
+    &lt;span data-content="trDate: date ( weekday 'long'; year 'numeric'; month 'long'; day 'numeric'; hour 'numeric'; minute 'numeric'; second 'numeric' )"&gt;Must be jueves, 21 de diciembre de 2012 4:00:00&lt;/span&gt;
 &lt;/div&gt;
                 </pre>
                 
@@ -197,9 +197,9 @@ zpt.run({
                     Translating errors:
                 </p>
                 <pre class="brush: html">
-&lt;div data-ilanguage="'es'" data-idomain="i18nBundle"&gt;
-    &lt;div data-ton-error="tr: 'Oh, noooo!'"&gt;
-        &lt;span data-tcontent="fireError()"&gt;Must fire error and then: ¡Error encontrado!&lt;/span&gt;
+&lt;div data-language="'es'" data-domain="i18nBundle"&gt;
+    &lt;div data-on-error="tr: 'Oh, noooo!'"&gt;
+        &lt;span data-content="fireError()"&gt;Must fire error and then: ¡Error encontrado!&lt;/span&gt;
     &lt;/div&gt;
 &lt;/div&gt;
                 </pre>

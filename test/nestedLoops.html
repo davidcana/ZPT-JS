@@ -23,10 +23,10 @@
             Try out nested loops with numeric arrays
         </p>
         <ol id="2NestedLoops">
-            <ol data-trepeat="list someNumbers">
-                <li data-trepeat="c list">
+            <ol data-repeat="list someNumbers">
+                <li data-repeat="c list">
                     Iterating element 
-                    <span class="nestedValue1" data-tcontent="c" data-tattributes="id string:number${c}">10/20/30/40</span>
+                    <span class="nestedValue1" data-content="c" data-attributes="id string:number${c}">10/20/30/40</span>
                 </li>
             </ol>
         </ol>
@@ -35,11 +35,11 @@
             Try out nested loops with complex object
         </p>
         <ol id="toolsLoop">
-            <ol data-trepeat="tool tools">
-                <span class="toolNames" data-tcontent="tool/name" data-tattributes="id string:tool${tool/id}">Tool X</span>
-                <li data-trepeat="c tool/numbers">
+            <ol data-repeat="tool tools">
+                <span class="toolNames" data-content="tool/name" data-attributes="id string:tool${tool/id}">Tool X</span>
+                <li data-repeat="c tool/numbers">
                     Iterating element 
-                    <span class="toolNumbers" data-tcontent="c" data-tattributes="id string:toolNumber${tool/id}${c}">
+                    <span class="toolNumbers" data-content="c" data-attributes="id string:toolNumber${tool/id}${c}">
                         10/20/30
                     </span>
                 </li>

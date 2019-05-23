@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Format expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 format_expressions ::= 'format:' formatter expression format_arguments
 formatter          ::= Name
 format_arguments   ::= [expression]*
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     <em>Format</em> expressions makes it easy to format values. They use <em>formatters</em> to do the work: a <em>formatter</em> is a normal function that must be previously registered. ZPT-JS includes some built-in <em>formatters</em>:
                 </p>
@@ -65,26 +65,26 @@ format_arguments   ::= [expression]*
                     You can add your custom <em>formatters</em> simply adding a function with the same name to the dictionary.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     <em>Formatters</em> does not exist in ZPT.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Simple format:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="format: lowerCase 'Test'"&gt;must be test&lt;/div&gt;
-&lt;div data-tcontent="format: upperCase 'Test'"&gt;must be TEST&lt;/div&gt;
+&lt;div data-content="format: lowerCase 'Test'"&gt;must be test&lt;/div&gt;
+&lt;div data-content="format: upperCase 'Test'"&gt;must be TEST&lt;/div&gt;
                 </pre>
                 
                 <p>
                     Format with arguments:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="format: fix 1.377 2"&gt;must be 1.37&lt;/div&gt;
-&lt;div data-tcontent="format: fix (/: 1 3) 2"&gt;must be 1.33&lt;/div&gt;
+&lt;div data-content="format: fix 1.377 2"&gt;must be 1.37&lt;/div&gt;
+&lt;div data-content="format: fix (/: 1 3) 2"&gt;must be 1.33&lt;/div&gt;
                 </pre>
                 
                 <p>
@@ -118,7 +118,7 @@ zpt.run({
                     ...and the invokation of <em>myCustomFormatter</em>:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="format: myCustomFormatter 1.55"&gt;must be $1.55&lt;/div&gt;
+&lt;div data-content="format: myCustomFormatter 1.55"&gt;must be $1.55&lt;/div&gt;
                 </pre>
                 
                 <p>

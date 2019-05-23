@@ -14,43 +14,43 @@
         <p>
             Define
         </p>
-        <ol data-tdefine="integer1 1; float1 1.5; text1 'this is a text'; text2 string:this is a text too">
-            <li>integer1 = 1 = <span id="t1-1" data-tcontent="integer1">an integer</span></li>
-            <li>float1 = 1.5 = <span id="t1-2" data-tcontent="float1">a float</span></li>
-            <li>text1 = this is a text = <span id="t1-3" data-tcontent="text1">a text</span></li>
-            <li>text2 = this is a text too = <span id="t1-4" data-tcontent="text2">a text</span></li>
+        <ol data-define="integer1 1; float1 1.5; text1 'this is a text'; text2 string:this is a text too">
+            <li>integer1 = 1 = <span id="t1-1" data-content="integer1">an integer</span></li>
+            <li>float1 = 1.5 = <span id="t1-2" data-content="float1">a float</span></li>
+            <li>text1 = this is a text = <span id="t1-3" data-content="text1">a text</span></li>
+            <li>text2 = this is a text too = <span id="t1-4" data-content="text2">a text</span></li>
         </ol>
-        <ol data-tdefine="integer1 1; 
+        <ol data-define="integer1 1; 
                           float1 1.5; 
                           text1 'this is a text';
                           text2 string:this is a text too">
-            <li>integer1 = 1 = <span id="t1-5" data-tcontent="integer1">an integer</span></li>
-            <li>float1 = 1.5 = <span id="t1-6" data-tcontent="float1">a float</span></li>
-            <li>text1 = this is a text = <span id="t1-7" data-tcontent="text1">a text</span></li>
-            <li>text2 = this is a text too = <span id="t1-8" data-tcontent="text2">a text</span></li>
+            <li>integer1 = 1 = <span id="t1-5" data-content="integer1">an integer</span></li>
+            <li>float1 = 1.5 = <span id="t1-6" data-content="float1">a float</span></li>
+            <li>text1 = this is a text = <span id="t1-7" data-content="text1">a text</span></li>
+            <li>text2 = this is a text too = <span id="t1-8" data-content="text2">a text</span></li>
         </ol>
         
         <p>
             Condition
         </p>
         <ol>
-            <li>Condition true 1: <span id="t2-1" data-tcondition="true">yes!</span></li>
-            <li>Condition true 2: <span id="t2-2" data-tcondition="true" data-tcontent="user/name">a name</span></li>
-            <li>Condition false 1: <span id="t2-3" data-tcondition="false">no!</span></li>
-            <li>Condition false 2: <span id="t2-4" data-tcondition="false" data-tcontent="user/name">a name</span></li>
-            <li>Condition not: false 1: <span id="t2-5" data-tcondition="not: false">yes!</span></li>
-            <li>Condition not: false 2: <span id="t2-6" data-tcondition="not: false" data-tcontent="user/name">a name</span></li>
-            <li>Condition not: true 1: <span id="t2-7" data-tcondition="not: true">no!</span></li>
-            <li>Condition not: true 2: <span id="t2-8" data-tcondition="not: true" data-tcontent="user/name">a name</span></li>
+            <li>Condition true 1: <span id="t2-1" data-condition="true">yes!</span></li>
+            <li>Condition true 2: <span id="t2-2" data-condition="true" data-content="user/name">a name</span></li>
+            <li>Condition false 1: <span id="t2-3" data-condition="false">no!</span></li>
+            <li>Condition false 2: <span id="t2-4" data-condition="false" data-content="user/name">a name</span></li>
+            <li>Condition not: false 1: <span id="t2-5" data-condition="not: false">yes!</span></li>
+            <li>Condition not: false 2: <span id="t2-6" data-condition="not: false" data-content="user/name">a name</span></li>
+            <li>Condition not: true 1: <span id="t2-7" data-condition="not: true">no!</span></li>
+            <li>Condition not: true 2: <span id="t2-8" data-condition="not: true" data-content="user/name">a name</span></li>
             
             <li>Condition with nested tags true 1: 
-                <span id="t2-9" data-tcondition="true">
-                    <span data-treplace="user/name">a name</span>
+                <span id="t2-9" data-condition="true">
+                    <span data-replace="user/name">a name</span>
                 </span>
             </li>
             <li>Condition with nested tags false 1: 
-                <span id="t2-10" data-tcondition="false">
-                    <span data-treplace="user/name">a name</span>
+                <span id="t2-10" data-condition="false">
+                    <span data-replace="user/name">a name</span>
                 </span>
             </li>
         </ol>
@@ -62,7 +62,7 @@
             <li>
                 Textarea:
                 <textarea id="t3-1" 
-                          data-tattributes="placeholder 'Write something here!';
+                          data-attributes="placeholder 'Write something here!';
                                             textareaAttrs;
                                             maxlength 200"></textarea>
             </li>
@@ -72,9 +72,9 @@
             Alt attributes
         </p>
         <ol>
-            <li>Link 1: <a id="t4-1" data-tattributes="title string:title in string expression; href 'http://www.xxx.org'">a link</a></li>
+            <li>Link 1: <a id="t4-1" data-attributes="title string:title in string expression; href 'http://www.xxx.org'">a link</a></li>
             <li>Link 2: <a id="t4-2" 
-                           data-tattributes="title string:title in string expression;
+                           data-attributes="title string:title in string expression;
                                              href 'http://www.xxx.org'">a link</a></li>
         </ol>
         
@@ -82,8 +82,8 @@
             Boolean attributes
         </p>
         <ol>
-            <li><button type="submit" data-tattributes="disabled false">This must be NOT disabled!</button></li>
-            <li><button type="submit" data-tattributes="disabled true">This must be disabled!</button></li>
+            <li><button type="submit" data-attributes="disabled false">This must be NOT disabled!</button></li>
+            <li><button type="submit" data-attributes="disabled true">This must be disabled!</button></li>
         </ol>
         
         <p>
@@ -91,17 +91,17 @@
         </p>
         <ol>
             <li>Link 2: <a id="t5-1" 
-                           data-tattributes="title nullValue;
+                           data-attributes="title nullValue;
                                              href 'http://www.xxx.org'">a link</a>
             </li>
             <li>Link 3: <a id="t5-2" 
-                           data-tattributes="title string:title in string expression; 
+                           data-attributes="title string:title in string expression; 
                                              href 'http://www.xxx.org';
                                              nullValue">a link</a></li>
             <li>
                 Textarea:
                 <textarea id="t5-3" 
-                          data-tattributes="placeholder 'Write something here!';
+                          data-attributes="placeholder 'Write something here!';
                                             nullValue;
                                             maxlength 200"></textarea>
             </li>
@@ -111,20 +111,20 @@
             Content
         </p>
         <ol>
-            <li>Non structure (escaped) formatted text: <span id="t6-1" data-tcontent="formatted">a formatted text</span></li>
-            <li>Structure (non escaped) formatted text: <span id="t6-2" data-tcontent="structure formatted">a formatted text</span></li>
-            <li>Default: <span id="t6-3" data-tcontent="default">a formatted text</span></li>
-            <li>Nothing: <span id="t6-4" data-tcontent="nothing">a formatted text</span></li>
+            <li>Non structure (escaped) formatted text: <span id="t6-1" data-content="formatted">a formatted text</span></li>
+            <li>Structure (non escaped) formatted text: <span id="t6-2" data-content="structure formatted">a formatted text</span></li>
+            <li>Default: <span id="t6-3" data-content="default">a formatted text</span></li>
+            <li>Nothing: <span id="t6-4" data-content="nothing">a formatted text</span></li>
         </ol>
         
         <p>
             Replace
         </p>
         <ol>
-            <li>Non structure (escaped) formatted text: <span id="t7-1"><span data-treplace="formatted">a formatted text</span></span></li>
-            <li>Structure (non escaped) formatted text: <span id="t7-2"><span data-treplace="structure formatted">a formatted text</span></span></li>
-            <li>Default: <span id="t7-3"><span data-treplace="default">a formatted text</span></span></li>
-            <li>Nothing: <span id="t7-4"><span data-treplace="nothing">a formatted text</span></span></li>
+            <li>Non structure (escaped) formatted text: <span id="t7-1"><span data-replace="formatted">a formatted text</span></span></li>
+            <li>Structure (non escaped) formatted text: <span id="t7-2"><span data-replace="structure formatted">a formatted text</span></span></li>
+            <li>Default: <span id="t7-3"><span data-replace="default">a formatted text</span></span></li>
+            <li>Nothing: <span id="t7-4"><span data-replace="nothing">a formatted text</span></span></li>
         </ol>
     </body>
 </html>

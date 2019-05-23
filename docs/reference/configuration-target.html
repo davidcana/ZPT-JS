@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Configuration - target</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -21,14 +21,14 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 target         ::= target_element || Array of target_element
 target_element ::= a DOM node
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     The <code>target</code> is used to define the node or nodes where ZPT-JS will search its custom attributes in a partial render. As <a href="configuration-root.html">root</a> it can be a simple DOM node or an array of DOM nodes.
                 </p>
@@ -37,7 +37,7 @@ target_element ::= a DOM node
                     It is very similar to <a href="configuration-root.html">root</a>. The difference is that <em>targets</em> refers to updates of nodes using partial renders. The first invokation of ZPT-JS needs a <em>root</em> definition.
                 </p>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Using the configuration option:
                 </p>

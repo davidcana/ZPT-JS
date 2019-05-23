@@ -6,7 +6,7 @@ var jsdom = require( 'node-jsdom' ).jsdom;
 jsdom.env(
     '<!doctype html>'
 	+ '<html>'
-	+ '<body><h1 id="t1" data-tcontent="string:hello">a text</h1></body>'
+	+ '<body><h1 id="t1" data-content="string:hello">a text</h1></body>'
 	+ '</html>', 
     /*[ '../../../js/lib/jquery-2.0.3.js' ], */
     [ 'http://code.jquery.com/jquery.min.js' ], 

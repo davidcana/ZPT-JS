@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Expressions</h1>
                 <ul>
                     <li><a href="#intro">Intro</a>.</li>
@@ -25,8 +25,8 @@
                     <li><a href="#misc">Misc expressions</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'intro'">Intro</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'intro'">Intro</h2>
                 <p>
                     Do you remember how we can replace the content of any tag? Take a look at this template:
                 </p>
@@ -36,17 +36,17 @@
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;span data-tcontent="title"&gt;the title&lt;/span&gt;.
+      This is &lt;span data-content="title"&gt;the title&lt;/span&gt;.
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
                 </pre>
                 
                 <p>
-                    <em>title</em> in the <em>data-tcontent</em> attribute is an <strong>expression</strong>. An <em>expression</em> can be evaluated by ZPT-JS to a value: this value is used by the <em>data-tcontent</em> attribute to replace its contents. Expressions are used widely by the tags of ZPT-JS.
+                    <em>title</em> in the <em>data-content</em> attribute is an <strong>expression</strong>. An <em>expression</em> can be evaluated by ZPT-JS to a value: this value is used by the <em>data-content</em> attribute to replace its contents. Expressions are used widely by the tags of ZPT-JS.
                 </p>
                 
-                <h2 data-tattributes="id 'path'">Path expressions</h2>
+                <h2 data-attributes="id 'path'">Path expressions</h2>
                 <p>
                     There are several types of expressions. The <em>title</em> is a <strong>variable expression</strong>, a subtype of <strong>path expressions</strong>. ZPT-JS evaluates it replacing it by its value in the dictionary (really in the scope). Very simple!
                 </p>
@@ -55,11 +55,11 @@
                     <strong>Literal expressions</strong> are also very simple. They represent constant values:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="'this is a string literal'"&gt;a string literal&lt;/span&gt;
-&lt;span data-tcontent="123"&gt;an integer number&lt;/span&gt;
-&lt;span data-tcontent="123.45"&gt;a float number&lt;/span&gt;
-&lt;span data-tcontent="true"&gt;a boolean true value&lt;/span&gt;
-&lt;span data-tcontent="false"&gt;a boolean false value&lt;/span&gt;
+&lt;span data-content="'this is a string literal'"&gt;a string literal&lt;/span&gt;
+&lt;span data-content="123"&gt;an integer number&lt;/span&gt;
+&lt;span data-content="123.45"&gt;a float number&lt;/span&gt;
+&lt;span data-content="true"&gt;a boolean true value&lt;/span&gt;
+&lt;span data-content="false"&gt;a boolean false value&lt;/span&gt;
                 </pre>
                 <p>
                     
@@ -68,21 +68,21 @@
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="user/name"&gt;any friends?&lt;/span&gt;
+&lt;span data-content="user/name"&gt;any friends?&lt;/span&gt;
                 </pre>
                 <p>
                     To evaluate <em>user/name</em>, ZPT-JS evaluates first <em>user</em> as an object and then searchs its <em>name</em> property. This is a <strong>property expression</strong>.
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="user/name | 'no friends'"&gt;any friends?&lt;/span&gt;
+&lt;span data-content="user/name | 'no friends'"&gt;any friends?&lt;/span&gt;
                 </pre>
                 <p>
                     This example will be evaluated to <em>'no friends'</em> if <em>user/name</em> is evaluated to false. So this allows to set default values.
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="user/birth()"&gt;birth&lt;/span&gt;
+&lt;span data-content="user/birth()"&gt;birth&lt;/span&gt;
                 </pre>
                 <p>
                     To evaluate <em>user/birth()</em>, ZPT-JS identifies first <em>user</em> as an object, then searchs its <em>birth</em> method, then evaluates their arguments (in this case there is none) and run it. This is a <strong>method expression</strong>.
@@ -92,31 +92,31 @@
                     Path expressions can be as complex as you wish:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="user/getData('personal')/day"&gt;a day&lt;/span&gt;
+&lt;span data-content="user/getData('personal')/day"&gt;a day&lt;/span&gt;
                 </pre>
                 <p>
                     ZPT-JS evaluates first <em>user</em> as an object, then searchs its <em>getData</em> method, then evaluates their arguments (in this case a string literal: <em>personal</em>), run it and then get the <em>day</em> property of the resulting object.
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="myFunction( 'an argument' )"&gt;birth&lt;/span&gt;
+&lt;span data-content="myFunction( 'an argument' )"&gt;birth&lt;/span&gt;
                 </pre>
                 <p>
                     ZPT-JS identifies first <em>myFunction</em> as a function, then evaluates their arguments and run it. This is a <strong>function expression</strong>.
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="items[0]"&gt;element 0 of items&lt;/span&gt;
-&lt;span data-tcontent="items[index]"&gt;element index of items&lt;/span&gt;
+&lt;span data-content="items[0]"&gt;element 0 of items&lt;/span&gt;
+&lt;span data-content="items[index]"&gt;element index of items&lt;/span&gt;
                 </pre>
                 <p>
                     These are some examples of <strong>array expressions</strong>. The first one evaluates to the first element of the <em>items</em> array. The second one to item number <em>index</em>.
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="[1 5 99 number]"&gt;1, 5, 99 and number&lt;/span&gt;
-&lt;span data-tcontent="['a' 'b' 99 number]"&gt;'a', 'b', 99 and number&lt;/span&gt;
-&lt;span data-tcontent="[4:8:2 number]"&gt;4, 6, 8 and number&lt;/span&gt;
+&lt;span data-content="[1 5 99 number]"&gt;1, 5, 99 and number&lt;/span&gt;
+&lt;span data-content="['a' 'b' 99 number]"&gt;'a', 'b', 99 and number&lt;/span&gt;
+&lt;span data-content="[4:8:2 number]"&gt;4, 6, 8 and number&lt;/span&gt;
                 </pre>
                 <p>
                     These are some examples of <strong>list expressions</strong>. The first one evaluates to an array with elements 1, 5, 99 and number. Mixing elements of different type is supported: the second one evaluates to an array with elements 'a', 'b', 99 and number.
@@ -129,29 +129,29 @@
                     Lists are very versatile:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="[1:3 10]"&gt;evaluates to 1,2,3,10&lt;/span&gt;
-&lt;span data-tcontent="[4 1:3 10]"&gt;evaluates to 4,1,2,3,10&lt;/span&gt;
+&lt;span data-content="[1:3 10]"&gt;evaluates to 1,2,3,10&lt;/span&gt;
+&lt;span data-content="[4 1:3 10]"&gt;evaluates to 4,1,2,3,10&lt;/span&gt;
                 </pre>
                 
                 <p>
                     Don't forget to not use spaces inside ranges! 
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="[ 1 : 3 ]"&gt;this will not work!&lt;/span&gt;
+&lt;span data-content="[ 1 : 3 ]"&gt;this will not work!&lt;/span&gt;
                 </pre>
                 
-                <h2 data-tattributes="id 'arithmethic'">Arithmethic expressions</h2>
+                <h2 data-attributes="id 'arithmethic'">Arithmethic expressions</h2>
                 <p>
                     <strong>Arithmethic expressions</strong> define expressions using math operations:
                 </p>
                 
                 <pre class="brush: html">
-&lt;span data-tcontent="+: 5 4"&gt;must be 9&lt;/span&gt;
-&lt;span data-tcontent="-: 5 4"&gt;must be 1&lt;/span&gt;
-&lt;span data-tcontent="*: 5 4"&gt;must be 20&lt;/span&gt;
-&lt;span data-tcontent="/: 69 3"&gt;must be 23&lt;/span&gt;
-&lt;span data-tcontent="%: 23 7"&gt;must be 2&lt;/span&gt;
-&lt;span data-tcontent="*: 2 ( +: number100 1 )"&gt;must be 202&lt;/span&gt;
+&lt;span data-content="+: 5 4"&gt;must be 9&lt;/span&gt;
+&lt;span data-content="-: 5 4"&gt;must be 1&lt;/span&gt;
+&lt;span data-content="*: 5 4"&gt;must be 20&lt;/span&gt;
+&lt;span data-content="/: 69 3"&gt;must be 23&lt;/span&gt;
+&lt;span data-content="%: 23 7"&gt;must be 2&lt;/span&gt;
+&lt;span data-content="*: 2 ( +: number100 1 )"&gt;must be 202&lt;/span&gt;
                 </pre>
                 
                 <p>
@@ -162,45 +162,45 @@
                     Lists expressions can be used in arithmethic operations:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="+: [1:3 10]"&gt;evaluates to 1+2+3+10 = 16&lt;/span&gt;
-&lt;span data-tcontent="+: [4 1:3 10]"&gt;evaluates to 4+1+2+3+10 = 20&lt;/span&gt;
+&lt;span data-content="+: [1:3 10]"&gt;evaluates to 1+2+3+10 = 16&lt;/span&gt;
+&lt;span data-content="+: [4 1:3 10]"&gt;evaluates to 4+1+2+3+10 = 20&lt;/span&gt;
                 </pre>
                 
-                <h2 data-tattributes="id 'boolean'">Boolean expressions</h2>
+                <h2 data-attributes="id 'boolean'">Boolean expressions</h2>
                 <p>
                     <strong>Boolean expressions</strong> define expressions using boolean operations:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="and: somethingTrue somethingFalse"&gt;must be false&lt;/span&gt;
-&lt;span data-tcontent="or: somethingTrue somethingFalse"&gt;must be true&lt;/span&gt;
-&lt;span data-tcontent="not: somethingTrue"&gt;must be false&lt;/span&gt;
-&lt;span data-tcontent="cond: somethingFalse 'It is true!' 'Liar!'"&gt;must be Liar!&lt;/span&gt;
+&lt;span data-content="and: somethingTrue somethingFalse"&gt;must be false&lt;/span&gt;
+&lt;span data-content="or: somethingTrue somethingFalse"&gt;must be true&lt;/span&gt;
+&lt;span data-content="not: somethingTrue"&gt;must be false&lt;/span&gt;
+&lt;span data-content="cond: somethingFalse 'It is true!' 'Liar!'"&gt;must be Liar!&lt;/span&gt;
                 </pre>
                 
-                <h2 data-tattributes="id 'comparison'">Comparison expressions</h2>
+                <h2 data-attributes="id 'comparison'">Comparison expressions</h2>
                 <p>
                     <strong>Comparison expressions</strong> compare values:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="eq: 1 number1"&gt;must be true&lt;/span&gt;
-&lt;span data-tcontent="not: eq: 1 number1"&gt;must be false&lt;/span&gt;
-&lt;span data-tcontent="gt: 10 number1"&gt;must be true&lt;/span&gt;
-&lt;span data-tcontent="lt: 10 number1"&gt;must be false&lt;/span&gt;
-&lt;span data-tcontent="in: 1 0 1"&gt;must be true&lt;/span&gt;
-&lt;span data-tcontent="in: 1 0 2"&gt;must be false&lt;/span&gt;
+&lt;span data-content="eq: 1 number1"&gt;must be true&lt;/span&gt;
+&lt;span data-content="not: eq: 1 number1"&gt;must be false&lt;/span&gt;
+&lt;span data-content="gt: 10 number1"&gt;must be true&lt;/span&gt;
+&lt;span data-content="lt: 10 number1"&gt;must be false&lt;/span&gt;
+&lt;span data-content="in: 1 0 1"&gt;must be true&lt;/span&gt;
+&lt;span data-content="in: 1 0 2"&gt;must be false&lt;/span&gt;
                 </pre>
                 
                 <p>
                     The first 4 use these comparison operations: equals (eq:), not (not:), greater than (gt:) and lesser than (lt:). The last one uses the <em>in</em> operator (in:): it evaluates to true if the first element is included into the next elements.
                 </p>
                 
-                <h2 data-tattributes="id 'scripting'">Scripting expressions</h2>
+                <h2 data-attributes="id 'scripting'">Scripting expressions</h2>
                 <p>
                     <strong>Scripting expressions</strong> executes scripts:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="js: ${number100} + 1"&gt;must be 101&lt;/span&gt;
-&lt;span data-tcontent="$('#myId')"&gt;search an id called myId in the DOM&lt;/span&gt;
+&lt;span data-content="js: ${number100} + 1"&gt;must be 101&lt;/span&gt;
+&lt;span data-content="$('#myId')"&gt;search an id called myId in the DOM&lt;/span&gt;
                 </pre>
                 <p>
                     The first one is a <strong>javascript expression</strong>: ZPT-JS evaluates the expressions (starting by <em>$</em> and surrounded by <em>{}</em>) and then execute the resulting string as javascript code.
@@ -209,14 +209,14 @@
                     The second one is a <strong>jquery expression</strong>: it evaluates the string surrounded by parenthesis as a jquery selector.
                 </p>
                 
-                <h2 data-tattributes="id 'misc'">Misc expressions</h2>
+                <h2 data-attributes="id 'misc'">Misc expressions</h2>
                 <p>
                     This category includes <strong>exists</strong>, <strong>string</strong> and <strong>format</strong> expressions.
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="exists: existingVar"&gt;must be true&lt;/span&gt;
-&lt;span data-tcontent="exists: non/existing/path"&gt;must be false&lt;/span&gt;
-&lt;span data-tcontent="string:user is ${user/name}"&gt;must be user is Bob&lt;/span&gt;
+&lt;span data-content="exists: existingVar"&gt;must be true&lt;/span&gt;
+&lt;span data-content="exists: non/existing/path"&gt;must be false&lt;/span&gt;
+&lt;span data-content="string:user is ${user/name}"&gt;must be user is Bob&lt;/span&gt;
                 </pre>
                 
                 <p>
@@ -230,10 +230,10 @@
                     <strong>Format expressions</strong> use components called <strong>formatters</strong> to format the evaluation of an expression. ZPT-JS includes some built-in formatters:
                 </p>
                 <pre class="brush: html">
-&lt;span data-tcontent="format: lowerCase 'Test'"&gt;must be test&lt;/span&gt;
-&lt;span data-tcontent="format: upperCase 'Test'"&gt;must be TEST&lt;/span&gt;
-&lt;span data-tcontent="format: fix 1.371 2"&gt;must be 1.37&lt;/span&gt;
-&lt;span data-tcontent="format: fix (/: 1 3) 2"&gt;must be 0.33&lt;/span&gt;
+&lt;span data-content="format: lowerCase 'Test'"&gt;must be test&lt;/span&gt;
+&lt;span data-content="format: upperCase 'Test'"&gt;must be TEST&lt;/span&gt;
+&lt;span data-content="format: fix 1.371 2"&gt;must be 1.37&lt;/span&gt;
+&lt;span data-content="format: fix (/: 1 3) 2"&gt;must be 0.33&lt;/span&gt;
                 </pre>
             </article>
         </div>

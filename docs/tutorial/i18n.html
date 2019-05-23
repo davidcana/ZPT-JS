@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - I18n</h1>
                 <ul>
                     <li><a href="#intro">Intro to i18n</a>.</li>
@@ -25,9 +25,9 @@
                     <li><a href="#datesAndTimes">Dates and times</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
 
-                <h2 data-tattributes="id 'intro'">Intro to i18n</h2>
+                <h2 data-attributes="id 'intro'">Intro to i18n</h2>
                 <p>
                     Nowadays ZPT-JS has some i18n capabilities. How do they work? Let's see an example:
                 </p>
@@ -98,14 +98,14 @@ zpt.run({
     &lt;/head&gt;
     &lt;body&gt;
         &lt;h1&gt;Some I18n expressions&lt;/h1&gt;
-        &lt;ol data-ilanguage="'en'" data-idomain="i18nBundle"&gt;
+        &lt;ol data-language="'en'" data-domain="i18nBundle"&gt;
             &lt;li&gt;
                ¡Hola mundo! = 
-               &lt;span data-tcontent="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
+               &lt;span data-content="tr: 'Hello world!'"&gt;Must be ¡Hola mundo!&lt;/span&gt;
             &lt;/li&gt;
             &lt;li&gt;
                Él ha encontrado 10 resultados = 
-                &lt;span data-tcontent="tr: 'Results msg' ( GENDER 'male'; RES 10 )"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
+                &lt;span data-content="tr: 'Results msg' ( GENDER 'male'; RES 10 )"&gt;Must be 'Él ha encontrado 10 resultados'&lt;/span&gt;
             &lt;/li&gt;
         &lt;/ol&gt;
     &lt;/body&gt;
@@ -123,8 +123,8 @@ zpt.run({
                             <li>An instance of <code>I18nBundle</code> class. An instance of this class groups an instance of <code>I18n</code> class per supported language. They are useful to support using several languages in a template.</li>
                         </ul>    
                     </li>
-                    <li>The <code>data-idomain</code> attribute defines the source of i18n resources to use. It can be one or several instances of <code>I18n</code> or <code>I18nBundle</code> classes or an array of them.</li>
-                    <li>The <code>data-ilanguage</code> attribute defines the current language to use. It is needed when <code>data-idomain</code> contains a <code>I18nBundle</code> instance, it is useless when we use <code>I18n</code> instances.</li>
+                    <li>The <code>data-domain</code> attribute defines the source of i18n resources to use. It can be one or several instances of <code>I18n</code> or <code>I18nBundle</code> classes or an array of them.</li>
+                    <li>The <code>data-language</code> attribute defines the current language to use. It is needed when <code>data-domain</code> contains a <code>I18nBundle</code> instance, it is useless when we use <code>I18n</code> instances.</li>
                     <li>The <code>tr</code> expression  evaluates an expression but then it searches that value into the messages.</li>
                     <li>The expression <code>'Hello world!'</code> is a literal, but <code>'Results msg' ( GENDER 'male'; RES 10 )</code> is a little more complex:
                         <ol>
@@ -135,59 +135,59 @@ zpt.run({
                     </li>
                 </ul>
 
-                <h2 data-tattributes="id 'examples'">Some examples</h2>
+                <h2 data-attributes="id 'examples'">Some examples</h2>
                 <p>
                     Some examples of i18n tags in action:
                 </p>
                 <ul>
                     <li>
-                        <code>&lt;img src="image.png" data-tattributes="title tr: 'Hello world!'"&gt;</code> adds an i18n title to the image.
+                        <code>&lt;img src="image.png" data-attributes="title tr: 'Hello world!'"&gt;</code> adds an i18n title to the image.
                     </li>
                     <li>
-                        <code>&lt;li data-tdefine="msg tr: 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
+                        <code>&lt;li data-define="msg tr: 'Hello world!'"&gt;</code> defines a <code>msg</code> variable with the i18n message of <code>'Hello world!'</code>.
                     </li>
                     <li>
-                        <code>&lt;body data-ton-error="tr: 'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
+                        <code>&lt;body data-on-error="tr: 'Oh, noooo!'"&gt;</code> sets the i18n message of <code>'Oh, noooo!'</code> as the message to show if an error occurs.
                     </li>
-                    <li><code>&lt;span data-treplace="tr: 'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
+                    <li><code>&lt;span data-replace="tr: 'Hello world!'"&gt;</code> replaces the <code>span</code> tag by the i18n message of <code>'Hello world!'</code>.</li>
                 </ul>
                 <p>
-                    Some examples of valid <code>data-idomain</code> attributes:
+                    Some examples of valid <code>data-domain</code> attributes:
                 </p>
                 <ul>
-                    <li><code>data-idomain="i18nES1"</code> Defines an instance of <code>I18n</code> class as the source of i18n strings.</li>
-                    <li><code>data-idomain="i18nES2 i18nES1"</code> Defines 2 instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the <em>i18nES2</em> instance first; if the string is not found will be use <em>i18nES1</em> instance.</li>
-                    <li><code>data-idomain="i18nBundle1"</code> Defines an instance of <code>I18nBundle</code> class as the source of i18n strings.</li>
-                    <li><code>data-idomain="i18nBundle2 i18nBundle1"</code>Defines 2 instances of <code>I18nBundle</code> class as the source of i18n strings.</li>
-                    <li><code>data-idomain="i18nESArray"</code> Defines an array of instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the first instance in the array; if the string is not found will be use the next instance until it is found.</li>
+                    <li><code>data-domain="i18nES1"</code> Defines an instance of <code>I18n</code> class as the source of i18n strings.</li>
+                    <li><code>data-domain="i18nES2 i18nES1"</code> Defines 2 instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the <em>i18nES2</em> instance first; if the string is not found will be use <em>i18nES1</em> instance.</li>
+                    <li><code>data-domain="i18nBundle1"</code> Defines an instance of <code>I18nBundle</code> class as the source of i18n strings.</li>
+                    <li><code>data-domain="i18nBundle2 i18nBundle1"</code>Defines 2 instances of <code>I18nBundle</code> class as the source of i18n strings.</li>
+                    <li><code>data-domain="i18nESArray"</code> Defines an array of instances of <code>I18n</code> class as the source of i18n strings. ZPT will use the first instance in the array; if the string is not found will be use the next instance until it is found.</li>
                 </ul>
 
-                <h2 data-tattributes="id 'domains'">Working with domains</h2>
+                <h2 data-attributes="id 'domains'">Working with domains</h2>
                 <p>
-                    In the previous example the domain was a simple <code>I18nBundle</code> instance. This forces to use big maps with all the messages of one language. This can be awful if the amount of messages is big. <code>data-idomain</code> tag supports also a list of <code>I18nBundle</code> instances, so the messages will be searched in the same order.
+                    In the previous example the domain was a simple <code>I18nBundle</code> instance. This forces to use big maps with all the messages of one language. This can be awful if the amount of messages is big. <code>data-domain</code> tag supports also a list of <code>I18nBundle</code> instances, so the messages will be searched in the same order.
                 </p>
                 <p>
-                    Therefore, <code>data-idomain="i18nBundle1 i18nBundle2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
+                    Therefore, <code>data-domain="i18nBundle1 i18nBundle2"</code> allows to organise your i18n messages in 2 maps. The first one can contain general messages and the second one more particular messages (for example).
                 </p>
 
                 <p>
-                    <code>data-idomain</code> also supports nested definitions:
+                    <code>data-domain</code> also supports nested definitions:
                 </p>
                 <pre class="brush: html">
-&lt;div data-idomain="i18nBundle1"&gt;
-   &lt;span data-tcontent="tr: 'Hello world!'"&gt;
+&lt;div data-domain="i18nBundle1"&gt;
+   &lt;span data-content="tr: 'Hello world!'"&gt;
         ¡Hola mundo!
    &lt;/span&gt;
-   &lt;span data-idomain="i18nBundle2" data-tcontent="tr: 'Hello world!'"&gt;
+   &lt;span data-domain="i18nBundle2" data-content="tr: 'Hello world!'"&gt;
         ¡¡¡Hola mundo 2!!!
    &lt;/span&gt;
 &lt;/div&gt; 
                 </pre>
                 <p>
-                    The first <code>data-tcontent</code> will search only in <code>i18nBundle1</code>. The second one will search first in <code>i18nBundle2</code> and if it is not found will search in <code>i18nBundle1</code>.
+                    The first <code>data-content</code> will search only in <code>i18nBundle1</code>. The second one will search first in <code>i18nBundle2</code> and if it is not found will search in <code>i18nBundle1</code>.
                 </p>
 
-                <h2 data-tattributes="id 'json'">Loading messages from JSON files</h2>
+                <h2 data-attributes="id 'json'">Loading messages from JSON files</h2>
                 <p>
                     ZPT-JS makes it easy loading i18n messages from JSON files:
                 </p>
@@ -233,19 +233,19 @@ zpt.run({
                     The bundles (<em>i18nBundle1</em> and <em>i18nBundle2</em>) are not required, add to the dictionary if you need them.
                 </p>
 
-                <h2 data-tattributes="id 'numbers'">Numbers</h2>
+                <h2 data-attributes="id 'numbers'">Numbers</h2>
                 <p>
                     ZPT-JS uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> as i18n API for numbers. Let's see some examples:
                 </p>
                 <ul>
                     <li>
-                        <code>&lt;span data-tcontent="trNumber: 1355.23"&gt;</code> formats that number depending on the active i18n domain (<em>1,355.23</em> in english, <em>1.355,23</em> in spanish...).
+                        <code>&lt;span data-content="trNumber: 1355.23"&gt;</code> formats that number depending on the active i18n domain (<em>1,355.23</em> in english, <em>1.355,23</em> in spanish...).
                     </li>
                     <li>
-                        <code>&lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits (<em>1,355.236</em> in english, <em>1.355,236</em> in spanish...).
+                        <code>&lt;span data-content="trNumber: 1355.23643 ( maximumFractionDigits 3 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits (<em>1,355.236</em> in english, <em>1.355,236</em> in spanish...).
                     </li>
                     <li>
-                        <code>&lt;span data-tcontent="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits and a minimum of 6 integer digits (<em>001,355.236</em> in english, <em>001.355,236</em> in spanish...).
+                        <code>&lt;span data-content="trNumber: 1355.23643 ( maximumFractionDigits 3; minimumIntegerDigits 6 )"&gt;</code> formats that number depending on the active i18n domain and using a maximum of 3 fraction digits and a minimum of 6 integer digits (<em>001,355.236</em> in english, <em>001.355,236</em> in spanish...).
                     </li>
                 </ul>
 
@@ -253,16 +253,16 @@ zpt.run({
                     Take a look on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat">NumberFormat options</a> to see all available options.
                 </p>
 
-                <h2 data-tattributes="id 'currencies'">Currencies</h2>
+                <h2 data-attributes="id 'currencies'">Currencies</h2>
                 <p>
                     ZPT-JS uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> as i18n API for currencies. Let's see some examples:
                 </p>
                 <ul>
                     <li>
-                        <code>&lt;span data-tcontent="trCurrency: 'EUR' 1355.23"&gt;</code> formats that number depending on the active i18n domain and using that currency (<em>€ 1,355.23</em> in english, <em>1.355,23 €</em> in spanish...).
+                        <code>&lt;span data-content="trCurrency: 'EUR' 1355.23"&gt;</code> formats that number depending on the active i18n domain and using that currency (<em>€ 1,355.23</em> in english, <em>1.355,23 €</em> in spanish...).
                     </li>
                     <li>
-                        <code>&lt;span data-tcontent="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;</code> uses the name of the currency (<em>1,355.23 US dollars</em> in english, <em>1.355,23 € dólares estadounidenses</em> in spanish...).
+                        <code>&lt;span data-content="trCurrency: 'USD' 1355.23 ( currencyDisplay 'name' )"&gt;</code> uses the name of the currency (<em>1,355.23 US dollars</em> in english, <em>1.355,23 € dólares estadounidenses</em> in spanish...).
                     </li>
                 </ul>
 
@@ -270,19 +270,19 @@ zpt.run({
                     Options are the same as numbers (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat">NumberFormat options</a>) plus some specific options of currencies.
                 </p>
 
-                <h2 data-tattributes="id 'datesAndTimes'">Dates and times</h2>
+                <h2 data-attributes="id 'datesAndTimes'">Dates and times</h2>
                 <p>
                     ZPT-JS uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> as i18n API for date and times. Let's see some examples:
                 </p>
                 <ul>
                     <li>
-                        <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;</code> formats that date depending on the active i18n domain (<em>12/21/2012</em> in english, <em>21/12/2012</em> in spanish...).
+                        <code>&lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) )"&gt;</code> formats that date depending on the active i18n domain (<em>12/21/2012</em> in english, <em>21/12/2012</em> in spanish...).
                     </li>
                     <li>
-                        <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) (  weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;</code> formats that date with some options (<em>Friday, December 21, 2012</em> in english, <em>viernes, 21 de diciembre de 2012</em> in spanish...).
+                        <code>&lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) (  weekday 'long'; year 'numeric'; month 'long'; day 'numeric' )"&gt;</code> formats that date with some options (<em>Friday, December 21, 2012</em> in english, <em>viernes, 21 de diciembre de 2012</em> in spanish...).
                     </li>
                     <li>
-                        <code>&lt;span data-tcontent="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( hour 'numeric'; minute 'numeric';  second 'numeric' )"&gt;</code> formats that date with some options (<em>4:00:00 AM</em> in english, <em>4:00:00</em> in spanish...).
+                        <code>&lt;span data-content="trDate: ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) ( hour 'numeric'; minute 'numeric';  second 'numeric' )"&gt;</code> formats that date with some options (<em>4:00:00 AM</em> in english, <em>4:00:00</em> in spanish...).
                     </li>
                 </ul>
 

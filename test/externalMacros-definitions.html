@@ -6,23 +6,23 @@
     <body>
         
         <!-- Macro definitions -->
-        <p data-mdefine-macro="copyright">
+        <p data-define-macro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
-        <p data-mdefine-macro="dynamicMacro">
-            Dynamic text: <span data-tcontent="string:A test of a dynamic macro" data-tattributes="id string:t2-1">A text</span>
+        <p data-define-macro="dynamicMacro">
+            Dynamic text: <span data-content="string:A test of a dynamic macro" data-attributes="id string:t2-1">A text</span>
         </p>
-        <p data-mdefine-macro="dynamicMacroReadingVar">
-            Var value: <span data-tcontent="var" data-tattributes="id id">The var value</span>
+        <p data-define-macro="dynamicMacroReadingVar">
+            Var value: <span data-content="var" data-attributes="id id">The var value</span>
         </p>
         
-        <ul data-mdefine-macro="list">
-            <li data-trepeat="item items">
-                <span data-tcontent="item" data-tattributes="class string:listItems1">An item</span>
+        <ul data-define-macro="list">
+            <li data-repeat="item items">
+                <span data-content="item" data-attributes="class string:listItems1">An item</span>
             </li>
         </ul>
         
-        <div data-mdefine-macro="sidebar">
+        <div data-define-macro="sidebar">
             Links
             <ul>
                 <li><a href="/">Home</a></li>
@@ -30,12 +30,12 @@
                 <li><a href="/support">Support</a></li>
                 <li><a href="/contact">Contact Us</a></li>
             </ul>
-            <span data-mdefine-slot="additional_info"></span>
+            <span data-define-slot="additional_info"></span>
         </div>
         
-        <div data-mdefine-macro="enhacedSidebar">
+        <div data-define-macro="enhacedSidebar">
             Links
-            <div data-mdefine-slot="links">
+            <div data-define-slot="links">
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/products">Products</a></li>
@@ -43,40 +43,40 @@
                     <li><a href="/contact">Contact Us</a></li>
                 </ul>
             </div>
-            <span data-mdefine-slot="additional_info"></span>
+            <span data-define-slot="additional_info"></span>
         </div>
         
-        <ul data-mdefine-macro="dynamicListWith1Slot">
-            <li data-trepeat="item items">
-                <span data-tcontent="item">An item</span>
+        <ul data-define-macro="dynamicListWith1Slot">
+            <li data-repeat="item items">
+                <span data-content="item">An item</span>
             </li>
             <li>
-                <span data-mdefine-slot="additional_info"></span>
+                <span data-define-slot="additional_info"></span>
             </li>
         </ul>
         
-        <div data-mdefine-macro="enhancedCopyright">
+        <div data-define-macro="enhancedCopyright">
             <p>
                 This macro calls another macro.
             </p>
-            <p data-muse-macro="'copyright'">
+            <p data-use-macro="'copyright'">
                 Macro goes here
             </p>
         </div>
         
-        <div data-mdefine-macro="rerunMacro1" data-tdefine="number3 3">
-            <ul data-tattributes="id string:t${testNumber}-1b">
+        <div data-define-macro="rerunMacro1" data-define="number3 3">
+            <ul data-attributes="id string:t${testNumber}-1b">
                 <li>
-                    number = <span data-tcontent="number" data-tattributes="id string:t${testNumber}-2">The number value</span>
+                    number = <span data-content="number" data-attributes="id string:t${testNumber}-2">The number value</span>
                 </li>
                 <li>
-                    number2 = <span data-tcontent="number2" data-tattributes="id string:t${testNumber}-3">The number2 value</span>
+                    number2 = <span data-content="number2" data-attributes="id string:t${testNumber}-3">The number2 value</span>
                 </li>
                 <li>
-                    number3 = <span data-tcontent="number3" data-tattributes="id string:t${testNumber}-4">The number3 value</span>
+                    number3 = <span data-content="number3" data-attributes="id string:t${testNumber}-4">The number3 value</span>
                 </li>
                 <li>
-                    +: number number2 number3 = <span data-tcontent="+: number number2 number3" data-tattributes="id string:t${testNumber}-5">The added value</span>
+                    +: number number2 number3 = <span data-content="+: number number2 number3" data-attributes="id string:t${testNumber}-5">The added value</span>
                 </li>
             </ul>
         </div>

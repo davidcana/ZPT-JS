@@ -10,11 +10,46 @@
         <link rel="stylesheet" type="text/css" href="docs.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZCrud change log</h1>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
+                <h2>
+                    0.34.0 <span class="changes-date">23 May 2019</span>
+                </h2>
+                <ul>
+                    <li>Now exists expression returns true when the path expressions following its expression returns a value and it is not undefined. It is false when the path expression cannot locate an object or if it evaluates to undefined.</li>
+                    <li>
+                        Some exports added:
+                        <ul>
+                            <li>exports.I18nBundle</li>
+                            <li>exports.expressionBuilder</li>
+                            <li>exports.evaluateHelper</li>
+                            <li>exports.ExpressionTokenizer</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Name of tags simplified. The new name of attributes are:
+                        <ul>
+                            <li>talCondition:     <em>data-condition</em></li>
+                            <li>talRepeat:        <em>data-repeat</em></li>
+                            <li>talAttributes:    <em>data-attributes</em></li>
+                            <li>talContent:       <em>data-content</em></li>
+                            <li>talDefine:        <em>data-define</em></li>
+                            <li>talOmitTag:       <em>data-omit-tag</em></li>
+                            <li>talReplace:       <em>data-replace</em></li>
+                            <li>talOnError:       <em>data-on-error</em></li>
+                            <li>metalDefineMacro: <em>data-define-macro</em></li>
+                            <li>metalUseMacro:    <em>data-use-macro</em></li>
+                            <li>metalDefineSlot:  <em>data-define-slot</em></li>
+                            <li>metalFillSlot:    <em>data-fill-slot</em></li>
+                            <li>i18nDomain:       <em>data-domain</em></li>
+                            <li>i18nLanguage:     <em>data-language</em></li>
+                        </ul>
+                    </li>
+                </ul>
+                
                 <h2>
                     0.33.0 <span class="changes-date">8 May 2019</span>
                 </h2>

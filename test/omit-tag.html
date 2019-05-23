@@ -18,20 +18,20 @@
         <h1>replace</h1>
         
         <!-- Should omit -->
-        <div>replaced text = <span id="t1-1"><span data-treplace="'replaced text'">should be replaced</span></span></div>
-        <div>+: 1 1 = 2 = <span id="t1-2"><span data-treplace="+: 1 1">should be replaced</span></span></div>
-        <div>pre ( +: 1 1 ) post = pre ( 2 ) post = pre ( <span data-treplace="+: 1 1">should be replaced</span> ) post</div>
+        <div>replaced text = <span id="t1-1"><span data-replace="'replaced text'">should be replaced</span></span></div>
+        <div>+: 1 1 = 2 = <span id="t1-2"><span data-replace="+: 1 1">should be replaced</span></span></div>
+        <div>pre ( +: 1 1 ) post = pre ( 2 ) post = pre ( <span data-replace="+: 1 1">should be replaced</span> ) post</div>
     
         <h1>omit-tag</h1>
         <div><span id="t2-1"><span>Not using omit-tag (should not omit)</span></span></div>
      
         <!-- Should omit -->
-        <div><span id="t2-2"><span data-tomit-tag="">Void omit-tag (should omit)</span></span></div>
-        <div><span id="t2-3"><span data-tomit-tag="true">'true' literal (should omit)</span></span></div> 
-        <div><span id="t2-4"><span data-tomit-tag="gt: 1 0">gt: 1 0 (should omit)</span></span></div>
-        <div><span id="t2-5"><span data-tomit-tag="not: lt: 1 0">not: lt: 1 0 (should omit)</span></span></div>
-        <div><span id="t2-6"><span data-tomit-tag="1">1 (should omit)</span></span></div>
-        <div><span id="t2-7"><span data-tomit-tag="true">
+        <div><span id="t2-2"><span data-omit-tag="">Void omit-tag (should omit)</span></span></div>
+        <div><span id="t2-3"><span data-omit-tag="true">'true' literal (should omit)</span></span></div> 
+        <div><span id="t2-4"><span data-omit-tag="gt: 1 0">gt: 1 0 (should omit)</span></span></div>
+        <div><span id="t2-5"><span data-omit-tag="not: lt: 1 0">not: lt: 1 0 (should omit)</span></span></div>
+        <div><span id="t2-6"><span data-omit-tag="1">1 (should omit)</span></span></div>
+        <div><span id="t2-7"><span data-omit-tag="true">
             Children: 
             <span>1</span>
             <span>2</span>
@@ -39,11 +39,11 @@
         </span></span></div>
         
         <!-- Should not omit --> 
-        <div><span id="t2-8"><span data-tomit-tag="false">'false' literal (should not omit)</span></span></div>
-        <div><span id="t2-9"><span data-tomit-tag="lt: 1 0">lt: 1 0 (should not omit)</span></span></div>
-        <div><span id="t2-10"><span data-tomit-tag="not: gt: 1 0">not: gt: 1 0 (should not omit)</span></span></div>
-        <div><span id="t2-11"><span data-tomit-tag="0">1 (should not omit)</span></span></div>
-        <div><span id="t2-12"><span data-tomit-tag="false">
+        <div><span id="t2-8"><span data-omit-tag="false">'false' literal (should not omit)</span></span></div>
+        <div><span id="t2-9"><span data-omit-tag="lt: 1 0">lt: 1 0 (should not omit)</span></span></div>
+        <div><span id="t2-10"><span data-omit-tag="not: gt: 1 0">not: gt: 1 0 (should not omit)</span></span></div>
+        <div><span id="t2-11"><span data-omit-tag="0">1 (should not omit)</span></span></div>
+        <div><span id="t2-12"><span data-omit-tag="false">
             Children: 
             <span>1</span>
             <span>2</span>

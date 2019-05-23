@@ -71,12 +71,12 @@ QUnit.test( "Repeat test", function( assert ) {
 
 QUnit.test( "Omit-tag test", function( assert ) {
     assert.equal( $('#t6-1').html() , "Void omit-tag (should omit)" );
-    assert.equal( $('#t6-2').html() , '<span data-tomit-tag="" data-tcontent="c">Void omit-tag (should NOT omit)</span>' );
+    assert.equal( $('#t6-2').html() , '<span data-omit-tag="" data-content="c">Void omit-tag (should NOT omit)</span>' );
 });
 
 QUnit.test( "Replace test", function( assert ) {
     assert.equal( $('#t7-1').html() , "replaced text" );
-    assert.equal( $('#t7-2').html() , "<span data-treplace=\"'replaced text'\">should NOT be replaced</span>" );
+    assert.equal( $('#t7-2').html() , "<span data-replace=\"'replaced text'\">should NOT be replaced</span>" );
 });
 
 QUnit.test( "On-error test", function( assert ) {

@@ -12,31 +12,31 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Omiting and replacing</h1>
                 <ul>
                     <li><a href="#omit">Omiting</a>.</li>
                     <li><a href="#replace">Replacing</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
+            <article data-fill-slot="'article'">
                 
-                <h2 data-tattributes="id 'omit'">Omiting</h2>
+                <h2 data-attributes="id 'omit'">Omiting</h2>
                 <p>
-                    Sometimes we want to omit the surrounding start and end tags but evaluating his contents. It can be done using <em>data-tomit-tag</em> attribute. If we want to do this unconditionally:
+                    Sometimes we want to omit the surrounding start and end tags but evaluating his contents. It can be done using <em>data-omit-tag</em> attribute. If we want to do this unconditionally:
                 </p>
                 
                 <strong>sample.html</strong>
                 <pre class="brush: html; highlight: [3]">
 &lt;html&gt;
     &lt;body&gt;
-        &lt;div data-tdefine="user 'John'" data-tomit-tag=""&gt;
+        &lt;div data-define="user 'John'" data-omit-tag=""&gt;
             &lt;p&gt;
-                User: &lt;span data-tcontent="user"&gt;the user&lt;/span&gt;
+                User: &lt;span data-content="user"&gt;the user&lt;/span&gt;
             &lt;/p&gt;
             &lt;p&gt;
-                Message: &lt;span data-tcontent="string: hello, ${user}!"&gt;hello, user!&lt;/span&gt;
+                Message: &lt;span data-content="string: hello, ${user}!"&gt;hello, user!&lt;/span&gt;
             &lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
@@ -50,10 +50,10 @@
 &lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;
-            User: &lt;span data-tcontent="user"&gt;John&lt;/span&gt;
+            User: &lt;span data-content="user"&gt;John&lt;/span&gt;
         &lt;/p&gt;
         &lt;p&gt;
-            Message: &lt;span data-tcontent="string: hello, ${user}!"&gt;hello, John!&lt;/span&gt;
+            Message: &lt;span data-content="string: hello, ${user}!"&gt;hello, John!&lt;/span&gt;
         &lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;
@@ -67,12 +67,12 @@
                 <pre class="brush: html; highlight: [3]">
 &lt;html&gt;
     &lt;body&gt;
-        &lt;div data-tdefine="user 'John'" data-tomit-tag="omitDiv"&gt;
+        &lt;div data-define="user 'John'" data-omit-tag="omitDiv"&gt;
             &lt;p&gt;
-                User: &lt;span data-tcontent="user"&gt;the user&lt;/span&gt;
+                User: &lt;span data-content="user"&gt;the user&lt;/span&gt;
             &lt;/p&gt;
             &lt;p&gt;
-                Message: &lt;span data-tcontent="string: hello, ${user}!"&gt;hello, user!&lt;/span&gt;
+                Message: &lt;span data-content="string: hello, ${user}!"&gt;hello, user!&lt;/span&gt;
             &lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
@@ -83,9 +83,9 @@
                     The above example will omit the <em>div</em> tag if the variable <em>omitDiv</em> evaluates to <code>true</code>: rules to this are the same than <a href="conditionals.html">conditional's</a>
                 </p>
                 
-                <h2 data-tattributes="id 'replace'">Replacing</h2>
+                <h2 data-attributes="id 'replace'">Replacing</h2>
                 <p>
-                    The <em>data-treplace</em> attribute is similar to <em>data-tcontent</em>, but the first one removes the surrounding start and end tags:
+                    The <em>data-replace</em> attribute is similar to <em>data-content</em>, but the first one removes the surrounding start and end tags:
                 </p>
                 
                 <strong>sample.html</strong>
@@ -93,7 +93,7 @@
 &lt;html&gt;
   &lt;body&gt;
     &lt;p&gt;
-      This is &lt;span data-treplace="title"&gt;the title&lt;/span&gt;
+      This is &lt;span data-replace="title"&gt;the title&lt;/span&gt;
     &lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;

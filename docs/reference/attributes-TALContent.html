@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALContent</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= ('structure') expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-tcontent</em> inserts text or structure in place of its children. 
+                    The <em>data-content</em> inserts text or structure in place of its children. 
                     
                     It replaces the statement element with either text or a structure (unescaped markup). The body of the statement is an expression with an optional type prefix. The value of the expression is converted into an escaped string if you prefix the expression with text or omit the prefix, and is inserted unchanged if you prefix it with structure. Escaping consists of converting “&amp;” to “&amp;amp;”, “&lt;” to “&amp;lt;”, and “&gt;” to “&amp;gt;”.                
                 </p>
@@ -42,26 +42,26 @@ argument ::= ('structure') expression
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#content-replace-the-content-of-an-element">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
                     <li>
                         <em>text</em> prefix not supported but not needed, it is the default behaviour.
                     </li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>                
+                <h2 data-attributes="id 'examples'">Examples</h2>                
                 <p>
                     Inserting the user name:
                 </p>
                 <pre class="brush: html">
-                    &lt;p data-tcontent="user/name"&gt;Fred Farkas&lt;/p&gt;
+                    &lt;p data-content="user/name"&gt;Fred Farkas&lt;/p&gt;
                 </pre>
                 
                 <p>
                     Inserting HTML/XML:
                 </p>
                 <pre class="brush: html">
-                    &lt;p data-tcontent="structure myFormattedText"&gt;
+                    &lt;p data-content="structure myFormattedText"&gt;
                         marked &lt;strong&gt;up&lt;/strong&gt; content goes here.
                     &lt;/p&gt;
                 </pre>

@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Getting started</h1>
                 <ul>
                     <li><a href="#downloading">Downloading ZPT-JS and its dependencies</a>.</li>
@@ -25,13 +25,13 @@
                     <li><a href="#node">Using ZPT-JS and node.js</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'downloading'">Downloading ZPT-JS and its dependencies</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'downloading'">Downloading ZPT-JS and its dependencies</h2>
                 <p>
                     Go to <a href="../download.html">Download</a> section and follow the instructions to download ZPT-JS and its dependencies.
                 </p>
 
-                <h2 data-tattributes="id 'header'">Configuring the HTML header</h2>
+                <h2 data-attributes="id 'header'">Configuring the HTML header</h2>
                 <p>
                     You must add to your web page the javascript code of ZPT-JS and its dependencies(<em>zpt.min.js</em>). Don't forget to add the reference of the javascript file with the invokation to ZPT-JS (for example <em>gettingStarted.js</em>):
                 </p>
@@ -44,13 +44,13 @@
 &lt;/head&gt;
                 </pre>
 
-                <h2 data-tattributes="id 'template'">Write the template</h2>
+                <h2 data-attributes="id 'template'">Write the template</h2>
                 <p>
-                    Customize the body of your HTML document with some of the provided by ZPT-JS statements. One of these is <em>data-tcontent</em>:
+                    Customize the body of your HTML document with some of the provided by ZPT-JS statements. One of these is <em>data-content</em>:
                 </p>
                 <pre class="brush: html">
 &lt;body&gt;
-    &lt;p data-tcontent="message"&gt;
+    &lt;p data-content="message"&gt;
         the message
     &lt;/p&gt;
 &lt;/body&gt;
@@ -70,13 +70,13 @@
         &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
-        &lt;p data-tcontent="message"&gt;
+        &lt;p data-content="message"&gt;
             the message
         &lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;
                 </pre>
-                <h2 data-tattributes="id 'dictionary'">Build the dictionary</h2>
+                <h2 data-attributes="id 'dictionary'">Build the dictionary</h2>
                 <p>
                     Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template:
                 </p>
@@ -86,7 +86,7 @@ var dictionary = {
 };
                 </pre>
 
-                <h2 data-tattributes="id 'invoke'">Invoke ZPT-JS</h2>
+                <h2 data-attributes="id 'invoke'">Invoke ZPT-JS</h2>
                 <p>
                     Invoke the <code>run</code> method of ZPT:
                 </p>
@@ -122,23 +122,23 @@ zpt.run({
                     That's all!
                 </p>
                 
-                <h2 data-tattributes="id 'result'">The result</h2>
+                <h2 data-attributes="id 'result'">The result</h2>
                 <p>
                     The resulting <code>body</code> element is:
                 </p>
                 <pre class="brush: html">
 &lt;body&gt;
-    &lt;p data-tcontent="message"&gt;
+    &lt;p data-content="message"&gt;
         Hello, world!
     &lt;/p&gt;
 &lt;/body&gt;
                 </pre>
                 
                 <p>
-                    The <em>data-tcontent</em> attribute is ignored by browsers: all the <em>data-*</em> attributes are completely ignored by the user agent.
+                    The <em>data-content</em> attribute is ignored by browsers: all the <em>data-*</em> attributes are completely ignored by the user agent.
                 </p>
                 
-                <h2 data-tattributes="id 'node'">Using ZPT-JS and node.js</h2>
+                <h2 data-attributes="id 'node'">Using ZPT-JS and node.js</h2>
                 <p>
                     That's OK. But... how can we use ZPT-JS at the server side (using <a href="https://nodejs.org/">node.js</a>)? <a href="https://www.npmjs.com/package/node-jsdom">node-jsdom</a> is needed when no browser is available:
                 </p>
@@ -150,7 +150,7 @@ var jsdom = require( 'node-jsdom' ).jsdom;
 jsdom.env(
     '&lt;!doctype html&gt;'
 	+ '&lt;html&gt;'
-	+ '&lt;body&gt;&lt;h1 data-tcontent="'hello, world!'"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
+	+ '&lt;body&gt;&lt;h1 data-content="'hello, world!'"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
 	+ '&lt;/html&gt;', 
     [ 'http://code.jquery.com/jquery.min.js' ], 
     function( err, window ) {

@@ -16,24 +16,24 @@
         </p> 
         <ul id="group1">
             <li>
-                exists: on-error: <span id="t1-1" data-tcontent="exists: on-error">must be false</span>
+                exists: on-error: <span id="t1-1" data-content="exists: on-error">must be false</span>
             </li>
             <li>
-                user/fireError() = Oh, noooo! = <span id="t1-2" data-tcontent="user/fireError()">must fire error</span>
+                user/fireError() = Oh, noooo! = <span id="t1-2" data-content="user/fireError()">must fire error</span>
             </li>
         </ul>
         
         <p>
             Try out on-error tag
         </p>
-        <ul id="group2" data-ton-error="string:Oh, noooo!">
+        <ul id="group2" data-on-error="string:Oh, noooo!">
             <li>
-                exists: on-error: <span id="t2-1" data-tcontent="exists: on-error">must be true</span>
+                exists: on-error: <span id="t2-1" data-content="exists: on-error">must be true</span>
             </li>
-            <li>number1 = 1 = <span id="t2-2" data-tcontent="number1">must be 1</span></li>
-            <li>user/fireError() = Oh, noooo! = <span id="t2-3" data-tcontent="user/fireError()">must fire error</span></li>
-            <li>yes = yes = <span id="t2-4" data-tcontent="yes">must be yes</span></li>
-            <li>divBy0() = Infinity = <span id="t2-5" data-tcontent="divBy0()">1 / 0</span></li>
+            <li>number1 = 1 = <span id="t2-2" data-content="number1">must be 1</span></li>
+            <li>user/fireError() = Oh, noooo! = <span id="t2-3" data-content="user/fireError()">must fire error</span></li>
+            <li>yes = yes = <span id="t2-4" data-content="yes">must be yes</span></li>
+            <li>divBy0() = Infinity = <span id="t2-5" data-content="divBy0()">1 / 0</span></li>
         </ul>
         
         <p>
@@ -41,38 +41,38 @@
         </p>
         <ul id="group3">
             <li>
-                exists: on-error: <span id="t3-1" data-tcontent="exists: on-error">must be false</span>
+                exists: on-error: <span id="t3-1" data-content="exists: on-error">must be false</span>
             </li>
             <li>
-                user/fireError() = Oh, noooo! = <span id="t3-2" data-tcontent="user/fireError()">must fire error</span>
+                user/fireError() = Oh, noooo! = <span id="t3-2" data-content="user/fireError()">must fire error</span>
             </li>
         </ul>
         
         <p>
             Try out on-error object
         </p>
-        <ul id="group4" data-ton-error="treatError( error )">
-            <li>number1 = 1 = <span id="t4-2" data-tcontent="number1">must be 1</span></li>
-            <li>user/fireError() = Oh, noooo! = <span id="t4-3" data-tcontent="user/fireError()">must fire error</span></li>
-            <li>yes = yes = <span id="t4-4" data-tcontent="yes">must be yes</span></li>
-            <li>divBy0() = Infinity = <span id="t4-5" data-tcontent="divBy0()">1 / 0</span></li>
+        <ul id="group4" data-on-error="treatError( error )">
+            <li>number1 = 1 = <span id="t4-2" data-content="number1">must be 1</span></li>
+            <li>user/fireError() = Oh, noooo! = <span id="t4-3" data-content="user/fireError()">must fire error</span></li>
+            <li>yes = yes = <span id="t4-4" data-content="yes">must be yes</span></li>
+            <li>divBy0() = Infinity = <span id="t4-5" data-content="divBy0()">1 / 0</span></li>
         </ul>
         
         <p>
             Try out on-error object
         </p>
-        <ul id="group5" data-ton-error="nothing">
-            <li>user/fireError() = Oh, noooo! = <span id="t5-1" data-tcontent="user/fireError()">must fire error</span></li>
+        <ul id="group5" data-on-error="nothing">
+            <li>user/fireError() = Oh, noooo! = <span id="t5-1" data-content="user/fireError()">must fire error</span></li>
         </ul>
         
         <p>
             Try out literal structure on-error
         </p>
-        <ul id="group6" data-ton-error="'<strong>Oh, noooo!</strong>'">
-            <li>user/fireError() = Oh, noooo! = <span id="t6-1" data-tcontent="user/fireError()">must fire error</span></li>
+        <ul id="group6" data-on-error="'<strong>Oh, noooo!</strong>'">
+            <li>user/fireError() = Oh, noooo! = <span id="t6-1" data-content="user/fireError()">must fire error</span></li>
         </ul>
-        <ul id="group7" data-ton-error="structure '<strong>Oh, noooo!</strong>'">
-            <li>user/fireError() = Oh, noooo! = <span id="t7-1" data-tcontent="user/fireError()">must fire error</span></li>
+        <ul id="group7" data-on-error="structure '<strong>Oh, noooo!</strong>'">
+            <li>user/fireError() = Oh, noooo! = <span id="t7-1" data-content="user/fireError()">must fire error</span></li>
         </ul>
     </body> 
 </html>

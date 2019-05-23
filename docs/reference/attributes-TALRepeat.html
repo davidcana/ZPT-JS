@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALRepeat</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,16 +22,16 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument      ::= variable_name expression
 variable_name ::= Name
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-trepeat</em> statement replicates a sub-tree of your document once for each item in an array. The expression should evaluate to an array. If the array is empty, then the statement element is deleted, otherwise it is repeated for each value in the sequence. If the expression is <code>default</code>, then the element is left unchanged, and no new variables are defined.            
+                    The <em>data-repeat</em> statement replicates a sub-tree of your document once for each item in an array. The expression should evaluate to an array. If the array is empty, then the statement element is deleted, otherwise it is repeated for each value in the sequence. If the expression is <code>default</code>, then the element is left unchanged, and no new variables are defined.            
                 </p>
                 <p>
                     The <em>variable_name</em> is used to define a local variable and a repeat variable. For each repetition, the local variable is set to the current sequence element, and the repeat variable is set to an iteration object. 
@@ -62,7 +62,7 @@ variable_name ::= Name
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#repeat-repeat-an-element">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
                     <li>
                         The expression should evaluate to an array. In ZPT should evaluate to a sequence.
@@ -75,14 +75,14 @@ variable_name ::= Name
                     </li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Iterating over a sequence of strings:
                 </p>
                 
                 <pre class="brush: html">
-&lt;p data-trepeat="txt ['one' 'two' 'three']"&gt;
-    &lt;span data-treplace="txt" /&gt;
+&lt;p data-repeat="txt ['one' 'two' 'three']"&gt;
+    &lt;span data-replace="txt" /&gt;
 &lt;/p&gt;
                 </pre>
                 
@@ -92,10 +92,10 @@ variable_name ::= Name
                 
                 <pre class="brush: html">
 &lt;table&gt;
-    &lt;tr data-trepeat="item myObject/cart"&gt;
-        &lt;td data-tcontent="item-repeat/number()"&gt;1&lt;/td&gt;
-        &lt;td data-tcontent="item/description"&gt;Widget&lt;/td&gt;
-        &lt;td data-tcontent="item/price"&gt;$1.50&lt;/td&gt;
+    &lt;tr data-repeat="item myObject/cart"&gt;
+        &lt;td data-content="item-repeat/number()"&gt;1&lt;/td&gt;
+        &lt;td data-content="item/description"&gt;Widget&lt;/td&gt;
+        &lt;td data-content="item/price"&gt;$1.50&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
                 </pre>
@@ -106,12 +106,12 @@ variable_name ::= Name
                 
                 <pre class="brush: html">
 &lt;table border="1"&gt;
-    &lt;tr data-trepeat="row [1:10]"&gt;
-        &lt;td data-trepeat="column [1:10]"&gt;
-            &lt;span data-tdefine="x row-repeat/number();
+    &lt;tr data-repeat="row [1:10]"&gt;
+        &lt;td data-repeat="column [1:10]"&gt;
+            &lt;span data-define="x row-repeat/number();
                                 y column-repeat/number();
                                 z *: x y"
-                  data-treplace="string: ${x} * ${y} = ${z}"&gt;
+                  data-replace="string: ${x} * ${y} = ${z}"&gt;
                 1 * 1 = 1
             &lt;/span&gt;
         &lt;/td&gt;
@@ -123,12 +123,12 @@ variable_name ::= Name
                     Nested repeats in action:
                 </p>
                 <table border="1">
-                    <tr data-trepeat="row [1:10]">
-                        <td data-trepeat="column [1:10]">
-                            <span data-tdefine="x row-repeat/number();
+                    <tr data-repeat="row [1:10]">
+                        <td data-repeat="column [1:10]">
+                            <span data-define="x row-repeat/number();
                                                 y column-repeat/number();
                                                 z *: x y"
-                                  data-treplace="string: ${x} * ${y} = ${z}">
+                                  data-replace="string: ${x} * ${y} = ${z}">
                                 1 * 1 = 1
                             </span>
                         </td>
@@ -140,8 +140,8 @@ variable_name ::= Name
                 </p>
                 <pre class="brush: html">
 &lt;table&gt;
-    &lt;tr id="cart" data-trepeat="item myObject/cart"&gt;
-        &lt;td data-tcontent="item/description"&gt;Widget&lt;/td&gt;
+    &lt;tr id="cart" data-repeat="item myObject/cart"&gt;
+        &lt;td data-content="item/description"&gt;Widget&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
                 </pre>
@@ -150,8 +150,8 @@ variable_name ::= Name
                 </p>
                 <pre class="brush: html">
 &lt;table&gt;
-    &lt;tr data-trepeat="item myObject/cart" data-tattributes="id string:cart${item-repeat/number()}"&gt;
-        &lt;td data-tcontent="item/description"&gt;Widget&lt;/td&gt;
+    &lt;tr data-repeat="item myObject/cart" data-attributes="id string:cart${item-repeat/number()}"&gt;
+        &lt;td data-content="item/description"&gt;Widget&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
                 </pre>

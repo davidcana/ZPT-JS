@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Configuration - declaredRemotePageUrls</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -21,15 +21,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 declaredRemotePageUrls ::= '[' StringLiteral [ ',' StringLiteral ] ']'
 StringLiteral          ::= '/'' StringLiteralChar* '/''
 StringLiteralChar      ::= any character except '''
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     <em>declaredRemotePageUrls</em> configuration option must be an array of strings with the URLs of the HTML documents containing the external macros.
                 </p>
@@ -42,7 +42,7 @@ StringLiteralChar      ::= any character except '''
                     Because external macro files must be preloaded before the template is rendered (using the <a href="configuration-command.html">preload</a> command), ZPT-JS must to know the list of external files invoked in the template. If we use literal string expressions or expressions that can be evaluated using only dictionary there is nothing to do. But if we use an expression that can not be resolved at first like this:
                 </p>
                 <pre class="brush: html">
-&lt;div data-muse-macro="anObject/templateName"&gt;
+&lt;div data-use-macro="anObject/templateName"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>
@@ -50,7 +50,7 @@ StringLiteralChar      ::= any character except '''
                     If <code>anObject/templateName</code> evaluates to <code>aMacro@macros.html</code> and there is no reference to <code>macros.html</code> in other macro invokations, that macro invokation will throw an exception: <code>Macros in URL 'macros.html' not preloaded!</code>. To resolve this issue we must set manually the list of external macro files we want to use when executing  the ZPT call.
                 </p>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     If we don't use external macros ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro ZPT-JS needs to load one or more external files using HTTP. This makes ZPT-JS code executes asynchronously. Keep in mind this! To deal with this take a look at:
                 </p>
@@ -105,7 +105,7 @@ zpt.run({
                     And in your HTML code:
                 </p>
                 <pre class="brush: html">
-&lt;div data-muse-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
+&lt;div data-use-macro="'myMacro@/path/to/your/macro/macros.html'"&gt;
     Macro goes here
 &lt;/div&gt;
                 </pre>

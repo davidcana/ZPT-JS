@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALOmitTag</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= [ expression ]
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-tomit-tag</em> statement leaves the contents of an element in place while omitting the surrounding start and end tags.
+                    The <em>data-omit-tag</em> statement leaves the contents of an element in place while omitting the surrounding start and end tags.
                 </p>
                 <p>
                     If the expression evaluates to a <code>false</code> value, then normal processing of the element continues and the tags are not omitted. If the expression evaluates to a <code>true</code> value, or no expression is provided, the statement element is replaced with its contents.
@@ -53,23 +53,23 @@ argument ::= [ expression ]
                     Note: zome parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#omit-tag-remove-an-element-leaving-its-contents">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
                     <li>
-                        This attribute can make some attributes not to work because they depend on an enclosing tag: <em>data-trepeat</em> is one of them.
+                        This attribute can make some attributes not to work because they depend on an enclosing tag: <em>data-repeat</em> is one of them.
                     </li>
                     <li>
-                        Because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are <strong>REMOVED</strong> when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-tomit-tag</code> inside a macro definition and invoke it.
+                        Because ZPT-JS modifies directly the template (ZPT generates a new document), these tags are <strong>REMOVED</strong> when they are not inside a macro definition. So if you update the dictionary a run ZPT-JS a second time these tags does not exist yet. If you need this to work place <code>data-omit-tag</code> inside a macro definition and invoke it.
                     </li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Unconditionally omitting a tag:
                 </p>
                 
                 <pre class="brush: html">
-                    &lt;div data-tomit-tag="" comment="This tag will be removed"&gt;
+                    &lt;div data-omit-tag="" comment="This tag will be removed"&gt;
                         &lt;em&gt;...but this text will remain.&lt;/em&gt;
                     &lt;/div&gt;
                 </pre>
@@ -78,7 +78,7 @@ argument ::= [ expression ]
                     Conditionally omitting a tag:
                 </p>
                 <pre class="brush: html">
-                    &lt;strong data-tomit-tag="not:bold"&gt;
+                    &lt;strong data-omit-tag="not:bold"&gt;
                         I may be bold.
                     &lt;/strong&gt;
                 </pre>

@@ -29,20 +29,20 @@
 	        <p>
 	            Before use macro
 	        </p>
-	        <b data-muse-macro="'copyright'">
+	        <b data-use-macro="'copyright'">
 	            Macro goes here
 	        </b>
 	        <p>
 	            In the middle of 2 macros
 	        </p>
-	        <b data-muse-macro="'copyright'">
+	        <b data-use-macro="'copyright'">
 	            Macro goes here
 	        </b>
 	        <p>
 	            After use macro
 	        </p>
         </div>
-        <p data-mdefine-macro="copyright">
+        <p data-define-macro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
         
@@ -51,7 +51,7 @@
         </h2>
         <ol>
             <li>Link 1: <a id="t3-1" 
-                           data-tattributes="title string:title in string expression;
+                           data-attributes="title string:title in string expression;
                                              href 'http://www.xxx.org'">a link</a></li>
         </ol>
         
@@ -59,61 +59,61 @@
             tal:condition
         </h2>
         <ol>
-            <li>Condition true 1: <span id="t4-1" data-tcondition="true">yes!</span></li>
-            <li>Condition true 2: <span id="t4-2" data-tcondition="true" data-tcontent="'Bob'">a name</span></li>
-            <li>Condition false 1: <span id="t4-3" data-tcondition="false">no!</span></li>
-            <li>Condition false 2: <span id="t4-4" data-tcondition="false" data-tcontent="'Bob'">a name</span></li>
+            <li>Condition true 1: <span id="t4-1" data-condition="true">yes!</span></li>
+            <li>Condition true 2: <span id="t4-2" data-condition="true" data-content="'Bob'">a name</span></li>
+            <li>Condition false 1: <span id="t4-3" data-condition="false">no!</span></li>
+            <li>Condition false 2: <span id="t4-4" data-condition="false" data-content="'Bob'">a name</span></li>
         </ol>
         
         <h2>
             tal:content
         </h2>
         <ol>
-            <li id="t5-1" data-tcontent="string:hello">a text</li>
+            <li id="t5-1" data-content="string:hello">a text</li>
         </ol>
         
         <h2>
             tal:define
         </h2>
-        <ol data-tdefine="integer1 1; 
+        <ol data-define="integer1 1; 
                           float1 1.5; 
                           text1 'this is a text';
                           text2 string:this is a text too">
-            <li>integer1 = 1 = <span id="t6-1" data-tcontent="integer1">an integer</span></li>
-            <li>float1 = 1.5 = <span id="t6-2" data-tcontent="float1">a float</span></li>
-            <li>text1 = this is a text = <span id="t6-3" data-tcontent="text1">a text</span></li>
-            <li>text2 = this is a text too = <span id="t6-4" data-tcontent="text2">a text</span></li>
+            <li>integer1 = 1 = <span id="t6-1" data-content="integer1">an integer</span></li>
+            <li>float1 = 1.5 = <span id="t6-2" data-content="float1">a float</span></li>
+            <li>text1 = this is a text = <span id="t6-3" data-content="text1">a text</span></li>
+            <li>text2 = this is a text too = <span id="t6-4" data-content="text2">a text</span></li>
         </ol>
                 
         <h2>
             tal:omit-tag
         </h2>
         <ol>
-            <li id="t7-1"><span data-tomit-tag="">(should omit)</span></li>
-            <li id="t7-2"><span data-tomit-tag="not: lt: 1 0">not: lt: 1 0 (should omit)</span></li>
-            <li id="t7-3"><span data-tomit-tag="lt: 1 0">lt: 1 0 (should not omit)</span></li>
+            <li id="t7-1"><span data-omit-tag="">(should omit)</span></li>
+            <li id="t7-2"><span data-omit-tag="not: lt: 1 0">not: lt: 1 0 (should omit)</span></li>
+            <li id="t7-3"><span data-omit-tag="lt: 1 0">lt: 1 0 (should not omit)</span></li>
         </ol>
         
         <h2>
             tal:on-error
         </h2>
-        <ol data-tdefine="number1 1"
-            data-ton-error="string:Oh, noooo!">
-            <li>number1 = 1 = <span id="t8-1" data-tcontent="number1">must be 1</span></li>
-            <li>throwError() = Error! = <span id="t8-2" data-tcontent="throwError()">Error!</span></li>
+        <ol data-define="number1 1"
+            data-on-error="string:Oh, noooo!">
+            <li>number1 = 1 = <span id="t8-1" data-content="number1">must be 1</span></li>
+            <li>throwError() = Error! = <span id="t8-2" data-content="throwError()">Error!</span></li>
         </ol>
         
         <h2>
             tal:repeat
         </h2>
         <ol>
-            <li data-trepeat="c [10 20 30]">
-                Iterating element <span class="t9-1" data-tcontent="c">10/20/30</span>
+            <li data-repeat="c [10 20 30]">
+                Iterating element <span class="t9-1" data-content="c">10/20/30</span>
             </li>
         </ol>
         <ol>
-            <li data-trepeat="c [7:1:-2]">
-                Iterating element <span class="t9-2" data-tcontent="c">7/5/3/1</span>
+            <li data-repeat="c [7:1:-2]">
+                Iterating element <span class="t9-2" data-content="c">7/5/3/1</span>
             </li>
         </ol>
         
@@ -121,7 +121,7 @@
             tal:replace
         </h2>
         <ol>
-            <li id="t10-1"><span data-treplace="'replaced text'">should be replaced</span></li>
+            <li id="t10-1"><span data-replace="'replaced text'">should be replaced</span></li>
         </ol>
     </body>
 </html>

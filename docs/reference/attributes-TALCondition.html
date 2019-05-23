@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - TALCondition</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,15 +22,15 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-tcondition</em> statement includes the statement element in the template only if the condition is met, and omits it otherwise. If its expression evaluates to a <code>true</code> value, then normal processing of the element continues, otherwise the statement element is immediately removed from the template.
+                    The <em>data-condition</em> statement includes the statement element in the template only if the condition is met, and omits it otherwise. If its expression evaluates to a <code>true</code> value, then normal processing of the element continues, otherwise the statement element is immediately removed from the template.
                 </p>
                 <p>
                     If an expression evaluates to any of the next:
@@ -49,23 +49,23 @@ argument ::= expression
                     Note: extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#condition-conditionally-insert-or-remove-an-element">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     None.
                 </p>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Test a variable before inserting it (the first example tests for existence and truth, while the second only tests for existence):
                 </p>
                 <pre class="brush: html">
                     &lt;p datat-condition="myObject/message"
-                       data-tcontent="myObject/message"&gt;
+                       data-content="myObject/message"&gt;
                        Message goes here
                     &lt;/p>
 
                     &lt;p datat-condition="exists: myObject/message"
-                       data-tcontent="myObject/message"&gt;
+                       data-content="myObject/message"&gt;
                        Message goes here
                     &lt;/p>
                 </pre>
@@ -74,22 +74,22 @@ argument ::= expression
                     Test for alternate conditions:
                 </p>
                 <pre class="brush: html">
-                &lt;div data-trepeat="item [1:10]"&gt;
-                    &lt;span data-treplace="item-repeat/index()"&gt;1&lt;/span&gt;
+                &lt;div data-repeat="item [1:10]"&gt;
+                    &lt;span data-replace="item-repeat/index()"&gt;1&lt;/span&gt;
                     is 
-                    &lt;span data-tcondition="item-repeat/even()"&gt;even&lt;/span&gt;
-                    &lt;span data-tcondition="item-repeat/odd()"&gt;odd&lt;/span&gt;
+                    &lt;span data-condition="item-repeat/even()"&gt;even&lt;/span&gt;
+                    &lt;span data-condition="item-repeat/odd()"&gt;odd&lt;/span&gt;
                 &lt;/div&gt;
                 </pre>
                 
                 <p>
                     Test for alternate conditions in action:
                 </p>
-                <div data-trepeat="item [1:10]">
-                    <span data-treplace="item-repeat/index()">1</span>
+                <div data-repeat="item [1:10]">
+                    <span data-replace="item-repeat/index()">1</span>
                     is 
-                    <span data-tcondition="item-repeat/even()">even</span>
-                    <span data-tcondition="item-repeat/odd()">odd</span>
+                    <span data-condition="item-repeat/even()">even</span>
+                    <span data-condition="item-repeat/odd()">odd</span>
                 </div>
                 
                 <p>

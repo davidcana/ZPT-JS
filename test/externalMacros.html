@@ -17,13 +17,13 @@
                 <p>
                     Before use macro
                 </p>
-                <b data-muse-macro="'copyright@externalMacros-definitions.html'">
+                <b data-use-macro="'copyright@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
                 <p>
                     In the middle of 2 macros
                 </p>
-                <b data-muse-macro="'copyright@externalMacros-definitions.html'">
+                <b data-use-macro="'copyright@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
                 <p>
@@ -33,36 +33,36 @@
 
             <h4>Dynamic macro</h4>
             <div id="t2">
-                <b data-muse-macro="'dynamicMacro@externalMacros-definitions.html'">
+                <b data-use-macro="'dynamicMacro@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
             </div>
 
             <h4>Dynamic macro reading var (var = undefined)</h4>
             <div id="t3">
-                <b data-tdefine="id string:t3-1" data-muse-macro="'dynamicMacroReadingVar@externalMacros-definitions.html'">
+                <b data-define="id string:t3-1" data-use-macro="'dynamicMacroReadingVar@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
             </div>
 
             <h4>Dynamic macro reading var (var = 1)</h4>
             <div id="t4">
-                <b data-tdefine="var 1; id string:t4-1" data-muse-macro="'dynamicMacroReadingVar@externalMacros-definitions.html'">
+                <b data-define="var 1; id string:t4-1" data-use-macro="'dynamicMacroReadingVar@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
             </div>
 
             <h4>Dynamic macro reading var (items = [10 20 30])</h4>
             <div id="t5">
-                <b data-tdefine="items [10 20 30]" data-muse-macro="'list@externalMacros-definitions.html'">
+                <b data-define="items [10 20 30]" data-use-macro="'list@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
             </div>
 
             <h4>Macro using 1 slot</h4>
             <div id="t6">
-                <p data-muse-macro="'sidebar@externalMacros-definitions.html'">
-                    <em data-mfill-slot="'additional_info'">
+                <p data-use-macro="'sidebar@externalMacros-definitions.html'">
+                    <em data-fill-slot="'additional_info'">
                         Make sure to check out our <a href="/specials">specials</a>.
                     </em>
                 </p>
@@ -70,14 +70,14 @@
 
             <h4>Macro using 2 slots</h4>
             <div id="t7">
-                <div data-muse-macro="'enhacedSidebar@externalMacros-definitions.html'">
-                    <div data-mfill-slot="'links'">
+                <div data-use-macro="'enhacedSidebar@externalMacros-definitions.html'">
+                    <div data-fill-slot="'links'">
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/otherProducts">Other products</a></li>
                         </ul>
                     </div>
-                    <em data-mfill-slot="'additional_info'">
+                    <em data-fill-slot="'additional_info'">
                         Make sure to check out our <a href="/specials">specials</a>.
                     </em>
                 </div>
@@ -85,8 +85,8 @@
 
             <h4>Macro using 2 slots but only defining 1</h4>
             <div id="t8">
-                <div data-muse-macro="'enhacedSidebar@externalMacros-definitions.html'">
-                    <em data-mfill-slot="'additional_info'">
+                <div data-use-macro="'enhacedSidebar@externalMacros-definitions.html'">
+                    <em data-fill-slot="'additional_info'">
                         Make sure to check out our <a href="/specials">specials</a>.
                     </em>
                 </div>
@@ -94,8 +94,8 @@
 
             <h4>Dynamic macro using 1 slot (items = [10 20 30])</h4>
             <div id="t9">
-                <b data-tdefine="items [10 20 30]" data-muse-macro="'dynamicListWith1Slot@externalMacros-definitions.html'">
-                    <em data-mfill-slot="'additional_info'">
+                <b data-define="items [10 20 30]" data-use-macro="'dynamicListWith1Slot@externalMacros-definitions.html'">
+                    <em data-fill-slot="'additional_info'">
                         Make sure to check out our <a href="/specials">specials</a>.
                     </em>
                 </b>
@@ -105,8 +105,8 @@
         <div id="block2">
             <h4>External macro test using var</h4>
             <div id="t10">
-                <b data-tdefine="macroKey 'futureCopyright@externalMacros-definitions2.html'" 
-                   data-muse-macro="macroKey">
+                <b data-define="macroKey 'futureCopyright@externalMacros-definitions2.html'" 
+                   data-use-macro="macroKey">
                     Macro goes here
                 </b>
             </div>
@@ -115,16 +115,16 @@
         <div id="block3">
             <h4>3 external macros in 3 different external macro files test using var</h4>
             <div id="t11">
-                <b data-tdefine="macroKey 'copyright@externalMacros-definitions.html'" 
-                   data-muse-macro="macroKey">
+                <b data-define="macroKey 'copyright@externalMacros-definitions.html'" 
+                   data-use-macro="macroKey">
                     Macro goes here
                 </b>
-                <b data-tdefine="macroKey 'futureCopyright@externalMacros-definitions2.html'" 
-                   data-muse-macro="macroKey">
+                <b data-define="macroKey 'futureCopyright@externalMacros-definitions2.html'" 
+                   data-use-macro="macroKey">
                     Macro goes here
                 </b>
-                <b data-tdefine="macroKey 'futureCopyright@externalMacros-definitions3.html'" 
-                   data-muse-macro="macroKey">
+                <b data-define="macroKey 'futureCopyright@externalMacros-definitions3.html'" 
+                   data-use-macro="macroKey">
                     Macro goes here
                 </b>
             </div>
@@ -136,13 +136,13 @@
                 <p>
                     Before use macro
                 </p>
-                <b data-muse-macro="'copyright@externalMacros-definitions.html'">
+                <b data-use-macro="'copyright@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
                 <p>
                     In the middle of 2 macros
                 </p>
-                <b data-muse-macro="'enhancedCopyright@externalMacros-definitions.html'">
+                <b data-use-macro="'enhancedCopyright@externalMacros-definitions.html'">
                     Macro goes here
                 </b>
                 <p>
@@ -153,22 +153,22 @@
         
         <div id="block5">
             <h4>Using define tags in macro use and macro call</h4>
-            <b data-muse-macro="'copyright4@externalMacros-definitions4.html'"
-               data-tdefine="notInMacroVar 'It also works!'">
+            <b data-use-macro="'copyright4@externalMacros-definitions4.html'"
+               data-define="notInMacroVar 'It also works!'">
                 Macro goes here
             </b>
         </div>
         
         <h4>Slot evaluation</h4>
         <div id="t15">
-            <div data-muse-macro="'enhacedSidebar@externalMacros-definitions.html'"
-                 data-tdefine="linksSlot 'links';
+            <div data-use-macro="'enhacedSidebar@externalMacros-definitions.html'"
+                 data-define="linksSlot 'links';
                                additionalInfoSlot 'additional_info'">
-                <div data-mfill-slot="linksSlot">
+                <div data-fill-slot="linksSlot">
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/otherProducts">Other products</a></li>
-                        <li><a data-tattributes="href '/sales'">Sales!</a></li>
+                        <li><a data-attributes="href '/sales'">Sales!</a></li>
                     </ul>
                 </div>
             </div>

@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - Attributes - METALUseMacro</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,30 +22,30 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument ::= expression
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-muse-macro</em> statement replaces the statement element with a macro. The statement expression describes a macro definition.
+                    The <em>data-use-macro</em> statement replaces the statement element with a macro. The statement expression describes a macro definition.
                 </p>
 
                 <p>
-                    In ZPT-JS the expression will generally be a path expression referring to a macro defined in another template. See <a href="attributes-METALDefineMacro.html">data-mdefine-macro</a> for more information.
+                    In ZPT-JS the expression will generally be a path expression referring to a macro defined in another template. See <a href="attributes-METALDefineMacro.html">data-define-macro</a> for more information.
                 </p>
 
                 <p>
-                    The effect of expanding a macro is to graft a subtree from another document (or from elsewhere in the current document) in place of the statement element, replacing the existing sub-tree. Parts of the original subtree may remain, grafted onto the new subtree, if the macro has slots. See <a href="attributes-METALDEfineSlot.html">data-mdefine-slot</a> for more information.
+                    The effect of expanding a macro is to graft a subtree from another document (or from elsewhere in the current document) in place of the statement element, replacing the existing sub-tree. Parts of the original subtree may remain, grafted onto the new subtree, if the macro has slots. See <a href="attributes-METALDEfineSlot.html">data-define-slot</a> for more information.
                 </p>
                 
                 <p>
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#define-macro-define-a-macro">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <ul>
                     <li>
                         In ZPT the syntax is <em>argument ::= Name</em>, so all invokations are literals. ZPT-JS uses expressions.
@@ -58,12 +58,12 @@ argument ::= expression
                     </li>
                 </ul>
                 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Invokation of <em>copyright</em> macro in  the same file (internal macro invokation):
                 </p>
                 <pre class="brush: html">
-&lt;p data-muse-macro="'copyright'"&gt;
+&lt;p data-use-macro="'copyright'"&gt;
     Macro goes here
 &lt;/p&gt;
                 </pre>
@@ -72,7 +72,7 @@ argument ::= expression
                     Invokation of <em>copyright</em> macro in <em>macros.html</em> file (external macro invokation):
                 </p>
                 <pre class="brush: html">
-&lt;p data-muse-macro="'copyright@macros.html'"&gt;
+&lt;p data-use-macro="'copyright@macros.html'"&gt;
     Macro goes here
 &lt;/p&gt;
                 </pre>
@@ -81,7 +81,7 @@ argument ::= expression
                     Invokation of macro defined by <em>macroPath</em> variable (it can be an internal or external macro invokation):
                 </p>
                 <pre class="brush: html">
-&lt;p data-muse-macro="macroPath"&gt;
+&lt;p data-use-macro="macroPath"&gt;
     Macro goes here
 &lt;/p&gt;
                 </pre>

@@ -72,17 +72,17 @@ function runTests(){
 
 QUnit.test( "Simple macros test", function( assert ) {
     var t1 = `
-<b data-muse-macro="'copyright-list@externalMacros-definitions4.html'" style="display: none;">
+<b data-use-macro="'copyright-list@externalMacros-definitions4.html'" style="display: none;">
     Macro goes here
 </b>
-<p data-mmacro="copyright-list" data-tdefine="externalMacroUrl 'externalMacros-definitions4.html'">
-    <b data-muse-macro="'copyright2'" style="display: none;">
+<p data-mmacro="copyright-list" data-define="externalMacroUrl 'externalMacros-definitions4.html'">
+    <b data-use-macro="'copyright2'" style="display: none;">
         Macro copyright2 goes here
     </b>
     <p data-mmacro="copyright2">
 Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
-    <b data-muse-macro="'copyright1'" style="display: none;">
+    <b data-use-macro="'copyright1'" style="display: none;">
         Macro copyright1 goes here
     </b>
     <p data-mmacro="copyright1">
@@ -92,17 +92,17 @@ Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
         `;
     assertHtml( assert, '#t1', t1 );
     var t2 = `
-<b data-muse-macro="'copyright-list2@externalMacros-definitions4.html'" style="display: none;">
+<b data-use-macro="'copyright-list2@externalMacros-definitions4.html'" style="display: none;">
     Macro goes here
 </b>
-<p data-mmacro="copyright-list2" data-tdefine="externalMacroUrl 'externalMacros-definitions4.html'">
-    <b data-muse-macro="'copyright2'" style="display: none;">
+<p data-mmacro="copyright-list2" data-define="externalMacroUrl 'externalMacros-definitions4.html'">
+    <b data-use-macro="'copyright2'" style="display: none;">
         Macro copyright2 goes here
     </b>
     <p data-mmacro="copyright2">
         Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
-    <b data-muse-macro="'copyright3'" style="display: none;">
+    <b data-use-macro="'copyright3'" style="display: none;">
         Macro copyright3 goes here
     </b>
     <p data-mmacro="copyright3">

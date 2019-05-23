@@ -12,8 +12,8 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
-        <div data-muse-macro="'page@templates.html'">
-            <div data-mfill-slot="'page-header'">
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS reference - String expressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
@@ -22,8 +22,8 @@
                     <li><a href="#examples">Examples</a>.</li>
                 </ul>
             </div>
-            <article data-mfill-slot="'article'">
-                <h2 data-tattributes="id 'syntax'">Syntax</h2>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 string_expression      ::= 'string:' string_expression_item
 string_expression_item ::= ( plain_string | [ varsub ] )*
@@ -32,7 +32,7 @@ plain_string           ::= ( '$$' | non_dollar )*
 non_dollar             ::= any character except '$'
                 </pre>
                 
-                <h2 data-tattributes="id 'description'">Description</h2>
+                <h2 data-attributes="id 'description'">Description</h2>
                 <p>
                     <em>String</em> expressions interpret the expression string as text. If no expression string is supplied the resulting string is empty. The string can contain variable substitutions of the form <em>$name</em> or <em>${path}</em>, where <em>name</em> is a variable name, and <em>path</em> is a path expression. The escaped string value of the path expression is inserted into the string. To prevent a <em>$</em> from being interpreted this way, it must be escaped as <em>$$</em>.
                 </p>
@@ -41,18 +41,18 @@ non_dollar             ::= any character except '$'
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#tales-string-expressions">Zope Page Templates Reference</a>.
                 </p>
                 
-                <h2 data-tattributes="id 'differences'">Differences with ZPT</h2>
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
                     None.
                 </p>
 
-                <h2 data-tattributes="id 'examples'">Examples</h2>
+                <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     Using <em>{}</em> or not:
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="string:user is ${user/name}"&gt;must be Bob&lt;/div&gt;
-&lt;div data-tcontent="string:user is $user/name"&gt;must be Bob again&lt;/div&gt;
+&lt;div data-content="string:user is ${user/name}"&gt;must be Bob&lt;/div&gt;
+&lt;div data-content="string:user is $user/name"&gt;must be Bob again&lt;/div&gt;
                 </pre>
 
                 <p>
@@ -61,7 +61,7 @@ non_dollar             ::= any character except '$'
 
                 </p>
                 <pre class="brush: html">
-&lt;div data-tcontent="string:give me $$${aString} or else"&gt;escape the $&lt;/div&gt;
+&lt;div data-content="string:give me $$${aString} or else"&gt;escape the $&lt;/div&gt;
                 </pre>
 
                 <p>

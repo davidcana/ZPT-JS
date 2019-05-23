@@ -16,13 +16,13 @@
 	        <p>
 	            Before use macro
 	        </p>
-	        <b data-muse-macro="'copyright'">
+	        <b data-use-macro="'copyright'">
 	            Macro goes here
 	        </b>
 	        <p>
 	            In the middle of 2 macros
 	        </p>
-	        <b data-muse-macro="'copyright'">
+	        <b data-use-macro="'copyright'">
 	            Macro goes here
 	        </b>
 	        <p>
@@ -32,36 +32,36 @@
         
         <h4>Dynamic macro</h4>
         <div id="t2">
-	        <b data-muse-macro="'dynamicMacro'">
+	        <b data-use-macro="'dynamicMacro'">
 	            Macro goes here
 	        </b>
         </div>
         
         <h4>Dynamic macro reading var (var = undefined)</h4>
         <div id="t3">
-	        <b data-tdefine="id string:t3-1" data-muse-macro="'dynamicMacroReadingVar'">
+	        <b data-define="id string:t3-1" data-use-macro="'dynamicMacroReadingVar'">
 	            Macro goes here
 	        </b>
         </div>
         
         <h4>Dynamic macro reading var (var = 1)</h4>
         <div id="t4">
-	        <b data-tdefine="var 1; id string:t4-1" data-muse-macro="'dynamicMacroReadingVar'">
+	        <b data-define="var 1; id string:t4-1" data-use-macro="'dynamicMacroReadingVar'">
 	            Macro goes here
 	        </b>
         </div>
         
         <h4>Dynamic macro reading var (items = [10 20 30])</h4>
         <div id="t5">
-	        <b data-tdefine="items [10 20 30]" data-muse-macro="'list'">
+	        <b data-define="items [10 20 30]" data-use-macro="'list'">
 	            Macro goes here
 	        </b>
         </div>
         
         <h4>Macro using 1 slot</h4>
         <div id="t6">
-	        <p data-muse-macro="'sidebar'">
-			    <em data-mfill-slot="'additional_info'">
+	        <p data-use-macro="'sidebar'">
+			    <em data-fill-slot="'additional_info'">
 			        Make sure to check out our <a href="/specials">specials</a>.
 			    </em>
 	        </p>
@@ -69,14 +69,14 @@
         
         <h4>Macro using 2 slots</h4>
         <div id="t7">
-	        <div data-muse-macro="'enhacedSidebar'">
-	            <div data-mfill-slot="'links'">
+	        <div data-use-macro="'enhacedSidebar'">
+	            <div data-fill-slot="'links'">
 	                <ul>
 	                    <li><a href="/">Home</a></li>
 	                    <li><a href="/otherProducts">Other products</a></li>
 	                </ul>
 	            </div>
-	            <em data-mfill-slot="'additional_info'">
+	            <em data-fill-slot="'additional_info'">
 	                Make sure to check out our <a href="/specials">specials</a>.
 	            </em>
 	        </div>
@@ -84,8 +84,8 @@
         
         <h4>Macro using 2 slots but only defining 1</h4>
         <div id="t8">
-	        <div data-muse-macro="'enhacedSidebar'">
-	            <em data-mfill-slot="'additional_info'">
+	        <div data-use-macro="'enhacedSidebar'">
+	            <em data-fill-slot="'additional_info'">
 	                Make sure to check out our <a href="/specials">specials</a>.
 	            </em>
 	        </div>
@@ -93,39 +93,39 @@
         
         <h4>Dynamic macro using 1 slot (items = [10 20 30])</h4>
         <div id="t9">
-	        <b data-tdefine="items [10 20 30]" data-muse-macro="'dynamicListWith1Slot'">
-	            <em data-mfill-slot="'additional_info'">
+	        <b data-define="items [10 20 30]" data-use-macro="'dynamicListWith1Slot'">
+	            <em data-fill-slot="'additional_info'">
 	                Make sure to check out our <a href="/specials">specials</a>.
 	            </em>
 	        </b>
         </div>
         
         <h4>Using var as macro id (using copyright)</h4>
-        <div id="t10" data-tdefine="copyrightMacroId 'copyright'">
-	        <b data-muse-macro="copyrightMacroId">
+        <div id="t10" data-define="copyrightMacroId 'copyright'">
+	        <b data-use-macro="copyrightMacroId">
 	            Macro goes here
 	        </b>
         </div>
         
         <h4>Using var as macro id (using newCopyright)</h4>
-        <div id="t11" data-tdefine="copyrightMacroId 'newCopyright'">
-	        <b data-muse-macro="copyrightMacroId">
+        <div id="t11" data-define="copyrightMacroId 'newCopyright'">
+	        <b data-use-macro="copyrightMacroId">
 	            Macro goes here
 	        </b>
         </div>
         
         <h4>Macro using 2 slots and vars</h4>
         <div id="t12">
-	        <div data-muse-macro="'enhacedSidebar'"
-                 data-tdefine="linksSlot 'links';
+	        <div data-use-macro="'enhacedSidebar'"
+                 data-define="linksSlot 'links';
                                additionalInfoSlot 'additional_info'">
-	            <div data-mfill-slot="linksSlot">
+	            <div data-fill-slot="linksSlot">
 	                <ul>
 	                    <li><a href="/">Home</a></li>
 	                    <li><a href="/otherProducts">Other products</a></li>
 	                </ul>
 	            </div>
-	            <em data-mfill-slot="additionalInfoSlot">
+	            <em data-fill-slot="additionalInfoSlot">
 	                Make sure to check out our <a href="/specials">specials</a>.
 	            </em>
 	        </div>
@@ -133,15 +133,15 @@
         
         <h4>Macro using 2 slots and vars (first is null)</h4>
         <div id="t13">
-	        <div data-muse-macro="'enhacedSidebar'"
-                 data-tdefine="additionalInfoSlot 'additional_info'">
-	            <div data-mfill-slot="linksSlot">
+	        <div data-use-macro="'enhacedSidebar'"
+                 data-define="additionalInfoSlot 'additional_info'">
+	            <div data-fill-slot="linksSlot">
 	                <ul>
 	                    <li><a href="/">Home</a></li>
 	                    <li><a href="/otherProducts">Other products</a></li>
 	                </ul>
 	            </div>
-	            <em data-mfill-slot="additionalInfoSlot">
+	            <em data-fill-slot="additionalInfoSlot">
 	                Make sure to check out our <a href="/specials">specials</a>.
 	            </em>
 	        </div>
@@ -149,48 +149,48 @@
         
         <h4>Using define tags in macro use and macro call</h4>
         <div id="t14">
-            <div data-muse-macro="'define'" 
-                 data-tdefine="notInMacroVar 'It also works!'">
+            <div data-use-macro="'define'" 
+                 data-define="notInMacroVar 'It also works!'">
                 Macro goes here
             </div>
         </div>
         
         <h4>Slot evaluation</h4>
         <div id="t15">
-            <div data-muse-macro="'enhacedSidebar'"
-                 data-tdefine="linksSlot 'links';
+            <div data-use-macro="'enhacedSidebar'"
+                 data-define="linksSlot 'links';
                                additionalInfoSlot 'additional_info'">
-                <div data-mfill-slot="linksSlot">
+                <div data-fill-slot="linksSlot">
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/otherProducts">Other products</a></li>
-                        <li><a data-tattributes="href '/sales'">Sales!</a></li>
+                        <li><a data-attributes="href '/sales'">Sales!</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         
         <!-- Macro definitions -->
-        <p data-mdefine-macro="copyright">
+        <p data-define-macro="copyright">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
-        <p data-mdefine-macro="newCopyright">
+        <p data-define-macro="newCopyright">
             Copyright 2017, <em>Foo, Bar, and Associates</em> Inc.
         </p>
-        <p data-mdefine-macro="dynamicMacro">
-            Dynamic text: <span data-tcontent="string:A test of a dynamic macro" data-tattributes="id string:t2-1">A text</span>
+        <p data-define-macro="dynamicMacro">
+            Dynamic text: <span data-content="string:A test of a dynamic macro" data-attributes="id string:t2-1">A text</span>
         </p>
-        <p data-mdefine-macro="dynamicMacroReadingVar">
-            Var value: <span data-tcontent="var" data-tattributes="id id">The var value</span>
+        <p data-define-macro="dynamicMacroReadingVar">
+            Var value: <span data-content="var" data-attributes="id id">The var value</span>
         </p>
         
-        <ul data-mdefine-macro="list">
-	        <li data-trepeat="item items">
-		        <span data-tcontent="item" data-tattributes="class string:listItems1">An item</span>
+        <ul data-define-macro="list">
+	        <li data-repeat="item items">
+		        <span data-content="item" data-attributes="class string:listItems1">An item</span>
 	        </li>
         </ul>
         
-        <div data-mdefine-macro="sidebar">
+        <div data-define-macro="sidebar">
 			Links
 			<ul>
 			    <li><a href="/">Home</a></li>
@@ -198,12 +198,12 @@
 			    <li><a href="/support">Support</a></li>
 			    <li><a href="/contact">Contact Us</a></li>
 			</ul>
-			<span data-mdefine-slot="additional_info"></span>
+			<span data-define-slot="additional_info"></span>
         </div>
         
-        <div data-mdefine-macro="enhacedSidebar">
+        <div data-define-macro="enhacedSidebar">
             Links
-            <div data-mdefine-slot="links">
+            <div data-define-slot="links">
 	            <ul>
 	                <li><a href="/">Home</a></li>
 	                <li><a href="/products">Products</a></li>
@@ -211,22 +211,22 @@
 	                <li><a href="/contact">Contact Us</a></li>
 	            </ul>
             </div>
-            <span data-mdefine-slot="additional_info"></span>
+            <span data-define-slot="additional_info"></span>
         </div>
         
-        <ul data-mdefine-macro="dynamicListWith1Slot">
-            <li data-trepeat="item items">
-                <span data-tcontent="item">An item</span>
+        <ul data-define-macro="dynamicListWith1Slot">
+            <li data-repeat="item items">
+                <span data-content="item">An item</span>
             </li>
             <li>
-                <span data-mdefine-slot="additional_info"></span>
+                <span data-define-slot="additional_info"></span>
             </li>
         </ul>
         
-        <ul data-mdefine-macro="define"
-            data-tdefine="inMacroVar 'It works!'">
-            <li>inMacroVar: <span data-tcontent="inMacroVar" data-tattributes="id 't14-1'">Must be 'It works!'</span></li>
-            <li>notInMacroVar: <span data-tcontent="notInMacroVar" data-tattributes="id 't14-2'">Must be 'It also works!'</span></li>
+        <ul data-define-macro="define"
+            data-define="inMacroVar 'It works!'">
+            <li>inMacroVar: <span data-content="inMacroVar" data-attributes="id 't14-1'">Must be 'It works!'</span></li>
+            <li>notInMacroVar: <span data-content="notInMacroVar" data-attributes="id 't14-2'">Must be 'It also works!'</span></li>
         </ul>
     </body>
 </html>
