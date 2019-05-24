@@ -139,7 +139,9 @@ module.exports = (function() {
         inI18nOptionsDelimiter: ' ',
         argumentsDelimiter:     ',',
         macroDelimiter:         '@',
-
+        propsDelimiter:         ';',
+        inPropsDelimiter:       ' ',
+        
         htmlStructureExpressionPrefix:  "structure",
         globalVariableExpressionPrefix: "global",
         nocallVariableExpressionPrefix: "nocall",

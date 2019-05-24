@@ -132,9 +132,14 @@ module.exports = function( exp, delimiter, escape ) {
         return 0;
     };
     
+    var nextTokenIfAny = function( defaultValue ) {
+        return hasMoreTokens()? nextToken(): defaultValue;
+    };
+    
     return {
         hasMoreTokens: hasMoreTokens,
         nextToken: nextToken,
-        countTokens: countTokens
+        countTokens: countTokens,
+        nextTokenIfAny: nextTokenIfAny
     };
 };
