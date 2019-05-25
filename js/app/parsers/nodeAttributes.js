@@ -17,6 +17,7 @@ module.exports = function( node ) {
     this.talOmitTag = node.getAttribute( tags.talOmitTag );
     this.talReplace = node.getAttribute( tags.talReplace );
     this.talOnError = node.getAttribute( tags.talOnError );
+    this.talProps = node.getAttribute( tags.talProps );
     this.talTag = undefined;
     
     // metal namespace

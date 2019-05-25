@@ -20,6 +20,7 @@ module.exports = (function() {
         talOmitTag:       "data-omit-tag",
         talReplace:       "data-replace",
         talOnError:       "data-on-error",
+        talProps:         "data-props",
         metalDefineMacro: "data-define-macro",
         metalUseMacro:    "data-use-macro",
         metalDefineSlot:  "data-define-slot",
@@ -41,6 +42,7 @@ module.exports = (function() {
         talOmitTag:       "tal:omit-tag",
         talReplace:       "tal:replace",
         talOnError:       "tal:on-error",
+        talProps:         "tal:props",
         metalDefineMacro: "metal:define-macro",
         metalUseMacro:    "metal:use-macro",
         metalDefineSlot:  "metal:define-slot",
@@ -333,8 +335,21 @@ module.exports = (function() {
         return folderDictionaries;
     };
     /* End folder dictionaries */
+
+    /* Process props errors array */
+    var defaultProcessPropsErrorsArray = function( errorsArray ) {
+
+        alert( 
+            errorsArray.join( '\n' ) 
+        );
+    };
+    var processPropsErrorsArray = defaultProcessPropsErrorsArray;
+    var setProcessPropsErrorsArray = function( _processPropsErrorsArray ){
+        self.processPropsErrorsArray = _processPropsErrorsArray;
+    };
+    /* End process props errors array */
     
-    return {
+    var self = {
         getTags: getTags,
         setTags: setTags,
         getTal: getTal,
@@ -356,6 +371,10 @@ module.exports = (function() {
         asyncError: asyncError,
         repeat: repeat,
         setFolderDictionaries: setFolderDictionaries,
-        getFolderDictionaries: getFolderDictionaries
+        getFolderDictionaries: getFolderDictionaries,
+        processPropsErrorsArray: processPropsErrorsArray,
+        setProcessPropsErrorsArray: setProcessPropsErrorsArray
     };
+    
+    return self;
 })();

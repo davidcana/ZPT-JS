@@ -28,6 +28,7 @@ var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
 var TALOnError = require( '../attributes/TAL/talOnError.js' );
 var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
+var TALProps = require( '../attributes/TAL/talProps.js' );
 var contentHelper = require( '../attributes/TAL/contentHelper.js' );
 
 module.exports = (function() {
@@ -388,6 +389,15 @@ module.exports = (function() {
         
         var autoDefineHelper = _autoDefineHelper || new AutoDefineHelper( node );
         
+        if ( ! processProps( 
+            attributes.talProps,
+            scope,
+            autoDefineHelper
+        ) ) {
+            // Stop processing the rest of this node as it is invisible
+            return false;
+        }
+        
         processOnError( 
             attributes.talOnError,
             autoDefineHelper
@@ -533,7 +543,18 @@ module.exports = (function() {
         var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string );
         return i18nLanguage.putToAutoDefineHelper( autoDefineHelper );
     };
+    
+    var processProps = function( string, scope, autoDefineHelper ) {
 
+        if ( ! string ) {
+            return true;
+        }
+
+        var talProps = attributeCache.getByAttributeClass( TALProps, string );
+        return talProps.process( scope );
+        //return talProps.putToAutoDefineHelper( autoDefineHelper );
+    };
+    
     var processMETALDefineMacro = function( node, scope, string ) {
 
         if ( ! string ) {

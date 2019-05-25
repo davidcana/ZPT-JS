@@ -26,10 +26,12 @@ var TALProps = function( _string, _propsItems ) {
                 propsItem.defaultValueString,
                 propsItem.defaultValueExpression
             );
-            errorsArray.concat( errors );
+            errorsArray = errorsArray.concat( errors );
         }
         
         processErrorsArray( errorsArray );
+        
+        return errorsArray.length == 0;
     };
 
     var checkPropsItem = function( scope, name, type, required, defaultValueString, defaultValueExpression ) {
@@ -39,7 +41,7 @@ var TALProps = function( _string, _propsItems ) {
         var value = scope.get( name );
         
         // Set default value if needed
-        if ( value === undefined || defaultValueExpression === undefined ){
+        if ( value === undefined && defaultValueExpression !== undefined ){
             var setDefaultValueError = setDefaultValue( scope, name, type, defaultValueString, defaultValueExpression );
             if ( setDefaultValueError ){
                 errorsArray.push( setDefaultValueError );
@@ -68,7 +70,7 @@ var TALProps = function( _string, _propsItems ) {
         var realType = getTypeOf( value );
         return realType === expectedType? 
             false: 
-            'Expected value type (' + expectedType + ') of ' + name + ' property does not match type (' + realType + '), value is ' + value
+            'Expected value type (' + expectedType + ') of ' + name + ' property does not match type (' + realType + '), value is "' + value + '".'
     };
     
     /*
@@ -97,18 +99,7 @@ var TALProps = function( _string, _propsItems ) {
     
     var checkRequired = function( name, required, value ) {
         
-        if ( ! required ){
-            return;
-        }
-        
-        // Normalize value
-        var stringRequired = '' + required;
-        stringRequired = stringRequired.toLoweCase();
-        if ( stringRequired !== "true" && stringRequired !== "false" ){
-            return 'Required must be true or false: ' + name;
-        }
-        
-        return "true" === stringRequired && value === undefined? 
+        return true === required && value === undefined? 
             'Required value must not be undefined: ' + name:
             false;
     };
@@ -131,10 +122,7 @@ var TALProps = function( _string, _propsItems ) {
             return;
         }
         
-        // Process errors
-        alert( 
-            errorsArray.join( '\n' ) 
-        );
+        context.processPropsErrorsArray( errorsArray );
     };
     
     var toString = function(){
@@ -169,10 +157,30 @@ TALProps.build = function( string ) {
             true 
         );
         
-        var name = inPropTokens.nextTokenIfAny();
-        var type = inPropTokens.nextTokenIfAny();
-        var required = inPropTokens.nextTokenIfAny();
-        var defaultValueString = inPropTokens.nextTokenIfAny();
+        var name, type, defaultValueString;
+        var required = false;
+        var state = 1;
+        while ( inPropTokens.hasMoreTokens() ){
+            var currentToken = inPropTokens.nextToken();
+            if ( TALProps.tokenIsRequired( currentToken ) ){
+                required = true;
+                continue;
+            }
+            switch ( state ) {
+                case 1:
+                    name = currentToken;
+                    break;
+                case 2:
+                    type = currentToken;
+                    break;
+                case 3:
+                    defaultValueString = currentToken;
+                    break;
+                default:
+                    throw 'Too many arguments in talProps item: ' + string.trim();
+            }
+            ++state;
+        }
         
         // The name is the only required element
         if ( ! name ){
@@ -189,6 +197,10 @@ TALProps.build = function( string ) {
     }
 
     return new TALProps( string, propsItems );
+};
+
+TALProps.tokenIsRequired = function( token ) {
+    return "required" === token.toLowerCase();
 };
 
 module.exports = TALProps;
