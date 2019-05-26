@@ -551,8 +551,7 @@ module.exports = (function() {
         }
 
         var talProps = attributeCache.getByAttributeClass( TALProps, string );
-        return talProps.process( scope );
-        //return talProps.putToAutoDefineHelper( autoDefineHelper );
+        return talProps.process( scope, autoDefineHelper );
     };
     
     var processMETALDefineMacro = function( node, scope, string ) {

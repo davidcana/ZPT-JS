@@ -12,7 +12,13 @@ var TALProps = function( _string, _propsItems ) {
     var string = _string;
     var propsItems = _propsItems;
     
-    var process = function( scope ){
+    var process = function( scope, autoDefineHelper ){
+        
+        // Add strictModeVarName to the autoDefineHelper
+        autoDefineHelper.put(
+            context.getConf().strictModeVarName,
+            'true'
+        );
         
         var errorsArray = [];
         

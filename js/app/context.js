@@ -153,13 +153,15 @@ module.exports = (function() {
         onErrorStructureVarName: "on-error-structure",
         i18nDomainVarName:       "i18nDomain",
         i18nLanguageVarName:     "i18nLanguage",
-        repeatVarName:           "repeat",
         externalMacroUrlVarName: "externalMacroUrl",
+        strictModeVarName:       "strictMode",
+        
+        repeatVarName:           "repeat",
         windowVarName:           "window",
         contextVarName:          "context",
         nothingVarName:          "nothing",
         defaultVarName:          "default",
-        i18nConfResourceId:      '/CONF/',
+        i18nConfResourceId:      "/CONF/",
         
         nothingVarValue:         "___nothing___",
         defaultVarValue:         "___default___",
