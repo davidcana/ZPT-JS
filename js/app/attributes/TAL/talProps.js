@@ -67,10 +67,14 @@ var TALProps = function( _string, _propsItems ) {
     
     var checkType = function( name, expectedType, value ) {
         
+        if ( ! expectedType ){
+            return;
+        }
+        
         var realType = getTypeOf( value );
-        return realType === expectedType? 
+        return realType === expectedType.toLowerCase()? 
             false: 
-            'Expected value type (' + expectedType + ') of ' + name + ' property does not match type (' + realType + '), value is "' + value + '".'
+            'Expected value type (' + expectedType.toLowerCase() + ') of ' + name + ' property does not match type (' + realType + '), value is "' + value + '".'
     };
     
     /*
@@ -94,7 +98,9 @@ var TALProps = function( _string, _propsItems ) {
     var getTypeOf = function( value ){
         
         var temp = {}.toString.call( value ).split(' ')[ 1 ].slice( 0, -1 ).toLowerCase();
-        return temp === 'object'? temp.constructor.name: temp;
+        return temp === 'object'? 
+            value.constructor.name.toLowerCase(): 
+            temp;
     };
     
     var checkRequired = function( name, required, value ) {
@@ -157,7 +163,9 @@ TALProps.build = function( string ) {
             true 
         );
         
-        var name, type, defaultValueString;
+        var name = undefined;
+        var type = undefined;
+        var defaultValueString = undefined;
         var required = false;
         var state = 1;
         while ( inPropTokens.hasMoreTokens() ){
