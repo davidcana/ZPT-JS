@@ -77,3 +77,46 @@ QUnit.test( "simple failing test", function( assert ) {
         ] 
     );
 });
+
+QUnit.test( "Default value not failing test", function( assert ) {
+
+    lastPropsErrorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't3' ),
+        dictionary: dictionary
+    });
+
+    assert.equal( $('#t3-1').text() , "6" );
+    assert.equal( $('#t3-2').text() , "1" );
+    assert.equal( $('#t3-3').text() , "5" );
+    assert.equal( $('#t3-4').text() , "1" );
+    
+    assert.equal( lastPropsErrorsArray, undefined );
+});
+
+QUnit.test( "Default value failing test", function( assert ) {
+
+    lastPropsErrorsArray = undefined;
+    dictionary.myFunction = function(){
+        return undefined;
+    };
+    
+    zpt.run({
+        root: document.getElementById( 't4' ),
+        dictionary: dictionary
+    });
+
+    assert.equal( $('#t4-1').text() , "must not be evaluated" );
+    assert.equal( $('#t4-2').text() , "must not be evaluated" );
+    
+    assert.deepEqual( 
+        lastPropsErrorsArray, 
+        [
+            "Expected value type (number) of aNumber property does not match type (string), value is \"not a number\".",
+            "Expected value type (number) of aString property does not match type (string), value is \"string\".",
+            "Expected value type (string) of aValue property does not match type (undefined), value is \"undefined\".",
+            "Required value must not be undefined: aValue"
+        ] 
+    );
+});

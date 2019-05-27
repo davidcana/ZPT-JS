@@ -18,7 +18,7 @@
                                   text1 'this is a text'; 
                                   text2 'this is a text too'; 
                                   array1 [10:15]">
-            <ol data-props="number1 Number;
+            <ol data-props="number1 number;
                             text1 string;
                             array1 array;
                             required text2 string;
@@ -62,6 +62,36 @@
                 <li>user/name = <span id="t2-7" data-content="user/name">must not be evaluated</span></li>
                 <li>tree/name = <span id="t2-8" data-content="myTree/name">must not be evaluated</span></li>
                 <li>aString2 = <span id="t2-9" data-content="aString2">must not be evaluated</span></li>
+            </ol>
+        </div>
+        
+        <h2>Default value not failing</h2>
+        <div id="t3">
+            <ol data-props="aNumber number 6;
+                            number1 number 99">
+                <li>aNumber = <span id="t3-1" data-content="aNumber">an integer</span></li>
+                <li>number1 = <span id="t3-2" data-content="number1">an integer</span></li>
+            </ol>
+            <ol data-props="aNumber number (+: 3 2);
+                            number1 number (-: 100 1)">
+                <li>aNumber = <span id="t3-3" data-content="aNumber">an integer</span></li>
+                <li>number1 = <span id="t3-4" data-content="number1">an integer</span></li>
+            </ol>
+        </div>
+        
+        <h2>Default value failing</h2>
+        <div id="t4">
+            <ol data-props="aNumber number 'not a number';
+                            aString number 99;
+                            required aValue string myFunction()">
+                <li>
+                    aNumber = 
+                    <span id="t4-1" data-content="aNumber">must not be evaluated</span>
+                </li>
+                <li>
+                    number1 = 
+                    <span id="t4-2" data-content="aString">must not be evaluated</span>
+                </li>
             </ol>
         </div>
     </body>
