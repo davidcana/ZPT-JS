@@ -4,14 +4,15 @@ var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
+var context = zpt.context;
 
 var lastPropsErrorsArray;
 var processPropsErrorsArray = function( errorsArray ) {
     
     lastPropsErrorsArray = errorsArray;
-    alert( 
+    /*alert( 
         errorsArray.join( '\n' ) 
-    );
+    );*/
 };
 zpt.context.setProcessPropsErrorsArray( processPropsErrorsArray );
 
@@ -120,3 +121,46 @@ QUnit.test( "Default value failing test", function( assert ) {
         ] 
     );
 });
+
+QUnit.test( "Strict mode using props test", function( assert ) {
+
+    lastPropsErrorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't5' ),
+        dictionary: dictionary
+    });
+
+    assert.equal( $('#t5-1').text() , "5" );
+    assert.equal( $('#t5-2').text() , "undefined" );
+    assert.equal( $('#t5-3').text() , "NaN" );
+    
+    assert.deepEqual( 
+        lastPropsErrorsArray, 
+        [
+            "Not declared variable found using strict mode:nonDefinedNumber"
+        ] 
+    );
+});
+
+QUnit.test( "Strict mode using context test", function( assert ) {
+
+    lastPropsErrorsArray = undefined;
+    context.setStrictMode( true );
+    
+    zpt.run({
+        root: document.getElementById( 't6' ),
+        dictionary: dictionary
+    });
+
+    assert.equal( $('#t6-1').text() , "undefined" );
+    assert.equal( $('#t6-2').text() , "NaN" );
+
+    assert.deepEqual( 
+        lastPropsErrorsArray, 
+        [
+            "Not declared variable found using strict mode:nonDefinedNumber"
+        ] 
+    );
+});
+

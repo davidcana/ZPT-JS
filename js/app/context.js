@@ -155,6 +155,8 @@ module.exports = (function() {
         i18nLanguageVarName:     "i18nLanguage",
         externalMacroUrlVarName: "externalMacroUrl",
         strictModeVarName:       "strictMode",
+        declaredVarsVarName:     "declaredVars",
+        notRequiredVarsVarName:  "notRequiredVars",
         
         repeatVarName:           "repeat",
         windowVarName:           "window",
@@ -197,7 +199,6 @@ module.exports = (function() {
         trCurrencyExpression: "trCurrency" + EXPRESSION_SUFFIX,
         trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
         inExpression: "in" + EXPRESSION_SUFFIX,
-        /*pathExpression: "path" + EXPRESSION_SUFFIX,*/
         pathExpression: "",
         jqueryExpression: "$"
     };
@@ -351,6 +352,19 @@ module.exports = (function() {
     };
     /* End process props errors array */
     
+    /* Strict mode  */
+    var strictMode = false;
+    var setStrictMode = function( _strictMode ){
+        strictMode = _strictMode;
+    };
+    var isStrictMode = function(){
+        return strictMode;
+    };
+    var isStrictModeInScope = function( scope ){
+        return strictMode || scope.get( getConf().strictModeVarName );
+    };
+    /* End strict mode  */
+    
     var self = {
         getTags: getTags,
         setTags: setTags,
@@ -375,7 +389,10 @@ module.exports = (function() {
         setFolderDictionaries: setFolderDictionaries,
         getFolderDictionaries: getFolderDictionaries,
         processPropsErrorsArray: processPropsErrorsArray,
-        setProcessPropsErrorsArray: setProcessPropsErrorsArray
+        setProcessPropsErrorsArray: setProcessPropsErrorsArray,
+        setStrictMode: setStrictMode,
+        isStrictMode: isStrictMode,
+        isStrictModeInScope: isStrictModeInScope
     };
     
     return self;

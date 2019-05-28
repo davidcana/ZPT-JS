@@ -26,6 +26,7 @@
                     <li><a href="#errors">Errors</a>.</li>
                     <li><a href="#repeat">Repeat</a>.</li>
                     <li><a href="#folderDictionaries">Folder dictionaries</a>.</li>
+                    <li><a href="#strictMode">Strict mode</a>.</li>
                 </ul>
             </div>
             <article data-fill-slot="'article'">
@@ -65,6 +66,7 @@ zpt.context.setTags({
         talOmitTag:       "data-mit-tag",
         talReplace:       "data-eplace",
         talOnError:       "data-n-error",
+        talProps:         "data-rops",
         metalDefineMacro: "data-efine-macro",
         metalUseMacro:    "data-se-macro",
         metalDefineSlot:  "data-efine-slot",
@@ -110,6 +112,7 @@ zpt.context.setTags({
         talOmitTag:       "tal:omit-tag",
         talReplace:       "tal:replace",
         talOnError:       "tal:on-error",
+        talProps:         "tal:props",
         metalDefineMacro: "metal:define-macro",
         metalUseMacro:    "metal:use-macro",
         metalDefineSlot:  "metal:define-slot",
@@ -213,6 +216,8 @@ var conf = {
     inI18nOptionsDelimiter: ' ',
     argumentsDelimiter:     ',',
     macroDelimiter:         '@',
+    propsDelimiter:         ';',
+    inPropsDelimiter:       ' ',
 
     htmlStructureExpressionPrefix:  "structure",
     globalVariableExpressionPrefix: "global",
@@ -223,13 +228,15 @@ var conf = {
     onErrorStructureVarName: "on-error-structure",
     i18nDomainVarName:       "i18nDomain",
     i18nLanguageVarName:     "i18nLanguage",
-    repeatVarName:           "repeat",
     externalMacroUrlVarName: "externalMacroUrl",
+    strictModeVarName:       "strictMode",
+
+    repeatVarName:           "repeat",
     windowVarName:           "window",
     contextVarName:          "context",
     nothingVarName:          "nothing",
     defaultVarName:          "default",
-    i18nConfResourceId:      '/CONF/',
+    i18nConfResourceId:      "/CONF/",
 
     nothingVarValue:         "___nothing___",
     defaultVarValue:         "___default___",
@@ -387,6 +394,23 @@ zpt.context.setErrorFunction(
                     <li><code>setFolderDictionaries( folderDictionaries )</code>. Sets the folder dictionaries.</li>
                 </ul>
                 
+                <h2 data-attributes="id 'strictMode'">Strict mode</h2>
+                <p>
+                    <em>Strict mode</em> makes it easy to force to declare variables. If <em>strict mode</em> is set to <code>true</code> and ZPT-JS finds a not declared variable an error occurs. <em>Strict mode</em> can be defined in two ways: 
+                </p>
+                <ul>
+                    <li>Using a <a href="attributes-TALProps.html">data-props</a> attribute. All the variables used in this node must be declared.</li>
+                    <li>Using <code>setStrictMode( true )</code>. All the variables used in the root node must be declared.</li>
+                </ul>
+                
+                <p>
+                    The methods related to <em>Strict mode</em> (defined in context) are:
+                </p>
+                <ul>
+                    <li><code>setStrictMode( strictMode )</code>. Set the strict mode of the node root to <code>true</code> or <code>false</code>.</li>
+                    <li><code>isStrictMode()</code>. Returns the current value of <code>strictMode</code>.</li>
+                    <li><code>isStrictModeInScope( scope )</code>. Returns <code>true</code> if the strictMode is <code>true</code> in context or using a <em>data-props</em> attribute..</li>
+                </ul>
             </article>
         </div>
     </body>

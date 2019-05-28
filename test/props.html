@@ -94,5 +94,34 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>Strict mode using props</h2>
+        <div id="t5">
+            <ol data-props="aNumber number 5">
+                <li>aNumber = <span id="t5-1" data-content="aNumber">an integer</span></li>
+                <li>
+                    nonDefinedNumber = 
+                    <span id="t5-2" data-content="nonDefinedNumber">must not be evaluated</span>
+                </li>
+                <li>
+                    nonDefinedNumber = 
+                    <span id="t5-3" data-content="+: 1 nonDefinedNumber">must not be evaluated</span>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Strict mode using context</h2>
+        <div id="t6">
+            <ol>
+                <li>
+                    nonDefinedNumber = 
+                    <span id="t6-1" data-content="nonDefinedNumber">must not be evaluated</span>
+                </li>
+                <li>
+                    nonDefinedNumber = 
+                    <span id="t6-2" data-content="+: 1 nonDefinedNumber">must not be evaluated</span>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

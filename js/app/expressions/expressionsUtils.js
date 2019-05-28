@@ -11,7 +11,21 @@ module.exports = (function() {
         return evaluateHelper.isNumber( value )? "" + value: "'" + value + "'";
     };
     
+    var buildList = function( items, asStrings ) {
+        
+        var result = '[';
+        var separator = asStrings? "'": "";
+        
+        for ( var i = 0; i < items.length; i++ ) {
+            result += separator + items[ i ] + separator + " ";
+        }
+        
+        result += ']';
+        return result;
+    };
+    
     return {
-        buildLiteral: buildLiteral
+        buildLiteral: buildLiteral,
+        buildList: buildList
     };
 })();

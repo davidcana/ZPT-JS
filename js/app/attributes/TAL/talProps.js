@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 var $ = require( 'jquery' );
 
 var TALProps = function( _string, _propsItems ) {
@@ -13,15 +14,48 @@ var TALProps = function( _string, _propsItems ) {
     var propsItems = _propsItems;
     
     var process = function( scope, autoDefineHelper ){
+
+        putVariables( scope, autoDefineHelper );
+
+        return processPropsItems( scope );
+    };
+    
+    var putVariables = function( scope, autoDefineHelper ) {
         
-        // Add strictModeVarName to the autoDefineHelper
-        autoDefineHelper.put(
-            context.getConf().strictModeVarName,
-            'true'
+        // Add strictModeVarName to the autoDefineHelper if needed
+        var strictModeVarName = context.getConf().strictModeVarName;
+        if ( true !== scope.get( strictModeVarName ) ){
+            autoDefineHelper.put( strictModeVarName, 'true' );
+        }
+        
+        // Build declared and required
+        var declaredVarsVarName = context.getConf().declaredVarsVarName;
+        var notRequiredVarsVarName = context.getConf().notRequiredVarsVarName;
+        var declared = scope.get( declaredVarsVarName ) || [];
+        var required = scope.get( notRequiredVarsVarName ) || [];
+        for ( var i = 0; i < propsItems.length; i++ ) {
+            var propsItem = propsItems[ i ];
+            declared.push( propsItem.name );
+            if ( propsItem.required ){
+                required.push( propsItem.name );
+            }
+        }
+        
+        // Add declaredVarsVarName and notRequiredVarsVarName to the autoDefineHelper
+        autoDefineHelper.put( 
+            declaredVarsVarName, 
+            expressionsUtils.buildList( declared, true )
         );
+        autoDefineHelper.put( 
+            notRequiredVarsVarName,
+            expressionsUtils.buildList( required, true )
+        );
+    };
+    
+    var processPropsItems = function( scope ) {
         
         var errorsArray = [];
-        
+
         for ( var i = 0; i < propsItems.length; i++ ) {
             var propsItem = propsItems[ i ];
             var errors = checkPropsItem(
@@ -34,11 +68,11 @@ var TALProps = function( _string, _propsItems ) {
             );
             errorsArray = errorsArray.concat( errors );
         }
-        
+
         processErrorsArray( errorsArray );
-        
+
         return errorsArray.length == 0;
-    };
+    }
 
     var checkPropsItem = function( scope, name, type, required, defaultValueString, defaultValueExpression ) {
         

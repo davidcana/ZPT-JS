@@ -3,24 +3,29 @@
 */
 "use strict";
 
+var context = require( '../../context.js' );
+
 var VariableExpression = function( nameToApply ) {
     
     var name = nameToApply;
     
     var evaluate = function( scope ){
-        return scope.get( name );
+        
+        var value = scope.get( name );
+        if ( value !== undefined ){
+            return value;
+        }
+        
+        var strictMode = context.isStrictModeInScope( scope );
+        if ( strictMode ){
+            var error = 'Not declared variable found using strict mode:' + name;
+            context.processPropsErrorsArray( [ error ] );
+        }
+
+        return undefined;
     };
     /*
     var evaluate = function( scope ){
-        
-        // Try to get the value from the scope
-        var result = scope.get( name );
-        if ( result !== undefined ){
-            return result;
-        }
-        
-        // Update the scope and try again
-        scope.update();
         return scope.get( name );
     };
     */

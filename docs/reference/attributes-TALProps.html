@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Attributes - TALProps</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS reference - Attributes - TALProps</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+argument       ::= props_item [';' props_item]*
+props_item     ::= ('required') variable_name (variable_type (expression))
+variable_name  ::= Name
+variable_type  ::= Name
+                </pre>
+                
+                <h2 data-attributes="id 'description'">Description</h2>
+                <p>
+                    The <em>data-props</em> statement declares a list of variables and some settings about them.
+                </p>
+                <p>
+                    Each declaration can define:
+                </p>
+                <ul>
+                    <li>
+                        The <em>required</em> reserved word declares a required variable. It is optional. The default value is <code>false</code>.
+                    </li>
+                    <li>
+                        The <em>variable name</em>. It is the only mandatory item.
+                    </li>
+                    <li>
+                        The <em>variable type</em> (optional). It declares the type of the variable.
+                    </li>
+                    <li>
+                        An expression working as default value (optional). It is evaluated only if the value of the variable is undefined.
+                    </li>
+                </ul>
+                
+                <p>
+                    Some example of types:
+                </p>
+                <table class="comparison">
+                    <tr>
+                        <th>Type</th>
+                        <th>Value example</th>
+                    </tr>
+                    <tr>
+                        <td>undefined</td>
+                        <td>undefined</td>
+                    </tr>
+                    <tr>
+                        <td>null</td>
+                        <td>null</td>
+                    </tr>
+                    <tr>
+                        <td>number</td>
+                        <td>NaN</td>
+                    </tr>
+                    <tr>
+                        <td>number</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>array</td>
+                        <td>[]</td>
+                    </tr>
+                    <tr>
+                        <td>string</td>
+                        <td>''</td>
+                    </tr>
+                    <tr>
+                        <td>function</td>
+                        <td>function(){}</td>
+                    </tr>
+                    <tr>
+                        <td>regexp</td>
+                        <td>/a/</td>
+                    </tr>
+                    <tr>
+                        <td>date</td>
+                        <td>new Date()</td>
+                    </tr>
+                    <tr>
+                        <td>object</td>
+                        <td>{}</td>
+                    </tr>
+                    <tr>
+                        <td>myconstructor</td>
+                        <td>new MyConstructor()</td>
+                    </tr>
+                </table>
+                
+                <p>
+                    A <em>strict mode</em> is set to true inside the node with this attribute.
+                </p>
+                
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    This statement does not exist in ZPT.
+                </p>
+                
+                <h2 data-attributes="id 'examples'">Examples</h2>
+                <p>
+                    Declaring a number, a string, an array and a date:
+                </p>
+                <pre class="brush: html">
+data-props="aNumber number;
+            aText string;
+            AnArray array;
+            ADateValue date"
+                </pre>
+                
+                <p>
+                    Declaring a number, a string, an array and a date (all required):
+                </p>
+                <pre class="brush: html">
+data-props="required aNumber number;
+            required aText string;
+            required AnArray array;
+            required ADateValue date"
+                </pre>
+                
+                <p>
+                    Declaring some default values:
+                </p>
+                <pre class="brush: html">
+data-props="aNumber number 99;
+            aText string 'a default value'"
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>
