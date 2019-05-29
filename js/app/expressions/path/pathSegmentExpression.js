@@ -110,6 +110,11 @@ PathSegmentExpression.buildFirstPathToken = function( t ){
                     // Must be an object in scope
                     if ( result === undefined ) {
                         result = VariableExpression.build( token );
+                        
+                        // Not recognized expression
+                        if ( result === undefined ) {
+                            throw 'Unknown expression: ' + token;
+                        }
                     }
                 }
             }

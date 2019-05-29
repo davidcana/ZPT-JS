@@ -9,13 +9,17 @@ var context = require( '../../../js/app/context.js' );
 // Unit tests
 QUnit.test( "Non existing expressions test", function( assert ) {
 
-    zpt.run({
-        root: $( '#t1' )[0],
-        dictionary: dictionary
-    });
+    try {
+        zpt.run({
+            root: $( '#t1' )[0],
+            dictionary: dictionary
+        });
+    } catch ( e ) {
+        assert.equal( e , "Unknown expression: strinnnng:" );
+    }
     
-    assert.equal( $('#t1-1').html() , "undefined" );
-    assert.equal( $('#t1-2').html() , "undefined" );
+    assert.equal( $('#t1-1').html() , "not defined expression" );
+    assert.equal( $('#t1-2').html() , "not defined expression" );
 });
 
 QUnit.test( "Using null values in expressions test", function( assert ) {

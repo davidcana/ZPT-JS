@@ -400,7 +400,7 @@ zpt.context.setErrorFunction(
                 </p>
                 <ul>
                     <li>Using a <a href="attributes-TALProps.html">data-props</a> attribute. All the variables used in this node must be declared.</li>
-                    <li>Using <code>setStrictMode( true )</code>. All the variables used in the root node must be declared.</li>
+                    <li>Using <code>zpt.context.setStrictMode( true )</code>. All the variables used in the root node must be declared.</li>
                 </ul>
                 
                 <p>
@@ -409,7 +409,6 @@ zpt.context.setErrorFunction(
                 <ul>
                     <li><code>setStrictMode( strictMode )</code>. Set the strict mode of the node root to <code>true</code> or <code>false</code>.</li>
                     <li><code>isStrictMode()</code>. Returns the current value of <code>strictMode</code>.</li>
-                    <li><code>isStrictModeInScope( scope )</code>. Returns <code>true</code> if the strictMode is <code>true</code> in context or using a <em>data-props</em> attribute..</li>
                 </ul>
             </article>
         </div>

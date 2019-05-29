@@ -249,4 +249,21 @@ Scope.prototype.buildUrlListOfFolderDictionaries = function ( maxFolderDictionar
     return result;
 };
 
+Scope.prototype.isStrictMode = function(){
+    return context.isStrictMode() || this.get( context.getConf().strictModeVarName );
+};
+
+Scope.prototype.isValidVariable = function( name ){
+    
+    if ( ! this.isStrictMode() ){
+        return true;
+    }
+    
+    var declared = this.get( context.getConf().declaredVarsVarName );
+    
+    return declared && declared.indexOf? 
+        declared.indexOf( name ) !== -1: 
+        false;
+};
+
 module.exports = Scope;

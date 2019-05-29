@@ -172,7 +172,7 @@ module.exports = (function() {
         loggingLevel: log4javascript.Level.ERROR,
 
         externalMacroPrefixURL: '',
-        
+        variableNameRE:         /^[A-Za-z0-9_/-]+$/,
         expressionCacheOn: true,
         attributeCacheOn: true,
 
@@ -360,9 +360,6 @@ module.exports = (function() {
     var isStrictMode = function(){
         return strictMode;
     };
-    var isStrictModeInScope = function( scope ){
-        return strictMode || scope.get( getConf().strictModeVarName );
-    };
     /* End strict mode  */
     
     var self = {
@@ -391,8 +388,7 @@ module.exports = (function() {
         processPropsErrorsArray: processPropsErrorsArray,
         setProcessPropsErrorsArray: setProcessPropsErrorsArray,
         setStrictMode: setStrictMode,
-        isStrictMode: isStrictMode,
-        isStrictModeInScope: isStrictModeInScope
+        isStrictMode: isStrictMode
     };
     
     return self;

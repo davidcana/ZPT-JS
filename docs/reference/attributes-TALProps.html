@@ -108,8 +108,12 @@ variable_type  ::= Name
                 </table>
                 
                 <p>
-                    A <em>strict mode</em> is set to true inside the node with this attribute.
+                    A <em>strict mode</em> is set to <code>true</code> inside the node with this attribute. <em>Strict mode</em> makes it easy to force to declare variables. If <em>strict mode</em> is <code>true</code> and ZPT-JS finds a not declared variable an error occurs. <em>Strict mode</em> can be defined in two ways: 
                 </p>
+                <ul>
+                    <li>Using a <em>data-props</em> attribute. All the variables used in this node must be declared.</li>
+                    <li>Using <a href="context.html#strictMode">zpt.context.setStrictMode( true )</a>. All the variables used in the root node must be declared.</li>
+                </ul>
                 
                 <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
@@ -123,8 +127,8 @@ variable_type  ::= Name
                 <pre class="brush: html">
 data-props="aNumber number;
             aText string;
-            AnArray array;
-            ADateValue date"
+            anArray array;
+            aDateValue date"
                 </pre>
                 
                 <p>
@@ -133,8 +137,8 @@ data-props="aNumber number;
                 <pre class="brush: html">
 data-props="required aNumber number;
             required aText string;
-            required AnArray array;
-            required ADateValue date"
+            required anArray array;
+            required aDateValue date"
                 </pre>
                 
                 <p>

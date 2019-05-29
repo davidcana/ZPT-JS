@@ -11,18 +11,13 @@ var VariableExpression = function( nameToApply ) {
     
     var evaluate = function( scope ){
         
-        var value = scope.get( name );
-        if ( value !== undefined ){
-            return value;
-        }
-        
-        var strictMode = context.isStrictModeInScope( scope );
-        if ( strictMode ){
+        if ( ! scope.isValidVariable( name ) ){
             var error = 'Not declared variable found using strict mode:' + name;
             context.processPropsErrorsArray( [ error ] );
+            return undefined;
         }
-
-        return undefined;
+        
+        return scope.get( name );
     };
     /*
     var evaluate = function( scope ){
@@ -41,7 +36,11 @@ var VariableExpression = function( nameToApply ) {
 };
 
 VariableExpression.build = function( string ) {
-    return new VariableExpression( string );
+    
+    return context.getConf().variableNameRE.test( string )?
+        new VariableExpression( string ):
+        undefined;
+    //return new VariableExpression( string );
 }
 
 module.exports = VariableExpression;

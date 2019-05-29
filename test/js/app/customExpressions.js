@@ -18,12 +18,16 @@ var buildDictionary = function(){
 
 var testNotDefinedExpression = function( assert ){
     
-    zpt.run({
+    try {
+        zpt.run({
             root: document.body,
             dictionary: buildDictionary()
-    });
-    assert.equal( $('#t1-1').html() , "undefined" );
-    assert.equal( $('#t1-2').html() , "undefined" );
+        });
+    } catch ( e ) {
+        assert.equal( e , "Unknown expression: avg: aNumber 1" );
+    }
+    //assert.equal( $('#t1-1').html() , "undefined" );
+    //assert.equal( $('#t1-2').html() , "undefined" );
 };
 
 var testDefinedExpression = function( assert ){

@@ -16,7 +16,6 @@ New in 0.35.0
 - Added some methods to context:
     - setStrictMode( strictMode ). Set the value of strictMode (default value is false). If it is set to true all variables must be declared; if ZPT-JS finds a non declared variable in an expression an error occurs.
     - isStrictMode(). Get the value of strictMode.
-    - isStrictModeInScope( scope ). Returns true if the strictMode is true in context or using a data-props attribute.
 
 New in 0.34.0
 - Now exists expression returns true when the path expressions following its expression returns a value and it is not undefined. It is false when the path expression cannot locate an object or if it evaluates to undefined.
