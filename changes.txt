@@ -18,6 +18,15 @@ New in 0.35.0
     - isStrictMode(). Get the value of strictMode.
 - Variable expression must match a regular expression. It is defined by zpt.context.getConf().variableNameRE and it is /^[A-Za-z0-9_/-]+$/ by default.
 - errorFunction method of Context now is invoked when any error occurs except if the error is related to async preloading (in this case the asyncError method is invoked).
+- Added a prefix to private vars to avoid name collision: '_'. The renamed vars are:
+    - onErrorVarName: "_on-error",
+    - onErrorStructureVarName: "_on-error-structure",
+    - i18nDomainVarName:       "_i18nDomain"
+    - i18nLanguageVarName:     "_i18nLanguage"
+    - externalMacroUrlVarName: "_externalMacroUrl"
+    - strictModeVarName:       "_strictMode"
+    - declaredVarsVarName:     "_declaredVars"
+    - repeatVarName:           "_repeat"
 
 New in 0.34.0
 - Now exists expression returns true when the path expressions following its expression returns a value and it is not undefined. It is false when the path expression cannot locate an object or if it evaluates to undefined.
