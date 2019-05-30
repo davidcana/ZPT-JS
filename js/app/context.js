@@ -126,6 +126,7 @@ module.exports = (function() {
     
     /* Conf */
     var EXPRESSION_SUFFIX = ':';
+    var PRIVATE_VARS_PREFIX = '_';
     var defaultConf = {
         pathDelimiter:          '|',
         pathSegmentDelimiter:   '/',
@@ -151,14 +152,14 @@ module.exports = (function() {
         nocallVariableExpressionPrefix: "nocall",
         
         templateErrorVarName:    "error",
-        onErrorVarName:          "on-error",
-        onErrorStructureVarName: "on-error-structure",
-        i18nDomainVarName:       "i18nDomain",
-        i18nLanguageVarName:     "i18nLanguage",
-        externalMacroUrlVarName: "externalMacroUrl",
-        strictModeVarName:       "strictMode",
-        declaredVarsVarName:     "declaredVars",
-        repeatVarName:           "repeat",
+        onErrorVarName:          PRIVATE_VARS_PREFIX + "on-error",
+        onErrorStructureVarName: PRIVATE_VARS_PREFIX + "on-error-structure",
+        i18nDomainVarName:       PRIVATE_VARS_PREFIX + "i18nDomain",
+        i18nLanguageVarName:     PRIVATE_VARS_PREFIX + "i18nLanguage",
+        externalMacroUrlVarName: PRIVATE_VARS_PREFIX + "externalMacroUrl",
+        strictModeVarName:       PRIVATE_VARS_PREFIX + "strictMode",
+        declaredVarsVarName:     PRIVATE_VARS_PREFIX + "declaredVars",
+        repeatVarName:           PRIVATE_VARS_PREFIX + "repeat",
         
         windowVarName:           "window",
         contextVarName:          "context",
