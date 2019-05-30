@@ -5,19 +5,25 @@ var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
 
+var errorsCounter = 0;
+var errorFunction = function( errors ) {
+    ++errorsCounter;
+};
+zpt.context.setErrorFunction( errorFunction );
+
 // Run tests!
 QUnit.test( "Before on-error tag test", function( assert ) {
     
     try {
+        errorsCounter = 0;
         zpt.run({
             root: $( '#group1' )[0],
             dictionary: dictionary
         });
-        assert.equal( "true" , "false" );
     } catch( e ) {
-        assert.equal( "true" , "true" );
+        // Nothing to do
     }
-    
+    assert.equal( 1, errorsCounter );
     assert.equal( $('#t1-1').text() , "false" );
 });
 
@@ -38,15 +44,16 @@ QUnit.test( "on-error tag test", function( assert ) {
 QUnit.test( "After on-error tag test", function( assert ) {
 
     try {
+        errorsCounter = 0;
         zpt.run({
             root: $( '#group3' )[0],
             dictionary: dictionary
         });
-        assert.equal( "true" , "false" );
     } catch( e ) {
-        assert.equal( "true" , "true" );
+        // Nothing to do
     }
-
+    
+    assert.equal( 1, errorsCounter );
     assert.equal( $('#t3-1').text() , "false" );
 });
 

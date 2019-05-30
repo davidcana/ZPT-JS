@@ -132,14 +132,12 @@ QUnit.test( "Strict mode using props test", function( assert ) {
     });
 
     assert.equal( $('#t5-1').text() , "5" );
-    assert.equal( $('#t5-2').text() , "undefined" );
-    assert.equal( $('#t5-3').text() , "NaN" );
+    assert.equal( $('#t5-2').text() , "must not be evaluated" );
+    assert.equal( $('#t5-3').text() , "must not be evaluated" );
     
     assert.deepEqual( 
         lastPropsErrorsArray, 
-        [
-            "Not declared variable found using strict mode:nonDefinedNumber"
-        ] 
+        "Not declared variable found using strict mode:nonDefinedNumber"
     );
 });
 
@@ -153,14 +151,12 @@ QUnit.test( "Strict mode using context test", function( assert ) {
         dictionary: dictionary
     });
 
-    assert.equal( $('#t6-1').text() , "undefined" );
-    assert.equal( $('#t6-2').text() , "NaN" );
+    assert.equal( $('#t6-1').text() , "must not be evaluated" );
+    assert.equal( $('#t6-2').text() , "must not be evaluated" );
 
     assert.deepEqual( 
         lastPropsErrorsArray, 
-        [
-            "Not declared variable found using strict mode:nonDefinedNumber"
-        ] 
+        "Not declared variable found using strict mode:nonDefinedNumber"
     );
 });
 

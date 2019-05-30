@@ -230,6 +230,7 @@ var conf = {
     i18nLanguageVarName:     "i18nLanguage",
     externalMacroUrlVarName: "externalMacroUrl",
     strictModeVarName:       "strictMode",
+    declaredVarsVarName:     "declaredVars",
 
     repeatVarName:           "repeat",
     windowVarName:           "window",
@@ -245,7 +246,7 @@ var conf = {
     loggingLevel: log4javascript.Level.ERROR,
 
     externalMacroPrefixURL: '',
-
+    variableNameRE:         /^[A-Za-z0-9_/-]+$/,
     expressionCacheOn: true,
     attributeCacheOn: true,
 
@@ -355,11 +356,11 @@ var altAttributes = {
                 </p>
                 <ul>
                     <li><code>setErrorFunction( errorFunction )</code>. Sets a function that will be invoked if there is an error and no failCallback is set.</li>
-                    <li><code>asyncError( ( url, error, failCallback ) )</code>. Method invoked by ZPT when an asynchronous action fails. Used internally: there is no need to invoke it explicitly by users of ZPT-JS.</li>
+                    <li><code>asyncError( url, error, failCallback )</code>. Method invoked by ZPT when an asynchronous action fails. Used internally: there is no need to invoke it explicitly by users of ZPT-JS.</li>
                 </ul>
                 
                 <p>
-                    Setting an error function to count errors:
+                    Setting an error function to count errors using alert to show them:
                 </p>
                 <pre class="brush: js; highlight: [7]">
 "use strict";

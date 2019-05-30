@@ -16,7 +16,8 @@ New in 0.35.0
 - Added some methods to context:
     - setStrictMode( strictMode ). Set the value of strictMode (default value is false). If it is set to true all variables must be declared; if ZPT-JS finds a non declared variable in an expression an error occurs.
     - isStrictMode(). Get the value of strictMode.
-    - Variable expression must match a regular expression. It is defined by zpt.context.getConf().variableNameRE and it is /^[A-Za-z0-9_/-]+$/ by default.
+- Variable expression must match a regular expression. It is defined by zpt.context.getConf().variableNameRE and it is /^[A-Za-z0-9_/-]+$/ by default.
+- errorFunction method of Context now is invoked when any error occurs except if the error is related to async preloading (in this case the asyncError method is invoked).
 
 New in 0.34.0
 - Now exists expression returns true when the path expressions following its expression returns a value and it is not undefined. It is false when the path expression cannot locate an object or if it evaluates to undefined.

@@ -12,18 +12,11 @@ var VariableExpression = function( nameToApply ) {
     var evaluate = function( scope ){
         
         if ( ! scope.isValidVariable( name ) ){
-            var error = 'Not declared variable found using strict mode:' + name;
-            context.errorFunction( [ error ] );
-            return undefined;
+            throw 'Not declared variable found using strict mode:' + name;
         }
         
         return scope.get( name );
     };
-    /*
-    var evaluate = function( scope ){
-        return scope.get( name );
-    };
-    */
     
     var toString = function(){
         return name;
@@ -40,7 +33,6 @@ VariableExpression.build = function( string ) {
     return context.getConf().variableNameRE.test( string )?
         new VariableExpression( string ):
         undefined;
-    //return new VariableExpression( string );
 }
 
 module.exports = VariableExpression;

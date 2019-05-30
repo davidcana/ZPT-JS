@@ -170,7 +170,8 @@ module.exports = (function() {
             
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
-            throw e;
+            context.errorFunction( e );
+            //throw e;
         }
     };
         

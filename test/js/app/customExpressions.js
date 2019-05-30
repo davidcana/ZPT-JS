@@ -6,6 +6,11 @@ var zpt = require( '../../../js/app/main.js' );
 var expressionBuilder = zpt.expressionBuilder;
 var context = zpt.context;
 
+var errorFunction = function( errors ) {
+    throw errors;
+};
+zpt.context.setErrorFunction( errorFunction );
+
 var AverageExpression = require( './averageExpression.js' );
 
 var buildDictionary = function(){
@@ -23,6 +28,7 @@ var testNotDefinedExpression = function( assert ){
             root: document.body,
             dictionary: buildDictionary()
         });
+        assert.equal( "true" , "false" );
     } catch ( e ) {
         assert.equal( e , "Unknown expression: avg: aNumber 1" );
     }

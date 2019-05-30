@@ -125,7 +125,7 @@ module.exports = (function() {
     /* End Formatters */
     
     /* Conf */
-    var EXPRESSION_SUFFIX = ":";
+    var EXPRESSION_SUFFIX = ':';
     var defaultConf = {
         pathDelimiter:          '|',
         pathSegmentDelimiter:   '/',
@@ -144,6 +144,8 @@ module.exports = (function() {
         propsDelimiter:         ';',
         inPropsDelimiter:       ' ',
         
+        i18nConfResourceId:      "/CONF/",
+        
         htmlStructureExpressionPrefix:  "structure",
         globalVariableExpressionPrefix: "global",
         nocallVariableExpressionPrefix: "nocall",
@@ -156,50 +158,48 @@ module.exports = (function() {
         externalMacroUrlVarName: "externalMacroUrl",
         strictModeVarName:       "strictMode",
         declaredVarsVarName:     "declaredVars",
-        
         repeatVarName:           "repeat",
+        
         windowVarName:           "window",
         contextVarName:          "context",
+        
         nothingVarName:          "nothing",
         defaultVarName:          "default",
-        i18nConfResourceId:      "/CONF/",
-        
         nothingVarValue:         "___nothing___",
         defaultVarValue:         "___default___",
         
-        loggingOn: false,
+        loggingOn:    false,
         loggingLevel: log4javascript.Level.ERROR,
 
-        externalMacroPrefixURL: '',
+        externalMacroPrefixURL: "",
         variableNameRE:         /^[A-Za-z0-9_/-]+$/,
-        expressionCacheOn: true,
-        attributeCacheOn: true,
+        expressionCacheOn:      true,
+        attributeCacheOn:       true,
 
-        expressionSuffix: EXPRESSION_SUFFIX,
-        stringExpression: "string" + EXPRESSION_SUFFIX,
-        existsExpression: "exists" + EXPRESSION_SUFFIX,
-        //noCallExpression: "nocall" + EXPRESSION_SUFFIX,
-        notExpression: "not" + EXPRESSION_SUFFIX,
+        expressionSuffix:     EXPRESSION_SUFFIX,
+        stringExpression:     "string" + EXPRESSION_SUFFIX,
+        existsExpression:     "exists" + EXPRESSION_SUFFIX,
+        notExpression:        "not" + EXPRESSION_SUFFIX,
         javaScriptExpression: "js" + EXPRESSION_SUFFIX,
-        equalsExpression: "eq" + EXPRESSION_SUFFIX,
-        greaterExpression: "gt" + EXPRESSION_SUFFIX,
-        lowerExpression: "lt" + EXPRESSION_SUFFIX,
-        addExpression: "+" + EXPRESSION_SUFFIX,
-        subExpression: "-" + EXPRESSION_SUFFIX,
-        mulExpression: "*" + EXPRESSION_SUFFIX,
-        divExpression: "/" + EXPRESSION_SUFFIX,
-        modExpression: "%" + EXPRESSION_SUFFIX,
-        orExpression: "or" + EXPRESSION_SUFFIX,
-        andExpression: "and" + EXPRESSION_SUFFIX,
-        condExpression: "cond" + EXPRESSION_SUFFIX,
-        formatExpression: "format" + EXPRESSION_SUFFIX,
-        trExpression: "tr" + EXPRESSION_SUFFIX,
-        trNumberExpression: "trNumber" + EXPRESSION_SUFFIX,
+        equalsExpression:     "eq" + EXPRESSION_SUFFIX,
+        greaterExpression:    "gt" + EXPRESSION_SUFFIX,
+        lowerExpression:      "lt" + EXPRESSION_SUFFIX,
+        addExpression:        "+" + EXPRESSION_SUFFIX,
+        subExpression:        "-" + EXPRESSION_SUFFIX,
+        mulExpression:        "*" + EXPRESSION_SUFFIX,
+        divExpression:        "/" + EXPRESSION_SUFFIX,
+        modExpression:        "%" + EXPRESSION_SUFFIX,
+        orExpression:         "or" + EXPRESSION_SUFFIX,
+        andExpression:        "and" + EXPRESSION_SUFFIX,
+        condExpression:       "cond" + EXPRESSION_SUFFIX,
+        formatExpression:     "format" + EXPRESSION_SUFFIX,
+        trExpression:         "tr" + EXPRESSION_SUFFIX,
+        trNumberExpression:   "trNumber" + EXPRESSION_SUFFIX,
         trCurrencyExpression: "trCurrency" + EXPRESSION_SUFFIX,
         trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
-        inExpression: "in" + EXPRESSION_SUFFIX,
-        pathExpression: "",
-        jqueryExpression: "$"
+        inExpression:         "in" + EXPRESSION_SUFFIX,
+        pathExpression:       "",
+        jqueryExpression:     "$"
     };
     var conf = defaultConf;
     
@@ -302,17 +302,28 @@ module.exports = (function() {
     
     /* Errors */
     var defaultErrorFunction = function( error ) {
-
-        alert( 
-            $.isArray( error )?
+        
+        var msg = $.isArray( error )?
             error.join( '\n' ):
-            error
-        );
+            error;
+        
+        alert( msg );
+        throw msg;
     };
     var errorFunction = defaultErrorFunction;
     var setErrorFunction = function( _errorFunction ){
         self.errorFunction = _errorFunction;
     };
+    var asyncError = function( url, errorMessage, failCallback ){
+
+        var msg = 'Error trying to get ' + url + ': ' + errorMessage;
+        if ( failCallback ){
+            failCallback( msg );
+        } else {
+            errorFunction( msg );
+        }
+    };
+    /*
     var asyncError = function( url, error, failCallback ){
 
         var msg = 'Error trying to get ' + url + ': ' + error;
@@ -321,7 +332,7 @@ module.exports = (function() {
         } else {
             error( msg );
         }
-    };
+    };*/
     /* End errors */
     
     /* Repeat */

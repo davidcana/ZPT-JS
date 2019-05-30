@@ -159,7 +159,8 @@ var TALProps = function( _string, _propsItems ) {
             return;
         }
         
-        context.errorFunction( errorsArray );
+        //context.errorFunction( errorsArray );
+        throw errorsArray;
     };
     
     var toString = function(){

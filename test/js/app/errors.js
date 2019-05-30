@@ -6,6 +6,11 @@ var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
 var context = require( '../../../js/app/context.js' );
 
+var errorFunction = function( errors ) {
+    throw errors;
+};
+zpt.context.setErrorFunction( errorFunction );
+
 // Unit tests
 QUnit.test( "Non existing expressions test", function( assert ) {
 
