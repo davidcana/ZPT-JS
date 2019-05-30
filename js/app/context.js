@@ -156,7 +156,6 @@ module.exports = (function() {
         externalMacroUrlVarName: "externalMacroUrl",
         strictModeVarName:       "strictMode",
         declaredVarsVarName:     "declaredVars",
-        notRequiredVarsVarName:  "notRequiredVars",
         
         repeatVarName:           "repeat",
         windowVarName:           "window",
