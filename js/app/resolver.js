@@ -180,15 +180,6 @@ module.exports = (function( ) {
                 }
             }).fail( function( jqXHR, textStatus, error ) {
                 context.asyncError( currentPageUrl, error, failCallback );
-                /*
-                var msg = 'Error trying to get ' + currentPageUrl + ': ' + error;
-                if ( failCallback ){
-                    failCallback( msg );
-                } else {
-                    context.error( msg );
-                }*/
-                //alert( msg );
-                //throw msg;
             });
         }
     };

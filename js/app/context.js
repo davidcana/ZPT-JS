@@ -301,15 +301,17 @@ module.exports = (function() {
     /* End Alt attributes */
     
     /* Errors */
-    var defaultErrorFunction = function( errorMessage ){
-        alert( errorMessage );
+    var defaultErrorFunction = function( error ) {
+
+        alert( 
+            $.isArray( error )?
+            error.join( '\n' ):
+            error
+        );
     };
     var errorFunction = defaultErrorFunction;
-    var setErrorFunction = function( errorFunctionToSet ){
-        errorFunction = errorFunctionToSet;
-    };
-    var error = function( errorMessage ){
-        return errorFunction( errorMessage );
+    var setErrorFunction = function( _errorFunction ){
+        self.errorFunction = _errorFunction;
     };
     var asyncError = function( url, error, failCallback ){
 
@@ -337,19 +339,6 @@ module.exports = (function() {
         return folderDictionaries;
     };
     /* End folder dictionaries */
-
-    /* Process props errors array */
-    var defaultProcessPropsErrorsArray = function( errorsArray ) {
-
-        alert( 
-            errorsArray.join( '\n' ) 
-        );
-    };
-    var processPropsErrorsArray = defaultProcessPropsErrorsArray;
-    var setProcessPropsErrorsArray = function( _processPropsErrorsArray ){
-        self.processPropsErrorsArray = _processPropsErrorsArray;
-    };
-    /* End process props errors array */
     
     /* Strict mode  */
     var strictMode = false;
@@ -379,13 +368,12 @@ module.exports = (function() {
         getAltAttributes: getAltAttributes,
         setAltAttributes: setAltAttributes,
         isAltAttribute: isAltAttribute,
+        errorFunction: errorFunction,
         setErrorFunction: setErrorFunction,
         asyncError: asyncError,
         repeat: repeat,
         setFolderDictionaries: setFolderDictionaries,
         getFolderDictionaries: getFolderDictionaries,
-        processPropsErrorsArray: processPropsErrorsArray,
-        setProcessPropsErrorsArray: setProcessPropsErrorsArray,
         setStrictMode: setStrictMode,
         isStrictMode: isStrictMode
     };

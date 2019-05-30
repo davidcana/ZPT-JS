@@ -355,22 +355,26 @@ var altAttributes = {
                 </p>
                 <ul>
                     <li><code>setErrorFunction( errorFunction )</code>. Sets a function that will be invoked if there is an error and no failCallback is set.</li>
-                    <li><code>asyncError( ( url, error, failCallback ) )</code>. Methos invoked by ZPT when an asynchronous action fails. Used internally: there is no need to invoke it explicitly by users of ZPT-JS.</li>
+                    <li><code>asyncError( ( url, error, failCallback ) )</code>. Method invoked by ZPT when an asynchronous action fails. Used internally: there is no need to invoke it explicitly by users of ZPT-JS.</li>
                 </ul>
                 
                 <p>
                     Setting an error function to count errors:
                 </p>
-                <pre class="brush: js; highlight: [6]">
+                <pre class="brush: js; highlight: [7]">
 "use strict";
 
 var zpt = require( 'zpt' );
+var $ = require( 'jquery' );
 
 var errorCounter = 0;
 zpt.context.setErrorFunction(
-    function( errorMessage ){
+    function( error ){
         ++errorCounter;
-        alert( 'Another error: ' + errorMessage );
+        var msg = $.isArray( error )?
+            error.join( '\n' ):
+            error;
+        alert( 'Another error: ' + msg );
     }
 );
 

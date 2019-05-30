@@ -7,14 +7,14 @@ var Qunit = require( 'qunit' );
 var context = zpt.context;
 
 var lastPropsErrorsArray;
-var processPropsErrorsArray = function( errorsArray ) {
+var errorFunction = function( errorsArray ) {
     
     lastPropsErrorsArray = errorsArray;
     /*alert( 
         errorsArray.join( '\n' ) 
     );*/
 };
-zpt.context.setProcessPropsErrorsArray( processPropsErrorsArray );
+zpt.context.setErrorFunction( errorFunction );
 
 var Tree = function( name ) {
     this.name = name;

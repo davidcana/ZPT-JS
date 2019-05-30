@@ -13,7 +13,7 @@ var VariableExpression = function( nameToApply ) {
         
         if ( ! scope.isValidVariable( name ) ){
             var error = 'Not declared variable found using strict mode:' + name;
-            context.processPropsErrorsArray( [ error ] );
+            context.errorFunction( [ error ] );
             return undefined;
         }
         
