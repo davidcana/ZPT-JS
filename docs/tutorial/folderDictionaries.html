@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Folder dictionaries</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Folder dictionaries</h1>
+                <ul>
+                    <li><a href="#intro">What is a folder dictionary?</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'intro'">What is a folder dictionary?</h2>
+                <p>
+                    A <em>folder dictionary</em> is a javascript file called <em>folderDictionary.js</em> that defines a <code>folderDictionary</code> variable. An example:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var folderDictionary = {
+    myVar: 1
+};
+                </pre>
+
+                <p>
+                    You can define javascript files called <em>folderDictionary.js</em> on any folder. When the <a href="../reference/configuration-maxFolderDictionaries.html">maxFolderDictionaries</a> configuration option is set to a value greater than zero ZPT-JS will preload this number of folder dictionaries. The first one is the file in the current folder, the second one is the file in the parent folder and so on.
+                </p>
+
+                <p>
+                    Defining one or more folder dictionaries makes it easy to define default values for variables. You can overwrite the value of any of these values in the dictionary or in the dictionary extension: values in folder dictionaries have the lowest preference order.
+                </p>
+
+                <p>
+                    When ZPT-JS search for a value in the folder directories it iterates through all folder dictionaries until it finds a value. ZPT-JS first tries with the folder dictionary in the same folder. If there is a match it returns this value; if not, ZPT-JS tries with the folder dictionary of the parent folder. It continues until it finds a matching value, the folder is the root of the web site or the number of checked folder dicionaries is equal to the maximum. 
+                </p>
+
+                <h2 data-attributes="id 'examples'">Examples</h2>
+                <p>
+                    Let's define 2 folder dictionaries. The URL of the first one is at <em>/folder/folderDictionary.js</em>:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var folderDictionary = {
+    var1: 1
+};
+                </pre>
+
+                <p>
+                    The URL of the second one is at <em>/folderDictionary.js</em>:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var folderDictionary = {
+    var1: 10,
+    var2: 2
+};
+                </pre>
+
+                <p>
+                    Our template is:
+                </p>
+                <pre class="brush: html">
+&lt;div data-content="var1"&gt;
+    value of var1
+&lt;/div&gt;
+&lt;div data-content="var2"&gt;
+    value of var2
+&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    And the ZPT-JS invokation:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    maxFolderDictionaries: 5,
+    callback: function(){
+
+        zpt.run();
+
+        [your code here]
+    }
+});
+                </pre>
+                
+                <p>
+                    Then, if the URL of our HTML file is <em>/folder/myPage.html</em> ZPT-JS will preload both folder directories. The value of <em>var1</em> will be <em>1</em> because ZPT-JS iterates through all folder dictionaries until it finds a value, starting with the folder dictionary in the same folder. The value of <em>var2</em> will be <em>2</em>
+                </p>
+                <p>
+                    If the URL of our HTML file is <em>/myPage.html</em> ZPT-JS will preload only <em>/folderDictionary.js</em>. The value of <em>var1</em> will be <em>10</em> and the value of <em>var2</em> will be <em>2</em>
+                </p>
+
+                <p>
+                    Folder dictionaries are useful to define default values for some variables such as footer macros. For example:
+                </p>
+
+                <strong>/reference/folderDictionary.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var folderDictionary = {
+    'footer-macro': 'referenceFooter@templates.html'
+};
+                </pre>
+
+                <strong>/folderDictionary.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var folderDictionary = {
+    'footer-macro': 'generalFooter@templates.html'
+};
+                </pre>
+
+                <p>
+                    Our template is:
+                </p>
+                <pre class="brush: html">
+&lt;div data-use-macro="footer-macro"&gt;
+    the footer
+&lt;/div&gt;
+                </pre>
+
+                <p>
+                    So if the URL of our HTML file is <em>/reference/myPage.html</em> the footer will be <em>'referenceFooter@templates.html'</em>; if the URL of our HTML file is <em>/myPage.html</em> the footer will be <em>'generalFooter@templates.html'</em>.
+                </p>
+            </article>
+        </div>
+        
+
+    </body>
+</html>
