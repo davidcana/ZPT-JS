@@ -49,32 +49,8 @@ module.exports = (function() {
     var updateParserOptions = function( options ){
         
         parserOptions.command = options.command || 'fullRender';
-        parserOptions.root = options.root || parserOptions.root;
+        parserOptions.root = options.root === undefined? parserOptions.root: options.root;
         parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
-        /*
-        if ( options.dictionary ){
-            parserOptions.dictionary = options.dictionary;
-            
-        } else if ( ! parserOptions.dictionary ){
-            parserOptions.dictionary = {};
-        }*/
-        /*
-        if ( options.dictionary ){
-            if ( ! parserOptions.dictionary ){
-                parserOptions.dictionary = options.dictionary;
-            } else {
-                $.extend( parserOptions.dictionary, options.dictionary );
-            }
-        } else if ( ! parserOptions.dictionary ){
-            parserOptions.dictionary = {};
-        }*/
-        
-        //parserOptions.target = options.target || parserOptions.root;
-        /*
-        parserOptions.notRemoveGeneratedTags = options.hasOwnProperty( 'notRemoveGeneratedTags' )? 
-            options.notRemoveGeneratedTags: 
-            parserOptions.notRemoveGeneratedTags;
-        */
     };
     
     var preload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags, maxFolderDictionaries ){
@@ -103,9 +79,7 @@ module.exports = (function() {
                             resolver.loadRemotePages( 
                                 scope,
                                 declaredRemotePageUrls,
-                                function (){
-                                    processCallback( callback );
-                                },
+                                callback,
                                 failCallback
                             );
                         },
@@ -117,13 +91,6 @@ module.exports = (function() {
         } catch( e ){
             log.fatal( 'Exiting init method of ZPT with errors: ' + e );
             throw e;
-        }
-    };
-    
-    var processCallback = function( currentCallback ){
-        
-        if ( currentCallback && typeof currentCallback == 'function' ) {
-            currentCallback();
         }
     };
     
@@ -159,7 +126,7 @@ module.exports = (function() {
         
         try {
             if ( ! target ){
-                throw 'No target defined!';
+                throw 'Unable to process null root or target!';
             }
             
             if ( ! notRemoveGeneratedTags ){

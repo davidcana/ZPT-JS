@@ -97,3 +97,36 @@ QUnit.test( "Non-existing i18n file test", function( assert ) {
         }
     });
 });
+
+QUnit.test( "Using null root test", function( assert ) {
+
+    try {
+        zpt.run({
+            root: document.getElementById( 'nonExistentId' ),
+            dictionary: dictionary
+        });
+    } catch( e ){
+        assert.equal( e , "Unable to process null root or target!" );
+    }
+});
+
+QUnit.test( "Using null target test", function( assert ) {
+
+    zpt.run({
+        root: $( '#t5' )[0],
+        dictionary: dictionary
+    });
+    
+    assert.equal( $('#t5-1').html() , "3" );
+    
+    try {
+        zpt.run({
+            command: 'partialRender',
+            target: document.getElementById( 'nonExistentId' )
+        });
+        assert.equal( "true" , "false" );
+        
+    } catch( e ){
+        assert.equal( e , "Unable to process null root or target!" );
+    }
+});
