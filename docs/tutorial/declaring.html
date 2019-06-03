@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Declaring variables</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Declaring variables</h1>
+                <ul>
+                    <li><a href="#typos">Typos</a>.</li>
+                    <li><a href="#declaring">The solution: declaring variables</a>.</li>
+                    <li><a href="#checkingTypes">Checking types</a>.</li>
+                    <li><a href="#default">Default values</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'typos'">Typos</h2>
+                <p>
+                    Take a look at this template:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="tite"&gt;the title&lt;/span&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    Now we declare the dictionary and invoke ZPT:
+                </p>
+                <strong>sample.js</strong>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = { 
+    title: "hello world!"
+};
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    The expected HTML is:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="tite"&gt;hello world!&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    But the resulting HTML is:
+                </p>
+                <pre class="brush: html">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="tite"&gt;undefined&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    But... what happened? We added a variable called <em>title</em> to the dictionary but we used a variable called <em>tite</em> in the template. As this variable is not defined its value is <code>undefined</code>:
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="tite"&gt;the title&lt;/span&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <h2 data-attributes="id 'declaring'">The solution: declaring variables</h2>
+                <p>
+                    ZPT-JS makes it easy to <em>declare variables</em>. Take a look at this template:
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [3]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p data-declare="required title string"&gt;
+      This is &lt;span data-content="tite"&gt;the title&lt;/span&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                <p>
+                    We have used <a href="../reference/attributes-TALDeclare.html">data-declare</a> statement to declare the <em>title</em> variable as a not undefined <em>string</em> (if a variable is required an <code>undefined</code> value is not valid and an error occurs). Also, this <em>p</em> node now works in <em>strict mode</em>: all variables inside it must be declared. So, if ZPT-JS finds a non declared variable an error occurs.
+                </p>
+                <p>
+                    If an error occurs ZPT-JS stop processing the nodes and show the error (using a javascript <code>alert</code> by default).
+                </p>
+                
+                <h2 data-attributes="id 'checkingTypes'">Checking types</h2>
+                <p>
+                    Sometimes it is useful to declare types to force ZPT-JS to check them. To force a variable is a number:
+                </p>
+
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [3,4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p data-declare="a number"&gt;
+      A number + 1: &lt;span data-content="+: a 1"&gt;a + 1&lt;/span&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                <p>
+                    If the value of <em>a</em> is not a valid number an error occurs.
+                </p>
+                <p>
+                    For more details about types see <a href="../reference/attributes-TALDeclare.html">the reference about data-declare</a>.
+                </p>
+                
+                <h2 data-attributes="id 'default'">Default values</h2>
+                <p>
+                    It is easy to declare default values. Any ZPT-JS expression is valid. To set <code>10</code> and <code>20</code> as default values:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [3,4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p data-declare="a number 10;
+                     b number 20"&gt;
+      Adding... &lt;span data-content="+: a b"&gt;a + b&lt;/span&gt;.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                <p>
+                    So if <em>a</em> or <em>b</em> are <code>undefined</code> ZPT-JS will set them to their default values.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

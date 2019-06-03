@@ -26,7 +26,7 @@
                 <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 argument       ::= declare_item [';' declare_item]*
-declare_item     ::= ('required') variable_name (variable_type (expression))
+declare_item   ::= ('required') variable_name (variable_type (expression))
 variable_name  ::= Name
 variable_type  ::= Name
                 </pre>
@@ -62,14 +62,6 @@ variable_type  ::= Name
                         <th>Value example</th>
                     </tr>
                     <tr>
-                        <td>undefined</td>
-                        <td>undefined</td>
-                    </tr>
-                    <tr>
-                        <td>null</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
                         <td>number</td>
                         <td>NaN</td>
                     </tr>
@@ -83,7 +75,7 @@ variable_type  ::= Name
                     </tr>
                     <tr>
                         <td>string</td>
-                        <td>''</td>
+                        <td>'any string'</td>
                     </tr>
                     <tr>
                         <td>function</td>
@@ -108,12 +100,29 @@ variable_type  ::= Name
                 </table>
                 
                 <p>
+                    Any value matches <em>undefined</em> or <em>null</em> types.
+                </p>
+                
+                <p>
                     A <em>strict mode</em> is set to <code>true</code> inside the node with this attribute. <em>Strict mode</em> makes it easy to force to declare variables. If <em>strict mode</em> is <code>true</code> and ZPT-JS finds a not declared variable an error occurs. <em>Strict mode</em> can be defined in two ways: 
                 </p>
                 <ul>
                     <li>Using a <em>data-declare</em> attribute. All the variables used in this node must be declared.</li>
                     <li>Using <a href="context.html#strictMode">zpt.context.setStrictMode( true )</a>. All the variables used in the root node must be declared.</li>
                 </ul>
+                
+                <p>
+                    An error occurs if:
+                </p>
+                <ul>
+                    <li>A non declared variable is found.</li>
+                    <li>The value of a required variable is <code>undefined</code>.</li>
+                    <li>The type of a variable does not match with the declared one.</li>
+                </ul>
+                
+                <p>
+                    If an error occurs ZPT-JS stop processing the nodes and show the error (using a javascript <code>alert</code> by default). ZPT-JS uses the errorFunction defined in context. To customize it use the <a href="context.html#errors">setErrorFunction in context</a>.
+                </p>
                 
                 <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
                 <p>
@@ -126,9 +135,9 @@ variable_type  ::= Name
                 </p>
                 <pre class="brush: html">
 data-declare="aNumber number;
-            aText string;
-            anArray array;
-            aDateValue date"
+              aText string;
+              anArray array;
+              aDateValue date"
                 </pre>
                 
                 <p>
@@ -136,9 +145,16 @@ data-declare="aNumber number;
                 </p>
                 <pre class="brush: html">
 data-declare="required aNumber number;
-            required aText string;
-            required anArray array;
-            required aDateValue date"
+              required aText string;
+              required anArray array;
+              required aDateValue date"
+                </pre>
+                
+                <p>
+                    Declaring a required variable (no type):
+                </p>
+                <pre class="brush: html">
+data-declare="required myVar"
                 </pre>
                 
                 <p>
@@ -146,7 +162,7 @@ data-declare="required aNumber number;
                 </p>
                 <pre class="brush: html">
 data-declare="aNumber number 99;
-            aText string 'a default value'"
+              aText string 'a default value'"
                 </pre>
             </article>
         </div>

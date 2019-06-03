@@ -19,7 +19,7 @@ New in 0.35.0
 - Variable expression must match a regular expression. It is defined by zpt.context.getConf().variableNameRE and it is /^[A-Za-z0-9_/-]+$/ by default.
 - errorFunction method of Context now is invoked when any error occurs except if the error is related to async preloading (in this case the asyncError method is invoked).
 - Added a prefix to private vars to avoid name collision: '_'. The renamed vars are:
-    - onErrorVarName: "_on-error",
+    - onErrorVarName:          "_on-error",
     - onErrorStructureVarName: "_on-error-structure",
     - i18nDomainVarName:       "_i18nDomain"
     - i18nLanguageVarName:     "_i18nLanguage"

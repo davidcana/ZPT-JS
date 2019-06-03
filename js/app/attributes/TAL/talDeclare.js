@@ -180,6 +180,7 @@ TALDeclare.build = function( string ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 
     var declareItems = [];
+    var omitTypes = [ 'undefined', 'null' ];
     
     var tokens = new ExpressionTokenizer( 
         string.trim(), 
@@ -211,7 +212,9 @@ TALDeclare.build = function( string ) {
                     name = currentToken;
                     break;
                 case 2:
-                    type = currentToken;
+                    if ( -1 == omitTypes.indexOf( currentToken.toLowerCase() ) ){
+                        type = currentToken;   
+                    }
                     break;
                 case 3:
                     defaultValueString = currentToken;

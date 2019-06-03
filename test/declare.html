@@ -19,14 +19,14 @@
                                   text2 'this is a text too'; 
                                   array1 [10:15]">
             <ol data-declare="number1 number;
-                            text1 string;
-                            array1 array;
-                            required text2 string;
-                            add function;
-                            dateValue date;
-                            user object;
-                            myTree tree;
-                            required aString">
+                              text1 string;
+                              array1 array;
+                              required text2 string;
+                              add function;
+                              dateValue date;
+                              user object;
+                              myTree tree;
+                              required aString">
                 <li>number1 = <span id="t1-1" data-content="number1">an integer</span></li>
                 <li>text1 = <span id="t1-2" data-content="text1">a text</span></li>
                 <li>array1 = <span id="t1-3" data-content="array1">an array</span></li>
@@ -44,14 +44,14 @@
                                   text1 [10:15];
                                   array1 'not array'">
             <ol data-declare="number1 number;
-                            text1 string;
-                            array1 array;
-                            required text2 string;
-                            array1 function;
-                            dateValue2 date;
-                            user2 object;
-                            myTree tree;
-                            required aString2">
+                              text1 string;
+                              array1 array;
+                              required text2 string;
+                              array1 function;
+                              dateValue2 date;
+                              user2 object;
+                              myTree tree;
+                              required aString2">
                 <li>number1 = <span id="t2-1" data-content="number1">must not be evaluated</span></li>
                 <li>text1 = <span id="t2-2" data-content="text1">must not be evaluated</span></li>
                 <li>array1 = <span id="t2-3" data-content="array1">must not be evaluated</span></li>
@@ -68,12 +68,12 @@
         <h2>Default value not failing</h2>
         <div id="t3">
             <ol data-declare="aNumber number 6;
-                            number1 number 99">
+                              number1 number 99">
                 <li>aNumber = <span id="t3-1" data-content="aNumber">an integer</span></li>
                 <li>number1 = <span id="t3-2" data-content="number1">an integer</span></li>
             </ol>
             <ol data-declare="aNumber number (+: 3 2);
-                            number1 number (-: 100 1)">
+                              number1 number (-: 100 1)">
                 <li>aNumber = <span id="t3-3" data-content="aNumber">an integer</span></li>
                 <li>number1 = <span id="t3-4" data-content="number1">an integer</span></li>
             </ol>
@@ -82,8 +82,8 @@
         <h2>Default value failing</h2>
         <div id="t4">
             <ol data-declare="aNumber number 'not a number';
-                            aString number 99;
-                            required aValue string myFunction()">
+                              aString number 99;
+                              required aValue string myFunction()">
                 <li>
                     aNumber = 
                     <span id="t4-1" data-content="aNumber">must not be evaluated</span>
@@ -120,6 +120,21 @@
                 <li>
                     nonDefinedNumber = 
                     <span id="t6-2" data-content="+: 1 nonDefinedNumber">must not be evaluated</span>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Undefined type</h2>
+        <div id="t7">
+            <ol data-declare="value1 Undefined 'it can be of any type';
+                              value2 nulL 'it can be of any type also'">
+                <li>
+                    value1 = 
+                    <span id="t7-1" data-content="value1">must be it can be of any type</span>
+                </li>
+                <li>
+                    value2 = 
+                    <span id="t7-2" data-content="value2">must be it can be of any type also</span>
                 </li>
             </ol>
         </div>

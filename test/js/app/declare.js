@@ -160,3 +160,17 @@ QUnit.test( "Strict mode using context test", function( assert ) {
     );
 });
 
+QUnit.test( "Undefined type", function( assert ) {
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't7' ),
+        dictionary: dictionary
+    });
+
+    assert.equal( $('#t7-1').text() , "it can be of any type" );
+    assert.equal( $('#t7-2').text() , "it can be of any type also" );
+
+    assert.equal( errorsArray, undefined );
+});
