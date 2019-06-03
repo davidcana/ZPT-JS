@@ -1,5 +1,5 @@
 /*
-    TALProps class
+    TALDeclare class
 */
 "use strict";
 
@@ -8,16 +8,16 @@ var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 var $ = require( 'jquery' );
 
-var TALProps = function( _string, _propsItems ) {
+var TALDeclare = function( _string, _declareItems ) {
     
     var string = _string;
-    var propsItems = _propsItems;
+    var declareItems = _declareItems;
     
     var process = function( scope, autoDefineHelper ){
 
         putVariables( scope, autoDefineHelper );
 
-        return processPropsItems( scope );
+        return processDeclareItems( scope );
     };
     
     var putVariables = function( scope, autoDefineHelper ) {
@@ -31,9 +31,9 @@ var TALProps = function( _string, _propsItems ) {
         // Build declared and required
         var declaredVarsVarName = context.getConf().declaredVarsVarName;
         var declared = scope.get( declaredVarsVarName ) || [];
-        for ( var i = 0; i < propsItems.length; i++ ) {
-            var propsItem = propsItems[ i ];
-            declared.push( propsItem.name );
+        for ( var i = 0; i < declareItems.length; i++ ) {
+            var declareItem = declareItems[ i ];
+            declared.push( declareItem.name );
         }
         
         // Add declaredVarsVarName to the autoDefineHelper
@@ -43,19 +43,19 @@ var TALProps = function( _string, _propsItems ) {
         );
     };
     
-    var processPropsItems = function( scope ) {
+    var processDeclareItems = function( scope ) {
         
         var errorsArray = [];
 
-        for ( var i = 0; i < propsItems.length; i++ ) {
-            var propsItem = propsItems[ i ];
-            var errors = checkPropsItem(
+        for ( var i = 0; i < declareItems.length; i++ ) {
+            var declareItem = declareItems[ i ];
+            var errors = checkDeclareItem(
                 scope,
-                propsItem.name,
-                propsItem.type,
-                propsItem.required,
-                propsItem.defaultValueString,
-                propsItem.defaultValueExpression
+                declareItem.name,
+                declareItem.type,
+                declareItem.required,
+                declareItem.defaultValueString,
+                declareItem.defaultValueExpression
             );
             errorsArray = errorsArray.concat( errors );
         }
@@ -65,7 +65,7 @@ var TALProps = function( _string, _propsItems ) {
         return errorsArray.length == 0;
     }
 
-    var checkPropsItem = function( scope, name, type, required, defaultValueString, defaultValueExpression ) {
+    var checkDeclareItem = function( scope, name, type, required, defaultValueString, defaultValueExpression ) {
         
         var errorsArray = [];
         
@@ -164,7 +164,7 @@ var TALProps = function( _string, _propsItems ) {
     };
     
     var toString = function(){
-        return "TALProps: " + string;
+        return "TALDeclare: " + string;
     };
     
     return {
@@ -173,17 +173,17 @@ var TALProps = function( _string, _propsItems ) {
     };
 };
 
-TALProps.id = 'tal:props';
+TALDeclare.id = 'tal:declare';
 
-TALProps.build = function( string ) {
+TALDeclare.build = function( string ) {
 
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 
-    var propsItems = [];
+    var declareItems = [];
     
     var tokens = new ExpressionTokenizer( 
         string.trim(), 
-        context.getConf().propsDelimiter, 
+        context.getConf().declareDelimiter, 
         true 
     );
 
@@ -191,7 +191,7 @@ TALProps.build = function( string ) {
         
         var inPropTokens = new ExpressionTokenizer( 
             tokens.nextToken().trim(), 
-            context.getConf().inPropsDelimiter, 
+            context.getConf().inDeclareDelimiter, 
             true 
         );
         
@@ -202,7 +202,7 @@ TALProps.build = function( string ) {
         var state = 1;
         while ( inPropTokens.hasMoreTokens() ){
             var currentToken = inPropTokens.nextToken();
-            if ( TALProps.tokenIsRequired( currentToken ) ){
+            if ( TALDeclare.tokenIsRequired( currentToken ) ){
                 required = true;
                 continue;
             }
@@ -217,7 +217,7 @@ TALProps.build = function( string ) {
                     defaultValueString = currentToken;
                     break;
                 default:
-                    throw 'Too many arguments in talProps item: ' + string.trim();
+                    throw 'Too many arguments in talDeclare item: ' + string.trim();
             }
             ++state;
         }
@@ -227,7 +227,7 @@ TALProps.build = function( string ) {
             continue;
         }
         
-        propsItems.push({
+        declareItems.push({
             name: name,
             type: type,
             required: required,
@@ -236,11 +236,11 @@ TALProps.build = function( string ) {
         });
     }
 
-    return new TALProps( string, propsItems );
+    return new TALDeclare( string, declareItems );
 };
 
-TALProps.tokenIsRequired = function( token ) {
+TALDeclare.tokenIsRequired = function( token ) {
     return "required" === token.toLowerCase();
 };
 
-module.exports = TALProps;
+module.exports = TALDeclare;

@@ -284,14 +284,14 @@ module.exports = function(grunt) {
                 src: 'test/js/app/folderDictionaries2.js',
                 dest: 'build/folderDictionaries2.js'
             },
-            props: {
+            declare: {
                 options: {
                     browserifyOptions: {
                         debug: true
                     }
                 },
-                src: 'test/js/app/props.js',
-                dest: 'build/props.js'
+                src: 'test/js/app/declare.js',
+                dest: 'build/declare.js'
             }
         },
         compress: {

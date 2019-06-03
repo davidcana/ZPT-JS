@@ -20,7 +20,7 @@ module.exports = (function() {
         talOmitTag:       "data-omit-tag",
         talReplace:       "data-replace",
         talOnError:       "data-on-error",
-        talProps:         "data-props",
+        talDeclare:         "data-declare",
         metalDefineMacro: "data-define-macro",
         metalUseMacro:    "data-use-macro",
         metalDefineSlot:  "data-define-slot",
@@ -42,7 +42,7 @@ module.exports = (function() {
         talOmitTag:       "tal:omit-tag",
         talReplace:       "tal:replace",
         talOnError:       "tal:on-error",
-        talProps:         "tal:props",
+        talDeclare:       "tal:declare",
         metalDefineMacro: "metal:define-macro",
         metalUseMacro:    "metal:use-macro",
         metalDefineSlot:  "metal:define-slot",
@@ -142,8 +142,8 @@ module.exports = (function() {
         inI18nOptionsDelimiter: ' ',
         argumentsDelimiter:     ',',
         macroDelimiter:         '@',
-        propsDelimiter:         ';',
-        inPropsDelimiter:       ' ',
+        declareDelimiter:         ';',
+        inDeclareDelimiter:       ' ',
         
         i18nConfResourceId:      "/CONF/",
         

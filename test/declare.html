@@ -2,23 +2,23 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Props tests</title>
+        <title>Declare tests</title>
         <link rel="stylesheet" href="styles/qunit-1.19.0.css">
         
-        <script src="http://127.0.0.1:9966/props.js" defer></script>
+        <script src="http://127.0.0.1:9966/declare.js" defer></script>
     </head>
     <body>
         <div id="qunit"></div>
         <div id="qunit-fixture"></div>
         
-        <h1>Props</h1>
+        <h1>Declare</h1>
         
         <h2>Simple not failing</h2>
         <div id="t1" data-define="number1 1; 
                                   text1 'this is a text'; 
                                   text2 'this is a text too'; 
                                   array1 [10:15]">
-            <ol data-props="number1 number;
+            <ol data-declare="number1 number;
                             text1 string;
                             array1 array;
                             required text2 string;
@@ -43,7 +43,7 @@
         <div id="t2" data-define="number1 'not number'; 
                                   text1 [10:15];
                                   array1 'not array'">
-            <ol data-props="number1 number;
+            <ol data-declare="number1 number;
                             text1 string;
                             array1 array;
                             required text2 string;
@@ -67,12 +67,12 @@
         
         <h2>Default value not failing</h2>
         <div id="t3">
-            <ol data-props="aNumber number 6;
+            <ol data-declare="aNumber number 6;
                             number1 number 99">
                 <li>aNumber = <span id="t3-1" data-content="aNumber">an integer</span></li>
                 <li>number1 = <span id="t3-2" data-content="number1">an integer</span></li>
             </ol>
-            <ol data-props="aNumber number (+: 3 2);
+            <ol data-declare="aNumber number (+: 3 2);
                             number1 number (-: 100 1)">
                 <li>aNumber = <span id="t3-3" data-content="aNumber">an integer</span></li>
                 <li>number1 = <span id="t3-4" data-content="number1">an integer</span></li>
@@ -81,7 +81,7 @@
         
         <h2>Default value failing</h2>
         <div id="t4">
-            <ol data-props="aNumber number 'not a number';
+            <ol data-declare="aNumber number 'not a number';
                             aString number 99;
                             required aValue string myFunction()">
                 <li>
@@ -95,9 +95,9 @@
             </ol>
         </div>
         
-        <h2>Strict mode using props</h2>
+        <h2>Strict mode using declare</h2>
         <div id="t5">
-            <ol data-props="aNumber number 5">
+            <ol data-declare="aNumber number 5">
                 <li>aNumber = <span id="t5-1" data-content="aNumber">an integer</span></li>
                 <li>
                     nonDefinedNumber = 

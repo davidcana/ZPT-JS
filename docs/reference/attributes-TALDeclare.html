@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>ZPT-JS reference - Attributes - TALProps</title>
+        <title>ZPT-JS reference - Attributes - TALDeclare</title>
         
         <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
         <script type="text/javascript" src="../js/zpt.js" defer></script>
@@ -14,7 +14,7 @@
     <body>
         <div data-use-macro="'page@templates.html'">
             <div data-fill-slot="'page-header'">
-                <h1>ZPT-JS reference - Attributes - TALProps</h1>
+                <h1>ZPT-JS reference - Attributes - TALDeclare</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
                     <li><a href="#description">Description</a>.</li>
@@ -25,15 +25,15 @@
             <article data-fill-slot="'article'">
                 <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
-argument       ::= props_item [';' props_item]*
-props_item     ::= ('required') variable_name (variable_type (expression))
+argument       ::= declare_item [';' declare_item]*
+declare_item     ::= ('required') variable_name (variable_type (expression))
 variable_name  ::= Name
 variable_type  ::= Name
                 </pre>
                 
                 <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <em>data-props</em> statement declares a list of variables and some settings about them.
+                    The <em>data-declare</em> statement declares a list of variables and some settings about them.
                 </p>
                 <p>
                     Each declaration can define:
@@ -111,7 +111,7 @@ variable_type  ::= Name
                     A <em>strict mode</em> is set to <code>true</code> inside the node with this attribute. <em>Strict mode</em> makes it easy to force to declare variables. If <em>strict mode</em> is <code>true</code> and ZPT-JS finds a not declared variable an error occurs. <em>Strict mode</em> can be defined in two ways: 
                 </p>
                 <ul>
-                    <li>Using a <em>data-props</em> attribute. All the variables used in this node must be declared.</li>
+                    <li>Using a <em>data-declare</em> attribute. All the variables used in this node must be declared.</li>
                     <li>Using <a href="context.html#strictMode">zpt.context.setStrictMode( true )</a>. All the variables used in the root node must be declared.</li>
                 </ul>
                 
@@ -125,7 +125,7 @@ variable_type  ::= Name
                     Declaring a number, a string, an array and a date:
                 </p>
                 <pre class="brush: html">
-data-props="aNumber number;
+data-declare="aNumber number;
             aText string;
             anArray array;
             aDateValue date"
@@ -135,7 +135,7 @@ data-props="aNumber number;
                     Declaring a number, a string, an array and a date (all required):
                 </p>
                 <pre class="brush: html">
-data-props="required aNumber number;
+data-declare="required aNumber number;
             required aText string;
             required anArray array;
             required aDateValue date"
@@ -145,7 +145,7 @@ data-props="required aNumber number;
                     Declaring some default values:
                 </p>
                 <pre class="brush: html">
-data-props="aNumber number 99;
+data-declare="aNumber number 99;
             aText string 'a default value'"
                 </pre>
             </article>

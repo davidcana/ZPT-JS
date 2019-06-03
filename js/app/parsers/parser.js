@@ -28,7 +28,7 @@ var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
 var TALOnError = require( '../attributes/TAL/talOnError.js' );
 var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
-var TALProps = require( '../attributes/TAL/talProps.js' );
+var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 var contentHelper = require( '../attributes/TAL/contentHelper.js' );
 
 module.exports = (function() {
@@ -357,8 +357,8 @@ module.exports = (function() {
         
         var autoDefineHelper = _autoDefineHelper || new AutoDefineHelper( node );
         
-        if ( ! processProps( 
-            attributes.talProps,
+        if ( ! processDeclare( 
+            attributes.talDeclare,
             scope,
             autoDefineHelper
         ) ) {
@@ -512,14 +512,14 @@ module.exports = (function() {
         return i18nLanguage.putToAutoDefineHelper( autoDefineHelper );
     };
     
-    var processProps = function( string, scope, autoDefineHelper ) {
+    var processDeclare = function( string, scope, autoDefineHelper ) {
 
         if ( ! string ) {
             return true;
         }
 
-        var talProps = attributeCache.getByAttributeClass( TALProps, string );
-        return talProps.process( scope, autoDefineHelper );
+        var talDeclare = attributeCache.getByAttributeClass( TALDeclare, string );
+        return talDeclare.process( scope, autoDefineHelper );
     };
     
     var processMETALDefineMacro = function( node, scope, string ) {

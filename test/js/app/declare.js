@@ -6,10 +6,10 @@ var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
 var context = zpt.context;
 
-var lastPropsErrorsArray;
-var errorFunction = function( errorsArray ) {
+var errorsArray;
+var errorFunction = function( _errorsArray ) {
     
-    lastPropsErrorsArray = errorsArray;
+    errorsArray = _errorsArray;
     /*alert( 
         errorsArray.join( '\n' ) 
     );*/
@@ -23,7 +23,7 @@ var Tree = function( name ) {
 // Run tests!
 QUnit.test( "simple not failing test", function( assert ) {
     
-    lastPropsErrorsArray = undefined;
+    errorsArray = undefined;
     dictionary.myTree = new Tree( 'Oak' );
     
     zpt.run({
@@ -40,12 +40,12 @@ QUnit.test( "simple not failing test", function( assert ) {
     assert.equal( $('#t1-7').text() , "Bob" );
     assert.equal( $('#t1-8').text() , "Oak" );
     
-    assert.equal( lastPropsErrorsArray, undefined );
+    assert.equal( errorsArray, undefined );
 });
 
 QUnit.test( "simple failing test", function( assert ) {
     
-    lastPropsErrorsArray = undefined;
+    errorsArray = undefined;
     delete dictionary.myTree;
     
     zpt.run({
@@ -63,7 +63,7 @@ QUnit.test( "simple failing test", function( assert ) {
     assert.equal( $('#t2-8').text() , "must not be evaluated" );
     
     assert.deepEqual( 
-        lastPropsErrorsArray, 
+        errorsArray, 
         [
             "Expected value type (number) of number1 property does not match type (string), value is \"not number\".",
             "Expected value type (string) of text1 property does not match type (array), value is \"10,11,12,13,14,15\".",
@@ -81,7 +81,7 @@ QUnit.test( "simple failing test", function( assert ) {
 
 QUnit.test( "Default value not failing test", function( assert ) {
 
-    lastPropsErrorsArray = undefined;
+    errorsArray = undefined;
 
     zpt.run({
         root: document.getElementById( 't3' ),
@@ -93,12 +93,12 @@ QUnit.test( "Default value not failing test", function( assert ) {
     assert.equal( $('#t3-3').text() , "5" );
     assert.equal( $('#t3-4').text() , "1" );
     
-    assert.equal( lastPropsErrorsArray, undefined );
+    assert.equal( errorsArray, undefined );
 });
 
 QUnit.test( "Default value failing test", function( assert ) {
 
-    lastPropsErrorsArray = undefined;
+    errorsArray = undefined;
     dictionary.myFunction = function(){
         return undefined;
     };
@@ -112,7 +112,7 @@ QUnit.test( "Default value failing test", function( assert ) {
     assert.equal( $('#t4-2').text() , "must not be evaluated" );
     
     assert.deepEqual( 
-        lastPropsErrorsArray, 
+        errorsArray, 
         [
             "Expected value type (number) of aNumber property does not match type (string), value is \"not a number\".",
             "Expected value type (number) of aString property does not match type (string), value is \"string\".",
@@ -122,9 +122,9 @@ QUnit.test( "Default value failing test", function( assert ) {
     );
 });
 
-QUnit.test( "Strict mode using props test", function( assert ) {
+QUnit.test( "Strict mode using declare test", function( assert ) {
 
-    lastPropsErrorsArray = undefined;
+    errorsArray = undefined;
 
     zpt.run({
         root: document.getElementById( 't5' ),
@@ -136,14 +136,14 @@ QUnit.test( "Strict mode using props test", function( assert ) {
     assert.equal( $('#t5-3').text() , "must not be evaluated" );
     
     assert.deepEqual( 
-        lastPropsErrorsArray, 
+        errorsArray, 
         "Not declared variable found using strict mode:nonDefinedNumber"
     );
 });
 
 QUnit.test( "Strict mode using context test", function( assert ) {
 
-    lastPropsErrorsArray = undefined;
+    errorsArray = undefined;
     context.setStrictMode( true );
     
     zpt.run({
@@ -155,7 +155,7 @@ QUnit.test( "Strict mode using context test", function( assert ) {
     assert.equal( $('#t6-2').text() , "must not be evaluated" );
 
     assert.deepEqual( 
-        lastPropsErrorsArray, 
+        errorsArray, 
         "Not declared variable found using strict mode:nonDefinedNumber"
     );
 });
