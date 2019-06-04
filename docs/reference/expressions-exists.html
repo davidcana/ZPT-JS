@@ -44,17 +44,13 @@ exists_expressions ::= 'exists:' expression
 
                 <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
-                    Testing for the existence of a property:
+                    Testing for the existence of a property in an object:
                 </p>
                 <pre class="brush: html">
 &lt;div data-condition="not: exists: myObject/name"&gt;
     Name not set!
 &lt;/div&gt;
                 </pre>
-
-                <p>
-                    Note that in this case you can’t use the expression, <code>not:myObject/name</code>, since that expression will be <code>true</code> if the number variable exists and is zero.
-                </p>
 
                 <p>
                     Note: some parts extracted from <a href="https://zope.readthedocs.io/en/latest/zopebook/AppendixC.html#tales-exists-expressions">Zope Page Templates Reference</a>.
