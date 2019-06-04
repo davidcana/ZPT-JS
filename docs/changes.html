@@ -16,6 +16,36 @@
             </div>
             <article data-fill-slot="'article'">
                 <h2>
+                    0.35.0 <span class="changes-date">4 Jun 2019</span>
+                </h2>
+                <ul>
+                    <li>Added new tag: data-declare. It declares a list of items, each item is a variable name, a variable type (optional) and a default value expression (optional too). Optionally a 'required' suffix can be added. A strict mode is set to true inside the node with this attribute.</li>
+                    <li>
+                        Added some methods to context:
+                        <ul>
+                            <li>setStrictMode( strictMode ). Set the value of strictMode (default value is false). If it is set to true all variables must be declared; if ZPT-JS finds a non declared variable in an expression an error occurs.</li>
+                            <li>isStrictMode(). Get the value of strictMode.</li>
+                        </ul>
+                    </li>
+                    <li>Variable expression must match a regular expression. It is defined by zpt.context.getConf().variableNameRE and it is /^[A-Za-z0-9_/-]+$/ by default.</li>
+                    <li>errorFunction method of Context now is invoked when any error occurs except if the error is related to async preloading (in this case the asyncError method is invoked).</li>
+                    <li>
+                        Added a prefix to private vars to avoid name collision: '_'. The renamed vars are:
+                        <ul>
+                            <li>onErrorVarName:          <em>_on-error</em></li>
+                            <li>onErrorStructureVarName: <em>_on-error-structure</em></li>
+                            <li>i18nDomainVarName:       <em>_i18nDomain</em></li>
+                            <li>i18nLanguageVarName:     <em>_i18nLanguage</em></li>
+                            <li>externalMacroUrlVarName: <em>_externalMacroUrl</em></li>
+                            <li>strictModeVarName:       <em>_strictMode</em></li>
+                            <li>declaredVarsVarName:     <em>_declaredVars</em></li>
+                            <li>repeatVarName:           <em>_repeat</em></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                
+                <h2>
                     0.34.0 <span class="changes-date">23 May 2019</span>
                 </h2>
                 <ul>
