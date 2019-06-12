@@ -7,12 +7,13 @@ var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var Scope = require( './scope.js' );
 var utils = require( '../utils.js' );
+var ParserWorker = require( '../parsers/parserWorker.js' );
 
 module.exports = (function() {
     
     var keyLength = 6;
     
-    var build = function( parserOptions, target, parser, dictionaryExtension ) {
+    var build = function( parserOptions, target, dictionaryExtension ) {
 
         var scope = new Scope( 
             parserOptions.dictionary, 
@@ -22,13 +23,13 @@ module.exports = (function() {
         );
         
         if ( parserOptions.command == 'partialRender' ){
-            updateForPartialRender( parserOptions, target, scope, parser );
+            updateForPartialRender( parserOptions, target, scope );
         }
         
         return scope;
     };
     
-    var updateForPartialRender = function( parserOptions, target, scope, parser ) {
+    var updateForPartialRender = function( parserOptions, target, scope ) {
         
         // Get root key
         var rootMap = markAllRoots( parserOptions );
@@ -58,7 +59,7 @@ module.exports = (function() {
             
             var nodeKey = node.getAttribute( rootKeyTag );
             if ( nodeKey && nodeKey === rootKey ){
-                return processListOfDefines( parser, scope, itemsList );
+                return processListOfDefines( scope, itemsList );
             }
             
             node = node.parentNode;
@@ -68,14 +69,14 @@ module.exports = (function() {
         throw 'Error trying to update scope in partial render: root not found!';
     };
     
-    var processListOfDefines = function( parser, scope, itemsList ){
+    var processListOfDefines = function( scope, itemsList ){
         
         for ( var c = itemsList.length - 1; c >= 0; c-- ) {
             var talDefine = itemsList[ c ];
-            parser.processDefine( 
-                scope, 
+            ParserWorker.processDefine(
                 talDefine, 
-                true
+                true,
+                scope
             );
         }
     };
