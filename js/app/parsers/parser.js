@@ -37,6 +37,7 @@ module.exports = (function() {
         command: undefined, // preload, fullRender or partialRender
         root: undefined,
         dictionary: {},
+        indexExpressions: false
         //notRemoveGeneratedTags,
         //target,
         //declaredRemotePageUrls,
@@ -51,6 +52,7 @@ module.exports = (function() {
         parserOptions.command = options.command || 'fullRender';
         parserOptions.root = options.root === undefined? parserOptions.root: options.root;
         parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
+        parserOptions.indexExpressions = options.indexExpressions === undefined? parserOptions.indexExpressions: options.indexExpressions;
     };
     
     var preload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags, maxFolderDictionaries ){
@@ -118,11 +120,12 @@ module.exports = (function() {
         render(
             parserOptions.command == 'partialRender'? options.target: parserOptions.root,
             options.dictionaryExtension,
-            options.notRemoveGeneratedTags
+            options.notRemoveGeneratedTags,
+            options.indexExpressions
         );
     };
     
-    var render = function( target, dictionaryExtension, notRemoveGeneratedTags ){
+    var render = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions ){
         
         try {
             if ( ! target ){
@@ -133,7 +136,7 @@ module.exports = (function() {
                 removeGeneratedTagsFromAllTargetElements( target );
             }
             
-            processAllTargetElements( target, dictionaryExtension );
+            processAllTargetElements( target, dictionaryExtension, indexExpressions );
             
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -172,21 +175,21 @@ module.exports = (function() {
         }
     };
     
-    var processAllTargetElements = function( target, dictionaryExtension ) {
+    var processAllTargetElements = function( target, dictionaryExtension, indexExpressions ) {
         
         // Is multiroot?
         if ( $.isArray( target ) ){ 
             // There are several roots
             for ( var c = 0; c < target.length; c++ ) {
-                processTarget( target[ c ], dictionaryExtension );
+                processTarget( target[ c ], dictionaryExtension, indexExpressions );
             }
         } else {
             // There is only one root
-            processTarget( target, dictionaryExtension );
+            processTarget( target, dictionaryExtension, indexExpressions );
         }
     };
     
-    var processTarget = function( target, dictionaryExtension ) {
+    var processTarget = function( target, dictionaryExtension, indexExpressions ) {
         
         process( 
             target, 
@@ -195,22 +198,23 @@ module.exports = (function() {
                 target, 
                 self, 
                 dictionaryExtension
-            )
+            ),
+            indexExpressions
         );
     };
     
-    var process = function( node, scope ) {
+    var process = function( node, scope, indexExpressions ) {
 
         try {
             // Get the attributes from the node
-            var attributes = new NodeAttributes( node );
+            var attributes = new NodeAttributes( node, indexExpressions );
             
             scope.startElement();
 
             // Process instructions
             attributes.talRepeat != null ? 
-                    processLoop( node, attributes, scope ):
-                    processElement( node, attributes, scope );
+                processLoop( node, attributes, scope, indexExpressions ):
+                processElement( node, attributes, scope, undefined, indexExpressions );
 
             scope.endElement();
 
@@ -244,7 +248,7 @@ module.exports = (function() {
         };
     };
     
-    var processLoop = function( node, attributes, scope ) {
+    var processLoop = function( node, attributes, scope, indexExpressions ) {
         
         // Process repeat
         var talRepeat = TALRepeat.build( attributes.talRepeat );
@@ -252,7 +256,7 @@ module.exports = (function() {
 
         // Check default
         if ( evaluateHelper.isDefault( loop.getItems() ) ){
-            processElement( node, attributes, scope );
+            processElement( node, attributes, scope, undefined, indexExpressions );
             return true;
         }
         
@@ -284,7 +288,7 @@ module.exports = (function() {
             parentNode.insertBefore( tmpNode, nextSibling );
             
             // Process it
-            if ( ! processElement( tmpNode, attributes, scope, autoDefineHelper ) ) {
+            if ( ! processElement( tmpNode, attributes, scope, autoDefineHelper, indexExpressions ) ) {
                 scope.endElement();
                 return false;
             }
@@ -343,7 +347,7 @@ module.exports = (function() {
         }
     };
     
-    var processElement = function( node, attributes, scope, _autoDefineHelper ) {
+    var processElement = function( node, attributes, scope, _autoDefineHelper, indexExpressions ) {
 
         // If it is defined a metalFillSlot or a metalDefineMacro do nothing
         if ( attributes.metalFillSlot || ! processMETALDefineMacro(
@@ -428,7 +432,7 @@ module.exports = (function() {
                     scope, 
                     attributes.talContent ) ) {
 
-                defaultContent( node, scope );
+                defaultContent( node, scope, indexExpressions );
             }
         }
 
@@ -443,7 +447,7 @@ module.exports = (function() {
         return true;
     };
 
-    var defaultContent = function( node, scope ) {
+    var defaultContent = function( node, scope, indexExpressions ) {
 
         var childNodes = node.childNodes;
         if ( ! childNodes ) {
@@ -456,7 +460,7 @@ module.exports = (function() {
             // Check if node is ELEMENT_NODE and not parsed yet
             if ( currentChildNode && currentChildNode.nodeType == 1
                     && ! currentChildNode.getAttribute( tags.qdup ) ) {
-                process( currentChildNode, scope );
+                process( currentChildNode, scope, indexExpressions );
             }
         }
     };

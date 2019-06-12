@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Update tests</title>
+        <link rel="stylesheet" href="styles/qunit-1.19.0.css">
+        
+        <script src="http://127.0.0.1:9966/update.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <h1>Update</h1>
+        
+        <h2>Simple not failing</h2>
+        <div id="t1" data-define="number1 1; 
+                                  text1 'this is a text'; 
+                                  text2 'this is a text too'; 
+                                  array1 [10:15]">
+            <ol data-declare="number1 number;
+                              text1 string;
+                              array1 array;
+                              required text2 string;
+                              add function;
+                              dateValue date;
+                              user object;
+                              myTree tree;
+                              required aString">
+                <li>number1 = <span id="t1-1" data-content="number1">an integer</span></li>
+                <li>text1 = <span id="t1-2" data-content="text1">a text</span></li>
+                <li>array1 = <span id="t1-3" data-content="array1">an array</span></li>
+                <li>text2 = <span id="t1-4" data-content="text2">a text</span></li>
+                <li>add(1,2) = <span id="t1-5" data-content="add(1,2)">a number</span></li>
+                <li>dateValue = <span id="t1-6" data-content="dateValue">a date</span></li>
+                <li>user/name = <span id="t1-7" data-content="user/name">must be Bob</span></li>
+                <li>tree/name = <span id="t1-8" data-content="myTree/name">must be Oak</span></li>
+                <li>aString = <span id="t1-9" data-content="aString">must be string</span></li>
+            </ol>
+        </div>
+        
+    </body>
+</html>

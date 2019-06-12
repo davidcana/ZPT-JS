@@ -30,7 +30,8 @@ module.exports = (function() {
         i18nLanguage:     "data-language",
         //scopeKey:         "data-scope-key",
         rootKey:          "data-root-key",
-        qdup:             "data-qdup"
+        qdup:             "data-qdup",
+        id:               "data-id",
     };
     var originalTags = {
         talCondition:     "tal:condition",
@@ -52,7 +53,8 @@ module.exports = (function() {
         i18nLanguage:     "i18n:language",
         //scopeKey:         "data-scope-key",
         rootKey:          "data-root-key",
-        qdup:             "data-qdup"
+        qdup:             "data-qdup",
+        id:               "data-id",
     };
     var tags = defaultTags;
     var tal = '';
@@ -362,6 +364,13 @@ module.exports = (function() {
     };
     /* End strict mode  */
     
+    /* Expression counter */
+    var expressionCounter = 0;
+    var nextExpressionCounter = function(){
+        return ++expressionCounter;
+    };
+    /* End expression counter */
+    
     var self = {
         getTags: getTags,
         setTags: setTags,
@@ -387,7 +396,8 @@ module.exports = (function() {
         setFolderDictionaries: setFolderDictionaries,
         getFolderDictionaries: getFolderDictionaries,
         setStrictMode: setStrictMode,
-        isStrictMode: isStrictMode
+        isStrictMode: isStrictMode,
+        nextExpressionCounter: nextExpressionCounter
     };
     
     return self;

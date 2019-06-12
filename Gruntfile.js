@@ -292,6 +292,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/declare.js',
                 dest: 'build/declare.js'
+            },
+            update: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/update.js',
+                dest: 'build/update.js'
             }
         },
         compress: {
