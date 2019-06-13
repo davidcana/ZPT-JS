@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
 var CondExpression = function( stringToApply, expression1ToApply, expression2ToApply, expression3ToApply ) {
@@ -22,7 +23,7 @@ var CondExpression = function( stringToApply, expression1ToApply, expression2ToA
     };
     
     var dependsOn = function(){
-        return [ expression1, expression2, expression3 ];
+        return expressionsUtils.buildDependsOnList( expression1, expression2, expression3 );
     };
     
     var toString = function(){

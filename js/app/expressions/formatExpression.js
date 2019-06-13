@@ -63,14 +63,7 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
     };
     
     var dependsOn = function(){
-
-        var result = [ formatterExpression ];
-
-        result = result.concat(
-            expressionsUtils.buildDependsOnList( argsExpressions )
-        );
-
-        return result;
+        return expressionsUtils.buildDependsOnList( formatterExpression, argsExpressions );
     };
     
     var toString = function(){

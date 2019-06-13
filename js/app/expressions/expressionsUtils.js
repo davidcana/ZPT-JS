@@ -4,6 +4,7 @@
 "use strict";
 
 var evaluateHelper = require( './evaluateHelper.js' );
+var $ = require( 'jquery' );
 
 module.exports = (function() {
     
@@ -29,14 +30,30 @@ module.exports = (function() {
         var result = [];
         
         for ( var argCounter = 0; argCounter < arguments.length; argCounter++ ){
-            var expressionList = arguments[ argCounter ];
-            if ( expressionList ){
-                for ( var i = 0; i < expressionList.length; i++ ) {
-                    result = result.concat( expressionList[ i ].dependsOn() )
-                }
-            }
+            var list = arguments[ argCounter ];
+            result = result.concat( 
+                getDependsOnFromList( list )
+            );
         }
         
+        return result;
+    };
+    
+    var getDependsOnFromList = function( list ){
+        
+        var result = [];
+        
+        if ( ! list ){
+            return result;
+        }
+        
+        for ( var i = 0; i < list.length; i++ ) {
+            var item = list[ i ];
+            result = result.concat( 
+                $.isArray( item )? getDependsOnFromList( item ): item.dependsOn()
+            );
+        }
+
         return result;
     };
     /*

@@ -6,6 +6,7 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 var expressionBuilder = require( '../expressionBuilder.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 var StringExpression = require( '../stringExpression.js' );
 
 var JavascriptExpression = function( expressionToApply ) {
@@ -18,7 +19,7 @@ var JavascriptExpression = function( expressionToApply ) {
     };
     
     var dependsOn = function(){
-        return [ stringExpression ];
+        return expressionsUtils.buildDependsOnList( stringExpression );
     };
     
     var toString = function(){

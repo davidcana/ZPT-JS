@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var trHelper = require( './trHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 
 var TrNumberExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
     
@@ -23,7 +24,7 @@ var TrNumberExpression = function( stringToApply, expressionToApply, argsExpress
     };
 
     var dependsOn = function(){
-        return trHelper.dependsOn( expression, argsExpressions );
+        return expressionsUtils.buildDependsOnList( expression, argsExpressions );
     };
     
     var toString = function(){

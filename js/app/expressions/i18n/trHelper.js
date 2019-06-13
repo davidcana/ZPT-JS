@@ -7,7 +7,6 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var i18nHelper = require( '../../i18n/i18nHelper.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
 
 module.exports = (function() {
     
@@ -122,20 +121,8 @@ module.exports = (function() {
             language );
     };
     
-    var dependsOn = function( expression, argsExpressions ){
-
-        var result = [ expression ];
-
-        result = result.concat(
-            expressionsUtils.buildDependsOnList( argsExpressions )
-        );
-
-        return result;
-    };
-    
     return {
         build: build,
-        evaluate: evaluate,
-        dependsOn: dependsOn
+        evaluate: evaluate
     };
 })();

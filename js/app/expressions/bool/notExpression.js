@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 
 var NotExpression = function( stringToApply, expressionToApply ) {
     
@@ -16,7 +17,7 @@ var NotExpression = function( stringToApply, expressionToApply ) {
     };
 
     var dependsOn = function(){
-        return [ expression ];
+        return expressionsUtils.buildDependsOnList( expression );
     };
     
     var toString = function(){

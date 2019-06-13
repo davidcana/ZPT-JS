@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var comparisonHelper = require( './comparisonHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 
 var GreaterExpression = function( stringToApply, expression1ToApply, expression2ToApply ) {
     
@@ -18,7 +19,7 @@ var GreaterExpression = function( stringToApply, expression1ToApply, expression2
     };
 
     var dependsOn = function(){
-        return [ expression1, expression2 ];
+        return expressionsUtils.buildDependsOnList( expression1, expression2 );
     };
     
     var toString = function(){
