@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 var $ = require( 'jquery' );
 
 var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
@@ -16,7 +17,6 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         
         // Evaluate and check array bases and indexes
         var evaluatedArrayBase = arrayBase.evaluate( scope );
-        //var evaluatedIndexes = evaluateHelper.evaluateExpressionList( indexes, scope );
 
         // Iterate indexes
         var result = evaluatedArrayBase;
@@ -31,13 +31,25 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         
         return result;
     };
-
+    
+    var dependsOn = function(){
+        
+        var result = [ arrayBase ];
+        
+        result = result.concat(
+            expressionsUtils.buildDependsOnList( indexes )
+        );
+        
+        return result;
+    };
+    
     var toString = function(){
         return arrayBase + '[' + indexes + ']';
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -21,12 +21,17 @@ var CondExpression = function( stringToApply, expression1ToApply, expression2ToA
             expression3.evaluate( scope );
     };
     
+    var dependsOn = function(){
+        return [ expression1, expression2, expression3 ];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

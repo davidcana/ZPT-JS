@@ -18,12 +18,17 @@ var FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
         return ! element? undefined: element.apply( element, evaluatedArgs );
     };
 
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

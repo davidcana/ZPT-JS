@@ -24,8 +24,35 @@ module.exports = (function() {
         return result;
     };
     
+    var buildDependsOnList = function(){
+        
+        var result = [];
+        
+        for ( var argCounter = 0; argCounter < arguments.length; argCounter++ ){
+            var expressionList = arguments[ argCounter ];
+            if ( expressionList ){
+                for ( var i = 0; i < expressionList.length; i++ ) {
+                    result = result.concat( expressionList[ i ].dependsOn() )
+                }
+            }
+        }
+        
+        return result;
+    };
+    /*
+    var buildDependsOnList = function( expressionList ){
+
+        var result = [];
+        for ( var i = 0; i < expressionList.length; i++ ) {
+            result = result.concat( expressionList[ i ].dependsOn() )
+        }
+        return result;
+    };
+    */
+    
     return {
         buildLiteral: buildLiteral,
-        buildList: buildList
+        buildList: buildList,
+        buildDependsOnList: buildDependsOnList
     };
 })();

@@ -11,12 +11,17 @@ var PropertyExpression = function( nameToApply ) {
         return parent[ name ];
     };
     
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return name;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

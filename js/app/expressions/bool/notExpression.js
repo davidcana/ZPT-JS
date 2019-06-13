@@ -15,12 +15,17 @@ var NotExpression = function( stringToApply, expressionToApply ) {
         return ! evaluateHelper.evaluateBoolean( scope, expression );
     };
 
+    var dependsOn = function(){
+        return [ expression ];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

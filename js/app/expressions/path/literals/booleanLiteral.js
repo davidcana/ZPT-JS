@@ -15,8 +15,13 @@ var BooleanLiteral = function( literalToApply ) {
         return "" + literal;
     };
     
+    var dependsOn = function(){
+        return [];
+    };
+    
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -37,12 +37,17 @@ var JqueryExpression = function( stringToApply ) {
         }
     };
 
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return string;
     };
 
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

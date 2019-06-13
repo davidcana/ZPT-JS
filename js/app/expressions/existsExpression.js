@@ -20,6 +20,9 @@ var ExistsExpression = function( stringToApply, expressionToApply ) {
         }
     };
 
+    var dependsOn = function(){
+        return [ expression ];
+    };
     
     var toString = function(){
         return string;
@@ -27,6 +30,7 @@ var ExistsExpression = function( stringToApply, expressionToApply ) {
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

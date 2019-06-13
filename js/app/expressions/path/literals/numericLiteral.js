@@ -11,12 +11,17 @@ var NumericLiteral = function( literalToApply ) {
         return literal;
     };
     
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return literal;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

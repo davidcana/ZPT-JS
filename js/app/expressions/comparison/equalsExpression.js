@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
 var EqualsExpression = function( stringToApply, argsToApply ) {
@@ -27,12 +28,17 @@ var EqualsExpression = function( stringToApply, argsToApply ) {
         return true;
     };
 
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( args );
+    };
+    
     var toString = function(){
         return string;
     };
 
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

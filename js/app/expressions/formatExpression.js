@@ -6,6 +6,7 @@
 var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var ExpressionTokenizer = require( './expressionTokenizer.js' );
+var expressionsUtils = require( './expressionsUtils.js' );
 var evaluateHelper = require( './evaluateHelper.js' );
 
 var FormatExpression = function( stringToApply, formatterExpressionToApply, argsExpressionsToApply ) {
@@ -61,12 +62,24 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
         return formatter && $.isFunction( formatter );
     };
     
+    var dependsOn = function(){
+
+        var result = [ formatterExpression ];
+
+        result = result.concat(
+            expressionsUtils.buildDependsOnList( argsExpressions )
+        );
+
+        return result;
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

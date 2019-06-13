@@ -18,12 +18,17 @@ var VariableExpression = function( nameToApply ) {
         return scope.get( name );
     };
     
+    var dependsOn = function(){
+        return [ name ];
+    };
+
     var toString = function(){
         return name;
     };
-    
+
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

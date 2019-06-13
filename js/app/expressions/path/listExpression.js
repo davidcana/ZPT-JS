@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 var RangeExpression = require( './rangeExpression.js' );
 var $ = require( 'jquery' );
 
@@ -31,12 +32,17 @@ var ListExpression = function( stringToApply, itemsToApply ) {
         return result;
     };
     
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( items );
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

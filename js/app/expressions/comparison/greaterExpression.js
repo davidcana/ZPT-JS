@@ -17,12 +17,17 @@ var GreaterExpression = function( stringToApply, expression1ToApply, expression2
         return numbers.number1 > numbers.number2;
     };
 
+    var dependsOn = function(){
+        return [ expression1, expression2 ];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -10,13 +10,18 @@ var StringLiteral = function( literalToApply ) {
     var evaluate = function( scope ){
         return literal;
     };
-
+    
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return literal;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

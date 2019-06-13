@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var arithmethicHelper = require( './arithmethicHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 
 var MultiplyExpression = function( stringToApply, expressionListToApply ) {
     
@@ -23,12 +24,17 @@ var MultiplyExpression = function( stringToApply, expressionListToApply ) {
             } );
     };
 
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expressionList );
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

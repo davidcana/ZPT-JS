@@ -35,13 +35,17 @@ var RangeExpression = function( stringToApply, startExpressionToApply, endExpres
         return result;
     };
 
-
+    var dependsOn = function(){
+        return [ startExpression, endExpression, stepExpression ];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

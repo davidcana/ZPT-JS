@@ -16,12 +16,17 @@ var MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
         return parent[ name ].apply( parent, evaluatedArgs );
     };
 
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

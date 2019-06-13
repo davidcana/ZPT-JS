@@ -17,12 +17,17 @@ var JavascriptExpression = function( expressionToApply ) {
         return eval( evaluatedString );
     };
     
+    var dependsOn = function(){
+        return [ stringExpression ];
+    };
+    
     var toString = function(){
         return stringExpression;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -14,6 +14,9 @@ New in 0.37.0
     - afterProcessing()
     - getTemplate( viewId ) ?
 
+New in 0.36.1
+- Remove jquery dependency?
+
 New in 0.36.0
 - Add new command: update?
 - Add options.updatedDictionary (object) to set the list of properties to bind?

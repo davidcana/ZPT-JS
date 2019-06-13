@@ -23,12 +23,17 @@ var TrCurrencyExpression = function( stringToApply, expressionToApply, argsExpre
         return evaluated;
     };
     
+    var dependsOn = function(){
+        return trHelper.dependsOn( expression, argsExpressions );
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

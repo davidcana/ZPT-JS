@@ -11,12 +11,17 @@ var IndirectionExpression = function( nameToApply ) {
         return parent[ scope.get( name ) ];
     };
     
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return '?' + name;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -6,6 +6,7 @@
 var context = require( '../context.js' );
 var StringLiteral = require( './path/literals/stringLiteral.js' );
 var PathExpression = require( './path/pathExpression.js' );
+var expressionsUtils = require( './expressionsUtils.js' );
 
 var StringExpression = function( stringToApply, expressionListToApply ) {
     
@@ -24,12 +25,17 @@ var StringExpression = function( stringToApply, expressionListToApply ) {
         return result;
     };
 
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expressionList );
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

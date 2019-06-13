@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 
 var OrExpression = function( stringToApply, expressionListToApply ) {
     
@@ -23,12 +24,17 @@ var OrExpression = function( stringToApply, expressionListToApply ) {
         return false;
     };
 
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expressionList );
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };
