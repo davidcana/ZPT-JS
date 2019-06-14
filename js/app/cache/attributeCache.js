@@ -71,10 +71,6 @@ module.exports = (function() {
                 false );
     };
     
-    var registerAttribute = function(){
-        
-    };
-    
     return {
         getByDetails: getByDetails,
         getByAttributeClass: getByAttributeClass
