@@ -3,6 +3,7 @@
 */
 "use strict";
 
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 var Loop = require( '../../parsers/loop.js' );
 
 var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply ) {
@@ -10,9 +11,15 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
     var string = stringToApply;
     var varName = varNameToApply;
     var expressionString = expressionStringToApply;
+    var loop;
     
     var process = function( scope ){
-        return new Loop( varName, expressionString, scope );
+        loop = new Loop( varName, expressionString, scope );
+        return loop;
+    };
+    
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( loop.getExpression() );
     };
     
     var toString = function(){
@@ -21,6 +28,7 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

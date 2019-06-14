@@ -15,12 +15,17 @@ var METALDefineMacro = function( nameToApply ) {
         return false;
     };
 
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return "METALDefineMacro: " + name;
     };
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

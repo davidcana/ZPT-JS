@@ -10,7 +10,11 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
     
     var itemVariableName = _itemVariableName;
     var expressionString = _expressionString;
+    
     var expression = expressionBuilder.build( expressionString );
+    var getExpression = function(){
+        return expression;
+    };
     
     var items = expression.evaluate( scope );
     var getItems = function(){
@@ -58,10 +62,11 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
         
         return null;
     };
-
+    
     return {
         setOffset: setOffset,
         repeat:repeat,
-        getItems: getItems
+        getItems: getItems,
+        getExpression: getExpression
     };
 };

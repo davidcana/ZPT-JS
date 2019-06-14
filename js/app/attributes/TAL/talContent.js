@@ -6,6 +6,7 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 var contentHelper = require( './contentHelper.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 
 var TALContent = function( stringToApply, expressionToApply, structureToApply ) {
     
@@ -22,12 +23,17 @@ var TALContent = function( stringToApply, expressionToApply, structureToApply ) 
         );
     };
 
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expression );
+    };
+    
     var toString = function(){
         return "TALContent: " + string;
     };
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

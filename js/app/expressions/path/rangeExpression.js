@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 var NumericLiteral = require( './literals/numericLiteral.js' );
 
@@ -36,7 +37,7 @@ var RangeExpression = function( stringToApply, startExpressionToApply, endExpres
     };
 
     var dependsOn = function(){
-        return [ startExpression, endExpression, stepExpression ];
+        return expressionsUtils.buildDependsOnList( startExpression, endExpression, stepExpression );
     };
     
     var toString = function(){

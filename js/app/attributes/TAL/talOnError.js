@@ -28,12 +28,17 @@ var TALOnError = function( stringToApply, structureToApply ) {
         );
     };
 
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return "TALOnError: " + string;
     };
     
     return {
         putToAutoDefineHelper: putToAutoDefineHelper,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -33,14 +33,7 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
     };
     
     var dependsOn = function(){
-        
-        var result = [ arrayBase ];
-        
-        result = result.concat(
-            expressionsUtils.buildDependsOnList( indexes )
-        );
-        
-        return result;
+        return expressionsUtils.buildDependsOnList( arrayBase, indexes );
     };
     
     var toString = function(){

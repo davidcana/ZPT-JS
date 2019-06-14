@@ -39,33 +39,37 @@ module.exports = (function() {
         return result;
     };
     
-    var getDependsOnFromList = function( list ){
+    var getDependsOnFromList = function( arg ){
         
         var result = [];
         
-        if ( ! list ){
+        if ( ! arg ){
             return result;
         }
         
+        if ( ! $.isArray( arg ) ){
+            return getDependsOnFromNonList( arg );
+        }
+        
+        var list = arg;
         for ( var i = 0; i < list.length; i++ ) {
             var item = list[ i ];
             result = result.concat( 
-                $.isArray( item )? getDependsOnFromList( item ): item.dependsOn()
+                $.isArray( item )? getDependsOnFromList( item ): getDependsOnFromNonList( item )
             );
         }
 
         return result;
     };
-    /*
-    var buildDependsOnList = function( expressionList ){
-
-        var result = [];
-        for ( var i = 0; i < expressionList.length; i++ ) {
-            result = result.concat( expressionList[ i ].dependsOn() )
+    
+    var getDependsOnFromNonList = function( item ){
+        
+        if ( $.isFunction( item.dependsOn ) ){
+            return item.dependsOn();
         }
-        return result;
+        
+        throw 'Unable to build depends on list, item does not implement dependsOn method: ' + item;
     };
-    */
     
     return {
         buildLiteral: buildLiteral,

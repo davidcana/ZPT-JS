@@ -5,6 +5,7 @@
 
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 var contentHelper = require( './contentHelper.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 
 var TALReplace = function( stringToApply, expressionToApply, structureToApply ) {
     
@@ -40,12 +41,17 @@ var TALReplace = function( stringToApply, expressionToApply, structureToApply ) 
         return true;
     };
     
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expression );
+    };
+    
     var toString = function(){
         return 'TALReplace: ' + string;
     };
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

@@ -5,6 +5,7 @@
 
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 var $ = require( 'jquery' );
 
 var TALDefine = function( stringToApply, defineItemsToApply ) {
@@ -25,13 +26,30 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
             );
         }
     };
+    
+    var dependsOn = function(){
+        
+        var result = [];
+        
+        for ( var i = 0; i < defineItems.length; i++ ) {
+            var defineItem = defineItems[ i ];
+            if ( ! defineItem.nocall ){
+                result = result.concat( 
+                    expressionsUtils.buildDependsOnList( defineItem.expression )
+                );
+            }
+        }
 
+        return result;
+    };
+    
     var toString = function(){
         return "TALDefine: " + string;
     };
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

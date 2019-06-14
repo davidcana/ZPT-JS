@@ -4,6 +4,7 @@
 "use strict";
 
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 
 var TALCondition = function( stringToApply, expressionToApply ) {
     
@@ -12,7 +13,6 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     
     var process = function( scope, node ){
         
-        //var result = expression.evaluate( scope );
         var result = evaluateHelper.evaluateBoolean( scope, expression );
             
         node.style.display = result ? '' : 'none';
@@ -20,13 +20,17 @@ var TALCondition = function( stringToApply, expressionToApply ) {
         return result;
     };
 
-
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expression );
+    };
+    
     var toString = function(){
         return "TALCondition: " + string;
     };
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

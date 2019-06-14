@@ -4,7 +4,7 @@
 "use strict";
 
 var context = require( '../context.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
+var expressionsUtils = require( './expressionsUtils.js' );
 
 var ExistsExpression = function( stringToApply, expressionToApply ) {
     

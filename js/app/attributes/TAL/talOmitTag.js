@@ -4,6 +4,7 @@
 "use strict";
 
 var BooleanLiteral = require( '../../expressions/path/literals/booleanLiteral.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 
 var TALOmitTag = function( stringToApply, expressionToApply ) {
     
@@ -26,12 +27,17 @@ var TALOmitTag = function( stringToApply, expressionToApply ) {
         return result;
     };
     
+    var dependsOn = function(){
+        return expressionsUtils.buildDependsOnList( expression );
+    };
+    
     var toString = function(){
         return "TALOmitTag: " + string;
     };
     
     return {
         process: process,
+        dependsOn: dependsOn,
         toString: toString
     };
 };
