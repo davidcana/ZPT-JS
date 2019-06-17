@@ -1,12 +1,14 @@
 /*
     attributeCache singleton class
 */
+"use strict";
+
+var CacheHelper = require( './cacheHelper.js' );
+var context = require( '../context.js' );
+var log = require( '../logHelper.js' );
+var attributeIndex = require( '../attributes/attributeIndex.js' );
+
 module.exports = (function() {
-    "use strict";
-    
-    var CacheHelper = require( './cacheHelper.js' );
-    var context = require( '../context.js' );
-    var log = require( '../logHelper.js' );
     
     var map = {};
     
@@ -33,7 +35,20 @@ module.exports = (function() {
         attributeMap[ CacheHelper.hashCode( string ) ] = value;
     };
     
-    var getByDetails = function( attribute, string, buildFunction, force ) {
+    var index = function( node, attribute ){
+        
+        if ( node ){
+            log.debug( 'Must index!' );
+            attributeIndex.add( node, attribute );
+            
+        } else {
+            log.debug( 'Not indexed!' );
+        }
+        
+        return attribute;
+    };
+    
+    var getByDetails = function( attribute, string, buildFunction, force, node ) {
         
         log.debug( 
             'Request building of ZPT attribute "' + string + '", force "' + force + '"' );
@@ -47,7 +62,8 @@ module.exports = (function() {
             var fromCache = get( attribute, string );
             if ( fromCache ){
                 log.debug( 'Found in cache!' );
-                return fromCache;
+                //return fromCache;
+                return index( node, fromCache );
             } else {
                 log.debug( 'NOT found in cache!' );
             }
@@ -57,10 +73,11 @@ module.exports = (function() {
         log.debug( 'Must build!' );
         var builded = buildFunction();
         put( attribute, string, builded );
-        return builded;
+        //return builded;
+        return index( node, builded );
     };
     
-    var getByAttributeClass = function( attributeInstance, string ) {
+    var getByAttributeClass = function( attributeInstance, string, node ) {
         
         return getByDetails( 
                 attributeInstance.id, 
@@ -68,11 +85,13 @@ module.exports = (function() {
                 function(){
                     return attributeInstance.build( string );
                 }, 
-                false );
+                false,
+                node
+        );
     };
     
     return {
-        getByDetails: getByDetails,
+        //getByDetails: getByDetails,
         getByAttributeClass: getByAttributeClass
     };
 })();

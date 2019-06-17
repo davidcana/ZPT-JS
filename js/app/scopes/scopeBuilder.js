@@ -59,7 +59,11 @@ module.exports = (function() {
             
             var nodeKey = node.getAttribute( rootKeyTag );
             if ( nodeKey && nodeKey === rootKey ){
-                return processListOfDefines( scope, itemsList );
+                return processListOfDefines( 
+                    scope, 
+                    itemsList, 
+                    parserOptions.indexExpressions? node: undefined
+                );
             }
             
             node = node.parentNode;
@@ -69,11 +73,12 @@ module.exports = (function() {
         throw 'Error trying to update scope in partial render: root not found!';
     };
     
-    var processListOfDefines = function( scope, itemsList ){
+    var processListOfDefines = function( scope, itemsList, node ){
         
         for ( var c = itemsList.length - 1; c >= 0; c-- ) {
             var talDefine = itemsList[ c ];
             ParserWorker.processDefine(
+                node, 
                 talDefine, 
                 true,
                 scope

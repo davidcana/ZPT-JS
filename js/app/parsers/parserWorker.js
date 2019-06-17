@@ -195,6 +195,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         var autoDefineHelper = _autoDefineHelper || new AutoDefineHelper( node );
         
         if ( ! processDeclare( 
+            node,
             attributes.talDeclare,
             autoDefineHelper
         ) ) {
@@ -203,16 +204,19 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         }
         
         processOnError( 
+            node,
             attributes.talOnError,
             autoDefineHelper
         );
         
         processI18nLanguage( 
+            node,
             attributes.i18nLanguage,
             autoDefineHelper
         );
         
-        processI18nDomain(  
+        processI18nDomain(
+            node,
             attributes.i18nDomain, 
             autoDefineHelper
         );
@@ -223,6 +227,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         );
         
         ParserWorker.processDefine( 
+            indexExpressions? node: undefined,
             attributes.talDefine,  
             false,
             scope
@@ -289,13 +294,13 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         }
     };
     
-    var processOnError = function( string, autoDefineHelper ) {
+    var processOnError = function( node, string, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
         }
 
-        var talOnError = attributeCache.getByAttributeClass( TALOnError, string );
+        var talOnError = attributeCache.getByAttributeClass( TALOnError, string, indexExpressions? node: undefined );
         return talOnError.putToAutoDefineHelper( autoDefineHelper );
     };
     
@@ -306,37 +311,37 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
         
-        var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
+        var talDefine = attributeCache.getByAttributeClass( TALDefine, string, indexExpressions? node: undefined );
         return talDefine.process( scope, false );
     };
 
-    var processI18nDomain = function( string, autoDefineHelper ) {
+    var processI18nDomain = function( node, string, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
         }
 
-        var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string );
+        var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string, indexExpressions? node: undefined );
         return i18nDomain.putToAutoDefineHelper( scope, autoDefineHelper );
     };
     
-    var processI18nLanguage = function( string, autoDefineHelper ) {
+    var processI18nLanguage = function( node, string, autoDefineHelper ) {
 
         if ( ! string ) {
             return;
         }
 
-        var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string );
+        var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string, indexExpressions? node: undefined );
         return i18nLanguage.putToAutoDefineHelper( autoDefineHelper );
     };
     
-    var processDeclare = function( string, autoDefineHelper ) {
+    var processDeclare = function( node, string, autoDefineHelper ) {
 
         if ( ! string ) {
             return true;
         }
 
-        var talDeclare = attributeCache.getByAttributeClass( TALDeclare, string );
+        var talDeclare = attributeCache.getByAttributeClass( TALDeclare, string, indexExpressions? node: undefined );
         return talDeclare.process( scope, autoDefineHelper );
     };
     
@@ -372,7 +377,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return true;
         }
 
-        var talCondition = attributeCache.getByAttributeClass( TALCondition, string );
+        var talCondition = attributeCache.getByAttributeClass( TALCondition, string, indexExpressions? node: undefined );
         return talCondition.process( scope, node );
     };
     
@@ -382,7 +387,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return false;
         }
         
-        var talReplace = attributeCache.getByAttributeClass( TALReplace, string );
+        var talReplace = attributeCache.getByAttributeClass( TALReplace, string, indexExpressions? node: undefined );
         return talReplace.process( scope, node );
     };
 
@@ -392,7 +397,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return false;
         }
 
-        var talOmitTag = attributeCache.getByAttributeClass( TALOmitTag, string );
+        var talOmitTag = attributeCache.getByAttributeClass( TALOmitTag, string, indexExpressions? node: undefined );
         return talOmitTag.process( scope, node );
     };
     
@@ -402,7 +407,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return false;
         }
 
-        var talContent = attributeCache.getByAttributeClass( TALContent, string );
+        var talContent = attributeCache.getByAttributeClass( TALContent, string, indexExpressions? node: undefined );
         return talContent.process( scope, node );
     };
   
@@ -412,7 +417,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
 
-        var talAttributes = attributeCache.getByAttributeClass( TALAttributes, string );
+        var talAttributes = attributeCache.getByAttributeClass( TALAttributes, string, indexExpressions? node: undefined );
         return talAttributes.process( scope, node );
     };
     
@@ -423,13 +428,13 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
     return self;
 };
 
-ParserWorker.processDefine = function( string, forceGlobal, _scope ) {
+ParserWorker.processDefine = function( node, string, forceGlobal, _scope ) {
 
     if ( ! string ) {
         return;
     }
 
-    var talDefine = attributeCache.getByAttributeClass( TALDefine, string );
+    var talDefine = attributeCache.getByAttributeClass( TALDefine, string, node );
     return talDefine.process( _scope, forceGlobal );
 };
 
