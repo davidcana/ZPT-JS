@@ -38,11 +38,12 @@ var TALOmitTag = function( stringToApply, expressionToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALOmitTag.id
     };
 };
 
-TALOmitTag.id = 'tal:ommit-tag';
+TALOmitTag.id = 'tal:omit-tag';
 
 TALOmitTag.build = function( string ) {
     

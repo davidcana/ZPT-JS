@@ -18,13 +18,19 @@ var I18NLanguage = function( stringToApply ) {
         );
     };
     
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return "I18NLanguage: " + string;
     };
     
     return {
         putToAutoDefineHelper: putToAutoDefineHelper,
-        toString: toString
+        dependsOn: dependsOn,
+        toString: toString,
+        type: I18NLanguage.id
     };
 };
 

@@ -88,14 +88,20 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
             }
         );
     };
-
+    
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return "METALUseMacro: " + string;
     };
     
     return {
         process: process,
-        toString: toString
+        dependsOn: dependsOn,
+        toString: toString,
+        type: METALUseMacro.id
     };
 };
 

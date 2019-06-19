@@ -48,7 +48,7 @@ module.exports = (function() {
         return attribute;
     };
     
-    var getByDetails = function( attribute, string, buildFunction, force, node ) {
+    var getByDetails = function( attributeType, string, buildFunction, force, node ) {
         
         log.debug( 
             'Request building of ZPT attribute "' + string + '", force "' + force + '"' );
@@ -59,7 +59,7 @@ module.exports = (function() {
             
         } else {
             log.debug( 'Cache ON!' );
-            var fromCache = get( attribute, string );
+            var fromCache = get( attributeType, string );
             if ( fromCache ){
                 log.debug( 'Found in cache!' );
                 //return fromCache;
@@ -72,7 +72,7 @@ module.exports = (function() {
         // Force build and put into cache
         log.debug( 'Must build!' );
         var builded = buildFunction();
-        put( attribute, string, builded );
+        put( attributeType, string, builded );
         //return builded;
         return index( node, builded );
     };

@@ -26,7 +26,8 @@ var METALDefineMacro = function( nameToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: METALDefineMacro.id
     };
 };
 

@@ -52,7 +52,8 @@ var TALReplace = function( stringToApply, expressionToApply, structureToApply ) 
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALReplace.id
     };
 };
 

@@ -109,7 +109,8 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALAttributes.id
     };
 };
 

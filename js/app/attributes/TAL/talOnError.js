@@ -39,7 +39,8 @@ var TALOnError = function( stringToApply, structureToApply ) {
     return {
         putToAutoDefineHelper: putToAutoDefineHelper,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALOnError.id
     };
 };
 

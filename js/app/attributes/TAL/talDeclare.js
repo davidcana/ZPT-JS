@@ -173,7 +173,8 @@ var TALDeclare = function( _string, _declareItems ) {
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALDeclare.id
     };
 };
 

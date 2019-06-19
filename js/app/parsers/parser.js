@@ -12,6 +12,7 @@ var Scope = require( '../scopes/scope.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
 var ParserWorker = require( './parserWorker.js' );
+var ParserUpdater = require( './parserUpdater.js' );
 
 module.exports = (function() {
     
@@ -28,7 +29,6 @@ module.exports = (function() {
         //failCallback,
     };
     var tags = context.getTags();
-    var parserWorker = undefined;
     
     var updateParserOptions = function( options ){
         
@@ -86,26 +86,35 @@ module.exports = (function() {
         // Init parser options
         updateParserOptions( options );
     
-        // command == 'preload'
-        if ( options.command == 'preload' ){
-            preload(
-                options.callback,
-                options.failCallback,
-                options.declaredRemotePageUrls || [],
-                options.i18n,
-                options.notRemoveGeneratedTags,
-                options.maxFolderDictionaries
-            );
-            return;
-        } 
-        
-        // command == 'partialRender' or command == 'fullRender'
-        render(
-            parserOptions.command == 'partialRender'? options.target: parserOptions.root,
-            options.dictionaryExtension,
-            options.notRemoveGeneratedTags,
-            options.indexExpressions
-        );
+        var command = options.command || 'fullRender';
+        switch ( command ) {
+            case 'preload':
+                preload(
+                    options.callback,
+                    options.failCallback,
+                    options.declaredRemotePageUrls || [],
+                    options.i18n,
+                    options.notRemoveGeneratedTags,
+                    options.maxFolderDictionaries
+                );
+                break;
+            case 'fullRender':
+            case 'partialRender':
+                render(
+                    command == 'partialRender'? options.target: parserOptions.root,
+                    options.dictionaryExtension,
+                    options.notRemoveGeneratedTags,
+                    options.indexExpressions
+                );
+                break;
+            case 'update':
+                processUpdate( 
+                    options.dictionaryChanges
+                );
+                break;
+            default:
+                throw 'Unknown command: ' + command;
+        }
     };
     
     var render = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions ){
@@ -174,7 +183,7 @@ module.exports = (function() {
     
     var processTarget = function( target, dictionaryExtension, indexExpressions ) {
         
-        parserWorker = new ParserWorker( 
+        var parserWorker = new ParserWorker( 
             target, 
             scopeBuilder.build( 
                 parserOptions, 
@@ -186,7 +195,19 @@ module.exports = (function() {
         
         parserWorker.run();
     };
+    
+    var processUpdate = function( dictionaryChanges ) {
 
+        var parserUpdater = new ParserUpdater( 
+            scopeBuilder.build( 
+                parserOptions
+            ),
+            dictionaryChanges
+        );
+
+        parserUpdater.run();
+    };
+    
     var getOptions = function(){
         return parserOptions;
     };

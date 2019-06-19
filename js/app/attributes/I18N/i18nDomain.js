@@ -32,13 +32,19 @@ var I18NDomain = function( stringToApply ) {
         );
     };
 
+    var dependsOn = function(){
+        return [];
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         putToAutoDefineHelper: putToAutoDefineHelper,
-        toString: toString
+        dependsOn: dependsOn,
+        toString: toString,
+        type: I18NDomain.id
     };
 };
 

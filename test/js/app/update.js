@@ -23,8 +23,12 @@ var Tree = function( name ) {
 // Run tests!
 QUnit.test( "simple not failing test", function( assert ) {
     
+    var dictionary = {
+        number1: 1,
+        text1: 'test 1'
+    };
+    
     errorsArray = undefined;
-    dictionary.myTree = new Tree( 'Oak' );
     
     zpt.run({
         root: document.getElementById( 't1' ),
@@ -32,14 +36,23 @@ QUnit.test( "simple not failing test", function( assert ) {
         indexExpressions: true
     });
     
-    assert.equal( $('#t1-1').text() , "1" );
-    assert.equal( $('#t1-2').text() , "this is a text" );
-    assert.equal( $('#t1-3').text() , "10,11,12,13,14,15" );
-    assert.equal( $('#t1-4').text() , "this is a text too" );
-    assert.equal( $('#t1-5').text() , "3" );
-    assert.equal( $('#t1-6').text().substring(0,15) , "Mon Dec 24 2018" );
-    assert.equal( $('#t1-7').text() , "Bob" );
-    assert.equal( $('#t1-8').text() , "Oak" );
+    var testFunction = function(){
+        assert.equal( $('#t1-1').text() , "" + arguments[ 0 ] );
+        assert.equal( $('#t1-2').text() , "" + arguments[ 1 ] );        
+        assert.equal( errorsArray, undefined );
+    };
     
-    assert.equal( errorsArray, undefined );
+    testFunction( 1, 'test 1' );
+    
+    var dictionaryChanges = {
+        number1: 2
+    };
+    dictionary.text1 = 'test 2';
+    
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+    
+    testFunction( 2, 'test 1' );
 });

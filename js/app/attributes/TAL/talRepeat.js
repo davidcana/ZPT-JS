@@ -29,7 +29,8 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALRepeat.id
     };
 };
 

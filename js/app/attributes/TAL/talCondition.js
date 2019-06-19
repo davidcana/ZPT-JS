@@ -31,7 +31,8 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
-        toString: toString
+        toString: toString,
+        type: TALCondition.id
     };
 };
 
