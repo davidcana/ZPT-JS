@@ -69,11 +69,13 @@ var ParserUpdater = function( _scope, _dictionaryChanges ) {
                 attributeInstance.putToAutoDefineHelper( autoDefineHelper );
                 break;
             case TALAttributes.id:
+                attributeInstance.process( scope, node, indexItem.groupId );
+                break;
             case TALCondition.id:
             case TALContent.id:
             case METALDefineMacro.id:
-            case TALOmitTag.id:
-            case TALReplace.id:
+            //case TALOmitTag.id:
+            //case TALReplace.id:
                 attributeInstance.process( scope, node );
                 break;
             case METALUseMacro.id:
@@ -83,7 +85,7 @@ var ParserUpdater = function( _scope, _dictionaryChanges ) {
                 attributeInstance.process( scope, autoDefineHelper );
                 break;
             default:
-                throw 'Unknown attribute type: ' + attributeInstance.type;
+                throw 'Unsupported attribute type: ' + attributeInstance.type;
         }
     };
     

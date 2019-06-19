@@ -14,17 +14,20 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     var string = stringToApply;
     var attributeItems = attributeItemsToApply;
     
-    var process = function( scope, node ){
+    var process = function( scope, node, attributeName ){
         
         for ( var i = 0; i < attributeItems.length; i++ ) {
             var attributeItem = attributeItems[ i ];
             var name = attributeItem.name;
-            var value = attributeItem.expression.evaluate( scope );
             
-            if ( name ){
-                processSimpleAttributeItem( node, name, value );
-            } else {
-                processMapAttributeItem( node, value );
+            if ( ! attributeName || name === attributeName ){
+                var value = attributeItem.expression.evaluate( scope );
+
+                if ( name ){
+                    processSimpleAttributeItem( node, name, value );
+                } else {
+                    processMapAttributeItem( node, value );
+                }
             }
         }
     };
@@ -91,6 +94,20 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     var dependsOn = function(){
 
         var result = [];
+        var object = {};
+        
+        for ( var i = 0; i < attributeItems.length; i++ ) {
+            var attributeItem = attributeItems[ i ];
+            object[ attributeItem.name ] = expressionsUtils.buildDependsOnList( attributeItem.expression );
+        }
+        result.push( object );
+        
+        return result;
+    };
+    /*
+    var dependsOn = function(){
+
+        var result = [];
 
         for ( var i = 0; i < attributeItems.length; i++ ) {
             var attributeItem = attributeItems[ i ];
@@ -101,6 +118,7 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
 
         return result;
     };
+    */
     
     var toString = function(){
         return "TALAttributes: " + string;

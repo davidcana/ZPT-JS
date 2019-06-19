@@ -14,14 +14,10 @@ var errorFunction = function( _errorsArray ) {
         errorsArray.join( '\n' ) 
     );*/
 };
-//zpt.context.setErrorFunction( errorFunction );
-
-var Tree = function( name ) {
-    this.name = name;
-}
+zpt.context.setErrorFunction( errorFunction );
 
 // Run tests!
-QUnit.test( "simple not failing test", function( assert ) {
+QUnit.test( "simple TALContent test", function( assert ) {
     
     var dictionary = {
         number1: 1,
@@ -56,3 +52,63 @@ QUnit.test( "simple not failing test", function( assert ) {
     
     testFunction( 2, 'test 1' );
 });
+
+QUnit.test( "simple TALAttributes test", function( assert ) {
+
+    var dictionary = {
+        number1: 100,
+        text1: 'test 1'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't2' ),
+        dictionary: dictionary,
+        indexExpressions: true
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t2-1').attr('maxlength') , "" + arguments[ 0 ] );
+        assert.equal( $('#t2-1').attr('placeholder') , "" + arguments[ 1 ] );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 100, 'test 1' );
+
+    var dictionaryChanges = {
+        text1: 'test 2'
+    };
+    dictionary.number1 = 200;
+
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 100, 'test 2' );
+});
+
+/*
+            case TALDefine.id:
+
+                break;
+            case TALRepeat.id:
+
+                break;
+            case I18NDomain.id:
+            case I18NLanguage.id:
+            case TALOnError.id:
+                attributeInstance.putToAutoDefineHelper( autoDefineHelper );
+                break;
+            case TALCondition.id:
+            case METALDefineMacro.id:
+                attributeInstance.process( scope, node );
+                break;
+            case METALUseMacro.id:
+
+                break;
+            case TALDeclare.id:
+
+*/
+
