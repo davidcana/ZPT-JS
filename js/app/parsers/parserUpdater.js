@@ -6,6 +6,7 @@
 var context = require( '../context.js' );
 var log = require( '../logHelper.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
+var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -21,10 +22,13 @@ var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
 var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 
-var ParserUpdater = function( _scope, _dictionaryChanges ) {
+var ParserUpdater = function( _scope, _dictionaryChanges, _parserOptions ) {
     
-    var scope = _scope;
+    //var scope = _scope;
     var dictionaryChanges = _dictionaryChanges;
+    var parserOptions = _parserOptions;
+    
+    var scopeMap = {};
     
     var run = function(){
         
@@ -37,7 +41,7 @@ var ParserUpdater = function( _scope, _dictionaryChanges ) {
     var processVarChange = function( varName, varValue ){
         
         // Update scope
-        scope.setVar( varName, varValue );
+        //scope.setVar( varName, varValue );
         
         // Update attributes
         var list = attributeIndex.getVarsList( varName );
@@ -53,12 +57,16 @@ var ParserUpdater = function( _scope, _dictionaryChanges ) {
             '[' + context.getTags().id + '="' + indexItem.nodeId + '"]' 
         );
         if ( ! node ){
-            throw 'Node ' + indexItem.nodeId + ' not found!';
+            throw indexItem.nodeId + ' node not found!';
         }
+        
+        var scope = getNodeScope( indexItem.nodeId, node );
         
         switch ( attributeInstance.type ){
             case TALDefine.id:
-                
+                scope.startElement();
+                attributeInstance.process( scope );
+                scope.endElement();
                 break;
             case TALRepeat.id:
                 
@@ -87,6 +95,22 @@ var ParserUpdater = function( _scope, _dictionaryChanges ) {
             default:
                 throw 'Unsupported attribute type: ' + attributeInstance.type;
         }
+    };
+    
+    var getNodeScope = function( nodeId, node ){
+        
+        var thisScope = scopeMap[ nodeId ];
+        
+        if ( ! thisScope ){
+            thisScope = scopeBuilder.build( 
+                parserOptions, 
+                node, 
+                dictionaryChanges
+            );
+            scopeMap[ nodeId ] = thisScope;
+        }
+
+        return thisScope;
     };
     
     var self = {

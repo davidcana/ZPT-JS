@@ -202,7 +202,8 @@ module.exports = (function() {
             scopeBuilder.build( 
                 parserOptions
             ),
-            dictionaryChanges
+            dictionaryChanges,
+            parserOptions
         );
 
         parserUpdater.run();
