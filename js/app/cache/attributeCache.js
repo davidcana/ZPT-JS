@@ -10,7 +10,12 @@ var attributeIndex = require( '../attributes/attributeIndex.js' );
 
 module.exports = (function() {
     
-    var map = {};
+    var map;
+    
+    var reset = function(){
+        map = {};
+    };
+    reset();
     
     var get = function( attribute, string ) {
         
@@ -62,8 +67,8 @@ module.exports = (function() {
             var fromCache = get( attributeType, string );
             if ( fromCache ){
                 log.debug( 'Found in cache!' );
-                //return fromCache;
-                return index( node, fromCache );
+                return fromCache;
+                //return index( node, fromCache );
             } else {
                 log.debug( 'NOT found in cache!' );
             }
@@ -92,6 +97,7 @@ module.exports = (function() {
     
     return {
         //getByDetails: getByDetails,
-        getByAttributeClass: getByAttributeClass
+        getByAttributeClass: getByAttributeClass,
+        reset: reset
     };
 })();

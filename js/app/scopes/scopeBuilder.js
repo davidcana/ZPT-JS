@@ -13,7 +13,7 @@ module.exports = (function() {
     
     var keyLength = 6;
     
-    var build = function( parserOptions, target, dictionaryExtension ) {
+    var build = function( parserOptions, target, dictionaryExtension, mustUpdate ) {
 
         var scope = new Scope( 
             parserOptions.dictionary, 
@@ -22,14 +22,15 @@ module.exports = (function() {
             context.getFolderDictionaries()
         );
         
-        if ( parserOptions.command == 'partialRender' ){
-            updateForPartialRender( parserOptions, target, scope );
+        if ( mustUpdate ){
+        //if ( parserOptions.command == 'partialRender' ){
+            update( parserOptions, target, scope );
         }
         
         return scope;
     };
     
-    var updateForPartialRender = function( parserOptions, target, scope ) {
+    var update = function( parserOptions, target, scope ) {
         
         // Get root key
         var rootMap = markAllRoots( parserOptions );
@@ -70,7 +71,7 @@ module.exports = (function() {
             
         } while ( node.nodeType != 9 && ++c < 100 );
         
-        throw 'Error trying to update scope in partial render: root not found!';
+        throw 'Error trying to update scope: root not found!';
     };
     
     var processListOfDefines = function( scope, itemsList, node ){

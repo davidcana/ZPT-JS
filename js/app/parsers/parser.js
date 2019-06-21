@@ -13,6 +13,8 @@ var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
 var ParserWorker = require( './parserWorker.js' );
 var ParserUpdater = require( './parserUpdater.js' );
+var attributeIndex = require( '../attributes/attributeIndex.js' );
+var attributeCache = require( '../cache/attributeCache.js' );
 
 module.exports = (function() {
     
@@ -104,7 +106,8 @@ module.exports = (function() {
                     command == 'partialRender'? options.target: parserOptions.root,
                     options.dictionaryExtension,
                     options.notRemoveGeneratedTags,
-                    options.indexExpressions
+                    options.indexExpressions,
+                    options.indexExpressions && command == 'fullRender'
                 );
                 break;
             case 'update':
@@ -117,7 +120,7 @@ module.exports = (function() {
         }
     };
     
-    var render = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions ){
+    var render = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions, resetIndex ){
         
         try {
             if ( ! target ){
@@ -126,6 +129,11 @@ module.exports = (function() {
             
             if ( ! notRemoveGeneratedTags ){
                 removeGeneratedTagsFromAllTargetElements( target );
+            }
+            
+            if ( resetIndex ){
+                attributeIndex.reset();
+                attributeCache.reset();
             }
             
             processAllTargetElements( target, dictionaryExtension, indexExpressions );
@@ -188,7 +196,8 @@ module.exports = (function() {
             scopeBuilder.build( 
                 parserOptions, 
                 target, 
-                dictionaryExtension
+                dictionaryExtension,
+                parserOptions.command == 'partialRender'
             ),
             indexExpressions
         );
@@ -199,9 +208,6 @@ module.exports = (function() {
     var processUpdate = function( dictionaryChanges ) {
 
         var parserUpdater = new ParserUpdater( 
-            scopeBuilder.build( 
-                parserOptions
-            ),
             dictionaryChanges,
             parserOptions
         );

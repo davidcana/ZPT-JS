@@ -8,8 +8,14 @@ var context = require( '../context.js' );
 
 module.exports = (function() {
     
-    var map = {};
-    var tags = context.getTags();
+    var map;
+    var tags;
+    
+    var reset = function(){
+        map = {};
+        tags = context.getTags();
+    };
+    reset();
     
     var add = function( node, attributeInstance ){
         
@@ -76,6 +82,7 @@ module.exports = (function() {
     
     return {
         add: add,
-        getVarsList: getVarsList
+        getVarsList: getVarsList,
+        reset: reset
     };
 })();

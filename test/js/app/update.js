@@ -17,6 +17,7 @@ var errorFunction = function( _errorsArray ) {
 //zpt.context.setErrorFunction( errorFunction );
 
 // Run tests!
+
 QUnit.test( "simple TALContent test", function( assert ) {
     
     var dictionary = {
@@ -117,13 +118,12 @@ QUnit.test( "simple TALDefine test", function( assert ) {
     var dictionaryChanges = {
         number1: 2
     };
-    dictionary.text1 = 'edited text';
     
     zpt.run({
         command: 'update',
         dictionaryChanges: dictionaryChanges
     });
-
+    
     testFunction( 2, 'test', 'test2', 'test100' );
 });
 

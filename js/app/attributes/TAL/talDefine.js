@@ -28,6 +28,22 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
     };
     
     var dependsOn = function(){
+
+        var result = [];
+        var object = {};
+
+        for ( var i = 0; i < defineItems.length; i++ ) {
+            var defineItem = defineItems[ i ];
+            if ( ! defineItem.nocall ){
+                object[ defineItem.name ] = expressionsUtils.buildDependsOnList( defineItem.expression );
+            }
+        }
+        result.push( object );
+
+        return result;
+    };
+    /*
+    var dependsOn = function(){
         
         var result = [];
         
@@ -42,6 +58,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
 
         return result;
     };
+    */
     
     var toString = function(){
         return "TALDefine: " + string;

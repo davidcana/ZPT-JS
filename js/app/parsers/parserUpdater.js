@@ -22,9 +22,8 @@ var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
 var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 
-var ParserUpdater = function( _scope, _dictionaryChanges, _parserOptions ) {
+var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
-    //var scope = _scope;
     var dictionaryChanges = _dictionaryChanges;
     var parserOptions = _parserOptions;
     
@@ -63,34 +62,38 @@ var ParserUpdater = function( _scope, _dictionaryChanges, _parserOptions ) {
         var scope = getNodeScope( indexItem.nodeId, node );
         
         switch ( attributeInstance.type ){
-            case TALDefine.id:
-                scope.startElement();
-                attributeInstance.process( scope );
-                scope.endElement();
-                break;
-            case TALRepeat.id:
-                
-                break;
-            case I18NDomain.id:
-            case I18NLanguage.id:
-            case TALOnError.id:
-                attributeInstance.putToAutoDefineHelper( autoDefineHelper );
-                break;
             case TALAttributes.id:
                 attributeInstance.process( scope, node, indexItem.groupId );
                 break;
-            case TALCondition.id:
             case TALContent.id:
-            case METALDefineMacro.id:
-            //case TALOmitTag.id:
-            //case TALReplace.id:
                 attributeInstance.process( scope, node );
+                break;
+            case TALDefine.id:
+                //alert( 'varName: '  + varName + '\ngroupId: ' + indexItem.groupId );
+                processVarChange( indexItem.groupId );
+                break;
+                
+                
+            case I18NDomain.id:
+            case I18NLanguage.id:
+                attributeInstance.putToAutoDefineHelper( autoDefineHelper );
+                break;
+            case TALCondition.id:
+                attributeInstance.process( scope, node );
+                break;
+            case TALRepeat.id:
+
                 break;
             case METALUseMacro.id:
                 
                 break;
+                
+                
+            case TALOmitTag.id:
+            case TALReplace.id:
+            case TALOnError.id:
             case TALDeclare.id:
-                attributeInstance.process( scope, autoDefineHelper );
+                // Nothing to do
                 break;
             default:
                 throw 'Unsupported attribute type: ' + attributeInstance.type;
@@ -105,7 +108,8 @@ var ParserUpdater = function( _scope, _dictionaryChanges, _parserOptions ) {
             thisScope = scopeBuilder.build( 
                 parserOptions, 
                 node, 
-                dictionaryChanges
+                dictionaryChanges,
+                true
             );
             scopeMap[ nodeId ] = thisScope;
         }
