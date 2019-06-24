@@ -85,7 +85,8 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
     var processLoop = function( node, attributes ) {
         
         // Process repeat
-        var talRepeat = TALRepeat.build( attributes.talRepeat );
+        //var talRepeat = TALRepeat.build( attributes.talRepeat );
+        var talRepeat = attributeCache.getByAttributeClass( TALRepeat, attributes.talRepeat, indexExpressions? node: undefined );
         var loop = talRepeat.process( scope, node );
 
         // Check default
@@ -100,6 +101,8 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         node.setAttribute( tags.qdup, 1 );
         var nodeId = node.getAttribute( 'id' );
         node.removeAttribute( 'id' );
+        var nodeDataId = node.getAttribute( tags.id );
+        node.removeAttribute( tags.id );
         
         var nextSiblingData = processLoopNextSibling( node );
         var nextSibling = nextSiblingData.nextSibling;
@@ -117,6 +120,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
                 tmpNode.checked = false;
             }
 
+            // Generate new id if it is needed
+            if ( indexExpressions ){
+                tmpNode.setAttribute( tags.id, context.nextExpressionCounter() );
+                tmpNode.setAttribute( tags.relatedId, nodeDataId );
+            }
+            
             // Insert it
             var parentNode = node.parentNode;
             parentNode.insertBefore( tmpNode, nextSibling );
@@ -135,6 +144,9 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         node.setAttribute( tags.talRepeat, attributes.talRepeat );
         if ( nodeId !== '' && nodeId != null ){
             node.setAttribute( 'id', nodeId );
+        }
+        if ( nodeDataId !== '' && nodeDataId != null ){
+            node.setAttribute( tags.id, nodeDataId );
         }
         node.removeAttribute( tags.qdup );
         

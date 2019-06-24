@@ -208,6 +208,7 @@ module.exports = (function() {
     var processUpdate = function( dictionaryChanges ) {
 
         var parserUpdater = new ParserUpdater( 
+            self,
             dictionaryChanges,
             parserOptions
         );
@@ -221,7 +222,9 @@ module.exports = (function() {
     
     var self = {
         run: run,
-        getOptions: getOptions
+        getOptions: getOptions,
+        removeGeneratedTags: removeGeneratedTags
+        //processTarget: processTarget
     };
     
     return self;

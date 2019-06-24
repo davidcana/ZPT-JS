@@ -4,6 +4,7 @@ var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
+var utils = require( './utils.js' );
 var context = zpt.context;
 
 var errorsArray;
@@ -127,24 +128,35 @@ QUnit.test( "simple TALDefine test", function( assert ) {
     testFunction( 2, 'test', 'test2', 'test100' );
 });
 
-/*
-            case TALRepeat.id:
+QUnit.test( "simple TALRepeat test", function( assert ) {
 
-                break;
-            case I18NDomain.id:
-            case I18NLanguage.id:
-            case TALOnError.id:
-                attributeInstance.putToAutoDefineHelper( autoDefineHelper );
-                break;
-            case TALCondition.id:
-            
-                attributeInstance.process( scope, node );
-                break;
-            case METALUseMacro.id:
+    var dictionary = {
+        items: [ 1, 4, 9 ]
+    };
 
-                break;
-            case TALDeclare.id:
-            
-            metalFillSlot
-*/
+    errorsArray = undefined;
 
+    zpt.run({
+        root: document.getElementById( 't4' ),
+        dictionary: dictionary,
+        indexExpressions: true
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( '1/4/9' );
+    
+    var dictionaryChanges = {
+        items: [ 2, 6, 8 ]
+    };
+    
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+    /*
+    testFunction( '2/6/8' );*/
+});

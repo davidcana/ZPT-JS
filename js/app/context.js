@@ -32,6 +32,7 @@ module.exports = (function() {
         rootKey:          "data-root-key",
         qdup:             "data-qdup",
         id:               "data-id",
+        relatedId:        "data-related-id"
     };
     var originalTags = {
         talCondition:     "tal:condition",
@@ -55,6 +56,7 @@ module.exports = (function() {
         rootKey:          "data-root-key",
         qdup:             "data-qdup",
         id:               "data-id",
+        relatedId:        "data-related-id"
     };
     var tags = defaultTags;
     var tal = '';

@@ -7,6 +7,7 @@ var context = require( '../context.js' );
 var log = require( '../logHelper.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
+var ParserWorker = require( './parserWorker.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -22,8 +23,9 @@ var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
 var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 
-var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
+var ParserUpdater = function( _parser, _dictionaryChanges, _parserOptions ) {
     
+    var parser = _parser;
     var dictionaryChanges = _dictionaryChanges;
     var parserOptions = _parserOptions;
     
@@ -70,7 +72,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
                 break;
             case TALDefine.id:
                 //alert( 'varName: '  + varName + '\ngroupId: ' + indexItem.groupId );
-                processVarChange( indexItem.groupId );
+                //processVarChange( indexItem.groupId );
                 break;
                 
                 
@@ -78,11 +80,25 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             case I18NLanguage.id:
                 attributeInstance.putToAutoDefineHelper( autoDefineHelper );
                 break;
+                
+            case TALRepeat.id:
+                updateNode( node );
+                /*
+                parser.removeGeneratedTags( node );
+                var parserWorker = new ParserWorker( 
+                    node, 
+                    scopeBuilder.build( 
+                        parserOptions, 
+                        node, 
+                        dictionaryChanges,
+                        true
+                    ),
+                    true
+                );
+                parserWorker.run();*/
+                break;
             case TALCondition.id:
                 attributeInstance.process( scope, node );
-                break;
-            case TALRepeat.id:
-
                 break;
             case METALUseMacro.id:
                 
@@ -115,6 +131,37 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
         }
 
         return thisScope;
+    };
+    
+    var updateNode = function( node ){
+        
+        //
+        removeTags( node );
+        
+        //
+        var parserWorker = new ParserWorker( 
+            node, 
+            scopeBuilder.build( 
+                parserOptions, 
+                node, 
+                dictionaryChanges,
+                true
+            ),
+            true
+        );
+        parserWorker.run();
+    };
+    
+    var removeTags = function( target ){
+
+        var node;
+        var pos = 0;
+        var list = target.parentNode.querySelectorAll( 
+            '[' + context.getTags().relatedId + '="' + target.getAttribute( context.getTags().id ) + '"]' 
+        );
+        while ( node = list[ pos++ ] ) {
+            node.parentNode.removeChild( node );
+        }
     };
     
     var self = {
