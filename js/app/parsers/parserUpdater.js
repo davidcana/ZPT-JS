@@ -58,7 +58,9 @@ var ParserUpdater = function( _parser, _dictionaryChanges, _parserOptions ) {
             '[' + context.getTags().id + '="' + indexItem.nodeId + '"]' 
         );
         if ( ! node ){
-            throw indexItem.nodeId + ' node not found!';
+            // Removed node!
+            return;
+            //throw indexItem.nodeId + ' node not found!';
         }
         
         var scope = getNodeScope( indexItem.nodeId, node );
@@ -82,29 +84,10 @@ var ParserUpdater = function( _parser, _dictionaryChanges, _parserOptions ) {
                 break;
                 
             case TALRepeat.id:
-                updateNode( node );
-                /*
-                parser.removeGeneratedTags( node );
-                var parserWorker = new ParserWorker( 
-                    node, 
-                    scopeBuilder.build( 
-                        parserOptions, 
-                        node, 
-                        dictionaryChanges,
-                        true
-                    ),
-                    true
-                );
-                parserWorker.run();*/
-                break;
             case TALCondition.id:
-                attributeInstance.process( scope, node );
-                break;
             case METALUseMacro.id:
-                
+                updateNode( node );
                 break;
-                
-                
             case TALOmitTag.id:
             case TALReplace.id:
             case TALOnError.id:
