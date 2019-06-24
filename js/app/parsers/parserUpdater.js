@@ -8,6 +8,7 @@ var log = require( '../logHelper.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserWorker = require( './parserWorker.js' );
+var nodeRemover = require( './nodeRemover.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -23,9 +24,8 @@ var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
 var TALReplace = require( '../attributes/TAL/talReplace.js' );
 var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 
-var ParserUpdater = function( _parser, _dictionaryChanges, _parserOptions ) {
+var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
-    var parser = _parser;
     var dictionaryChanges = _dictionaryChanges;
     var parserOptions = _parserOptions;
     
@@ -118,10 +118,10 @@ var ParserUpdater = function( _parser, _dictionaryChanges, _parserOptions ) {
     
     var updateNode = function( node ){
         
-        //
-        removeTags( node );
+        // Remove related to node nodes
+        nodeRemover.removeRelatedNodes( node );
         
-        //
+        // Instance and invoke parserWorker to update node
         var parserWorker = new ParserWorker( 
             node, 
             scopeBuilder.build( 
@@ -134,19 +134,7 @@ var ParserUpdater = function( _parser, _dictionaryChanges, _parserOptions ) {
         );
         parserWorker.run();
     };
-    
-    var removeTags = function( target ){
 
-        var node;
-        var pos = 0;
-        var list = target.parentNode.querySelectorAll( 
-            '[' + context.getTags().relatedId + '="' + target.getAttribute( context.getTags().id ) + '"]' 
-        );
-        while ( node = list[ pos++ ] ) {
-            node.parentNode.removeChild( node );
-        }
-    };
-    
     var self = {
         run: run
     };

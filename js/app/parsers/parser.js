@@ -13,6 +13,7 @@ var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
 var ParserWorker = require( './parserWorker.js' );
 var ParserUpdater = require( './parserUpdater.js' );
+var nodeRemover = require( './nodeRemover.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
 
@@ -44,7 +45,7 @@ module.exports = (function() {
         
         try {
             if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllTargetElements( parserOptions.root );
+                nodeRemover.removeGeneratedNodes( parserOptions.root );
             }
             
             var scope = new Scope( 
@@ -128,7 +129,7 @@ module.exports = (function() {
             }
             
             if ( ! notRemoveGeneratedTags ){
-                removeGeneratedTagsFromAllTargetElements( target );
+                nodeRemover.removeGeneratedNodes( target );
             }
             
             if ( resetIndex ){
@@ -144,37 +145,7 @@ module.exports = (function() {
             //throw e;
         }
     };
-        
-    var removeGeneratedTagsFromAllTargetElements = function( target ) {
-        
-        // Is multiroot?
-        if ( $.isArray( target ) ){ 
-            // There are several roots
-            for ( var c = 0; c < target.length; c++ ) {
-                removeGeneratedTags( target[ c ] );
-            }
-        } else {
-            // There is only one root
-            removeGeneratedTags( target );
-        }
-    };
-    
-    var removeGeneratedTags = function( target ) {
-        
-        removeTags( target, tags.qdup );       // Remove all generated nodes (repeats)
-        removeTags( target, tags.metalMacro ); // Remove all generated nodes (macros)
-    };
-    
-    var removeTags = function( target, tag ){
-        
-        var node;
-        var pos = 0;
-        var list = target.querySelectorAll( "*[" + tag + "]" );
-        while ( node = list[ pos++ ] ) {
-            node.parentNode.removeChild( node );
-        }
-    };
-    
+
     var processAllTargetElements = function( target, dictionaryExtension, indexExpressions ) {
         
         // Is multiroot?
@@ -208,7 +179,6 @@ module.exports = (function() {
     var processUpdate = function( dictionaryChanges ) {
 
         var parserUpdater = new ParserUpdater( 
-            self,
             dictionaryChanges,
             parserOptions
         );
@@ -222,9 +192,7 @@ module.exports = (function() {
     
     var self = {
         run: run,
-        getOptions: getOptions,
-        removeGeneratedTags: removeGeneratedTags
-        //processTarget: processTarget
+        getOptions: getOptions
     };
     
     return self;
