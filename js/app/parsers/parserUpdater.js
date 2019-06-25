@@ -41,12 +41,9 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
 
     var processVarChange = function( varName, varValue ){
         
-        // Update scope
-        //scope.setVar( varName, varValue );
-        
-        // Update attributes
         var list = attributeIndex.getVarsList( varName );
-        for ( var i = 0; i < list.length; i++ ) {
+        var length = list.length;
+        for ( var i = 0; i < length; i++ ) {
             updateAttribute( varName, varValue, list[ i ] );
         }
     };
@@ -72,12 +69,11 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             case TALContent.id:
                 attributeInstance.process( scope, node );
                 break;
+                
             case TALDefine.id:
                 //alert( 'varName: '  + varName + '\ngroupId: ' + indexItem.groupId );
                 //processVarChange( indexItem.groupId );
                 break;
-                
-                
             case I18NDomain.id:
             case I18NLanguage.id:
                 attributeInstance.putToAutoDefineHelper( autoDefineHelper );

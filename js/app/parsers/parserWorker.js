@@ -7,6 +7,7 @@ var context = require( '../context.js' );
 var log = require( '../logHelper.js' );
 var NodeAttributes = require( './nodeAttributes.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
+var attributeIndex = require( '../attributes/attributeIndex.js' );
 var AutoDefineHelper = require( './autoDefineHelper.js' );
 var evaluateHelper = require( '../expressions/evaluateHelper.js' );
 
@@ -120,7 +121,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
                 tmpNode.checked = false;
             }
 
-            // Generate new id if it is needed
+            // Set id and related id if needed
             if ( indexExpressions ){
                 tmpNode.setAttribute( tags.id, context.nextExpressionCounter() );
                 tmpNode.setAttribute( tags.relatedId, nodeDataId );
@@ -376,9 +377,14 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         
         // No sense to cache macro uses!
         var metalUseMacro = METALUseMacro.build( string, stringDefine, scope );
-        var newNode = metalUseMacro.process( scope, node, autoDefineHelper );
+        var newNode = metalUseMacro.process( scope, node, autoDefineHelper, indexExpressions );
         newNode.setAttribute( tags.qdup, 1 );
         
+        // Index node
+        if ( indexExpressions ){
+            attributeIndex.add( node, metalUseMacro );
+        }
+    
         // Process new node
         return process( newNode );
     };

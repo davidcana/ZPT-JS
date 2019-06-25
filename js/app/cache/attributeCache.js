@@ -95,9 +95,21 @@ module.exports = (function() {
         );
     };
     
+    var getByAttributeClassWithFunction = function( attributeInstance, string, node, customFunction ) {
+
+        return getByDetails( 
+            attributeInstance.id, 
+            string, 
+            customFunction, 
+            false,
+            node
+        );
+    };
+    
     return {
         //getByDetails: getByDetails,
         getByAttributeClass: getByAttributeClass,
+        getByAttributeClassWithFunction: getByAttributeClassWithFunction,
         reset: reset
     };
 })();

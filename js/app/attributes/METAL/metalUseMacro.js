@@ -6,6 +6,7 @@
 var context = require( '../../context.js' );
 var Scope = require( '../../scopes/scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
 var resolver = require( '../../resolver.js' );
 var $ = require( 'jquery' );
@@ -16,7 +17,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     var macroExpression = macroExpressionToApply;
     var define = defineToApply;
     
-    var process = function( scope, node, autoDefineHelper ){
+    var process = function( scope, node, autoDefineHelper, indexExpressions ){
 
         // Init some vars
         var macroKey = resolver.getMacroKey( macroExpression, scope );
@@ -30,7 +31,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         newNode.removeAttribute( 'style' );
 
         // Update define and autoDefine attributes of the new node
-        updateNewNodeAttributes( macroKey, newNode, autoDefineHelper );
+        updateNewNodeAttributes( macroKey, newNode, autoDefineHelper, tags, node, indexExpressions );
         
         // Fill slots
         fillSlots( scope, node, tags, newNode );
@@ -41,7 +42,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         return newNode;
     };
     
-    var updateNewNodeAttributes = function( macroKey, newNode, autoDefineHelper ){
+    var updateNewNodeAttributes = function( macroKey, newNode, autoDefineHelper, tags, node, indexExpressions ){
 
         // Update the talDefine attribute
         TALDefine.updateAttribute( newNode, define );
@@ -54,6 +55,14 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
                 "'" + macroData.url + "'"
             );
             autoDefineHelper.updateNode( newNode );
+        }
+        
+        // Set related id attribute if needed
+        if ( indexExpressions ){
+            newNode.setAttribute( 
+                tags.relatedId, 
+                node.getAttribute( tags.id ) 
+            );
         }
     };
     
@@ -90,7 +99,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     };
     
     var dependsOn = function(){
-        return [];
+        return expressionsUtils.buildDependsOnList( macroExpression );
     };
     
     var toString = function(){
@@ -107,7 +116,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
 
 METALUseMacro.id = 'metal:use-macro';
 
-METALUseMacro.build = function( string, stringDefine, scope ) {
+METALUseMacro.build = function( string, stringDefine ) {
     var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new METALUseMacro( 
