@@ -18,66 +18,6 @@ var errorFunction = function( _errorsArray ) {
 //zpt.context.setErrorFunction( errorFunction );
 
 // Run tests!
-QUnit.test( "simple METALUseMacro test", function( assert ) {
-    
-    var done = assert.async();
-    
-    var dictionary = {
-        externalMacro: 'copyright@externalMacros-definitions.html'
-    };
-
-    errorsArray = undefined;
-
-    zpt.run({
-        command: 'preload',
-        root: document.getElementById( 't5' ),
-        dictionary: dictionary,
-        declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
-        callback: function(){
-            
-            zpt.run({
-                indexExpressions: true
-            });
-            
-            var t5 = 
-`<div data-use-macro=\"externalMacro\" data-id=\"1\" style=\"display: none;\">
-                Macro goes here
-            </div><p data-mmacro=\"copyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"1\" data-qdup=\"1\">
-            Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
-        </p>`;
-            assert.equal( $('#t5').html().trim(), t5 );
-
-            var dictionaryChanges = {
-                externalMacro: 'enhancedCopyright@externalMacros-definitions.html'
-            };
-
-            debugger;
-            
-            zpt.run({
-                command: 'update',
-                dictionaryChanges: dictionaryChanges
-            });
-            
-            t5 = 
-`<div data-use-macro=\"externalMacro\" data-id=\"1\" style=\"display: none;\">
-                Macro goes here
-            </div><div data-mmacro=\"enhancedCopyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"1\" data-qdup=\"1\">
-            <p>
-                This macro calls another macro.
-            </p>
-            <p data-use-macro=\"'copyright'\" data-id=\"2\" style=\"display: none;\">
-                Macro goes here
-            </p><p data-mmacro=\"copyright\" data-related-id=\"2\" data-qdup=\"1\">
-            Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
-        </p>
-        </div>`;
-            assert.equal( $('#t5').html().trim(), t5 );
-            
-            done();
-        }
-    });
-});
-
 QUnit.test( "simple TALContent test", function( assert ) {
 
     var dictionary = {
@@ -218,4 +158,133 @@ QUnit.test( "simple TALRepeat test", function( assert ) {
     });
 
     testFunction( '2/6/8' );
+});
+
+QUnit.test( "simple METALUseMacro test", function( assert ) {
+    
+    var done = assert.async();
+    
+    context.setExpressionCounter( 100 );
+    
+    var dictionary = {
+        externalMacro: 'copyright@externalMacros-definitions.html'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        command: 'preload',
+        root: document.getElementById( 't5' ),
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
+        callback: function(){
+            
+            zpt.run({
+                indexExpressions: true
+            });
+            
+            var t5 = 
+`<div data-use-macro=\"externalMacro\" data-id=\"101\" style=\"display: none;\">
+                Macro goes here
+            </div><p data-mmacro=\"copyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"101\" data-qdup=\"1\">
+            Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+        </p>`;
+            assert.equal( $('#t5').html().trim(), t5 );
+
+            var dictionaryChanges = {
+                externalMacro: 'enhancedCopyright@externalMacros-definitions.html'
+            };
+
+            debugger;
+            
+            zpt.run({
+                command: 'update',
+                dictionaryChanges: dictionaryChanges
+            });
+            
+            t5 = 
+`<div data-use-macro=\"externalMacro\" data-id=\"101\" style=\"display: none;\">
+                Macro goes here
+            </div><div data-mmacro=\"enhancedCopyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"101\" data-qdup=\"1\">
+            <p>
+                This macro calls another macro.
+            </p>
+            <p data-use-macro=\"'copyright'\" data-id=\"102\" style=\"display: none;\">
+                Macro goes here
+            </p><p data-mmacro=\"copyright\" data-related-id=\"102\" data-qdup=\"1\">
+            Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
+        </p>
+        </div>`;
+            assert.equal( $('#t5').html().trim(), t5 );
+            
+            done();
+        }
+    });
+});
+
+QUnit.test( "simple TALCondition test", function( assert ) {
+
+    // First invokation
+    var dictionary = {
+        number1: 1,
+        text1: 'test 1',
+        boolean1: false,
+        boolean2: false
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't6' ),
+        dictionary: dictionary,
+        indexExpressions: true
+    });
+    
+    var testFunction = function(){
+        assert.equal( $('#t6-1').text() , "" + arguments[ 0 ] );
+        assert.ok( arguments[ 1 ] == $('#t6-1').is(':visible') );
+        assert.equal( $('#t6-2').text() , "" + arguments[ 2 ] );  
+        assert.ok( arguments[ 3 ] == $('#t6-2').is(':visible') );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'an integer', false, 'a text', false );
+    
+    // Second invokation
+    var dictionaryChanges = {
+        boolean2: true
+    };
+
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+    
+    testFunction( 1, true, 'test 1', true );
+    
+    // Second invokation
+    var dictionaryChanges = {
+        boolean2: false
+    };
+
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 1, false, 'test 1', false );
+    
+    // Fourth invokation
+    var dictionaryChanges = {
+        number1: 2,
+        text1: 'test 2',
+        boolean2: true
+    };
+
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 2, true, 'test 2', true );
 });

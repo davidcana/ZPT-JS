@@ -371,6 +371,9 @@ module.exports = (function() {
     var nextExpressionCounter = function(){
         return ++expressionCounter;
     };
+    var setExpressionCounter = function( _expressionCounter ){
+        expressionCounter = _expressionCounter;
+    };
     /* End expression counter */
     
     var self = {
@@ -399,7 +402,8 @@ module.exports = (function() {
         getFolderDictionaries: getFolderDictionaries,
         setStrictMode: setStrictMode,
         isStrictMode: isStrictMode,
-        nextExpressionCounter: nextExpressionCounter
+        nextExpressionCounter: nextExpressionCounter,
+        setExpressionCounter: setExpressionCounter
     };
     
     return self;
