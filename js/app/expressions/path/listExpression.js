@@ -32,8 +32,8 @@ var ListExpression = function( stringToApply, itemsToApply ) {
         return result;
     };
     
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( items );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, items );
     };
     
     var toString = function(){

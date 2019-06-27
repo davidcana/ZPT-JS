@@ -62,8 +62,8 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
         return formatter && $.isFunction( formatter );
     };
     
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( formatterExpression, argsExpressions );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, formatterExpression, argsExpressions );
     };
     
     var toString = function(){

@@ -40,11 +40,11 @@ module.exports = (function() {
         attributeMap[ CacheHelper.hashCode( string ) ] = value;
     };
     
-    var index = function( node, attribute ){
+    var index = function( node, attribute, scope ){
         
         if ( node ){
             log.debug( 'Must index!' );
-            attributeIndex.add( node, attribute );
+            attributeIndex.add( node, attribute, scope );
             
         } else {
             log.debug( 'Not indexed!' );
@@ -53,7 +53,7 @@ module.exports = (function() {
         return attribute;
     };
     
-    var getByDetails = function( attributeType, string, buildFunction, force, node ) {
+    var getByDetails = function( attributeType, string, buildFunction, force, node, scope ) {
         
         log.debug( 
             'Request building of ZPT attribute "' + string + '", force "' + force + '"' );
@@ -68,7 +68,7 @@ module.exports = (function() {
             if ( fromCache ){
                 log.debug( 'Found in cache!' );
                 return fromCache;
-                //return index( node, fromCache );
+                //return index( node, fromCache, scope );
             } else {
                 log.debug( 'NOT found in cache!' );
             }
@@ -79,10 +79,10 @@ module.exports = (function() {
         var builded = buildFunction();
         put( attributeType, string, builded );
         //return builded;
-        return index( node, builded );
+        return index( node, builded, scope );
     };
     
-    var getByAttributeClass = function( attributeInstance, string, node ) {
+    var getByAttributeClass = function( attributeInstance, string, node, scope ) {
         
         return getByDetails( 
                 attributeInstance.id, 
@@ -91,25 +91,29 @@ module.exports = (function() {
                     return attributeInstance.build( string );
                 }, 
                 false,
-                node
+                node,
+                scope
         );
     };
     
-    var getByAttributeClassWithFunction = function( attributeInstance, string, node, customFunction ) {
+    /*
+    var getByAttributeClassWithFunction = function( attributeInstance, string, node, customFunction, scope ) {
 
         return getByDetails( 
             attributeInstance.id, 
             string, 
             customFunction, 
             false,
-            node
+            node,
+            scope
         );
     };
+    */
     
     return {
         //getByDetails: getByDetails,
         getByAttributeClass: getByAttributeClass,
-        getByAttributeClassWithFunction: getByAttributeClassWithFunction,
+        //getByAttributeClassWithFunction: getByAttributeClassWithFunction,
         reset: reset
     };
 })();

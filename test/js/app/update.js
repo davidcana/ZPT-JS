@@ -89,7 +89,7 @@ QUnit.test( "simple TALAttributes test", function( assert ) {
 
     testFunction( 100, 'test 2' );
 });
-/*
+
 QUnit.test( "simple TALDefine test", function( assert ) {
 
     var dictionary = {
@@ -126,7 +126,7 @@ QUnit.test( "simple TALDefine test", function( assert ) {
 
     testFunction( 2, 'test', 'test2', 'test100' );
 });
-*/
+
 QUnit.test( "simple TALRepeat test", function( assert ) {
 
     var dictionary = {

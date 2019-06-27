@@ -22,11 +22,16 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
                     defineItem.name, 
                     defineItem.nocall? defineItem.expression: defineItem.expression.evaluate( scope ), 
                     forceGlobal || defineItem.global,
-                    defineItem.nocall
+                    defineItem.nocall,
+                    defineItem.expression
             );
         }
     };
     
+    var dependsOn = function(){
+        return [];
+    };
+    /*
     var dependsOn = function(){
 
         var result = [];
@@ -42,6 +47,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
 
         return result;
     };
+    */
     /*
     var dependsOn = function(){
         

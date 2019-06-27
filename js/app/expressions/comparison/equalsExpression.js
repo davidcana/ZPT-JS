@@ -28,8 +28,8 @@ var EqualsExpression = function( stringToApply, argsToApply ) {
         return true;
     };
 
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( args );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, args );
     };
     
     var toString = function(){

@@ -87,7 +87,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         
         // Process repeat
         //var talRepeat = TALRepeat.build( attributes.talRepeat );
-        var talRepeat = attributeCache.getByAttributeClass( TALRepeat, attributes.talRepeat, indexExpressions? node: undefined );
+        var talRepeat = attributeCache.getByAttributeClass( 
+            TALRepeat, 
+            attributes.talRepeat, 
+            indexExpressions? node: undefined,
+            scope
+        );
         var loop = talRepeat.process( scope, node );
 
         // Check default
@@ -313,7 +318,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
 
-        var talOnError = attributeCache.getByAttributeClass( TALOnError, string, indexExpressions? node: undefined );
+        var talOnError = attributeCache.getByAttributeClass( 
+            TALOnError, 
+            string, 
+            indexExpressions? node: undefined,
+            scope
+        );
         return talOnError.putToAutoDefineHelper( autoDefineHelper );
     };
     
@@ -324,7 +334,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
         
-        var talDefine = attributeCache.getByAttributeClass( TALDefine, string, indexExpressions? node: undefined );
+        var talDefine = attributeCache.getByAttributeClass( 
+            TALDefine, 
+            string, 
+            indexExpressions? node: undefined,
+            scope
+        );
         return talDefine.process( scope, false );
     };
 
@@ -334,7 +349,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
 
-        var i18nDomain = attributeCache.getByAttributeClass( I18NDomain, string, indexExpressions? node: undefined );
+        var i18nDomain = attributeCache.getByAttributeClass( 
+            I18NDomain, 
+            string, 
+            indexExpressions? node: undefined,
+            scope
+        );
         return i18nDomain.putToAutoDefineHelper( scope, autoDefineHelper );
     };
     
@@ -344,7 +364,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
 
-        var i18nLanguage = attributeCache.getByAttributeClass( I18NLanguage, string, indexExpressions? node: undefined );
+        var i18nLanguage = attributeCache.getByAttributeClass( 
+            I18NLanguage, 
+            string, 
+            indexExpressions? node: undefined,
+            scope
+        );
         return i18nLanguage.putToAutoDefineHelper( autoDefineHelper );
     };
     
@@ -354,7 +379,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return true;
         }
 
-        var talDeclare = attributeCache.getByAttributeClass( TALDeclare, string, indexExpressions? node: undefined );
+        var talDeclare = attributeCache.getByAttributeClass( 
+            TALDeclare, 
+            string, 
+            indexExpressions? node: undefined, 
+            scope
+        );
         return talDeclare.process( scope, autoDefineHelper );
     };
     
@@ -382,7 +412,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
         
         // Index node
         if ( indexExpressions ){
-            attributeIndex.add( node, metalUseMacro );
+            attributeIndex.add( node, metalUseMacro, scope );
         }
     
         // Process new node
@@ -395,7 +425,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return true;
         }
 
-        var talCondition = attributeCache.getByAttributeClass( TALCondition, string, indexExpressions? node: undefined );
+        var talCondition = attributeCache.getByAttributeClass( 
+            TALCondition, 
+            string, 
+            indexExpressions? node: undefined, 
+            scope
+        );
         return talCondition.process( scope, node );
     };
     
@@ -405,7 +440,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return false;
         }
         
-        var talReplace = attributeCache.getByAttributeClass( TALReplace, string, indexExpressions? node: undefined );
+        var talReplace = attributeCache.getByAttributeClass( 
+            TALReplace, 
+            string, 
+            indexExpressions? node: undefined,
+            scope
+        );
         return talReplace.process( scope, node );
     };
 
@@ -415,7 +455,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return false;
         }
 
-        var talOmitTag = attributeCache.getByAttributeClass( TALOmitTag, string, indexExpressions? node: undefined );
+        var talOmitTag = attributeCache.getByAttributeClass( 
+            TALOmitTag, 
+            string, 
+            indexExpressions? node: undefined, 
+            scope
+        );
         return talOmitTag.process( scope, node );
     };
     
@@ -425,7 +470,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return false;
         }
 
-        var talContent = attributeCache.getByAttributeClass( TALContent, string, indexExpressions? node: undefined );
+        var talContent = attributeCache.getByAttributeClass( 
+            TALContent, 
+            string, 
+            indexExpressions? node: undefined,
+            scope
+        );
         return talContent.process( scope, node );
     };
   
@@ -435,7 +485,12 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             return;
         }
 
-        var talAttributes = attributeCache.getByAttributeClass( TALAttributes, string, indexExpressions? node: undefined );
+        var talAttributes = attributeCache.getByAttributeClass( 
+            TALAttributes, 
+            string, 
+            indexExpressions? node: undefined, 
+            scope 
+        );
         return talAttributes.process( scope, node );
     };
     
@@ -446,14 +501,19 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
     return self;
 };
 
-ParserWorker.processDefine = function( node, string, forceGlobal, _scope ) {
+ParserWorker.processDefine = function( node, string, forceGlobal, scope ) {
 
     if ( ! string ) {
         return;
     }
 
-    var talDefine = attributeCache.getByAttributeClass( TALDefine, string, node );
-    return talDefine.process( _scope, forceGlobal );
+    var talDefine = attributeCache.getByAttributeClass( 
+        TALDefine, 
+        string, 
+        node,
+        scope
+    );
+    return talDefine.process( scope, forceGlobal );
 };
 
 module.exports = ParserWorker;

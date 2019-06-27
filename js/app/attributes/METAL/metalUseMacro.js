@@ -98,8 +98,8 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         );
     };
     
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( macroExpression );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, macroExpression );
     };
     
     var toString = function(){

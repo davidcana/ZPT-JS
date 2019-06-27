@@ -24,8 +24,8 @@ var OrExpression = function( stringToApply, expressionListToApply ) {
         return false;
     };
 
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( expressionList );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, expressionList );
     };
     
     var toString = function(){

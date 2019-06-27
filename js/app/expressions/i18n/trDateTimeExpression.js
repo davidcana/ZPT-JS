@@ -23,8 +23,8 @@ var TrDateTimeExpression = function( stringToApply, expressionToApply, argsExpre
         return evaluated;
     };
 
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( expression, argsExpressions );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, expression, argsExpressions );
     };
     
     var toString = function(){

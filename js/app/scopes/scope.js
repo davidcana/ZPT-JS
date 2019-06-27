@@ -15,6 +15,7 @@ var Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderD
     this.changesStack = [];
     this.nocallVars = {};
     this.folderDictionaries = _folderDictionaries || [];
+    this.globalVarsExpressions = {}
     
     if ( addCommonVars ){
         this.setCommonVars();
@@ -58,7 +59,8 @@ Scope.prototype.startElement = function(){
     
     var vars = {
         varsToUnset : [],
-        varsToSet : {}
+        varsToSet : {},
+        expressions: {}
     };
 
     this.changesStack.push( vars );
@@ -102,19 +104,6 @@ Scope.prototype.getWithoutEvaluating = function( name ) {
     
     return undefined;
 };
-/*
-Scope.prototype.getWithoutEvaluating = function( name ) {
-
-    var valueFromVars = this.vars[ name ];
-    if ( valueFromVars !== undefined ){
-        return valueFromVars;
-    }
-
-    return this.dictionaryExtension[ name ] !== undefined? 
-        this.dictionaryExtension[ name ]: 
-        this.dictionary[ name ];
-};
-*/
 
 Scope.prototype.get = function( name ) {
 
@@ -150,7 +139,9 @@ Scope.prototype.endElement = function ( ) {
     }
 };
 
-Scope.prototype.set = function ( name, value, isGlobal, nocall ) {
+Scope.prototype.set = function ( name, value, isGlobal, nocall, _expression ) {
+    
+    var expression = _expression === undefined? null: _expression;
     
     if ( ! isGlobal ){
 
@@ -160,12 +151,19 @@ Scope.prototype.set = function ( name, value, isGlobal, nocall ) {
 
         if ( currentValue != null ){
             vars.varsToSet[ name ] = currentValue;
-
+            
         } else {
             vars.varsToUnset.push( name );
         }
+        
+        vars.expressions[ name ] = expression;
+        
+    } else {
+        
+        // Global vars
+        this.globalVarsExpressions[ name ] = expression; 
     }
-
+    
     // Common to global and local vars
     this.setVar( name, value );
     
@@ -264,6 +262,23 @@ Scope.prototype.isValidVariable = function( name ){
     return declared && declared.indexOf? 
         declared.indexOf( name ) !== -1: 
         false;
+};
+
+Scope.prototype.getVarExpression = function ( name ) {
+    
+    var expression;
+    
+    // Local vars
+    var vars = this.currentVars();
+    if ( vars ){
+        expression = vars.expressions[ name ];
+    }
+    
+    if ( expression === undefined ){
+        expression = this.globalVarsExpressions[ name ];
+    }
+
+    return expression;
 };
 
 module.exports = Scope;

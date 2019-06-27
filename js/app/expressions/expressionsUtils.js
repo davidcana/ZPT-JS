@@ -29,17 +29,19 @@ module.exports = (function() {
         
         var result = [];
         
-        for ( var argCounter = 0; argCounter < arguments.length; argCounter++ ){
+        var scope = arguments[ 0 ]
+        
+        for ( var argCounter = 1; argCounter < arguments.length; argCounter++ ){
             var list = arguments[ argCounter ];
             result = result.concat( 
-                getDependsOnFromList( list )
+                getDependsOnFromList( scope, list )
             );
         }
         
         return result;
     };
     
-    var getDependsOnFromList = function( arg ){
+    var getDependsOnFromList = function( scope, arg ){
         
         var result = [];
         
@@ -48,24 +50,24 @@ module.exports = (function() {
         }
         
         if ( ! $.isArray( arg ) ){
-            return getDependsOnFromNonList( arg );
+            return getDependsOnFromNonList( scope, arg );
         }
         
         var list = arg;
         for ( var i = 0; i < list.length; i++ ) {
             var item = list[ i ];
             result = result.concat( 
-                $.isArray( item )? getDependsOnFromList( item ): getDependsOnFromNonList( item )
+                $.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( scope, item )
             );
         }
 
         return result;
     };
     
-    var getDependsOnFromNonList = function( item ){
+    var getDependsOnFromNonList = function( scope, item ){
         
         if ( $.isFunction( item.dependsOn ) ){
-            return item.dependsOn();
+            return item.dependsOn( scope );
         }
         
         throw 'Unable to build depends on list, item does not implement dependsOn method: ' + item;

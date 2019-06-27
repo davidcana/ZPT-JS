@@ -91,14 +91,14 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
         node.setAttribute( name, value );
     };
 
-    var dependsOn = function(){
+    var dependsOn = function( scope ){
 
         var result = [];
         var object = {};
         
         for ( var i = 0; i < attributeItems.length; i++ ) {
             var attributeItem = attributeItems[ i ];
-            object[ attributeItem.name ] = expressionsUtils.buildDependsOnList( attributeItem.expression );
+            object[ attributeItem.name ] = expressionsUtils.buildDependsOnList( scope, attributeItem.expression );
         }
         result.push( object );
         

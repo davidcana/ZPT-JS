@@ -32,8 +32,8 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         return result;
     };
     
-    var dependsOn = function(){
-        return expressionsUtils.buildDependsOnList( arrayBase, indexes );
+    var dependsOn = function( scope ){
+        return expressionsUtils.buildDependsOnList( scope, arrayBase, indexes );
     };
     
     var toString = function(){

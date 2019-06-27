@@ -17,12 +17,12 @@ module.exports = (function() {
     };
     reset();
     
-    var add = function( node, attributeInstance ){
+    var add = function( node, attributeInstance, scope ){
         
         addList(
             node,
             attributeInstance,
-            attributeInstance.dependsOn()
+            attributeInstance.dependsOn( scope )
         );
     };
     
@@ -48,17 +48,7 @@ module.exports = (function() {
             addVar( node, attributeInstance, item, groupId );
         }
     };
-    /*
-    var add = function( node, attributeInstance ){
 
-        var varsList = attributeInstance.dependsOn();
-
-        for ( var i = 0; i < varsList.length; i++ ) {
-            var varName = varsList[ i ];
-            addVar( node, attributeInstance, varName );
-        }
-    };
-    */
     var addVar = function( node, attributeInstance, varName, groupId  ){
         
         var list = map[ varName ];
