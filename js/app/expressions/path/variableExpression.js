@@ -24,11 +24,6 @@ var VariableExpression = function( nameToApply ) {
         var expression = scope.getVarExpression( name );
         return expression? expression.dependsOn( scope ): [ name ];
     };
-    /*
-    var dependsOn = function(){
-        return [ name ];
-    };
-    */
     
     var toString = function(){
         return name;

@@ -266,19 +266,21 @@ Scope.prototype.isValidVariable = function( name ){
 
 Scope.prototype.getVarExpression = function ( name ) {
     
-    var expression;
-    
-    // Local vars
-    var vars = this.currentVars();
-    if ( vars ){
-        expression = vars.expressions[ name ];
-    }
-    
-    if ( expression === undefined ){
-        expression = this.globalVarsExpressions[ name ];
-    }
+    var expression = this.getExpressionFromLocal( name );
+    return expression !== undefined? expression: this.globalVarsExpressions[ name ];
+};
 
-    return expression;
+Scope.prototype.getExpressionFromLocal = function ( name ) {
+
+    for ( var i = this.changesStack.length - 1; i >= 0; --i ){
+        var vars = this.changesStack[ i ];
+        var expression = vars.expressions[ name ];
+        if ( expression !== undefined ){
+            return expression;
+        }
+    }
+    
+    return undefined;
 };
 
 module.exports = Scope;

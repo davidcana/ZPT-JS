@@ -57,26 +57,18 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
         if ( ! node ){
             // Removed node!
             return;
-            //throw indexItem.nodeId + ' node not found!';
         }
         
         var scope = getNodeScope( indexItem.nodeId, node );
         
         switch ( attributeInstance.type ){
+                
             case TALAttributes.id:
                 attributeInstance.process( scope, node, indexItem.groupId );
                 break;
+                
             case TALContent.id:
                 attributeInstance.process( scope, node );
-                break;
-                
-            case TALDefine.id:
-                //alert( 'varName: '  + varName + '\ngroupId: ' + indexItem.groupId );
-                //processVarChange( indexItem.groupId );
-                break;
-            case I18NDomain.id:
-            case I18NLanguage.id:
-                attributeInstance.putToAutoDefineHelper( autoDefineHelper );
                 break;
                 
             case TALRepeat.id:
@@ -84,12 +76,17 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             case METALUseMacro.id:
                 updateNode( node );
                 break;
+                
+            case TALDefine.id:
             case TALOmitTag.id:
             case TALReplace.id:
             case TALOnError.id:
             case TALDeclare.id:
+            case I18NDomain.id:
+            case I18NLanguage.id:
                 // Nothing to do
                 break;
+                
             default:
                 throw 'Unsupported attribute type: ' + attributeInstance.type;
         }
