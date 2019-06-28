@@ -70,9 +70,23 @@ module.exports = (function() {
         return map[ varName ];
     };
     
+    var remove = function( varName, nodeId ){
+
+        var list = map[ varName ];
+
+        var filtered = list.filter(
+            function( value, index, arr ){
+                return value.nodeId !== nodeId;
+            }
+        );
+
+        map[ varName ] = filtered;
+    };
+    
     return {
         add: add,
         getVarsList: getVarsList,
+        remove: remove,
         reset: reset
     };
 })();

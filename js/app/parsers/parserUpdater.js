@@ -44,7 +44,9 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
         var list = attributeIndex.getVarsList( varName );
         var length = list.length;
         for ( var i = 0; i < length; i++ ) {
-            updateAttribute( varName, varValue, list[ i ] );
+            if ( ! updateAttribute( varName, varValue, list[ i ] ) ){
+                attributeIndex.remove( varName, list[ i ].nodeId );
+            }
         }
     };
 
@@ -56,7 +58,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
         );
         if ( ! node ){
             // Removed node!
-            return;
+            return false;
         }
         
         var scope = getNodeScope( indexItem.nodeId, node );
@@ -90,6 +92,8 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             default:
                 throw 'Unsupported attribute type: ' + attributeInstance.type;
         }
+        
+        return true;
     };
     
     var getNodeScope = function( nodeId, node ){
