@@ -7,6 +7,8 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var i18nHelper = require( '../../i18n/i18nHelper.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
+var VariableExpression = require( '../path/variableExpression.js' );
 
 module.exports = (function() {
     
@@ -121,8 +123,20 @@ module.exports = (function() {
             language );
     };
     
+    var dependsOn = function( scope, expression, argsExpressions ){
+        
+        return expressionsUtils.buildDependsOnList( 
+            scope, 
+            expression, 
+            argsExpressions, 
+            new VariableExpression( context.getConf().i18nDomainVarName ),
+            new VariableExpression( context.getConf().i18nLanguageVarName )
+        );
+    };
+    
     return {
         build: build,
-        evaluate: evaluate
+        evaluate: evaluate,
+        dependsOn: dependsOn
     };
 })();

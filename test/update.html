@@ -73,5 +73,42 @@
                 <li>text1 = <span id="t6-2" data-content="text1">a text</span></li>
             </ol>
         </div>
+        
+        <h2>Simple I18NLanguage and I18nDomain</h2>
+        <div id="t7" data-domain="i18nBundle" data-language="language">
+            <ol>
+                <li>
+                    ¡Hola mundo! = 
+                    <span id="t7-1" 
+                          data-content="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
+                </li>
+                <li>
+                    Ella ha encontrado 10 resultados = 
+                    <span id="t7-2" 
+                          data-content="tr: 'Results msg' ( GENDER 'female'; RES 10 )">Must be 'Ella ha encontrado 10 resultados'</span>
+                </li>
+                <li>
+                    1355.23 as number = 1.355,23 =
+                    <span id="t7-3"
+                          data-content="trNumber: 1355.23">Must be 1.355,23</span>
+                </li>
+                <li>
+                    1355.23 as currency in euros = 1.355,23 € =
+                    <span id="t7-4"
+                          data-content="trCurrency: 'EUR' 1355.23">Must be 1.355,23 €</span>
+                </li>
+                <li>
+                    Inline 12/20/2012 3:00:00 UTC as datetime = jueves, 21 de diciembre de 2012 =
+                    <span id="t7-5"
+                          data-content="trDate: 
+                                        ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) 
+                                        ( 
+                                        weekday 'long'; 
+                                        year 'numeric'; 
+                                        month 'long'; 
+                                        day 'numeric' )">Must be jueves, 21 de diciembre de 2012</span>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

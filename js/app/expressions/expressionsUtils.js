@@ -65,6 +65,10 @@ module.exports = (function() {
     };
     
     var getDependsOnFromNonList = function( scope, item ){
+        return $.isFunction( item.dependsOn )? item.dependsOn( scope ): [];
+    };
+    /*
+    var getDependsOnFromNonList = function( scope, item ){
         
         if ( $.isFunction( item.dependsOn ) ){
             return item.dependsOn( scope );
@@ -72,6 +76,7 @@ module.exports = (function() {
         
         throw 'Unable to build depends on list, item does not implement dependsOn method: ' + item;
     };
+    */
     
     return {
         buildLiteral: buildLiteral,

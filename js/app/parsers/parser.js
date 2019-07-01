@@ -184,6 +184,8 @@ module.exports = (function() {
         );
 
         parserUpdater.run();
+        
+        $.extend( parserOptions.dictionary, dictionaryChanges );
     };
     
     var getOptions = function(){

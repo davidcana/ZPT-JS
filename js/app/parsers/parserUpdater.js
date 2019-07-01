@@ -42,6 +42,10 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     var processVarChange = function( varName, varValue ){
         
         var list = attributeIndex.getVarsList( varName );
+        if ( ! list ){
+            return;
+        }
+        
         var length = list.length;
         for ( var i = 0; i < length; i++ ) {
             if ( ! updateAttribute( varName, varValue, list[ i ] ) ){
