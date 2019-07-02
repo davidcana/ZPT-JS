@@ -4,7 +4,7 @@
 exports.run = function( options ){
     
     var parser = require( './parsers/parser.js' );
-    parser.run( options );
+    return parser.run( options );
 };
 
 /* Declare exports */

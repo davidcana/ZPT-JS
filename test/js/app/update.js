@@ -405,3 +405,51 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
         'Friday, December 21, 2012' 
     );
 });
+
+QUnit.test( "2 vars in TALContent test", function( assert ) {
+
+    var dictionary = {
+        number1: 1,
+        text1: 'test'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't8' ),
+        dictionary: dictionary,
+        indexExpressions: true
+    });
+
+    var testFunction = function( content, parserUpdater, expectedStatistics ){
+        assert.equal( $('#t8-1').text() , content );
+        assert.equal( errorsArray, undefined );
+        if ( parserUpdater ){
+            assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
+            //var statistics = parserUpdater.getStatistics();
+            //assert.equal( statistics.totalUpdates , content );
+        }
+    };
+
+    testFunction( 'test1' );
+    
+    var dictionaryChanges = {
+        number1: 2,
+        text1: 'test 2'
+    };
+
+    var parserUpdater = zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 
+        'test 22', 
+        parserUpdater,
+        {
+            totalUpdates: 1,
+            removedNodeUpdates: 0
+        }
+    );
+    
+});

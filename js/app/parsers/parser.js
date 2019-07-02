@@ -112,7 +112,7 @@ module.exports = (function() {
                 );
                 break;
             case 'update':
-                processUpdate( 
+                return processUpdate( 
                     options.dictionaryChanges
                 );
                 break;
@@ -186,6 +186,8 @@ module.exports = (function() {
         parserUpdater.run();
         
         $.extend( parserOptions.dictionary, dictionaryChanges );
+        
+        return parserUpdater;
     };
     
     var getOptions = function(){

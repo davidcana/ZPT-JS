@@ -30,6 +30,15 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     var parserOptions = _parserOptions;
     
     var scopeMap = {};
+    var nodeData = {};
+    
+    var statistics = {
+        totalUpdates: 0,
+        removedNodeUpdates: 0
+    };
+    var getStatistics = function(){
+        return statistics;
+    };
     
     var run = function(){
         
@@ -56,12 +65,15 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
 
     var updateAttribute = function( varName, varValue, indexItem ){
         
+        ++statistics.totalUpdates;
+        
         var attributeInstance = indexItem.attributeInstance;
         var node = document.querySelector( 
             '[' + context.getTags().id + '="' + indexItem.nodeId + '"]' 
         );
         if ( ! node ){
             // Removed node!
+            ++statistics.removedNodeUpdates;
             return false;
         }
         
@@ -137,7 +149,8 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     };
 
     var self = {
-        run: run
+        run: run,
+        getStatistics: getStatistics
     };
     
     return self;
