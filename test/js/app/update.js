@@ -15,7 +15,7 @@ var errorFunction = function( _errorsArray ) {
         errorsArray.join( '\n' ) 
     );*/
 };
-//zpt.context.setErrorFunction( errorFunction );
+zpt.context.setErrorFunction( errorFunction );
 
 // Run tests!
 QUnit.test( "simple TALContent test", function( assert ) {
@@ -426,8 +426,6 @@ QUnit.test( "2 vars in TALContent test", function( assert ) {
         assert.equal( errorsArray, undefined );
         if ( parserUpdater ){
             assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
-            //var statistics = parserUpdater.getStatistics();
-            //assert.equal( statistics.totalUpdates , content );
         }
     };
 

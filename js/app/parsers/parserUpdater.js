@@ -30,47 +30,90 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     var parserOptions = _parserOptions;
     
     var scopeMap = {};
-    var nodeData = {};
+    var nodeAttributes, 
+        statistics;
     
-    var statistics = {
-        totalUpdates: 0,
-        removedNodeUpdates: 0
-    };
     var getStatistics = function(){
         return statistics;
     };
     
     var run = function(){
         
+        // Init some vars
+        nodeAttributes = {};
+        statistics = {
+            totalUpdates: 0,
+            removedNodeUpdates: 0
+        };
+        
+        // Build data form changed vars
         for ( var varName in dictionaryChanges ){
-            var varValue = dictionaryChanges[ varName ];
-            processVarChange( varName, varValue );
+            buildDataFromVarChange( varName );
         }
+        
+        // Update attributes
+        for ( var i in nodeAttributes ) {
+            var currentNodeAttributeList = nodeAttributes[ i ];
+            for ( var j in currentNodeAttributeList ){
+                updateAttribute( currentNodeAttributeList[ j ] );   
+            }
+        } 
     };
 
-    var processVarChange = function( varName, varValue ){
+    var buildDataFromVarChange = function( varName ){
         
+        // Get the list of changes related to varName
         var list = attributeIndex.getVarsList( varName );
         if ( ! list ){
             return;
         }
         
+        // Build data about all changes
         var length = list.length;
         for ( var i = 0; i < length; i++ ) {
-            if ( ! updateAttribute( varName, varValue, list[ i ] ) ){
+            if ( ! addNewNodeAttribute( varName, list[ i ] ) ){
                 attributeIndex.remove( varName, list[ i ].nodeId );
             }
         }
     };
+    
+    var findNodeById = function ( nodeId ) {
+        
+        return document.querySelector( 
+            '[' + context.getTags().id + '="' + nodeId + '"]' 
+        );
+    }
 
-    var updateAttribute = function( varName, varValue, indexItem ){
+    var addNewNodeAttribute = function( varName, indexItem ){
+
+        var attributeInstance = indexItem.attributeInstance;
+        var node = findNodeById( indexItem.nodeId );
+        if ( ! node ){
+            // Removed node!
+            ++statistics.removedNodeUpdates;
+            return false;
+        }
+
+        // Add data to nodeData
+        var thisNodeData = nodeAttributes[ indexItem.nodeId ];
+        if ( ! thisNodeData ){
+            thisNodeData = {};
+            nodeAttributes[ indexItem.nodeId ] = thisNodeData;
+        }
+        var elementId = indexItem.groupId? 
+            attributeInstance.type + '/' + indexItem.groupId: 
+            attributeInstance.type;
+        thisNodeData[ elementId ] = indexItem;
+
+        return true;
+    };
+    
+    var updateAttribute = function( indexItem ){
         
         ++statistics.totalUpdates;
         
         var attributeInstance = indexItem.attributeInstance;
-        var node = document.querySelector( 
-            '[' + context.getTags().id + '="' + indexItem.nodeId + '"]' 
-        );
+        var node = findNodeById( indexItem.nodeId );
         if ( ! node ){
             // Removed node!
             ++statistics.removedNodeUpdates;
@@ -111,7 +154,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
         
         return true;
     };
-    
+
     var getNodeScope = function( nodeId, node ){
         
         var thisScope = scopeMap[ nodeId ];
