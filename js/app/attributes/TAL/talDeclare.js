@@ -166,6 +166,10 @@ var TALDeclare = function( _string, _declareItems ) {
         return [];
     };
     
+    var update = function(){
+        // Nothing to do
+    };
+    
     var toString = function(){
         return "TALDeclare: " + string;
     };
@@ -173,6 +177,7 @@ var TALDeclare = function( _string, _declareItems ) {
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALDeclare.id
     };

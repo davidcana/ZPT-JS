@@ -24,6 +24,10 @@ var TALCondition = function( stringToApply, expressionToApply ) {
         return expressionsUtils.buildDependsOnList( scope, expression );
     };
     
+    var update = function( parserUpdater, node ){
+        parserUpdater.updateNode( node );
+    };
+    
     var toString = function(){
         return "TALCondition: " + string;
     };
@@ -31,6 +35,7 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALCondition.id
     };

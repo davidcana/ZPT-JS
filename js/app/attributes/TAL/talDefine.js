@@ -31,40 +31,10 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
     var dependsOn = function(){
         return [];
     };
-    /*
-    var dependsOn = function(){
-
-        var result = [];
-        var object = {};
-
-        for ( var i = 0; i < defineItems.length; i++ ) {
-            var defineItem = defineItems[ i ];
-            if ( ! defineItem.nocall ){
-                object[ defineItem.name ] = expressionsUtils.buildDependsOnList( defineItem.expression );
-            }
-        }
-        result.push( object );
-
-        return result;
+    
+    var update = function(){
+        // Nothing to do
     };
-    */
-    /*
-    var dependsOn = function(){
-        
-        var result = [];
-        
-        for ( var i = 0; i < defineItems.length; i++ ) {
-            var defineItem = defineItems[ i ];
-            if ( ! defineItem.nocall ){
-                result = result.concat( 
-                    expressionsUtils.buildDependsOnList( defineItem.expression )
-                );
-            }
-        }
-
-        return result;
-    };
-    */
     
     var toString = function(){
         return "TALDefine: " + string;
@@ -73,6 +43,7 @@ var TALDefine = function( stringToApply, defineItemsToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALDefine.id
     };

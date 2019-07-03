@@ -118,5 +118,18 @@
                 <li>a string = <span id="t8-1" data-content="string:${text1}${number1}">a string</span></li>
             </ol>
         </div>
+        
+        <h2>Var in macro</h2>
+        <div id="t9">
+            <div data-use-macro="internalMacro">
+                Macro goes here
+            </div>
+            <p data-define-macro="macro1">
+                This is macro1 and value of var1 is <span data-content="var1" data-attributes="id 't9-1'">value of var1</span>
+            </p>
+            <p data-define-macro="macro2">
+                This is macro2 and value of var1 is <span data-content="var1" data-attributes="id 't9-1'">value of var1</span>
+            </p>
+        </div>
     </body>
 </html>

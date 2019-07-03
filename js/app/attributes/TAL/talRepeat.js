@@ -24,6 +24,10 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
         return expressionsUtils.buildDependsOnList( scope, expression );
     };
     
+    var update = function( parserUpdater, node ){
+        parserUpdater.updateNode( node );
+    };
+    
     var toString = function(){
         return "TALRepeat: " + string;
     };
@@ -31,6 +35,7 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALRepeat.id
     };

@@ -27,6 +27,10 @@ var TALContent = function( stringToApply, expressionToApply, structureToApply ) 
         return expressionsUtils.buildDependsOnList( scope, expression );
     };
     
+    var update = function( parserUpdater, node, scope ){
+        process( scope, node );
+    };
+    
     var toString = function(){
         return "TALContent: " + string;
     };
@@ -34,6 +38,7 @@ var TALContent = function( stringToApply, expressionToApply, structureToApply ) 
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALContent.id
     };

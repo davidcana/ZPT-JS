@@ -195,7 +195,7 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
                 externalMacro: 'enhancedCopyright@externalMacros-definitions.html'
             };
 
-            debugger;
+            //debugger;
             
             zpt.run({
                 command: 'update',
@@ -450,4 +450,49 @@ QUnit.test( "2 vars in TALContent test", function( assert ) {
         }
     );
     
+});
+
+QUnit.test( "var in macro test", function( assert ) {
+
+    var dictionary = {
+        internalMacro: 'macro1',
+        var1: 1
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't9' ),
+        dictionary: dictionary,
+        indexExpressions: true
+    });
+
+    var testFunction = function( content, parserUpdater, expectedStatistics ){
+        assert.equal( $('#t9-1').text() , content );
+        assert.equal( errorsArray, undefined );
+        if ( parserUpdater ){
+            assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
+        }
+    };
+
+    testFunction( 1 );
+
+    var dictionaryChanges = {
+        internalMacro: 'macro2',
+        var1: 10
+    };
+    
+    var parserUpdater = zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 
+        10, 
+        parserUpdater,
+        {
+            totalUpdates: 1,
+            removedNodeUpdates: 1
+        }
+    );
 });

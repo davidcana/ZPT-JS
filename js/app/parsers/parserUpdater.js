@@ -9,6 +9,7 @@ var attributeIndex = require( '../attributes/attributeIndex.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserWorker = require( './parserWorker.js' );
 var nodeRemover = require( './nodeRemover.js' );
+var $ = require( 'jquery' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -38,6 +39,9 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     };
     
     var run = function(){
+        
+        // Update dictionary
+        $.extend( parserOptions.dictionary, dictionaryChanges );
         
         // Init some vars
         nodeAttributes = {};
@@ -110,8 +114,6 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
     var updateAttribute = function( indexItem ){
         
-        ++statistics.totalUpdates;
-        
         var attributeInstance = indexItem.attributeInstance;
         var node = findNodeById( indexItem.nodeId );
         if ( ! node ){
@@ -120,37 +122,11 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             return false;
         }
         
+        ++statistics.totalUpdates;
+        
         var scope = getNodeScope( indexItem.nodeId, node );
         
-        switch ( attributeInstance.type ){
-                
-            case TALAttributes.id:
-                attributeInstance.process( scope, node, indexItem.groupId );
-                break;
-                
-            case TALContent.id:
-                attributeInstance.process( scope, node );
-                break;
-                
-            case TALRepeat.id:
-            case TALCondition.id:
-            case METALUseMacro.id:
-                updateNode( node );
-                break;
-                
-            case TALDefine.id:
-            case TALOmitTag.id:
-            case TALReplace.id:
-            case TALOnError.id:
-            case TALDeclare.id:
-            case I18NDomain.id:
-            case I18NLanguage.id:
-                // Nothing to do
-                break;
-                
-            default:
-                throw 'Unsupported attribute type: ' + attributeInstance.type;
-        }
+        attributeInstance.update( self, node, scope, indexItem );
         
         return true;
     };
@@ -163,7 +139,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             thisScope = scopeBuilder.build( 
                 parserOptions, 
                 node, 
-                dictionaryChanges,
+                undefined,
                 true
             );
             scopeMap[ nodeId ] = thisScope;
@@ -183,7 +159,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             scopeBuilder.build( 
                 parserOptions, 
                 node, 
-                dictionaryChanges,
+                undefined,
                 true
             ),
             true
@@ -193,6 +169,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
 
     var self = {
         run: run,
+        updateNode: updateNode,
         getStatistics: getStatistics
     };
     

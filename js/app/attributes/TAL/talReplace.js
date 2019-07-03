@@ -45,6 +45,10 @@ var TALReplace = function( stringToApply, expressionToApply, structureToApply ) 
         return expressionsUtils.buildDependsOnList( scope, expression );
     };
     
+    var update = function(){
+        // Nothing to do
+    };
+    
     var toString = function(){
         return 'TALReplace: ' + string;
     };
@@ -52,6 +56,7 @@ var TALReplace = function( stringToApply, expressionToApply, structureToApply ) 
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALReplace.id
     };

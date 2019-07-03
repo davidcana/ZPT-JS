@@ -36,6 +36,10 @@ var I18NDomain = function( stringToApply ) {
         return [];
     };
     
+    var update = function(){
+        // Nothing to do
+    };
+    
     var toString = function(){
         return string;
     };
@@ -43,6 +47,7 @@ var I18NDomain = function( stringToApply ) {
     return {
         putToAutoDefineHelper: putToAutoDefineHelper,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: I18NDomain.id
     };

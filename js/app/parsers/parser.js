@@ -177,15 +177,13 @@ module.exports = (function() {
     };
     
     var processUpdate = function( dictionaryChanges ) {
-
+        
         var parserUpdater = new ParserUpdater( 
             dictionaryChanges,
             parserOptions
         );
 
         parserUpdater.run();
-        
-        $.extend( parserOptions.dictionary, dictionaryChanges );
         
         return parserUpdater;
     };

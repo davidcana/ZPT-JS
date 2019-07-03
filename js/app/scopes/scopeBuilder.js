@@ -23,7 +23,6 @@ module.exports = (function() {
         );
         
         if ( mustUpdate ){
-        //if ( parserOptions.command == 'partialRender' ){
             update( parserOptions, target, scope );
         }
         

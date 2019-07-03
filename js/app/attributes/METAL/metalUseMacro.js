@@ -102,6 +102,10 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         return expressionsUtils.buildDependsOnList( scope, macroExpression );
     };
     
+    var update = function( parserUpdater, node ){
+        parserUpdater.updateNode( node );
+    };
+    
     var toString = function(){
         return "METALUseMacro: " + string;
     };
@@ -109,6 +113,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: METALUseMacro.id
     };

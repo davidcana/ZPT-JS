@@ -31,6 +31,10 @@ var TALOmitTag = function( stringToApply, expressionToApply ) {
         return expressionsUtils.buildDependsOnList( scope, expression );
     };
     
+    var update = function(){
+        // Nothing to do
+    };
+    
     var toString = function(){
         return "TALOmitTag: " + string;
     };
@@ -38,6 +42,7 @@ var TALOmitTag = function( stringToApply, expressionToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALOmitTag.id
     };

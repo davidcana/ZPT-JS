@@ -32,6 +32,10 @@ var TALOnError = function( stringToApply, structureToApply ) {
         return [];
     };
     
+    var update = function(){
+        // Nothing to do
+    };
+    
     var toString = function(){
         return "TALOnError: " + string;
     };
@@ -39,6 +43,7 @@ var TALOnError = function( stringToApply, structureToApply ) {
     return {
         putToAutoDefineHelper: putToAutoDefineHelper,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALOnError.id
     };

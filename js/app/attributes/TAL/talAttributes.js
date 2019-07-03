@@ -104,21 +104,10 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
         
         return result;
     };
-    /*
-    var dependsOn = function(){
-
-        var result = [];
-
-        for ( var i = 0; i < attributeItems.length; i++ ) {
-            var attributeItem = attributeItems[ i ];
-            result = result.concat( 
-                expressionsUtils.buildDependsOnList( attributeItem.expression )
-            );
-        }
-
-        return result;
+    
+    var update = function( parserUpdater, node, scope, indexItem ){
+        process( scope, node, indexItem.groupId );
     };
-    */
     
     var toString = function(){
         return "TALAttributes: " + string;
@@ -127,6 +116,7 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     return {
         process: process,
         dependsOn: dependsOn,
+        update: update,
         toString: toString,
         type: TALAttributes.id
     };
