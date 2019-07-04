@@ -67,8 +67,8 @@ module.exports = (function() {
             var fromCache = get( attributeType, string );
             if ( fromCache ){
                 log.debug( 'Found in cache!' );
-                return fromCache;
-                //return index( node, fromCache, scope );
+                //return fromCache;
+                return index( node, fromCache, scope );
             } else {
                 log.debug( 'NOT found in cache!' );
             }
