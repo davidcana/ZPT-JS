@@ -7,23 +7,9 @@ var context = require( '../context.js' );
 var log = require( '../logHelper.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
-var ParserWorker = require( './parserWorker.js' );
+var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 var nodeRemover = require( './nodeRemover.js' );
 var $ = require( 'jquery' );
-
-var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
-var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
-var METALDefineMacro = require( '../attributes/METAL/metalDefineMacro.js' );
-var METALUseMacro = require( '../attributes/METAL/metalUseMacro.js' );
-var TALAttributes = require( '../attributes/TAL/talAttributes.js' );
-var TALCondition = require( '../attributes/TAL/talCondition.js' );
-var TALContent = require( '../attributes/TAL/talContent.js' );
-var TALDefine = require( '../attributes/TAL/talDefine.js' );
-var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
-var TALOnError = require( '../attributes/TAL/talOnError.js' );
-var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
-var TALReplace = require( '../attributes/TAL/talReplace.js' );
-var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 
 var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
@@ -153,8 +139,8 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
         // Remove related to node nodes
         nodeRemover.removeRelatedNodes( node );
         
-        // Instance and invoke parserWorker to update node
-        var parserWorker = new ParserWorker( 
+        // Instance and invoke parserNodeRenderer to update node
+        var parserNodeRenderer = new ParserNodeRenderer( 
             node, 
             scopeBuilder.build( 
                 parserOptions, 
@@ -164,7 +150,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             ),
             true
         );
-        parserWorker.run();
+        parserNodeRenderer.run();
     };
 
     var self = {

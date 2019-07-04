@@ -7,7 +7,7 @@ var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var Scope = require( './scope.js' );
 var utils = require( '../utils.js' );
-var ParserWorker = require( '../parsers/parserWorker.js' );
+var ParserNodeRenderer = require( '../parsers/parserNodeRenderer.js' );
 
 module.exports = (function() {
     
@@ -77,7 +77,7 @@ module.exports = (function() {
         
         for ( var c = itemsList.length - 1; c >= 0; c-- ) {
             var talDefine = itemsList[ c ];
-            ParserWorker.processDefine(
+            ParserNodeRenderer.processDefine(
                 node, 
                 talDefine, 
                 true,

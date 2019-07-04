@@ -60,7 +60,6 @@ module.exports = (function() {
     };
     var tags = defaultTags;
     var tal = '';
-    //var self = this;
     
     var getTags = function (){
         return tags;
@@ -328,16 +327,6 @@ module.exports = (function() {
             errorFunction( msg );
         }
     };
-    /*
-    var asyncError = function( url, error, failCallback ){
-
-        var msg = 'Error trying to get ' + url + ': ' + error;
-        if ( failCallback ){
-            failCallback( msg );
-        } else {
-            error( msg );
-        }
-    };*/
     /* End errors */
     
     /* Repeat */

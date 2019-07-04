@@ -4,15 +4,15 @@
 "use strict";
 
 var $ = require( 'jquery' );
-
 var context = require( '../context.js' );
 var resolver = require( '../resolver.js' );
 var log = require( '../logHelper.js' );
 var Scope = require( '../scopes/scope.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
-var ParserWorker = require( './parserWorker.js' );
+var ParserRenderer = require( './parserRenderer.js' );
 var ParserUpdater = require( './parserUpdater.js' );
+var ParserPreloader = require( './parserPreloader.js' );
 var nodeRemover = require( './nodeRemover.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
@@ -41,47 +41,6 @@ module.exports = (function() {
         parserOptions.indexExpressions = options.indexExpressions === undefined? parserOptions.indexExpressions: options.indexExpressions;
     };
     
-    var preload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags, maxFolderDictionaries ){
-        
-        try {
-            if ( ! notRemoveGeneratedTags ){
-                nodeRemover.removeGeneratedNodes( parserOptions.root );
-            }
-            
-            var scope = new Scope( 
-                parserOptions.dictionary, 
-                parserOptions.dictionaryExtension, 
-                true 
-            );
-            
-            scope.loadFolderDictionariesAsync( 
-                maxFolderDictionaries, 
-                window.location,
-                function(){
-                    context.setFolderDictionaries( scope.folderDictionaries );
-                    
-                    i18nHelper.loadAsyncAuto( 
-                        parserOptions.dictionary,
-                        i18n,
-                        function(){
-                            resolver.loadRemotePages( 
-                                scope,
-                                declaredRemotePageUrls,
-                                callback,
-                                failCallback
-                            );
-                        },
-                        failCallback
-                    );
-                } 
-            );
-            
-        } catch( e ){
-            log.fatal( 'Exiting init method of ZPT with errors: ' + e );
-            throw e;
-        }
-    };
-    
     var run = function( _options ){
         
         var options = _options || {};
@@ -92,7 +51,7 @@ module.exports = (function() {
         var command = options.command || 'fullRender';
         switch ( command ) {
             case 'preload':
-                preload(
+                return processPreload(
                     options.callback,
                     options.failCallback,
                     options.declaredRemotePageUrls || [],
@@ -100,80 +59,55 @@ module.exports = (function() {
                     options.notRemoveGeneratedTags,
                     options.maxFolderDictionaries
                 );
-                break;
             case 'fullRender':
             case 'partialRender':
-                render(
+                return processRender(
                     command == 'partialRender'? options.target: parserOptions.root,
                     options.dictionaryExtension,
                     options.notRemoveGeneratedTags,
                     options.indexExpressions,
                     options.indexExpressions && command == 'fullRender'
                 );
-                break;
             case 'update':
                 return processUpdate( 
                     options.dictionaryChanges
                 );
-                break;
             default:
                 throw 'Unknown command: ' + command;
         }
     };
     
-    var render = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions, resetIndex ){
+    var processPreload = function( callback, failCallback, declaredRemotePageUrls, i18n, notRemoveGeneratedTags, maxFolderDictionaries ){
         
-        try {
-            if ( ! target ){
-                throw 'Unable to process null root or target!';
-            }
-            
-            if ( ! notRemoveGeneratedTags ){
-                nodeRemover.removeGeneratedNodes( target );
-            }
-            
-            if ( resetIndex ){
-                attributeIndex.reset();
-                attributeCache.reset();
-            }
-            
-            processAllTargetElements( target, dictionaryExtension, indexExpressions );
-            
-        } catch( e ){
-            log.fatal( 'Exiting run method of ZPT with errors: ' + e );
-            context.errorFunction( e );
-            //throw e;
-        }
-    };
+        var parserPreloader = new ParserPreloader( 
+            parserOptions, 
+            callback, 
+            failCallback, 
+            declaredRemotePageUrls, 
+            i18n, 
+            notRemoveGeneratedTags, 
+            maxFolderDictionaries
+        );
 
-    var processAllTargetElements = function( target, dictionaryExtension, indexExpressions ) {
-        
-        // Is multiroot?
-        if ( $.isArray( target ) ){ 
-            // There are several roots
-            for ( var c = 0; c < target.length; c++ ) {
-                processTarget( target[ c ], dictionaryExtension, indexExpressions );
-            }
-        } else {
-            // There is only one root
-            processTarget( target, dictionaryExtension, indexExpressions );
-        }
+        parserPreloader.run();
+
+        return parserPreloader;
     };
     
-    var processTarget = function( target, dictionaryExtension, indexExpressions ) {
+    var processRender = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions, resetIndex ){
         
-        var parserWorker = new ParserWorker( 
+        var parserRenderer = new ParserRenderer( 
+            parserOptions, 
             target, 
-            scopeBuilder.build( 
-                parserOptions, 
-                target, 
-                dictionaryExtension,
-                parserOptions.command == 'partialRender'
-            ),
-            indexExpressions
+            dictionaryExtension, 
+            notRemoveGeneratedTags, 
+            indexExpressions, 
+            resetIndex
         );
+
+        parserRenderer.run();
         
-        parserWorker.run();
+        return parserRenderer;
     };
     
     var processUpdate = function( dictionaryChanges ) {

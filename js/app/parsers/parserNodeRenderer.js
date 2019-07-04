@@ -1,5 +1,5 @@
 /* 
-    Class ParserWorker
+    Class ParserNodeRenderer
 */
 "use strict";
 
@@ -26,7 +26,7 @@ var TALReplace = require( '../attributes/TAL/talReplace.js' );
 var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
 var contentHelper = require( '../attributes/TAL/contentHelper.js' );
 
-var ParserWorker = function( _target, _scope, _indexExpressions ) {
+var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
     
     var target = _target; 
     var scope = _scope;
@@ -244,7 +244,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
             autoDefineHelper
         );
         
-        ParserWorker.processDefine( 
+        ParserNodeRenderer.processDefine( 
             indexExpressions? node: undefined,
             attributes.talDefine,  
             false,
@@ -501,7 +501,7 @@ var ParserWorker = function( _target, _scope, _indexExpressions ) {
     return self;
 };
 
-ParserWorker.processDefine = function( node, string, forceGlobal, scope ) {
+ParserNodeRenderer.processDefine = function( node, string, forceGlobal, scope ) {
 
     if ( ! string ) {
         return;
@@ -516,4 +516,4 @@ ParserWorker.processDefine = function( node, string, forceGlobal, scope ) {
     return talDefine.process( scope, forceGlobal );
 };
 
-module.exports = ParserWorker;
+module.exports = ParserNodeRenderer;
