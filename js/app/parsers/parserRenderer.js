@@ -1,5 +1,5 @@
 /* 
-    Class ParserWorker
+    Class ParserRenderer
 */
 "use strict";
 
@@ -12,7 +12,7 @@ var nodeRemover = require( './nodeRemover.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 
-var ParserWorker = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _indexExpressions, _resetIndex ) {
+var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _indexExpressions, _resetIndex ) {
     
     var parserOptions = _parserOptions;
     var target = _target; 
@@ -87,4 +87,4 @@ var ParserWorker = function( _parserOptions, _target, _dictionaryExtension, _not
     return self;
 };
 
-module.exports = ParserWorker;
+module.exports = ParserRenderer;
