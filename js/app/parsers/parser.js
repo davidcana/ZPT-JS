@@ -23,7 +23,8 @@ module.exports = (function() {
         command: undefined, // preload, fullRender or partialRender
         root: undefined,
         dictionary: {},
-        indexExpressions: false
+        indexExpressions: true
+        //indexExpressions: false
         //notRemoveGeneratedTags,
         //target,
         //declaredRemotePageUrls,
@@ -65,8 +66,7 @@ module.exports = (function() {
                     command == 'partialRender'? options.target: parserOptions.root,
                     options.dictionaryExtension,
                     options.notRemoveGeneratedTags,
-                    options.indexExpressions,
-                    options.indexExpressions && command == 'fullRender'
+                    parserOptions.indexExpressions && command == 'fullRender'
                 );
             case 'update':
                 return processUpdate( 
@@ -94,14 +94,13 @@ module.exports = (function() {
         return parserPreloader;
     };
     
-    var processRender = function( target, dictionaryExtension, notRemoveGeneratedTags, indexExpressions, resetIndex ){
+    var processRender = function( target, dictionaryExtension, notRemoveGeneratedTags, resetIndex ){
         
         var parserRenderer = new ParserRenderer( 
             parserOptions, 
             target, 
             dictionaryExtension, 
             notRemoveGeneratedTags, 
-            indexExpressions, 
             resetIndex
         );
 

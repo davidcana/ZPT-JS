@@ -12,13 +12,12 @@ var nodeRemover = require( './nodeRemover.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 
-var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _indexExpressions, _resetIndex ) {
+var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _resetIndex ) {
     
     var parserOptions = _parserOptions;
     var target = _target; 
     var dictionaryExtension = _dictionaryExtension;
     var notRemoveGeneratedTags = _notRemoveGeneratedTags;
-    var indexExpressions = _indexExpressions;
     var resetIndex = _resetIndex;
     
     var run = function(){
@@ -41,7 +40,7 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
                 attributeCache.reset();
             }
 
-            processAllTargetElements( target, dictionaryExtension, indexExpressions );
+            processAllTargetElements();
 
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -50,31 +49,31 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
         }
     };
 
-    var processAllTargetElements = function( target, dictionaryExtension, indexExpressions ) {
+    var processAllTargetElements = function() {
 
         // Is multiroot?
         if ( $.isArray( target ) ){ 
             // There are several roots
             for ( var c = 0; c < target.length; c++ ) {
-                processTarget( target[ c ], dictionaryExtension, indexExpressions );
+                process1Target( target[ c ] );
             }
         } else {
             // There is only one root
-            processTarget( target, dictionaryExtension, indexExpressions );
+            process1Target( target );
         }
     };
 
-    var processTarget = function( target, dictionaryExtension, indexExpressions ) {
+    var process1Target = function( currentTarget ) {
 
         var parserNodeRenderer = new ParserNodeRenderer( 
-            target, 
+            currentTarget, 
             scopeBuilder.build( 
                 parserOptions, 
-                target, 
+                currentTarget, 
                 dictionaryExtension,
                 parserOptions.command == 'partialRender'
             ),
-            indexExpressions
+            parserOptions.indexExpressions
         );
 
         parserNodeRenderer.run();

@@ -123,15 +123,25 @@ module.exports = (function() {
             language );
     };
     
-    var dependsOn = function( scope, expression, argsExpressions ){
+    var dependsOn = function( selfVarName, scope, expression, argsExpressions ){
         
         return expressionsUtils.buildDependsOnList( 
+            selfVarName, 
+            scope, 
+            new VariableExpression( context.getConf().i18nDomainVarName ),
+            new VariableExpression( context.getConf().i18nLanguageVarName ),
+            expression, 
+            argsExpressions
+        );
+        /*
+        return expressionsUtils.buildDependsOnList( 
+            selfVarName, 
             scope, 
             expression, 
             argsExpressions, 
             new VariableExpression( context.getConf().i18nDomainVarName ),
             new VariableExpression( context.getConf().i18nLanguageVarName )
-        );
+        );*/
     };
     
     return {

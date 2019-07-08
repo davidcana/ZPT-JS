@@ -15,7 +15,7 @@ var Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderD
     this.changesStack = [];
     this.nocallVars = {};
     this.folderDictionaries = _folderDictionaries || [];
-    this.globalVarsExpressions = {}
+    this.globalVarsExpressions = {};
     
     if ( addCommonVars ){
         this.setCommonVars();
@@ -281,6 +281,10 @@ Scope.prototype.getExpressionFromLocal = function ( name ) {
     }
     
     return undefined;
+};
+
+Scope.prototype.isLocalVar = function ( name ) {
+    return this.vars[ name ] !== undefined;
 };
 
 module.exports = Scope;

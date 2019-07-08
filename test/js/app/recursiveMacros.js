@@ -15,35 +15,14 @@ var dictionary = {
             items: [ 'item21', 'item22' ]
         },
         'item3'
-    ],
-    viewItems: [
-        {
-            type: 'fieldContainer',
-            title: 'Container title',
-            description: 'Container description',
-            fields: [
-                {
-                    id: 'id'
-                },
-                {
-                    id: 'name'
-                },
-                {
-                    id: 'name2'
-                }
-            ]
-        }
-    ],
-    record: {
-        id: 'The id',
-        name: 'The name'
-    }
+    ]
 };
 
 // Parse template
 zpt.run({
     root: document.body,
-    dictionary: dictionary
+    dictionary: dictionary,
+    indexExpressions: false
 });
 
 // Run tests

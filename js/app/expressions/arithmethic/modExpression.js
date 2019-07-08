@@ -24,8 +24,8 @@ var ModExpression = function( stringToApply, expressionListToApply ) {
             } );
     };
     
-    var dependsOn = function( scope ){
-        return expressionsUtils.buildDependsOnList( scope, expressionList );
+    var dependsOn = function( selfVarName, scope ){
+        return expressionsUtils.buildDependsOnList( selfVarName, scope, expressionList );
     };
     
     var toString = function(){

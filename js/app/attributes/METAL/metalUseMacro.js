@@ -99,7 +99,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     };
     
     var dependsOn = function( scope ){
-        return expressionsUtils.buildDependsOnList( scope, macroExpression );
+        return expressionsUtils.buildDependsOnList( undefined, scope, macroExpression );
     };
     
     var update = function( parserUpdater, node ){

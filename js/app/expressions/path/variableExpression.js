@@ -19,10 +19,14 @@ var VariableExpression = function( nameToApply ) {
         return scope.get( name );
     };
     
-    var dependsOn = function( scope ){
+    var dependsOn = function( selfVarName, scope ){
         
         var expression = scope.getVarExpression( name );
-        return expression? expression.dependsOn( scope ): [ name ];
+        return expression? expression.dependsOn( name, scope ): [ name ];
+    };
+    
+    var getVarName = function(){
+        return name;
     };
     
     var toString = function(){
@@ -32,6 +36,7 @@ var VariableExpression = function( nameToApply ) {
     return {
         evaluate: evaluate,
         dependsOn: dependsOn,
+        getVarName: getVarName,
         toString: toString
     };
 };

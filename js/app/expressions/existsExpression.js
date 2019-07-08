@@ -21,8 +21,8 @@ var ExistsExpression = function( stringToApply, expressionToApply ) {
         }
     };
 
-    var dependsOn = function( scope ){
-        return expressionsUtils.buildDependsOnList( scope, expression );
+    var dependsOn = function( selfVarName, scope ){
+        return expressionsUtils.buildDependsOnList( selfVarName, scope, expression );
     };
     
     var toString = function(){

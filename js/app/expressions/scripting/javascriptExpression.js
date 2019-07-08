@@ -18,8 +18,8 @@ var JavascriptExpression = function( expressionToApply ) {
         return eval( evaluatedString );
     };
     
-    var dependsOn = function( scope ){
-        return expressionsUtils.buildDependsOnList( scope, stringExpression );
+    var dependsOn = function( selfVarName, scope ){
+        return expressionsUtils.buildDependsOnList( selfVarName, scope, stringExpression );
     };
     
     var toString = function(){

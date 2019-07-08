@@ -23,8 +23,8 @@ var TrCurrencyExpression = function( stringToApply, expressionToApply, argsExpre
         return evaluated;
     };
     
-    var dependsOn = function( scope ){
-        return trHelper.dependsOn( scope, expression, argsExpressions );
+    var dependsOn = function( selfVarName, scope ){
+        return trHelper.dependsOn( selfVarName, scope, expression, argsExpressions );
     };
     
     var toString = function(){

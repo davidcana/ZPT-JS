@@ -24,7 +24,8 @@ var TALContent = function( stringToApply, expressionToApply, structureToApply ) 
     };
 
     var dependsOn = function( scope ){
-        return expressionsUtils.buildDependsOnList( scope, expression );
+        //return expressionsUtils.buildDependsOnList( selfVarName, scope, expression );
+        return expressionsUtils.buildDependsOnList( undefined, scope, expression );
     };
     
     var update = function( parserUpdater, node, scope ){

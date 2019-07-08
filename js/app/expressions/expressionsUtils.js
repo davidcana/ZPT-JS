@@ -29,19 +29,20 @@ module.exports = (function() {
         
         var result = [];
         
-        var scope = arguments[ 0 ]
+        var selfVarName = arguments[ 0 ];
+        var scope = arguments[ 1 ];
         
-        for ( var argCounter = 1; argCounter < arguments.length; argCounter++ ){
+        for ( var argCounter = 2; argCounter < arguments.length; argCounter++ ){
             var list = arguments[ argCounter ];
             result = result.concat( 
-                getDependsOnFromList( scope, list )
+                getDependsOnFromList( selfVarName, scope, list )
             );
         }
         
         return result;
     };
     
-    var getDependsOnFromList = function( scope, arg ){
+    var getDependsOnFromList = function( selfVarName, scope, arg ){
         
         var result = [];
         
@@ -50,33 +51,27 @@ module.exports = (function() {
         }
         
         if ( ! $.isArray( arg ) ){
-            return getDependsOnFromNonList( scope, arg );
+            return getDependsOnFromNonList( selfVarName, scope, arg );
         }
         
         var list = arg;
         for ( var i = 0; i < list.length; i++ ) {
             var item = list[ i ];
             result = result.concat( 
-                $.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( scope, item )
+                $.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( selfVarName, scope, item )
             );
         }
 
         return result;
     };
     
-    var getDependsOnFromNonList = function( scope, item ){
-        return $.isFunction( item.dependsOn )? item.dependsOn( scope ): [];
-    };
-    /*
-    var getDependsOnFromNonList = function( scope, item ){
+    var getDependsOnFromNonList = function( selfVarName, scope, item ){
         
-        if ( $.isFunction( item.dependsOn ) ){
-            return item.dependsOn( scope );
-        }
-        
-        throw 'Unable to build depends on list, item does not implement dependsOn method: ' + item;
+        return ! $.isFunction( item.dependsOn ) || ( $.isFunction( item.getVarName ) && selfVarName === item.getVarName() )? 
+            []: 
+            item.dependsOn( selfVarName, scope );
+        //return $.isFunction( item.dependsOn )? item.dependsOn( scope ): [];
     };
-    */
     
     return {
         buildLiteral: buildLiteral,
