@@ -93,6 +93,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
                     currentNode.nextSibling );
 
                 slotContent.removeAttribute( tags.metalFillSlot );
+                slotContent.setAttribute( tags.id, context.nextExpressionCounter() ); // Set a new id attribute to avoid id conflicts
                 currentNode.remove();
             }
         );

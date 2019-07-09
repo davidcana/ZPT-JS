@@ -36,8 +36,8 @@ var RangeExpression = function( stringToApply, startExpressionToApply, endExpres
         return result;
     };
 
-    var dependsOn = function( selfVarName, scope ){
-        return expressionsUtils.buildDependsOnList( selfVarName, scope, startExpression, endExpression, stepExpression );
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, startExpression, endExpression, stepExpression );
     };
     
     var toString = function(){

@@ -22,8 +22,8 @@ var TrNumberExpression = function( stringToApply, expressionToApply, argsExpress
         return evaluated;
     };
 
-    var dependsOn = function( selfVarName, scope ){
-        return trHelper.dependsOn( selfVarName, scope, expression, argsExpressions );
+    var dependsOn = function( depsDataItem, scope ){
+        return trHelper.dependsOn( depsDataItem, scope, expression, argsExpressions );
     };
     
     var toString = function(){

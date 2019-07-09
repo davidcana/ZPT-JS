@@ -18,7 +18,6 @@ zpt.run({
     dictionary: dictionary
 });
 
-// Run tests!
 QUnit.test( "Define test", function( assert ) {
     assert.equal( $('#t1-1').html() , "1" );
     assert.equal( $('#t1-2').html() , "1.5" );
@@ -75,9 +74,10 @@ QUnit.test( "Content test", function( assert ) {
     assert.equal( $('#t6-4').html() , "" );
 });
 
+// Run tests!
 QUnit.test( "Replace test", function( assert ) {
     assert.equal( $('#t7-1').html() , "This is a &lt;strong&gt;formatted&lt;/strong&gt; text" );
     assert.equal( $('#t7-2').html() , "This is a <strong>formatted</strong> text" );
-    assert.equal( $('#t7-3').html() , "<span data-replace=\"default\">a formatted text</span>" );
+    assert.equal( $('#t7-3').html() , "<span data-replace=\"default\" data-id=\"36\">a formatted text</span>" );
     assert.equal( $('#t7-4').html() , "" );
 });

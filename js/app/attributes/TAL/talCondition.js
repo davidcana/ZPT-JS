@@ -21,7 +21,6 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     };
 
     var dependsOn = function( scope ){
-        //return expressionsUtils.buildDependsOnList( selfVarName, scope, expression );
         return expressionsUtils.buildDependsOnList( undefined, scope, expression );
     };
     

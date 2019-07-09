@@ -24,8 +24,8 @@ var DivideExpression = function( stringToApply, expressionListToApply ) {
             } );
     };
 
-    var dependsOn = function( selfVarName, scope ){
-        return expressionsUtils.buildDependsOnList( selfVarName, scope, expressionList );
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, expressionList );
     };
     
     var toString = function(){

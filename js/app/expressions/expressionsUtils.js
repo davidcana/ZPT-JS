@@ -5,6 +5,7 @@
 
 var evaluateHelper = require( './evaluateHelper.js' );
 var $ = require( 'jquery' );
+var DepsDataItem = require( '../parsers/depsDataItem.js' );
 
 module.exports = (function() {
     
@@ -29,20 +30,24 @@ module.exports = (function() {
         
         var result = [];
         
-        var selfVarName = arguments[ 0 ];
+        var depsDataItem = arguments[ 0 ];
+        if ( ! depsDataItem ){
+            depsDataItem = new DepsDataItem();
+        }
+        
         var scope = arguments[ 1 ];
         
         for ( var argCounter = 2; argCounter < arguments.length; argCounter++ ){
             var list = arguments[ argCounter ];
             result = result.concat( 
-                getDependsOnFromList( selfVarName, scope, list )
+                getDependsOnFromList( depsDataItem, scope, list )
             );
         }
         
         return result;
     };
     
-    var getDependsOnFromList = function( selfVarName, scope, arg ){
+    var getDependsOnFromList = function( depsDataItem, scope, arg ){
         
         var result = [];
         
@@ -51,25 +56,25 @@ module.exports = (function() {
         }
         
         if ( ! $.isArray( arg ) ){
-            return getDependsOnFromNonList( selfVarName, scope, arg );
+            return getDependsOnFromNonList( depsDataItem, scope, arg );
         }
         
         var list = arg;
         for ( var i = 0; i < list.length; i++ ) {
             var item = list[ i ];
             result = result.concat( 
-                $.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( selfVarName, scope, item )
+                $.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( depsDataItem, scope, item )
             );
         }
 
         return result;
     };
     
-    var getDependsOnFromNonList = function( selfVarName, scope, item ){
+    var getDependsOnFromNonList = function( depsDataItem, scope, item ){
         
-        return ! $.isFunction( item.dependsOn ) || ( $.isFunction( item.getVarName ) && selfVarName === item.getVarName() )? 
+        return ! $.isFunction( item.dependsOn ) || ( $.isFunction( item.getVarName ) && depsDataItem === item.getVarName() )? 
             []: 
-            item.dependsOn( selfVarName, scope );
+            item.dependsOn( depsDataItem, scope );
         //return $.isFunction( item.dependsOn )? item.dependsOn( scope ): [];
     };
     

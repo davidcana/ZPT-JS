@@ -39,8 +39,8 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
         return result;
     };
     
-    var dependsOn = function( selfVarName, scope ){
-        return expressionsUtils.buildDependsOnList( selfVarName, scope, items[ 0 ] );
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, items[ 0 ] );
     };
     
     var toString = function(){

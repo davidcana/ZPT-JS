@@ -18,8 +18,8 @@ var GreaterExpression = function( stringToApply, expression1ToApply, expression2
         return numbers.number1 > numbers.number2;
     };
 
-    var dependsOn = function( selfVarName, scope ){
-        return expressionsUtils.buildDependsOnList( selfVarName, scope, expression1, expression2 );
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, expression1, expression2 );
     };
     
     var toString = function(){

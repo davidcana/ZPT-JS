@@ -5,38 +5,35 @@
 
 var DepsDataItem = function() {
     
-    this.dictionary = {};
-    this.nonDictionary = {};
+    this.nonExpressionVars = {};
+    this.expressionVars = {};
 };
 
 DepsDataItem.prototype.mustAddVar = function( varName ){
-    return this.dictionary[ varName ] === undefined || this.nonDictionary[ varName ] === undefined;
+    return this.nonExpressionVars[ varName ] === undefined && this.expressionVars[ varName ] === undefined;
 };
 
-DepsDataItem.prototype.addVars = function( varNames, scope ){
+DepsDataItem.prototype.addAllVars = function( varNames, scope ){
     
     for ( var name in varNames ){
         this.add1Var( varNames[ name ], scope );
     }
 };
 
+DepsDataItem.prototype.add1ExpressionVar = function( varName ){
+    this.expressionVars[ varName ] = true;
+};
+
+DepsDataItem.prototype.add1NonExpressionVar = function( varName ){
+    this.nonExpressionVars[ varName ] = true;
+};
+
 DepsDataItem.prototype.add1Var = function( varName, scope ){
 
-    var map = scope.isLocalVar( varName )? this.nonDictionary: this.dictionary;
+    var map = scope.isLocalVar( varName )? this.expressionVars: this.nonExpressionVars;
     map[ varName ] = true;
 
     return true;
-};
-
-DepsDataItem.prototype.listDictionaryVars = function(){
-
-    var result = [];
-    
-    for ( var name in this.dictionary ){
-        result.push( this.dictionary[ name ] );
-    }
-    
-    return result;
 };
 
 module.exports = DepsDataItem;

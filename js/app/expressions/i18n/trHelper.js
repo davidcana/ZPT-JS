@@ -123,10 +123,10 @@ module.exports = (function() {
             language );
     };
     
-    var dependsOn = function( selfVarName, scope, expression, argsExpressions ){
+    var dependsOn = function( depsDataItem, scope, expression, argsExpressions ){
         
         return expressionsUtils.buildDependsOnList( 
-            selfVarName, 
+            depsDataItem, 
             scope, 
             new VariableExpression( context.getConf().i18nDomainVarName ),
             new VariableExpression( context.getConf().i18nLanguageVarName ),
@@ -135,7 +135,7 @@ module.exports = (function() {
         );
         /*
         return expressionsUtils.buildDependsOnList( 
-            selfVarName, 
+            depsDataItem, 
             scope, 
             expression, 
             argsExpressions, 

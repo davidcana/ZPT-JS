@@ -86,11 +86,11 @@ QUnit.test( "On-error test", function( assert ) {
 QUnit.test( "Macros test", function( assert ) {
 
     var t9 = `
-<div metal:use-macro="'enhacedSidebar'" style="display: none;">
-<em metal:fill-slot="'additional_info'">
+<div metal:use-macro="'enhacedSidebar'" data-id=\"18\" style="display: none;">
+<em metal:fill-slot="'additional_info'" data-id=\"19\">
 Make sure to check out our <a href="/specials">specials</a>.
 </em>
-</div><div data-mmacro="enhacedSidebar" data-qdup="1">
+</div><div data-mmacro="enhacedSidebar" data-related-id=\"18\" data-qdup="1">
 Links
 <div metal:define-slot="links">
 <ul>
@@ -100,7 +100,7 @@ Links
 <li><a href="/contact">Contact Us</a></li>
 </ul>
 </div>
-<em>
+<em data-id=\"20\">
 Make sure to check out our <a href="/specials">specials</a>.
 </em>
 </div>

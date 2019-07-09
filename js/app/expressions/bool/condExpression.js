@@ -22,8 +22,8 @@ var CondExpression = function( stringToApply, expression1ToApply, expression2ToA
             expression3.evaluate( scope );
     };
     
-    var dependsOn = function( selfVarName, scope ){
-        return expressionsUtils.buildDependsOnList( selfVarName, scope, expression1, expression2, expression3 );
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, expression1, expression2, expression3 );
     };
     
     var toString = function(){

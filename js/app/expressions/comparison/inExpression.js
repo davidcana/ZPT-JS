@@ -39,8 +39,8 @@ var InExpression = function( stringToApply, expressionListToApply ) {
         return false;
     };
 
-    var dependsOn = function( selfVarName, scope ){
-        return expressionsUtils.buildDependsOnList( selfVarName, scope, expressionList );
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, expressionList );
     };
     
     var toString = function(){

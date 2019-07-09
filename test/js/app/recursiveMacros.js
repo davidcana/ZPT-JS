@@ -22,7 +22,7 @@ var dictionary = {
 zpt.run({
     root: document.body,
     dictionary: dictionary,
-    indexExpressions: false
+    //indexExpressions: false
 });
 
 // Run tests
