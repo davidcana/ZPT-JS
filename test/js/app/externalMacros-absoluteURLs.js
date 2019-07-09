@@ -25,28 +25,28 @@ function runTests(){
     
 QUnit.test( "Simple macros test", function( assert ) {
     var t1 = `
-        <p>
+<p>
     Before use macro
 </p>
-<b style="display: none;" data-use-macro="copyright/externalMacros-definitions.html">
+<b data-use-macro="string:copyright@\${template}" data-id="1" style="display: none;">
     Macro goes here
 </b>
-<p data-mmacro="copyright">
+<p data-mmacro="copyright" data-tauto-define="_externalMacroUrl '/test/externalMacros-definitions.html'" data-related-id="1" data-qdup="1">
     Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
 </p>
 <p>
     In the middle of 2 macros
 </p>
-<b style="display: none;" data-use-macro="copyright/externalMacros-definitions.html">
+<b data-use-macro="'copyright@/test/externalMacros-definitions.html'" data-id="2" style="display: none;">
     Macro goes here
 </b>
-<p data-mmacro="copyright">
+<p data-mmacro="copyright" data-tauto-define="_externalMacroUrl '/test/externalMacros-definitions.html'" data-related-id="2" data-qdup="1">
     Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
 </p>
 <p>
     After use macro
 </p>
-        `;
+`;
     utils.assertHtml( assert, '#t1', t1 );
 });
 

@@ -25,15 +25,17 @@ function runMacro(){
     QUnit.test( "Dynamic macros test", function( assert ) {
         var t1 = `
 <p>
-Before use macro
+    Before use macro
 </p>
-<b id="m1" data-use-macro="'dynamicMacro@externalMacros-definitions.html'" style="display: none;">
-Macro goes here
-</b><p data-mmacro="dynamicMacro" data-define="externalMacroUrl 'externalMacros-definitions.html'">
-Dynamic text: <span data-content="string:A test of a dynamic macro" data-attributes="id string:t2-1">A test of a dynamic macro</span>
+<b id="m1" data-use-macro="'dynamicMacro@externalMacros-definitions.html'" data-id="1" style="display: none;">
+    Macro goes here
+</b>
+<p data-mmacro="dynamicMacro" data-tauto-define="_externalMacroUrl 'externalMacros-definitions.html'" data-related-id="1" data-qdup="1">
+    Dynamic text: 
+    <span data-content="string:A test of a dynamic macro" data-attributes="id string:t2-1" data-id="2" id="t2-1">A test of a dynamic macro</span>
 </p>
 <p>
-After use macro
+    After use macro
 </p>
 `;
         utils.assertHtml( assert, '#t1', t1 );

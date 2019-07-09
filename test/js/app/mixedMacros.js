@@ -73,40 +73,39 @@ function runTests(){
 
 QUnit.test( "Simple macros test", function( assert ) {
     var t1 = `
-<b data-use-macro="'copyright-list@externalMacros-definitions4.html'" style="display: none;">
+<b data-use-macro="'copyright-list1@externalMacros-definitions4.html'" data-id="1" style="display: none;">
     Macro goes here
 </b>
-<p data-mmacro="copyright-list" data-define="externalMacroUrl 'externalMacros-definitions4.html'">
-    <b data-use-macro="'copyright2'" style="display: none;">
+<p data-mmacro="copyright-list1" data-tauto-define="_externalMacroUrl 'externalMacros-definitions4.html'" data-related-id="1" data-qdup="1">
+    <b data-use-macro="'copyright2'" data-id="2" style="display: none;">
         Macro copyright2 goes here
     </b>
-    <p data-mmacro="copyright2">
-Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
+    <p data-mmacro="copyright2" data-related-id="2" data-qdup="1">
+        Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
-    <b data-use-macro="'copyright1'" style="display: none;">
+    <b data-use-macro="'copyright1'" data-id="3" style="display: none;">
         Macro copyright1 goes here
     </b>
-    <p data-mmacro="copyright1">
+    <p data-mmacro="copyright1" data-related-id="3" data-qdup="1">
         Copyright 1 2009, <em>Foo, Bar, and Associates</em> Inc.
     </p>
 </p>
         `;
     utils.assertHtml( assert, '#t1', t1 );
     var t2 = `
-<b data-use-macro="'copyright-list2@externalMacros-definitions4.html'" style="display: none;">
+<b data-use-macro="'copyright-list2@externalMacros-definitions4.html'" data-id="4" style="display: none;">
     Macro goes here
 </b>
-<p data-mmacro="copyright-list2" data-define="externalMacroUrl 'externalMacros-definitions4.html'">
-    <b data-use-macro="'copyright2'" style="display: none;">
+<p data-mmacro="copyright-list2" data-tauto-define="_externalMacroUrl 'externalMacros-definitions4.html'" data-related-id="4" data-qdup="1">
+    <b data-use-macro="'copyright2'" data-id="5" style="display: none;">
         Macro copyright2 goes here
-    </b>
-    <p data-mmacro="copyright2">
+    </b><p data-mmacro="copyright2" data-related-id="5" data-qdup="1">
         Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
-    <b data-use-macro="'copyright3'" style="display: none;">
+    <b data-use-macro="'copyright3'" data-id="6" style="display: none;">
         Macro copyright3 goes here
     </b>
-    <p data-mmacro="copyright3">
+    <p data-mmacro="copyright3" data-related-id="6" data-qdup="1">
         Copyright 3 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
 </p>

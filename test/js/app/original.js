@@ -106,11 +106,14 @@ Make sure to check out our <a href="/specials">specials</a>.
 </em>
 </div>
 `;
+    utils.assertHtml( assert, '#t9', t9 );
     //assert.htmlEqualExt( '#t9', t9 );
+    /*
     assert.equal( 
         $('#t9').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
         t9.replace(/(\r\n|\n|\r|\t| )/gm,""), 
         "Passed!" );
+        */
 });
 
 QUnit.test( "I18n test", function( assert ) {
