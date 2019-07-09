@@ -7,6 +7,7 @@ var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
+var utils = require( './utils.js' );
 
 /* I18n maps init */
 var msg = {
@@ -65,7 +66,7 @@ QUnit.test( "Attributes test", function( assert ) {
 });
 
 QUnit.test( "Repeat test", function( assert ) {
-    assert.equal( getAllValues( '.cValue1' ) , 'jaja/jeje/jiji' );
+    assert.equal( utils.getAllValues( '.cValue1' ) , 'jaja/jeje/jiji' );
     assert.equal( $( '.cValue2' ).length , 0 );
 });
 
@@ -116,9 +117,3 @@ QUnit.test( "I18n test", function( assert ) {
     assert.equal( $('#t10-1').html() , "¡Hola mundo!" );
     assert.equal( $('#t10-2').html() , "Hello world!" );
 });
-
-function getAllValues( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().join( '/' );
-}

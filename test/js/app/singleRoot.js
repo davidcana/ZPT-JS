@@ -4,6 +4,7 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
+var utils = require( './utils.js' );
 
 var dictionary = {};
 
@@ -35,7 +36,7 @@ Dynamic text: <span data-content="string:A test of a dynamic macro" data-attribu
 After use macro
 </p>
 `;
-        assertHtml( assert, '#t1', t1 );
+        utils.assertHtml( assert, '#t1', t1 );
     });
 
 }
@@ -43,19 +44,6 @@ After use macro
 function runLoop(){
     
     QUnit.test( "Dynamic macros test", function( assert ) {
-        assert.equal( getAllValues( '.cValue1' ) , '10/20/30' );
+        assert.equal( utils.getAllValues( '.cValue1' ) , '10/20/30' );
     });
-}
-
-function getAllValues( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().join( '/' );
-}
-
-function assertHtml( assert, id1, id2 ){
-    assert.equal( 
-        $( id1 ).text().replace(/\s+/g, ""), 
-        $( id2 ).text().replace(/\s+/g, ""), 
-        "Passed!" ); 
 }

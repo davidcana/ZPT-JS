@@ -5,6 +5,7 @@ var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var context = require( '../../../js/app/context.js' );
+var utils = require( './utils.js' );
 
 context.getConf().externalMacroPrefixURL = '/test/';
 
@@ -49,14 +50,7 @@ QUnit.test( "Simple macros test", function( assert ) {
     After use macro
 </p>
         `;
-    assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, '#t1', t1 );
 });
 
-}
-
-function assertHtml( assert, id1, id2 ){
-    assert.equal( 
-        $( id1 ).text().replace(/\s+/g, ""), 
-        $( id2 ).text().replace(/\s+/g, ""), 
-        "Passed!" ); 
 }

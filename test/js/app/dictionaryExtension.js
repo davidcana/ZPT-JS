@@ -4,7 +4,6 @@ var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 require( '../../../js/app/jqueryPlugin.js' );
-var utils = require( './utils.js' );
 
 QUnit.test( "Defining new vars in dictionary extension tests", function( assert ) {
     

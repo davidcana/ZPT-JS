@@ -4,6 +4,7 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
+var utils = require( './utils.js' );
 
 var dictionary = { 
     nullValue: null,
@@ -94,7 +95,7 @@ QUnit.test( "Simple macros test", function( assert ) {
     After use macro
 </p>
         `;
-    assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, '#t1', t1 );
 });
 
 QUnit.test( "Dynamic macro", function( assert ) {
@@ -108,7 +109,7 @@ QUnit.test( "Dynamic macro", function( assert ) {
     Dynamic text: <span id="t2-1" data-attributes="id string:t2-1" data-content="string:A test of a dynamic macro">A test of a dynamic macro</span>
 </p>
     `;
-    assertHtml( assert, '#t2', t2 );
+    utils.assertHtml( assert, '#t2', t2 );
 });
 
 QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
@@ -122,7 +123,7 @@ QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
     Var value: <span id=\"t3-1\" data-attributes=\"id id\" data-content=\"var\">undefined</span>
 </p>
     `;
-    assertHtml( assert, '#t3', t3 );
+    utils.assertHtml( assert, '#t3', t3 );
 });
 
 QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
@@ -136,11 +137,11 @@ QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
     Var value: <span id=\"t4-1\" data-attributes=\"id id\" data-content=\"var\">1</span>
 </p>
     `;
-    assertHtml( assert, '#t4', t4 );
+    utils.assertHtml( assert, '#t4', t4 );
 });
 
 QUnit.test( "Dynamic macro reading var (items = [10 20 30]) test", function( assert ) {
-    assert.equal( getValues( '.listItems1' ) , '10/20/30'  );
+    assert.equal( utils.getAllValues( '.listItems1' ) , '10/20/30'  );
     
     var t5 = `
 <b style=\"display: none;\" data-define=\"items [10 20 30]\" data-use-macro=\"list/externalMacros-definitions.html\">
@@ -158,7 +159,7 @@ QUnit.test( "Dynamic macro reading var (items = [10 20 30]) test", function( ass
     </li>
 </ul>
         `;
-        assertHtml( assert, '#t5', t5 );
+        utils.assertHtml( assert, '#t5', t5 );
 });
 
 QUnit.test( "Macro using 1 slot test", function( assert ) {
@@ -182,7 +183,7 @@ QUnit.test( "Macro using 1 slot test", function( assert ) {
     </em>
 </div>
         `;
-        assertHtml( assert, '#t6', t6 );
+        utils.assertHtml( assert, '#t6', t6 );
 });
 
 
@@ -213,7 +214,7 @@ QUnit.test( "Macro using 2 slots test", function( assert ) {
     </em>
 </div>
         `;
-        assertHtml( assert, '#t7', t7 );
+        utils.assertHtml( assert, '#t7', t7 );
 });
 
 QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
@@ -239,7 +240,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
     </em>
 </div>
         `;
-        assertHtml( assert, '#t8', t8 );
+        utils.assertHtml( assert, '#t8', t8 );
 });
     
     
@@ -253,7 +254,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
         Copyright 2020, <em>Foo, Bar, and Associates</em> Inc.
     </p>
 `;
-        assertHtml( assert, '#t10', t10 );
+        utils.assertHtml( assert, '#t10', t10 );
     });
     
     
@@ -279,7 +280,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
         Copyright 2030, <em>Foo, Bar, and Associates</em> Inc.
     </p>
 `;
-        assertHtml( assert, '#t11', t11 );
+        utils.assertHtml( assert, '#t11', t11 );
     });          
 
 
@@ -315,7 +316,7 @@ Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
 After use macro
 </p>
 `;
-        assertHtml( assert, '#t12', t12 );
+        utils.assertHtml( assert, '#t12', t12 );
     });  
  
     QUnit.test( "Using define tags in macro use and macro call", function( assert ) {
@@ -324,25 +325,6 @@ After use macro
     });
     
     QUnit.test( "Slot evaluation", function( assert ) {
-        assert.equal( count( '[href="/sales"]' ) , 1  );
+        assert.equal( utils.count( '[href="/sales"]' ) , 1  );
     });
-}
-
-function count( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().length;
-}
-
-function getValues( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().join( '/' );
-}
-
-function assertHtml( assert, id1, id2 ){
-    assert.equal( 
-        $( id1 ).text().replace(/\s+/g, ""), 
-        $( id2 ).text().replace(/\s+/g, ""), 
-        "Passed!" ); 
 }

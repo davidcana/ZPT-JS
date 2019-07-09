@@ -4,6 +4,7 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
+var utils = require( './utils.js' );
 
 var dictionary = { 
     nullValue: null,
@@ -90,7 +91,7 @@ Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
 </p>
         `;
-    assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, '#t1', t1 );
     var t2 = `
 <b data-use-macro="'copyright-list2@externalMacros-definitions4.html'" style="display: none;">
     Macro goes here
@@ -110,20 +111,7 @@ Copyright 2 2022, <em>Foo, Bar, and Associates</em> Inc. (remote)
     </p>
 </p>
 `;
-    assertHtml( assert, '#t2', t2 );
+    utils.assertHtml( assert, '#t2', t2 );
 });
 
-}
-
-function getValues( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().join( '/' );
-}
-
-function assertHtml( assert, id1, id2 ){
-    assert.equal( 
-        $( id1 ).text().replace(/\s+/g, ""), 
-        $( id2 ).text().replace(/\s+/g, ""), 
-        "Passed!" ); 
 }

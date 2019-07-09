@@ -4,6 +4,7 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
+var utils = require( './utils.js' );
 
 var dictionary = { 
     items: [ 
@@ -126,20 +127,5 @@ QUnit.test( "Simple macros test", function( assert ) {
 	</li>
 </ul>
     `;
-    assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, '#t1', t1 );
 });
-
-
-
-function getValues( selector ){
-    return $( selector ).map( function( index, element ) {
-        return this.innerHTML;
-    } ).get().join( '/' );
-}
-
-function assertHtml( assert, id1, id2 ){
-    assert.equal( 
-        $( id1 ).text().replace(/\s+/g, ""), 
-        $( id2 ).text().replace(/\s+/g, ""), 
-        "Passed!" ); 
-}
