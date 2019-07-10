@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>ZPT-JS reference - Configuration - maxFolderDictionaries</title>
+        <title>ZPT-JS reference - Configuration - dictionaryChanges</title>
         
         <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
         <script type="text/javascript" src="../js/zpt.js" defer></script>
@@ -14,7 +14,7 @@
     <body>
         <div data-use-macro="'page@templates.html'">
             <div data-fill-slot="'page-header'">
-                <h1>ZPT-JS reference - Configuration - maxFolderDictionaries</h1>
+                <h1>ZPT-JS reference - Configuration - dictionaryChanges</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
                     <li><a href="#description">Description</a>.</li>
@@ -24,45 +24,59 @@
             <article data-fill-slot="'article'">
                 <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
-maxFolderDictionaries ::= Integer
+dictionaryChanges ::= a javascript object
                 </pre>
                 
                 <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <code>maxFolderDictionaries</code> defines the maximum number of <em>folder dictionaries</em> to preload. It is an integer value.
+                    The <code>dictionaryChanges</code> is used to declare one or more values in dictionary that must be updated. It is a javascript object.
                 </p>
                 
                 <p>
-                    Important! This configuration option must be used beside <a href="configuration-command.html">preload</a> command. It the command is not <em>preload</em> it will be ignored.
+                    Important! This configuration option must be used beside <a href="configuration-command.html">update</a> command. It the command is not <em>update</em> it will be ignored.
                 </p>
                 
-                <p>
-                    For more details about <a href="../tutorial/folderDictionaries.html">folder dictionaries</a> read the tutorial.
-                </p>
-
                 <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
-                    An example of ZPT-JS invokation using <em>maxFolderDictionaries</em> (reading a maximum of 5):
+                    An example of <em>fullRender</em>:
                 </p>
-                <pre class="brush: js; highlight: [13]">
+                <pre class="brush: js; highlight: [29]">
 "use strict";
 
 var zpt = require( 'zpt' );
 
 var dictionary = {
-    ...
+    aString: "string",
+    doggy: false,
+    number: 23,
+    user: {
+        name: "Bob", 
+        age: function( ){
+            return 25;
+        }
+    },
+    items: [ "item0", "item1", "item2" ]
 };
 
+// Parse template
 zpt.run({
-    command: 'preload',
     root: document.body,
-    dictionary: dictionary,
-    maxFolderDictionaries: 5,
-    callback: function(){
+    dictionary: dictionary
+});
 
-        zpt.run();
-        
-        [your code here]
+[ your code here ]
+
+// Second execution: update the DOM, the user and the number have changed
+zpt.run({
+    command: "update",
+    dictionaryChanges: {
+        number: 30,
+        user: {
+            name: "Kermit", 
+            age: function( ){
+                return 45;
+            }
+        }
     }
 });
                 </pre>

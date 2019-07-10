@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>ZPT-JS reference - Configuration - maxFolderDictionaries</title>
+        <title>ZPT-JS reference - Configuration - indexExpressions</title>
         
         <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
         <script type="text/javascript" src="../js/zpt.js" defer></script>
@@ -14,7 +14,7 @@
     <body>
         <div data-use-macro="'page@templates.html'">
             <div data-fill-slot="'page-header'">
-                <h1>ZPT-JS reference - Configuration - maxFolderDictionaries</h1>
+                <h1>ZPT-JS reference - Configuration - indexExpressions</h1>
                 <ul>
                     <li><a href="#syntax">Syntax</a>.</li>
                     <li><a href="#description">Description</a>.</li>
@@ -24,27 +24,31 @@
             <article data-fill-slot="'article'">
                 <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
-maxFolderDictionaries ::= Integer
+indexExpressions ::= Boolean
                 </pre>
                 
                 <h2 data-attributes="id 'description'">Description</h2>
                 <p>
-                    The <code>maxFolderDictionaries</code> defines the maximum number of <em>folder dictionaries</em> to preload. It is an integer value.
+                    If <code>indexExpressions</code> is <code>true</code> ZPT builds an index with all the expressions and their dependencies. This makes it easy a later <em>update</em> command. It is an boolean value. The default value is <code>true</code>.
                 </p>
                 
                 <p>
-                    Important! This configuration option must be used beside <a href="configuration-command.html">preload</a> command. It the command is not <em>preload</em> it will be ignored.
+                    If it is <code>true</code> ZPT will add a <code>data-id</code> attribute to every tag with ZPT attributes (a counter value starting by 1). It is needed by the index.
                 </p>
                 
                 <p>
-                    For more details about <a href="../tutorial/folderDictionaries.html">folder dictionaries</a> read the tutorial.
+                    You can set this value to <code>false</code> if you are not going to use <em>update</em> commands to improve performance.
+                </p>
+                
+                <p>
+                    Important! This configuration option must be used beside a <a href="configuration-command.html">fullRender</a> command and previous to an <a href="configuration-command.html">update</a> command. It the command is not <em>fullRender</em> it will be ignored and the <em>update</em> command will do nothing.
                 </p>
 
                 <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
-                    An example of ZPT-JS invokation using <em>maxFolderDictionaries</em> (reading a maximum of 5):
+                    An example of ZPT-JS invokation using <em>indexExpressions</em>:
                 </p>
-                <pre class="brush: js; highlight: [13]">
+                <pre class="brush: js; highlight: [12]">
 "use strict";
 
 var zpt = require( 'zpt' );
@@ -54,16 +58,9 @@ var dictionary = {
 };
 
 zpt.run({
-    command: 'preload',
-    root: document.body,
+    root: document.getElementById( 't1' ),
     dictionary: dictionary,
-    maxFolderDictionaries: 5,
-    callback: function(){
-
-        zpt.run();
-        
-        [your code here]
-    }
+    indexExpressions: false
 });
                 </pre>
             </article>

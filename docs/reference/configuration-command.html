@@ -24,7 +24,7 @@
             <article data-fill-slot="'article'">
                 <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
-command ::= 'preload' | 'fullRender' | 'partialRender'
+command ::= 'preload' | 'fullRender' | 'partialRender' | 'update'
                 </pre>
                 
                 <h2 data-attributes="id 'description'">Description</h2>
@@ -40,8 +40,9 @@ command ::= 'preload' | 'fullRender' | 'partialRender'
                             <li><em>HTML files including external macros</em>. ZPT-JS will search the files to preload, but some files must be declared using <a href="configuration-declaredRemotePageUrls.html">declaredRemotePageUrls</a> configuration option.</li>
                         </ul>
                     </li>
-                    <li><em>fullRender</em>. Do a render of the <a href="configuration-root.html">root</a> element(s).</li>
-                    <li><em>partialRender</em>. Do a render of the <a href="configuration-target.html">target</a> element(s).</li>
+                    <li><em>fullRender</em>. It does a render of the <a href="configuration-root.html">root</a> element(s).</li>
+                    <li><em>partialRender</em>. It does a render of the <a href="configuration-target.html">target</a> element(s).</li>
+                    <li><em>update</em>. It updates the DOM to match one or more changes of the dictionary using the minimum changes. It is mandatory to define a <a href="configuration-dictionaryChanges.html">dictionaryChanges</a> configuration. The <a href="configuration-indexExpressions.html">indexExpressions</a> configuration value must be <code>true</code> (the default value).</li>
                 </ul>
 
                 <h2 data-attributes="id 'examples'">Examples</h2>
@@ -84,7 +85,7 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way:
+                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way using the <em>partialRender</em> command:
                 </p>
                 <pre class="brush: js; highlight: [19]">
 "use strict";
@@ -114,7 +115,43 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    If we don't use external macros ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro ZPT-JS needs to load one or more external files using HTTP. This makes ZPT-JS code executes asynchronously. Keep in mind this! To deal with this take a look at:
+                    Zcrud also allows to update the DOM depending on some changes in the dictionary:
+                </p>
+                
+                <pre class="brush: js; highlight: [19]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: update the DOM
+zpt.run({
+    command: 'update',
+    dictionaryChanges: {
+        ...
+    }
+});
+                </pre>
+                <p>
+                    ZPT also updates the dictionary with the values in <em>dictionaryChanges</em>. It is shallow copy, not a deep copy.
+                </p>
+                
+                <p>
+                    If we don't use external resources (external macros or i18n files) ZPT-JS executes synchronously: no external file needs to be loaded. But if we use at least one external macro or one i18n file ZPT-JS needs to load one or more external files using HTTP using the <em>preload</em> command. This makes ZPT-JS code executes asynchronously. Keep in mind this! 
+                </p>
+                <p>
+                     An example preloading external macro files:
                 </p>
                 <pre class="brush: js; highlight: [10]">
 "use strict";
@@ -139,6 +176,35 @@ zpt.run({
                 <p>
                     First invokation of <em>zpt.run</em> preload <em>externalMacros-definitions1.html</em> and <em>externalMacros-definitions2.html</em>. The second one (inside the callback) renders the HTML after preloading.
                 </p>
+                
+                <p>
+                    An example preloading i18n resources (only one language):
+                </p>
+                <pre class="brush: js; highlight: [10]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.run({
+    command: 'preload',
+    root: document.body,
+    dictionary: dictionary,
+    i18n: {
+        urlPrefix: './i18n/',
+        files: {
+            'es': [ 'es1.json', 'es2.json' ]
+        }
+    },
+    callback: function(){
+        zpt.run();
+        [ your code here ]
+    }
+});
+                </pre>
             </article>
         </div>
     </body>
