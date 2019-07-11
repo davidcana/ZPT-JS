@@ -85,7 +85,7 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way using the <em>partialRender</em> command:
+                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way using the <em>partialRender</em> command and defining a <em>target</em> element instead of a <em>root</em>:
                 </p>
                 <pre class="brush: js; highlight: [19]">
 "use strict";
@@ -115,7 +115,7 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    Zcrud also allows to update the DOM depending on some changes in the dictionary:
+                    ZPT-JS provides an alternative to <em>partialRender</em> command: the <em>update</em> command. With this command ZPT-JS updates the DOM inside the root element depending on some changes in the dictionary. To do this ZPT-JS builds an index with data about the expressions and attributes to know the parts of the DOM to update. Let's see an example:
                 </p>
                 
                 <pre class="brush: js; highlight: [19]">
@@ -144,7 +144,7 @@ zpt.run({
 });
                 </pre>
                 <p>
-                    ZPT also updates the dictionary with the values in <em>dictionaryChanges</em>. It is shallow copy, not a deep copy.
+                    ZPT-JS also updates the dictionary with the values in <em>dictionaryChanges</em>. It is shallow copy, not a deep copy.
                 </p>
                 
                 <p>

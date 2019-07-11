@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>More about invoking ZPT</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - More about invoking ZPT</h1>
+                <ul>
+                    <li><a href="#intro">Intro</a>.</li>
+                    <li><a href="#fullRender">The fullRender command</a>.</li>
+                    <li><a href="#partialRender">Thr partialRender command</a>.</li>
+                    <li><a href="#update">The update command</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'intro'">Intro</h2>
+                <p>
+                    This document details the available options of invoking ZPT-JS to update the DOM of the web pages. The <em>preload</em> command is not covered here, take a look at <a href="macros.html">macros</a> and at <a href="i18n.html">i18n</a> to view some examples about this command.
+                </p>
+                
+                <h2 data-attributes="id 'fullRender'">The fullRender command</h2>
+                <p>
+                    The <strong>fullRender</strong> is the only mandatory command you must use. When you invoke it ZPT-JS locates the root provided by the command and looks for all the custom attributes related to ZPT-JS. Then ZPT-JS does the corresponding action of each found attribute.
+                </p>
+                
+                <p>
+                    An example of <em>fullRender</em>:
+                </p>
+                <pre class="brush: js; highlight: [13]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary,
+    command: 'fullRender'
+});
+                </pre>
+                <p>
+                    This is exactly equivalent to the next example (without setting command, <em>fullRender</em> is the default command):
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <h2 data-attributes="id 'partialRender'">The partialRender command</h2>
+                <p>
+                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way using the <em>partialRender</em> command and defining a <em>target</em> element instead of a <em>root</em>:
+                </p>
+                <pre class="brush: js; highlight: [19]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: render only some elements
+zpt.run({
+    command: 'partialRender',
+    target: [ 
+        document.getElementById( 'id1' ), 
+        document.getElementById( 'id2' )
+    ]
+});
+                </pre>
+                
+                <h2 data-attributes="id 'update'">The update command</h2>
+                <p>
+                    ZPT-JS provides an alternative to <em>partialRender</em> command: the <em>update</em> command. With this command ZPT-JS updates the DOM inside the root element depending on some changes in the dictionary. To do this ZPT-JS builds an index with data about the expressions and attributes to know the parts of the DOM to update. Let's see an example:
+                </p>
+                
+                <pre class="brush: js; highlight: [19]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: update the DOM
+zpt.run({
+    command: 'update',
+    dictionaryChanges: {
+        ...
+    }
+});
+                </pre>
+                <p>
+                    ZPT-JS also updates the dictionary with the values in <em>dictionaryChanges</em>. It is shallow copy, not a deep copy.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>
