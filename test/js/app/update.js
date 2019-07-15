@@ -11,9 +11,7 @@ var errorsArray;
 var errorFunction = function( _errorsArray ) {
     
     errorsArray = _errorsArray;
-    /*alert( 
-        errorsArray.join( '\n' ) 
-    );*/
+    //alert( errorsArray );
 };
 zpt.context.setErrorFunction( errorFunction );
 
@@ -495,4 +493,41 @@ QUnit.test( "var in macro test", function( assert ) {
             removedNodeUpdates: 1
         }
     );
+});
+
+QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
+
+    var dictionary = {
+        number1: 1,
+        text1: 'test 1'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't10' ),
+        dictionary: dictionary,
+        indexExpressions: false
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t10-1').text() , "" + arguments[ 0 ] );
+        assert.equal( $('#t10-2').text() , "" + arguments[ 1 ] );        
+        assert.equal( errorsArray, arguments[ 2 ] );
+    };
+
+    testFunction( 1, 'test 1' );
+
+    var dictionaryChanges = {
+        number1: 2
+    };
+    dictionary.text1 = 'test 2';
+    
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+    
+    // No changes done to DOM, no index was built
+    testFunction( 1, 'test 1', 'Unable to update, no index built! Set indexExpressions to true!' );
 });

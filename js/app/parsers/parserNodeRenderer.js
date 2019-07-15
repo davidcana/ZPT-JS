@@ -90,7 +90,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talRepeat = attributeCache.getByAttributeClass( 
             TALRepeat, 
             attributes.talRepeat, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         var loop = talRepeat.process( scope, node );
@@ -245,10 +246,11 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         );
         
         ParserNodeRenderer.processDefine( 
-            indexExpressions? node: undefined,
+            node,
             attributes.talDefine,  
             false,
-            scope
+            scope,
+            indexExpressions
         );
         
         if ( ! processCondition(
@@ -321,7 +323,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talOnError = attributeCache.getByAttributeClass( 
             TALOnError, 
             string, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         return talOnError.putToAutoDefineHelper( autoDefineHelper );
@@ -337,7 +340,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talDefine = attributeCache.getByAttributeClass( 
             TALDefine, 
             string, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         return talDefine.process( scope, false );
@@ -352,7 +356,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var i18nDomain = attributeCache.getByAttributeClass( 
             I18NDomain, 
             string, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         return i18nDomain.putToAutoDefineHelper( scope, autoDefineHelper );
@@ -367,7 +372,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var i18nLanguage = attributeCache.getByAttributeClass( 
             I18NLanguage, 
             string, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         return i18nLanguage.putToAutoDefineHelper( autoDefineHelper );
@@ -382,7 +388,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talDeclare = attributeCache.getByAttributeClass( 
             TALDeclare, 
             string, 
-            indexExpressions? node: undefined, 
+            node,
+            indexExpressions,
             scope
         );
         return talDeclare.process( scope, autoDefineHelper );
@@ -428,7 +435,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talCondition = attributeCache.getByAttributeClass( 
             TALCondition, 
             string, 
-            indexExpressions? node: undefined, 
+            node,
+            indexExpressions,
             scope
         );
         return talCondition.process( scope, node );
@@ -443,7 +451,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talReplace = attributeCache.getByAttributeClass( 
             TALReplace, 
             string, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         return talReplace.process( scope, node );
@@ -458,7 +467,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talOmitTag = attributeCache.getByAttributeClass( 
             TALOmitTag, 
             string, 
-            indexExpressions? node: undefined, 
+            node,
+            indexExpressions,
             scope
         );
         return talOmitTag.process( scope, node );
@@ -473,7 +483,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talContent = attributeCache.getByAttributeClass( 
             TALContent, 
             string, 
-            indexExpressions? node: undefined,
+            node,
+            indexExpressions,
             scope
         );
         return talContent.process( scope, node );
@@ -488,7 +499,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
         var talAttributes = attributeCache.getByAttributeClass( 
             TALAttributes, 
             string, 
-            indexExpressions? node: undefined, 
+            node,
+            indexExpressions,
             scope 
         );
         return talAttributes.process( scope, node );
@@ -501,7 +513,7 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
     return self;
 };
 
-ParserNodeRenderer.processDefine = function( node, string, forceGlobal, scope ) {
+ParserNodeRenderer.processDefine = function( node, string, forceGlobal, scope, indexExpressions ) {
 
     if ( ! string ) {
         return;
@@ -511,6 +523,7 @@ ParserNodeRenderer.processDefine = function( node, string, forceGlobal, scope ) 
         TALDefine, 
         string, 
         node,
+        indexExpressions,
         scope
     );
     return talDefine.process( scope, forceGlobal );

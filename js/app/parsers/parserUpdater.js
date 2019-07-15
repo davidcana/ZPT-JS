@@ -26,28 +26,39 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
     var run = function(){
         
-        // Update dictionary
-        $.extend( parserOptions.dictionary, dictionaryChanges );
-        
-        // Init some vars
-        nodeAttributes = {};
-        statistics = {
-            totalUpdates: 0,
-            removedNodeUpdates: 0
-        };
-        
-        // Build data form changed vars
-        for ( var varName in dictionaryChanges ){
-            buildDataFromVarChange( varName );
-        }
-        
-        // Update attributes
-        for ( var i in nodeAttributes ) {
-            var currentNodeAttributeList = nodeAttributes[ i ];
-            for ( var j in currentNodeAttributeList ){
-                updateAttribute( currentNodeAttributeList[ j ] );   
+        try {
+            // Check the index was built
+            if ( ! parserOptions.indexExpressions ){
+                throw 'Unable to update, no index built! Set indexExpressions to true!';
             }
-        } 
+
+            // Update dictionary
+            $.extend( parserOptions.dictionary, dictionaryChanges );
+
+            // Init some vars
+            nodeAttributes = {};
+            statistics = {
+                totalUpdates: 0,
+                removedNodeUpdates: 0
+            };
+
+            // Build data form changed vars
+            for ( var varName in dictionaryChanges ){
+                buildDataFromVarChange( varName );
+            }
+
+            // Update attributes
+            for ( var i in nodeAttributes ) {
+                var currentNodeAttributeList = nodeAttributes[ i ];
+                for ( var j in currentNodeAttributeList ){
+                    updateAttribute( currentNodeAttributeList[ j ] );   
+                }
+            }
+            
+        } catch( e ){
+            log.fatal( 'Exiting run method of update command of ZPT with errors: ' + e );
+            context.errorFunction( e );
+        }
     };
 
     var buildDataFromVarChange = function( varName ){

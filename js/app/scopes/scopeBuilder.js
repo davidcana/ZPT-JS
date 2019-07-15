@@ -62,7 +62,8 @@ module.exports = (function() {
                 return processListOfDefines( 
                     scope, 
                     itemsList, 
-                    parserOptions.indexExpressions? node: undefined
+                    node,
+                    parserOptions.indexExpressions
                 );
             }
             
@@ -73,7 +74,7 @@ module.exports = (function() {
         throw 'Error trying to update scope: root not found!';
     };
     
-    var processListOfDefines = function( scope, itemsList, node ){
+    var processListOfDefines = function( scope, itemsList, node, indexExpressions ){
         
         for ( var c = itemsList.length - 1; c >= 0; c-- ) {
             var talDefine = itemsList[ c ];
@@ -81,7 +82,8 @@ module.exports = (function() {
                 node, 
                 talDefine, 
                 true,
-                scope
+                scope,
+                indexExpressions
             );
         }
     };

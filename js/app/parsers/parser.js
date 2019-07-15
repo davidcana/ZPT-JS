@@ -24,7 +24,6 @@ module.exports = (function() {
         root: undefined,
         dictionary: {},
         indexExpressions: true
-        //indexExpressions: false
         //notRemoveGeneratedTags,
         //target,
         //declaredRemotePageUrls,

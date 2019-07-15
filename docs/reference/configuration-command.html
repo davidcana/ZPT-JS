@@ -42,7 +42,7 @@ command ::= 'preload' | 'fullRender' | 'partialRender' | 'update'
                     </li>
                     <li><em>fullRender</em>. It does a render of the <a href="configuration-root.html">root</a> element(s).</li>
                     <li><em>partialRender</em>. It does a render of the <a href="configuration-target.html">target</a> element(s).</li>
-                    <li><em>update</em>. It updates the DOM to match one or more changes of the dictionary using the minimum changes. It is mandatory to define a <a href="configuration-dictionaryChanges.html">dictionaryChanges</a> configuration. The <a href="configuration-indexExpressions.html">indexExpressions</a> configuration value must be <code>true</code> (the default value).</li>
+                    <li><em>update</em>. It updates the DOM to match one or more changes of the dictionary using the minimum changes. It is mandatory to define a <a href="configuration-dictionaryChanges.html">dictionaryChanges</a> configuration. The <a href="configuration-indexExpressions.html">indexExpressions</a> configuration value must be <code>true</code> (the default value). If it is <code>false</code> an error is thrown.</li>
                 </ul>
 
                 <h2 data-attributes="id 'examples'">Examples</h2>
