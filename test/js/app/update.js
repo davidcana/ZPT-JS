@@ -531,3 +531,104 @@ QUnit.test( "simple TALContent with indexExpressions = false test", function( as
     // No changes done to DOM, no index was built
     testFunction( 1, 'test 1', 'Unable to update, no index built! Set indexExpressions to true!' );
 });
+
+QUnit.test( "simple METALFillSlot test", function( assert ) {
+    
+    var done = assert.async();
+    var id = 't11';
+    context.setExpressionCounter( 200 );
+    
+    var dictionary = {
+        items: [ 'item0', 'item1', 'item2' ],
+        slot: 'header'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        command: 'preload',
+        root: document.getElementById( id ),
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
+        callback: function(){
+            
+            zpt.run();
+            
+            var t = `
+<div data-use-macro=\"'dynamicListWith2Slots@externalMacros-definitions.html'\" data-id=\"201\" style=\"display: none;\">
+    <div data-fill-slot=\"slot\" data-id=\"202\">
+        My custom slot
+    </div>
+</div>
+<div data-mmacro=\"dynamicListWith2Slots\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"201\" data-qdup=\"1\">
+    <div data-id=\"203\">
+            My custom slot
+        </div>
+    <ul>
+        <li data-repeat=\"item items\" data-id=\"204\" style=\"display: none;\">
+            <span data-content=\"item\">An item</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"205\" data-related-id=\"204\" data-tauto-define=\"item-index 0;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"206\">item0</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"207\" data-related-id=\"204\" data-tauto-define=\"item-index 1;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"208\">item1</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"209\" data-related-id=\"204\" data-tauto-define=\"item-index 2;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"210\">item2</span>
+        </li>
+    </ul>
+    <div data-define-slot=\"footer\">
+        Default footer
+    </div>
+</div>
+`;
+            utils.assertHtml( assert, '#' + id, t );
+
+            var dictionaryChanges = {
+                slot: 'footer'
+            };
+
+            //debugger;
+            
+            zpt.run({
+                command: 'update',
+                dictionaryChanges: dictionaryChanges
+            });
+            
+            t = `
+<div data-use-macro=\"'dynamicListWith2Slots@externalMacros-definitions.html'\" data-id=\"201\" style=\"display: none;\">
+    <div data-fill-slot=\"slot\" data-id=\"202\">
+        My custom slot
+    </div>
+</div>
+<div data-mmacro=\"dynamicListWith2Slots\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"201\" data-qdup=\"1\">
+    <div data-define-slot=\"header\">
+        Default header
+    </div>
+    <ul>
+        <li data-repeat=\"item items\" data-id=\"212\" style=\"display: none;\">
+            <span data-content=\"item\">An item</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"213\" data-related-id=\"212\" data-tauto-define=\"item-index 0;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"214\">item0</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"215\" data-related-id=\"212\" data-tauto-define=\"item-index 1;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"216\">item1</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"217\" data-related-id=\"212\" data-tauto-define=\"item-index 2;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"218\">item2</span>
+        </li>
+    </ul>
+    <div data-id=\"211\">
+        My custom slot
+    </div>
+</div>
+`;
+            utils.assertHtml( assert, '#' + id, t );
+            //assert.equal( $('#' + id).html().trim(), t );
+
+            done();
+        }
+    });
+});

@@ -7,7 +7,10 @@ var context = require( '../../context.js' );
 var Scope = require( '../../scopes/scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+var attributeIndex = require( '../attributeIndex.js' );
+var attributeCache = require( '../../cache/attributeCache.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
+var METALFillSlot = require( './metalFillSlot.js' );
 var resolver = require( '../../resolver.js' );
 var $ = require( 'jquery' );
 
@@ -34,7 +37,7 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         updateNewNodeAttributes( macroKey, newNode, autoDefineHelper, tags, node, indexExpressions );
         
         // Fill slots
-        fillSlots( scope, node, tags, newNode );
+        fillSlots( scope, node, tags, newNode, indexExpressions );
 
         // Add the macro node
         node.parentNode.insertBefore( newNode, node.nextSibling );
@@ -66,17 +69,32 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
         }
     };
     
-    var fillSlots = function( scope, node, tags, newNode ){
+    var fillSlots = function( scope, node, tags, newNode, indexExpressions ){
         
         $( node ).find( "[" + resolver.filterSelector( tags.metalFillSlot ) + "]" ).each(
             
-            function( index, value ) {
+            function( index, element ) {
                 
                 var slotIdExpressionString = $( this ).attr( tags.metalFillSlot );
                 var slotIdExpression = expressionBuilder.build( slotIdExpressionString );
                 var slotId = slotIdExpression.evaluate( scope );
                 //console.log( 'replacing ' + slotId + '...' );
 
+                // Index fill slot element
+                if ( indexExpressions ){
+                    var metalFillSlot = attributeCache.getByAttributeClass( 
+                        METALFillSlot, 
+                        slotIdExpressionString, 
+                        element,
+                        indexExpressions,
+                        scope,
+                        function(){
+                            return METALFillSlot.build( slotIdExpressionString, node );
+                        }
+                    );
+                    attributeIndex.add( element, metalFillSlot, scope );   
+                }
+                
                 // Do nothing if slotIdExpression evaluates to false
                 if ( ! slotId ){
                     return;

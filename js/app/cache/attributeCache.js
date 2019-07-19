@@ -82,12 +82,12 @@ module.exports = (function() {
         return index( node, builded, scope );
     };
     
-    var getByAttributeClass = function( attributeInstance, string, node, indexExpressions, scope ) {
+    var getByAttributeClass = function( attributeInstance, string, node, indexExpressions, scope, constructor ) {
         
         return getByDetails( 
                 attributeInstance.id, 
                 string, 
-                function(){
+                constructor || function(){
                     return attributeInstance.build( string );
                 }, 
                 false,

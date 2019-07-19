@@ -81,5 +81,19 @@
             </ul>
         </div>
         
+        <div data-define-macro="dynamicListWith2Slots">
+            <div data-define-slot="header">
+                Default header
+            </div>
+            <ul>
+                <li data-repeat="item items">
+                    <span data-content="item">An item</span>
+                </li>
+            </ul>
+            <div data-define-slot="footer">
+                Default footer
+            </div>
+        </div>
+        
     </body>
 </html>
