@@ -6,8 +6,7 @@
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-
-var $ = require( 'jquery' );
+var utils = require( '../../utils.js' );
 
 var TALAttributes = function( stringToApply, attributeItemsToApply ) {
     
@@ -39,7 +38,7 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
             return;
         }
         
-        if ( ! $.isPlainObject( map ) ){
+        if ( ! utils.isPlainObject( map ) ){
             throw 'Invalid attribute value: "' + map + '". Object expected.';
         }
         

@@ -3,7 +3,7 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 var I18n = require( './i18n.js' );
 var I18nBundle = require( './i18nBundle.js' );
 var context = require( '../context.js' );
@@ -44,6 +44,32 @@ module.exports = (function() {
     var loadAsyncItem = function( map, callback, failCallback, remoteList, currentIndex ){
         
         var url = remoteList[ currentIndex ];
+        utils.getJSON( 
+            {
+                url: url,
+                done: function( data ) {
+                    map[ url ] = data;
+                    if ( currentIndex > 0 ){
+                        loadAsyncItem( 
+                            map, 
+                            callback, 
+                            failCallback,
+                            remoteList, 
+                            --currentIndex );
+                    } else {
+                        callback( map );
+                    }
+                },
+                fail: function( jqxhr, textStatus, error ) {
+                    context.asyncError( url, error, failCallback );
+                }
+            }
+        );
+    };
+    /*
+    var loadAsyncItem = function( map, callback, failCallback, remoteList, currentIndex ){
+        
+        var url = remoteList[ currentIndex ];
         $.getJSON( url )
             .done(
                 function( data ) {
@@ -65,25 +91,6 @@ module.exports = (function() {
                     context.asyncError( url, error, failCallback );
                 }
             );
-    };
-    /*
-    var loadAsyncItem = function( map, deferred, remoteList, currentIndex ){
-
-        var url = remoteList[ currentIndex ];
-        $.getJSON( 
-            url,
-            function( data ) {
-                map[ url ] = data;
-                if ( currentIndex > 0 ){
-                    loadAsyncItem( 
-                        map, 
-                        deferred, 
-                        remoteList, 
-                        --currentIndex );
-                } else {
-                    deferred( map );
-                }
-            });
     };
     */
     

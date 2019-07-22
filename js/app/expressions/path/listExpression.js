@@ -7,7 +7,6 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
 var RangeExpression = require( './rangeExpression.js' );
-var $ = require( 'jquery' );
 
 var ListExpression = function( stringToApply, itemsToApply ) {
     
@@ -22,7 +21,7 @@ var ListExpression = function( stringToApply, itemsToApply ) {
             var expression = items[ i ];
             var evaluated = expression.evaluate( scope );
             
-            if ( $.isArray( evaluated ) ){ 
+            if ( Array.isArray( evaluated ) ){ 
                 result = result.concat( evaluated );
             } else {
                 result.push( evaluated );

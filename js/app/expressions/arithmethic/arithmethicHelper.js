@@ -7,7 +7,6 @@ module.exports = (function() {
     var context = require( '../../context.js' );
     var ExpressionTokenizer = require( '../expressionTokenizer.js' );
     var evaluateHelper = require( '../evaluateHelper.js' );
-    var $ = require( 'jquery' );
     
     var build = function( string, tag ) {
         var expressionBuilder = require( '../expressionBuilder.js' );
@@ -34,7 +33,7 @@ module.exports = (function() {
             var expression = expressionList[ i ];
             var evaluated = expression.evaluate( scope );
             
-            if ( ! $.isArray( evaluated ) ){ 
+            if ( ! Array.isArray( evaluated ) ){ 
                 // Process numeric value
                 result = processInteger( 
                     c++, 

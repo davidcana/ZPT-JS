@@ -4,7 +4,7 @@
 "use strict";
 
 var context = require( '../context.js' );
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 var loadjs = require( 'loadjs' );
 
 var Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderDictionaries ) {
@@ -113,7 +113,7 @@ Scope.prototype.get = function( name ) {
         return value;
     }
     
-    return value && $.isFunction( value.evaluate )?
+    return value && utils.isFunction( value.evaluate )?
         value.evaluate( this ): 
         'Error evaluating property "' + name + '": ' + value;
 };

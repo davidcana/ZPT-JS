@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
 var context = require( '../context.js' );
 
 module.exports = (function() {
@@ -13,7 +12,7 @@ module.exports = (function() {
     var removeGeneratedNodes = function( target ) {
         
         // Is multiroot?
-        if ( $.isArray( target ) ){ 
+        if ( Array.isArray( target ) ){ 
             // There are several roots
             for ( var c = 0; c < target.length; c++ ) {
                 removeNodes( target[ c ] );

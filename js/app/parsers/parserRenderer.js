@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var log = require( '../logHelper.js' );
 var attributeCache = require( '../cache/attributeCache.js' );
@@ -52,7 +51,7 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
     var processAllTargetElements = function() {
 
         // Is multiroot?
-        if ( $.isArray( target ) ){ 
+        if ( Array.isArray( target ) ){ 
             // There are several roots
             for ( var c = 0; c < target.length; c++ ) {
                 process1Target( target[ c ] );

@@ -4,6 +4,7 @@
 "use strict";
 
 var $ = require( 'jquery' );
+var utils = require( '../../../js/app/utils.js' );
 var zpt = require( '../../../js/app/main.js' );
 var context = zpt.context;
 var evaluateHelper = zpt.evaluateHelper;
@@ -25,7 +26,7 @@ var AverageExpression = function( _string, _expressionList ) {
             var expression = expressionList[ i ];
             var evaluated = expression.evaluate( scope );
             
-            if ( ! $.isArray( evaluated ) ){ 
+            if ( ! Array.isArray( evaluated ) ){ 
                 // Process numeric value
                 result = processInteger( 
                     c++, 

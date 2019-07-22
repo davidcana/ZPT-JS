@@ -7,7 +7,7 @@ module.exports = function( languageId, res ) {
     
     var MessageFormat = require( 'messageformat' );
     var context = require( '../context.js' );
-    var $ = require( 'jquery' );
+    var utils = require( '../utils.js' );
     
     var resources = res;
     var mf = new MessageFormat( languageId );
@@ -61,7 +61,7 @@ module.exports = function( languageId, res ) {
     
     var getSource = function( params ){
         
-        return params && $.isFunction( params.toSource )?
+        return params && utils.isFunction( params.toSource )?
             params.toSource():
             '';
     };

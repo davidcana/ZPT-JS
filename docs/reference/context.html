@@ -366,13 +366,12 @@ var altAttributes = {
 "use strict";
 
 var zpt = require( 'zpt' );
-var $ = require( 'jquery' );
 
 var errorCounter = 0;
 zpt.context.setErrorFunction(
     function( error ){
         ++errorCounter;
-        var msg = $.isArray( error )?
+        var msg = Array.isArray( error )?
             error.join( '\n' ):
             error;
         alert( 'Another error: ' + msg );

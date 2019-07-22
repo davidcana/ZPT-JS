@@ -9,7 +9,7 @@ var attributeIndex = require( '../attributes/attributeIndex.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 var nodeRemover = require( './nodeRemover.js' );
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 
 var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
@@ -33,7 +33,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
             }
 
             // Update dictionary
-            $.extend( parserOptions.dictionary, dictionaryChanges );
+            utils.extend( parserOptions.dictionary, dictionaryChanges );
 
             // Init some vars
             nodeAttributes = {};

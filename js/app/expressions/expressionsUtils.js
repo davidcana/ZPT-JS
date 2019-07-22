@@ -4,7 +4,7 @@
 "use strict";
 
 var evaluateHelper = require( './evaluateHelper.js' );
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 var DepsDataItem = require( '../parsers/depsDataItem.js' );
 
 module.exports = (function() {
@@ -55,7 +55,7 @@ module.exports = (function() {
             return result;
         }
         
-        if ( ! $.isArray( arg ) ){
+        if ( ! Array.isArray( arg ) ){
             return getDependsOnFromNonList( depsDataItem, scope, arg );
         }
         
@@ -63,7 +63,7 @@ module.exports = (function() {
         for ( var i = 0; i < list.length; i++ ) {
             var item = list[ i ];
             result = result.concat( 
-                $.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( depsDataItem, scope, item )
+                Array.isArray( item )? getDependsOnFromList( scope, item ): getDependsOnFromNonList( depsDataItem, scope, item )
             );
         }
 
@@ -72,10 +72,9 @@ module.exports = (function() {
     
     var getDependsOnFromNonList = function( depsDataItem, scope, item ){
         
-        return ! $.isFunction( item.dependsOn ) || ( $.isFunction( item.getVarName ) && depsDataItem === item.getVarName() )? 
+        return ! utils.isFunction( item.dependsOn ) || ( utils.isFunction( item.getVarName ) && depsDataItem === item.getVarName() )? 
             []: 
             item.dependsOn( depsDataItem, scope );
-        //return $.isFunction( item.dependsOn )? item.dependsOn( scope ): [];
     };
     
     return {

@@ -4,6 +4,7 @@
 "use strict";
 
 var $ = require( 'jquery' );
+var utils = require( './utils.js' );
 var context = require( './context.js' );
 var expressionBuilder = require( './expressions/expressionBuilder.js' );
 
@@ -158,7 +159,7 @@ module.exports = (function( ) {
         remotePages = {};
         
         if ( ! pending ){
-            if ( callback && $.isFunction( callback ) ){
+            if ( callback && utils.isFunction( callback ) ){
                 callback();   
             }
             return;
@@ -175,7 +176,7 @@ module.exports = (function( ) {
                 var element = $( '<div></div>' );
                 element.html( html );
                 remotePages[ this.url ] = element;
-                if ( --pending == 0 && callback && $.isFunction( callback ) ){
+                if ( --pending == 0 && callback && utils.isFunction( callback ) ){
                     callback();
                 }
             }).fail( function( jqXHR, textStatus, error ) {

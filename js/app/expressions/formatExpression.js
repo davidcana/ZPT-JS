@@ -3,7 +3,7 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 var context = require( '../context.js' );
 var ExpressionTokenizer = require( './expressionTokenizer.js' );
 var expressionsUtils = require( './expressionsUtils.js' );
@@ -59,7 +59,7 @@ var FormatExpression = function( stringToApply, formatterExpressionToApply, args
     };
     
     var isValidFormatter = function( formatter ){
-        return formatter && $.isFunction( formatter );
+        return formatter && utils.isFunction( formatter );
     };
     
     var dependsOn = function( depsDataItem, scope ){

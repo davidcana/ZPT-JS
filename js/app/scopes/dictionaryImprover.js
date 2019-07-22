@@ -3,7 +3,7 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 
 module.exports = (function() {
     
@@ -50,7 +50,7 @@ module.exports = (function() {
     var copy = function( from, to, key ){
         
         var value = from[ key ];
-        var newValue = $.isPlainObject( value )? $.extend( true, {}, value ): value;
+        var newValue = utils.isPlainObject( value )? utils.deepExtend( {}, value ): value;
         to[ key ] = newValue;
     };
     

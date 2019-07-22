@@ -3,7 +3,7 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
+var utils = require( '../utils.js' );
 var context = require( '../context.js' );
 
 module.exports = (function() {
@@ -41,9 +41,9 @@ module.exports = (function() {
     };
     var addAny = function( node, attributeInstance, item, groupId ){
         
-        if ( $.isPlainObject( item ) ){
+        if ( utils.isPlainObject( item ) ){
             addObject( node, attributeInstance, item );
-        } else if ( $.isArray( item ) ){
+        } else if ( Array.isArray( item ) ){
             addList( node, attributeInstance, item, groupId );
         } else {
             addVar( node, attributeInstance, item, groupId );

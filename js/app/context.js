@@ -4,7 +4,7 @@
 "use strict";
 
 var log4javascript = require( 'log4javascript' );
-var $ = require( 'jquery' );
+var utils = require( './utils.js' );
 var LoopItem = require( './parsers/loopItem.js' );
 
 module.exports = (function() {
@@ -291,7 +291,7 @@ module.exports = (function() {
         "value" : 1
     };
     // All booleanAttributes are also altAttributes
-    $.extend( altAttributes, booleanAttributes );
+    utils.extend( altAttributes, booleanAttributes );
     
     var getAltAttributes = function (){
         return altAttributes;
@@ -307,7 +307,7 @@ module.exports = (function() {
     /* Errors */
     var defaultErrorFunction = function( error ) {
         
-        var msg = $.isArray( error )?
+        var msg = Array.isArray( error )?
             error.join( '\n' ):
             error;
         

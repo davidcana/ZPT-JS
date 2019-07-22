@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
 var context = require( '../context.js' );
 var Scope = require( './scope.js' );
 var utils = require( '../utils.js' );
@@ -90,7 +89,7 @@ module.exports = (function() {
     
     var getRoot = function( parserOptions, target, rootMap ){
         
-        if ( ! $.isArray( parserOptions.root ) ){ 
+        if ( ! Array.isArray( parserOptions.root ) ){ 
             return parserOptions.root;
         }
         
@@ -116,7 +115,7 @@ module.exports = (function() {
         var root = parserOptions.root;
 
         // Is multiroot?
-        if ( $.isArray( root ) ){ 
+        if ( Array.isArray( root ) ){ 
             // There are several roots
             for ( var c = 0; c < root.length; c++ ) {
                 markAsRoot( root[ c ], rootMap );

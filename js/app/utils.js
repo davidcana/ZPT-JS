@@ -16,7 +16,16 @@ module.exports = (function() {
         return result;
     }
     
-    var isArray = Array.isArray;
+    //var isArray = Array.isArray;
+    
+    var isFunction = function isFunction( obj ) {
+
+        // Support: Chrome <=57, Firefox <=52
+        // In some browsers, typeof returns "function" for HTML <object> elements
+        // (i.e., `typeof document.createElement( "object" ) === "function"`).
+        // We don't want to classify *any* DOM node as a function.
+        return typeof obj === "function" && typeof obj.nodeType !== "number";
+    };
     
     var isPlainObject = function( obj ) {
         var proto, Ctor;
@@ -39,6 +48,10 @@ module.exports = (function() {
         return typeof Ctor === "function" && fnToString.call( Ctor ) === ObjectFunctionString;
     };
     var getProto = Object.getPrototypeOf;
+    var class2type = {};
+    var hasOwn = class2type.hasOwnProperty;
+    var fnToString = hasOwn.toString;
+    var ObjectFunctionString = fnToString.call( Object );
     
     var deepExtend = function( out ) {
         out = out || {};
@@ -78,27 +91,48 @@ module.exports = (function() {
         return out;
     };
     
-    var getJSON = function( url, doneListener, failListener ){
+    var getJSON = function( conf ){
         
+        // Check conf object
+        if ( ! conf ){
+            throw 'Error trying to getJSON: no arguments!';
+        }
+        if ( ! conf.url ){
+            throw 'Error trying to getJSON: no URL defined!';
+        }
+        if ( ! conf.done ){
+            throw 'Error trying to getJSON: no done callback defined!';
+        }
+        
+        // Do it!
         var oReq = new window.XMLHttpRequest();
         oReq.addEventListener( 
-            "load",
+            'load',
             function(){
-                doneListener( 
-                    JSON.parse( 
-                        oReq.responseText 
-                    ) 
-                );
+                if ( this.status >= 200 && this.status < 400 ) {
+                    // Success!
+                    conf.done( 
+                        JSON.parse( 
+                            oReq.responseText 
+                        ) 
+                    );
+                } else {
+                    // We reached our target server, but it returned an error
+                    conf.fail( undefined, undefined, this.statusText );
+                }
             }
         );
-        oReq.addEventListener( "error", failListener );
-        oReq.open( "GET", url );
+        if ( conf.fail ){
+            oReq.addEventListener( 'error', conf.fail );
+        }
+        oReq.open( 'GET', conf.url );
         oReq.send();
     };
     
     return {
         generateId: generateId,
-        isArray: isArray,
+        //isArray: isArray,
+        isFunction: isFunction,
         isPlainObject: isPlainObject,
         deepExtend: deepExtend,
         extend: extend,

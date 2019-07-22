@@ -7,7 +7,6 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
-var $ = require( 'jquery' );
 
 var InExpression = function( stringToApply, expressionListToApply ) {
     
@@ -22,7 +21,7 @@ var InExpression = function( stringToApply, expressionListToApply ) {
             var expression = expressionList[ i ];
             var evaluated = expression.evaluate( scope );
             
-            if ( $.isArray( evaluated ) ){ 
+            if ( Array.isArray( evaluated ) ){ 
                 for ( var j = 0; j < evaluated.length; j++ ) {
                     if ( evaluated0 == evaluated[ j ] ){
                         return true;

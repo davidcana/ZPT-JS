@@ -6,7 +6,6 @@
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-var $ = require( 'jquery' );
 
 var TALDeclare = function( _string, _declareItems ) {
     

@@ -6,7 +6,6 @@
 var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
-var $ = require( 'jquery' );
 
 var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
     
