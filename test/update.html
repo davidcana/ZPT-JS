@@ -149,5 +149,20 @@
                 </div>
             </div>
         </div>
+        
+        <h2>Mixing TALContent and TALAttributes</h2>
+        <div id="t12">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>
+                    Textarea:
+                    <textarea id="t12-1"
+                              data-attributes="maxlength number1;
+                                               placeholder text1"
+                              data-content="string:placeholder is ${text1}"></textarea>
+                </li>
+            </ol>
+        </div>
+        
     </body>
 </html>

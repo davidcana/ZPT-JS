@@ -27,8 +27,7 @@ QUnit.test( "simple TALContent test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't1' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function(){
@@ -63,8 +62,7 @@ QUnit.test( "simple TALAttributes test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't2' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function(){
@@ -99,8 +97,7 @@ QUnit.test( "simple TALDefine test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't3' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function(){
@@ -135,8 +132,7 @@ QUnit.test( "simple TALRepeat test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't4' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function(){
@@ -177,9 +173,7 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
         declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
         callback: function(){
             
-            zpt.run({
-                indexExpressions: true
-            });
+            zpt.run();
             
             var t5 = 
 `<div data-use-macro=\"externalMacro\" data-id=\"101\" style=\"display: none;\">
@@ -234,8 +228,7 @@ QUnit.test( "simple TALCondition test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't6' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
     
     var testFunction = function(){
@@ -339,8 +332,7 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
     // First ZPT invokation
     zpt.run({
         root: document.getElementById( 't7' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function(){
@@ -415,8 +407,7 @@ QUnit.test( "2 vars in TALContent test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't8' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function( content, parserUpdater, expectedStatistics ){
@@ -461,8 +452,7 @@ QUnit.test( "var in macro test", function( assert ) {
 
     zpt.run({
         root: document.getElementById( 't9' ),
-        dictionary: dictionary,
-        indexExpressions: true
+        dictionary: dictionary
     });
 
     var testFunction = function( content, parserUpdater, expectedStatistics ){
@@ -493,43 +483,6 @@ QUnit.test( "var in macro test", function( assert ) {
             removedNodeUpdates: 1
         }
     );
-});
-
-QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
-
-    var dictionary = {
-        number1: 1,
-        text1: 'test 1'
-    };
-
-    errorsArray = undefined;
-
-    zpt.run({
-        root: document.getElementById( 't10' ),
-        dictionary: dictionary,
-        indexExpressions: false
-    });
-
-    var testFunction = function(){
-        assert.equal( $('#t10-1').text() , "" + arguments[ 0 ] );
-        assert.equal( $('#t10-2').text() , "" + arguments[ 1 ] );        
-        assert.equal( errorsArray, arguments[ 2 ] );
-    };
-
-    testFunction( 1, 'test 1' );
-
-    var dictionaryChanges = {
-        number1: 2
-    };
-    dictionary.text1 = 'test 2';
-    
-    zpt.run({
-        command: 'update',
-        dictionaryChanges: dictionaryChanges
-    });
-    
-    // No changes done to DOM, no index was built
-    testFunction( 1, 'test 1', 'Unable to update, no index built! Set indexExpressions to true!' );
 });
 
 QUnit.test( "simple METALFillSlot test", function( assert ) {
@@ -631,4 +584,93 @@ QUnit.test( "simple METALFillSlot test", function( assert ) {
             done();
         }
     });
+});
+
+QUnit.test( "mixing TALContent and TALAttributes test", function( assert ) {
+
+    var dictionary = {
+        number1: 100,
+        text1: 'test 1'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't12' ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t12-1').attr('maxlength') , "" + arguments[ 0 ] );
+        assert.equal( $('#t12-1').attr('placeholder') , "" + arguments[ 1 ] );
+        assert.equal( $('#t12-1').text() , "" + arguments[ 2 ] );
+        if ( arguments[ 3 ] ){
+            assert.deepEqual( arguments[ 3 ], arguments[ 4 ] );
+        }   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 
+        100, 
+        'test 1', 
+        'placeholder is test 1'
+    );
+    
+    var dictionaryChanges = {
+        text1: 'test 2'
+    };
+    dictionary.number1 = 200;
+
+    var parserUpdater = zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 
+        100, 
+        'test 2', 
+        'placeholder is test 2',
+        parserUpdater.getStatistics(),
+        {
+            "removedNodeUpdates": 0,
+            "totalUpdates": 2
+        }
+    );
+});
+
+QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
+
+    var dictionary = {
+        number1: 1,
+        text1: 'test 1'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't10' ),
+        dictionary: dictionary,
+        indexExpressions: false
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t10-1').text() , "" + arguments[ 0 ] );
+        assert.equal( $('#t10-2').text() , "" + arguments[ 1 ] );        
+        assert.equal( errorsArray, arguments[ 2 ] );
+    };
+
+    testFunction( 1, 'test 1' );
+
+    var dictionaryChanges = {
+        number1: 2
+    };
+    dictionary.text1 = 'test 2';
+    
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+    
+    // No changes done to DOM, no index was built
+    testFunction( 1, 'test 1', 'Unable to update, no index built! Set indexExpressions to true!' );
 });
