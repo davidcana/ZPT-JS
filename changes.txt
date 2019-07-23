@@ -7,19 +7,19 @@ New in future versions
 - Add data-tswitch expression and data-tcase expression?
 - Implement adquisition?
 
-New in 0.37.0
+New in 0.38.0
 - Add options.registerComponent?
 - Add support of components. Components must implement these methods:
     - beforeProcessing()
     - afterProcessing()
     - getTemplate( viewId ) ?
 
-New in 0.36.1
+New in 0.37.0
 - Remove jquery dependency?
 
 New in 0.36.0
-- Add new command: update?
-- Add options.updatedDictionary (object) to set the list of properties to bind?
+- Added new command: update.
+- Added options.updatedDictionary (object) to set the list of properties to bind.
 
 New in 0.35.0
 - Added new tag: data-declare. It declares a list of items, each item is a variable name, a variable type (optional) and a default value expression (optional too). Optionally a 'required' suffix can be added. A strict mode is set to true inside the node with this attribute.
