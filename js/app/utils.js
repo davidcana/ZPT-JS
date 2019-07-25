@@ -91,6 +91,51 @@ module.exports = (function() {
         return out;
     };
     
+    var ajax = function( conf ){
+        
+        // Check conf object
+        if ( ! conf ){
+            throw 'Error trying to process ajax: no arguments!';
+        }
+        if ( ! conf.url ){
+            throw 'Error trying to process ajax: no URL defined!';
+        }
+        if ( ! conf.done ){
+            throw 'Error trying to process ajax: no done callback defined!';
+        }
+        
+        // Do it!
+        var oReq = new window.XMLHttpRequest();
+        oReq.addEventListener( 
+            'load',
+            function(){
+                if ( this.status >= 200 && this.status < 400 ) {
+                    // Success!
+                    conf.done( 
+                        conf.parseJSON?
+                        JSON.parse( oReq.responseText ):
+                        oReq.responseText
+                    );
+                } else {
+                    // We reached our target server, but it returned an error
+                    conf.fail( undefined, undefined, this.statusText );
+                }
+            }
+        );
+        if ( conf.fail ){
+            oReq.addEventListener( 'error', conf.fail );
+        }
+        oReq.open( 'GET', conf.url );
+        oReq.send();
+    };
+    
+    var getJSON = function( conf ){
+        
+        conf.parseJSON = true;
+        ajax( conf );
+    };
+    
+    /*
     var getJSON = function( conf ){
         
         // Check conf object
@@ -128,6 +173,7 @@ module.exports = (function() {
         oReq.open( 'GET', conf.url );
         oReq.send();
     };
+    */
     
     return {
         generateId: generateId,
@@ -136,6 +182,7 @@ module.exports = (function() {
         isPlainObject: isPlainObject,
         deepExtend: deepExtend,
         extend: extend,
-        getJSON: getJSON
+        getJSON: getJSON,
+        ajax: ajax
     };
 })();

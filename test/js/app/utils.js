@@ -4,6 +4,8 @@
 "use strict";
 
 var $ = require( 'jquery' );
+var Qunit = require('qunit');
+var htmlComparator = require( './htmlComparator.js' );
 
 module.exports = (function() {
     
@@ -22,12 +24,40 @@ module.exports = (function() {
         return seconds;
     };
     
+    var assertHtml = function ( assert, id, expectedHtml ){
+        
+        var actualElement = $( id );
+        var compare = htmlComparator.equal( 
+            actualElement.html(), 
+            expectedHtml 
+        );
+        if ( compare === true ){
+            assert.ok( true );
+        } else {
+            Qunit.dump.setParser(
+                'string',
+                function( str ){
+                    return str;
+                }
+            );
+            assert.pushResult({
+                result: false,
+                actual: compare.actual,
+                expected: compare.expected,
+                message: compare.message,
+                negative: false
+            });
+        }
+    };
+    
+    /*
     var assertHtml = function ( assert, id, html ){
         assert.equal( 
             $( id ).html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
             html.replace(/(\r\n|\n|\r|\t| )/gm,"")
         );
     };
+    */
     /*
     var assertHtml = function ( assert, id1, id2 ){
         assert.equal( 

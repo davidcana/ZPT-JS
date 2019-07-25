@@ -169,6 +169,24 @@ module.exports = (function( ) {
             var currentPageUrl = buildURL( remotePageUrls[ c ] );
             
             /* jshint loopfunc: true */
+            utils.ajax(
+                {
+                    url: currentPageUrl,
+                    //dataType: 'html',
+                    done: function( html ) {
+                        var element = $( '<div></div>' );
+                        element.html( html );
+                        remotePages[ this.url ] = element;
+                        if ( --pending == 0 && callback && utils.isFunction( callback ) ){
+                            callback();
+                        }
+                    },
+                    fail: function( jqXHR, textStatus, error ) {
+                        context.asyncError( currentPageUrl, error, failCallback );
+                    }
+                }
+            );
+            /*
             $.ajax({
                 url: currentPageUrl,
                 dataType: 'html'
@@ -182,9 +200,10 @@ module.exports = (function( ) {
             }).fail( function( jqXHR, textStatus, error ) {
                 context.asyncError( currentPageUrl, error, failCallback );
             });
+            */
         }
     };
-    
+                  
     var configureNode = function( node, macroId, macroKey ){
         node.removeAttribute( context.getTags().metalDefineMacro );
         node.setAttribute( context.getTags().metalMacro, macroId );
