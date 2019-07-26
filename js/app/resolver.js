@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
 var utils = require( './utils.js' );
 var context = require( './context.js' );
 var expressionBuilder = require( './expressions/expressionBuilder.js' );
@@ -91,7 +90,7 @@ module.exports = (function( ) {
         // Node is in this page
         var macroId = macroData.macroId;
         var selector = builDefineMacroSelector( macroId );
-        var node = $( selector )[0];
+        var node = document.querySelector( selector );
 
         if ( ! node ){
             throw "Node using selector '" + selector + "' is null!";
@@ -112,7 +111,7 @@ module.exports = (function( ) {
         }
         
         var selector = builDefineMacroSelector( macroData.macroId );
-        var node = $( selector, element )[0];
+        var node = element.querySelector( selector );
         
         if ( ! node ){
             return undefined;
@@ -128,9 +127,13 @@ module.exports = (function( ) {
         
         var remotePageUrls = declaredRemotePageUrls.slice();
         
-        $( "[" + filterSelector( context.getTags().metalUseMacro ) + "]" ).each( function( index ) {
-            var currentMacroUse = $( this );
-            var macroKeyExpressionString = currentMacroUse.attr( context.getTags().metalUseMacro );
+        var list = document.querySelectorAll( 
+            "[" + filterSelector( context.getTags().metalUseMacro ) + "]"
+        );
+        var currentMacroUse;
+        var pos = 0;
+        while ( currentMacroUse = list[ pos++ ] ) {
+            var macroKeyExpressionString = currentMacroUse.getAttribute( context.getTags().metalUseMacro );
             
             try {
                 var macroData = getMacroDataUsingExpressionString( macroKeyExpressionString, scope );
@@ -142,7 +145,7 @@ module.exports = (function( ) {
             } catch ( exception ){
                 // Macrodata could not be resolved, do nothing
             }
-        });
+        }
                                                               
         return remotePageUrls;
     };
@@ -174,8 +177,8 @@ module.exports = (function( ) {
                     url: currentPageUrl,
                     //dataType: 'html',
                     done: function( html ) {
-                        var element = $( '<div></div>' );
-                        element.html( html );
+                        var element = document.createElement( 'div' );
+                        element.innerHTML = html;
                         remotePages[ this.url ] = element;
                         if ( --pending == 0 && callback && utils.isFunction( callback ) ){
                             callback();

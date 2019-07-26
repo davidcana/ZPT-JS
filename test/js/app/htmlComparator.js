@@ -3,8 +3,6 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
-
 module.exports = (function() {
     
     /**
@@ -277,7 +275,7 @@ module.exports = (function() {
     };
     
     var serializeHtml = function( html ) {
-      var rootNode = $( '<div></div>' )[0],
+      var rootNode = window.document.createElement( 'div' ),
         rootNodeStyles = getElementStyles( rootNode ),
         serializedHtml = [],
         kids, i, len;

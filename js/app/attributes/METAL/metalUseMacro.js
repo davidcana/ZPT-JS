@@ -12,7 +12,6 @@ var attributeCache = require( '../../cache/attributeCache.js' );
 var TALDefine = require( '../TAL/talDefine.js' );
 var METALFillSlot = require( './metalFillSlot.js' );
 var resolver = require( '../../resolver.js' );
-var $ = require( 'jquery' );
 
 var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApply ) {
     
@@ -71,50 +70,50 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
     
     var fillSlots = function( scope, node, tags, newNode, indexExpressions ){
         
-        $( node ).find( "[" + resolver.filterSelector( tags.metalFillSlot ) + "]" ).each(
-            
-            function( index, element ) {
-                
-                var slotIdExpressionString = $( this ).attr( tags.metalFillSlot );
-                var slotIdExpression = expressionBuilder.build( slotIdExpressionString );
-                var slotId = slotIdExpression.evaluate( scope );
-                //console.log( 'replacing ' + slotId + '...' );
-
-                // Index fill slot element
-                if ( indexExpressions ){
-                    var metalFillSlot = attributeCache.getByAttributeClass( 
-                        METALFillSlot, 
-                        slotIdExpressionString, 
-                        element,
-                        indexExpressions,
-                        scope,
-                        function(){
-                            return METALFillSlot.build( slotIdExpressionString, node );
-                        }
-                    );
-                    attributeIndex.add( element, metalFillSlot, scope );   
-                }
-                
-                // Do nothing if slotIdExpression evaluates to false
-                if ( ! slotId ){
-                    return;
-                }
-
-                var slotContent = $( this )[0].cloneNode( true );
-                var currentNode = $( newNode ).find(
-                    "[" + resolver.filterSelector( tags.metalDefineSlot ) + "='" + slotId + "']")[0];
-                if ( ! currentNode ){
-                    throw 'Slot "' + slotId + '" in expression "' + slotIdExpressionString +'" not found!';
-                }
-                currentNode.parentNode.insertBefore( 
-                    slotContent, 
-                    currentNode.nextSibling );
-
-                slotContent.removeAttribute( tags.metalFillSlot );
-                slotContent.setAttribute( tags.id, context.nextExpressionCounter() ); // Set a new id attribute to avoid id conflicts
-                currentNode.remove();
-            }
+        var list = node.querySelectorAll( 
+            "[" + resolver.filterSelector( tags.metalFillSlot ) + "]"
         );
+        var element;
+        var pos = 0;
+        while ( element = list[ pos++ ] ) {
+            var slotIdExpressionString = element.getAttribute( tags.metalFillSlot );
+            var slotIdExpression = expressionBuilder.build( slotIdExpressionString );
+            var slotId = slotIdExpression.evaluate( scope );
+
+            // Index fill slot element
+            if ( indexExpressions ){
+                var metalFillSlot = attributeCache.getByAttributeClass( 
+                    METALFillSlot, 
+                    slotIdExpressionString, 
+                    element,
+                    indexExpressions,
+                    scope,
+                    function(){
+                        return METALFillSlot.build( slotIdExpressionString, node );
+                    }
+                );
+                attributeIndex.add( element, metalFillSlot, scope );   
+            }
+
+            // Do nothing if slotIdExpression evaluates to false
+            if ( ! slotId ){
+                return;
+            }
+
+            var slotContent = element.cloneNode( true );
+            var currentNode = newNode.querySelector( 
+                "[" + resolver.filterSelector( tags.metalDefineSlot ) + "='" + slotId + "']"
+            );
+            if ( ! currentNode ){
+                throw 'Slot "' + slotId + '" in expression "' + slotIdExpressionString +'" not found!';
+            }
+            currentNode.parentNode.insertBefore( 
+                slotContent, 
+                currentNode.nextSibling );
+            slotContent.removeAttribute( tags.metalFillSlot );
+            slotContent.setAttribute( tags.id, context.nextExpressionCounter() ); // Set a new id attribute to avoid id conflicts
+            currentNode.remove();
+        }
     };
     
     var dependsOn = function( scope ){

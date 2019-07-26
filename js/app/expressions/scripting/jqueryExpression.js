@@ -27,13 +27,13 @@ var JqueryExpression = function( stringToApply ) {
             
             // Element with length > 1
             var texts = [];
-            evaluated.each( function() {
-                texts.push( $(this).text() );
-            });
+            for ( var i = 0; i < evaluated.length; ++i ){
+                texts.push( evaluated[ i ].innerText );
+            }
             return texts;
             
         } catch ( e ){
-            return 'Jquery expression error in "' + string + '".';
+            return 'Jquery expression error in "' + string + '": ' + e;
         }
     };
 
