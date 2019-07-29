@@ -1,82 +1,85 @@
 'use strict';
 
-var $ = require( 'jquery' );
-var CacheParser = require( '../../../js/app/parsers/parser.js' );
-var NoCacheParser = require( '../../../js/app/parsers/noCacheParser.js' );
+var zpt = require( '../../../js/app/main.js' );
 //var log = require( '../../../js/app/logHelper.js' );
 var context = require( '../../../js/app/context.js' );
 
 var testPerformance = function ( id, numberOfExecutions, dictionary ){
     
-    print(
-        '-------- Begin test of HTML element: ' + id + ' --------------' );
+    print( '-------- Begin test of HTML element: ' + id + ' --------------' );
         
-    //context.getConf().expressionCacheOn = false;
-    var onePhaseStart = performance.now();
-    run( id, numberOfExecutions, dictionary, NoCacheParser, 'NO CACHE parser' )
-    var onePhaseElapsed = performance.now() - onePhaseStart;
+    context.getConf().expressionCacheOn = false;
+    var noCacheStart = performance.now();
+    run( id, numberOfExecutions, dictionary, 'NO CACHE parser' )
+    var noCacheElapsed = performance.now() - noCacheStart;
     
-    //context.getConf().expressionCacheOn = true;
-    var twoPhasesStart = performance.now();
-    run( id, numberOfExecutions, dictionary, CacheParser, 'CACHE parser' );
-    var twoPhasesElapsed = performance.now() - twoPhasesStart;
+    context.getConf().expressionCacheOn = true;
+    var cacheStart = performance.now();
+    run( id, numberOfExecutions, dictionary, 'CACHE parser' );
+    var cacheElapsed = performance.now() - cacheStart;
     
     // Show differences
-	showResume( id, numberOfExecutions, onePhaseElapsed, twoPhasesElapsed );
+	showResume( id, numberOfExecutions, noCacheElapsed, cacheElapsed );
     
-    print(
-        '-------- End test of HTML element: ' + id + ' --------------' );
+    print( '-------- End test of HTML element: ' + id + ' --------------' );
 };
 
-var run = function( id, numberOfExecutions, dictionary, Parser, description ){
-    
-    var parser =  new Parser({
-        root: $( '#' + id )[0],
-        dictionary: dictionary
-    });
+var run = function( id, numberOfExecutions, dictionary, description ){
     
     for ( var c = 0; c < numberOfExecutions; ++c ){
         var start = performance.now();
 
-        parser.run();
+        zpt.run({
+            root: document.getElementById( id ),
+            dictionary: dictionary
+        });
 
         print( 
             id + ': processed ' + description + ' in ' 
                 + format( performance.now() - start) 
-                + ' ms' );
+                + ' ms' 
+        );
     }
 }
 
-var showResume = function( id, numberOfExecutions, onePhaseElapsed, twoPhasesElapsed ){
+var showResume = function( id, numberOfExecutions, noCacheElapsed, cacheElapsed ){
     
     print( 
-        'Template resume: ' + id );
+        'Template resume: ' + id
+    );
     print( 
         'Total time of ' + numberOfExecutions + ' executions at'
-            + ' one phase: ' + format( onePhaseElapsed ) + ' ms' );
+            + ' one phase: ' + format( noCacheElapsed ) + ' ms' 
+    );
     print( 
         'Average time of ' + numberOfExecutions + ' executions at'
-            + ' one phase: ' + format( onePhaseElapsed / numberOfExecutions ) + ' ms' );
+            + ' one phase: ' + format( noCacheElapsed / numberOfExecutions ) + ' ms' 
+    );
     print( 
         'Total time of ' + numberOfExecutions + ' executions at'
-            + ' two phases: ' + format( twoPhasesElapsed ) + ' ms' );
+            + ' two phases: ' + format( cacheElapsed ) + ' ms' 
+    );
     print( 
         'Average time of ' + numberOfExecutions + ' executions at'
-            + ' two phases: ' + format( twoPhasesElapsed / numberOfExecutions ) + ' ms' );
+            + ' two phases: ' + format( cacheElapsed / numberOfExecutions ) + ' ms' 
+    );
     
-    if ( onePhaseElapsed > twoPhasesElapsed ){
+    if ( noCacheElapsed > cacheElapsed ){
         print( 
-            'Performance of two phases is better in ' + format( onePhaseElapsed - twoPhasesElapsed ) + ' ms'
-                + ', one average execution in ' + format( ( onePhaseElapsed - twoPhasesElapsed ) / numberOfExecutions ) + ' ms'
-                + ', ' + format( getPercent( onePhaseElapsed, twoPhasesElapsed ) ) + '% better ');
-    } else if ( onePhaseElapsed < twoPhasesElapsed ){
+            'Performance of two phases is better in ' + format( noCacheElapsed - cacheElapsed ) + ' ms'
+                + ', one average execution in ' + format( ( noCacheElapsed - cacheElapsed ) / numberOfExecutions ) + ' ms'
+                + ', ' + format( getPercent( noCacheElapsed, cacheElapsed ) ) + '% better '
+        );
+    } else if ( noCacheElapsed < cacheElapsed ){
         print(
-            'Performance of one phase is better in ' + format( twoPhasesElapsed - onePhaseElapsed ) + ' ms'
-                + ', one average execution in ' + format( ( twoPhasesElapsed - onePhaseElapsed ) / numberOfExecutions ) + ' ms'
-                + ', ' + format( getPercent( twoPhasesElapsed, onePhaseElapsed ) ) + '% better ');
+            'Performance of one phase is better in ' + format( cacheElapsed - noCacheElapsed ) + ' ms'
+                + ', one average execution in ' + format( ( cacheElapsed - noCacheElapsed ) / numberOfExecutions ) + ' ms'
+                + ', ' + format( getPercent( cacheElapsed, noCacheElapsed ) ) + '% better '
+        );
     } else {
         print(
-            'Times are equal!' );
+            'Times are equal!' 
+        );
     }
 }
 
