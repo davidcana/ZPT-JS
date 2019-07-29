@@ -34,7 +34,10 @@
             }
         },
         items: [ "item0", "item1", "item2" ],
-        property: "name"
+        property: "name",
+        forceError: function(){
+            throw "Forced error!"
+        }
     };
             </pre>
         </div>
@@ -43,14 +46,14 @@
             <label for="expression">Expression:</label>
             <input type="text" name="expression" id="expression" value="" size="50">
         </div>
-        
+
         <div>
             Result:
             <span id="result" data-content="">
                 -
             </span>
         </div>
-        
+
         <input id="evaluate" type="button" value="Evaluate!">
     </body>
 </html>

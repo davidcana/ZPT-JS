@@ -1,6 +1,5 @@
 "use strict";
 
-var $ = require( 'jquery' );
 var Scope = require( '../../../js/app/scopes/scope.js' );
 var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
 
@@ -31,21 +30,37 @@ var dictionary = {
     return3: function( ){
         return 3;
     },
-    property: "name"
+    property: "name",
+    forceError: function(){
+        throw "Forced error!"
+    }
 };
 
-$( '#evaluate' ).click( function() {
+var resultSpan = document.getElementById( 'result' );
+var expressionInput = document.getElementById( 'expression' );
+var evaluateButton = document.getElementById( 'evaluate' );
 
+var updateResult = function() {
     try {
         var scope = new Scope( dictionary, undefined, true );
-        var string = $( '#expression' ).val();
-        /*var evaluated = expressionEvaluator.evaluateToNotNull( scope, string );*/
-        var expression = expressionBuilder.build( string );
+        var expression = expressionBuilder.build( expressionInput.value );
         var evaluated = expression? expression.evaluate( scope ): '[Error: no expression]';
-        $( '#result' ).text( evaluated === undefined? '[undefined]': evaluated );
+        resultSpan.textContent = evaluated === undefined? '[undefined]': evaluated;
     } catch ( e ){
-        $( '#result' ).text( e );
+        resultSpan.textContent = 'Exception thrown: ' + e;
     }
-
     return false;
-});
+};
+
+evaluateButton.addEventListener( 'click', updateResult );
+
+expressionInput.addEventListener( 
+    'keyup', 
+    function( e ) {
+        var keyCode = e.which || e.keyCode;
+        if ( keyCode === 13 ){
+            e.preventDefault();
+            updateResult();
+        }
+    }
+);

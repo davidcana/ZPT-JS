@@ -3,8 +3,6 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
-var utils = require( '../../../js/app/utils.js' );
 var zpt = require( '../../../js/app/main.js' );
 var context = zpt.context;
 var evaluateHelper = zpt.evaluateHelper;
