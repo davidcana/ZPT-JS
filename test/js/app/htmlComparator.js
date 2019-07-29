@@ -564,19 +564,34 @@ module.exports = (function() {
       return function() { return iframeApi; };
     })();
     */
+    var genericEqual = function( actual, expected, message, mustBeEquals ){
+        
+        var serializedActual, serializedExpected,
+            pushContext = _getPushContext( this );
+
+        message = message || mustBeEquals? "HTML should be equal": "HTML should not be equal";
+        serializedActual = serializeHtml( actual );
+        serializedExpected = serializeHtml( expected );
+
+        // Don't escape quotes!
+        Qunit.dump.setParser(
+            'string',
+            function( str ){
+                return str;
+            }
+        );
+        
+        var isEquiv = QUnit.equiv( serializedActual, serializedExpected );
+        pushContext.push(
+          mustBeEquals? isEquiv: !isEquiv,
+          deserializeHtml( serializedActual ),
+          deserializeHtml( serializedExpected ),
+          message
+        );
+    };
+    
     var api = {
-
-      /**
-       * Compare two snippets of HTML for equality after normalization.
-       *
-       * @example assert.htmlEqual("<B>Hello, QUnit!</B>  ", "<b>Hello, QUnit!</b>", "HTML should be equal");
-       * @param {String} actual The actual HTML before normalization.
-       * @param {String} expected The excepted HTML before normalization.
-       * @param {String} [message] Optional message to display in the results.
-       */
-      equal: function( actual, expected, _message ) {
-
-        var message = _message || "HTML should be equal";
+      compare: function( actual, expected ) {
           
         // Serialize
         var serializedActual = serializeHtml( actual );
@@ -586,13 +601,23 @@ module.exports = (function() {
         var deserializedActual = deserializeHtml( serializedActual );
         var deserializedExpected = deserializeHtml( serializedExpected );
           
-        return deserializedActual === deserializedExpected? 
-            true:
-            {
-                actual: deserializedActual,
-                expected: deserializedExpected,
-                message: message
-            };
+        return {
+            equals: deserializedActual === deserializedExpected,
+            actual: deserializedActual,
+            expected: deserializedExpected
+        };
+      },
+        
+      /**
+       * Compare two snippets of HTML for equality after normalization.
+       *
+       * @example assert.htmlEqual("<B>Hello, QUnit!</B>  ", "<b>Hello, QUnit!</b>", "HTML should be equal");
+       * @param {String} actual The actual HTML before normalization.
+       * @param {String} expected The excepted HTML before normalization.
+       * @param {String} [message] Optional message to display in the results.
+       */
+      htmlEqual: function( actual, expected, message ) {
+        return genericEqual( actual, expected, message, true );
       },
     /*
       htmlEqual: function( actual, expected, message ) {
@@ -619,25 +644,8 @@ module.exports = (function() {
        * @param {String} expected The excepted HTML before normalization.
        * @param {String} [message] Optional message to display in the results.
        */
-      notEqual: function( actual, expected, _message ) {
-          
-        var message = _message || "HTML should not be equal";
-          
-        // Serialize
-        var serializedActual = serializeHtml( actual );
-        var serializedExpected = serializeHtml( expected );
-
-        // Deserialize
-        var deserializedActual = deserializeHtml( serializedActual );
-        var deserializedExpected = deserializeHtml( serializedExpected );
-          
-        return deserializedActual !== deserializedExpected? 
-            true:
-            {
-                actual: deserializedActual,
-                expected: deserializedExpected,
-                message: message
-            };
+      notHtmlEqual: function( actual, expected, message ) {
+        return genericEqual( actual, expected, message, false );
       },
     /*
       notHtmlEqual: function( actual, expected, message ) {

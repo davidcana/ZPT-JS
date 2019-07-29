@@ -27,11 +27,11 @@ module.exports = (function() {
     var assertHtml = function ( assert, id, expectedHtml ){
         
         var actualElement = $( id );
-        var compare = htmlComparator.equal( 
+        var compare = htmlComparator.compare( 
             actualElement.html(), 
             expectedHtml 
         );
-        if ( compare === true ){
+        if ( compare.equals ){
             assert.ok( true );
         } else {
             Qunit.dump.setParser(
@@ -44,12 +44,11 @@ module.exports = (function() {
                 result: false,
                 actual: compare.actual,
                 expected: compare.expected,
-                message: compare.message,
+                message: 'HTML should be equal!',
                 negative: false
             });
         }
     };
-    
     /*
     var assertHtml = function ( assert, id, html ){
         assert.equal( 

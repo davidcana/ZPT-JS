@@ -15,7 +15,8 @@ New in 0.38.0
     - getTemplate( viewId ) ?
 
 New in 0.37.0
-- Remove jquery dependency?
+- Removed jquery dependency in non dev.
+- Replaced node-jsdom dependency by jsdom due it is no longer maintained.
 
 New in 0.36.0
 - Added new command: update.
