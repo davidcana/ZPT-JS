@@ -8,17 +8,29 @@ var utils = require( './utils.js' );
 
 var dictionary = {};
 
-zpt.run({
-    command: 'preload',
-    root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
-    dictionary: dictionary,
-    declaredRemotePageUrls: [],
-    callback: function(){
-        zpt.run();
-        runMacro();
-        runLoop();
+var init = function( assert ){
+    
+    var done = assert.async(); // QUnit's assert.async() function tells the framework to pause all tests until done() is called.
+    zpt.run({
+        command: 'preload',
+        root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
+        dictionary: dictionary,
+        declaredRemotePageUrls: [],
+        callback: function(){
+            zpt.run();
+            done();
+        }
+    });
+};
+
+QUnit.module( 'module', {  
+    before: function( assert ){
+        init( assert );
     }
 });
+
+runMacro();
+runLoop();
 
 function runMacro(){
     

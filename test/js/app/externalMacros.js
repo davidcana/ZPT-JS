@@ -58,16 +58,28 @@ var dictionary = {
     }
 };
 
-zpt.run({
-    command: 'preload',
-    root: document.body,
-    dictionary: dictionary,
-    declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
-    callback: function(){
-        zpt.run();
-        runTests();
+var init = function( assert ){
+    
+    var done = assert.async(); // QUnit's assert.async() function tells the framework to pause all tests until done() is called.
+    zpt.run({
+        command: 'preload',
+        root: document.body,
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ 'externalMacros-definitions2.html', 'externalMacros-definitions3.html' ],
+        callback: function(){
+            zpt.run();
+            done();
+        }
+    });
+}
+
+QUnit.module( 'module', {  
+    before: function( assert ){
+        init( assert );
     }
 });
+
+runTests();
 
 function runTests(){
     
