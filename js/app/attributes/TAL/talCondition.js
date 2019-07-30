@@ -49,7 +49,7 @@ TALCondition.build = function( string ) {
     
     return new TALCondition( 
                 string,
-                expressionBuilder.build( string.trim() ) );
+                expressionBuilder.build( string ) );
 };
 
 module.exports = TALCondition;

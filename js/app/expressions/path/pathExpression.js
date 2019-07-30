@@ -78,8 +78,10 @@ PathExpression.build = function( s ) {
     var expressionList = [];
     while ( segments.hasMoreTokens() ) {
         expressionList.push( 
-                expressionBuilder.build( 
-                    segments.nextToken().trim() ) );
+            expressionBuilder.build( 
+                segments.nextToken() 
+            ) 
+        );
     }
     return new PathExpression( string, expressionList );
 }

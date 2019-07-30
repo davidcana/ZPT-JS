@@ -104,6 +104,15 @@ module.exports = function(grunt) {
                 src: 'test/js/app/jquery.js',
                 dest: 'build/jquery.js'
             },
+            query: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/query.js',
+                dest: 'build/query.js'
+            },
             jqueryPlugin: {
                 options: {
                     browserifyOptions: {

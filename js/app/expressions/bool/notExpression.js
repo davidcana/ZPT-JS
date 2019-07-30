@@ -40,9 +40,7 @@ NotExpression.getId = NotExpression.getPrefix;
 NotExpression.build = function( string ) {
     var expressionBuilder = require( '../expressionBuilder.js' );
     
-    var expression = expressionBuilder.build(
-        string, 
-        NotExpression.prefix );
+    var expression = expressionBuilder.build( string );
     
     return new NotExpression( string, expression );
 }

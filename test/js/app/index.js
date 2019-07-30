@@ -8,6 +8,7 @@ QUnit.testSuites([
 	{ name: "macros Test Suite", path: "./macros.html" },
     { name: "external macros Test Suite", path: "./externalMacros.html" },
     { name: "jquery expressions Test Suite", path: "./jquery.html" },
+    { name: "query expressions Test Suite", path: "./query.html" },
 	{ name: "on-error tag Test Suite", path: "./on-error.html" },
     { name: "jquery plugin Test Suite", path: "./jqueryPlugin.html" },
     { name: "formatters Test Suite", path: "./format.html" },

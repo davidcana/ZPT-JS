@@ -37,7 +37,7 @@ module.exports = (function() {
         
         // Get tokens
         var subformat = useSubformat? 
-                expressionBuilder.build( segments.nextToken().trim() ): 
+                expressionBuilder.build( segments.nextToken() ): 
                 undefined;
         var expression = expressionBuilder.build( 
                 segments.nextToken().trim() );

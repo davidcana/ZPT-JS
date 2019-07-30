@@ -67,7 +67,8 @@ ListExpression.build = function( s ) {
         items.push(
             range?
             range:
-            expressionBuilder.build( segment ) );
+            expressionBuilder.build( segment )
+        );
     }
 
     return new ListExpression( string, items );

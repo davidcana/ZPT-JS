@@ -25,10 +25,8 @@ module.exports = (function() {
             throw 'Wrong number of elements in expression "' + string + '", ' + tag + ' expressions only support two.';
         }
 
-        var expression1 = expressionBuilder.build( 
-            segments.nextToken().trim() );
-        var expression2 = expressionBuilder.build( 
-            segments.nextToken().trim() );
+        var expression1 = expressionBuilder.build( segments.nextToken() );
+        var expression2 = expressionBuilder.build( segments.nextToken() );
         
         return {
             expression1: expression1,

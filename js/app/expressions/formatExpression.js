@@ -106,8 +106,7 @@ FormatExpression.build = function( s ) {
     // Get arguments
     var argsExpressions = [];
     while ( segments.hasMoreTokens() ) {
-        var argExpression = expressionBuilder.build( 
-            segments.nextToken().trim() );
+        var argExpression = expressionBuilder.build( segments.nextToken() );
         argsExpressions.push( argExpression );
     }
 

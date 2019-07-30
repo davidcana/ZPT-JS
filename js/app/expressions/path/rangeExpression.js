@@ -85,12 +85,11 @@ RangeExpression.build = function( s ) {
             expressionBuilder.build( start );
 
     // Build end expression
-    var endExpression = expressionBuilder.build( 
-            segments.nextToken().trim() );
+    var endExpression = expressionBuilder.build( segments.nextToken() );
 
     // Build step expression
     var stepExpression = numberOfTokens == 3? 
-            expressionBuilder.build( segments.nextToken().trim() ):
+            expressionBuilder.build( segments.nextToken() ):
             NumericLiteral.build ( RANGE_DEFAULT_STEP );
     
     return new RangeExpression( string, startExpression, endExpression, stepExpression );

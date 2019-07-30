@@ -62,9 +62,9 @@ CondExpression.build = function( s ) {
 
     return new CondExpression( 
         string,
-        expressionBuilder.build( segments.nextToken().trim() ), 
-        expressionBuilder.build( segments.nextToken().trim() ), 
-        expressionBuilder.build( segments.nextToken().trim() ) );
+        expressionBuilder.build( segments.nextToken() ), 
+        expressionBuilder.build( segments.nextToken() ), 
+        expressionBuilder.build( segments.nextToken() ) );
 }
 
 module.exports = CondExpression;

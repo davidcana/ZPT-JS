@@ -43,7 +43,7 @@ METALFillSlot.build = function( string, useMacroNode ) {
     
     return new METALFillSlot( 
             string,
-            expressionBuilder.build( string.trim() ),
+            expressionBuilder.build( string ),
             useMacroNode
     );
 };

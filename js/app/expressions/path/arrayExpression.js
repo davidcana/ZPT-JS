@@ -62,7 +62,8 @@ ArrayExpression.build = function( arrayBase, accessor ) {
 
         // Get index and add to indexes
         var index = expressionBuilder.build( 
-                accessor.substring( 1, close ) );
+                accessor.substring( 1, close ) 
+        );
         indexes.push( index );
 
         // continue processing array access for multidimensional arrays
