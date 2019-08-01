@@ -3,7 +3,28 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         qunit: {
-            files: [ 'test/**/*.html', '!test/index.html', '!test/externalMacros-definitions.html' ]
+            files: [ 
+                'test/**/*.html', 
+                '!test/index.html', 
+                '!test/errors.html',
+                '!test/externalMacros.html',
+                '!test/externalMacros-definitions.html',
+                '!test/externalMacros-definitions2.html',
+                '!test/externalMacros-definitions3.html',
+                '!test/externalMacros-definitions4.html',
+                '!test/folderDictionaries.html',
+                '!test/i18n.html',
+                '!test/i18nAsync.html',
+                '!test/i18nAsyncAuto.html',
+                '!test/mixedMacros.html',
+                '!test/moreTest/externalMacros-absoluteURLs.html',
+                '!test/moreTest/externalMacros-prefixURLs.html',
+                '!test/moreTest/folderDictionaries2.html',
+                '!test/node.html',
+                '!test/rerunSimple.html',
+                '!test/singleRoot.html',
+                '!test/update.html'
+            ]
         },
         watch: {
             files: [ 'js/app/*.js', 'test/js/app/*.js' ],

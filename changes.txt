@@ -16,6 +16,8 @@ New in 0.38.0
 
 New in 0.37.0
 - Removed jquery dependency in non dev.
+- Jquery expressions replaced by query expressions.
+- Bug fixed: jsdom dependency added.
 
 New in 0.36.1
 - Dependencies updated.
