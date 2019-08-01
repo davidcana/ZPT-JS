@@ -3,7 +3,6 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
-require( '../../../js/app/jqueryPlugin.js' );
 var utils = require( './utils.js' );
 
 QUnit.test( "1 level of folder dictionaries tests", function( assert ) {
@@ -14,8 +13,9 @@ QUnit.test( "1 level of folder dictionaries tests", function( assert ) {
     var dictionary = { 
         var1: 11
     };
-    $( '#t1' ).zpt({
+    zpt.run({
         command: 'preload',
+        root: document.getElementById( 't1' ),
         dictionary: dictionary,
         maxFolderDictionaries: 5,
         callback: function(){
@@ -37,8 +37,9 @@ QUnit.test( "1 level of folder dictionaries with dictionaryExtension tests", fun
     var dictionary = { 
         var1: 11
     };
-    $( '#t1' ).zpt({
+    zpt.run({
         command: 'preload',
+        root: document.getElementById( 't1' ),
         dictionary: dictionary,
         maxFolderDictionaries: 5,
         callback: function(){
@@ -51,13 +52,13 @@ QUnit.test( "1 level of folder dictionaries with dictionaryExtension tests", fun
             var dictionaryExtension = { 
                 folderVar1: 123
             };
-            $( '#t1' ).zpt({
+            zpt.run({
                 dictionaryExtension: dictionaryExtension
             });
             runTests( assert, 11, 123, undefined, undefined );
 
             // Third render (not using dictionaryExtension)
-            $( '#t1' ).zpt();
+            zpt.run();
             runTests( assert, 11, 111, undefined, undefined );
 
             done();
@@ -73,8 +74,9 @@ QUnit.test( "1 level of folder dictionaries with dictionary tests", function( as
     var dictionary = { 
         var1: 11
     };
-    $( '#t1' ).zpt({
+    zpt.run({
         command: 'preload',
+        root: document.getElementById( 't1' ),
         dictionary: dictionary,
         maxFolderDictionaries: 5,
         callback: function(){
@@ -85,12 +87,12 @@ QUnit.test( "1 level of folder dictionaries with dictionary tests", function( as
 
             // Second render (defining folderVar1 in dictionary)
             dictionary.folderVar1 = 123;
-            $( '#t1' ).zpt();
+            zpt.run();
             runTests( assert, 11, 123, undefined, undefined );
 
             // Third render (deleting folderVar1 in dictionary)
             delete dictionary.folderVar1;
-            $( '#t1' ).zpt();
+            zpt.run();
             runTests( assert, 11, 111, undefined, undefined );
 
             done();

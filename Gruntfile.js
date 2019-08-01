@@ -95,15 +95,6 @@ module.exports = function(grunt) {
                 src: 'test/js/app/i18nAsyncAuto.js',
                 dest: 'build/i18nAsyncAuto.js'
             },
-            jquery: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/app/jquery.js',
-                dest: 'build/jquery.js'
-            },
             query: {
                 options: {
                     browserifyOptions: {
@@ -112,15 +103,6 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/query.js',
                 dest: 'build/query.js'
-            },
-            jqueryPlugin: {
-                options: {
-                    browserifyOptions: {
-                        debug: true
-                    }
-                },
-                src: 'test/js/app/jqueryPlugin.js',
-                dest: 'build/jqueryPlugin.js'
             },
             loops: {
                 options: {

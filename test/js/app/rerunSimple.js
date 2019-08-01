@@ -3,26 +3,26 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
-require( '../../../js/app/jqueryPlugin.js' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
 var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
 var utils = require( './utils.js' );
 
 QUnit.test( "Rerun simple tests", function( assert ) {
     
-    var $root = $( '#simple' );
+    var root = document.getElementById( 'simple' );
     var dictionary = { 
         counter: 4
     };
     
-    $root.zpt({
-        dictionary: dictionary
+    zpt.run({
+        dictionary: dictionary,
+        root: root
     });
 
     function continueTesting(){
         runTests( dictionary.counter );
         if ( dictionary.counter-- > 1 ){
-            $root.zpt();
+            zpt.run();
             continueTesting();
         }
     }
@@ -45,11 +45,14 @@ QUnit.test( "Rerun simple tests", function( assert ) {
 
 QUnit.test( "Rerun and check dictionary vars", function( assert ) {
 
-    $( '#ul1' ).zpt();
+    zpt.run({
+        root: document.getElementById( 'ul1' )
+    });
     runTests();
     
-    $( '#ul2' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 'ul2' )
     });
     runTests();
     
@@ -74,20 +77,23 @@ QUnit.test( "Rerun and check dictionary vars (more complex)", function( assert )
         var: 10
     };
     
-    $( '#ul2-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 'ul2-1' ),
         dictionary: dictionary
     });
     runTests( 10, 10, 10 );
 
     dictionary.var = 20;
-    $( '#ul2-2' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 'ul2-2' )
     });
     runTests( 10, 20, 20 );
     
     dictionary.var = 30;
-    $( '#ul2-3' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 'ul2-3' )
     });
     runTests( 10, 20, 30 );
     
@@ -115,18 +121,19 @@ QUnit.test( "Rerun and check dictionary vars (multiple target)", function( asser
     var dictionary = { 
         var: 10
     };
-    $( '#ul3-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 'ul3-1' ),
         dictionary: dictionary
     });
     runTests( 1, 110, 1, 2, 12, 110, 1, 3, 13, 110, 1, 3, 4, 14, 110 );
     
     dictionary.var = 11;
     zpt.run({
+        command: 'partialRender',
         target: [ 
             document.getElementById( 'ul3-2' ), 
             document.getElementById( 'ul3-4' )
-        ],
-        command: 'partialRender'
+        ]
     });
     runTests( 1, 110, 1, 2, 13, 111, 1, 3, 13, 110, 1, 3, 4, 15, 111 );
     
@@ -164,8 +171,9 @@ QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", funct
     runTests( 1, 11, 2, 12 );
     
     dictionary.var = 11;
-    $( '#t5-2-2' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 't5-2-2' )
     });
     runTests( 1, 11, 2, 13 );
     
@@ -181,13 +189,15 @@ QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", funct
 QUnit.test( "Rerun using data-domain", function( assert ) {
 
     // Render #ul6-1 and run tests
-    $( '#ul6-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 'ul6-1' ),
         dictionary: buildDictionaryForI18n()
     });
     runTests();
 
-    $( '#t6-2' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 'ul6-2' ),
     });
     runTests();
     
@@ -201,17 +211,19 @@ QUnit.test( "Rerun using data-domain", function( assert ) {
 
 QUnit.test( "Rerun using data-language", function( assert ) {
 
-    // Render #ul6-1 and run tests
+    // Render #ul7-1 and run tests
     var dictionary = buildDictionaryForI18n();
     dictionary.language = 'es';
-    $( '#ul7-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 'ul7-1' ),
         dictionary: dictionary
     });
     runTests( '¡Hola mundo!' );
     
     dictionary.language = 'en';
-    $( '#t7-2' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 't7-2' )
     });
     runTests( 'Hello world!' );
     
@@ -240,14 +252,16 @@ QUnit.test( "Rerun using on-error", function( assert ) {
     };
     
     // Render #ul8-1 and run tests
-    $( '#ul8-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 'ul8-1' ),
         dictionary: dictionary
     });
     runTests( 'Error number 1', 'Error number 2' );
     
     // Partial render #ul8-2 and run tests again
-    $( '#ul8-2' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 'ul8-2' ),
     });
     runTests( 'Error number 1', 'Error number 3' );
     
@@ -275,7 +289,8 @@ QUnit.test( "Rerun using loops", function( assert ) {
     
     // Render #t9-1 and run tests
     var startDate = new Date();
-    $( '#t9-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 't9-1' ),
         dictionary: dictionary
     });
     console.log( 'Run using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
@@ -284,8 +299,9 @@ QUnit.test( "Rerun using loops", function( assert ) {
     // Partial render #t9-2 and run tests again
     dictionary.number = 100;
     startDate = new Date();
-    $( '#t9-1-3' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 't9-1-3' ),
     });
     console.log( 'Rerun using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
     runTests( '0/1/102/3' );
@@ -341,15 +357,17 @@ QUnit.test( "Rerun using external macros", function( assert ) {
 var macroTests = function( assert, dictionary, testNumber ){
     
     // Render #t10-1 and run tests
-    $( '#t' + testNumber + '-1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 't' + testNumber + '-1' ),
         dictionary: dictionary
     });
     runMacroTests( 10, 15 );
 
     // Partial render #t10-2 and run tests again
     dictionary.number = 11;
-    $( '#t' + testNumber + '-1b' ).zpt({
-        command: 'partialRender'
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 't' + testNumber + '-1b' )
     });
     runMacroTests( 11, 16 );
 

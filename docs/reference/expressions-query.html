@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Query expressions</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS reference - Query expressions</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#differences">Differences with ZPT</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+query_expression ::= 'query:' expresssion
+                </pre>
+                
+                <h2 data-attributes="id 'description'">Description</h2>
+                <p>
+                    <em>Query expressions</em> evaluate arbitrary query expressions using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selectors</a>.
+                </p>
+                
+                <p>
+                    ZPT-JS first evaluates the expression and them invokes <code>window.document.querySelectorAll</code> to get the results.
+                </p>
+                
+                <h2 data-attributes="id 'differences'">Differences with ZPT</h2>
+                <p>
+                    <em>Query</em> expressions does not exist in ZPT.
+                </p>
+
+                <h2 data-attributes="id 'examples'">Examples</h2>
+                <p>
+                    Let's define some HTML elements and assign them some IDs:
+                </p>
+                <pre class="brush: html">
+&lt;div&gt;
+    &lt;div&gt;value1 = &lt;span id="value1" class="values"&gt;10&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;value2 = &lt;span id="value2" class="values"&gt;20&lt;/span&gt;&lt;/div&gt;
+    &lt;div&gt;value3 = &lt;span id="value3" class="values"&gt;30&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    An example using ID selector:
+                </p>
+                <pre class="brush: html">
+&lt;div&gt;query:'#value1' = 10 = &lt;span id="t1" data-content="query:'#value1'"&gt;must be 10&lt;/span&gt;&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Some examples using class selector:
+                </p>
+                <pre class="brush: html">
+&lt;div&gt;query:'.values' = 10,20,30 = &lt;span id="t2" data-content="query:'.values'"&gt;must be 10,20,30&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;+: query:'.values' = 60 = &lt;span id="t3" data-content="+: query:'.values'"&gt;must be 10 + 20 + 30&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;+: 100 query:'.values' = 160 = &lt;span id="t4" data-content="+: 100 query:'.values'"&gt;must be 100 + 10 + 20 + 30&lt;/span&gt;&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Some examples using ID and class selectors, combining them with vars:
+                </p>
+                <pre class="brush: html">
+&lt;div&gt;query:myVar = 20 = &lt;span id="t5" data-define="myVar '#value2'" data-content="query:myVar"&gt;must be 20&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;+: 200 query:myVar = 260 = &lt;span id="t6" data-define="myVar '.values'"data-content="+: 200 query:myVar"&gt;must be 200 + 10 + 20 + 30&lt;/span&gt;&lt;/div&gt;
+                </pre>
+
+            </article>
+        </div>
+    </body>
+</html>

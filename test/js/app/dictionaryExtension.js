@@ -3,7 +3,6 @@
 var $ = require( 'jquery' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
-require( '../../../js/app/jqueryPlugin.js' );
 
 QUnit.test( "Defining new vars in dictionary extension tests", function( assert ) {
     
@@ -11,7 +10,8 @@ QUnit.test( "Defining new vars in dictionary extension tests", function( assert 
     var dictionary = { 
         var1: 11
     };
-    $( '#t1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 't1' ),
         dictionary: dictionary
     });
     runTests( assert, 11, undefined, NaN );
@@ -20,13 +20,13 @@ QUnit.test( "Defining new vars in dictionary extension tests", function( assert 
     var dictionaryExtension = { 
         var2: 22
     };
-    $( '#t1' ).zpt({
+    zpt.run({
         dictionaryExtension: dictionaryExtension
     });
     runTests( assert, 11, 22, 33 );
     
     // Third render (not using dictionaryExtension)
-    $( '#t1' ).zpt();
+    zpt.run();
     runTests( assert, 11, undefined, NaN );
     
 });
@@ -38,7 +38,8 @@ QUnit.test( "Redefining vars in dictionary extension tests", function( assert ) 
         var1: 11,
         var2: 2
     };
-    $( '#t1' ).zpt({
+    zpt.run({
+        root: document.getElementById( 't1' ),
         dictionary: dictionary
     });
     runTests( assert, 11, 2, 13 );
@@ -47,13 +48,13 @@ QUnit.test( "Redefining vars in dictionary extension tests", function( assert ) 
     var dictionaryExtension = { 
         var2: 22
     };
-    $( '#t1' ).zpt({
+    zpt.run({
         dictionaryExtension: dictionaryExtension
     });
     runTests( assert, 11, 22, 33 );
     
     // Third render (not using dictionaryExtension)
-    $( '#t1' ).zpt();
+    zpt.run();
     runTests( assert, 11, 2, 13 );
 
 });

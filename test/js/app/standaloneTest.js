@@ -77,12 +77,13 @@ dictionary.textareaAttrs = {
 // Parse template using javascript API
 /* globals zpt */
 zpt.run({
-    root: $( '#tests-1' )[0],
+    root: document.getElementById( 'tests-1' ),
     dictionary: dictionary
 });
 
 // Parse template using jquery plugin
-$( '#tests-2' ).zpt({
+zpt.run({
+    root: document.getElementById( 'tests-2' ),
     dictionary: dictionary
 });
 

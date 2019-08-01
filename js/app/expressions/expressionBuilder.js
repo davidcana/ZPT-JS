@@ -60,7 +60,6 @@ module.exports = (function() {
     };
     var registerScripting = function(){
         register( require( './scripting/javascriptExpression.js' ) );
-        register( require( './scripting/jqueryExpression.js' ) );
         register( require( './scripting/queryExpression.js' ) );
     };
     
