@@ -3,28 +3,44 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         qunit: {
-            files: [ 
-                'test/**/*.html', 
-                '!test/index.html', 
-                '!test/errors.html',
-                '!test/externalMacros.html',
-                '!test/externalMacros-definitions.html',
-                '!test/externalMacros-definitions2.html',
-                '!test/externalMacros-definitions3.html',
-                '!test/externalMacros-definitions4.html',
-                '!test/folderDictionaries.html',
-                '!test/i18n.html',
-                '!test/i18nAsync.html',
-                '!test/i18nAsyncAuto.html',
-                '!test/mixedMacros.html',
-                '!test/moreTest/externalMacros-absoluteURLs.html',
-                '!test/moreTest/externalMacros-prefixURLs.html',
-                '!test/moreTest/folderDictionaries2.html',
-                '!test/node.html',
-                '!test/rerunSimple.html',
-                '!test/singleRoot.html',
-                '!test/update.html'
-            ]
+            all: {
+                options: {
+                    timeout: 10000,
+                    urls: [
+                        'http://localhost:9000/test/expressions.html',
+                        'http://localhost:9000/test/statements.html',
+                        'http://localhost:9000/test/omit-tag.html',
+                        'http://localhost:9000/test/scope.html',
+                        'http://localhost:9000/test/loops.html',
+                        'http://localhost:9000/test/nestedLoops.html',
+                        'http://localhost:9000/test/macros.html',
+                        'http://localhost:9000/test/externalMacros.html',
+                        'http://localhost:9000/test/query.html',
+                        'http://localhost:9000/test/on-error.html',
+                        'http://localhost:9000/test/format.html',
+                        'http://localhost:9000/test/rerunSimple.html',
+                        'http://localhost:9000/test/rerunMacros.html',
+                        'http://localhost:9000/test/i18n.html',
+                        'http://localhost:9000/test/i18nAsync.html',
+                        'http://localhost:9000/test/i18nAsyncAuto.html',
+                        'http://localhost:9000/test/customExpressions.html',
+                        'http://localhost:9000/test/errors.html',
+                        'http://localhost:9000/test/multiroot.html',
+                        'http://localhost:9000/test/original.html',
+                        'http://localhost:9000/test/recursiveMacros.html',
+                        'http://localhost:9000/test/mixedMacros.html',
+                        'http://localhost:9000/test/standalone.html',
+                        'http://localhost:9000/test/moreTest/externalMacros-absoluteURLs.html',
+                        'http://localhost:9000/test/moreTest/externalMacros-prefixURLs.html',
+                        'http://localhost:9000/test/singleRoot.html',
+                        'http://localhost:9000/test/dictionaryExtension.html',
+                        'http://localhost:9000/test/folderDictionaries.html',
+                        'http://localhost:9000/test/moreTest/folderDictionaries2.html',
+                        'http://localhost:9000/test/declare.html',
+                        'http://localhost:9000/test/update.html'
+                    ]
+                }
+            }
         },
         watch: {
             files: [ 'js/app/*.js', 'test/js/app/*.js' ],

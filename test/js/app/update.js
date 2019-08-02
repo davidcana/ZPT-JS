@@ -338,7 +338,7 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
     var testFunction = function(){
         assert.equal( $('#t7-1').text() , "" + arguments[ 0 ] );
         assert.equal( $('#t7-2').text() , "" + arguments[ 1 ] );
-        assert.equal( $('#t7-3').text() , "" + arguments[ 2 ] );
+        assert.ok( arguments[ 3 ].indexOf( $('#t7-3').html() ) != -1 );
         assert.ok( arguments[ 3 ].indexOf( $('#t7-4').html() ) != -1 );
         assert.equal( $('#t7-5').text() , "" + arguments[ 4 ] );
         assert.equal( errorsArray, undefined );
@@ -347,8 +347,8 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
     testFunction( 
         '¡Hola mundo!', 
         'Ella ha encontrado 10 resultados', 
-        '1.355,23', 
-        [ "1.355,23&nbsp;€", "1.355,23" ],
+        [ '1.355,23', '1355,23' ], 
+        [ "1.355,23&nbsp;€", "1.355,23", "1355,23" ],
         'viernes, 21 de diciembre de 2012' 
     );
     
@@ -365,7 +365,7 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
     testFunction( 
         'Hello world!', 
         'She found 10 results', 
-        '1,355.23', 
+        [ '1,355.23' ], 
         [ "€1,355.23", "1,355.23" ],
         'Friday, December 21, 2012' 
     );
