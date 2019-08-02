@@ -80,7 +80,7 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
     
     var findNodeById = function ( nodeId ) {
         
-        return document.querySelector( 
+        return window.document.querySelector( 
             '[' + context.getTags().id + '="' + nodeId + '"]' 
         );
     }

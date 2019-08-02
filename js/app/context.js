@@ -311,7 +311,8 @@ module.exports = (function() {
             error.join( '\n' ):
             error;
         
-        alert( msg );
+        window.alert( msg );
+        
         throw msg;
     };
     var errorFunction = defaultErrorFunction;

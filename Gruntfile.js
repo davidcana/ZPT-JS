@@ -3,6 +3,9 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         qunit: {
+            files: [ 
+                'test/js/app/node.js' 
+            ],
             all: {
                 options: {
                     timeout: 10000,
@@ -409,6 +412,9 @@ module.exports = function(grunt) {
             options: {
                 jshintrc: '.jshintrc'
             }
+        },
+        exec: {
+            check_node: 'node samples/js/app/node.js'
         }
     });
 
@@ -419,6 +425,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-exec');
     
     grunt.registerTask('test', ['qunit']);
     grunt.registerTask('default', ['browserify']);

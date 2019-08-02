@@ -90,7 +90,7 @@ module.exports = (function( ) {
         // Node is in this page
         var macroId = macroData.macroId;
         var selector = builDefineMacroSelector( macroId );
-        var node = document.querySelector( selector );
+        var node = window.document.querySelector( selector );
 
         if ( ! node ){
             throw "Node using selector '" + selector + "' is null!";
