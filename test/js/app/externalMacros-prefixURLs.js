@@ -62,7 +62,7 @@ In the middle of 2 macros
     After use macro
 </p>
 `;
-    utils.assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, 't1', t1 );
 });
 
 }

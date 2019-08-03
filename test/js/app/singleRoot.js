@@ -50,7 +50,7 @@ function runMacro(){
     After use macro
 </p>
 `;
-        utils.assertHtml( assert, '#t1', t1 );
+        utils.assertHtml( assert, 't1', t1 );
     });
 
 }

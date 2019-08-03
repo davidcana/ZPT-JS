@@ -102,7 +102,7 @@ QUnit.test( "Simple macros test", function( assert ) {
     </p>
 </p>
         `;
-    utils.assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, 't1', t1 );
     var t2 = `
 <b data-use-macro="'copyright-list2@externalMacros-definitions4.html'" data-id="4" style="display: none;">
     Macro goes here
@@ -121,7 +121,7 @@ QUnit.test( "Simple macros test", function( assert ) {
     </p>
 </p>
 `;
-    utils.assertHtml( assert, '#t2', t2 );
+    utils.assertHtml( assert, 't2', t2 );
 });
 
 }

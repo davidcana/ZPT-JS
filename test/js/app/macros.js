@@ -105,7 +105,7 @@ QUnit.test( "Simple macros test", function( assert ) {
     After use macro
 </p>
 `;
-    utils.assertHtml( assert, '#t1', t1 );
+    utils.assertHtml( assert, 't1', t1 );
 });
 
 QUnit.test( "Dynamic macro", function( assert ) {
@@ -119,7 +119,7 @@ QUnit.test( "Dynamic macro", function( assert ) {
     Dynamic text: <span data-content="string:A test of a dynamic macro" data-attributes="id string:t2-1" data-id="4" id="t2-1">A test of a dynamic macro</span>
 </p>
 `;
-    utils.assertHtml( assert, '#t2', t2 );
+    utils.assertHtml( assert, 't2', t2 );
 });
 
 QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
@@ -133,7 +133,7 @@ QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
     Var value: <span data-content="var" data-attributes="id id" data-id="7" id="t3-1">undefined</span>
 </p>
 `;
-    utils.assertHtml( assert, '#t3', t3 );
+    utils.assertHtml( assert, 't3', t3 );
 });
 
 QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
@@ -147,7 +147,7 @@ QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
     Var value: <span data-content="var" data-attributes="id id" data-id="10" id="t4-1">1</span>
 </p>
 `;
-    utils.assertHtml( assert, '#t4', t4 );
+    utils.assertHtml( assert, 't4', t4 );
 });
 
 QUnit.test( "Dynamic macro reading var (items = [10 20 30]) test", function( assert ) {
@@ -172,7 +172,7 @@ QUnit.test( "Dynamic macro reading var (items = [10 20 30]) test", function( ass
     </li>
 </ul>
 `;
-    utils.assertHtml( assert, '#t5', t5 );
+    utils.assertHtml( assert, 't5', t5 );
 });
 
 QUnit.test( "Macro using 1 slot test", function( assert ) {
@@ -196,7 +196,7 @@ QUnit.test( "Macro using 1 slot test", function( assert ) {
     </em>
 </div>
 `;
-    utils.assertHtml( assert, '#t6', t6 );
+    utils.assertHtml( assert, 't6', t6 );
 });
 
 QUnit.test( "Macro using 2 slots test", function( assert ) {
@@ -226,7 +226,7 @@ QUnit.test( "Macro using 2 slots test", function( assert ) {
     </em>
 </div>
 `;
-    utils.assertHtml( assert, '#t7', t7 );
+    utils.assertHtml( assert, 't7', t7 );
 });
 
 QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
@@ -252,7 +252,7 @@ QUnit.test( "Macro using 2 slots but only defining 1 test", function( assert ) {
     </em>
 </div>
 `;
-    utils.assertHtml( assert, '#t8', t8 );
+    utils.assertHtml( assert, 't8', t8 );
 });
 
 QUnit.test( "External macro test using var", function( assert ) {
@@ -265,7 +265,7 @@ QUnit.test( "External macro test using var", function( assert ) {
     Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
 </p>
 `;
-    utils.assertHtml( assert, '#t10', t10 );
+    utils.assertHtml( assert, 't10', t10 );
 });
 
 QUnit.test( "3 external macros in 3 different external macro files test using var", function( assert ) {
@@ -278,7 +278,7 @@ QUnit.test( "3 external macros in 3 different external macro files test using va
     Copyright 2017, <em>Foo, Bar, and Associates</em> Inc.
 </p>
 `;
-    utils.assertHtml( assert, '#t11', t11 );
+    utils.assertHtml( assert, 't11', t11 );
 });          
 
 QUnit.test( "Simple external macros with local calls test", function( assert ) {
@@ -307,7 +307,7 @@ QUnit.test( "Simple external macros with local calls test", function( assert ) {
     </em>
 </div>
 `;
-    utils.assertHtml( assert, '#t12', t12 );
+    utils.assertHtml( assert, 't12', t12 );
 });  
 
 QUnit.test( "Using define tags in macro use and macro call", function( assert ) {

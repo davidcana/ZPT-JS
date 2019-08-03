@@ -106,7 +106,7 @@ Make sure to check out our <a href="/specials">specials</a>.
 </em>
 </div>
 `;
-    utils.assertHtml( assert, '#t9', t9 );
+    utils.assertHtml( assert, 't9', t9 );
     //assert.htmlEqualExt( '#t9', t9 );
     /*
     assert.equal( 

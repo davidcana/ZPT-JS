@@ -26,9 +26,9 @@ module.exports = (function() {
     
     var assertHtml = function ( assert, id, expectedHtml ){
         
-        var actualElement = $( id );
+        var actualElement = window.document.getElementById( id );
         var compare = htmlComparator.compare( 
-            actualElement.html(), 
+            actualElement.innerHTML,
             expectedHtml 
         );
         if ( compare.equals ){

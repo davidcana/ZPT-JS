@@ -71,7 +71,7 @@ fs.readFile(
     After use macro
 </p>
 `;
-        //utils.assertHtml( assert, '#t2-1', t2_1 );
+        //utils.assertHtml( assert, 't2-1', t2_1 );
         //assert( byId('t2-1').innerHTML.trim(), t2_1.trim() );
 
         assert( byId('t3-1').getAttribute('title') , "title in string expression" );

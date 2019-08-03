@@ -536,7 +536,7 @@ QUnit.test( "simple METALFillSlot test", function( assert ) {
     </div>
 </div>
 `;
-            utils.assertHtml( assert, '#' + id, t );
+            utils.assertHtml( assert, id, t );
 
             var dictionaryChanges = {
                 slot: 'footer'
@@ -578,7 +578,7 @@ QUnit.test( "simple METALFillSlot test", function( assert ) {
     </div>
 </div>
 `;
-            utils.assertHtml( assert, '#' + id, t );
+            utils.assertHtml( assert, id, t );
             //assert.equal( $('#' + id).html().trim(), t );
 
             done();

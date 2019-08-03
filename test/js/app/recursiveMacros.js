@@ -126,5 +126,5 @@ QUnit.test("Simple macros test", function (assert) {
     </li>
 </ul>
     `;
-    utils.assertHtml(assert, '#t1', t1);
+    utils.assertHtml(assert, 't1', t1);
 });
