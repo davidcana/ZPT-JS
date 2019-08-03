@@ -15,8 +15,8 @@ fs.readFile(
     'utf8', 
     function( err, data ) {
         if ( err ) throw err;
-        console.log( 'OK: ' + filename );
-        console.log( 'data:\n' + data );
+        console.log( filename + ' read succesfully.');
+        //console.log( 'data:\n' + data );
 
         // Build JSDOM instance
         var dom = new JSDOM( 
@@ -32,7 +32,7 @@ fs.readFile(
         var window = dom.window;
         var document = window.document;
         global.window = window;
-        console.log( 'document.body.innerHTML:\n' + document.body.innerHTML );
+        //console.log( 'document.body.innerHTML:\n' + document.body.innerHTML );
         
         // Parse template
         var zpt = require( '../../../js/app/main.js' );
@@ -45,7 +45,7 @@ fs.readFile(
             }
         });
 
-        console.log( 'Done!' );
+        console.log( 'ZPT was executed.' );
 
         // Some tests
         var t2_1 = `
@@ -78,12 +78,12 @@ fs.readFile(
         assert( byId('t3-1').getAttribute('href') , "http://www.xxx.org" );
 
         assert( byId('t4-1').innerHTML, "yes!" );
-        //assert( isVisible ( byId('t4-1') ), true );
+        assert( isVisible( byId('t4-1') ), true );
         assert( byId('t4-2').innerHTML, "Bob" );
-        //assert( isVisible ( byId('t4-2') ), true );
-        //assert( isVisible ( byId('t4-3') ), false );
+        assert( isVisible( byId('t4-2') ), true );
+        assert( isVisible( byId('t4-3') ), false );
         assert( byId('t4-4').innerHTML, "a name" );
-        //assert( isVisible ( byId('t4-4') ), false );
+        assert( isVisible( byId('t4-4') ), false );
 
         assert( byId('t5-1').innerText, "hello" );
 
@@ -112,7 +112,11 @@ fs.readFile(
 function byId( id ){
     return window.document.getElementById( id );
 }
-
+function isVisible( elem ) {
+    //console.log( 'display: ' + window.getComputedStyle( elem ).display  === 'none' );
+    return window.getComputedStyle( elem ).display !== 'none';
+}
+/*
 function isVisible(elem) {
     //if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');
     const style = window.getComputedStyle(elem);
@@ -137,6 +141,7 @@ function isVisible(elem) {
     } while (pointContainer = pointContainer.parentNode);
     return false;
 }
+*/
 /*
 function isVisible( elem ) {
     return !!( elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length );
