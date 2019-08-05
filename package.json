@@ -50,7 +50,9 @@
     "qunit": "~2.9.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "testNode": "qunit test/js/app/node.js",
+    "testBrowser": "grunt qunit",
+    "test": "npm-run-all testBrowser testNode",
     "http-server": "http-server -p 9000",
     "web": "cd ./docs; http-server -p 9001",
     "beefy": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js ../../../samples/js/app/performance.js:performance.js",

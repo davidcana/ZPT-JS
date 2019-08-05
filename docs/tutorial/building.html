@@ -18,14 +18,36 @@
             </div>
             <article data-fill-slot="'article'">
                 <p>
-                    At first use the next command to initialize a <a href="http://didact.us/beefy/">beefy server</a> (port 9966) to make it easy to test ZPT-JS without browserifying by hand and a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve static files (HTML, CSS and JSON files).
+                    At first use the next command to initialize a <a href="http://didact.us/beefy/">beefy server</a> (port 9966) to make it easy to test ZPT-JS without browserifying by hand and a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve static files (HTML, CSS and JSON files):
                 </p>
                 <pre class="console">
 $ npm run start
-                </pre>   
+                </pre>
                 <p>
-                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. For testing ZPT-JS open <code>test/index.html</code> or <a href="http://localhost:9000/test/">http://localhost:9000/test/</a> with your favourite browser. All tests passed using last versions of Mozilla Firefox (55.0.2, 64-bit). Perhaps some tests fail using other browsers!
+                    Use the next command to initialize a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9001) to serve static files of the web of ZPT-JS:
                 </p>
+                <pre class="console">
+$ npm run web
+                </pre> 
+                <p>
+                    Open <a href="http://localhost:9001">http://localhost:9001</a> with your favourite browser to view the web of ZPT-JS.
+                </p>
+                <p>
+                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. The are some different ways for testing ZPT-JS:
+                </p>
+                <ul>
+                    <li>
+                        Open <a href="http://localhost:9000/test/">http://localhost:9000/test/</a> with your favourite browser. Be careful: only related to browser test are run! All tests passed using last versions of Mozilla Firefox (68.0.1, 64-bit) and Chromium (74.0.3729.169, 64-bit). Perhaps some tests fail using other browsers!
+                    </li>
+                    <li>
+                        Test ZPT-JS using console:
+                <pre class="console">
+$ npm run testBrowser   // Run the related to browser tests
+$ npm run testNode      // Run the related to node.js tests
+$ npm run test          // Run all tests
+                </pre>
+                    </li>
+                </ul>
                 <p>
                     ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:
                 </p>
