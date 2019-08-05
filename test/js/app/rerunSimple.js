@@ -293,7 +293,7 @@ QUnit.test( "Rerun using loops", function( assert ) {
         root: document.getElementById( 't9-1' ),
         dictionary: dictionary
     });
-    console.log( 'Run using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
+    //console.log( 'Run using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
     runTests( '0/1/2/3' );
     
     // Partial render #t9-2 and run tests again
@@ -303,7 +303,7 @@ QUnit.test( "Rerun using loops", function( assert ) {
         command: 'partialRender',
         target: document.getElementById( 't9-1-3' ),
     });
-    console.log( 'Rerun using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
+    //console.log( 'Rerun using loops render time: ' + utils.getMilliseconds( startDate ) + ' milliseconds.' );
     runTests( '0/1/102/3' );
     
     function runTests( added ){

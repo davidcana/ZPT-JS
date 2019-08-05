@@ -24,6 +24,13 @@
 $ npm run start
                 </pre>
                 <p>
+                    ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. Grunt file uses:
+                </p>
+                <ul>
+                    <li><em>grunt-browserify</em>. Build javascript files to be understood for browsers.</li>
+                    <li><em>grunt-contrib-watch</em>. Watch changes of javascript files to invoke <em>browserify</em> automatically.</li>
+                </ul>
+                <p>
                     Use the next command to initialize a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9001) to serve static files of the web of ZPT-JS:
                 </p>
                 <pre class="console">
@@ -33,7 +40,7 @@ $ npm run web
                     Open <a href="http://localhost:9001">http://localhost:9001</a> with your favourite browser to view the web of ZPT-JS.
                 </p>
                 <p>
-                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. The are some different ways for testing ZPT-JS:
+                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. There are some different ways for testing ZPT-JS:
                 </p>
                 <ul>
                     <li>
@@ -41,22 +48,18 @@ $ npm run web
                     </li>
                     <li>
                         Test ZPT-JS using console:
-                <pre class="console">
+                        <pre class="console">
 $ npm run testBrowser   // Run the related to browser tests
 $ npm run testNode      // Run the related to node.js tests
 $ npm run test          // Run all tests
-                </pre>
+                        </pre>
+                        Some tests (<code>errors.html</code>, <code>folderDictionaries.html</code> and <code>folderDictionaries2.html</code>) show this error message several times:
+                        <pre class="console">
+Failed to load resource: the server responded with a status of 404 (Not Found)
+                        </pre>
+                        This is due to forced loading errors (<code>errors.html</code>) or errors trying to load <em>folder dictionaries</em> (<code>folderDictionaries.html</code> and <code>folderDictionaries2.html</code>). This is the expected behaviour.
                     </li>
                 </ul>
-                <p>
-                    ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. If you want to modify and rebuild ZPT-JS the next command lines are useful:
-                </p>
-                <pre class="console">
-$ grunt browserify        // Build all test js files; also build a standalone version
-$ grunt browserify:[file] // Build a single js file; use 'standalone' to build a standalone version
-$ grunt compress          // Compress files and folders of this project into dist/zpt_yyyy-mm-dd_hhmm.tar.gz
-                </pre>
-
             </article>
         </div>
     </body>

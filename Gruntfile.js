@@ -3,9 +3,9 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         qunit: {
-            all: {
+            browser: {
                 options: {
-                    timeout: 10000,
+                    timeout: 60000,
                     urls: [
                         'http://localhost:9000/test/expressions.html',
                         'http://localhost:9000/test/statements.html',
