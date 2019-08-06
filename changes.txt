@@ -7,12 +7,18 @@ New in future versions
 - Add data-tswitch expression and data-tcase expression?
 - Implement adquisition?
 
-New in 0.38.0
+New in 0.39.0
 - Add options.registerComponent?
 - Add support of components. Components must implement these methods:
     - beforeProcessing()
     - afterProcessing()
     - getTemplate( viewId ) ?
+
+New in 0.38.0
+- New configuration option added: goToFragmentIdentifier?
+
+New in 0.37.1
+- Bug fixed: an error occurs when strict mode is set to true and a var is defined using tal:define?
 
 New in 0.37.0
 - Removed jquery dependency in non dev.
