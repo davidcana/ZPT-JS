@@ -15,8 +15,14 @@
         <div data-use-macro="'page@templates.html'">
             <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Building and testing</h1>
+                <ul>
+                    <li><a href="#starting">Starting ZPT-JS</a>.</li>
+                    <li><a href="#web">The web of ZPT-JS</a>.</li>
+                    <li><a href="#testing">Testing</a>.</li>
+                </ul>
             </div>
             <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'starting'">Starting ZPT-JS</h2>
                 <p>
                     At first use the next command to initialize a <a href="http://didact.us/beefy/">beefy server</a> (port 9966) to make it easy to test ZPT-JS without browserifying by hand and a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve static files (HTML, CSS and JSON files):
                 </p>
@@ -30,6 +36,7 @@ $ npm run start
                     <li><em>grunt-browserify</em>. Build javascript files to be understood for browsers.</li>
                     <li><em>grunt-contrib-watch</em>. Watch changes of javascript files to invoke <em>browserify</em> automatically.</li>
                 </ul>
+                <h2 data-attributes="id 'web'">The web of ZPT-JS</h2>
                 <p>
                     Use the next command to initialize a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9001) to serve static files of the web of ZPT-JS:
                 </p>
@@ -39,6 +46,7 @@ $ npm run web
                 <p>
                     Open <a href="http://localhost:9001">http://localhost:9001</a> with your favourite browser to view the web of ZPT-JS.
                 </p>
+                <h2 data-attributes="id 'testing'">Testing</h2>
                 <p>
                     ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. There are some different ways for testing ZPT-JS:
                 </p>
