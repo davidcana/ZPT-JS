@@ -138,5 +138,25 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>Using tal:define in strict mode (not failing)</h2>
+        <div id="t8" data-define="number1 1">
+            <ol data-declare="number1 number">
+                <li>number1 = <span id="t8-1" data-content="number1">an integer</span></li>
+                <li data-define="number2 2">
+                    <span>number2 = <span id="t8-2" data-content="number2">an integer</span></span>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Using tal:define in strict mode (failing)</h2>
+        <div id="t9" data-define="number1 1; number2 2">
+            <ol data-declare="number1 number">
+                <li>number1 = <span id="t9-1" data-content="number1">must not be evaluated</span></li>
+                <li>
+                    <span>number2 = <span id="t9-2" data-content="number2">must not be evaluated</span></span>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

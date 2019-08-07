@@ -60,7 +60,8 @@ Scope.prototype.startElement = function(){
     var vars = {
         varsToUnset : [],
         varsToSet : {},
-        expressions: {}
+        expressions: {},
+        impliedDeclaredVars: []
     };
 
     this.changesStack.push( vars );
@@ -158,6 +159,10 @@ Scope.prototype.set = function ( name, value, isGlobal, nocall, _expression ) {
         
         vars.expressions[ name ] = expression;
         
+        if ( this.isStrictMode() ){
+            vars.impliedDeclaredVars.push( name );
+        }
+        
     } else {
         
         // Global vars
@@ -253,15 +258,30 @@ Scope.prototype.isStrictMode = function(){
 
 Scope.prototype.isValidVariable = function( name ){
     
+    // If strict mode is off all variable are valid
     if ( ! this.isStrictMode() ){
         return true;
     }
     
+    // If the variable is declared return true
     var declared = this.get( context.getConf().declaredVarsVarName );
-    
-    return declared && declared.indexOf? 
+    var isDeclared = declared && declared.indexOf? 
         declared.indexOf( name ) !== -1: 
         false;
+    if ( isDeclared ){
+        return true;
+    }
+    
+    // Check if the variable is implicitly declared
+    for ( var i = this.changesStack.length - 1; i >= 0; --i ){
+        var vars = this.changesStack[ i ];
+        var isImplied = vars.impliedDeclaredVars.indexOf( name ) !== -1;
+        if ( isImplied ){
+            return true;
+        }
+    }
+    
+    return false;
 };
 
 Scope.prototype.getVarExpression = function ( name ) {

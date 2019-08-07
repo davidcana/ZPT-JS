@@ -24,6 +24,7 @@ var Tree = function( name ) {
 QUnit.test( "simple not failing test", function( assert ) {
     
     errorsArray = undefined;
+    context.setStrictMode( true );
     dictionary.myTree = new Tree( 'Oak' );
     
     zpt.run({
@@ -46,6 +47,7 @@ QUnit.test( "simple not failing test", function( assert ) {
 QUnit.test( "simple failing test", function( assert ) {
     
     errorsArray = undefined;
+    context.setStrictMode( true );
     delete dictionary.myTree;
     
     zpt.run({
@@ -82,7 +84,8 @@ QUnit.test( "simple failing test", function( assert ) {
 QUnit.test( "Default value not failing test", function( assert ) {
 
     errorsArray = undefined;
-
+    context.setStrictMode( false );
+    
     zpt.run({
         root: document.getElementById( 't3' ),
         dictionary: dictionary
@@ -99,6 +102,7 @@ QUnit.test( "Default value not failing test", function( assert ) {
 QUnit.test( "Default value failing test", function( assert ) {
 
     errorsArray = undefined;
+    context.setStrictMode( false );
     dictionary.myFunction = function(){
         return undefined;
     };
@@ -125,7 +129,8 @@ QUnit.test( "Default value failing test", function( assert ) {
 QUnit.test( "Strict mode using declare test", function( assert ) {
 
     errorsArray = undefined;
-
+    context.setStrictMode( false );
+    
     zpt.run({
         root: document.getElementById( 't5' ),
         dictionary: dictionary
@@ -160,10 +165,11 @@ QUnit.test( "Strict mode using context test", function( assert ) {
     );
 });
 
-QUnit.test( "Undefined type", function( assert ) {
+QUnit.test( "undefined type", function( assert ) {
 
     errorsArray = undefined;
-
+    context.setStrictMode( false );
+    
     zpt.run({
         root: document.getElementById( 't7' ),
         dictionary: dictionary
@@ -174,3 +180,39 @@ QUnit.test( "Undefined type", function( assert ) {
 
     assert.equal( errorsArray, undefined );
 });
+
+QUnit.test( "using tal:define in strict mode (not failing)", function( assert ) {
+    
+    errorsArray = undefined;
+    context.setStrictMode( false );
+    
+    zpt.run({
+        root: document.getElementById( 't8' ),
+        dictionary: dictionary
+    });
+    
+    assert.equal( $('#t8-1').text() , "1" );
+    assert.equal( $('#t8-2').text() , "2" );
+    
+    assert.equal( errorsArray, undefined );
+});
+
+QUnit.test( "using tal:define in strict mode (failing)", function( assert ) {
+    
+    errorsArray = undefined;
+    context.setStrictMode( false );
+    
+    zpt.run({
+        root: document.getElementById( 't9' ),
+        dictionary: dictionary
+    });
+    
+    assert.equal( $('#t9-1').text() , "1" );
+    assert.equal( $('#t9-2').text() , "must not be evaluated" );
+    
+    assert.deepEqual( 
+        errorsArray, 
+        "Not declared variable found using strict mode:number2"
+    );
+});
+
