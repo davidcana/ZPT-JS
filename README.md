@@ -161,7 +161,7 @@ An example of ZPT-JS template:
     </html>
 ```
 
-Please, take a look to [the ZPT-JS wiki](https://github.com/davidcana/ZPT-JS/wiki) for more information about ZPT-JS.
+Please, take a look to [the ZPT-JS web](https://davidcana.github.io/ZPT-JS) for more information about ZPT-JS.
 
 ## License
 [LGPL](http://www.gnu.org/licenses/lgpl.html)
