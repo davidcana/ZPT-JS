@@ -145,40 +145,30 @@ zpt.run({
                 <pre class="brush: js">
 "use strict";
 
-var jsdom = require( 'node-jsdom' ).jsdom;
+var jsdom = require( 'jsdom' );
+var { JSDOM } = jsdom;
 
-jsdom.env(
+// Build JSDOM instance
+var dom = new JSDOM(
     '&lt;!doctype html&gt;'
 	+ '&lt;html&gt;'
 	+ '&lt;body&gt;&lt;h1 data-content="'hello, world!'"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
-	+ '&lt;/html&gt;', 
-    [ 'http://code.jquery.com/jquery.min.js' ], 
-    function( err, window ) {
-
-        // Check if an error occurs
-        if ( err ) {
-            console.error( err );
-            return 1;
-        }
-
-        // Copy window to global
-        global.window = window;
-
-        // Copy from window to local vars
-        var $ = window.$;
-        var document = window.document;
-
-        // Parse template
-        var zpt = require( 'zpt' );
-
-        zpt.run({
-            root: document.body,
-            dictionary: {}
-        });
-
-        console.log( 'Done!' );
-    }
+	+ '&lt;/html&gt;'
 );
+
+// Init some important vars
+var window = dom.window;
+var document = window.document;
+global.window = window;
+
+// Parse template
+var zpt = require( 'zpt' );
+zpt.run({
+    root: document.body,
+    dictionary: {}
+});
+
+console.log( 'Done!' );
     </pre>
             </article>
         </div>
