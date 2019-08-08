@@ -15,7 +15,7 @@ New in 0.39.0
     - getTemplate( viewId ) ?
 
 New in 0.38.0
-- New configuration option added: goToFragmentIdentifier?
+- New configuration option added: goToURLHash?
 
 New in 0.37.1
 - Bug fixed: an error occurs when strict mode is set to true and a var is defined using tal:define.
