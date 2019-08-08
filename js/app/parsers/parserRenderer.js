@@ -11,13 +11,14 @@ var nodeRemover = require( './nodeRemover.js' );
 var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 
-var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _resetIndex ) {
+var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _resetIndex, _goToURLHash ) {
     
     var parserOptions = _parserOptions;
-    var target = _target; 
+    var target = _target;
     var dictionaryExtension = _dictionaryExtension;
     var notRemoveGeneratedTags = _notRemoveGeneratedTags;
     var resetIndex = _resetIndex;
+    var goToURLHash = _goToURLHash;
     
     var run = function(){
         process();
@@ -40,6 +41,10 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
             }
 
             processAllTargetElements();
+            
+            if ( goToURLHash ){
+                processGoToURLHash();
+            }
 
         } catch( e ){
             log.fatal( 'Exiting run method of ZPT with errors: ' + e );
@@ -76,6 +81,23 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
         );
 
         parserNodeRenderer.run();
+    };
+    
+    var processGoToURLHash = function(){
+        
+        var id = decodeURI( window.location.hash ).substr( 1 );
+        if ( ! id ){
+            return;
+        }
+        
+        var element = window.document.getElementById( id );
+        if ( ! element ){
+            log.warn( 'Unable to go to URL hash. Element with id "' + id + '" not found!' );
+            return;
+        }
+
+        // Go to hash
+        window.location.href = '#' + id;
     };
     
     var self = {

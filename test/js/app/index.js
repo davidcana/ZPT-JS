@@ -29,5 +29,6 @@ QUnit.testSuites([
     { name: "Folder dictionary Test Suite", path: "./folderDictionaries.html" },
     { name: "Folder dictionary level 2 Test Suite", path: "./moreTest/folderDictionaries2.html" },
     { name: "declare root Test Suite", path: "./declare.html" },
-    { name: "update Test Suite", path: "./update.html" }
+    { name: "update Test Suite", path: "./update.html" },
+    { name: "goToURLHash Test Suite", path: "./goToURLHash.html#t1" }
 ]);

@@ -64,7 +64,8 @@ module.exports = (function() {
                     command == 'partialRender'? options.target: parserOptions.root,
                     options.dictionaryExtension,
                     options.notRemoveGeneratedTags,
-                    parserOptions.indexExpressions && command == 'fullRender'
+                    parserOptions.indexExpressions && command == 'fullRender',
+                    options.goToURLHash === undefined? context.nextRunCounter() === 1: false
                 );
             case 'update':
                 return processUpdate( 
@@ -92,14 +93,15 @@ module.exports = (function() {
         return parserPreloader;
     };
     
-    var processRender = function( target, dictionaryExtension, notRemoveGeneratedTags, resetIndex ){
+    var processRender = function( target, dictionaryExtension, notRemoveGeneratedTags, resetIndex, goToURLHash ){
         
         var parserRenderer = new ParserRenderer( 
             parserOptions, 
             target, 
             dictionaryExtension, 
             notRemoveGeneratedTags, 
-            resetIndex
+            resetIndex,
+            goToURLHash
         );
 
         parserRenderer.run();

@@ -366,6 +366,13 @@ module.exports = (function() {
     };
     /* End expression counter */
     
+    /* Run counter */
+    var runCounter = 0;
+    var nextRunCounter = function(){
+        return ++runCounter;
+    };
+    /* End run counter */
+    
     var self = {
         getTags: getTags,
         setTags: setTags,
@@ -393,7 +400,8 @@ module.exports = (function() {
         setStrictMode: setStrictMode,
         isStrictMode: isStrictMode,
         nextExpressionCounter: nextExpressionCounter,
-        setExpressionCounter: setExpressionCounter
+        setExpressionCounter: setExpressionCounter,
+        nextRunCounter: nextRunCounter
     };
     
     return self;

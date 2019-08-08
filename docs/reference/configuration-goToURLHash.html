@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - goToURLHash</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - goToURLHash</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+goToURLHash ::= Boolean
+                </pre>
+                
+                <h2 data-attributes="id 'description'">Description</h2>
+                <p>
+                    If the URL of a web page is <code>https://mydomain.org/mydoc.html#myhash</code> and <code>myhash</code> exists as a static id in <code>mydoc.html</code> the browser will show it properly. But if <code>myhash</code> id is assigned dinamically by ZPT-JS the browser will not find it because it does not exist yet!
+                </p>
+                
+                <p>
+                    If <code>goToURLHash</code> is <code>true</code> ZPT-JS forces the browser to show the current hash after rendering the ZPT template. ZPT-JS updates the <code>location.href</code> to the current URL hash. It is a boolean value. 
+                </p>
+                
+                <p>
+                    The default value is <code>true</code> the first execution of ZPT, the rest executions are default to <code>false</code>.
+                </p>
+                
+                <p>
+                    Important! This configuration option must be used beside a <a href="configuration-command.html">fullRender</a> or a <a href="configuration-command.html">partialRender</a> command, it will be ignored if the command is another one.
+                </p>
+
+                <h2 data-attributes="id 'examples'">Examples</h2>
+                <p>
+                    An example of ZPT-JS invokation using <em>goToURLHash</em>:
+                </p>
+                <pre class="brush: js; highlight: [12]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    ...
+};
+
+zpt.run({
+    root: document.getElementById( 't1' ),
+    dictionary: dictionary,
+    goToURLHash: true // Force going to URL hash
+});
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>
