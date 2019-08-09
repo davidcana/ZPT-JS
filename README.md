@@ -5,7 +5,7 @@
 Core features of **ZPT-JS** are:
 
 *   Easy to learn; clean, simple and consistent syntax.
-*   A rich and powerful group of expressions available (string, Jquery, logical, math, arrays, lists, ranges, function, method expressions...).
+*   A rich and powerful group of expressions available (string, query, logical, math, arrays, lists, ranges, function, method expressions...).
 *   Don't break HTML! The HTML documents using ZPT-JS are valid HTML documents.
 *   Makes it easy to designers maintain pages without having to abandon their tools.
 *   Internal macro support; external asynchronous macro loading support.
@@ -27,7 +27,7 @@ Using ZPT-JS:
 *   the data
 *   the final HTML file is the ZPT template! The DOM of the HTML page is modified depending on the tags in the ZPT template.
 
-A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-content`. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
+A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way `tal:content` attribute is replaced by `data-content`. However, ZPT-JS also supports standard TAL attributes (invoking `zpt.context.useOriginalTags()`).
 
 ## Installation
 
@@ -39,37 +39,7 @@ npm install zpt
 
 ## Usage
 
-An example of ZPT-JS template:
-
-*sample.js*
-```javascript
-    "use strict";
-
-    var zpt = require( 'zpt' );
-
-    var dictionary = { 
-        number1: 1,
-        number100: 100,
-        user: {
-            name: "Bob", 
-            age: function( ){
-                return 25;
-            }
-        },
-        user2: {
-            name: "Mary", 
-            age: function( ){
-                return 29;
-            }
-        },
-        tools: [ 'tool0', 'tool1', 'tool2' ]
-    };
-
-    zpt.run({
-        root: document.body,
-        dictionary: dictionary
-    });
-```
+Let's see an example of ZPT-JS template. It includes several kinds of **expressions** and **tags**. It also shows examples of loops and macros:
 
 *sample.html*
 ```html
@@ -79,7 +49,7 @@ An example of ZPT-JS template:
             <meta charset="utf-8">
             <title>Some ZPT-JS examples</title>
 
-            <script src="zpt.js"></script>
+            <script src="sample.js"></script>
         </head>
         <body>
             <h1>Some ZPT-JS examples</h1>
@@ -90,7 +60,7 @@ An example of ZPT-JS template:
                 <li data-content="string:help my ${user/name}">a string expression</li>
                 <li>
                     <a data-attributes="href 'www.yoursite.org';
-                                         title 'a title for your site'">A link using string literals in a data-attributes</a>
+                                        title 'a title for your site'">A link using string literals in a data-attributes</a>
                 </li>
                 <li data-condition="eq: number1 number100">
                     a condition: change number1 or number100 to show this!
@@ -159,6 +129,38 @@ An example of ZPT-JS template:
             </ul>
         </body>
     </html>
+```
+
+The javascript code to invoke ZPT requires an object called **dictionary** that will be accesible by the template:
+
+*sample.js*
+```javascript
+    "use strict";
+
+    var zpt = require( 'zpt' );
+
+    var dictionary = { 
+        number1: 1,
+        number100: 100,
+        user: {
+            name: "Bob", 
+            age: function( ){
+                return 25;
+            }
+        },
+        user2: {
+            name: "Mary", 
+            age: function( ){
+                return 29;
+            }
+        },
+        tools: [ 'tool0', 'tool1', 'tool2' ]
+    };
+
+    zpt.run({
+        root: document.body,
+        dictionary: dictionary
+    });
 ```
 
 Please, take a look to [the ZPT-JS web](https://davidcana.github.io/ZPT-JS) for more information about ZPT-JS.
