@@ -7,12 +7,15 @@ New in future versions
 - Add data-tswitch expression and data-tcase expression?
 - Implement adquisition?
 
-New in 0.40.0
+New in 0.41.0
 - Add options.registerComponent?
 - Add support of components. Components must implement these methods:
     - beforeProcessing()
     - afterProcessing()
     - getTemplate( viewId ) ?
+
+New in 0.40.0
+- Add options.reactive (boolean) to activate or deactivate the reactive behaviour in a full render command?
 
 New in 0.39.0
 - Add options.macro (string) to set the name of the macro to invoke in a full render command?
