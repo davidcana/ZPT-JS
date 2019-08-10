@@ -46,8 +46,46 @@ goToURLHash ::= Boolean
 
                 <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
-                    An example of ZPT-JS invokation using <em>goToURLHash</em>:
+                    Let's see an example of ZPT-JS invokation using <em>goToURLHash</em>. We have defined a link like this:
                 </p>
+                
+                <strong>link.html</strong>
+                <pre class="brush: html">
+...
+&lt;a href="sample.html?myId"&gt;
+   My link
+&lt;/a&gt;
+...
+                </pre>
+                
+                <p>
+                    Our sample HTML document is:
+                </p>
+                
+                <strong>sample.html</strong>
+                <pre class="brush: html; highlight: [10]">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt; 
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Testing goToURLHash&lt;/title&gt;
+        &lt;script src="testingGoToURLHash.js" type="text/javascript" defer&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        ...
+        &lt;div data-attributes="id 'myId'"&gt;
+           ...
+        &lt;/div&gt;
+        ...
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    Now we click the link in <code>link.html</code>. Before invoking <code>zpt.run</code> the selected div element does not define any id attribute, so the browser can not find it. But if <em>goToURLHash</em> is <code>true</code> ZPT-JS updates the <code>location.href</code> to the current URL hash (<em>myId</em> in this case).
+                </p>
+                
+                <strong>sample.js</strong>
                 <pre class="brush: js; highlight: [12]">
 "use strict";
 
@@ -63,6 +101,10 @@ zpt.run({
     goToURLHash: true // Force going to URL hash
 });
                 </pre>
+                
+                <p>
+                    This setting is not needed if we want to update location only the first time.
+                </p>
             </article>
         </div>
     </body>
