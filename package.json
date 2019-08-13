@@ -4,8 +4,6 @@
   "main": "./js/app/main.js",
   "description": "Zenon Page Templates - JS (ZPT-JS)",
   "keywords": [
-    "jquery-plugin",
-    "ecosystem:jquery",
     "template",
     "templates",
     "templating",
