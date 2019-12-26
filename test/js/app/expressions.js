@@ -11,6 +11,7 @@ var c = 10;
 dictionary.method = function(){
     return c++;
 };
+dictionary.toEncode1 = '#';
 
 // Parse template
 zpt.run({
@@ -64,6 +65,7 @@ QUnit.test( "Javascript expressions test", function( assert ) {
     assert.equal( $('#t4-7').html() , "true" );
     assert.equal( $('#t4-8').html() , "false" );
     assert.equal( $('#t4-9').html() , "101" );
+    assert.equal( $('#t4-10').html() , "%23" );
 });
 
 QUnit.test( "Comparison expressions test", function( assert ) {
