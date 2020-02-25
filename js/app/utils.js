@@ -32,7 +32,7 @@ module.exports = (function() {
 
         // Detect obvious negatives
         // Use toString instead of jQuery.type to catch host objects
-        if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+        if ( !obj || Object.prototype.toString.call( obj ) !== "[object Object]" ) {
             return false;
         }
 

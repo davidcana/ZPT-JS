@@ -20,6 +20,9 @@ New in 0.40.0
 New in 0.39.0
 - Add options.macro (string) to set the name of the macro to invoke in a full render command?
 
+New in 0.38.2
+- Some errors about non declared variables fixed.
+
 New in 0.38.1
 - Bug fixed: problem with npm solved.
 

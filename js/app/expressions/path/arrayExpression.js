@@ -77,7 +77,7 @@ ArrayExpression.build = function( arrayBase, accessor ) {
     
     return new ArrayExpression( arrayBase, indexes );
 };
-
+/*
 ArrayExpression.buildAccessor = function( accessor ) {
     
     // Array accessor must begin and end with brackets
@@ -97,7 +97,7 @@ ArrayExpression.buildAccessor = function( accessor ) {
 
     return new ArrayExpression( arrayBase, indexes );
 };
-
+*/
 ArrayExpression.buildArrayData = function( token ) {
     
     var bracket = ArrayExpression.findArrayAccessor( token );

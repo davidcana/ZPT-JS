@@ -28,11 +28,11 @@ module.exports = (function() {
         var count = segments.countTokens();
         if ( count < minElements ) {
             throw 'Too few elements in ' + tag + ' expression (minimum is ' + minElements 
-                    + ', ' + count + ' present): ' + expression;
+                    + ', ' + count + ' present): ' + string.trim();
         }
         if ( count > maxElements ) {
             throw 'Too many elements in ' + tag + ' expression (maximum is ' + maxElements 
-                    + ', ' + count + ' present):' + expression;
+                    + ', ' + count + ' present):' + string.trim();
         }
         
         // Get tokens
