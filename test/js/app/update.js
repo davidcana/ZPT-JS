@@ -638,6 +638,152 @@ QUnit.test( "mixing TALContent and TALAttributes test", function( assert ) {
     );
 });
 
+QUnit.test( "update text element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 13;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'update',
+            index: 1,
+            newElement: 5
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '1/5/9' );
+});
+
+QUnit.test( "update text element by element TALRepeat test", function( assert ) {
+
+    var testNumber = 14;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'update',
+            currentElement: 4,
+            newElement: 5
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '1/5/9' );
+});
+
+QUnit.test( "delete text element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 15;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'delete',
+            index: 1
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '1/9' );
+});
+
+QUnit.test( "delete text element by element TALRepeat test", function( assert ) {
+
+    var testNumber = 16;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'delete',
+            currentElement: 4
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '1/9' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

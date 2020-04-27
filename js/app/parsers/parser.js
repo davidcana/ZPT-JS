@@ -69,7 +69,8 @@ module.exports = (function() {
                 );
             case 'update':
                 return processUpdate( 
-                    options.dictionaryChanges
+                    options.dictionaryChanges,
+                    options.dictionaryActions
                 );
             default:
                 throw 'Unknown command: ' + command;
@@ -109,10 +110,11 @@ module.exports = (function() {
         return parserRenderer;
     };
     
-    var processUpdate = function( dictionaryChanges ) {
+    var processUpdate = function( dictionaryChanges, dictionaryActions ) {
         
         var parserUpdater = new ParserUpdater( 
             dictionaryChanges,
+            dictionaryActions,
             parserOptions
         );
 

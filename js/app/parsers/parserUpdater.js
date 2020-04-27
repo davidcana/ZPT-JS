@@ -10,18 +10,71 @@ var scopeBuilder = require( '../scopes/scopeBuilder.js' );
 var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 var nodeRemover = require( './nodeRemover.js' );
 var utils = require( '../utils.js' );
+var dictionaryActionBuilder = require( './dictionaryActions/dictionaryActionBuilder.js' );
 
-var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
+var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOptions ) {
     
     var dictionaryChanges = _dictionaryChanges;
+    var dictionaryActions = _dictionaryActions;
     var parserOptions = _parserOptions;
     
     var scopeMap = {};
     var nodeAttributes, 
         statistics;
+    var dictionaryActionsInstances = [];
     
     var getStatistics = function(){
         return statistics;
+    };
+    
+    var initializeDictionaryActionsInstances = function(){
+        
+        dictionaryActionsInstances = [];
+        
+        if ( ! dictionaryActions ){
+            return;
+        }
+        
+        for ( var i = 0; i < dictionaryActions.length; ++i ){
+            var action = dictionaryActions[ i ];
+            var newActionInstance = dictionaryActionBuilder.build( action );
+            dictionaryActionsInstances.push( newActionInstance );
+        }
+    };
+    
+    var updateDictionaryUsingActions = function( dictionary, varNamesMap ){
+    
+        for ( var i = 0; i < dictionaryActionsInstances.length; ++i ){
+            var actionInstance = dictionaryActionsInstances[ i ];
+            
+            // Update dictionary using action
+            actionInstance.updateDictionary( parserOptions.dictionary );
+            
+            // Add the var to the varNamesMap
+            varNamesMap[ actionInstance.id ] = dictionary[ actionInstance.id ];
+        }
+    };
+    
+    var updateDictionary = function(){
+        
+        var result = {};
+        
+        if ( dictionaryChanges ){
+            utils.extend( parserOptions.dictionary, dictionaryChanges );
+            utils.extend( result, dictionaryChanges );
+        }
+        if ( dictionaryActions ){
+            updateDictionaryUsingActions( parserOptions.dictionary, result );
+        }
+        
+        return result;
+    };
+    
+    var buildData = function( varNamesMap ){
+        //for ( var varName in dictionaryChanges ){
+        for ( var varName in varNamesMap ){
+            buildDataFromVarChange( varName );
+        }
     };
     
     var run = function(){
@@ -32,8 +85,10 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
                 throw 'Unable to update, no index built! Set indexExpressions to true!';
             }
 
+            initializeDictionaryActionsInstances();
+            
             // Update dictionary
-            utils.extend( parserOptions.dictionary, dictionaryChanges );
+            var varNamesMap = updateDictionary();
 
             // Init some vars
             nodeAttributes = {};
@@ -42,10 +97,8 @@ var ParserUpdater = function( _dictionaryChanges, _parserOptions ) {
                 removedNodeUpdates: 0
             };
 
-            // Build data form changed vars
-            for ( var varName in dictionaryChanges ){
-                buildDataFromVarChange( varName );
-            }
+            // Build data
+            buildData( varNamesMap );
 
             // Update attributes
             for ( var i in nodeAttributes ) {
