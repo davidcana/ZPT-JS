@@ -13,9 +13,9 @@ ArrayCreate.prototype = Object.create( AbstractArrayAction.prototype );
 
 ArrayCreate.prototype.updateDictionary = function( dictionary ){
     
-    var indexToUse = this.getIndexToUse( dictionary );
+    this.indexToUse = this.getIndexToUse( dictionary );
     var arrayValue = this.getArrayValue( dictionary );
-    arrayValue.splice( indexToUse, 0, this.newElement );
+    arrayValue.splice( this.indexToUse, 0, this.newElement );
 };
 
 module.exports = ArrayCreate;

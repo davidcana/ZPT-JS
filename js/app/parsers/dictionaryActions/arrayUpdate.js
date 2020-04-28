@@ -2,6 +2,7 @@
     Class ArrayUpdate
 */
 var AbstractArrayAction = require( './abstractArrayAction.js' );
+var utils = require( '../../utils.js' );
 
 var ArrayUpdate = function( object ) {
     AbstractArrayAction.call( this, object );
@@ -13,9 +14,23 @@ ArrayUpdate.prototype = Object.create( AbstractArrayAction.prototype );
 
 ArrayUpdate.prototype.updateDictionary = function( dictionary ){
     
-    var indexToUse = this.getIndexToUse( dictionary );
+    this.indexToUse = this.getIndexToUse( dictionary );
     var arrayValue = this.getArrayValue( dictionary );
-    arrayValue[ indexToUse ] = this.newElement;
+    arrayValue[ this.indexToUse ] = this.newElement;
+};
+
+ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater ){
+    
+    // Must get the nodeToUpdate
+    var nodeToUpdate = this.resolveNode( indexItem, parserUpdater );
+    if ( ! nodeToUpdate ){
+        throw 'No node found to be updated at this index: ' + this.indexToUse;
+    }
+    
+    // Update the selected node
+    parserUpdater.updateNode( nodeToUpdate );
+    
+    return true;
 };
 
 module.exports = ArrayUpdate;

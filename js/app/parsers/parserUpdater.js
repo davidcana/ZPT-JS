@@ -21,11 +21,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     var scopeMap = {};
     var nodeAttributes, 
         statistics;
-    var dictionaryActionsInstances = [];
-    
-    var getStatistics = function(){
-        return statistics;
-    };
+    var dictionaryActionsInstances;
     
     var initializeDictionaryActionsInstances = function(){
         
@@ -41,8 +37,13 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             dictionaryActionsInstances.push( newActionInstance );
         }
     };
+    initializeDictionaryActionsInstances();
     
-    var updateDictionaryUsingActions = function( dictionary, varNamesMap ){
+    var getStatistics = function(){
+        return statistics;
+    };
+    
+    var updateDictionaryUsingActions = function(){
     
         for ( var i = 0; i < dictionaryActionsInstances.length; ++i ){
             var actionInstance = dictionaryActionsInstances[ i ];
@@ -51,30 +52,39 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             actionInstance.updateDictionary( parserOptions.dictionary );
             
             // Add the var to the varNamesMap
-            varNamesMap[ actionInstance.id ] = dictionary[ actionInstance.id ];
+            //varNamesMap[ actionInstance.id ] = dictionary[ actionInstance.id ];
         }
     };
     
     var updateDictionary = function(){
         
-        var result = {};
-        
         if ( dictionaryChanges ){
             utils.extend( parserOptions.dictionary, dictionaryChanges );
-            utils.extend( result, dictionaryChanges );
-        }
-        if ( dictionaryActions ){
-            updateDictionaryUsingActions( parserOptions.dictionary, result );
         }
         
-        return result;
+        if ( dictionaryActions ){
+            updateDictionaryUsingActions();
+        }
     };
     
-    var buildData = function( varNamesMap ){
-        //for ( var varName in dictionaryChanges ){
-        for ( var varName in varNamesMap ){
+    var buildData = function(){
+        
+        for ( var varName in dictionaryChanges ){
             buildDataFromVarChange( varName );
         }
+        /*
+        for ( var varNameFromActionsMap in varNamesFromActionsMap ){
+            buildDataFromAction( varNameFromActionsMap );
+        }
+        */
+    };
+    
+    var addUpdatedToStatistics = function(){
+        ++statistics.totalUpdates;
+    };
+    
+    var addRemovedToStatistics = function(){
+        ++statistics.removedNodeUpdates;
     };
     
     var run = function(){
@@ -84,29 +94,22 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             if ( ! parserOptions.indexExpressions ){
                 throw 'Unable to update, no index built! Set indexExpressions to true!';
             }
-
-            initializeDictionaryActionsInstances();
             
-            // Update dictionary
-            var varNamesMap = updateDictionary();
-
             // Init some vars
             nodeAttributes = {};
             statistics = {
                 totalUpdates: 0,
                 removedNodeUpdates: 0
             };
+            
+            // Update dictionary
+            updateDictionary();
 
             // Build data
-            buildData( varNamesMap );
+            buildData();
 
-            // Update attributes
-            for ( var i in nodeAttributes ) {
-                var currentNodeAttributeList = nodeAttributes[ i ];
-                for ( var j in currentNodeAttributeList ){
-                    updateAttribute( currentNodeAttributeList[ j ] );   
-                }
-            }
+            // Do all required HTML updates
+            updateHTML();
             
         } catch( e ){
             log.fatal( 'Exiting run method of update command of ZPT with errors: ' + e );
@@ -114,6 +117,63 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         }
     };
 
+    var updateHTML = function(){
+
+        updateHTMLFromVarChange();
+        updateHTMLFromActions();
+    };
+    
+    var updateHTMLFromActions = function(){
+
+        for ( var i = 0; i < dictionaryActionsInstances.length; ++i ){
+            var actionInstance = dictionaryActionsInstances[ i ];
+            
+            // Get the list of changes related to varName
+            var list = attributeIndex.getVarsList( actionInstance.id );
+            if ( ! list ){
+                continue;
+            }
+            
+            // Iterate list and udate HTML if required
+            for ( var j = 0; j < list.length; j++ ) {
+                var indexItem = list[ j ];
+                if ( ! actionInstance.attributeInstanceIsRelated( indexItem.attributeInstance ) ){
+                    continue;
+                }
+                actionInstance.updateHTML( indexItem, self );
+            }
+        }
+    };
+    
+    var updateHTMLFromVarChange = function(){
+        
+        // Update attributes
+        for ( var i in nodeAttributes ) {
+            var currentNodeAttributeList = nodeAttributes[ i ];
+            for ( var j in currentNodeAttributeList ){
+                updateAttribute( currentNodeAttributeList[ j ] );   
+            }
+        }
+    };
+    /*
+    var buildDataFromAction = function( varName ){
+        
+        // Get the list of changes related to varName
+        var list = attributeIndex.getVarsList( varName );
+        if ( ! list ){
+            return;
+        }
+        
+        // Build data about all changes
+        var length = list.length;
+        for ( var i = 0; i < length; i++ ) {
+            var attributeInstance = list[ i ];
+            if ( ! addNewNodeAttribute( varName, list[ i ] ) ){
+                attributeIndex.remove( varName, list[ i ].nodeId );
+            }
+        }
+    };
+    */
     var buildDataFromVarChange = function( varName ){
         
         // Get the list of changes related to varName
@@ -217,10 +277,22 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         parserNodeRenderer.run();
     };
 
+    var deleteNode = function( node ){
+        node.parentNode.removeChild( node );
+        
+        //TODO update next siblings?
+    };
+    
     var self = {
         run: run,
         updateNode: updateNode,
-        getStatistics: getStatistics
+        deleteNode: deleteNode,
+        //updateAttribute: updateAttribute,
+        findNodeById: findNodeById,
+        getNodeScope: getNodeScope,
+        getStatistics: getStatistics,
+        addUpdatedToStatistics: addUpdatedToStatistics,
+        addRemovedToStatistics: addRemovedToStatistics
     };
     
     return self;

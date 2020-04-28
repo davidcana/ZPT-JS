@@ -41,8 +41,31 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     throw 'currentElement ' + this.currentElement + ' not found in ' + this.id + ' array action!';
 };
 
-AbstractArrayAction.prototype.updateDictionary = function( dictionary ){
+AbstractArrayAction.prototype.attributeInstanceIsRelated = function( attributeInstance ){
+    return attributeInstance.type === 'tal:repeat';
+};
+
+AbstractArrayAction.prototype.updateDictionary = function(){
     throw 'Error: updateDictionary must be implemented!';
+};
+
+AbstractArrayAction.prototype.updateHTML = function(){
+    throw 'Error: updateHTML must be implemented!';
+};
+
+AbstractArrayAction.prototype.resolveNode = function( indexItem, parserUpdater ){
+    
+    //var attributeInstance = indexItem.attributeInstance;
+    var node = parserUpdater.findNodeById( indexItem.nodeId );
+    if ( ! node ){
+        // Removed node!
+        parserUpdater.addRemovedToStatistics();
+        return false;
+    }
+    parserUpdater.addUpdatedToStatistics();
+    
+    // Return the node
+    return node.parentNode.children[ 1 + this.indexToUse ]; // The first is always the tal:repeat
 };
 
 module.exports = AbstractArrayAction;

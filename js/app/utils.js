@@ -3,6 +3,8 @@
 */
 "use strict";
 
+//var context = require( './context.js' );
+
 module.exports = (function() {
     
     var generateId = function ( len, _charSet ) {
@@ -174,7 +176,11 @@ module.exports = (function() {
         oReq.send();
     };
     */
-    
+    /*
+    var getNodeId = function ( node ){
+        return node.getAttribute( context.getTags().id );
+    };
+    */
     return {
         generateId: generateId,
         //isArray: isArray,
@@ -184,5 +190,6 @@ module.exports = (function() {
         extend: extend,
         getJSON: getJSON,
         ajax: ajax
+        //getNodeId: getNodeId
     };
 })();
