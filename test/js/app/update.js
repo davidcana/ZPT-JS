@@ -784,6 +784,117 @@ QUnit.test( "delete text element by element TALRepeat test", function( assert ) 
     testFunction( '1/9' );
 });
 
+QUnit.test( "insert text element by index = 2 TALRepeat test", function( assert ) {
+
+    var testNumber = 17;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'create',
+            index: 2,
+            newElement: 5
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '1/4/5/9' );
+});
+
+QUnit.test( "insert text element by index = '_first_' TALRepeat test", function( assert ) {
+
+    var testNumber = 18;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'create',
+            index: '_first_',
+            newElement: 5
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '5/1/4/9' );
+});
+
+QUnit.test( "insert text element by index = '_last_' TALRepeat test", function( assert ) {
+
+    var testNumber = 19;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 1, 4, 9 ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( '1/4/9' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'create',
+            index: '_last_',
+            newElement: 5
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( '1/4/9/5' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

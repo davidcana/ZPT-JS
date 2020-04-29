@@ -32,12 +32,17 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
         return "TALRepeat: " + string;
     };
     
+    var getExpressionString = function(){
+        return expressionString;
+    };
+    
     return {
         process: process,
         dependsOn: dependsOn,
         update: update,
         toString: toString,
-        type: TALRepeat.id
+        type: TALRepeat.id,
+        getExpressionString: getExpressionString
     };
 };
 

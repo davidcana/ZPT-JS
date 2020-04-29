@@ -19,7 +19,7 @@ ArrayDelete.prototype.updateDictionary = function( dictionary ){
 ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater ){
     
     // Must get the nodeToUpdate
-    var nodeToUpdate = this.resolveNode( indexItem, parserUpdater );
+    var nodeToUpdate = this.resolveChildNode( indexItem, parserUpdater );
     if ( ! nodeToUpdate ){
         throw 'No node found to be deleted at this index: ' + this.indexToUse;
     }

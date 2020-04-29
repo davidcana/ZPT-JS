@@ -22,7 +22,8 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
         if ( this.index == '_first_' ){
             return 0;
         } else if ( this.index == '_last_' ){
-            return arrayValue.length;
+            //return this.getArrayValue( dictionary ).length;
+            return -1; // This means it is the last
         } else {
             return this.index;
         }
@@ -53,7 +54,7 @@ AbstractArrayAction.prototype.updateHTML = function(){
     throw 'Error: updateHTML must be implemented!';
 };
 
-AbstractArrayAction.prototype.resolveNode = function( indexItem, parserUpdater ){
+AbstractArrayAction.prototype.resolveChildNode = function( indexItem, parserUpdater ){
     
     //var attributeInstance = indexItem.attributeInstance;
     var node = parserUpdater.findNodeById( indexItem.nodeId );
@@ -65,7 +66,24 @@ AbstractArrayAction.prototype.resolveNode = function( indexItem, parserUpdater )
     parserUpdater.addUpdatedToStatistics();
     
     // Return the node
-    return node.parentNode.children[ 1 + this.indexToUse ]; // The first is always the tal:repeat
+    return this.indexToUse === -1?
+        null:
+        node.parentNode.children[ 1 + this.indexToUse ]; // The first is always the tal:repeat
+};
+
+AbstractArrayAction.prototype.resolveThisNode = function( indexItem, parserUpdater ){
+    
+    //var attributeInstance = indexItem.attributeInstance;
+    var node = parserUpdater.findNodeById( indexItem.nodeId );
+    if ( ! node ){
+        // Removed node!
+        parserUpdater.addRemovedToStatistics();
+        return false;
+    }
+    parserUpdater.addUpdatedToStatistics();
+    
+    // Return the node
+    return node;
 };
 
 module.exports = AbstractArrayAction;

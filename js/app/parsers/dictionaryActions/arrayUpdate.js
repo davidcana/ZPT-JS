@@ -22,7 +22,7 @@ ArrayUpdate.prototype.updateDictionary = function( dictionary ){
 ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater ){
     
     // Must get the nodeToUpdate
-    var nodeToUpdate = this.resolveNode( indexItem, parserUpdater );
+    var nodeToUpdate = this.resolveChildNode( indexItem, parserUpdater );
     if ( ! nodeToUpdate ){
         throw 'No node found to be updated at this index: ' + this.indexToUse;
     }

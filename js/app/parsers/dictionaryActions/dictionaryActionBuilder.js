@@ -5,6 +5,7 @@
 
 var ArrayUpdate = require( './arrayUpdate.js' );
 var ArrayDelete = require( './arrayDelete.js' );
+var ArrayCreate = require( './arrayCreate.js' );
 
 module.exports = (function() {
     
@@ -16,7 +17,7 @@ module.exports = (function() {
             case 'delete':
                 return new ArrayDelete( object );
             case 'create':
-
+                return new ArrayCreate( object );
                 break;
             default:
                 throw 'Unknown dictionary action: ' + object.action();
