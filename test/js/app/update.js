@@ -895,6 +895,382 @@ QUnit.test( "insert text element by index = '_last_' TALRepeat test", function( 
     testFunction( '1/4/9/5' );
 });
 
+QUnit.test( "update object element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 20;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'update',
+            index: 1,
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'John/Dave/Luke', 'The number 1/The number 4/The number 3' );
+});
+
+QUnit.test( "update object element by element TALRepeat test", function( assert ) {
+
+    var testNumber = 21;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'update',
+            currentElement: {
+                name: 'Peter',
+                description: 'The number 2'
+            },
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'John/Dave/Luke', 'The number 1/The number 4/The number 3' );
+});
+
+QUnit.test( "delete object element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 22;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'delete',
+            index: 1
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'John/Luke', 'The number 1/The number 3' );
+});
+
+QUnit.test( "delete object element by object TALRepeat test", function( assert ) {
+
+    var testNumber = 23;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'delete',
+            currentElement: {
+                name: 'Peter',
+                description: 'The number 2'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'John/Luke', 'The number 1/The number 3' );
+});
+
+QUnit.test( "insert object element by index = 2 TALRepeat test", function( assert ) {
+
+    var testNumber = 24;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'create',
+            index: 2,
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'John/Peter/Dave/Luke', 'The number 1/The number 2/The number 4/The number 3' );
+});
+
+QUnit.test( "insert object element by index = '_first_' TALRepeat test", function( assert ) {
+
+    var testNumber = 25;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'create',
+            index: '_first_',
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'Dave/John/Peter/Luke', 'The number 4/The number 1/The number 2/The number 3' );
+});
+
+QUnit.test( "insert object element by index = '_last_' TALRepeat test", function( assert ) {
+
+    var testNumber = 26;
+    var dictionary = {};
+    dictionary[ 'items' + testNumber ] = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    var dictionaryActions = [
+        {
+            id: 'items' + testNumber,
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+
+    testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

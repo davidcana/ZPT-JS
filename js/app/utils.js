@@ -181,6 +181,12 @@ module.exports = (function() {
         return node.getAttribute( context.getTags().id );
     };
     */
+    var deepEqual = function( x, y ) {
+        return (x && y && typeof x === 'object' && typeof y === 'object') ?
+            (Object.keys(x).length === Object.keys(y).length) && Object.keys(x).reduce(function(isEqual, key) {return isEqual && deepEqual(x[key], y[key]);}, true):
+            (x === y);
+    };
+    
     return {
         generateId: generateId,
         //isArray: isArray,
@@ -189,7 +195,8 @@ module.exports = (function() {
         deepExtend: deepExtend,
         extend: extend,
         getJSON: getJSON,
-        ajax: ajax
+        ajax: ajax,
+        deepEqual: deepEqual
         //getNodeId: getNodeId
     };
 })();

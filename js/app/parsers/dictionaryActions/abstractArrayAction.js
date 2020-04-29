@@ -1,6 +1,8 @@
 /* 
     Class AbstractArrayAction
 */
+var utils = require( '../../utils.js' );
+
 var AbstractArrayAction = function( object ) {
     
     this.id = object.id;
@@ -22,7 +24,6 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
         if ( this.index == '_first_' ){
             return 0;
         } else if ( this.index == '_last_' ){
-            //return this.getArrayValue( dictionary ).length;
             return -1; // This means it is the last
         } else {
             return this.index;
@@ -34,7 +35,8 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     
     for ( var i = 0; i < arrayValue.length; ++i ){
         var element = arrayValue[ i ];
-        if ( element == this.currentElement ){
+        //if ( element == this.currentElement ){
+        if ( utils.deepEqual( element, this.currentElement ) ){
             return i;
         }
     }
