@@ -6,12 +6,15 @@ var utils = require( '../../utils.js' );
 var AbstractArrayAction = function( object ) {
     
     this.id = object.id;
+    this.var = object.var;
     this.index = object.index;
     this.currentElement = object.currentElement;
 };
 
 AbstractArrayAction.prototype.getArrayValue = function( dictionary ){
-    return dictionary[ this.id ];
+    return this.var === undefined?
+        dictionary[ this.id ]:
+        this.var;
 };
 
 AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
