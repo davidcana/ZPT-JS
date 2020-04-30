@@ -1441,8 +1441,6 @@ QUnit.test( "update object nested element by index and selecting by search TALRe
     
     var dictionaryActions = [
         {
-            //id: 'objectList' + testNumber + '[1].items',
-            //var: dictionary["objectList" + testNumber][1].items,
             search: [
                 'objectList' + testNumber,
                 {
@@ -1466,6 +1464,324 @@ QUnit.test( "update object nested element by index and selecting by search TALRe
     });
     
     testFunction( 'John/Peter/Luke/Dave/Chris/Lars', 'The number 1/The number 2/The number 3/The number 7/The number 5/The number 6' );
+});
+
+QUnit.test( "update object nested element by element TALRepeat test", function( assert ) {
+
+    var testNumber = 29;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            id: 'objectList' + testNumber + '[1].items',
+            var: dictionary["objectList" + testNumber][1].items,
+            action: 'update',
+            currentElement: {
+                name: 'Chris',
+                description: 'The number 5'
+            },
+            newElement: {
+                name: 'Dave',
+                description: 'The number 7'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Michael/Dave/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 7/The number 6' );
+});
+
+QUnit.test( "update object nested element by element and selecting by search TALRepeat test", function( assert ) {
+
+    var testNumber = 30;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'update',
+            currentElement: {
+                name: 'Chris',
+                description: 'The number 5'
+            },
+            newElement: {
+                name: 'Dave',
+                description: 'The number 7'
+            }
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Michael/Dave/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 7/The number 6' );
+});
+
+QUnit.test( "delete object nested element by element TALRepeat test", function( assert ) {
+
+    var testNumber = 31;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            id: 'objectList' + testNumber + '[1].items',
+            var: dictionary["objectList" + testNumber][1].items,
+            action: 'delete',
+            index: 1
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Michael/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 6' );
+});
+
+QUnit.test( "delete object nested element by element and selecting by search TALRepeat test", function( assert ) {
+
+    var testNumber = 32;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'delete',
+            index: 1
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Michael/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 6' );
 });
 
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
