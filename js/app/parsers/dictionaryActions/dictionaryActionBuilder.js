@@ -9,16 +9,15 @@ var ArrayCreate = require( './arrayCreate.js' );
 
 module.exports = (function() {
     
-    var build = function( object ) {
+    var build = function( object, dictionary ) {
         
         switch ( object.action ) {
             case 'update':
-                return new ArrayUpdate( object );
+                return new ArrayUpdate( object, dictionary );
             case 'delete':
-                return new ArrayDelete( object );
+                return new ArrayDelete( object, dictionary );
             case 'create':
-                return new ArrayCreate( object );
-                break;
+                return new ArrayCreate( object, dictionary );
             default:
                 throw 'Unknown dictionary action: ' + object.action();
         }

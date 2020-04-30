@@ -3,8 +3,8 @@
 */
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 
-var ArrayDelete = function( object ) {
-    AbstractArrayAction.call( this, object );
+var ArrayDelete = function( object, dictionary ) {
+    AbstractArrayAction.call( this, object, dictionary );
 };
 
 ArrayDelete.prototype = Object.create( AbstractArrayAction.prototype );

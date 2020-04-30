@@ -33,7 +33,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         
         for ( var i = 0; i < dictionaryActions.length; ++i ){
             var action = dictionaryActions[ i ];
-            var newActionInstance = dictionaryActionBuilder.build( action );
+            var newActionInstance = dictionaryActionBuilder.build( action, parserOptions.dictionary );
             dictionaryActionsInstances.push( newActionInstance );
         }
     };

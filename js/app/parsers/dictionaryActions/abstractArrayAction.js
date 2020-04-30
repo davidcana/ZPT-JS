@@ -2,13 +2,69 @@
     Class AbstractArrayAction
 */
 var utils = require( '../../utils.js' );
+//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
-var AbstractArrayAction = function( object ) {
+var AbstractArrayAction = function( object, dictionary ) {
     
     this.id = object.id;
     this.var = object.var;
     this.index = object.index;
     this.currentElement = object.currentElement;
+    if ( object.search ){
+        if ( this.id || this.var ){
+            throw 'Error in array action: you can not set a search and then an id or var: if you set a search ZPT-JS will set the id and var for you!'
+        }
+        this.initializeUsingSearch( object.search, dictionary );
+    }
+};
+
+AbstractArrayAction.prototype.initializeUsingSearch = function( search, dictionary ){
+
+    this.id = '';
+    this.var = dictionary;
+    
+    // Iterate search items and build id and var
+    for ( var i = 0; i < search.length; ++i ){
+        var item = search[ i ];
+        
+        if ( utils.isPlainObject( item ) ){
+            item = this.search( this.var, item );
+        }
+        
+        if ( Number.isInteger( item ) ){
+            this.id += '[' + item + ']';
+        } else {
+            var separator = i === 0? '': '.';
+            this.id += separator + item;
+        }
+        
+        this.var = this.var[ item ];
+    }
+/*
+            id: 'objectList[1].items',
+            var: dictionary["objectList"][1]["items"],
+            search: [
+                'objectList',
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+*/
+};
+
+AbstractArrayAction.prototype.search = function( list, criteria ){
+
+    for ( var i = 0; i < list.length; ++i ){
+        var record = list[ i ];
+        var thisRecordValue = record[ criteria.name ];
+        if ( utils.deepEqual( thisRecordValue, criteria.value ) ){
+            return i;
+        }
+    }
+    
+    throw 'No record found matching your criteria!'
 };
 
 AbstractArrayAction.prototype.getArrayValue = function( dictionary ){

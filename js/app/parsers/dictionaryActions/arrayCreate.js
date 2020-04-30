@@ -4,8 +4,8 @@
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var context = require( '../../context.js' );
 
-var ArrayCreate = function( object ) {
-    AbstractArrayAction.call( this, object );
+var ArrayCreate = function( object, dictionary ) {
+    AbstractArrayAction.call( this, object, dictionary );
     
     this.newElement = object.newElement;
 };

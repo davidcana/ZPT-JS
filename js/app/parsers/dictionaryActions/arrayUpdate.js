@@ -4,8 +4,8 @@
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var utils = require( '../../utils.js' );
 
-var ArrayUpdate = function( object ) {
-    AbstractArrayAction.call( this, object );
+var ArrayUpdate = function( object, dictionary ) {
+    AbstractArrayAction.call( this, object, dictionary );
     
     this.newElement = object.newElement;
 };
