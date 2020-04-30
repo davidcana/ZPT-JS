@@ -1387,9 +1387,8 @@ QUnit.test( "update object nested element by index TALRepeat test", function( as
         command: 'update',
         dictionaryActions: dictionaryActions
     });
-    /*
-    testFunction( 'John/Dave/Luke', 'The number 1/The number 4/The number 3' );
-    */
+    
+    testFunction( 'John/Peter/Luke/Dave/Chris/Lars', 'The number 1/The number 2/The number 3/The number 7/The number 5/The number 6' );
 });
 
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {

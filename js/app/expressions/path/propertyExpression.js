@@ -12,7 +12,8 @@ var PropertyExpression = function( nameToApply ) {
     };
     
     var dependsOn = function(){
-        return [];
+        return '.' + name;
+        //return [];
     };
     
     var toString = function(){

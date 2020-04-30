@@ -40,9 +40,31 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
     };
     
     var dependsOn = function( depsDataItem, scope ){
+        
+        var firstSegmentDependsOn = expressionsUtils.buildDependsOnList( depsDataItem, scope, items[ 0 ] );
+        if ( firstSegmentDependsOn.length == 0 ){
+            return [];
+        } else if ( firstSegmentDependsOn.length > 1 ){
+            return firstSegmentDependsOn;
+        }
+        
+        var result = firstSegmentDependsOn[ 0 ];
+        for ( var i = 1; i < items.length; i++ ) {
+            var token = items[ i ];
+            var tokenDependsOn = token.dependsOn();
+            if ( ! tokenDependsOn ){
+                return result;
+            }
+            result += tokenDependsOn;
+        }
+        
+        return result;
+    };
+    /*
+    var dependsOn = function( depsDataItem, scope ){
         return expressionsUtils.buildDependsOnList( depsDataItem, scope, items[ 0 ] );
     };
-    
+    */
     var toString = function(){
         return string;
     };

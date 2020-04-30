@@ -17,7 +17,8 @@ var MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
     };
 
     var dependsOn = function(){
-        return [];
+        return undefined;
+        //return [];
     };
     
     var toString = function(){

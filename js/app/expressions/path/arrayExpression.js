@@ -32,8 +32,32 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
     };
     
     var dependsOn = function( depsDataItem, scope ){
+        
+        // Build the arrayBaseDependsOn
+        var arrayBaseDependsOn = expressionsUtils.buildDependsOnList( depsDataItem, scope, arrayBase );
+        
+        // This must be rare!
+        if ( arrayBaseDependsOn.length === 0 ){
+            return [];
+        } else if ( arrayBaseDependsOn.length > 1 ){
+            return expressionsUtils.buildDependsOnList( depsDataItem, scope, arrayBase, indexes );
+        }
+        
+        // Join all together
+        var dep = arrayBaseDependsOn[ 0 ];
+        for ( var i = 0; i < indexes.length; ++i ){
+            var indexExpression = indexes[ i ];
+            var indexEvaluated = indexExpression.evaluate( scope )
+            dep += '[' + indexEvaluated + ']';
+        }
+        
+        return [ dep ];
+    };
+    /*
+    var dependsOn = function( depsDataItem, scope ){
         return expressionsUtils.buildDependsOnList( depsDataItem, scope, arrayBase, indexes );
     };
+    */
     
     var toString = function(){
         return arrayBase + '[' + indexes + ']';
