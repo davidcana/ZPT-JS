@@ -122,6 +122,41 @@ QUnit.test( "simple TALDefine test", function( assert ) {
     testFunction( 2, 'test', 'test2', 'test100' );
 });
 
+QUnit.test( "simple TALDefine (2) test", function( assert ) {
+
+    var dictionary = {
+        number1: 1,
+        number2: 2,
+        number3: 3,
+        text1: 'test'
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't3b' ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t3b-1').text() , "" + arguments[ 0 ] );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'test1test23' );
+
+    var dictionaryChanges = {
+        number1: 111
+    };
+
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    testFunction( 'test111test23' );
+});
+
 QUnit.test( "simple TALRepeat test", function( assert ) {
 
     var dictionary = {
@@ -1331,6 +1366,14 @@ QUnit.test( "update object nested element by index TALRepeat test", function( as
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
             action: 'update',
             index: 0,
             newElement: {
