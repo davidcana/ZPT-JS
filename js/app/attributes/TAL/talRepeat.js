@@ -36,13 +36,18 @@ var TALRepeat = function( stringToApply, varNameToApply, expressionStringToApply
         return expressionString;
     };
     
+    var getVarName = function(){
+        return varName;
+    };
+    
     return {
         process: process,
         dependsOn: dependsOn,
         update: update,
         toString: toString,
         type: TALRepeat.id,
-        getExpressionString: getExpressionString
+        getExpressionString: getExpressionString,
+        getVarName: getVarName
     };
 };
 

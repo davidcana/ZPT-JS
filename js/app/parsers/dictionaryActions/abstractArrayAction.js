@@ -2,7 +2,6 @@
     Class AbstractArrayAction
 */
 var utils = require( '../../utils.js' );
-//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 
 var AbstractArrayAction = function( object, dictionary ) {
     
@@ -40,18 +39,6 @@ AbstractArrayAction.prototype.initializeUsingSearch = function( search, dictiona
         
         this.var = this.var[ item ];
     }
-/*
-            id: 'objectList[1].items',
-            var: dictionary["objectList"][1]["items"],
-            search: [
-                'objectList',
-                {
-                    name: 'id',
-                    value: 'object2'
-                },
-                'items'
-            ],
-*/
 };
 
 AbstractArrayAction.prototype.search = function( list, criteria ){
@@ -94,7 +81,6 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     
     for ( var i = 0; i < arrayValue.length; ++i ){
         var element = arrayValue[ i ];
-        //if ( element == this.currentElement ){
         if ( utils.deepEqual( element, this.currentElement ) ){
             return i;
         }

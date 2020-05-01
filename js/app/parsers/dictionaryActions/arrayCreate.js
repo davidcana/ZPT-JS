@@ -57,12 +57,13 @@ ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater ){
     var itemIndex = this.indexToUse === -1? 
         parentNode.childElementCount - 1:
         this.indexToUse;
+    var itemVariableName = indexItem.attributeInstance.getVarName();
     tmpNode.setAttribute( 
         'data-tauto-define',
-        'item-index ' + itemIndex + ';'
-            + 'item-all ' + indexItem.attributeInstance.getExpressionString() + ';'
-            + 'item item-all[item-index];'
-            + 'item-repeat context/repeat(item-index,' + parentNode.childElementCount + ',0)'
+        itemVariableName + '-index ' + itemIndex + ';'
+            + itemVariableName + '-all ' + indexItem.attributeInstance.getExpressionString() + ';'
+            + itemVariableName + ' ' + itemVariableName +'-all[' + itemVariableName + '-index];'
+            + itemVariableName + '-repeat context/repeat(' + itemVariableName + '-index,' + parentNode.childElementCount + ',0)'
     );
     
     // Insert it
