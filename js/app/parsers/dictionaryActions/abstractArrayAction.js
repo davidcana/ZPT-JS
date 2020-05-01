@@ -1,6 +1,8 @@
 /* 
     Class AbstractArrayAction
 */
+"use strict";
+
 var utils = require( '../../utils.js' );
 
 var AbstractArrayAction = function( object, dictionary ) {

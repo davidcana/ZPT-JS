@@ -10,6 +10,7 @@ var attributeCache = require( '../cache/attributeCache.js' );
 var attributeIndex = require( '../attributes/attributeIndex.js' );
 var AutoDefineHelper = require( './autoDefineHelper.js' );
 var evaluateHelper = require( '../expressions/evaluateHelper.js' );
+var Loop = require( './loop.js' );
 
 var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
 var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
@@ -121,18 +122,9 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
             
             scope.startElement();
             
-            // Get tmpNode
-            var tmpNode = node.cloneNode( true );
-            if ( 'form' in tmpNode ) {
-                tmpNode.checked = false;
-            }
+            // Clone and configure the node
+            var tmpNode = ParserNodeRenderer.cloneAndConfigureNode( node, indexExpressions, tags, nodeDataId );
 
-            // Set id and related id if needed
-            if ( indexExpressions ){
-                tmpNode.setAttribute( tags.id, context.nextExpressionCounter() );
-                tmpNode.setAttribute( tags.relatedId, nodeDataId );
-            }
-            
             // Insert it
             var parentNode = node.parentNode;
             parentNode.insertBefore( tmpNode, nextSibling );
@@ -527,6 +519,44 @@ ParserNodeRenderer.processDefine = function( node, string, forceGlobal, scope, i
         scope
     );
     return talDefine.process( scope, forceGlobal );
+};
+
+ParserNodeRenderer.cloneAndConfigureNode = function( node, indexExpressions, tags, nodeDataId ) {
+    
+    // Clone node
+    var tmpNode = node.cloneNode( true );
+    if ( 'form' in tmpNode ) {
+        tmpNode.checked = false;
+    }
+
+    // Set id and related id if needed
+    if ( indexExpressions ){
+        tmpNode.setAttribute( tags.id, context.nextExpressionCounter() );
+        tmpNode.setAttribute( tags.relatedId, nodeDataId );
+    }
+    
+    return tmpNode;
+};
+
+ParserNodeRenderer.configureNodeForNewItem = function( tmpNode, tags, parentNode, indexItem, indexToUse ) {
+    
+    // Remove attributes
+    tmpNode.removeAttribute( tags.talRepeat );
+    tmpNode.removeAttribute( 'style' );
+    tmpNode.setAttribute( tags.qdup, 1 );
+    
+    // Configure loop attributes
+    var itemIndex = indexToUse === -1? 
+        parentNode.childElementCount - 1:
+        indexToUse;
+    Loop.setAutoDefineAttribute( 
+        tmpNode, 
+        indexItem.attributeInstance.getVarName(), 
+        itemIndex, 
+        indexItem.attributeInstance.getExpressionString(), 
+        parentNode.childElementCount, 
+        0
+    );
 };
 
 module.exports = ParserNodeRenderer;

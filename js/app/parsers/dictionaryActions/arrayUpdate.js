@@ -1,6 +1,8 @@
 /* 
     Class ArrayUpdate
 */
+"use strict";
+
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var utils = require( '../../utils.js' );
 

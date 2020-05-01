@@ -1,8 +1,11 @@
 /* 
     Class ArrayCreate
 */
+"use strict";
+
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var context = require( '../../context.js' );
+var ParserNodeRenderer = require( '../../parsers/parserNodeRenderer.js' );
 
 var ArrayCreate = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
@@ -32,38 +35,23 @@ ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater ){
         throw 'No node found to clone';
     }
     
-    ///////////////
+    // Init some vars
     var tags = context.getTags();
-    var nodeDataId = node.getAttribute( tags.id );
     var parentNode = node.parentNode;
     
-    // Get tmpNode
-    var tmpNode = node.cloneNode( true );
-    if ( 'form' in tmpNode ) {
-        tmpNode.checked = false;
-    }
-    
-    // Set id and related id if needed
-    tmpNode.setAttribute( tags.id, context.nextExpressionCounter() );
-    tmpNode.setAttribute( tags.relatedId, nodeDataId );
-    ////////////
-    
-    // Remove attributes
-    tmpNode.removeAttribute( tags.talRepeat );
-    tmpNode.removeAttribute( 'style' );
-    tmpNode.setAttribute( tags.qdup, 1 );
-    
-    // Configure loop attributes
-    var itemIndex = this.indexToUse === -1? 
-        parentNode.childElementCount - 1:
-        this.indexToUse;
-    var itemVariableName = indexItem.attributeInstance.getVarName();
-    tmpNode.setAttribute( 
-        'data-tauto-define',
-        itemVariableName + '-index ' + itemIndex + ';'
-            + itemVariableName + '-all ' + indexItem.attributeInstance.getExpressionString() + ';'
-            + itemVariableName + ' ' + itemVariableName +'-all[' + itemVariableName + '-index];'
-            + itemVariableName + '-repeat context/repeat(' + itemVariableName + '-index,' + parentNode.childElementCount + ',0)'
+    // Clone and configure the node
+    var tmpNode = ParserNodeRenderer.cloneAndConfigureNode( 
+        node, 
+        true, 
+        tags, 
+        node.getAttribute( tags.id ) 
+    );
+    ParserNodeRenderer.configureNodeForNewItem( 
+        tmpNode, 
+        tags, 
+        parentNode, 
+        indexItem, 
+        this.indexToUse
     );
     
     // Insert it

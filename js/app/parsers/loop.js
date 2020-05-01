@@ -5,8 +5,9 @@
 
 var AutoDefineHelper = require( './autoDefineHelper.js' );
 var expressionBuilder = require( '../expressions/expressionBuilder.js' );
+var context = require( '../context.js' );
 
-module.exports = function ( _itemVariableName, _expressionString, scope ) {
+var Loop = function ( _itemVariableName, _expressionString, scope ) {
     
     var itemVariableName = _itemVariableName;
     var expressionString = _expressionString;
@@ -33,31 +34,13 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
         
         if ( currentIndex++ < maxIndex ) {
             
-            var autoDefineHelper = new AutoDefineHelper();
-            
-            // Declare item-index, item-all, item and item-repeat variables
-            autoDefineHelper.put(
-                itemVariableName + '-index',
-                currentIndex
+            return Loop.buildAutoDefineHelper( 
+                itemVariableName, 
+                currentIndex, 
+                expressionString, 
+                items.length, 
+                offset 
             );
-            autoDefineHelper.put(
-                itemVariableName + '-all',
-                expressionString
-            );
-            autoDefineHelper.put(
-                itemVariableName,
-                itemVariableName + '-all' + '[' + itemVariableName + '-index' + ']'
-            );
-            autoDefineHelper.put(
-                itemVariableName + '-repeat',
-                "context/repeat(" 
-                    + itemVariableName + "-index" + ","
-                    + items.length + ","
-                    + offset
-                    + ")"
-            );
-            
-            return autoDefineHelper;
         }
         
         return null;
@@ -70,3 +53,46 @@ module.exports = function ( _itemVariableName, _expressionString, scope ) {
         getExpression: getExpression
     };
 };
+
+Loop.buildAutoDefineHelper = function( itemVariableName, itemIndex, expressionString, numberOfItems, offset ){
+    
+    var autoDefineHelper = new AutoDefineHelper();
+
+    // Declare item-index, item-all, item and item-repeat variables
+    autoDefineHelper.put(
+        itemVariableName + '-index',
+        itemIndex
+    );
+    autoDefineHelper.put(
+        itemVariableName + '-all',
+        expressionString
+    );
+    autoDefineHelper.put(
+        itemVariableName,
+        itemVariableName + '-all' + '[' + itemVariableName + '-index' + ']'
+    );
+    autoDefineHelper.put(
+        itemVariableName + '-repeat',
+        "context/repeat(" 
+            + itemVariableName + "-index" + ","
+            + numberOfItems + ","
+            + offset
+            + ")"
+    );
+
+    return autoDefineHelper;
+};
+
+Loop.setAutoDefineAttribute = function( node, itemVariableName, itemIndex, expressionString, numberOfItems, offset ){
+    
+    // Set item-index, item-all, item and item-repeat attributes
+    node.setAttribute( 
+        context.getTags().talAutoDefine,
+        itemVariableName + '-index ' + itemIndex + ';'
+            + itemVariableName + '-all ' + expressionString + ';'
+            + itemVariableName + ' ' + itemVariableName +'-all[' + itemVariableName + '-index];'
+            + itemVariableName + '-repeat context/repeat(' + itemVariableName + '-index,' + numberOfItems + ',' + offset + ')'
+    );
+};
+
+module.exports = Loop;

@@ -50,9 +50,6 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             
             // Update dictionary using action
             actionInstance.updateDictionary( parserOptions.dictionary );
-            
-            // Add the var to the varNamesMap
-            //varNamesMap[ actionInstance.id ] = dictionary[ actionInstance.id ];
         }
     };
     
@@ -65,18 +62,6 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         if ( dictionaryActions ){
             updateDictionaryUsingActions();
         }
-    };
-    
-    var buildData = function(){
-        
-        for ( var varName in dictionaryChanges ){
-            buildDataFromVarChange( varName );
-        }
-        /*
-        for ( var varNameFromActionsMap in varNamesFromActionsMap ){
-            buildDataFromAction( varNameFromActionsMap );
-        }
-        */
     };
     
     var addUpdatedToStatistics = function(){
@@ -104,9 +89,6 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             
             // Update dictionary
             updateDictionary();
-
-            // Build data
-            buildData();
 
             // Do all required HTML updates
             updateHTML();
@@ -147,6 +129,11 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     
     var updateHTMLFromVarChange = function(){
         
+        // Build data
+        for ( var varName in dictionaryChanges ){
+            buildDataFromVarChange( varName );
+        }
+        
         // Update attributes
         for ( var i in nodeAttributes ) {
             var currentNodeAttributeList = nodeAttributes[ i ];
@@ -155,25 +142,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             }
         }
     };
-    /*
-    var buildDataFromAction = function( varName ){
-        
-        // Get the list of changes related to varName
-        var list = attributeIndex.getVarsList( varName );
-        if ( ! list ){
-            return;
-        }
-        
-        // Build data about all changes
-        var length = list.length;
-        for ( var i = 0; i < length; i++ ) {
-            var attributeInstance = list[ i ];
-            if ( ! addNewNodeAttribute( varName, list[ i ] ) ){
-                attributeIndex.remove( varName, list[ i ].nodeId );
-            }
-        }
-    };
-    */
+
     var buildDataFromVarChange = function( varName ){
         
         // Get the list of changes related to varName
@@ -287,7 +256,6 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         run: run,
         updateNode: updateNode,
         deleteNode: deleteNode,
-        //updateAttribute: updateAttribute,
         findNodeById: findNodeById,
         getNodeScope: getNodeScope,
         getStatistics: getStatistics,

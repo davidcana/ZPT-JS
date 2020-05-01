@@ -1,6 +1,8 @@
 /* 
     Class ArrayDelete
 */
+"use strict";
+
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 
 var ArrayDelete = function( object, dictionary ) {
