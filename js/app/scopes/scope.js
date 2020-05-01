@@ -58,8 +58,8 @@ Scope.prototype.setCommonVars = function(){
 Scope.prototype.startElement = function(){
     
     var vars = {
-        varsToUnset : [],
-        varsToSet : {},
+        varsToUnset: [],
+        varsToSet: {},
         expressions: {},
         impliedDeclaredVars: []
     };
@@ -206,7 +206,7 @@ Scope.prototype.loadFolderDictionary = function ( maxFolderDictionaries, callbac
         }
             
         // Run callback and return if the urlList is over
-        if ( i == urlList.length){
+        if ( i === urlList.length){
             callback();
             return;
         }
@@ -217,7 +217,7 @@ Scope.prototype.loadFolderDictionary = function ( maxFolderDictionaries, callbac
             callback,
             urlList, 
             i
-        )
+        );
     };
     
     var url = urlList[ i++ ];
@@ -241,7 +241,7 @@ Scope.prototype.buildUrlListOfFolderDictionaries = function ( maxFolderDictionar
     var c = 0;
     var path = location.pathname;
     var lastIndex = path.lastIndexOf( '/' );
-    while ( lastIndex != -1 && ++c <= maxFolderDictionaries ){
+    while ( lastIndex !== -1 && ++c <= maxFolderDictionaries ){
         var parent = path.substr( 0, lastIndex );
         result.push( 
             location.origin + parent + '/' + 'folderDictionary.js' 

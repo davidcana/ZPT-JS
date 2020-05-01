@@ -48,7 +48,7 @@ CondExpression.build = function( s ) {
     
     var string = s.trim();
 
-    if ( string.length == 0 ) {
+    if ( string.length === 0 ) {
         throw 'Cond expression void.';
     }
 
@@ -56,7 +56,7 @@ CondExpression.build = function( s ) {
             string, 
             context.getConf().expressionDelimiter, 
             false );
-    if ( segments.countTokens() != 3 ) {
+    if ( segments.countTokens() !== 3 ) {
         throw 'Syntax error in cond expression "' + string + '". 3 element are needed.';
     }
 
@@ -64,7 +64,8 @@ CondExpression.build = function( s ) {
         string,
         expressionBuilder.build( segments.nextToken() ), 
         expressionBuilder.build( segments.nextToken() ), 
-        expressionBuilder.build( segments.nextToken() ) );
-}
+        expressionBuilder.build( segments.nextToken() ) 
+    );
+};
 
 module.exports = CondExpression;

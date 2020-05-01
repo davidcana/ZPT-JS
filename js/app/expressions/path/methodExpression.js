@@ -18,7 +18,6 @@ var MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
 
     var dependsOn = function(){
         return undefined;
-        //return [];
     };
     
     var toString = function(){
@@ -49,6 +48,6 @@ MethodExpression.build = function( string ) {
     var args = expressionBuilder.getArgumentsFromString( argsString );
     
     return new MethodExpression( string, methodName, args );
-}
+};
 
 module.exports = MethodExpression;

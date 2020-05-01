@@ -299,7 +299,7 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
             var currentChildNode = childNodes[ i ];
 
             // Check if node is ELEMENT_NODE and not parsed yet
-            if ( currentChildNode && currentChildNode.nodeType == 1
+            if ( currentChildNode && currentChildNode.nodeType === 1
                     && ! currentChildNode.getAttribute( tags.qdup ) ) {
                 process( currentChildNode );
             }

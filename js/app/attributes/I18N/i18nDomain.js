@@ -21,8 +21,8 @@ var I18NDomain = function( stringToApply ) {
         }
         
         // Add brackets if not present
-        if ( newString[ 0 ] != '[' ){
-            newString = '[' + newString + ']'
+        if ( newString[ 0 ] !== '[' ){
+            newString = '[' + newString + ']';
         }
         
         // Add i18nDomainVarName to the autoDefineHelper

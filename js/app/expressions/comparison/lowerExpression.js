@@ -44,6 +44,6 @@ LowerExpression.build = function( string ) {
     var data = comparisonHelper.build( string, 'lower' );
 
     return new LowerExpression( string, data.expression1, data.expression2 );
-}
+};
 
 module.exports = LowerExpression;

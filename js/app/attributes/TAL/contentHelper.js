@@ -10,11 +10,11 @@ var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 module.exports = (function() {
 
     var formInputHasBody = {
-        BUTTON : 1,
-        LABEL : 1,
-        LEGEND : 1,
-        FIELDSET : 1,
-        OPTION : 1
+        BUTTON: 1,
+        LABEL: 1,
+        LEGEND: 1,
+        FIELDSET: 1,
+        OPTION: 1
     };
     
     var build = function( tag, string, constructorFunction ) {
@@ -23,7 +23,7 @@ module.exports = (function() {
         var content = string.trim();
 
         // Check if is an HTML expression
-        var structure = content.indexOf( context.getConf().htmlStructureExpressionPrefix + ' ' ) == 0;
+        var structure = content.indexOf( context.getConf().htmlStructureExpressionPrefix + ' ' ) === 0;
         var expressionString = structure? 
             content.substr( 1 + context.getConf().htmlStructureExpressionPrefix.length ): 
             content;

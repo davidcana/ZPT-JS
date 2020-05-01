@@ -13,7 +13,7 @@ module.exports = (function() {
         
         var string = s.trim();
         
-        if ( string.length == 0 ) {
+        if ( string.length === 0 ) {
             throw tag + ' expression void.';
         }
 
@@ -21,7 +21,7 @@ module.exports = (function() {
                 string, 
                 context.getConf().expressionDelimiter, 
                 false );
-        if ( segments.countTokens() != 2 ) {
+        if ( segments.countTokens() !== 2 ) {
             throw 'Wrong number of elements in expression "' + string + '", ' + tag + ' expressions only support two.';
         }
 

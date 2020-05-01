@@ -18,7 +18,8 @@ var TrNumberExpression = function( stringToApply, expressionToApply, argsExpress
                 expression, 
                 argsExpressions, 
                 'number', 
-                null );
+                null 
+        );
         return evaluated;
     };
 
@@ -50,12 +51,14 @@ TrNumberExpression.build = function( string ) {
             TrNumberExpression.getPrefix(), 
             1, 
             2, 
-            false );
+            false 
+    );
 
     return new TrNumberExpression( 
             string, 
             trData.expression, 
-            trData.argsExpressions );
+            trData.argsExpressions 
+    );
 };
 
 module.exports = TrNumberExpression;

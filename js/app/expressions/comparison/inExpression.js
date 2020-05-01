@@ -6,7 +6,6 @@
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
 
 var InExpression = function( stringToApply, expressionListToApply ) {
     
@@ -64,21 +63,23 @@ InExpression.build = function( s ) {
     
     var string = s.trim();
     
-    if ( string.length == 0 ) {
+    if ( string.length === 0 ) {
         throw 'In expression void.';
     }
 
     var segments = new ExpressionTokenizer( 
             string, 
             context.getConf().expressionDelimiter, 
-            false );
-    if ( segments.countTokens() == 1 ) {
+            false 
+    );
+    if ( segments.countTokens() === 1 ) {
         throw 'Only one element in in expression "' + string + '", please add at least one more.';
     }
 
     return new InExpression( 
         string,
-        expressionBuilder.buildList( segments ) );
-}
+        expressionBuilder.buildList( segments ) 
+    );
+};
 
 module.exports = InExpression;

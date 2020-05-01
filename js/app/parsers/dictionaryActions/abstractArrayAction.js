@@ -13,7 +13,7 @@ var AbstractArrayAction = function( object, dictionary ) {
     this.currentElement = object.currentElement;
     if ( object.search ){
         if ( this.id || this.var ){
-            throw 'Error in array action: you can not set a search and then an id or var: if you set a search ZPT-JS will set the id and var for you!'
+            throw 'Error in array action: you can not set a search and then an id or var: if you set a search ZPT-JS will set the id and var for you!';
         }
         this.initializeUsingSearch( object.search, dictionary );
     }
@@ -53,7 +53,7 @@ AbstractArrayAction.prototype.search = function( list, criteria ){
         }
     }
     
-    throw 'No record found matching your criteria!'
+    throw 'No record found matching your criteria!';
 };
 
 AbstractArrayAction.prototype.getArrayValue = function( dictionary ){
@@ -69,13 +69,12 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     }
     
     if ( this.index !== undefined ){
-        if ( this.index == '_first_' ){
+        if ( this.index === '_first_' ){
             return 0;
-        } else if ( this.index == '_last_' ){
+        } else if ( this.index === '_last_' ){
             return -1; // This means it is the last
-        } else {
-            return this.index;
         }
+        return this.index;
     }
     
     // Must use newElement

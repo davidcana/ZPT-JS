@@ -4,7 +4,6 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var Scope = require( '../../scopes/scope.js' );
 var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 var attributeIndex = require( '../attributeIndex.js' );
@@ -109,7 +108,8 @@ var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApp
             }
             currentNode.parentNode.insertBefore( 
                 slotContent, 
-                currentNode.nextSibling );
+                currentNode.nextSibling
+            );
             slotContent.removeAttribute( tags.metalFillSlot );
             slotContent.setAttribute( tags.id, context.nextExpressionCounter() ); // Set a new id attribute to avoid id conflicts
             currentNode.remove();

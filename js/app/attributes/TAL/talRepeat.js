@@ -57,7 +57,7 @@ TALRepeat.build = function( string ) {
     
     var expressionString = string.trim();
     var space = expressionString.indexOf( ' ' );
-    if ( space == -1 ) {
+    if ( space === -1 ) {
         throw 'Bad repeat expression: ' + expressionString;
     }
     var varName = expressionString.substring( 0, space );

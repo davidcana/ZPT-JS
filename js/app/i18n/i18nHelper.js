@@ -1,14 +1,12 @@
 /* 
     i18nHelper singleton class 
 */
-"use strict";
-
 var utils = require( '../utils.js' );
 var I18n = require( './i18n.js' );
-var I18nBundle = require( './i18nBundle.js' );
 var context = require( '../context.js' );
 
 module.exports = (function() {
+    "use strict";
     
     var tr = function ( i18nList, id, params, format, subformat, language ){
         
@@ -126,7 +124,7 @@ module.exports = (function() {
                     
                     // Register array vars
                     dictionary[ buildI18nInstanceArrayName( lang ) ] = i18nInstanceArray;
-                    if ( numberOfLanguages == 1 ){
+                    if ( numberOfLanguages === 1 ){
                         dictionary[ 'i18nArray' ] = i18nInstanceArray;
                     }
                     

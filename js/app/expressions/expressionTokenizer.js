@@ -25,12 +25,12 @@ module.exports = function( exp, delimiter, escape ) {
             },
             hasNext: function(){
                 return nextIndex < array.length;
-           }
+            }
         };
     };
     
     var analyze = function(){
-        var avoidRepeatedSeparators = delimiter == ' ';
+        var avoidRepeatedSeparators = delimiter === ' ';
         
         // Go ahead and find delimiters, if any, at construction time
         var parentLevel = 0;
@@ -42,22 +42,21 @@ module.exports = function( exp, delimiter, escape ) {
         for ( var i = 0; i < length; i++ ) {
             var ch = expression.charAt( i );
             
-            if ( ch == delimiter ) {
+            if ( ch === delimiter ) {
                 // If delimiter is not buried in parentheses or a quote
-                if ( parentLevel == 0 && ! inQuote  ) {
+                if ( parentLevel === 0 && ! inQuote  ) {
                     
-                    if ( avoidRepeatedSeparators && ( previousCh == delimiter || previousCh == '\n' ) ) {
+                    if ( avoidRepeatedSeparators && ( previousCh === delimiter || previousCh === '\n' ) ) {
                         continue;
                     }
                     
                     var nextCh = ( i + 1 < length ) ? expression.charAt( i + 1 ) : '';
                     
                     // And if delimiter is not escaped
-                    if ( ! ( escape && nextCh == delimiter ) ) {
+                    if ( ! ( escape && nextCh === delimiter ) ) {
                         delimiterCount++;
                         delimiters.push( i );
-                    }
-                    else {
+                    } else {
                         // Somewhat inefficient way to pare the
                         // escaped delimiter down to a single
                         // character without breaking our stride
@@ -65,24 +64,20 @@ module.exports = function( exp, delimiter, escape ) {
                         length--;
                     }
                 }
-            }
-            
             // Increment parenthesis level
-            else if ( ch == '(' || ch == '[' ) {
+            } else if ( ch === '(' || ch === '[' ) {
                 parentLevel++;
-            }
-            
+                
             // Decrement parenthesis level
-            else if ( ch == ')' || ch == ']' ) {
+            } else if ( ch === ')' || ch === ']' ) {
                 parentLevel--;
                 // If unmatched right parenthesis
                 if ( parentLevel < 0 ) {
                     throw 'Syntax error. Unmatched right parenthesis: ' + expression;
                 }
-            }
-            
+                
             // Start or end quote
-            else if ( ch == '\'' ) {
+            } else if ( ch === '\'' ) {
                 inQuote = ! inQuote;
             }
             

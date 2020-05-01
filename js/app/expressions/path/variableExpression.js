@@ -4,7 +4,6 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
 
 var VariableExpression = function( nameToApply ) {
     
@@ -36,13 +35,6 @@ var VariableExpression = function( nameToApply ) {
         depsDataItem.addAllVars( result, scope );
         return result;
     };
-    /*
-    var dependsOn = function( depsDataItem, scope ){
-
-        var expression = scope.getVarExpression( name );
-        return expression? expression.dependsOn( name, scope ): [ name ];
-    };
-    */
     
     var getVarName = function(){
         return name;
@@ -65,6 +57,6 @@ VariableExpression.build = function( string ) {
     return context.getConf().variableNameRE.test( string )?
         new VariableExpression( string ):
         undefined;
-}
+};
 
 module.exports = VariableExpression;

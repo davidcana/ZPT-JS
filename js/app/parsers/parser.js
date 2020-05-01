@@ -4,17 +4,9 @@
 "use strict";
 
 var context = require( '../context.js' );
-var resolver = require( '../resolver.js' );
-var log = require( '../logHelper.js' );
-var Scope = require( '../scopes/scope.js' );
-var scopeBuilder = require( '../scopes/scopeBuilder.js' );
-var i18nHelper = require( '../i18n/i18nHelper.js' );
 var ParserRenderer = require( './parserRenderer.js' );
 var ParserUpdater = require( './parserUpdater.js' );
 var ParserPreloader = require( './parserPreloader.js' );
-var nodeRemover = require( './nodeRemover.js' );
-var attributeIndex = require( '../attributes/attributeIndex.js' );
-var attributeCache = require( '../cache/attributeCache.js' );
 
 module.exports = (function() {
     
@@ -30,7 +22,6 @@ module.exports = (function() {
         //callback,
         //failCallback,
     };
-    var tags = context.getTags();
     
     var updateParserOptions = function( options ){
         
@@ -61,10 +52,10 @@ module.exports = (function() {
             case 'fullRender':
             case 'partialRender':
                 return processRender(
-                    command == 'partialRender'? options.target: parserOptions.root,
+                    command === 'partialRender'? options.target: parserOptions.root,
                     options.dictionaryExtension,
                     options.notRemoveGeneratedTags,
-                    parserOptions.indexExpressions && command == 'fullRender',
+                    parserOptions.indexExpressions && command === 'fullRender',
                     options.goToURLHash === undefined? context.nextRunCounter() === 1: false
                 );
             case 'update':

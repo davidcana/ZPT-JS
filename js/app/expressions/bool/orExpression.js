@@ -51,6 +51,6 @@ OrExpression.build = function( string ) {
     var expressionList = boolHelper.build( string, 'Or' );
 
     return new OrExpression( string, expressionList );
-}
+};
 
 module.exports = OrExpression;

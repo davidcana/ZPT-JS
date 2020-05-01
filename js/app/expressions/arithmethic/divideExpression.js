@@ -21,7 +21,8 @@ var DivideExpression = function( stringToApply, expressionListToApply ) {
             DivideExpression.mathOperation, 
             function( total, value ){
                 return total / value;
-            } );
+            } 
+        );
     };
 
     var dependsOn = function( depsDataItem, scope ){
@@ -50,9 +51,10 @@ DivideExpression.build = function( string ) {
     
     var expressionList = arithmethicHelper.build( 
             string,
-            DivideExpression.mathOperation );
+            DivideExpression.mathOperation 
+    );
 
     return new DivideExpression( string, expressionList );
-}
+};
 
 module.exports = DivideExpression;

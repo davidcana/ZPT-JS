@@ -21,7 +21,8 @@ var MultiplyExpression = function( stringToApply, expressionListToApply ) {
             MultiplyExpression.mathOperation, 
             function( total, value ){
                 return total * value;
-            } );
+            } 
+        );
     };
 
     var dependsOn = function( depsDataItem, scope ){
@@ -50,9 +51,10 @@ MultiplyExpression.build = function( string ) {
     
     var expressionList = arithmethicHelper.build( 
             string,
-            MultiplyExpression.mathOperation );
+            MultiplyExpression.mathOperation 
+    );
 
     return new MultiplyExpression( string, expressionList );
-}
+};
 
 module.exports = MultiplyExpression;

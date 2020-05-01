@@ -56,6 +56,6 @@ TrDateTimeExpression.build = function( string ) {
             string, 
             trData.expression, 
             trData.argsExpressions );
-}
+};
 
 module.exports = TrDateTimeExpression;

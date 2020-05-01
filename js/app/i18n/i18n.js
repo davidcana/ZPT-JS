@@ -28,7 +28,7 @@ module.exports = function( languageId, res ) {
     };
     
     var exists = function( id ) {
-        return resources[ id ] != undefined;
+        return resources[ id ] !== undefined;
     };
     
     var tr = function( id, params, format, subformat ) {

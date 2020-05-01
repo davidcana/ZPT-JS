@@ -51,6 +51,6 @@ AndExpression.build = function( string ) {
     var expressionList = boolHelper.build( string, 'And' );
 
     return new AndExpression( string, expressionList );
-}
+};
 
 module.exports = AndExpression;

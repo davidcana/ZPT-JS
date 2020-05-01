@@ -1,13 +1,12 @@
 /* 
     resolver singleton class
 */
-"use strict";
-
 var utils = require( './utils.js' );
 var context = require( './context.js' );
 var expressionBuilder = require( './expressions/expressionBuilder.js' );
 
 module.exports = (function( ) {
+    "use strict";
     
     var macros = {};
     var remotePages = {};
@@ -51,7 +50,7 @@ module.exports = (function( ) {
 
         var index = macroKey.indexOf( context.getConf().macroDelimiter );
         
-        return index == -1?
+        return index === -1?
             {
                 macroId: macroKey,
                 url: null
@@ -139,7 +138,7 @@ module.exports = (function( ) {
                 var macroData = getMacroDataUsingExpressionString( macroKeyExpressionString, scope );
 
                 var url = macroData.url;
-                if ( url && remotePageUrls.indexOf( url ) == -1 ){
+                if ( url && remotePageUrls.indexOf( url ) === -1 ){
                     remotePageUrls.push( url );
                 }
             } catch ( exception ){

@@ -75,7 +75,7 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
                 parserOptions, 
                 currentTarget, 
                 dictionaryExtension,
-                parserOptions.command == 'partialRender'
+                parserOptions.command === 'partialRender'
             ),
             parserOptions.indexExpressions
         );

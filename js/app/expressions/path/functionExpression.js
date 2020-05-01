@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var context = require( '../../context.js' );
 var evaluateHelper = require( '../evaluateHelper.js' );
 
 var FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
@@ -37,7 +36,7 @@ FunctionExpression.build = function( string ) {
     var expressionBuilder = require( '../expressionBuilder.js' );
     
     var leftParent = string.indexOf( '(' );
-    if ( leftParent == -1 ) {
+    if ( leftParent === -1 ) {
         return undefined;
     }
     
@@ -49,6 +48,6 @@ FunctionExpression.build = function( string ) {
     var args = expressionBuilder.getArgumentsFromString( argsString );
 
     return new FunctionExpression( string, functionName, args );
-}
+};
 
 module.exports = FunctionExpression;

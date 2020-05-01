@@ -6,7 +6,6 @@
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
 var ArrayExpression = require( './arrayExpression.js' );
 var StringLiteral = require( './literals/stringLiteral.js' );
 var NumericLiteral = require( './literals/numericLiteral.js' );
@@ -42,7 +41,7 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
     var dependsOn = function( depsDataItem, scope ){
         
         var firstSegmentDependsOn = expressionsUtils.buildDependsOnList( depsDataItem, scope, items[ 0 ] );
-        if ( firstSegmentDependsOn.length == 0 ){
+        if ( firstSegmentDependsOn.length === 0 ){
             return [];
         } else if ( firstSegmentDependsOn.length > 1 ){
             return firstSegmentDependsOn;
@@ -60,11 +59,7 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
         
         return result;
     };
-    /*
-    var dependsOn = function( depsDataItem, scope ){
-        return expressionsUtils.buildDependsOnList( depsDataItem, scope, items[ 0 ] );
-    };
-    */
+
     var toString = function(){
         return string;
     };
@@ -81,7 +76,7 @@ PathSegmentExpression.build = function( string ) {
     var items = [];
     
     // Blank expression evaluates to blank string
-    if ( string.length == 0 ) {
+    if ( string.length === 0 ) {
         items.push( 
             StringLiteral.build( '' ) );
         return items;
@@ -104,8 +99,7 @@ PathSegmentExpression.build = function( string ) {
     }
     
     return new PathSegmentExpression( string, items );
-}
-
+};
 
 PathSegmentExpression.buildFirstPathToken = function( t ){
 

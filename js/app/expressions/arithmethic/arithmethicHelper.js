@@ -11,14 +11,15 @@ module.exports = (function() {
     var build = function( string, tag ) {
         var expressionBuilder = require( '../expressionBuilder.js' );
 
-        if ( string.length == 0 ) {
+        if ( string.length === 0 ) {
             throw tag + " expression void.";
         }
         
         var segments = new ExpressionTokenizer( 
                 string, 
                 context.getConf().expressionDelimiter, 
-                false );
+                false 
+        );
 
         return expressionBuilder.buildList( segments );
     };

@@ -30,9 +30,9 @@ module.exports = (function() {
             if ( fromCache ){
                 log.debug( 'Found in cache!' );
                 return fromCache;
-            } else {
-                log.debug( 'NOT found in cache!' );
-            }
+            } 
+            log.debug( 'NOT found in cache!' );
+            
         } else {
             log.debug( 'Cache OFF!' );
         }

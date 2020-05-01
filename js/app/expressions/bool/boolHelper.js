@@ -12,7 +12,7 @@ module.exports = (function() {
         
         var string = s.trim();
         
-        if ( string.length == 0 ) {
+        if ( string.length === 0 ) {
             throw tag + ' expression void.';
         }
 
@@ -20,7 +20,7 @@ module.exports = (function() {
                 string, 
                 context.getConf().expressionDelimiter, 
                 false );
-        if ( segments.countTokens() == 1 ) {
+        if ( segments.countTokens() === 1 ) {
             throw 'Syntax error in expression "' + string + '". Only one element in ' + tag + ' expression, please add at least one more.';
         }
         

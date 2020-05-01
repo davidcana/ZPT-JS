@@ -3,7 +3,6 @@
 */
 "use strict";
 
-var context = require( '../../context.js' );
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 var contentHelper = require( './contentHelper.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );

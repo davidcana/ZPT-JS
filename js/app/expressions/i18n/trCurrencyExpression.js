@@ -58,6 +58,6 @@ TrCurrencyExpression.build = function( string ) {
             trData.expression, 
             trData.argsExpressions, 
             trData.subformat );
-}
+};
 
 module.exports = TrCurrencyExpression;

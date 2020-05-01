@@ -21,7 +21,8 @@ var SubstractExpression = function( stringToApply, expressionListToApply ) {
             SubstractExpression.mathOperation, 
             function( total, value ){
                 return total - value;
-            } );
+            } 
+        );
     };
     
     var dependsOn = function( depsDataItem, scope ){
@@ -50,9 +51,10 @@ SubstractExpression.build = function( string ) {
     
     var expressionList = arithmethicHelper.build( 
             string,
-            SubstractExpression.mathOperation );
+            SubstractExpression.mathOperation 
+    );
 
     return new SubstractExpression( string, expressionList );
-}
+};
 
 module.exports = SubstractExpression;

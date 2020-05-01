@@ -165,7 +165,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         return window.document.querySelector( 
             '[' + context.getTags().id + '="' + nodeId + '"]' 
         );
-    }
+    };
 
     var addNewNodeAttribute = function( varName, indexItem ){
 

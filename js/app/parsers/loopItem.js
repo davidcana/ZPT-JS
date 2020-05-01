@@ -19,19 +19,19 @@ LoopItem.prototype.number = function( ) {
 };
 
 LoopItem.prototype.even = function( ) {
-    return this.index() % 2 == 0;
+    return this.index() % 2 === 0;
 };
 
 LoopItem.prototype.odd = function ( ) {
-    return this.index() % 2 == 1;
+    return this.index() % 2 === 1;
 };
 
 LoopItem.prototype.start = function ( ) {
-    return this.index() == 0;
+    return this.index() === 0;
 };
 
 LoopItem.prototype.end = function ( ) {
-    return this.currentIndex == this.itemsLength - 1;
+    return this.currentIndex === this.itemsLength - 1;
 };
 
 LoopItem.prototype.length = function () {
@@ -79,7 +79,7 @@ LoopItem.prototype.formatRoman = function ( nn, capital ) {
     }
 
     var buf = '';
-    for ( var decade = 0; n != 0; decade++ ) {
+    for ( var decade = 0; n !== 0; decade++ ) {
         var digit = n % 10;
         if ( digit > 0 ) {
             digit--;
@@ -102,7 +102,7 @@ LoopItem.prototype.romanArray = [
         [ "iv", "IV" ],
         [ "iiv", "IIV" ],
         [ "iiiv", "IIIV" ],
-        [ "xi", "XI" ],
+        [ "xi", "XI" ]
     ],
 
     /* 10's place */
@@ -115,7 +115,7 @@ LoopItem.prototype.romanArray = [
         [ "xl", "XL" ],
         [ "xxl", "XXL" ],
         [ "xxxl", "XXXL" ],
-        [ "cx", "CX" ],
+        [ "cx", "CX" ]
     ],
 
     /* 100's place */
@@ -128,7 +128,7 @@ LoopItem.prototype.romanArray = [
         [ "cd", "CD" ],
         [ "ccd", "CCD" ],
         [ "cccd", "CCCD" ],
-        [ "mc", "MC" ],
+        [ "mc", "MC" ]
     ],
 
     /* 1000's place */

@@ -15,7 +15,7 @@ module.exports = (function() {
     var build = function( string, tag, minElements, maxElements, useSubformat ) {
         var expressionBuilder = require( '../expressionBuilder.js' );
         
-        if ( string.length == 0 ) {
+        if ( string.length === 0 ) {
             throw tag + ' expression void.';
         }
 
@@ -62,14 +62,16 @@ module.exports = (function() {
         var tokens = new ExpressionTokenizer( 
                 segment, 
                 context.getConf().i18nOptionsDelimiter, 
-                true );
+                true
+        );
         while ( tokens.hasMoreTokens() ) {
             var token = tokens.nextToken().trim();
             var argsTokens = new ExpressionTokenizer( 
                     token, 
                     context.getConf().inI18nOptionsDelimiter, 
-                    true );
-            if ( argsTokens.countTokens() != 2 ) {
+                    true 
+            );
+            if ( argsTokens.countTokens() !== 2 ) {
                 throw '2 elements are needed in i18n expression.';
             }
             
@@ -120,7 +122,8 @@ module.exports = (function() {
             i18nArgs, 
             format, 
             subformat,
-            language );
+            language 
+        );
     };
     
     var dependsOn = function( depsDataItem, scope, expression, argsExpressions ){
@@ -133,15 +136,6 @@ module.exports = (function() {
             expression, 
             argsExpressions
         );
-        /*
-        return expressionsUtils.buildDependsOnList( 
-            depsDataItem, 
-            scope, 
-            expression, 
-            argsExpressions, 
-            new VariableExpression( context.getConf().i18nDomainVarName ),
-            new VariableExpression( context.getConf().i18nLanguageVarName )
-        );*/
     };
     
     return {

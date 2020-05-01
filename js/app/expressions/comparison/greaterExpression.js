@@ -44,6 +44,6 @@ GreaterExpression.build = function( string ) {
     var data = comparisonHelper.build( string, 'greater' );
 
     return new GreaterExpression( string, data.expression1, data.expression2 );
-}
+};
 
 module.exports = GreaterExpression;

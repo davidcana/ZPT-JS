@@ -18,7 +18,8 @@ var TrStringExpression = function( stringToApply, expressionToApply, argsExpress
                 expression, 
                 argsExpressions, 
                 'string', 
-                null );
+                null 
+        );
         return evaluated;
     };
     
@@ -50,12 +51,14 @@ TrStringExpression.build = function( string ) {
             TrStringExpression.getPrefix(), 
             1, 
             2, 
-            false );
+            false 
+    );
 
     return new TrStringExpression( 
             string, 
             trData.expression, 
-            trData.argsExpressions );
-}
+            trData.argsExpressions 
+    );
+};
 
 module.exports = TrStringExpression;

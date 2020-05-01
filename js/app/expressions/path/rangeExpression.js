@@ -71,7 +71,7 @@ RangeExpression.build = function( s ) {
             false );
 
     var numberOfTokens = segments.countTokens();
-    if ( numberOfTokens != 2 && numberOfTokens != 3 ) {
+    if ( numberOfTokens !== 2 && numberOfTokens !== 3 ) {
         return undefined;
     }
 
@@ -88,11 +88,11 @@ RangeExpression.build = function( s ) {
     var endExpression = expressionBuilder.build( segments.nextToken() );
 
     // Build step expression
-    var stepExpression = numberOfTokens == 3? 
+    var stepExpression = numberOfTokens === 3? 
             expressionBuilder.build( segments.nextToken() ):
-            NumericLiteral.build ( RANGE_DEFAULT_STEP );
+            NumericLiteral.build( RANGE_DEFAULT_STEP );
     
     return new RangeExpression( string, startExpression, endExpression, stepExpression );
-}
+};
 
 module.exports = RangeExpression;

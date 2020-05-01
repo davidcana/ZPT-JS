@@ -6,7 +6,6 @@
 var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
 
 var EqualsExpression = function( stringToApply, argsToApply ) {
     
@@ -54,7 +53,7 @@ EqualsExpression.build = function( s ) {
     
     var string = s.trim();
     
-    if ( string.length == 0 ) {
+    if ( string.length === 0 ) {
         throw 'Equals expression void.';
     }
 
@@ -62,13 +61,14 @@ EqualsExpression.build = function( s ) {
             string, 
             context.getConf().expressionDelimiter, 
             false );
-    if ( segments.countTokens() == 1 ) {
+    if ( segments.countTokens() === 1 ) {
         throw 'Only one element in equals expression "' + string + '", please add at least one more.';
     }
 
     return new EqualsExpression( 
         string,
-        expressionBuilder.buildList( segments ) );
-}
+        expressionBuilder.buildList( segments ) 
+    );
+};
 
 module.exports = EqualsExpression;

@@ -61,8 +61,8 @@ var TALDeclare = function( _string, _declareItems ) {
 
         processErrorsArray( errorsArray );
 
-        return errorsArray.length == 0;
-    }
+        return errorsArray.length === 0;
+    };
 
     var checkDeclareItem = function( scope, name, type, required, defaultValueString, defaultValueExpression ) {
         
@@ -104,7 +104,7 @@ var TALDeclare = function( _string, _declareItems ) {
         var realType = getTypeOf( value );
         return realType === expectedType.toLowerCase()? 
             false: 
-            'Expected value type (' + expectedType.toLowerCase() + ') of ' + name + ' property does not match type (' + realType + '), value is "' + value + '".'
+            'Expected value type (' + expectedType.toLowerCase() + ') of ' + name + ' property does not match type (' + realType + '), value is "' + value + '".';
     };
     
     /*
@@ -154,7 +154,7 @@ var TALDeclare = function( _string, _declareItems ) {
     
     var processErrorsArray = function( errorsArray ) {
 
-        if ( errorsArray.length == 0 ){
+        if ( errorsArray.length === 0 ){
             return;
         }
         
@@ -221,7 +221,7 @@ TALDeclare.build = function( string ) {
                     name = currentToken;
                     break;
                 case 2:
-                    if ( -1 == omitTypes.indexOf( currentToken.toLowerCase() ) ){
+                    if ( -1 === omitTypes.indexOf( currentToken.toLowerCase() ) ){
                         type = currentToken;   
                     }
                     break;
@@ -244,7 +244,7 @@ TALDeclare.build = function( string ) {
             type: type,
             required: required,
             defaultValueString: defaultValueString,
-            defaultValueExpression: defaultValueString == undefined? undefined: expressionBuilder.build( defaultValueString ),
+            defaultValueExpression: defaultValueString == undefined? undefined: expressionBuilder.build( defaultValueString )
         });
     }
 

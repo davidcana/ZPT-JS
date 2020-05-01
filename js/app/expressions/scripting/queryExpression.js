@@ -18,7 +18,7 @@ var QueryExpression = function( stringToApply, expressionToApply ) {
             var elementList = window.document.querySelectorAll( evaluated );
             
             // elementList with length 1
-            if ( elementList.length == 1 ){
+            if ( elementList.length === 1 ){
                 return elementList[ 0 ].innerText;
             }
             
@@ -61,14 +61,6 @@ QueryExpression.build = function( string ) {
     var expression = expressionBuilder.build( string );
     
     return new QueryExpression( string, expression );
-}
-/*
-QueryExpression.build = function( string ) {
-    var StringExpression = require( '../stringExpression.js' );
-    
-    var expression = StringExpression.build( string );
-    
-    return new QueryExpression( string, expression );
-}*/
+};
 
 module.exports = QueryExpression;

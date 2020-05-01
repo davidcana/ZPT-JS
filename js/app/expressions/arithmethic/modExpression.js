@@ -21,7 +21,8 @@ var ModExpression = function( stringToApply, expressionListToApply ) {
             ModExpression.mathOperation, 
             function( total, value ){
                 return total % value;
-            } );
+            } 
+        );
     };
     
     var dependsOn = function( depsDataItem, scope ){
@@ -50,9 +51,10 @@ ModExpression.build = function( string ) {
     
     var expressionList = arithmethicHelper.build( 
             string,
-            ModExpression.mathOperation );
+            ModExpression.mathOperation 
+    );
 
     return new ModExpression( string, expressionList );
-}
+};
 
 module.exports = ModExpression;

@@ -4,8 +4,6 @@
 "use strict";
 
 var context = require( '../../context.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
-var expressionBuilder = require( '../expressionBuilder.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
 var StringExpression = require( '../stringExpression.js' );
 
@@ -42,11 +40,11 @@ JavascriptExpression.getPrefix = function() {
     return JavascriptExpression.prefix;
 };
 
-JavascriptExpression.getId = JavascriptExpression.getPrefix
+JavascriptExpression.getId = JavascriptExpression.getPrefix;
 
 JavascriptExpression.build = function( string ) {
     return new JavascriptExpression(
             StringExpression.build( string ) );
-}
+};
 
 module.exports = JavascriptExpression;

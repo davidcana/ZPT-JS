@@ -33,7 +33,7 @@ module.exports = (function() {
             var errorMessage = 
                 errorMessageToApply? 
                 errorMessageToApply: 
-                'Expression "' + expression + '" is not a valid number.'
+                'Expression "' + expression + '" is not a valid number.';
             throw errorMessage;
         }
         

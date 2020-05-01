@@ -3,14 +3,12 @@
 */
 "use strict";
 
-var context = require( '../../context.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
 var expressionsUtils = require( '../expressionsUtils.js' );
 
 var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
     
     var arrayBase = arrayBaseToApply;
-	var indexes = indexesToApply;
+    var indexes = indexesToApply;
     
     var evaluate = function( scope ){
         
@@ -47,17 +45,12 @@ var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
         var dep = arrayBaseDependsOn[ 0 ];
         for ( var i = 0; i < indexes.length; ++i ){
             var indexExpression = indexes[ i ];
-            var indexEvaluated = indexExpression.evaluate( scope )
+            var indexEvaluated = indexExpression.evaluate( scope );
             dep += '[' + indexEvaluated + ']';
         }
         
         return [ dep ];
     };
-    /*
-    var dependsOn = function( depsDataItem, scope ){
-        return expressionsUtils.buildDependsOnList( depsDataItem, scope, arrayBase, indexes );
-    };
-    */
     
     var toString = function(){
         return arrayBase + '[' + indexes + ']';
@@ -80,7 +73,7 @@ ArrayExpression.build = function( arrayBase, accessor ) {
 
         // Array accessor must begin and end with brackets
         var close = accessor.indexOf( ']' );
-        if ( accessor.charAt( 0 ) != '[' || close == -1 ) {
+        if ( accessor.charAt( 0 ) !== '[' || close === -1 ) {
             throw 'Bad array accessor: '  + accessor;
         }
 
@@ -101,27 +94,7 @@ ArrayExpression.build = function( arrayBase, accessor ) {
     
     return new ArrayExpression( arrayBase, indexes );
 };
-/*
-ArrayExpression.buildAccessor = function( accessor ) {
-    
-    // Array accessor must begin and end with brackets
-    var close = accessor.indexOf( ']' );
-    if ( accessor.charAt( 0 ) != '[' || close == -1 ) {
-        throw 'Error in array expression. Bad array accessor: '  + accessor;
-    }
 
-    var index = accessor.substring( 1, close );
-
-    // Continue evaluating array access for multidimensional arrays
-    close++;
-    if ( accessor.length > close ) {
-        token += accessor.substring( 0, close );
-        accessor = accessor.substring( close );
-    }
-
-    return new ArrayExpression( arrayBase, indexes );
-};
-*/
 ArrayExpression.buildArrayData = function( token ) {
     
     var bracket = ArrayExpression.findArrayAccessor( token );
@@ -131,8 +104,8 @@ ArrayExpression.buildArrayData = function( token ) {
     }
     
     return {
-        arrayAccessor : token.substring( bracket ).trim(),
-        token : token.substring( 0, bracket ).trim()
+        arrayAccessor: token.substring( bracket ).trim(),
+        token: token.substring( 0, bracket ).trim()
     };
 };
 
@@ -148,32 +121,29 @@ ArrayExpression.findArrayAccessor = function( token ) {
         var ch = token.charAt( i );
         switch( state ) {
         case IN_PAREN:
-            if ( ch == ')' ) {
+            if ( ch === ')' ) {
                 parenDepth--;
-                if ( parenDepth == 0 ) {
+                if ( parenDepth === 0 ) {
                     state = SCANNING;
                 }
-            }
-            else if ( ch == '(' ) {
+            } else if ( ch === '(' ) {
                 parenDepth++;
             }
             break;
 
         case IN_QUOTE:
-            if ( ch == '\'' ) {
+            if ( ch === '\'' ) {
                 state = SCANNING;
             }
             break;
 
         case SCANNING:
-            if ( ch == '\'' ) {
+            if ( ch === '\'' ) {
                 state = IN_QUOTE;
-            }
-            else if ( ch == '(' ) {
+            } else if ( ch === '(' ) {
                 parenDepth++;
                 state = IN_PAREN;
-            }
-            else if ( ch == '[' ) {
+            } else if ( ch === '[' ) {
                 return i;
             }
         }

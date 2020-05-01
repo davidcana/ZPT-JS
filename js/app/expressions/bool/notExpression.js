@@ -43,6 +43,6 @@ NotExpression.build = function( string ) {
     var expression = expressionBuilder.build( string );
     
     return new NotExpression( string, expression );
-}
+};
 
 module.exports = NotExpression;

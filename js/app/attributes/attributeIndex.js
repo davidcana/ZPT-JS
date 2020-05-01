@@ -22,7 +22,6 @@ module.exports = (function() {
         addList(
             node,
             attributeInstance,
-            //attributeInstance.dependsOn( undefined, scope )
             attributeInstance.dependsOn( scope )
         );
     };

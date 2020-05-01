@@ -16,7 +16,7 @@ module.exports = (function() {
         }
 
         var hash = 0;
-        if ( string.length == 0 ){
+        if ( string.length === 0 ){
             return hash;
         }
         for ( var i = 0, len = string.length; i < len; i++ ) {

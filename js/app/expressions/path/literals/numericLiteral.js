@@ -36,7 +36,7 @@ NumericLiteral.build = function( string ) {
 
         var floatValue = parseFloat( string );
         if ( floatValue == string ){
-            return new NumericLiteral ( floatValue );
+            return new NumericLiteral( floatValue );
         }
     }
 

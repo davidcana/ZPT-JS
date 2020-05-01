@@ -1,11 +1,8 @@
 /*
     utils singleton class
 */
-"use strict";
-
-//var context = require( './context.js' );
-
 module.exports = (function() {
+    "use strict";
     
     var generateId = function ( len, _charSet ) {
         
@@ -16,7 +13,7 @@ module.exports = (function() {
             result += charSet.substring( pos, pos + 1 );
         }
         return result;
-    }
+    };
     
     //var isArray = Array.isArray;
     
@@ -61,15 +58,17 @@ module.exports = (function() {
         for ( var i = 1; i < arguments.length; i++ ) {
             var obj = arguments[ i ];
 
-            if ( ! obj )
+            if ( ! obj ){
                 continue;
-
+            }
+            
             for ( var key in obj ) {
                 if ( obj.hasOwnProperty( key ) ) {
-                    if ( typeof obj[ key ] === 'object' )
+                    if ( typeof obj[ key ] === 'object' ){
                         out[ key ] = deepExtend( out[ key ], obj[ key ] );
-                    else
+                    } else {
                         out[ key ] = obj[ key ];
+                    }
                 }
             }
         }
@@ -81,12 +80,14 @@ module.exports = (function() {
         out = out || {};
 
         for ( var i = 1; i < arguments.length; i++ ) {
-            if ( ! arguments[ i ] )
+            if ( ! arguments[ i ] ){
                 continue;
+            }
 
             for ( var key in arguments[ i ] ) {
-                if ( arguments[ i ].hasOwnProperty( key ) )
+                if ( arguments[ i ].hasOwnProperty( key ) ){
                     out[ key ] = arguments[ i ][ key ];
+                }
             }
         }
 

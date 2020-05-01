@@ -87,7 +87,7 @@ FormatExpression.build = function( s ) {
     var expressionBuilder = require( './expressionBuilder.js' );
     
     var string = s.trim();
-    if ( string.length == 0 ) {
+    if ( string.length === 0 ) {
         throw 'Format expression void.';
     }
 
@@ -96,7 +96,7 @@ FormatExpression.build = function( s ) {
             context.getConf().expressionDelimiter, 
             false );
     var numberOfTokens = segments.countTokens();
-    if ( numberOfTokens == 1 ) {
+    if ( numberOfTokens === 1 ) {
         throw 'Only one element in format expression: "' + string + '". Please add at least one more.';
     }
 

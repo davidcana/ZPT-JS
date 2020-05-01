@@ -52,7 +52,7 @@ PathExpression.getPrefix = function() {
 };
 PathExpression.getId = function() { 
     return 'path';
-}
+};
 
 PathExpression.build = function( s ) {
     var expressionBuilder = require( '../expressionBuilder.js' );
@@ -60,7 +60,7 @@ PathExpression.build = function( s ) {
     var string = s.trim();
     
     // Blank expression evaluates to blank string
-    if ( string.length == 0 ) {
+    if ( string.length === 0 ) {
         return StringLiteral.build( '' );
     }
     
@@ -70,7 +70,7 @@ PathExpression.build = function( s ) {
             false );
 
     // If there is only 1 must be a path segment
-    if ( segments.countTokens() == 1 ) {
+    if ( segments.countTokens() === 1 ) {
         return PathSegmentExpression.build( string );
     }
 
@@ -84,6 +84,6 @@ PathExpression.build = function( s ) {
         );
     }
     return new PathExpression( string, expressionList );
-}
+};
 
 module.exports = PathExpression;

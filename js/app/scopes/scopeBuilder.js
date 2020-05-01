@@ -68,7 +68,7 @@ module.exports = (function() {
             
             node = node.parentNode;
             
-        } while ( node.nodeType != 9 && ++c < 100 );
+        } while ( node.nodeType !== 9 && ++c < 100 );
         
         throw 'Error trying to update scope: root not found!';
     };
@@ -104,7 +104,7 @@ module.exports = (function() {
 
             node = node.parentNode;
 
-        } while ( node.nodeType != 9 && ++c < 100 );
+        } while ( node.nodeType !== 9 && ++c < 100 );
         
         throw 'Error trying to get root: not found!';
     };

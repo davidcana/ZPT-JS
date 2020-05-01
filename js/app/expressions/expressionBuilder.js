@@ -123,7 +123,7 @@ module.exports = (function() {
     var getWithoutPrefixExpressionManager = function( string ){
         
         for ( var prefix in withoutPrefixExpressionManagers ) {
-            if ( string.indexOf( prefix ) == 0 ) {
+            if ( string.indexOf( prefix ) === 0 ) {
                 return withoutPrefixExpressionManagers[ prefix ];
             }
         }
@@ -159,7 +159,7 @@ module.exports = (function() {
             return effectiveToken;
         }
         
-        if ( effectiveToken.charAt( 0 ) == '(' ){
+        if ( effectiveToken.charAt( 0 ) === '(' ){
             return removeParenthesisIfAny( 
                         effectiveToken.substring( 1, effectiveToken.lastIndexOf( ')' ) ).trim() );
         }

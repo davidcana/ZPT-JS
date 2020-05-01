@@ -1,13 +1,13 @@
 /* 
     context singleton class
 */
-"use strict";
 
 var log4javascript = require( 'log4javascript' );
 var utils = require( './utils.js' );
 var LoopItem = require( './parsers/loopItem.js' );
 
 module.exports = (function() {
+    "use strict";
     
     /* Tags */
     var defaultTags = {
@@ -71,11 +71,11 @@ module.exports = (function() {
     };
     
     var getTal = function (){
-        if ( tal == '' ){
+        if ( tal === '' ){
             var c = 0;
             var notInclude = tags.qdup;
             for ( var property in tags ) {
-                if ( notInclude == tags[ property ] ){
+                if ( notInclude === tags[ property ] ){
                     continue;
                 }
                 if ( c++ > 0){
@@ -203,7 +203,7 @@ module.exports = (function() {
         trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
         inExpression:         "in" + EXPRESSION_SUFFIX,
         queryExpression:      "query" + EXPRESSION_SUFFIX,
-        pathExpression:       "",
+        pathExpression:       ""
     };
     var conf = defaultConf;
     
@@ -246,19 +246,19 @@ module.exports = (function() {
         The presence of a boolean attribute on an element represents the true value, and the absence of the attribute represents the false value.
     */
     var booleanAttributes = {
-        "checked" : 1,
-        "compact" : 1,
-        "declare" : 1,
-        "defer" : 1,
-        "disabled" : 1,
-        "ismap" : 1,
-        "multiple" : 1,
-        "nohref" : 1,
-        "noresize" : 1,
-        "noshade" : 1,
-        "nowrap" : 1,
-        "readonly" : 1,
-        "selected" : 1
+        checked: 1,
+        compact: 1,
+        declare: 1,
+        defer: 1,
+        disabled: 1,
+        ismap: 1,
+        multiple: 1,
+        nohref: 1,
+        noresize: 1,
+        noshade: 1,
+        nowrap: 1,
+        readonly: 1,
+        selected: 1
     };
     
     var getBooleanAttributes = function (){
@@ -277,18 +277,18 @@ module.exports = (function() {
         Attributes which don't support setAttribute().
     */
     var altAttributes = {
-        "className" : 1,
-        "class" : 1,
-        "href" : 1,
-        "htmlFor" : 1,
-        "id" : 1,
-        "innerHTML" : 1,
-        "label" : 1,
-        "style" : 1,
-        "src" : 1,
-        "text" : 1,
-        "title" : 1,
-        "value" : 1
+        className: 1,
+        class: 1,
+        href: 1,
+        htmlFor: 1,
+        id: 1,
+        innerHTML: 1,
+        label: 1,
+        style: 1,
+        src: 1,
+        text: 1,
+        title: 1,
+        value: 1
     };
     // All booleanAttributes are also altAttributes
     utils.extend( altAttributes, booleanAttributes );

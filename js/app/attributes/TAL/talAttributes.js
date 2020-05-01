@@ -137,7 +137,7 @@ TALAttributes.build = function( string ) {
     while ( tokens.hasMoreTokens() ) {
         var attribute = tokens.nextToken().trim();
         var space = attribute.indexOf( context.getConf().inAttributeDelimiter );
-        if ( space == -1 ) {
+        if ( space === -1 ) {
             attributeItems.push({
                 name: undefined,
                 expression: expressionBuilder.build( attribute )
