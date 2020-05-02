@@ -8,17 +8,30 @@ var utils = require( '../utils.js' );
 module.exports = (function() {
     
     var run = function ( dictionary, userObserver ){
-
+        
+        // Define the observer
         var observer = userObserver || {
             notify: function( propertyPath ){
                 console.log( propertyPath, 'changed' );
             }
         };
-        var _privateScope = {};
         
+        // Define the _privateScope
+        //var _privateScope = {};
+        //dictionary._privateScope = _privateScope;
+        dictionary._privateScope = {};
+        
+        // Init some properties in dictionary
+        dictionary._privateScope.autoCommit = true;
+        dictionary._privateScope.dictionaryChanges = {};
+        
+        // Define some methods in dictionary
+        dictionary.isAutoCommit = function(){
+            return dictionary._privateScope.autoCommit;
+        };
+        
+        // Copy properties in dictionary to _privateScope and define properties with setters and getters
         var keys = Object.keys( dictionary );
-        dictionary._privateScope = _privateScope;
-        
         for ( var i = 0; i < keys.length; i++ ){
             var key = keys[ i ];
             
@@ -27,7 +40,7 @@ module.exports = (function() {
                 continue;
             }
             
-            copy( dictionary, _privateScope, key );
+            //copy( dictionary, _privateScope, key );
             
             Object.defineProperty(
                 dictionary,
@@ -36,15 +49,27 @@ module.exports = (function() {
                     enumerable: true,
                     configurable: true,
                     get: function(){
-                        return dictionary._privateScope[ key ];
+                        return dictionary[ key ];
+                        //return dictionary._privateScope[ key ];
                     },
                     set: function( value ){
-                        dictionary._privateScope[ key ] = value;
+                        dictionary[ key ] = value;
+                        //dictionary._privateScope[ key ] = value;
                         observer.notify( key );
+                        
+                        // Record this change to commit it later
+                        dictionary._dictionaryChanges[ key ] = value;
+                        
+                        if ( dictionary._autoCommit ){
+                            dictionary._commit();
+                        }
                     }
                 }
             );   
         }
+        
+        //
+        
     };
     
     var copy = function( from, to, key ){
