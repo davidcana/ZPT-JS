@@ -31,6 +31,48 @@
             </ol>
         </div>
 
-
+        <h2>Simple TALAttributes autoCommit true</h2>
+        <div id="t3">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>
+                    Textarea:
+                    <textarea id="t3-1"
+                              data-attributes="maxlength number1;
+                                               placeholder text1"></textarea>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Simple TALAttributes autoCommit false</h2>
+        <div id="t4">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>
+                    Textarea:
+                    <textarea id="t4-1"
+                              data-attributes="maxlength number1;
+                                               placeholder text1"></textarea>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Simple TALRepeat autoCommit true</h2>
+        <div id="t5">
+            <ol>
+                <li data-repeat="item items">
+                    item n = <span data-content="item" data-attributes="class 'item5'">an item</span>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Simple TALRepeat autoCommit false</h2>
+        <div id="t6">
+            <ol>
+                <li data-repeat="item items">
+                    item n = <span data-content="item" data-attributes="class 'item6'">an item</span>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

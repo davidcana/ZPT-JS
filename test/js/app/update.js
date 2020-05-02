@@ -17,6 +17,8 @@ zpt.context.setErrorFunction( errorFunction );
 // Run tests!
 QUnit.test( "simple TALContent test", function( assert ) {
 
+    var testNumber = 1;
+    
     var dictionary = {
         number1: 1,
         text1: 'test 1'
@@ -25,13 +27,13 @@ QUnit.test( "simple TALContent test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't1' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( $('#t1-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t1-2').text(), "" + arguments[ 1 ] );        
+        assert.equal( $('#t'+ testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t'+ testNumber + '-2').text(), "" + arguments[ 1 ] );        
         assert.equal( errorsArray, undefined );
     };
 
@@ -52,6 +54,8 @@ QUnit.test( "simple TALContent test", function( assert ) {
 
 QUnit.test( "simple TALAttributes test", function( assert ) {
 
+    var testNumber = 2;
+    
     var dictionary = {
         number1: 100,
         text1: 'test 1'
@@ -60,13 +64,13 @@ QUnit.test( "simple TALAttributes test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't2' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( $('#t2-1').attr('maxlength'), "" + arguments[ 0 ] );
-        assert.equal( $('#t2-1').attr('placeholder'), "" + arguments[ 1 ] );
+        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -87,6 +91,8 @@ QUnit.test( "simple TALAttributes test", function( assert ) {
 
 QUnit.test( "simple TALDefine test", function( assert ) {
 
+    var testNumber = 3;
+    
     var dictionary = {
         number1: 1,
         text1: 'test'
@@ -95,15 +101,15 @@ QUnit.test( "simple TALDefine test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't3' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( $('#t3-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t3-2').text(), "" + arguments[ 1 ] );
-        assert.equal( $('#t3-3').text(), "" + arguments[ 2 ] );
-        assert.equal( $('#t3-4').text(), "" + arguments[ 3 ] );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );
+        assert.equal( $('#t' + testNumber + '-3').text(), "" + arguments[ 2 ] );
+        assert.equal( $('#t' + testNumber + '-4').text(), "" + arguments[ 3 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -123,6 +129,8 @@ QUnit.test( "simple TALDefine test", function( assert ) {
 
 QUnit.test( "simple TALDefine (2) test", function( assert ) {
 
+    var testNumber = '3b';
+    
     var dictionary = {
         number1: 1,
         number2: 2,
@@ -133,12 +141,12 @@ QUnit.test( "simple TALDefine (2) test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't3b' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( $('#t3b-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -158,6 +166,8 @@ QUnit.test( "simple TALDefine (2) test", function( assert ) {
 
 QUnit.test( "simple TALRepeat test", function( assert ) {
 
+    var testNumber = 4;
+    
     var dictionary = {
         items: [ 1, 4, 9 ]
     };
@@ -165,12 +175,12 @@ QUnit.test( "simple TALRepeat test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't4' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' ), arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -190,6 +200,8 @@ QUnit.test( "simple TALRepeat test", function( assert ) {
 
 QUnit.test( "simple METALUseMacro test", function( assert ) {
     
+    var testNumber = 5;
+    
     var done = assert.async();
     
     context.setExpressionCounter( 100 );
@@ -202,7 +214,7 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
 
     zpt.run({
         command: 'preload',
-        root: document.getElementById( 't5' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary,
         declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
         callback: function(){
@@ -241,7 +253,7 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
         </div>`;
-            assert.equal( $('#t5').html().trim(), t5 );
+            assert.equal( $( '#t' + testNumber ).html().trim(), t5 );
             
             done();
         }
@@ -250,6 +262,8 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
 
 QUnit.test( "simple TALCondition test", function( assert ) {
 
+    var testNumber = 6;
+    
     // First invokation
     var dictionary = {
         number1: 1,
@@ -261,15 +275,15 @@ QUnit.test( "simple TALCondition test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't6' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
     
     var testFunction = function(){
-        assert.equal( $('#t6-1').text(), "" + arguments[ 0 ] );
-        assert.ok( arguments[ 1 ] === $('#t6-1').is(':visible') );
-        assert.equal( $('#t6-2').text(), "" + arguments[ 2 ] );  
-        assert.ok( arguments[ 3 ] === $('#t6-2').is(':visible') );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.ok( arguments[ 1 ] === $('#t' + testNumber + '-1').is( ':visible' ) );
+        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 2 ] );  
+        assert.ok( arguments[ 3 ] === $('#t' + testNumber + '-2').is( ':visible' ) );
         assert.equal( errorsArray, undefined );
     };
 
@@ -316,6 +330,8 @@ QUnit.test( "simple TALCondition test", function( assert ) {
 
 QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
 
+    var testNumber = 7;
+    
     var I18n = zpt.I18n;
     var I18nBundle = zpt.I18nBundle;
 
@@ -365,16 +381,16 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
 
     // First ZPT invokation
     zpt.run({
-        root: document.getElementById( 't7' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( $('#t7-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t7-2').text(), "" + arguments[ 1 ] );
-        assert.ok( arguments[ 3 ].indexOf( $('#t7-3').html() ) !== -1 );
-        assert.ok( arguments[ 3 ].indexOf( $('#t7-4').html() ) !== -1 );
-        assert.equal( $('#t7-5').text(), "" + arguments[ 4 ] );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );
+        assert.ok( arguments[ 3 ].indexOf( $('#t' + testNumber + '-3').html() ) !== -1 );
+        assert.ok( arguments[ 3 ].indexOf( $('#t' + testNumber + '-4').html() ) !== -1 );
+        assert.equal( $('#t' + testNumber + '-5').text(), "" + arguments[ 4 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -432,6 +448,8 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
 
 QUnit.test( "2 vars in TALContent test", function( assert ) {
 
+    var testNumber = 8;
+    
     var dictionary = {
         number1: 1,
         text1: 'test'
@@ -440,12 +458,12 @@ QUnit.test( "2 vars in TALContent test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't8' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function( content, parserUpdater, expectedStatistics ){
-        assert.equal( $('#t8-1').text(), content );
+        assert.equal( $('#t' + testNumber + '-1').text(), content );
         assert.equal( errorsArray, undefined );
         if ( parserUpdater ){
             assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
@@ -477,6 +495,8 @@ QUnit.test( "2 vars in TALContent test", function( assert ) {
 
 QUnit.test( "var in macro test", function( assert ) {
 
+    var testNumber = 9;
+    
     var dictionary = {
         internalMacro: 'macro1',
         var1: 1
@@ -485,12 +505,12 @@ QUnit.test( "var in macro test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't9' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function( content, parserUpdater, expectedStatistics ){
-        assert.equal( $('#t9-1').text(), content );
+        assert.equal( $('#t' + testNumber + '-1').text(), content );
         assert.equal( errorsArray, undefined );
         if ( parserUpdater ){
             assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
@@ -520,6 +540,8 @@ QUnit.test( "var in macro test", function( assert ) {
 });
 
 QUnit.test( "simple METALFillSlot test", function( assert ) {
+    
+    var testNumber = 10;
     
     var done = assert.async();
     var id = 't11';
@@ -622,6 +644,8 @@ QUnit.test( "simple METALFillSlot test", function( assert ) {
 
 QUnit.test( "mixing TALContent and TALAttributes test", function( assert ) {
 
+    var testNumber = 12;
+    
     var dictionary = {
         number1: 100,
         text1: 'test 1'
@@ -630,14 +654,14 @@ QUnit.test( "mixing TALContent and TALAttributes test", function( assert ) {
     errorsArray = undefined;
 
     zpt.run({
-        root: document.getElementById( 't12' ),
+        root: document.getElementById( 't' + testNumber ),
         dictionary: dictionary
     });
 
     var testFunction = function(){
-        assert.equal( $('#t12-1').attr('maxlength'), "" + arguments[ 0 ] );
-        assert.equal( $('#t12-1').attr('placeholder'), "" + arguments[ 1 ] );
-        assert.equal( $('#t12-1').text(), "" + arguments[ 2 ] );
+        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] );
         if ( arguments[ 3 ] ){
             assert.deepEqual( arguments[ 3 ], arguments[ 4 ] );
         }   
