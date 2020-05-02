@@ -6,8 +6,10 @@
 
         <script type="text/javascript" src="lib/zpt.min.js" defer></script>
         <script type="text/javascript" src="js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
         
         <link rel="stylesheet" type="text/css" href="docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
     </head>
     <body>
         <div data-use-macro="'page@templates.html'">
@@ -35,6 +37,7 @@
                     <li>Makes it easy to designers maintain pages without having to abandon their tools.</li>
                     <li>Internal macro support; external asynchronous macro loading support.</li>
                     <li>I18n and L10n support using standards <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl</a> and <a href="http://userguide.icu-project.org/formatparse/messages">ICU</a>. External asynchronous i18n files loading support.</li>
+                    <li>ZPT-JS works as a reactive framework: you define an object with your data model. If you change some data ZPT-JS will make the minimum updates of the HTML to reflect it.</li>
                 </ul>
 
                 <h2>ZPT-JS and ZPT: similar but not equal</h2>
@@ -62,6 +65,76 @@
                 <p>
                     A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows, instead of using TAL attributes ZPT-JS uses data attributes. This way <em>tal:content</em> attribute is replaced by <em>data-content</em>. However, ZPT-JS also supports standard TAL attributes (setting a configuration option).
                 </p>
+                
+                <h2>Working with ZPT-JS</h2>
+                <p>
+                    A sample of template:
+                </p>
+                <pre class="brush: html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt; 
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Getting started&lt;/title&gt;
+
+        &lt;script src="zpt.min.js" defer&gt;&lt;/script&gt;
+        &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p data-content="message"&gt;
+            the message
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    Where <code>zpt.min.js</code> is the minimized version of ZPT-JS and <code>gettingStarted.js</code> is:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary({
+    message: "Hello, world!"
+});
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    The resulting <code>body</code> element is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-content="message"&gt;
+        Hello, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
+                
+                <p>
+                    If we change some data in the dictionary this way:
+                </p>
+                <pre class="brush: js">
+dictionary.message = "Bye, world!";
+                </pre>
+                
+                <p>
+                    We don't need to do anything else, the <code>body</code> element now is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-content="message"&gt;
+        Bye, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
+                
             </article>
         </div>
     </body>
