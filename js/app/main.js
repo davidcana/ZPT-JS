@@ -16,6 +16,7 @@ exports.logHelper = require( './logHelper.js' );
 exports.expressionBuilder = require( './expressions/expressionBuilder.js' );
 exports.evaluateHelper = require( './expressions/evaluateHelper.js' );
 exports.ExpressionTokenizer = require( './expressions/expressionTokenizer.js' );
+exports.ReactiveDictionary = require( './scopes/reactiveDictionary.js' );
 
 /* Support RequireJS module pattern */
 if ( typeof define === 'function' && define.amd ) {
@@ -28,4 +29,5 @@ if ( typeof define === 'function' && define.amd ) {
     define( 'zpt.expressionBuilder', exports.expressionBuilder );
     define( 'zpt.evaluateHelper', exports.evaluateHelper );
     define( 'zpt.ExpressionTokenizer', exports.ExpressionTokenizer );
+    define( 'zpt.ReactiveDictionary', exports.ReactiveDictionary );
 }

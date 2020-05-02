@@ -93,7 +93,8 @@ module.exports = {
         "exports": true,
         "global": true,
         "localStorage": true,
-        "Intl": true
+        "Intl": true,
+        "QUnit": true
     },
     "parserOptions": {
         "ecmaVersion": 6,

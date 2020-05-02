@@ -2,8 +2,7 @@
 
 var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
-var dictionary = require( './dictionary.js' );
-var Qunit = require( 'qunit' );
+var QUnit = require( 'qunit' );
 var utils = require( './utils.js' );
 var context = zpt.context;
 
@@ -31,8 +30,8 @@ QUnit.test( "simple TALContent test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t1-1').text() , "" + arguments[ 0 ] );
-        assert.equal( $('#t1-2').text() , "" + arguments[ 1 ] );        
+        assert.equal( $('#t1-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t1-2').text(), "" + arguments[ 1 ] );        
         assert.equal( errorsArray, undefined );
     };
 
@@ -66,8 +65,8 @@ QUnit.test( "simple TALAttributes test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t2-1').attr('maxlength') , "" + arguments[ 0 ] );
-        assert.equal( $('#t2-1').attr('placeholder') , "" + arguments[ 1 ] );
+        assert.equal( $('#t2-1').attr('maxlength'), "" + arguments[ 0 ] );
+        assert.equal( $('#t2-1').attr('placeholder'), "" + arguments[ 1 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -101,10 +100,10 @@ QUnit.test( "simple TALDefine test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t3-1').text() , "" + arguments[ 0 ] );
-        assert.equal( $('#t3-2').text() , "" + arguments[ 1 ] );
-        assert.equal( $('#t3-3').text() , "" + arguments[ 2 ] );
-        assert.equal( $('#t3-4').text() , "" + arguments[ 3 ] );
+        assert.equal( $('#t3-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t3-2').text(), "" + arguments[ 1 ] );
+        assert.equal( $('#t3-3').text(), "" + arguments[ 2 ] );
+        assert.equal( $('#t3-4').text(), "" + arguments[ 3 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -139,7 +138,7 @@ QUnit.test( "simple TALDefine (2) test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t3b-1').text() , "" + arguments[ 0 ] );
+        assert.equal( $('#t3b-1').text(), "" + arguments[ 0 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -171,7 +170,7 @@ QUnit.test( "simple TALRepeat test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -267,10 +266,10 @@ QUnit.test( "simple TALCondition test", function( assert ) {
     });
     
     var testFunction = function(){
-        assert.equal( $('#t6-1').text() , "" + arguments[ 0 ] );
-        assert.ok( arguments[ 1 ] == $('#t6-1').is(':visible') );
-        assert.equal( $('#t6-2').text() , "" + arguments[ 2 ] );  
-        assert.ok( arguments[ 3 ] == $('#t6-2').is(':visible') );
+        assert.equal( $('#t6-1').text(), "" + arguments[ 0 ] );
+        assert.ok( arguments[ 1 ] === $('#t6-1').is(':visible') );
+        assert.equal( $('#t6-2').text(), "" + arguments[ 2 ] );  
+        assert.ok( arguments[ 3 ] === $('#t6-2').is(':visible') );
         assert.equal( errorsArray, undefined );
     };
 
@@ -288,8 +287,8 @@ QUnit.test( "simple TALCondition test", function( assert ) {
     
     testFunction( 1, true, 'test 1', true );
     
-    // Second invokation
-    var dictionaryChanges = {
+    // Third invokation
+    dictionaryChanges = {
         boolean2: false
     };
 
@@ -301,7 +300,7 @@ QUnit.test( "simple TALCondition test", function( assert ) {
     testFunction( 1, false, 'test 1', false );
     
     // Fourth invokation
-    var dictionaryChanges = {
+    dictionaryChanges = {
         number1: 2,
         text1: 'test 2',
         boolean2: true
@@ -322,8 +321,8 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
 
     /* I18n maps init */
     var msg = {
-        en : {},
-        es : {}
+        en: {},
+        es: {}
     };
 
     /* English i18n messages */
@@ -356,8 +355,8 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
 
     // Init dictionary
     var dictionary = {
-        i18nES:  i18nES,
-        i18nEN:  i18nEN,
+        i18nES: i18nES,
+        i18nEN: i18nEN,
         i18nBundle: i18nBundle,
         language: 'es'
     };
@@ -371,11 +370,11 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t7-1').text() , "" + arguments[ 0 ] );
-        assert.equal( $('#t7-2').text() , "" + arguments[ 1 ] );
-        assert.ok( arguments[ 3 ].indexOf( $('#t7-3').html() ) != -1 );
-        assert.ok( arguments[ 3 ].indexOf( $('#t7-4').html() ) != -1 );
-        assert.equal( $('#t7-5').text() , "" + arguments[ 4 ] );
+        assert.equal( $('#t7-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t7-2').text(), "" + arguments[ 1 ] );
+        assert.ok( arguments[ 3 ].indexOf( $('#t7-3').html() ) !== -1 );
+        assert.ok( arguments[ 3 ].indexOf( $('#t7-4').html() ) !== -1 );
+        assert.equal( $('#t7-5').text(), "" + arguments[ 4 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -413,7 +412,7 @@ QUnit.test( "simple I18NLanguage and I18nDomain test", function( assert ) {
     i18nEN = new I18n( 'en', msg[ 'en' ] );
     i18nBundle = new I18nBundle( i18nES, i18nEN );
     
-    var dictionaryChanges = {
+    dictionaryChanges = {
         i18nBundle: i18nBundle
     };
     
@@ -446,7 +445,7 @@ QUnit.test( "2 vars in TALContent test", function( assert ) {
     });
 
     var testFunction = function( content, parserUpdater, expectedStatistics ){
-        assert.equal( $('#t8-1').text() , content );
+        assert.equal( $('#t8-1').text(), content );
         assert.equal( errorsArray, undefined );
         if ( parserUpdater ){
             assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
@@ -491,7 +490,7 @@ QUnit.test( "var in macro test", function( assert ) {
     });
 
     var testFunction = function( content, parserUpdater, expectedStatistics ){
-        assert.equal( $('#t9-1').text() , content );
+        assert.equal( $('#t9-1').text(), content );
         assert.equal( errorsArray, undefined );
         if ( parserUpdater ){
             assert.deepEqual( parserUpdater.getStatistics(), expectedStatistics );
@@ -636,9 +635,9 @@ QUnit.test( "mixing TALContent and TALAttributes test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t12-1').attr('maxlength') , "" + arguments[ 0 ] );
-        assert.equal( $('#t12-1').attr('placeholder') , "" + arguments[ 1 ] );
-        assert.equal( $('#t12-1').text() , "" + arguments[ 2 ] );
+        assert.equal( $('#t12-1').attr('maxlength'), "" + arguments[ 0 ] );
+        assert.equal( $('#t12-1').attr('placeholder'), "" + arguments[ 1 ] );
+        assert.equal( $('#t12-1').text(), "" + arguments[ 2 ] );
         if ( arguments[ 3 ] ){
             assert.deepEqual( arguments[ 3 ], arguments[ 4 ] );
         }   
@@ -687,7 +686,7 @@ QUnit.test( "update text element by index TALRepeat test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -724,7 +723,7 @@ QUnit.test( "update text element by element TALRepeat test", function( assert ) 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -761,7 +760,7 @@ QUnit.test( "delete text element by index TALRepeat test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -797,7 +796,7 @@ QUnit.test( "delete text element by element TALRepeat test", function( assert ) 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -833,7 +832,7 @@ QUnit.test( "insert text element by index = 2 TALRepeat test", function( assert 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -870,7 +869,7 @@ QUnit.test( "insert text element by index = '_first_' TALRepeat test", function(
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -907,7 +906,7 @@ QUnit.test( "insert text element by index = '_last_' TALRepeat test", function( 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.item' + testNumber ) , arguments[ 0 ]  );   
+        assert.equal( utils.getAllValues( '.item' + testNumber ), arguments[ 0 ]  );   
         assert.equal( errorsArray, undefined );
     };
 
@@ -946,7 +945,7 @@ QUnit.test( "update object element by index TALRepeat test", function( assert ) 
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -957,8 +956,8 @@ QUnit.test( "update object element by index TALRepeat test", function( assert ) 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1000,7 +999,7 @@ QUnit.test( "update object element by element TALRepeat test", function( assert 
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -1011,8 +1010,8 @@ QUnit.test( "update object element by element TALRepeat test", function( assert 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1057,7 +1056,7 @@ QUnit.test( "delete object element by index TALRepeat test", function( assert ) 
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -1068,8 +1067,8 @@ QUnit.test( "delete object element by index TALRepeat test", function( assert ) 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1107,7 +1106,7 @@ QUnit.test( "delete object element by object TALRepeat test", function( assert )
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -1118,8 +1117,8 @@ QUnit.test( "delete object element by object TALRepeat test", function( assert )
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1160,7 +1159,7 @@ QUnit.test( "insert object element by index = 2 TALRepeat test", function( asser
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -1171,8 +1170,8 @@ QUnit.test( "insert object element by index = 2 TALRepeat test", function( asser
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1214,7 +1213,7 @@ QUnit.test( "insert object element by index = '_first_' TALRepeat test", functio
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -1225,8 +1224,8 @@ QUnit.test( "insert object element by index = '_first_' TALRepeat test", functio
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1268,7 +1267,7 @@ QUnit.test( "insert object element by index = '_last_' TALRepeat test", function
         {
             name: 'Luke',
             description: 'The number 3'
-        },
+        }
     ];
 
     errorsArray = undefined;
@@ -1279,8 +1278,8 @@ QUnit.test( "insert object element by index = '_last_' TALRepeat test", function
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
 
@@ -1355,8 +1354,8 @@ QUnit.test( "update object nested element by index TALRepeat test", function( as
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1432,8 +1431,8 @@ QUnit.test( "update object nested element by index and selecting by search TALRe
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1515,8 +1514,8 @@ QUnit.test( "update object nested element by element TALRepeat test", function( 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1595,8 +1594,8 @@ QUnit.test( "update object nested element by element and selecting by search TAL
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1681,8 +1680,8 @@ QUnit.test( "delete object nested element by element TALRepeat test", function( 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1754,8 +1753,8 @@ QUnit.test( "delete object nested element by element and selecting by search TAL
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1833,8 +1832,8 @@ QUnit.test( "Insert object nested element by index = 2 TALRepeat test", function
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1910,8 +1909,8 @@ QUnit.test( "Insert object nested element by index = 2 and selecting by search T
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -1993,8 +1992,8 @@ QUnit.test( "Insert object nested element by index = '_first_' TALRepeat test", 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -2070,8 +2069,8 @@ QUnit.test( "Insert object nested element by index = '_first_' and selecting by 
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -2153,8 +2152,8 @@ QUnit.test( "Insert object nested element by index = '_last_' TALRepeat test", f
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -2230,8 +2229,8 @@ QUnit.test( "Insert object nested element by index = '_last_' and selecting by s
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -2278,8 +2277,8 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     });
 
     var testFunction = function(){
-        assert.equal( utils.getAllValues( '.itemName' + testNumber ) , arguments[ 0 ]  );
-        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ) , arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
         assert.equal( errorsArray, undefined );
     };
     
@@ -2524,8 +2523,8 @@ QUnit.test( "simple TALContent with indexExpressions = false test", function( as
     });
 
     var testFunction = function(){
-        assert.equal( $('#t10-1').text() , "" + arguments[ 0 ] );
-        assert.equal( $('#t10-2').text() , "" + arguments[ 1 ] );        
+        assert.equal( $('#t10-1').text(), "" + arguments[ 0 ] );
+        assert.equal( $('#t10-2').text(), "" + arguments[ 1 ] );        
         assert.equal( errorsArray, arguments[ 2 ] );
     };
 

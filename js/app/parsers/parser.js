@@ -7,6 +7,7 @@ var context = require( '../context.js' );
 var ParserRenderer = require( './parserRenderer.js' );
 var ParserUpdater = require( './parserUpdater.js' );
 var ParserPreloader = require( './parserPreloader.js' );
+var ReactiveDictionary = require( '../scopes/reactiveDictionary.js' );
 
 module.exports = (function() {
     
@@ -27,7 +28,11 @@ module.exports = (function() {
         
         parserOptions.command = options.command || 'fullRender';
         parserOptions.root = options.root === undefined? parserOptions.root: options.root;
-        parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
+        parserOptions.dictionary = ( options.dictionary instanceof ReactiveDictionary?
+            options.dictionary._getNonReactiveDictionary(): 
+            options.dictionary )
+            || parserOptions.dictionary;
+        //parserOptions.dictionary = options.dictionary || parserOptions.dictionary;
         parserOptions.indexExpressions = options.indexExpressions === undefined? parserOptions.indexExpressions: options.indexExpressions;
     };
     
