@@ -221,13 +221,13 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
             
             zpt.run();
             
-            var t5 = 
+            var t = 
 `<div data-use-macro=\"externalMacro\" data-id=\"101\" style=\"display: none;\">
                 Macro goes here
             </div><p data-mmacro=\"copyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"101\" data-qdup=\"1\">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>`;
-            assert.equal( $('#t5').html().trim(), t5 );
+            assert.equal( $('#t' + testNumber ).html().trim(), t );
 
             var dictionaryChanges = {
                 externalMacro: 'enhancedCopyright@externalMacros-definitions.html'
@@ -240,7 +240,7 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
                 dictionaryChanges: dictionaryChanges
             });
             
-            t5 = 
+            t = 
 `<div data-use-macro=\"externalMacro\" data-id=\"101\" style=\"display: none;\">
                 Macro goes here
             </div><div data-mmacro=\"enhancedCopyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"101\" data-qdup=\"1\">
@@ -253,7 +253,7 @@ QUnit.test( "simple METALUseMacro test", function( assert ) {
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
         </div>`;
-            assert.equal( $( '#t' + testNumber ).html().trim(), t5 );
+            assert.equal( $( '#t' + testNumber ).html().trim(), t );
             
             done();
         }

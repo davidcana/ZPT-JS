@@ -74,5 +74,105 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>Simple METALUseMacro autoCommit true</h2>
+        <div id="t7">
+            <div data-use-macro="externalMacro">
+                Macro goes here
+            </div>
+        </div>
+        
+        <h2>Simple METALUseMacro autoCommit false</h2>
+        <div id="t8">
+            <div data-use-macro="externalMacro">
+                Macro goes here
+            </div>
+        </div>
+        
+        <h2>Simple TALCondition autoCommit true, last action false</h2>
+        <div id="t9">
+            <ol data-declare="number1 number;
+                              text1 string;
+                              boolean1 boolean;
+                              boolean2 boolean"
+                data-condition="or: boolean1 boolean2">
+                <li>number1 = <span id="t9-1" data-content="number1">an integer</span></li>
+                <li>text1 = <span id="t9-2" data-content="text1">a text</span></li>
+            </ol>
+        </div>
+        
+        <h2>Simple I18NLanguage and I18nDomain autoCommit true</h2>
+        <div id="t10" data-domain="i18nBundle" data-language="language">
+            <ol>
+                <li>
+                    ¡Hola mundo! = 
+                    <span id="t10-1" 
+                          data-content="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
+                </li>
+                <li>
+                    Ella ha encontrado 10 resultados = 
+                    <span id="t10-2" 
+                          data-content="tr: 'Results msg' ( GENDER 'female'; RES 10 )">Must be 'Ella ha encontrado 10 resultados'</span>
+                </li>
+                <li>
+                    1355.23 as number = 1.355,23 =
+                    <span id="t10-3"
+                          data-content="trNumber: 1355.23">Must be 1.355,23</span>
+                </li>
+                <li>
+                    1355.23 as currency in euros = 1.355,23 € =
+                    <span id="t10-4"
+                          data-content="trCurrency: 'EUR' 1355.23">Must be 1.355,23 €</span>
+                </li>
+                <li>
+                    Inline 12/20/2012 3:00:00 UTC as datetime = jueves, 21 de diciembre de 2012 =
+                    <span id="t10-5"
+                          data-content="trDate: 
+                                        ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) 
+                                        ( 
+                                        weekday 'long'; 
+                                        year 'numeric'; 
+                                        month 'long'; 
+                                        day 'numeric' )">Must be jueves, 21 de diciembre de 2012</span>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Simple I18NLanguage and I18nDomain autoCommit false</h2>
+        <div id="t11" data-domain="i18nBundle" data-language="language">
+            <ol>
+                <li>
+                    ¡Hola mundo! = 
+                    <span id="t11-1" 
+                          data-content="tr: 'Hello world!'">Must be ¡Hola mundo!</span>
+                </li>
+                <li>
+                    Ella ha encontrado 10 resultados = 
+                    <span id="t11-2" 
+                          data-content="tr: 'Results msg' ( GENDER 'female'; RES 10 )">Must be 'Ella ha encontrado 10 resultados'</span>
+                </li>
+                <li>
+                    1355.23 as number = 1.355,23 =
+                    <span id="t11-3"
+                          data-content="trNumber: 1355.23">Must be 1.355,23</span>
+                </li>
+                <li>
+                    1355.23 as currency in euros = 1.355,23 € =
+                    <span id="t11-4"
+                          data-content="trCurrency: 'EUR' 1355.23">Must be 1.355,23 €</span>
+                </li>
+                <li>
+                    Inline 12/20/2012 3:00:00 UTC as datetime = jueves, 21 de diciembre de 2012 =
+                    <span id="t11-5"
+                          data-content="trDate: 
+                                        ( js: new Date( Date.UTC( 2012, 11, 21, 3, 0, 0 ) ) ) 
+                                        ( 
+                                        weekday 'long'; 
+                                        year 'numeric'; 
+                                        month 'long'; 
+                                        day 'numeric' )">Must be jueves, 21 de diciembre de 2012</span>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>
