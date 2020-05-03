@@ -611,3 +611,349 @@ QUnit.test( "simple I18NLanguage and I18nDomain autoCommit false test", function
         'Friday, December 21, 2012' 
     );
 });
+
+QUnit.test( "2 vars in TALContent autoCommit true test", function( assert ) {
+
+    var testNumber = 12;
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            number1: 1,
+            text1: 'test'
+        }
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function( content ){
+        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'test1' );
+    
+    // Change number1
+    dictionary.number1 = 2;
+    testFunction( 'test2' );
+    
+    // Change text1
+    dictionary.text1 = 'test 2';
+    testFunction( 'test 22' );
+});
+
+QUnit.test( "2 vars in TALContent autoCommit false test", function( assert ) {
+
+    var testNumber = 12;
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            number1: 1,
+            text1: 'test'
+        },
+        false
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function( content ){
+        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'test1' );
+    
+    // Change number1
+    dictionary.number1 = 2;
+    testFunction( 'test1' );
+    
+    // Change text1
+    dictionary.text1 = 'test 2';
+    testFunction( 'test1' );
+    
+    // Commit changes
+    dictionary._commitChanges();
+    testFunction( 'test 22' );
+});
+
+QUnit.test( "var in macro autoCommit true test", function( assert ) {
+
+    var testNumber = 14;
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            internalMacro: 'macro1',
+            var1: 1
+        }
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function( content ){
+        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'This is macro1 and value of var1 is 1' );
+    
+    // Change internalMacro
+    dictionary.internalMacro = 'macro2';
+    testFunction( 'This is macro2 and value of var1 is 1' );
+    
+    // Change var1
+    dictionary.var1 = 10;
+    testFunction( 'This is macro2 and value of var1 is 10' );
+});
+
+QUnit.test( "var in macro autoCommit false test", function( assert ) {
+
+    var testNumber = 15;
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            internalMacro: 'macro3',
+            var1: 1
+        },
+        false
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function( content ){
+        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'This is macro1 and value of var1 is 1' );
+    
+    // Change internalMacro
+    dictionary.internalMacro = 'macro4';
+    testFunction( 'This is macro1 and value of var1 is 1' );
+    
+    // Change var1
+    dictionary.var1 = 10;
+    testFunction( 'This is macro1 and value of var1 is 1' );
+    
+    // Commit changes
+    dictionary._commitChanges();
+    testFunction( 'This is macro2 and value of var1 is 10' );
+});
+
+QUnit.test( "simple METALFillSlot test", function( assert ) {
+    
+    var done = assert.async();
+    var id = 't16';
+    context.setExpressionCounter( 300 );
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            items: [ 'item0', 'item1', 'item2' ],
+            slot: 'header'
+        }
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        command: 'preload',
+        root: document.getElementById( id ),
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ 'externalMacros-definitions.html' ],
+        callback: function(){
+            
+            zpt.run();
+            
+            var t = `
+<div data-use-macro=\"'dynamicListWith2Slots@externalMacros-definitions.html'\" data-id=\"301\" style=\"display: none;\">
+    <div data-fill-slot=\"slot\" data-id=\"302\">
+        My custom slot
+    </div>
+</div>
+<div data-mmacro=\"dynamicListWith2Slots\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"301\" data-qdup=\"1\">
+    <div data-id=\"303\">
+            My custom slot
+        </div>
+    <ul>
+        <li data-repeat=\"item items\" data-id=\"304\" style=\"display: none;\">
+            <span data-content=\"item\">An item</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"305\" data-related-id=\"304\" data-tauto-define=\"item-index 0;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"306\">item0</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"307\" data-related-id=\"304\" data-tauto-define=\"item-index 1;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"308\">item1</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"309\" data-related-id=\"304\" data-tauto-define=\"item-index 2;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"310\">item2</span>
+        </li>
+    </ul>
+    <div data-define-slot=\"footer\">
+        Default footer
+    </div>
+</div>
+`;
+            utils.assertHtml( assert, id, t );
+
+            // Change slot
+            dictionary.slot = 'footer';
+
+            //debugger;
+            t = `
+<div data-use-macro=\"'dynamicListWith2Slots@externalMacros-definitions.html'\" data-id=\"301\" style=\"display: none;\">
+    <div data-fill-slot=\"slot\" data-id=\"302\">
+        My custom slot
+    </div>
+</div>
+<div data-mmacro=\"dynamicListWith2Slots\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"301\" data-qdup=\"1\">
+    <div data-define-slot=\"header\">
+        Default header
+    </div>
+    <ul>
+        <li data-repeat=\"item items\" data-id=\"312\" style=\"display: none;\">
+            <span data-content=\"item\">An item</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"313\" data-related-id=\"312\" data-tauto-define=\"item-index 0;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"314\">item0</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"315\" data-related-id=\"312\" data-tauto-define=\"item-index 1;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"316\">item1</span>
+        </li>
+        <li data-qdup=\"1\" data-id=\"317\" data-related-id=\"312\" data-tauto-define=\"item-index 2;item-all items;item item-all[item-index];item-repeat context/repeat(item-index,3,0)\">
+            <span data-content=\"item\" data-id=\"318\">item2</span>
+        </li>
+    </ul>
+    <div data-id=\"311\">
+        My custom slot
+    </div>
+</div>
+`;
+            utils.assertHtml( assert, id, t );
+
+            done();
+        }
+    });
+});
+
+QUnit.test( "mixing TALContent and TALAttributes autoCommit true test", function( assert ) {
+
+    var testNumber = 17;
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            number1: 100,
+            text1: 'test 1'
+        }
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] ); 
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 
+        100, 
+        'test 1', 
+        'placeholder is test 1'
+    );
+    
+    // Update text1
+    dictionary.text1 = 'test 2';
+    testFunction( 
+        100, 
+        'test 2', 
+        'placeholder is test 2'
+    );
+    
+    // Update number1
+    dictionary.number1 = 200;
+    testFunction( 
+        200, 
+        'test 2', 
+        'placeholder is test 2'
+    );
+});
+
+QUnit.test( "mixing TALContent and TALAttributes autoCommit false test", function( assert ) {
+
+    var testNumber = 18;
+    
+    var dictionary = new zpt.ReactiveDictionary(
+        {
+            number1: 100,
+            text1: 'test 1'
+        },
+        false
+    );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] ); 
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 
+        100, 
+        'test 1', 
+        'placeholder is test 1'
+    );
+    
+    // Update text1
+    dictionary.text1 = 'test 2';
+    testFunction( 
+        100, 
+        'test 1', 
+        'placeholder is test 1'
+    );
+    
+    // Update number1
+    dictionary.number1 = 200;
+    testFunction( 
+        100, 
+        'test 1', 
+        'placeholder is test 1'
+    );
+    
+    // Commit changes
+    dictionary._commitChanges();
+    testFunction( 
+        200, 
+        'test 2', 
+        'placeholder is test 2'
+    );
+});

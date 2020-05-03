@@ -174,5 +174,84 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>2 vars in TALContent autoCommit true</h2>
+        <div id="t12">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>a string = <span id="t12-1" data-content="string:${text1}${number1}">a string</span></li>
+            </ol>
+        </div>
+        
+        <h2>2 vars in TALContent autoCommit false</h2>
+        <div id="t13">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>a string = <span id="t13-1" data-content="string:${text1}${number1}">a string</span></li>
+            </ol>
+        </div>
+        
+        <h2>Var in macro autoCommit true</h2>
+        <div id="t14">
+            <div data-use-macro="internalMacro">
+                Macro goes here
+            </div>
+            <p data-define-macro="macro1">
+                <span data-attributes="id 't14-1'">This is macro1 and value of var1 is <span data-content="var1">value of var1</span></span>
+            </p>
+            <p data-define-macro="macro2">
+                <span data-attributes="id 't14-1'">This is macro2 and value of var1 is <span data-content="var1">value of var1</span></span>
+            </p>
+        </div>
+        
+        <h2>Var in macro autoCommit false</h2>
+        <div id="t15">
+            <div data-use-macro="internalMacro">
+                Macro goes here
+            </div>
+            <p data-define-macro="macro3">
+                <span data-attributes="id 't15-1'">This is macro1 and value of var1 is <span data-content="var1">value of var1</span></span>
+            </p>
+            <p data-define-macro="macro4">
+                <span data-attributes="id 't15-1'">This is macro2 and value of var1 is <span data-content="var1">value of var1</span></span>
+            </p>
+        </div>
+        
+        <h2>Simple METALFillSlot autoCommit true</h2>
+        <div id="t16">
+            <div data-use-macro="'dynamicListWith2Slots@externalMacros-definitions.html'">
+                <div data-fill-slot="slot">
+                    My custom slot
+                </div>
+            </div>
+        </div>
+        
+        <h2>Mixing TALContent and TALAttributes autoCommit true</h2>
+        <div id="t17">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>
+                    Textarea:
+                    <textarea id="t17-1"
+                              data-attributes="maxlength number1;
+                                               placeholder text1"
+                              data-content="string:placeholder is ${text1}"></textarea>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Mixing TALContent and TALAttributes autoCommit false</h2>
+        <div id="t18">
+            <ol data-declare="number1 number;
+                              text1 string">
+                <li>
+                    Textarea:
+                    <textarea id="t18-1"
+                              data-attributes="maxlength number1;
+                                               placeholder text1"
+                              data-content="string:placeholder is ${text1}"></textarea>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

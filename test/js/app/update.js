@@ -541,8 +541,6 @@ QUnit.test( "var in macro test", function( assert ) {
 
 QUnit.test( "simple METALFillSlot test", function( assert ) {
     
-    var testNumber = 10;
-    
     var done = assert.async();
     var id = 't11';
     context.setExpressionCounter( 200 );
