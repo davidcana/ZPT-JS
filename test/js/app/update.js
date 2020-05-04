@@ -2334,7 +2334,6 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             }
         ]
     });
-
     testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
     
     // Edit 1 item
@@ -2362,7 +2361,6 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             }
         ]
     });
-    
     testFunction( 'John/Peter/Dave', 'The number 1/The number 2/The number 4' );
     
     // Delete 1 item
@@ -2386,7 +2384,8 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             }
         ]
     });
-
+    testFunction( 'John/Dave', 'The number 1/The number 4' );
+    
     // Add 1 item
     zpt.run({
         command: 'update',

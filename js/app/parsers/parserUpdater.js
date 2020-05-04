@@ -42,25 +42,11 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     var getStatistics = function(){
         return statistics;
     };
-    
-    var updateDictionaryUsingActions = function(){
-    
-        for ( var i = 0; i < dictionaryActionsInstances.length; ++i ){
-            var actionInstance = dictionaryActionsInstances[ i ];
-            
-            // Update dictionary using action
-            actionInstance.updateDictionary( parserOptions.dictionary );
-        }
-    };
-    
-    var updateDictionary = function(){
+
+    var updateDictionaryForDictionaryChanges = function(){
         
         if ( dictionaryChanges ){
             utils.extend( parserOptions.dictionary, dictionaryChanges );
-        }
-        
-        if ( dictionaryActions ){
-            updateDictionaryUsingActions();
         }
     };
     
@@ -86,9 +72,6 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
                 totalUpdates: 0,
                 removedNodeUpdates: 0
             };
-            
-            // Update dictionary
-            updateDictionary();
 
             // Do all required HTML updates
             updateHTML();
@@ -110,6 +93,9 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         for ( var i = 0; i < dictionaryActionsInstances.length; ++i ){
             var actionInstance = dictionaryActionsInstances[ i ];
             
+            // Update dictionary using action
+            actionInstance.updateDictionary( parserOptions.dictionary );
+            
             // Get the list of changes related to varName
             var list = attributeIndex.getVarsList( actionInstance.id );
             if ( ! list ){
@@ -128,6 +114,9 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     };
     
     var updateHTMLFromVarChange = function(){
+        
+        // Update dictionary
+        updateDictionaryForDictionaryChanges();
         
         // Build data
         for ( var varName in dictionaryChanges ){

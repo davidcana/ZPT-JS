@@ -957,3 +957,456 @@ QUnit.test( "mixing TALContent and TALAttributes autoCommit false test", functio
         'placeholder is test 2'
     );
 });
+
+QUnit.test( "Combined actions starting from an empty array and selecting by search TALRepeat autoCommit true test", function( assert ) {
+
+    var testNumber = 19;
+    
+    var dictionary = new zpt.ReactiveDictionary( {} );
+    dictionary._addVariable( 'objectList' + testNumber, [] );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( '', '' );
+    
+    // Add 1 object
+    dictionary._addActions([
+        {
+            id: 'objectList' + testNumber,
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                id: 'object1',
+                items: [
+                    {
+                        name: 'John',
+                        description: 'The number 1'
+                    }, 
+                    {
+                        name: 'Peter',
+                        description: 'The number 2'
+                    },
+                    {
+                        name: 'Luke',
+                        description: 'The number 3'
+                    }
+                ]
+            }
+        }
+    ]);
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    // Edit 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object1'
+                },
+                'items'
+            ],
+            action: 'update',
+            currentElement: {
+                name: 'Luke',
+                description: 'The number 3'
+            },
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ]);
+    testFunction( 'John/Peter/Dave', 'The number 1/The number 2/The number 4' );
+    
+    // Delete 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object1'
+                },
+                'items'
+            ],
+            action: 'delete',
+            currentElement: {
+                name: 'Peter',
+                description: 'The number 2'
+            }
+        }
+    ]);
+    testFunction( 'John/Dave', 'The number 1/The number 4' );
+    
+    // Add 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object1'
+                },
+                'items'
+            ],
+            action: 'create',
+            index: 1,
+            newElement: {
+                name: 'Mary',
+                description: 'The number 5'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave', 'The number 1/The number 5/The number 4' );
+    
+    // Add 1 object
+    dictionary._addActions([
+        {
+            id: 'objectList' + testNumber,
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                id: 'object2',
+                items: [
+                    {
+                        name: 'Sophia',
+                        description: 'The number 6'
+                    }, 
+                    {
+                        name: 'Jane',
+                        description: 'The number 7'
+                    },
+                    {
+                        name: 'Drew',
+                        description: 'The number 8'
+                    }
+                ]
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
+    
+    // Add 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                name: 'Alexis',
+                description: 'The number 9'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew/Alexis', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8/The number 9' );
+    
+    // Edit 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'update',
+            currentElement: {
+                name: 'Drew',
+                description: 'The number 8'
+            },
+            newElement: {
+                name: 'Lucy',
+                description: 'The number 10'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Lucy/Alexis', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 10/The number 9' );
+    
+    // Delete 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'delete',
+            currentElement: {
+                name: 'Sophia',
+                description: 'The number 6'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Jane/Lucy/Alexis', 'The number 1/The number 5/The number 4/The number 7/The number 10/The number 9' );
+    
+    // Delete 1 object
+    dictionary._addActions([
+        {
+            id: 'objectList' + testNumber,
+            action: 'delete',
+            index: 0
+        }
+    ]);
+    testFunction( 'Jane/Lucy/Alexis', 'The number 7/The number 10/The number 9' );
+});
+
+QUnit.test( "Combined actions starting from an empty array and selecting by search TALRepeat autoCommit false test", function( assert ) {
+
+    var testNumber = 20;
+    
+    var dictionary = new zpt.ReactiveDictionary( {}, false );
+    dictionary._addVariable( 'objectList' + testNumber, [] );
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( '', '' );
+    
+    // Add 1 object
+    dictionary._addActions([
+        {
+            id: 'objectList' + testNumber,
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                id: 'object1',
+                items: [
+                    {
+                        name: 'John',
+                        description: 'The number 1'
+                    }, 
+                    {
+                        name: 'Peter',
+                        description: 'The number 2'
+                    },
+                    {
+                        name: 'Luke',
+                        description: 'The number 3'
+                    }
+                ]
+            }
+        }
+    ]);
+    testFunction( '', '' );
+    
+    // Commit
+    dictionary._commitChanges();
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    // Edit 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object1'
+                },
+                'items'
+            ],
+            action: 'update',
+            currentElement: {
+                name: 'Luke',
+                description: 'The number 3'
+            },
+            newElement: {
+                name: 'Dave',
+                description: 'The number 4'
+            }
+        }
+    ]);
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+
+    // Delete 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object1'
+                },
+                'items'
+            ],
+            action: 'delete',
+            currentElement: {
+                name: 'Peter',
+                description: 'The number 2'
+            }
+        }
+    ]);
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+
+    // Add 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object1'
+                },
+                'items'
+            ],
+            action: 'create',
+            index: 1,
+            newElement: {
+                name: 'Mary',
+                description: 'The number 5'
+            }
+        }
+    ]);
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+
+    // Commit
+    dictionary._commitChanges();
+    testFunction( 'John/Mary/Dave', 'The number 1/The number 5/The number 4' );
+    
+    // Add 1 object
+    dictionary._addActions([
+        {
+            id: 'objectList' + testNumber,
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                id: 'object2',
+                items: [
+                    {
+                        name: 'Sophia',
+                        description: 'The number 6'
+                    }, 
+                    {
+                        name: 'Jane',
+                        description: 'The number 7'
+                    },
+                    {
+                        name: 'Drew',
+                        description: 'The number 8'
+                    }
+                ]
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave', 'The number 1/The number 5/The number 4' );
+    
+    // Commit
+    dictionary._commitChanges();
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
+    //////
+    
+    // Add 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'create',
+            index: '_last_',
+            newElement: {
+                name: 'Alexis',
+                description: 'The number 9'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
+    
+    // Edit 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'update',
+            currentElement: {
+                name: 'Drew',
+                description: 'The number 8'
+            },
+            newElement: {
+                name: 'Lucy',
+                description: 'The number 10'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
+
+    // Delete 1 item
+    dictionary._addActions([
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    name: 'id',
+                    value: 'object2'
+                },
+                'items'
+            ],
+            action: 'delete',
+            currentElement: {
+                name: 'Sophia',
+                description: 'The number 6'
+            }
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
+    
+    // Delete 1 object
+    dictionary._addActions([
+        {
+            id: 'objectList' + testNumber,
+            action: 'delete',
+            index: 0
+        }
+    ]);
+    testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
+    
+    // Commit
+    dictionary._commitChanges();
+    testFunction( 'Jane/Lucy/Alexis', 'The number 7/The number 10/The number 9' );
+    
+});
+

@@ -13,18 +13,15 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
         nonReactiveDictionary: _nonReactiveDictionary,
         autoCommit: true,
         dictionaryChanges: {},
+        dictionaryActions: [],
         commitChanges: function(){
             zpt.run({
                 command: 'update',
-                dictionaryChanges: self._privateScope.dictionaryChanges
+                dictionaryChanges: self._privateScope.dictionaryChanges,
+                dictionaryActions: self._privateScope.dictionaryActions
             });
             self._privateScope.dictionaryChanges = {};
-        },
-        commitActions: function( dictionaryActions ){
-            zpt.run({
-                command: 'update',
-                dictionaryActions: dictionaryActions
-            });
+            self._privateScope.dictionaryActions = [];
         }
     };
 
@@ -32,17 +29,65 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
     this._getNonReactiveDictionary = function(){
         return this._privateScope.nonReactiveDictionary;
     };
+    
     this._isAutoCommit = function(){
         return this._privateScope.autoCommit;
     };
+    
     this._setAutoCommit = function( _autoCommit ){
         this._privateScope.autoCommit = _autoCommit;
     };
+    
     this._commitChanges = function(){
         this._privateScope.commitChanges();
     };
-    this._commitActions = function(){
-        this._privateScope.commitActions();
+
+    this._addActions = function( dictionaryActions ){
+        
+        // Record this actions to commit it later
+        self._privateScope.dictionaryActions = self._privateScope.dictionaryActions.concat( dictionaryActions );
+        
+        // Commit the change only if autoCommit is on
+        if ( self._isAutoCommit() ){
+            self._privateScope.commitChanges();
+        }
+    };
+    
+    this._addVariable = function( key, value ){
+        
+        // Set the value in nonReactiveDictionary
+        self._privateScope.nonReactiveDictionary[ key ] = value;
+        
+        // Define getter and setter
+        this._defineProperty( 
+            this._privateScope.nonReactiveDictionary, 
+            key 
+        );
+    };
+
+    this._defineProperty = function( dictionary, key ){
+
+        // Define property to set getter and setter
+        Object.defineProperty(
+            self, 
+            key, 
+            {
+                enumerable: true,
+                configurable: true,
+                get: function () { 
+                    return dictionary[ key ];
+                },
+                set: function ( value ) {
+                    // Record this change to commit it later
+                    self._privateScope.dictionaryChanges[ key ] = value;
+
+                    // Commit the change only if autoCommit is on
+                    if ( self._isAutoCommit() ){
+                        self._privateScope.commitChanges();
+                    }
+                }
+            }
+        );
     };
     
     // Initialize
@@ -64,26 +109,7 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
             
             // Define getter and setter
             (function( key ) {
-                Object.defineProperty(
-                    self, 
-                    key, 
-                    {
-                        enumerable: true,
-                        configurable: true,
-                        get: function () { 
-                            return dictionary[ key ];
-                        },
-                        set: function ( value ) {
-                            // Record this change to commit it later
-                            self._privateScope.dictionaryChanges[ key ] = value;
-
-                            // Commit the change only if autoCommit is on
-                            if ( self._isAutoCommit() ){
-                                self._privateScope.commitChanges();
-                            }
-                        }
-                    }
-                );
+                self._defineProperty( dictionary, key );
             })( key );
         }
     };
