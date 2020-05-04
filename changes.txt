@@ -8,13 +8,15 @@ New in future versions
 - Implement adquisition?
 
 New in 0.41.0
-- Add options.reactive (boolean) to activate or deactivate the reactive behaviour in a full render command?
-
-New in 0.40.0
 - Add options.macro (string) to set the name of the macro to invoke in a full render command?
 
+New in 0.40.0
+- Update command improved: support of method invocation and ranges?
+- Full reactive support: support of nested object?
+
 New in 0.39.0
-- Update command improved: support of array operations added using a new configuration option (dictionaryActions). 
+- Update command improved: support of array and object operations added using a new configuration option (dictionaryActions). 
+- Partial reactive support added: only supports change of properties directly in dictionary (not includes nested objects).
 
 New in 0.38.2
 - Some errors about non declared variables fixed.
