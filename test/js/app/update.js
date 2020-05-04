@@ -2582,7 +2582,6 @@ QUnit.test( "Properties of objects updated test", function( assert ) {
             }
         ]
     });
-    
     testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3', 'id2' );
 
     // Add element to object/items
@@ -2603,8 +2602,22 @@ QUnit.test( "Properties of objects updated test", function( assert ) {
             }
         ]
     });
-    
     testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4', 'id2' );
+    
+    // Remove a property from an object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'object'
+                ],
+                action: 'deleteObject',
+                property: 'id'
+            }
+        ]
+    });
+    testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4', 'undefined' );
 });
 
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {

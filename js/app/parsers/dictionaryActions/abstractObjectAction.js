@@ -18,10 +18,18 @@ AbstractObjectAction.prototype.attributeInstanceIsRelated = function( attributeI
     return true;
 };
 
-AbstractObjectAction.prototype.getObjectValue = function( dictionary ){
-    return this.var === undefined?
-        dictionary[ this.id ]:
-        this.var;
+AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater ){
+    
+    // Must get the node
+    var node = this.resolveThisNode( indexItem, parserUpdater );
+    if ( ! node ){
+        throw 'No node found to update';
+    }
+    
+    // Update the selected node
+    parserUpdater.updateNode( node );
+    
+    return true;
 };
 
 module.exports = AbstractObjectAction;
