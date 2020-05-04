@@ -67,7 +67,13 @@ module.exports = (function() {
     };
     
     var getVarsList = function( varName ){
-        return map[ varName ];
+        
+        var items = map[ varName ];
+        
+        // We must build another list to avoid sync errors
+        var result = [];
+        result = result.concat( items );
+        return result;
     };
     
     var remove = function( varName, nodeId ){

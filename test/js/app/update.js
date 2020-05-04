@@ -2528,6 +2528,85 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     testFunction( 'Jane/Lucy/Alexis', 'The number 7/The number 10/The number 9' );
 });
 
+QUnit.test( "Properties of objects updated test", function( assert ) {
+
+    var testNumber = 40;
+    
+    var dictionary = {
+        object: {
+            id: 'id1',
+            items: [ 
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        }
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( $('#t'+ testNumber + '-1').text(), "" + arguments[ 2 ] );      
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3', 'id1' );
+    
+    // Change object/id
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'object'
+                ],
+                action: 'updateObject',
+                property: 'id',
+                newElement: 'id2'
+            }
+        ]
+    });
+    
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3', 'id2' );
+
+    // Add element to object/items
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'object',
+                    'items'
+                ],
+                action: 'create',
+                index: '_last_',
+                newElement: {
+                    name: 'Dave',
+                    description: 'The number 4'
+                }
+            }
+        ]
+    });
+    
+    testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4', 'id2' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {
