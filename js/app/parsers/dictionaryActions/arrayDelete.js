@@ -14,7 +14,7 @@ ArrayDelete.prototype = Object.create( AbstractArrayAction.prototype );
 ArrayDelete.prototype.updateDictionary = function( dictionary ){
 
     this.indexToUse = this.getIndexToUse( dictionary );
-    var arrayValue = this.getArrayValue( dictionary );
+    var arrayValue = this.getValue( dictionary );
     arrayValue.splice( this.indexToUse, 1 );
 };
 

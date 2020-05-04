@@ -18,7 +18,7 @@ ArrayCreate.prototype = Object.create( AbstractArrayAction.prototype );
 ArrayCreate.prototype.updateDictionary = function( dictionary ){
     
     this.indexToUse = this.getIndexToUse( dictionary );
-    var arrayValue = this.getArrayValue( dictionary );
+    var arrayValue = this.getValue( dictionary );
     
     if ( this.indexToUse === -1 ){
         arrayValue.push( this.newElement );

@@ -3,65 +3,21 @@
 */
 "use strict";
 
+var AbstractAction = require( './abstractAction.js' );
 var utils = require( '../../utils.js' );
 
 var AbstractArrayAction = function( object, dictionary ) {
+    AbstractAction.call( this, object, dictionary );
     
-    this.id = object.id;
-    this.var = object.var;
     this.index = object.index;
-    this.currentElement = object.currentElement;
-    if ( object.search ){
-        if ( this.id || this.var ){
-            throw 'Error in array action: you can not set a search and then an id or var: if you set a search ZPT-JS will set the id and var for you!';
-        }
-        this.initializeUsingSearch( object.search, dictionary );
-    }
 };
 
-AbstractArrayAction.prototype.initializeUsingSearch = function( search, dictionary ){
-
-    this.id = '';
-    this.var = dictionary;
-    
-    // Iterate search items and build id and var
-    for ( var i = 0; i < search.length; ++i ){
-        var item = search[ i ];
-        
-        if ( utils.isPlainObject( item ) ){
-            item = this.search( this.var, item );
-        }
-        
-        if ( Number.isInteger( item ) ){
-            this.id += '[' + item + ']';
-        } else {
-            var separator = i === 0? '': '.';
-            this.id += separator + item;
-        }
-        
-        this.var = this.var[ item ];
-    }
-};
-
-AbstractArrayAction.prototype.search = function( list, criteria ){
-
-    for ( var i = 0; i < list.length; ++i ){
-        var record = list[ i ];
-        var thisRecordValue = record[ criteria.name ];
-        if ( utils.deepEqual( thisRecordValue, criteria.value ) ){
-            return i;
-        }
-    }
-    
-    throw 'No record found matching your criteria!';
-};
-
+AbstractArrayAction.prototype = Object.create( AbstractAction.prototype );
+/*
 AbstractArrayAction.prototype.getArrayValue = function( dictionary ){
-    return this.var === undefined?
-        dictionary[ this.id ]:
-        this.var;
+    return this.getValue( dictionary );
 };
-
+*/
 AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
 
     if ( this.index === undefined && this.currentElement === undefined ){
@@ -78,7 +34,7 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     }
     
     // Must use newElement
-    var arrayValue = this.getArrayValue( dictionary );
+    var arrayValue = this.getValue( dictionary );
     
     for ( var i = 0; i < arrayValue.length; ++i ){
         var element = arrayValue[ i ];
@@ -117,21 +73,6 @@ AbstractArrayAction.prototype.resolveChildNode = function( indexItem, parserUpda
     return this.indexToUse === -1?
         null:
         node.parentNode.children[ 1 + this.indexToUse ]; // The first is always the tal:repeat
-};
-
-AbstractArrayAction.prototype.resolveThisNode = function( indexItem, parserUpdater ){
-    
-    //var attributeInstance = indexItem.attributeInstance;
-    var node = parserUpdater.findNodeById( indexItem.nodeId );
-    if ( ! node ){
-        // Removed node!
-        parserUpdater.addRemovedToStatistics();
-        return false;
-    }
-    parserUpdater.addUpdatedToStatistics();
-    
-    // Return the node
-    return node;
 };
 
 module.exports = AbstractArrayAction;

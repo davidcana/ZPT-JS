@@ -4,7 +4,6 @@
 "use strict";
 
 var AbstractArrayAction = require( './abstractArrayAction.js' );
-var utils = require( '../../utils.js' );
 
 var ArrayUpdate = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
@@ -17,7 +16,7 @@ ArrayUpdate.prototype = Object.create( AbstractArrayAction.prototype );
 ArrayUpdate.prototype.updateDictionary = function( dictionary ){
     
     this.indexToUse = this.getIndexToUse( dictionary );
-    var arrayValue = this.getArrayValue( dictionary );
+    var arrayValue = this.getValue( dictionary );
     arrayValue[ this.indexToUse ] = this.newElement;
 };
 
