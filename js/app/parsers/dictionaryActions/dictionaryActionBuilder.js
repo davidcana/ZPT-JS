@@ -14,11 +14,11 @@ module.exports = (function() {
     var build = function( object, dictionary ) {
         
         switch ( object.action ) {
-        case 'update':
+        case 'updateArray':
             return new ArrayUpdate( object, dictionary );
-        case 'delete':
+        case 'deleteArray':
             return new ArrayDelete( object, dictionary );
-        case 'create':
+        case 'createArray':
             return new ArrayCreate( object, dictionary );
         case 'updateObject':
             return new ObjectUpdate( object, dictionary );

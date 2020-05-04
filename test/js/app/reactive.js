@@ -984,7 +984,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     dictionary._addActions([
         {
             id: 'objectList' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 id: 'object1',
@@ -1018,7 +1018,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Luke',
                 description: 'The number 3'
@@ -1042,7 +1042,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'delete',
+            action: 'deleteArray',
             currentElement: {
                 name: 'Peter',
                 description: 'The number 2'
@@ -1062,7 +1062,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: 1,
             newElement: {
                 name: 'Mary',
@@ -1076,7 +1076,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     dictionary._addActions([
         {
             id: 'objectList' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 id: 'object2',
@@ -1110,7 +1110,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 name: 'Alexis',
@@ -1131,7 +1131,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Drew',
                 description: 'The number 8'
@@ -1155,7 +1155,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'delete',
+            action: 'deleteArray',
             currentElement: {
                 name: 'Sophia',
                 description: 'The number 6'
@@ -1168,7 +1168,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     dictionary._addActions([
         {
             id: 'objectList' + testNumber,
-            action: 'delete',
+            action: 'deleteArray',
             index: 0
         }
     ]);
@@ -1201,7 +1201,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     dictionary._addActions([
         {
             id: 'objectList' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 id: 'object1',
@@ -1239,7 +1239,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Luke',
                 description: 'The number 3'
@@ -1263,7 +1263,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'delete',
+            action: 'deleteArray',
             currentElement: {
                 name: 'Peter',
                 description: 'The number 2'
@@ -1283,7 +1283,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: 1,
             newElement: {
                 name: 'Mary',
@@ -1301,7 +1301,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     dictionary._addActions([
         {
             id: 'objectList' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 id: 'object2',
@@ -1340,7 +1340,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 name: 'Alexis',
@@ -1361,7 +1361,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Drew',
                 description: 'The number 8'
@@ -1385,7 +1385,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 },
                 'items'
             ],
-            action: 'delete',
+            action: 'deleteArray',
             currentElement: {
                 name: 'Sophia',
                 description: 'The number 6'
@@ -1398,7 +1398,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     dictionary._addActions([
         {
             id: 'objectList' + testNumber,
-            action: 'delete',
+            action: 'deleteArray',
             index: 0
         }
     ]);

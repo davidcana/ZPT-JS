@@ -717,7 +717,7 @@ QUnit.test( "update text element by index TALRepeat test", function( assert ) {
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'update',
+            action: 'updateArray',
             index: 1,
             newElement: 5
         }
@@ -754,7 +754,7 @@ QUnit.test( "update text element by element TALRepeat test", function( assert ) 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'update',
+            action: 'updateArray',
             currentElement: 4,
             newElement: 5
         }
@@ -791,7 +791,7 @@ QUnit.test( "delete text element by index TALRepeat test", function( assert ) {
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'delete',
+            action: 'deleteArray',
             index: 1
         }
     ];
@@ -827,7 +827,7 @@ QUnit.test( "delete text element by element TALRepeat test", function( assert ) 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'delete',
+            action: 'deleteArray',
             currentElement: 4
         }
     ];
@@ -863,7 +863,7 @@ QUnit.test( "insert text element by index = 2 TALRepeat test", function( assert 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: 2,
             newElement: 5
         }
@@ -900,7 +900,7 @@ QUnit.test( "insert text element by index = '_first_' TALRepeat test", function(
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_first_',
             newElement: 5
         }
@@ -937,7 +937,7 @@ QUnit.test( "insert text element by index = '_last_' TALRepeat test", function( 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: 5
         }
@@ -988,7 +988,7 @@ QUnit.test( "update object element by index TALRepeat test", function( assert ) 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'update',
+            action: 'updateArray',
             index: 1,
             newElement: {
                 name: 'Dave',
@@ -1042,7 +1042,7 @@ QUnit.test( "update object element by element TALRepeat test", function( assert 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Peter',
                 description: 'The number 2'
@@ -1099,7 +1099,7 @@ QUnit.test( "delete object element by index TALRepeat test", function( assert ) 
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'delete',
+            action: 'deleteArray',
             index: 1
         }
     ];
@@ -1149,7 +1149,7 @@ QUnit.test( "delete object element by object TALRepeat test", function( assert )
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'delete',
+            action: 'deleteArray',
             currentElement: {
                 name: 'Peter',
                 description: 'The number 2'
@@ -1202,7 +1202,7 @@ QUnit.test( "insert object element by index = 2 TALRepeat test", function( asser
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: 2,
             newElement: {
                 name: 'Dave',
@@ -1256,7 +1256,7 @@ QUnit.test( "insert object element by index = '_first_' TALRepeat test", functio
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_first_',
             newElement: {
                 name: 'Dave',
@@ -1310,7 +1310,7 @@ QUnit.test( "insert object element by index = '_last_' TALRepeat test", function
     var dictionaryActions = [
         {
             id: 'items' + testNumber,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 name: 'Dave',
@@ -1387,7 +1387,7 @@ QUnit.test( "update object nested element by index TALRepeat test", function( as
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
-            action: 'update',
+            action: 'updateArray',
             index: 0,
             newElement: {
                 name: 'Dave',
@@ -1470,7 +1470,7 @@ QUnit.test( "update object nested element by index and selecting by search TALRe
                 },
                 'items'
             ],
-            action: 'update',
+            action: 'updateArray',
             index: 0,
             newElement: {
                 name: 'Dave',
@@ -1547,7 +1547,7 @@ QUnit.test( "update object nested element by element TALRepeat test", function( 
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Chris',
                 description: 'The number 5'
@@ -1633,7 +1633,7 @@ QUnit.test( "update object nested element by element and selecting by search TAL
                 },
                 'items'
             ],
-            action: 'update',
+            action: 'updateArray',
             currentElement: {
                 name: 'Chris',
                 description: 'The number 5'
@@ -1713,7 +1713,7 @@ QUnit.test( "delete object nested element by element TALRepeat test", function( 
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
-            action: 'delete',
+            action: 'deleteArray',
             index: 1
         }
     ];
@@ -1792,7 +1792,7 @@ QUnit.test( "delete object nested element by element and selecting by search TAL
                 },
                 'items'
             ],
-            action: 'delete',
+            action: 'deleteArray',
             index: 1
         }
     ];
@@ -1865,7 +1865,7 @@ QUnit.test( "Insert object nested element by index = 2 TALRepeat test", function
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
-            action: 'create',
+            action: 'createArray',
             index: 2,
             newElement: {
                 name: 'Dave',
@@ -1948,7 +1948,7 @@ QUnit.test( "Insert object nested element by index = 2 and selecting by search T
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: 2,
             newElement: {
                 name: 'Dave',
@@ -2025,7 +2025,7 @@ QUnit.test( "Insert object nested element by index = '_first_' TALRepeat test", 
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
-            action: 'create',
+            action: 'createArray',
             index: '_first_',
             newElement: {
                 name: 'Dave',
@@ -2108,7 +2108,7 @@ QUnit.test( "Insert object nested element by index = '_first_' and selecting by 
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: '_first_',
             newElement: {
                 name: 'Dave',
@@ -2185,7 +2185,7 @@ QUnit.test( "Insert object nested element by index = '_last_' TALRepeat test", f
         {
             id: 'objectList' + testNumber + '[1].items',
             var: dictionary["objectList" + testNumber][1].items,
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 name: 'Dave',
@@ -2268,7 +2268,7 @@ QUnit.test( "Insert object nested element by index = '_last_' and selecting by s
                 },
                 'items'
             ],
-            action: 'create',
+            action: 'createArray',
             index: '_last_',
             newElement: {
                 name: 'Dave',
@@ -2312,7 +2312,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
         dictionaryActions: [
             {
                 id: 'objectList' + testNumber,
-                action: 'create',
+                action: 'createArray',
                 index: '_last_',
                 newElement: {
                     id: 'object1',
@@ -2349,7 +2349,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                     },
                     'items'
                 ],
-                action: 'update',
+                action: 'updateArray',
                 currentElement: {
                     name: 'Luke',
                     description: 'The number 3'
@@ -2376,7 +2376,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                     },
                     'items'
                 ],
-                action: 'delete',
+                action: 'deleteArray',
                 currentElement: {
                     name: 'Peter',
                     description: 'The number 2'
@@ -2399,7 +2399,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                     },
                     'items'
                 ],
-                action: 'create',
+                action: 'createArray',
                 index: 1,
                 newElement: {
                     name: 'Mary',
@@ -2416,7 +2416,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
         dictionaryActions: [
             {
                 id: 'objectList' + testNumber,
-                action: 'create',
+                action: 'createArray',
                 index: '_last_',
                 newElement: {
                     id: 'object2',
@@ -2453,7 +2453,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                     },
                     'items'
                 ],
-                action: 'create',
+                action: 'createArray',
                 index: '_last_',
                 newElement: {
                     name: 'Alexis',
@@ -2477,7 +2477,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                     },
                     'items'
                 ],
-                action: 'update',
+                action: 'updateArray',
                 currentElement: {
                     name: 'Drew',
                     description: 'The number 8'
@@ -2504,7 +2504,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                     },
                     'items'
                 ],
-                action: 'delete',
+                action: 'deleteArray',
                 currentElement: {
                     name: 'Sophia',
                     description: 'The number 6'
@@ -2520,7 +2520,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
         dictionaryActions: [
             {
                 id: 'objectList' + testNumber,
-                action: 'delete',
+                action: 'deleteArray',
                 index: 0
             }
         ]
@@ -2593,7 +2593,7 @@ QUnit.test( "Properties of objects updated test", function( assert ) {
                     'object',
                     'items'
                 ],
-                action: 'create',
+                action: 'createArray',
                 index: '_last_',
                 newElement: {
                     name: 'Dave',
