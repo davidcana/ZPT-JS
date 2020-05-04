@@ -14,7 +14,7 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
         autoCommit: true,
         dictionaryChanges: {},
         dictionaryActions: [],
-        commitChanges: function(){
+        commit: function(){
             zpt.run({
                 command: 'update',
                 dictionaryChanges: self._privateScope.dictionaryChanges,
@@ -38,8 +38,8 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
         this._privateScope.autoCommit = _autoCommit;
     };
     
-    this._commitChanges = function(){
-        this._privateScope.commitChanges();
+    this._commit = function(){
+        this._privateScope.commit();
     };
 
     this._addActions = function( dictionaryActions ){
@@ -49,7 +49,7 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
         
         // Commit the change only if autoCommit is on
         if ( self._isAutoCommit() ){
-            self._privateScope.commitChanges();
+            self._privateScope.commit();
         }
     };
     
@@ -83,7 +83,7 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
 
                     // Commit the change only if autoCommit is on
                     if ( self._isAutoCommit() ){
-                        self._privateScope.commitChanges();
+                        self._privateScope.commit();
                     }
                 }
             }

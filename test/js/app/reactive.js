@@ -86,7 +86,7 @@ QUnit.test( "Simple TALContent autoCommit false test", function( assert ) {
     testFunction( 1, 'test 1' );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 2, 'test 2' );
 });
 
@@ -159,7 +159,7 @@ QUnit.test( "simple TALAttributes autoCommit false test", function( assert ) {
     testFunction( 100, 'test 1' );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 200, 'test 2' );
 });
 
@@ -221,7 +221,7 @@ QUnit.test( "simple TALRepeat autoCommit false test", function( assert ) {
     testFunction( '1/4/9' );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( '2/6/8' );
 });
 
@@ -320,7 +320,7 @@ QUnit.test( "simple METALUseMacro autoCommit false test", function( assert ) {
             assert.equal( $('#t' + testNumber ).html().trim(), t );
             
             // Commit changes
-            dictionary._commitChanges();
+            dictionary._commit();
             t = 
 `<div data-use-macro=\"externalMacro\" data-id=\"201\" style=\"display: none;\">
                 Macro goes here
@@ -389,7 +389,7 @@ QUnit.test( "simple TALCondition autoCommit true, last action false test", funct
     dictionary.boolean2 = true;
 
     // Commit changes. fourth invokation
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 2, true, 'test 2', true );
 });
 
@@ -602,7 +602,7 @@ QUnit.test( "simple I18NLanguage and I18nDomain autoCommit false test", function
     );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 
         'Hello world v2!', 
         'She found 10 results v2', 
@@ -681,7 +681,7 @@ QUnit.test( "2 vars in TALContent autoCommit false test", function( assert ) {
     testFunction( 'test1' );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 'test 22' );
 });
 
@@ -754,7 +754,7 @@ QUnit.test( "var in macro autoCommit false test", function( assert ) {
     testFunction( 'This is macro1 and value of var1 is 1' );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 'This is macro2 and value of var1 is 10' );
 });
 
@@ -950,7 +950,7 @@ QUnit.test( "mixing TALContent and TALAttributes autoCommit false test", functio
     );
     
     // Commit changes
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 
         200, 
         'test 2', 
@@ -1225,7 +1225,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     testFunction( '', '' );
     
     // Commit
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
     
     // Edit 1 item
@@ -1294,7 +1294,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
 
     // Commit
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 'John/Mary/Dave', 'The number 1/The number 5/The number 4' );
     
     // Add 1 object
@@ -1325,7 +1325,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     testFunction( 'John/Mary/Dave', 'The number 1/The number 5/The number 4' );
     
     // Commit
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
     //////
     
@@ -1405,7 +1405,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
     testFunction( 'John/Mary/Dave/Sophia/Jane/Drew', 'The number 1/The number 5/The number 4/The number 6/The number 7/The number 8' );
     
     // Commit
-    dictionary._commitChanges();
+    dictionary._commit();
     testFunction( 'Jane/Lucy/Alexis', 'The number 7/The number 10/The number 9' );
     
 });
