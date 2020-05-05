@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Reactive dictionaries</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS reference - Reactive dictionaries</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+var name = new zpt.ReactiveDictionary( object, [ autoCommit ] );
+
+dictionaryActions = updateArray || deleteArray || createArray || updateObject || deleteObject
+updateArray = {
+    id: identifier,
+    search: searchObject,
+    action: 'updateArray',
+    index: number,
+    currentElement: number || String || object
+    newElement: number || String || object
+}
+deleteArray = {
+    id: identifier,
+    search: searchObject,
+    action: 'deleteArray',
+    index: number,
+    currentElement: number || String || object
+}
+createArray = {
+    id: identifier,
+    search: searchObject,
+    action: 'createArray',
+    index: number,
+    newElement: number || String || object
+}
+updateObject = {
+    id: identifier,
+    search: searchObject,
+    action: 'updateObject',
+    property: identifier,
+    newElement: number || String || object
+}
+deleteObject = {
+    id: identifier,
+    search: searchObject,
+    action: 'deleteObject',
+    property: identifier
+}
+searchObject = [ searchObjectItem+ ]
+searchObjectItem = String || searchObjectItemCriteria
+searchObjectItemCriteria = {
+    name: identifier,
+    value: number || String || object
+}
+                </pre>
+                
+                <h2 data-attributes="id 'description'">Description</h2>
+                <p>
+                    Defines a dictionary with reactive capabilities: it can detect some type of modifications done to it and invoke a update command. The parameters are:
+                </p>
+                <ul>
+                    <li><em>object</em> (object). An object with the values to show in the template.</li>
+                    <li><em>autoCommit</em> (boolean, default is <code>true</code>). Defines if ZPT will run an update command automatically after each change. If it is <code>false</code> no action will be done until a commit command is executed.</li>
+                </ul>
+                
+                <p>
+                    When a ReactiveDictionary is instanced ZPT-JS walks through all of the properties of the object and creates getters and setters using <code>Object.defineProperty</code> inside the ReactiveDictionary: the original object is not modified.
+                </p>
+
+                <p>
+                    The avaliable methods are:
+                </p>
+                <ul>
+                    <li><em>_isAutoCommit()</em>. Returns a boolean value, <code>true</code> is auto commit mode is on, <code>false</code> otherwise.</li>
+                    <li><em>_setAutoCommit( autoCommit )</em>. Updates the auto commit mode.</li>
+                    <li><em>_commit()</em>. Commits changes. It does nothing if the auto commit mode is on (there is noaction to commit).</li>
+                    <li><em>_addVariable( key, value )</em>. Useful to add a new entry to the dictionary. It is needed for adding the getter and the setter to the dictionary.</li>
+                    <li><em>_addActions( dictionaryActions )</em>. Add some special actions to the dictionary. They include add, edit and remove elements in an array or edit and remove element in an object.</li>
+                </ul>
+                
+                <h2 data-attributes="id 'examples'">Examples</h2>
+                <p>
+                    An example of use:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary({
+    message: 'Hello, world!'
+});
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    If we change some data in the dictionary this way:
+                </p>
+                <pre class="brush: js">
+dictionary.message = "Bye, world!";
+                </pre>
+                
+                <p>
+                    We don't need to do anything else, the HTML code will be updated.
+                </p>
+                
+                <p>
+                    More examples. If we want to do some changes but only one update of HTML we must set the auto commit to off:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary(
+    {
+        message1: 'Hello, world1!',
+        message2: 'Hello, world2!',
+        message3: 'Hello, world3!'
+    }, 
+    false
+);
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    Now we modify some variables, but ZPT will not update HTML until commit is done:
+                </p>
+                 <pre class="brush: js">
+dictionary.message1 = 'Bye, world1!';
+dictionary.message2 = 'Bye, world2!';
+dictionary.message3 = 'Bye, world3!';
+
+dictionary._commit();
+                </pre>
+                
+                <p>
+                    We can activate or deactivate auto commit mode whenever we want:
+                </p>
+                    <pre class="brush: js">
+dictionary._setAutoCommit( true );
+
+dictionary.message1 = 'Hello again, world!';
+                </pre>
+                <p>
+                    ZPT will update HTML after the change of the value of <code>message1</code>. Be careful, pending updates will also be done!
+                </p>
+            </article>
+        </div>
+    </body>
+</html>
