@@ -28,6 +28,10 @@ AbstractArrayAction.getIndexNumericValue = function( index ){
     return index;
 };
 
+AbstractArrayAction.prototype.getIndexNumericValue = function(){
+    return AbstractArrayAction.getIndexNumericValue( this.index );
+};
+
 AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
 
     if ( this.index === undefined && this.currentElement === undefined ){
@@ -35,7 +39,7 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     }
     
     // Check if it uses the index
-    var indexNumericValue = AbstractArrayAction.getIndexNumericValue( this.index );
+    var indexNumericValue = this.getIndexNumericValue();
     if ( indexNumericValue !== undefined ){
         return indexNumericValue;
     }

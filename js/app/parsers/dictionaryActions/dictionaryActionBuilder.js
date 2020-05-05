@@ -21,7 +21,7 @@ module.exports = (function() {
                 ArrayDelete.buildMultiple( object, dictionary ):
                 new ArrayDelete( object, dictionary );
         case 'createArray':
-            return Array.isArray( object.index ) || Array.isArray( object.currentElement )? 
+            return Array.isArray( object.newElement )? 
                 ArrayCreate.buildMultiple( object, dictionary ):
                 new ArrayCreate( object, dictionary );
         case 'updateObject':

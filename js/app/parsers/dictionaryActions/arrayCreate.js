@@ -65,4 +65,39 @@ ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater ){
     parserUpdater.updateNode( tmpNode );
 };
 
+ArrayCreate.buildMultiple = function( object, dictionary ){
+
+    var actions = [];
+    
+    // Copy newElements to a new array
+    var newElements = utils.copyArray( object.newElement );
+    
+    // Configure the object, create the first instance and add it to the list
+    object.newElement = newElements[ 0 ];
+    var firstActionInstance = new ArrayCreate( object, dictionary );
+    actions.push( firstActionInstance );
+    
+    // Get the firstIndex and if the new elments must be the last
+    var firstIndex = firstActionInstance.getIndexNumericValue();
+    var isLast = -1 === firstIndex;
+        
+    // Build actions list
+    for ( var i = 1; i < newElements.length; ++i ){
+        var newElement = newElements[ i ];
+        
+        // Clone the object and configure the newElement and the index
+        var newObject = utils.deepExtend( object );
+        newObject.newElement = newElement;
+        newObject.index = isLast?
+            -1:
+            firstIndex + i;
+        
+        // Instance the action instance and add it to the list
+        var newActionInstance = new ArrayCreate( newObject, dictionary );
+        actions.push( newActionInstance );
+    }
+    
+    return actions;
+};
+
 module.exports = ArrayCreate;
