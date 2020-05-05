@@ -22,8 +22,8 @@
     "url": "https://github.com/davidcana/ZPT-JS"
   },
   "dependencies": {
-    "jsdom": "^15.1.1",
-    "loadjs": "^3.6.1",
+    "jsdom": "^16.2.2",
+    "loadjs": "^4.2.0",
     "messageformat": "^2.3.0"
   },
   "devDependencies": {
