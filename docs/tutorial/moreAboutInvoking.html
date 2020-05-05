@@ -18,8 +18,9 @@
                 <ul>
                     <li><a href="#intro">Intro</a>.</li>
                     <li><a href="#fullRender">The fullRender command</a>.</li>
-                    <li><a href="#partialRender">Thr partialRender command</a>.</li>
                     <li><a href="#update">The update command</a>.</li>
+                    <li><a href="#reactive">Invoking update command updating a reactive dictionary</a>.</li>
+                    <li><a href="#partialRender">The partialRender command</a>.</li>
                 </ul>
             </div>
             <article data-fill-slot="'article'">
@@ -42,7 +43,7 @@
 var zpt = require( 'zpt' );
 
 var dictionary = {
-    ...
+    message: "Hello, world!"
 };
 
 // Parse template
@@ -61,7 +62,7 @@ zpt.run({
 var zpt = require( 'zpt' );
 
 var dictionary = {
-    ...
+    message: "Hello, world!"
 };
 
 // Parse template
@@ -71,9 +72,72 @@ zpt.run({
 });
                 </pre>
                 
+                <h2 data-attributes="id 'update'">The update command</h2>
+                <p>
+                    With this command ZPT-JS updates the DOM inside the root element depending on some changes in the dictionary. To do this ZPT-JS builds an index with data about the expressions and attributes to know the parts of the DOM to update. Let's see an example:
+                </p>
+                
+                <pre class="brush: js; highlight: [19]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = {
+    message: "Hello, world!"
+};
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: update the DOM
+zpt.run({
+    command: 'update',
+    dictionaryChanges: {
+        message: "Bye, world!"
+    }
+});
+                </pre>
+                <p>
+                    ZPT-JS also updates the dictionary with the values in <em>dictionaryChanges</em>. It is shallow copy, not a deep copy.
+                </p>
+                
+                <h2 data-attributes="id 'reactive'">Invoking update command updating a reactive dictionary</h2>
+                <p>
+                    ZPT-JS provides a special type of object, the <strong>reactive dictionary</strong>. Defines a dictionary with reactive capabilities: it can detect some type of modifications done to it and invoke an update command immediately.
+                </p>
+                
+                <pre class="brush: js; highlight: [5,6,7]">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary({
+    message: "Hello, world!"
+});
+
+// First execution: render the body
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+
+[ your code here ]
+
+// Second execution: update the dictionary and ZPT will update HTML
+dictionary.message = "Bye, world!";
+                </pre>
+                <p>
+                    For more details about reactive dictionaries go to its <a href="../reference/reactiveDictionaries.html">reference page</a>.
+                </p>
+                
                 <h2 data-attributes="id 'partialRender'">The partialRender command</h2>
                 <p>
-                    Sometimes we need to render some DOM elements several times, but not the whole root element. This can be done this way using the <em>partialRender</em> command and defining a <em>target</em> element instead of a <em>root</em>:
+                    Another alternative command to render again some DOM elements several times is the <em>partialRender</em> command and defining a <em>target</em> element instead of a <em>root</em>:
                 </p>
                 <pre class="brush: js; highlight: [19]">
 "use strict";
@@ -81,7 +145,7 @@ zpt.run({
 var zpt = require( 'zpt' );
 
 var dictionary = {
-    ...
+    message: "Hello, world!"
 };
 
 // First execution: render the body
@@ -102,38 +166,8 @@ zpt.run({
 });
                 </pre>
                 
-                <h2 data-attributes="id 'update'">The update command</h2>
                 <p>
-                    ZPT-JS provides an alternative to <em>partialRender</em> command: the <em>update</em> command. With this command ZPT-JS updates the DOM inside the root element depending on some changes in the dictionary. To do this ZPT-JS builds an index with data about the expressions and attributes to know the parts of the DOM to update. Let's see an example:
-                </p>
-                
-                <pre class="brush: js; highlight: [19]">
-"use strict";
-
-var zpt = require( 'zpt' );
-
-var dictionary = {
-    ...
-};
-
-// First execution: render the body
-zpt.run({
-    root: document.body,
-    dictionary: dictionary
-});
-
-[ your code here ]
-
-// Second execution: update the DOM
-zpt.run({
-    command: 'update',
-    dictionaryChanges: {
-        ...
-    }
-});
-                </pre>
-                <p>
-                    ZPT-JS also updates the dictionary with the values in <em>dictionaryChanges</em>. It is shallow copy, not a deep copy.
+                    You can use this command if you prefer to use a custom object and you don't want to use the <code>ReactiveDictionary</code>.
                 </p>
             </article>
         </div>

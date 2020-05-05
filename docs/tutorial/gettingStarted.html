@@ -22,6 +22,7 @@
                     <li><a href="#dictionary">Build the dictionary</a>.</li>
                     <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
                     <li><a href="#result">The result</a>.</li>
+                    <li><a href="#updates">Updates</a>.</li>
                     <li><a href="#node">Using ZPT-JS and node.js</a>.</li>
                 </ul>
             </div>
@@ -78,12 +79,12 @@
                 </pre>
                 <h2 data-attributes="id 'dictionary'">Build the dictionary</h2>
                 <p>
-                    Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template:
+                    Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template. You can use any javascript object, but ZPT provides an specific type that supports a reactive behaviour:
                 </p>
                 <pre class="brush: js">
-var dictionary = { 
+var dictionary = new zpt.ReactiveDictionary({
     message: "Hello, world!"
-};
+});
                 </pre>
 
                 <h2 data-attributes="id 'invoke'">Invoke ZPT-JS</h2>
@@ -109,9 +110,9 @@ zpt.run({
 
 var zpt = require( 'zpt' );
 
-var dictionary = { 
+var dictionary = new zpt.ReactiveDictionary({
     message: "Hello, world!"
-};
+});
 
 zpt.run({
     root: document.body,
@@ -130,6 +131,25 @@ zpt.run({
 &lt;body&gt;
     &lt;p data-content="message"&gt;
         Hello, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
+                
+                <h2 data-attributes="id 'updating'">Updates</h2>
+                <p>
+                    If we change some data in the dictionary this way:
+                </p>
+                <pre class="brush: js">
+dictionary.message = "Bye, world!";
+                </pre>
+                
+                <p>
+                    We don't need to do anything else, the <code>body</code> element now is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-content="message"&gt;
+        Bye, world!
     &lt;/p&gt;
 &lt;/body&gt;
                 </pre>

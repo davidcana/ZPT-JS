@@ -28,12 +28,13 @@
                 <strong>sample.html</strong>
                 <pre class="brush: html">
 &lt;p data-condition="user/isLogged()"&gt;
+    Logged users stuff
     ...
 &lt;/p&gt;
                 </pre>
                 
                 <p>
-                    ZPT-JS evaluates the <em>user/isLogged()</em> expression: only if it evaluated to <code>true</code> the <em>p</em> tag will be shown. Otherwise it will be hidden.
+                    ZPT-JS evaluates the <em>user/isLogged()</em> expression: only if it evaluated to <code>true</code> the <em>p</em> tag will be parsed and shown. Otherwise it will not be parsed but hidden.
                 </p>
                 
                 <p>

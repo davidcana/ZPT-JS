@@ -18,6 +18,7 @@
                 <ul>
                     <li><a href="#omit">Omiting</a>.</li>
                     <li><a href="#replace">Replacing</a>.</li>
+                    <li><a href="#drawbacks">Drawbacks to omitting and replacing</a>.</li>
                 </ul>
             </div>
             <article data-fill-slot="'article'">
@@ -111,6 +112,91 @@
   &lt;/body&gt;
 &lt;/html&gt;
                 </pre>
+                
+                <h2 data-attributes="id 'drawbacks'">Drawbacks to omitting and replacing</h2>
+                <p>
+                    These attributes are useful, but the impossibility of updating is an important drawback.
+                </p>
+                
+                <p>
+                    Let's see and example of a template:
+                </p>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="title"&gt;the title&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="title"&gt;hello world!&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    If we want to update the title:
+                </p>
+                <pre class="brush: js">
+dictionary.message = "bye, world!";
+                </pre>
+                
+                <p>
+                    The updated resulting HTML will be:
+                </p>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-content="title"&gt;bye world!&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    Instead of using <code>data-content</code> let's use <code>data-replace</code>.
+                </p>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is &lt;span data-replace="title"&gt;the title&lt;/span&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    The resulting HTML will be:
+                </p>
+                <pre class="brush: html; highlight: [4]">
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      This is hello world!
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                </pre>
+                
+                <p>
+                    But the highlighted line has not got any ZPT custom attribute yet! So this HTML code can not be udated anymore. The same problem occurs with <code>data-omit-tag</code>.
+                </p>
+                
+                <p>
+                    In short, use these tags when no updating is needed. If you need updating avoid them, use <code>data-content</code> and other custom attributes.
+                </p>
             </article>
         </div>
     </body>
