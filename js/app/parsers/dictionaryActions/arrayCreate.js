@@ -6,6 +6,7 @@
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var context = require( '../../context.js' );
 var ParserNodeRenderer = require( '../../parsers/parserNodeRenderer.js' );
+var utils = require( '../../utils.js' );
 
 var ArrayCreate = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );

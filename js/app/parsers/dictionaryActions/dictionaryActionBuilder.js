@@ -17,9 +17,13 @@ module.exports = (function() {
         case 'updateArray':
             return new ArrayUpdate( object, dictionary );
         case 'deleteArray':
-            return new ArrayDelete( object, dictionary );
+            return Array.isArray( object.index ) || Array.isArray( object.currentElement )? 
+                ArrayDelete.buildMultiple( object, dictionary ):
+                new ArrayDelete( object, dictionary );
         case 'createArray':
-            return new ArrayCreate( object, dictionary );
+            return Array.isArray( object.index ) || Array.isArray( object.currentElement )? 
+                ArrayCreate.buildMultiple( object, dictionary ):
+                new ArrayCreate( object, dictionary );
         case 'updateObject':
             return new ObjectUpdate( object, dictionary );
         case 'deleteObject':

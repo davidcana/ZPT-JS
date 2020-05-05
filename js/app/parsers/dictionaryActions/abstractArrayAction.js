@@ -13,27 +13,34 @@ var AbstractArrayAction = function( object, dictionary ) {
 };
 
 AbstractArrayAction.prototype = Object.create( AbstractAction.prototype );
-/*
-AbstractArrayAction.prototype.getArrayValue = function( dictionary ){
-    return this.getValue( dictionary );
+
+AbstractArrayAction.getIndexNumericValue = function( index ){
+    
+    if ( index === undefined ){
+        return undefined;   
+    }
+    
+    if ( index === '_first_' ){
+        return 0;
+    } else if ( index === '_last_' ){
+        return -1; // This means it is the last
+    }
+    return index;
 };
-*/
+
 AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
 
     if ( this.index === undefined && this.currentElement === undefined ){
         throw 'index or currentElement must be defined in ' + this.id + ' array action!';
     }
     
-    if ( this.index !== undefined ){
-        if ( this.index === '_first_' ){
-            return 0;
-        } else if ( this.index === '_last_' ){
-            return -1; // This means it is the last
-        }
-        return this.index;
+    // Check if it uses the index
+    var indexNumericValue = AbstractArrayAction.getIndexNumericValue( this.index );
+    if ( indexNumericValue !== undefined ){
+        return indexNumericValue;
     }
-    
-    // Must use newElement
+
+    // Must use currentElement
     var arrayValue = this.getValue( dictionary );
     
     for ( var i = 0; i < arrayValue.length; ++i ){

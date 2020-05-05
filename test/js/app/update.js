@@ -2620,6 +2620,161 @@ QUnit.test( "Properties of objects updated test", function( assert ) {
     testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4', 'undefined' );
 });
 
+QUnit.test( "Multiple delete object nested element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 41;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            id: 'objectList' + testNumber + '[1].items',
+            var: dictionary["objectList" + testNumber][1].items,
+            action: 'deleteArray',
+            index: [ 1, 2 ]
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Michael', 'The number 1/The number 2/The number 3/The number 4' );
+});
+
+QUnit.test( "Multiple delete object nested element by element TALRepeat test", function( assert ) {
+
+    var testNumber = 41;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            id: 'objectList' + testNumber + '[1].items',
+            var: dictionary["objectList" + testNumber][1].items,
+            action: 'deleteArray',
+            currentElement: [ 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Michael', 'The number 1/The number 2/The number 3/The number 4' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

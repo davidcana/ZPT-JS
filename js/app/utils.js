@@ -188,6 +188,17 @@ module.exports = (function() {
             (x === y);
     };
     
+    var copyArray = function( arrayToCopy ){
+        
+        var result = [];
+        
+        for ( var i = 0; i < arrayToCopy.length; ++i ){
+            result.push( arrayToCopy[ i ] );
+        }
+        
+        return result;
+    };
+    
     return {
         generateId: generateId,
         //isArray: isArray,
@@ -197,7 +208,8 @@ module.exports = (function() {
         extend: extend,
         getJSON: getJSON,
         ajax: ajax,
-        deepEqual: deepEqual
+        deepEqual: deepEqual,
+        copyArray: copyArray
         //getNodeId: getNodeId
     };
 })();
