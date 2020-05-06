@@ -5,26 +5,35 @@
 
 var BooleanLiteral = require( '../../expressions/path/literals/booleanLiteral.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+var context = require( '../../context.js' );
 
 var TALOmitTag = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
     
-    var process = function( scope, node ){
+    var process = function( scope, node, parserNodeRenderer ){
         
         var result = expression.evaluate( scope );
-        
-        if ( result ) {
-            // Move children from current node to its parent and then remove it
-            var parentNode = node.parentNode;
-            while ( node.firstChild ) {
-                parentNode.appendChild( node.firstChild );
-            }
-            parentNode.removeChild( node );
+        if ( ! result ){
+            return false;
         }
+        
+        // Process the contents
+        parserNodeRenderer.defaultContent( node );
+        
+        // Move children from current node to its parent and then remove it
+        var tags = context.getTags();
+        var parentNode = node.parentNode;
+        while ( node.firstChild ) {
+            if ( node.firstChild.nodeType === 1 ){
+                node.firstChild.setAttribute( tags.qdup, 1 );
+            }
+            parentNode.appendChild( node.firstChild );
+        }
+        parentNode.removeChild( node );
 
-        return result;
+        return true;
     };
     
     var dependsOn = function( scope ){

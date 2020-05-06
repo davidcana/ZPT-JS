@@ -463,7 +463,7 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
             indexExpressions,
             scope
         );
-        return talOmitTag.process( scope, node );
+        return talOmitTag.process( scope, node, self );
     };
     
     var processContent = function( node, string ) {
@@ -499,7 +499,8 @@ var ParserNodeRenderer = function( _target, _scope, _indexExpressions ) {
     };
     
     var self = {
-        run: run
+        run: run,
+        defaultContent: defaultContent
     };
     
     return self;
