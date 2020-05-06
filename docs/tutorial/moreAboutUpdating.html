@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>More about updating</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - More about updating</h1>
+                <ul>
+                    <li><a href="#intro">Intro</a>.</li>
+                    <li><a href="#creatingArrays">Adding array items</a>.</li>
+                    <li><a href="#updatingArrays">Updating array items</a>.</li>
+                    <li><a href="#deletingArrays">Deleting array items</a>.</li>
+                    <li><a href="#search">Using searches to define complex expressions</a>.</li>
+                    <li><a href="#updatingObjects">Updating object properties</a>.</li>
+                    <li><a href="#deletingObjects">Deleting object properties</a>.</li>
+                    <li><a href="#reactiveDictionaries">Using reactive dictionaries</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'intro'">Intro</h2>
+                <p>
+                    We have already seen how to update a template using the <em>update</em> command. And we have also seen <em>reactive dictionaries</em> in action. But in some cases this is not enough.
+                </p>
+                
+                <p>
+                    Take a look at this template:
+                </p>
+                <pre class="brush: html">
+&lt;ol&gt;
+    &lt;li data-repeat="item items"&gt;
+        &lt;span data-content="item/name"&gt;an item name&lt;/span&gt;:
+        &lt;span data-content="item/description"&gt;an item description&lt;/span&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+                </pre>
+                
+                <p>
+                    The javascript code to invoke ZPT-JS:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary({
+    items: [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        }
+    ];
+});
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    Now we want to update the list of items. We can set the <em>items</em> in the dictionary this way:
+                </p>
+                <pre class="brush: js">
+dictionary.items = [ 
+        {
+            name: 'John',
+            description: 'The number 1'
+        }, 
+        {
+            name: 'Peter',
+            description: 'The number 2'
+        },
+        {
+            name: 'Luke',
+            description: 'The number 3'
+        },
+        {
+            name: 'Mary',
+            description: 'The number 4'
+        }
+    ];
+);
+                </pre>
+                
+                <p>
+                    That code makes ZPT-JS to update the <em>data-repeat</em> node. It removes the current content and rebuilds it all. Perhaps this is not important for you, but it can be.
+                </p>
+                
+                <p>
+                    Anyway this way is not very natural, it would be great if ZPT-JS would provide a way to update the <em>items</em> array and then rebuilds only the needed HTML.
+                </p>
+                
+                <h2 data-attributes="id 'creatingArrays'">Adding array items</h2>
+                <p>
+                    Take a look at this:
+                </p>
+                <pre class="brush: js">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            id: 'items',
+            action: 'createArray',
+            index: '_last_',
+            newElement: {
+                name: 'Mary',
+                description: 'The number 4'
+            }
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    Using <em>dictionaryActions</em> makes it easy to update the dictionary and the template. Some remarks about this:
+                </p>
+                <ul>
+                    <li>
+                        The <em>id</em> refers to the variable to modify.
+                    </li>
+                    <li>
+                        The <em>action</em> defines the action to run. Available options are <em>createArray</em>, <em>updateArray</em>, <em>deleteArray</em>, <em>updateObject</em> and <em>deleteObject</em>.
+                    </li>
+                    <li>
+                        The <em>index</em> indicates the place in the list to add the new element. Available options are <em>'_first_'</em>, <em>'_last_'</em> and a numeric value.
+                    </li>
+                    <li>
+                        The <em>newElement</em> can be a <em>String</em>, number or object. If it is an array ZPT-JS will add each element of the array, making it easy to add several elements at once.
+                    </li>
+                </ul>
+                
+                <h2 data-attributes="id 'updatingArrays'">Updating array items</h2>
+                <p>
+                    Now we are going to update the second item (replace <em>Peter</em> by <em>Mia</em>):
+                </p>
+                <pre class="brush: js">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            id: 'items',
+            action: 'updateArray',
+            index: 1,
+            newElement: {
+                name: 'Mia',
+                description: 'The number 5'
+            }
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    Another way would be:
+                </p>
+                <pre class="brush: js; highlight: [7,8,9]">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            id: 'items',
+            action: 'updateArray',
+            currentElement: {
+                name: 'Peter',
+                description: 'The number 2'
+            },
+            newElement: {
+                name: 'Mia',
+                description: 'The number 5'
+            }
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    Using <em>currentElement</em> provides an alternative way of finding elements to update or delete.
+                </p>
+                
+                <h2 data-attributes="id 'deletingArrays'">Deleting array items</h2>
+                <p>
+                    Now we are going to delete the first item (delete <em>John</em>):
+                </p>
+                <pre class="brush: js">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            id: 'items',
+            action: 'deleteArray',
+            index: '_first_'
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    We could use a <em>0</em> value as <em>index</em>. 
+                </p>
+                <p>
+                    Another way would be:
+                </p>
+                <pre class="brush: js; highlight: [7,8,9]">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            id: 'items',
+            action: 'deleteArray',
+            currentElement: {
+                name: 'John',
+                description: 'The number 1'
+            }
+        }
+    ]
+});
+                </pre>
+                
+                <h2 data-attributes="id 'search'">Using searches to define complex expressions</h2>
+                <p>
+                    Take a look at this template:
+                </p>
+                <pre class="brush: html">
+&lt;ol&gt;
+    &lt;li data-repeat="object objectList"&gt;
+        &lt;span data-content="object/id"&gt;&lt;/span&gt;
+        &lt;ol&gt;
+            &lt;li data-repeat="item object/items"&gt;
+                &lt;span data-content="item/name"&gt;an item name&lt;/span&gt;:
+                &lt;span data-content="item/description"&gt;an item description&lt;/span&gt;
+            &lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+                </pre>
+                
+                <p>
+                    The javascript code to invoke ZPT-JS:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary({
+    objectList: [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ]
+});
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    Now we want to add a new element to <em>objectList</em>:
+                </p>
+                <pre class="brush: js">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            id: 'objectList',
+            action: 'createArray',
+            index: '_last_',
+            newElement: {
+                id: 'object3',
+                items: [
+                    {
+                        name: 'Mary',
+                        description: 'The number 7'
+                    }, 
+                    {
+                        name: 'Ann',
+                        description: 'The number 8'
+                    }
+                ]
+            }
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    The resulting HTML looks like this:
+                </p>
+                <pre class="brush: html">
+1. object1
+    John: The number 1
+    Peter: The number 2
+    Luke: The number 3
+2. object2
+    Michael: The number 4
+    Chris: The number 5
+    Lars: The number 6
+3. object3
+    Mary: The number 7
+    Ann: The number 8  
+                </pre>
+                
+                <p>
+                    Now we are going to insert a new <em>item</em> inside <em>object3</em> (Selena, the number 9) to get something like this:
+                </p>
+                <pre class="brush: html highlight: [10]">
+1. object1
+    John: The number 1
+    Peter: The number 2
+    Luke: The number 3
+2. object2
+    Michael: The number 4
+    Chris: The number 5
+    Lars: The number 6
+3. object3
+    Selena: The number 9
+    Mary: The number 7
+    Ann: The number 8  
+                </pre>
+                
+                <p>
+                    And the command to run:
+                </p>
+                <pre class="brush: js; highlight: [5,6,7,8,9,10,11,12]">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            search: [
+                'objectList',
+                {
+                    name: 'id',
+                    value: 'object3'
+                },
+                'items'
+            ],
+            action: 'createArray',
+            index: '_first_',
+            newElement: {
+                name: 'Selena',
+                description: 'The number 9'
+            }
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    A <em>search</em> element is an array of elements that ZPT-JS combines to define a path to access the variable you want to modify. Each element can be one of these types:
+                </p>
+                <ul>
+                    <li><strong>A literal string</strong>. Such as <em>objectList</em> or <em>items</em> in this example.</li>
+                    <li><strong>An object with name and value properties</strong>. ZPT-JS will search into the available items the first that matches it.</li>
+                    <li><strong>An object with index property</strong>. ZPT-JS will select the element with that index.</li>
+                </ul>
+                
+                <p>
+                    In this example the path defined by the <em>search</em> is <em>objectList.{id='object3'}.items.</em>
+                </p>
+                
+                <p>
+                    Search elements can be used in any class of dictionaryActions, not only in <em>createArray</em> actions.
+                </p>
+                
+                <h2 data-attributes="id 'updatingObjects'">Updating object properties</h2>
+                <p>
+                    Take a look at this template:
+                </p>
+                <pre class="brush: html">
+&lt;div&gt;
+    &lt;span data-content="object/name"&gt;an item name&lt;/span&gt;:
+    &lt;span data-content="object/description"&gt;an item description&lt;/span&gt;
+&lt;/div&gt;
+                </pre>
+                
+                <p>
+                    Now we are going to update the <em>name</em> property (now the name is <em>Dave</em>):
+                </p>
+                <pre class="brush: js">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            search: [
+                'object'
+            ],
+            action: 'updateObject',
+            property: 'name',
+            newElement: 'Dave'
+        }
+    ]
+});
+                </pre>
+                
+                <h2 data-attributes="id 'deletingObjects'">Deleting object properties</h2>
+                <p>
+                    Using the previous template, now we are going to delete the <em>name</em> property:
+                </p>
+                <pre class="brush: js">
+zpt.run({
+    command: 'update',
+    dictionaryActions: [
+        {
+            search: [
+                'object'
+            ],
+            action: 'deleteObject',
+            property: 'name'
+        }
+    ]
+});
+                </pre>
+                
+                <p>
+                    The <em>name</em> property has been deleted from the <em>object</em> vaiable in the dictionary.
+                </p>
+                
+                <h2 data-attributes="id 'reactiveDictionaries'">Using reactive dictionaries</h2>
+                <p>
+                    An alternative way of working with <em>dictionary actions</em> is using a reactive dictionary:
+                </p>
+                <pre class="brush: js">
+"use strict";
+
+var zpt = require( 'zpt' );
+
+var dictionary = new zpt.ReactiveDictionary({
+    items: [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        }
+    ];
+});
+
+// Parse template
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                
+                <p>
+                    To run a dictionary action, you can do this:
+                </p>
+                <pre class="brush: js">
+dictionary._addActions([
+    {
+        id: 'items',
+        action: 'createArray',
+        index: '_last_',
+        newElement: {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Sophia',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Jane',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Drew',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    }
+]);
+                </pre>
+                
+                <p>
+                    Be careful, the update is done inmediately. For more details about <em>reactive dictionaries</em>, see <a href="../reference/reactiveDictionaries.html">reference page</a>
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

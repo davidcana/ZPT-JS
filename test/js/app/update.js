@@ -2695,7 +2695,7 @@ QUnit.test( "Multiple delete object nested element by index TALRepeat test", fun
 
 QUnit.test( "Multiple delete object nested element by element TALRepeat test", function( assert ) {
 
-    var testNumber = 41;
+    var testNumber = 42;
     var dictionary = {};
     dictionary[ 'objectList' + testNumber ] = [ 
         {
