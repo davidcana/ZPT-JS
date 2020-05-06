@@ -5,6 +5,7 @@
 
 var AbstractAction = require( './abstractAction.js' );
 var utils = require( '../../utils.js' );
+var context = require( '../../context.js' );
 
 var AbstractArrayAction = function( object, dictionary ) {
     AbstractAction.call( this, object, dictionary );
@@ -20,9 +21,9 @@ AbstractArrayAction.getIndexNumericValue = function( index ){
         return undefined;   
     }
     
-    if ( index === '_first_' ){
+    if ( index === context.getConf().firstIndexIdentifier ){
         return 0;
-    } else if ( index === '_last_' ){
+    } else if ( index === context.getConf().lastIndexIdentifier ){
         return -1; // This means it is the last
     }
     return index;

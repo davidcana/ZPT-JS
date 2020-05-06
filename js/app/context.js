@@ -203,7 +203,10 @@ module.exports = (function() {
         trDateTimeExpression: "trDate" + EXPRESSION_SUFFIX,
         inExpression:         "in" + EXPRESSION_SUFFIX,
         queryExpression:      "query" + EXPRESSION_SUFFIX,
-        pathExpression:       ""
+        pathExpression:       "",
+        
+        firstIndexIdentifier: "_first_",
+        lastIndexIdentifier:  "_last_"
     };
     var conf = defaultConf;
     

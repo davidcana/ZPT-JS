@@ -2498,10 +2498,13 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             {
                 search: [
                     'objectList' + testNumber,
+                    '_last_',
+                    /*
                     {
                         name: 'id',
                         value: 'object2'
                     },
+                    */
                     'items'
                 ],
                 action: 'deleteArray',
@@ -3040,6 +3043,126 @@ QUnit.test( "Multiple insert object nested element by index = '_last_' and selec
     });
     
     testFunction( 'John/Peter/Luke/Michael/Chris/Lars/Dave/Mary', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6/The number 7/The number 8' );
+});
+
+QUnit.test( "Insert object nested element by index = 2 and selecting by numeric/_first_/_last_ search TALRepeat test", function( assert ) {
+
+    var testNumber = 46;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+
+    // Insert using numeric search item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    1,
+                    'items'
+                ],
+                action: 'createArray',
+                index: 2,
+                newElement: {
+                    name: 'Dave',
+                    description: 'The number 7'
+                }
+            }
+        ]
+    });
+    testFunction( 'John/Peter/Luke/Michael/Chris/Dave/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 7/The number 6' );
+    
+    // Insert using _first_ search item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    '_first_',
+                    'items'
+                ],
+                action: 'createArray',
+                index: 1,
+                newElement: {
+                    name: 'Lea',
+                    description: 'The number 8'
+                }
+            }
+        ]
+    });
+    testFunction( 'John/Lea/Peter/Luke/Michael/Chris/Dave/Lars', 'The number 1/The number 8/The number 2/The number 3/The number 4/The number 5/The number 7/The number 6' );
+    
+    // Insert using _last_ search item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    '_last_',
+                    'items'
+                ],
+                action: 'createArray',
+                index: 0,
+                newElement: {
+                    name: 'Nicole',
+                    description: 'The number 9'
+                }
+            }
+        ]
+    });
+    testFunction( 'John/Lea/Peter/Luke/Nicole/Michael/Chris/Dave/Lars', 'The number 1/The number 8/The number 2/The number 3/The number 9/The number 4/The number 5/The number 7/The number 6' );
 });
 
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
