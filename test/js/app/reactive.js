@@ -1013,8 +1013,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object1'
+                    id: 'object1'
                 },
                 'items'
             ],
@@ -1036,8 +1035,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object1'
+                    id: 'object1'
                 },
                 'items'
             ],
@@ -1055,8 +1053,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object1'
+                    id: 'object1'
                 },
                 'items'
             ],
@@ -1103,8 +1100,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1124,8 +1120,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1147,8 +1142,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1230,8 +1224,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object1'
+                    id: 'object1'
                 },
                 'items'
             ],
@@ -1253,8 +1246,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object1'
+                    id: 'object1'
                 },
                 'items'
             ],
@@ -1272,8 +1264,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object1'
+                    id: 'object1'
                 },
                 'items'
             ],
@@ -1329,8 +1320,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1350,8 +1340,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1373,8 +1362,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],

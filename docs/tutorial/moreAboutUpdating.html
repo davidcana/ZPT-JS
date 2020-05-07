@@ -372,7 +372,7 @@ zpt.run({
                 <p>
                     And the command to run:
                 </p>
-                <pre class="brush: js; highlight: [5,6,7,8,9,10,11,12]">
+                <pre class="brush: js; highlight: [5,6,7,8,9,10,11,11]">
 zpt.run({
     command: 'update',
     dictionaryActions: [
@@ -380,8 +380,7 @@ zpt.run({
             search: [
                 'objectList',
                 {
-                    name: 'id',
-                    value: 'object3'
+                    id: 'object3'
                 },
                 'items'
             ],
@@ -402,7 +401,7 @@ zpt.run({
                 <ul>
                     <li><strong>A literal string</strong>. Such as <em>objectList</em> or <em>items</em> in this example.</li>
                     <li><strong>A literal integer</strong>. Useful to select item from arrays.</li>
-                    <li><strong>An object with name and value properties</strong>. ZPT-JS will search into the available items the first that matches it.</li>
+                    <li><strong>An object</strong>. ZPT-JS will search into the available items the first that matches it.</li>
                 </ul>
                 
                 <p>

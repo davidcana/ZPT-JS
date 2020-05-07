@@ -1463,8 +1463,7 @@ QUnit.test( "update object nested element by index and selecting by search TALRe
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1625,8 +1624,7 @@ QUnit.test( "update object nested element by element and selecting by search TAL
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1783,8 +1781,7 @@ QUnit.test( "delete object nested element by element and selecting by search TAL
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -1939,8 +1936,7 @@ QUnit.test( "Insert object nested element by index = 2 and selecting by search T
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -2099,8 +2095,7 @@ QUnit.test( "Insert object nested element by index = '_first_' and selecting by 
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -2259,8 +2254,7 @@ QUnit.test( "Insert object nested element by index = '_last_' and selecting by s
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -2340,8 +2334,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 search: [
                     'objectList' + testNumber,
                     {
-                        name: 'id',
-                        value: 'object1'
+                        id: 'object1'
                     },
                     'items'
                 ],
@@ -2366,8 +2359,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 search: [
                     'objectList' + testNumber,
                     {
-                        name: 'id',
-                        value: 'object1'
+                        id: 'object1'
                     },
                     'items'
                 ],
@@ -2388,8 +2380,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 search: [
                     'objectList' + testNumber,
                     {
-                        name: 'id',
-                        value: 'object1'
+                        id: 'object1'
                     },
                     'items'
                 ],
@@ -2442,8 +2433,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 search: [
                     'objectList' + testNumber,
                     {
-                        name: 'id',
-                        value: 'object2'
+                        id: 'object2'
                     },
                     'items'
                 ],
@@ -2466,8 +2456,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 search: [
                     'objectList' + testNumber,
                     {
-                        name: 'id',
-                        value: 'object2'
+                        id: 'object2'
                     },
                     'items'
                 ],
@@ -2492,12 +2481,6 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 search: [
                     'objectList' + testNumber,
                     '_last_',
-                    /*
-                    {
-                        name: 'id',
-                        value: 'object2'
-                    },
-                    */
                     'items'
                 ],
                 action: 'deleteArray',
@@ -2829,8 +2812,7 @@ QUnit.test( "Multiple insert object nested element by index = 2 and selecting by
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -2918,8 +2900,7 @@ QUnit.test( "Multiple insert object nested element by index = '_first_' and sele
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],
@@ -3007,8 +2988,7 @@ QUnit.test( "Multiple insert object nested element by index = '_last_' and selec
             search: [
                 'objectList' + testNumber,
                 {
-                    name: 'id',
-                    value: 'object2'
+                    id: 'object2'
                 },
                 'items'
             ],

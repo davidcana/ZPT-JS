@@ -50,18 +50,39 @@ AbstractAction.prototype.initializeUsingSearch = function( search, dictionary ){
     }
 };
 
-AbstractAction.prototype.search = function( list, criteria ){
+AbstractAction.prototype.search = function( list, expressionElement ){
     
-    // Search using name and value
     for ( var i = 0; i < list.length; ++i ){
         var record = list[ i ];
-        var thisRecordValue = record[ criteria.name ];
-        if ( utils.deepEqual( thisRecordValue, criteria.value ) ){
+        if ( AbstractAction.elementMaches( record, expressionElement ) ){
             return i;
         }
     }
     
     throw 'No record found matching your criteria!';
+};
+
+AbstractAction.elementMaches = function( element, expressionElement ){
+    
+    if ( expressionElement == undefined ){
+        throw 'Expression to match must not be null!';
+    }
+
+    if ( Array.isArray( expressionElement ) ){
+        throw 'Expression ' + utils.genericToString( expressionElement ) + ' to match must not be an array!';
+    }
+
+    if ( utils.isPlainObject( expressionElement ) ){
+        for ( var i in expressionElement ){
+            if ( expressionElement[ i ] !== element[ i ] ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Must be numeric or string
+    return element === expressionElement;
 };
 
 AbstractAction.prototype.getValue = function( dictionary ){

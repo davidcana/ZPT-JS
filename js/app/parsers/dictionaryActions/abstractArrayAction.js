@@ -50,35 +50,12 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
     
     for ( var i = 0; i < arrayValue.length; ++i ){
         var element = arrayValue[ i ];
-        if ( AbstractArrayAction.elementMaches( element, this.currentElement ) ){
+        if ( AbstractAction.elementMaches( element, this.currentElement ) ){
             return i;
         }
     }
     
     throw 'currentElement ' + utils.genericToString( this.currentElement ) + ' not found in ' + this.id + ' array action!';
-};
-
-AbstractArrayAction.elementMaches = function( element, expressionElement ){
-    
-    if ( expressionElement == undefined ){
-        throw 'Expression to match must not be null!';
-    }
-
-    if ( Array.isArray( expressionElement ) ){
-        throw 'Expression ' + utils.genericToString( expressionElement ) + 'to match must not be an array!';
-    }
-
-    if ( utils.isPlainObject( expressionElement ) ){
-        for ( var i in expressionElement ){
-            if ( expressionElement[ i ] !== element[ i ] ){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Must be numeric or string
-    return element === expressionElement;
 };
 
 AbstractArrayAction.prototype.attributeInstanceIsRelated = function( attributeInstance ){
