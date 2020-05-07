@@ -199,6 +199,30 @@ module.exports = (function() {
         return result;
     };
     
+    var genericToString = function( element ){
+    
+        if ( element == undefined ){
+            return 'undefined';
+        }
+        
+        if ( Array.isArray( element ) ){
+            var result = 'Array[ ';
+            for ( var i = 0; i < element.length; ++i ){
+                var separator = i === 0? '': ', ';
+                result += separator + genericToString( element[ i ] );
+            }
+            result += ' ]';
+            return result;
+        }
+        
+        if ( isPlainObject( element ) ){
+            return JSON.stringify( element );
+        }
+        
+        // Must be numeric or string
+        return element;
+    };
+    
     return {
         generateId: generateId,
         //isArray: isArray,
@@ -209,7 +233,8 @@ module.exports = (function() {
         getJSON: getJSON,
         ajax: ajax,
         deepEqual: deepEqual,
-        copyArray: copyArray
+        copyArray: copyArray,
+        genericToString: genericToString
         //getNodeId: getNodeId
     };
 })();

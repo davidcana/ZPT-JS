@@ -1044,8 +1044,7 @@ QUnit.test( "update object element by element TALRepeat test", function( assert 
             id: 'items' + testNumber,
             action: 'updateArray',
             currentElement: {
-                name: 'Peter',
-                description: 'The number 2'
+                name: 'Peter'
             },
             newElement: {
                 name: 'Dave',
@@ -1151,8 +1150,7 @@ QUnit.test( "delete object element by object TALRepeat test", function( assert )
             id: 'items' + testNumber,
             action: 'deleteArray',
             currentElement: {
-                name: 'Peter',
-                description: 'The number 2'
+                name: 'Peter'
             }
         }
     ];
@@ -1549,8 +1547,7 @@ QUnit.test( "update object nested element by element TALRepeat test", function( 
             var: dictionary["objectList" + testNumber][1].items,
             action: 'updateArray',
             currentElement: {
-                name: 'Chris',
-                description: 'The number 5'
+                name: 'Chris'
             },
             newElement: {
                 name: 'Dave',
@@ -1635,8 +1632,7 @@ QUnit.test( "update object nested element by element and selecting by search TAL
             ],
             action: 'updateArray',
             currentElement: {
-                name: 'Chris',
-                description: 'The number 5'
+                name: 'Chris'
             },
             newElement: {
                 name: 'Dave',
@@ -2351,8 +2347,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 ],
                 action: 'updateArray',
                 currentElement: {
-                    name: 'Luke',
-                    description: 'The number 3'
+                    name: 'Luke'
                 },
                 newElement: {
                     name: 'Dave',
@@ -2378,8 +2373,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 ],
                 action: 'deleteArray',
                 currentElement: {
-                    name: 'Peter',
-                    description: 'The number 2'
+                    name: 'Peter'
                 }
             }
         ]
@@ -2479,8 +2473,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 ],
                 action: 'updateArray',
                 currentElement: {
-                    name: 'Drew',
-                    description: 'The number 8'
+                    name: 'Drew'
                 },
                 newElement: {
                     name: 'Lucy',
@@ -2509,8 +2502,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
                 ],
                 action: 'deleteArray',
                 currentElement: {
-                    name: 'Sophia',
-                    description: 'The number 6'
+                    name: 'Sophia'
                 }
             }
         ]
@@ -2759,12 +2751,10 @@ QUnit.test( "Multiple delete object nested element by element TALRepeat test", f
             action: 'deleteArray',
             currentElement: [ 
                 {
-                    name: 'Chris',
-                    description: 'The number 5'
+                    name: 'Chris'
                 },
                 {
-                    name: 'Lars',
-                    description: 'The number 6'
+                    name: 'Lars'
                 }
             ]
         }

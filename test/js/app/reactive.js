@@ -1020,8 +1020,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'updateArray',
             currentElement: {
-                name: 'Luke',
-                description: 'The number 3'
+                name: 'Luke'
             },
             newElement: {
                 name: 'Dave',
@@ -1044,8 +1043,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'deleteArray',
             currentElement: {
-                name: 'Peter',
-                description: 'The number 2'
+                name: 'Peter'
             }
         }
     ]);
@@ -1133,8 +1131,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'updateArray',
             currentElement: {
-                name: 'Drew',
-                description: 'The number 8'
+                name: 'Drew'
             },
             newElement: {
                 name: 'Lucy',
@@ -1157,8 +1154,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'deleteArray',
             currentElement: {
-                name: 'Sophia',
-                description: 'The number 6'
+                name: 'Sophia'
             }
         }
     ]);
@@ -1241,8 +1237,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'updateArray',
             currentElement: {
-                name: 'Luke',
-                description: 'The number 3'
+                name: 'Luke'
             },
             newElement: {
                 name: 'Dave',
@@ -1265,8 +1260,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'deleteArray',
             currentElement: {
-                name: 'Peter',
-                description: 'The number 2'
+                name: 'Peter'
             }
         }
     ]);
@@ -1363,8 +1357,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'updateArray',
             currentElement: {
-                name: 'Drew',
-                description: 'The number 8'
+                name: 'Drew'
             },
             newElement: {
                 name: 'Lucy',
@@ -1387,8 +1380,7 @@ QUnit.test( "Combined actions starting from an empty array and selecting by sear
             ],
             action: 'deleteArray',
             currentElement: {
-                name: 'Sophia',
-                description: 'The number 6'
+                name: 'Sophia'
             }
         }
     ]);

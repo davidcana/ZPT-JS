@@ -180,8 +180,7 @@ zpt.run({
             id: 'items',
             action: 'updateArray',
             currentElement: {
-                name: 'Peter',
-                description: 'The number 2'
+                name: 'Peter'
             },
             newElement: {
                 name: 'Mia',
@@ -193,7 +192,7 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    Using <em>currentElement</em> provides an alternative way of finding elements to update or delete.
+                    Using <em>currentElement</em> provides an alternative way of finding elements to update or delete. The element must match all the fields of the <em>currentElement</em> if it is an object; if it is a literal (numeric or string) it must be equal.
                 </p>
                 
                 <h2 data-attributes="id 'deletingArrays'">Deleting array items</h2>
@@ -227,8 +226,7 @@ zpt.run({
             id: 'items',
             action: 'deleteArray',
             currentElement: {
-                name: 'John',
-                description: 'The number 1'
+                name: 'John'
             }
         }
     ]
