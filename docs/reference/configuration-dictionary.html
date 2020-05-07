@@ -44,6 +44,10 @@ dictionary ::= a javascript object
                     A <em>dictionary</em> can be modified by the programmer. Changes will be effective in the template after doing a partial or a full render.
                 </p>
                 
+                <p>
+                    ZPT-JS provides <code>zpt.ReactiveDictionary</code>, a javascript class that defines a dictionary with reactive capabilities: it can detect some type of modifications done to it and invoke an update command. For more details about <em>reactive dictionaries</em> go to <a href="reactiveDictionaries.html">reference page</a>.
+                </p>
+                
                 <h2 data-attributes="id 'examples'">Examples</h2>
                 <p>
                     An example of <em>fullRender</em>:
