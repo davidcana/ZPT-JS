@@ -601,5 +601,24 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>Combined actions starting from an empty array with conditions TALRepeat/TALCondition</h2>
+        <div id="t47">
+            <div data-condition="not: objectList47" 
+                 data-attributes="id 'objectList47_noObject'">
+                No object
+            </div>
+            <ol data-condition="objectList47">
+                <li data-repeat="object objectList47">
+                    <span data-content="object/id" data-attributes="class 'objectId47'"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName47'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription47'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

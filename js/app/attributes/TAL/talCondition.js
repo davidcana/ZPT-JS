@@ -5,6 +5,7 @@
 
 var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
 var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+var context = require( '../../context.js' );
 
 var TALCondition = function( stringToApply, expressionToApply ) {
     
@@ -14,7 +15,8 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     var process = function( scope, node ){
         
         var result = evaluateHelper.evaluateBoolean( scope, expression );
-            
+        
+        node.setAttribute( context.getTags().conditionResult, result );
         node.style.display = result ? '' : 'none';
         
         return result;
@@ -28,6 +30,15 @@ var TALCondition = function( stringToApply, expressionToApply ) {
         parserUpdater.updateNode( node );
     };
     
+    var updatableFromAction = function( parserUpdater, node ){
+        
+        var scope = parserUpdater.getNodeScope( node );
+        var result = evaluateHelper.evaluateBoolean( scope, expression );
+        var valueFromTag = 'true' === node.getAttribute( context.getTags().conditionResult );
+        
+        return result !== valueFromTag;
+    };
+    
     var toString = function(){
         return "TALCondition: " + string;
     };
@@ -36,6 +47,7 @@ var TALCondition = function( stringToApply, expressionToApply ) {
         process: process,
         dependsOn: dependsOn,
         update: update,
+        updatableFromAction: updatableFromAction,
         toString: toString,
         type: TALCondition.id
     };

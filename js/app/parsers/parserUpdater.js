@@ -88,8 +88,8 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
 
     var updateHTML = function(){
 
-        updateHTMLFromVarChange();
         updateHTMLFromActions();
+        updateHTMLFromVarChange();
     };
     
     var updateHTMLFromActions = function(){
@@ -110,6 +110,10 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             for ( var j = 0; j < list.length; j++ ) {
                 var indexItem = list[ j ];
                 if ( ! actionInstance.attributeInstanceIsRelated( indexItem.attributeInstance ) ){
+                    if ( ! utils.isFunction( indexItem.attributeInstance.updatableFromAction ) 
+                            || indexItem.attributeInstance.updatableFromAction( self, findNodeById( indexItem.nodeId ) ) ){
+                        buildDataFromVarChange( actionInstance.id );
+                    }
                     continue;
                 }
                 actionInstance.updateHTML( indexItem, self );
@@ -135,7 +139,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
             }
         }
     };
-
+    
     var buildDataFromVarChange = function( varName ){
         
         // Get the list of changes related to varName
@@ -196,14 +200,18 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         
         ++statistics.totalUpdates;
         
-        var scope = getNodeScope( indexItem.nodeId, node );
+        var scope = getNodeScope( node, indexItem.nodeId );
         
         attributeInstance.update( self, node, scope, indexItem );
         
         return true;
     };
 
-    var getNodeScope = function( nodeId, node ){
+    var getNodeScope = function( node, nodeId ){
+        
+        if ( ! nodeId ){
+            nodeId = node.getAttribute( context.getTags().id );
+        }
         
         var thisScope = scopeMap[ nodeId ];
         

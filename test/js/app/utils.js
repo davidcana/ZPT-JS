@@ -16,6 +16,13 @@ module.exports = (function() {
         } ).get().join( '/' );
     };
     
+    var getAllNodeIds = function( selector ){
+        
+        return $( selector ).map( function( index, element ) {
+            return this.getAttribute( 'data-id' );
+        } ).get().join( '/' );
+    };
+    
     var getMilliseconds = function ( startDate ) {
         
         var endDate   = new Date();
@@ -74,6 +81,7 @@ module.exports = (function() {
     
     return {
         getAllValues: getAllValues,
+        getAllNodeIds: getAllNodeIds,
         getMilliseconds: getMilliseconds,
         assertHtml: assertHtml,
         count: count

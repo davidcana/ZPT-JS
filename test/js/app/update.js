@@ -3135,6 +3135,208 @@ QUnit.test( "Insert object nested element by index = 2 and selecting by numeric/
     testFunction( 'John/Lea/Peter/Luke/Nicole/Michael/Chris/Dave/Lars', 'The number 1/The number 8/The number 2/The number 3/The number 9/The number 4/The number 5/The number 7/The number 6' );
 });
 
+QUnit.test( "Combined actions starting from an empty array with conditions TALRepeat/TALCondition test", function( assert ) {
+
+    context.setExpressionCounter( 1000 );
+    
+    var testNumber = 47;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        if ( arguments[ 0 ] ){
+            assert.equal( $( '#objectList47_noObject').text().trim(), arguments[ 0 ] );
+        } else {
+            assert.ok( ! $( '#objectList47_noObject').is( ':visible' ) );
+            //assert.equal( $( '#t' + testNumber ).find( '[data-id="1005"]' ).text().trim(), 'object1' );
+        }
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 1 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 2 ]  );
+        assert.equal( utils.getAllNodeIds( '.objectId' + testNumber ), arguments[ 3 ]  );
+        assert.equal( utils.getAllNodeIds( '.itemName' + testNumber ), arguments[ 4 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'No object', '', '', '', '' );
+    
+    // Add 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: 'object1',
+                    items: [
+                        {
+                            name: 'John',
+                            description: 'The number 1'
+                        }, 
+                        {
+                            name: 'Peter',
+                            description: 'The number 2'
+                        },
+                        {
+                            name: 'Luke',
+                            description: 'The number 3'
+                        }
+                    ]
+                }
+            }
+        ]
+    });
+    testFunction( '', 'John/Peter/Luke', 'The number 1/The number 2/The number 3', '1005', '1008/1011/1014' );
+    
+    // Add 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: 'object2',
+                    items: [
+                        {
+                            name: 'Sophia',
+                            description: 'The number 6'
+                        }, 
+                        {
+                            name: 'Jane',
+                            description: 'The number 7'
+                        },
+                        {
+                            name: 'Drew',
+                            description: 'The number 8'
+                        }
+                    ]
+                }
+            }
+        ]
+    });
+    testFunction( '', 'John/Peter/Luke/Sophia/Jane/Drew', 'The number 1/The number 2/The number 3/The number 6/The number 7/The number 8', '1005/1017', '1008/1011/1014/1020/1023/1026' );
+    
+    // Edit 1 item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object1'
+                    },
+                    'items'
+                ],
+                action: 'updateArray',
+                currentElement: {
+                    name: 'Luke'
+                },
+                newElement: {
+                    name: 'Dave',
+                    description: 'The number 4'
+                }
+            }
+        ]
+    });
+    testFunction( '', 'John/Peter/Dave/Sophia/Jane/Drew', 'The number 1/The number 2/The number 4/The number 6/The number 7/The number 8', '1005/1017', '1008/1011/1014/1020/1023/1026' );
+    
+    // Add 1 item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object2'
+                    },
+                    'items'
+                ],
+                action: 'createArray',
+                index: '_first_',
+                newElement: {
+                    name: 'Alexis',
+                    description: 'The number 10'
+                }
+            }
+        ]
+    });
+    testFunction( '', 'John/Peter/Dave/Alexis/Sophia/Jane/Drew', 'The number 1/The number 2/The number 4/The number 10/The number 6/The number 7/The number 8', '1005/1017', '1008/1011/1014/1029/1020/1023/1026' );
+    
+    // Delete 1 item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object1'
+                    },
+                    'items'
+                ],
+                action: 'deleteArray',
+                currentElement: {
+                    name: 'Peter'
+                }
+            }
+        ]
+    });
+    testFunction( '', 'John/Dave/Alexis/Sophia/Jane/Drew', 'The number 1/The number 4/The number 10/The number 6/The number 7/The number 8', '1005/1017', '1008/1014/1029/1020/1023/1026' );
+    
+    // Delete 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'deleteArray',
+                currentElement: {
+                    id: 'object1'
+                }
+            }
+        ]
+    });
+    testFunction( '', 'Alexis/Sophia/Jane/Drew', 'The number 10/The number 6/The number 7/The number 8', '1017', '1029/1020/1023/1026' );
+    
+    // Add 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: 'object3',
+                    items: [
+                        {
+                            name: 'Tania',
+                            description: 'The number 11'
+                        }, 
+                        {
+                            name: 'Brid',
+                            description: 'The number 12'
+                        }
+                    ]
+                }
+            }
+        ]
+    });
+    testFunction( '', 'Alexis/Sophia/Jane/Drew/Tania/Brid', 'The number 10/The number 6/The number 7/The number 8/The number 11/The number 12', '1017/1032', '1029/1020/1023/1026/1035/1038' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {
