@@ -28,7 +28,7 @@ ArrayCreate.prototype.updateDictionary = function( dictionary ){
     }
 };
 
-ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater ){
+ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance ){
     
     // Must get the nodeToUpdate
     var node = this.resolveThisNode( indexItem, parserUpdater );
@@ -63,6 +63,9 @@ ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater ){
     
     // Update the selected node
     parserUpdater.updateNode( tmpNode );
+    
+    // Run animation
+    parserUpdater.runAnimation( actionInstance, tmpNode );
 };
 
 ArrayCreate.buildMultiple = function( object, dictionary ){

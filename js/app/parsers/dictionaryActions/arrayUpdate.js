@@ -20,7 +20,7 @@ ArrayUpdate.prototype.updateDictionary = function( dictionary ){
     arrayValue[ this.indexToUse ] = this.newElement;
 };
 
-ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater ){
+ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance ){
     
     // Must get the nodeToUpdate
     var nodeToUpdate = this.resolveChildNode( indexItem, parserUpdater );
@@ -29,9 +29,10 @@ ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater ){
     }
     
     // Update the selected node
-    parserUpdater.updateNode( nodeToUpdate );
+    parserUpdater.updateNode( nodeToUpdate, true );
     
-    return true;
+    // Run animation
+    parserUpdater.runAnimation( actionInstance, nodeToUpdate );
 };
 
 module.exports = ArrayUpdate;

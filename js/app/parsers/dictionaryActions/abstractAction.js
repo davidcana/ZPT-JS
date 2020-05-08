@@ -11,6 +11,7 @@ var AbstractAction = function( object, dictionary ) {
     this.id = object.id;
     this.var = object.var;
     this.currentElement = object.currentElement;
+    this.animation = object.animation;
     if ( object.search ){
         if ( this.id || this.var ){
             throw 'Error in action: you can not set a search and then and id: if you set a search ZPT-JS will set the id for you!';

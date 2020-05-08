@@ -18,7 +18,7 @@ AbstractObjectAction.prototype.attributeInstanceIsRelated = function( attributeI
     return true;
 };
 
-AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater ){
+AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance ){
     
     // Must get the node
     var node = this.resolveThisNode( indexItem, parserUpdater );
@@ -29,7 +29,8 @@ AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater )
     // Update the selected node
     parserUpdater.updateNode( node );
     
-    return true;
+    // Run animation
+    parserUpdater.runAnimation( actionInstance, node );
 };
 
 module.exports = AbstractObjectAction;

@@ -349,6 +349,15 @@ module.exports = function(grunt) {
                 },
                 src: 'test/js/app/reactive.js',
                 dest: 'build/reactive.js'
+            },
+            updateEffects: {
+                options: {
+                    browserifyOptions: {
+                        debug: true
+                    }
+                },
+                src: 'test/js/app/updateEffects.js',
+                dest: 'build/updateEffects.js'
             }
         },
         compress: {

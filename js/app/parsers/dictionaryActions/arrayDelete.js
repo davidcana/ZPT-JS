@@ -19,7 +19,7 @@ ArrayDelete.prototype.updateDictionary = function( dictionary ){
     arrayValue.splice( this.indexToUse, 1 );
 };
 
-ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater ){
+ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance ){
     
     // Must get the nodeToUpdate
     var nodeToUpdate = this.resolveChildNode( indexItem, parserUpdater );
@@ -27,10 +27,16 @@ ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater ){
         throw 'No node found to be deleted at this index: ' + this.indexToUse;
     }
     
-    // Delete the selected node
-    parserUpdater.deleteNode( nodeToUpdate );
-    
-    return true;
+    // Run animation
+    parserUpdater.runAnimation( 
+        actionInstance, 
+        nodeToUpdate, 
+        function(){
+            
+            // Delete the selected node
+            parserUpdater.deleteNode( nodeToUpdate );  
+        } 
+    );
 };
 
 ArrayDelete.buildMultiple = function( object, dictionary ){

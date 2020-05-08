@@ -116,8 +116,15 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
                     }
                     continue;
                 }
-                actionInstance.updateHTML( indexItem, self );
+                actionInstance.updateHTML( indexItem, self, actionInstance );
             }
+        }
+    };
+    
+    var runAnimation = function( actionInstance, node, callback ){
+        
+        if ( ! context.getAnimationManager().animate( actionInstance, node, callback ) && callback ){
+            callback();
         }
     };
     
@@ -228,10 +235,13 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         return thisScope;
     };
     
-    var updateNode = function( node ){
+    var updateNode = function( node, mustRemoveGeneratedNodes ){
         
         // Remove related to node nodes
         nodeRemover.removeRelatedNodes( node );
+        if ( mustRemoveGeneratedNodes ){
+            nodeRemover.removeGeneratedNodes( node );
+        }
         
         // Instance and invoke parserNodeRenderer to update node
         var parserNodeRenderer = new ParserNodeRenderer( 
@@ -261,7 +271,8 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         getNodeScope: getNodeScope,
         getStatistics: getStatistics,
         addUpdatedToStatistics: addUpdatedToStatistics,
-        addRemovedToStatistics: addRemovedToStatistics
+        addRemovedToStatistics: addRemovedToStatistics,
+        runAnimation: runAnimation
     };
     
     return self;

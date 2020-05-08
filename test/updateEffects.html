@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Update effects tests</title>
+        <link rel="stylesheet" href="/node_modules/qunit/qunit/qunit.css">
+        <style>
+@keyframes textColorChange {
+    0% { color: #0000ff; }
+    50% { color: #00ff00; }
+    100% { color: #0000ff; }
+}
+.animation-flash {
+    animation: textColorChange 2s 3;
+}
+        </style>
+        <script src="http://127.0.0.1:9966/updateEffects.js" defer></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        
+        <h1>Update effects</h1>
+        
+        <h2>Insert object nested element by index TALRepeat</h2>
+        <div id="t1">
+            <ol>
+                <li data-repeat="object objectList1">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName1'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription1'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Insert item nested element by index TALRepeat</h2>
+        <div id="t2">
+            <ol>
+                <li data-repeat="object objectList2">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName2'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription2'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Update object nested element by index TALRepeat</h2>
+        <div id="t3">
+            <ol>
+                <li data-repeat="object objectList3">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName3'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription3'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Update item nested element by index TALRepeat</h2>
+        <div id="t4">
+            <ol>
+                <li data-repeat="object objectList4">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName4'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription4'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Delete object nested element by index TALRepeat</h2>
+        <div id="t5">
+            <ol>
+                <li data-repeat="object objectList5">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName5'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription5'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Delete item nested element by index TALRepeat</h2>
+        <div id="t6">
+            <ol>
+                <li data-repeat="object objectList6">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName6'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription6'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </body>
+</html>

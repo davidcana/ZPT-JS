@@ -52,9 +52,14 @@ module.exports = (function() {
         }
     };
     
+    var removeNode = function( node ){
+        node.parentNode.removeChild( node );
+    };
+    
     var self = {
         removeGeneratedNodes: removeGeneratedNodes,
-        removeRelatedNodes: removeRelatedNodes
+        removeRelatedNodes: removeRelatedNodes,
+        removeNode: removeNode
     };
     
     return self;

@@ -5,6 +5,7 @@
 var log4javascript = require( 'log4javascript' );
 var utils = require( './utils.js' );
 var LoopItem = require( './parsers/loopItem.js' );
+var CSSAnimationManager = require( './parsers/dictionaryActions/cssAnimationManager.js' );
 
 module.exports = (function() {
     "use strict";
@@ -378,6 +379,17 @@ module.exports = (function() {
     };
     /* End run counter */
     
+    /* Animation managers */
+    var defaultAnimationManager = CSSAnimationManager;
+    var animationManager = defaultAnimationManager;
+    var getAnimationManager = function(){
+        return animationManager;
+    };
+    var setAnimationManager = function( _animationManager ){
+        animationManager = _animationManager;
+    };
+    /* End animation managers*/
+    
     var self = {
         getTags: getTags,
         setTags: setTags,
@@ -406,7 +418,9 @@ module.exports = (function() {
         isStrictMode: isStrictMode,
         nextExpressionCounter: nextExpressionCounter,
         setExpressionCounter: setExpressionCounter,
-        nextRunCounter: nextRunCounter
+        nextRunCounter: nextRunCounter,
+        getAnimationManager: getAnimationManager,
+        setAnimationManager: setAnimationManager
     };
     
     return self;
