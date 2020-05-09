@@ -39,123 +39,39 @@ npm install zpt
 
 ## Usage
 
-Let's see an example of ZPT-JS template. It includes several kinds of **expressions** and **tags**. It also shows examples of loops and macros:
+A sample of template:
 
-*sample.html*
+*gettingStarted.html*
+
 ```html
     <!DOCTYPE html>
-    <html>
+    <html> 
         <head>
             <meta charset="utf-8">
-            <title>Some ZPT-JS examples</title>
+            <title>Getting started</title>
 
-            <script src="sample.js"></script>
+            <script src="zpt.min.js" defer></script>
+            <script src="gettingStarted.js" type="text/javascript" defer></script>
         </head>
         <body>
-            <h1>Some ZPT-JS examples</h1>
-    
-            <h2>Some expressions</h2>
-            <ol>
-                <li data-content="user/name">a property expresion</li>
-                <li data-content="string:help my ${user/name}">a string expression</li>
-                <li>
-                    <a data-attributes="href 'www.yoursite.org';
-                                        title 'a title for your site'">A link using string literals in a data-attributes</a>
-                </li>
-                <li data-condition="eq: number1 number100">
-                    a condition: change number1 or number100 to show this!
-                </li>
-                <li>
-                    <span data-replace="user/name | 'no friends'">
-                        any friends?
-                    </span>
-                </li>
-                <li data-content="user2/name | 'no friends'">
-                    any friends?
-                </li>
-                <li data-content="tools[0]">an item of an array</li>
-                <li data-content="user/age()">a method invokation</li>
-            </ol>
-            
-            <h2>Loops</h2>
-            <table>
-                <tr>
-                    <th>Value</th>
-                    <th>Index</th>
-                    <th>Number</th>
-                    <th>Even index</th>
-                    <th>Odd index</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>Length</th>
-                    <th>Letter</th>
-                    <th>Capital Letter</th>
-                    <th>Roman</th>
-                    <th>Capital Roman</th>
-                </tr>
-                <tr data-repeat="item tools">
-                    <td data-content="item">the item</td>
-                    <td data-content="item-repeat/index()">index</td>
-                    <td data-content="item-repeat/number()">number</td>
-                    <td data-content="item-repeat/even()">even</td>
-                    <td data-content="item-repeat/odd()">odd</td>
-                    <td data-content="item-repeat/start()">start</td>
-                    <td data-content="item-repeat/end()">end</td>
-                    <td data-content="item-repeat/length()">length</td>
-                    <td data-content="item-repeat/letter()">letter</td>
-                    <td data-content="item-repeat/Letter()">capital letter</td>
-                    <td data-content="item-repeat/roman()">roman</td>
-                    <td data-content="item-repeat/Roman()">capital roman</td>
-                </tr>
-            </table>
-            
-            <h2>Macros</h2>
-            
-            <h3>Macro invokation - Dynamic macro using 1 slot (items = [10 20 30])</h3>
-            <div data-define="items [10 20 30]" data-use-macro="dynamicListWith1Slot">
-                <em data-fill-slot="additional_info">
-                    Make sure to check out our <a href="/specials">specials</a>.
-                </em>
-            </div>
-            
-            <h3>Macro definition - Dynamic macro using 1 slot</h3>
-            <ul data-define-macro="dynamicListWith1Slot">
-                <li data-repeat="item items">
-                    <span data-content="item">An item</span>
-                </li>
-                <li>
-                    <span data-define-slot="additional_info"></span>
-                </li>
-            </ul>
+            <p data-content="message">
+                the message
+            </p>
         </body>
     </html>
 ```
+Where **zpt.min.js** is the minimized version of ZPT-JS and **gettingStarted.js** is:
 
-The javascript code to invoke ZPT requires an object called **dictionary** that will be accesible by the template:
+*gettingStarted.js*
 
-*sample.js*
 ```javascript
     "use strict";
 
     var zpt = require( 'zpt' );
 
-    var dictionary = { 
-        number1: 1,
-        number100: 100,
-        user: {
-            name: "Bob", 
-            age: function( ){
-                return 25;
-            }
-        },
-        user2: {
-            name: "Mary", 
-            age: function( ){
-                return 29;
-            }
-        },
-        tools: [ 'tool0', 'tool1', 'tool2' ]
-    };
+    var dictionary = new zpt.ReactiveDictionary({
+        message: "Hello, world!"
+    });
 
     zpt.run({
         root: document.body,
@@ -163,7 +79,33 @@ The javascript code to invoke ZPT requires an object called **dictionary** that 
     });
 ```
 
-Please, take a look to [the ZPT-JS web](https://davidcana.github.io/ZPT-JS) for more information about ZPT-JS.
+The resulting **body** element is:
+
+```html
+    <body>
+        <p data-content="message">
+            Hello, world!
+        </p>
+    </body>
+```
+
+If we change some data in the dictionary this way:
+
+```javascript
+    dictionary.message = "Bye, world!";
+```
+
+We don't need to do anything else, the **body** element now is:
+
+```html
+    <body>
+        <p data-content="message">
+            Bye, world!
+        </p>
+    </body>
+```
+
+Please, take a look at [the ZPT-JS web](https://davidcana.github.io/ZPT-JS) for more information about ZPT-JS.
 
 ## License
 [LGPL](http://www.gnu.org/licenses/lgpl.html)
