@@ -7,9 +7,12 @@ module.exports = (function() {
     
     var animate = function( dictionaryAction, node, callback ) {
     
-        // Return if there is no animation
+        // Run callback and return if there is no animation
         if ( ! dictionaryAction.animation ){
-            return false;
+            if ( callback ){
+                callback();
+            };
+            return;
         }
         
         // Set the animationend listener
@@ -19,7 +22,6 @@ module.exports = (function() {
         
         // Set the animation
         node.style.animation = dictionaryAction.animation;
-        //node.style.animation = "mymove 4s 2";
         
         return true;
     };

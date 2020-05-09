@@ -1,10 +1,8 @@
 "use strict";
 
-var $ = require( 'jquery' );
 var zpt = require( '../../../js/app/main.js' );
 var QUnit = require( 'qunit' );
 var utils = require( './utils.js' );
-var context = zpt.context;
 
 var errorsArray;
 var errorFunction = function( _errorsArray ) {
@@ -363,4 +361,164 @@ QUnit.test( "Update item nested element by index TALRepeat test", function( asse
     });
     
     testFunction( 'John/Peter/Dave/Michael/Chris/Lars', 'The number 1/The number 2/The number 7/The number 4/The number 5/The number 6' );
+});
+
+QUnit.test( "Delete object nested element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 5;
+    var done = assert.async();
+    
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ] );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ] );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'deleteArray',
+                currentElement: {
+                    id: 'object1'
+                },
+                animation: 'textColorChange 1s 3',
+                animationCallback: function(){
+                    testFunction( 'Michael/Chris/Lars', 'The number 4/The number 5/The number 6' );
+                    done();
+                }
+            }
+        ]
+    });
+});
+
+QUnit.test( "Delete item nested element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 6;
+    var done = assert.async();
+    
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object1'
+                    },
+                    'items'
+                ],
+                action: 'deleteArray',
+                currentElement: {
+                    name: 'Luke'
+                },
+                animation: 'textColorChange 1s 3',
+                animationCallback: function(){
+                    testFunction( 'John/Peter/Michael/Chris/Lars', 'The number 1/The number 2/The number 4/The number 5/The number 6' );
+                    done();
+                }
+            }
+        ]
+    });
 });

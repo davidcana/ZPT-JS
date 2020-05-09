@@ -31,5 +31,6 @@ QUnit.testSuites([
     { name: "declare root Test Suite", path: "./declare.html" },
     { name: "update Test Suite", path: "./update.html" },
     { name: "goToURLHash Test Suite", path: "./goToURLHash.html#t1" },
-    { name: "reactive Test Suite", path: "./reactive.html" }
+    { name: "reactive Test Suite", path: "./reactive.html" },
+    { name: "update effects Test Suite", path: "./updateEffects.html" }
 ]);

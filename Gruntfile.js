@@ -38,8 +38,9 @@ module.exports = function(grunt) {
                         'http://localhost:9000/test/moreTest/folderDictionaries2.html',
                         'http://localhost:9000/test/declare.html',
                         'http://localhost:9000/test/update.html',
+                        'http://localhost:9000/test/goToURLHash.html#t1',
                         'http://localhost:9000/test/reactive.html',
-                        'http://localhost:9000/test/goToURLHash.html#t1'
+                        'http://localhost:9000/test/updateEffects.html'
                     ]
                 }
             }

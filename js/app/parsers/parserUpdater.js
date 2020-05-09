@@ -123,9 +123,20 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     
     var runAnimation = function( actionInstance, node, callback ){
         
-        if ( ! context.getAnimationManager().animate( actionInstance, node, callback ) && callback ){
-            callback();
-        }
+        // Build combinedCallback combining callback and actionInstance.animationCallback
+        var combinedCallback = ! callback && ! actionInstance.animationCallback? 
+            undefined:
+            function(){
+                if ( callback ){
+                    callback();
+                }
+                if ( actionInstance.animationCallback ){
+                    actionInstance.animationCallback();
+                }
+            };
+        
+        // Get animation manager to run animation
+        context.getAnimationManager().animate( actionInstance, node, combinedCallback );
     };
     
     var updateHTMLFromVarChange = function(){
