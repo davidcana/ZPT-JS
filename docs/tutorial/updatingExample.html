@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Updating example</title>
+        
+        <script type="text/javascript" src="../lib/zpt.js" defer></script>
+        <script type="text/javascript" src="../js/updatingExample.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+        <style>
+@keyframes createKeyframes {
+    0% { color: #0000ff; }
+    50% { color: #00ff00; }
+    100% { color: blue; }
+}
+@keyframes updateKeyframes {
+    0% { color: #0000ff; }
+    50% { color: #00ff00; }
+    100% { color: orange; }
+}
+@keyframes deleteKeyframes {
+    0% { color: #0000ff; }
+    50% { color: #00ff00; }
+    100% { color: red; }
+}
+        </style>
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Updating example</h1>
+            </div>
+            <article data-fill-slot="'article'">
+                <p>
+                    Now we are going to view ZPT-JS in action!
+                </p>
+                
+                <h2>Managing the list of objects</h2>
+                <ul>
+                    <li>
+                        <em>Add object</em>. Add an object to the list.
+                        <div>
+                            <label>
+                                Object id: 
+                                <input type="text" data-attributes="id 'objectIdToAdd'">
+                            </label>
+                            <button data-attributes="id 'addObjectButton'">Add object</button>
+                        </div>
+                    </li>
+                    <li>
+                        <em>Update object</em>. Update the id of the object.
+                        <div>
+                            <label>
+                                Current object id: 
+                                <input type="text" data-attributes="id 'currentObjectIdToUpdate'">
+                            </label>
+                            <label>
+                                New object id: 
+                                <input type="text" data-attributes="id 'newObjectIdToUpdate'">
+                            </label>
+                            <button data-attributes="id 'updateObjectButton'">Update object</button>
+                        </div>
+                    </li>
+                    <li>
+                        <em>Remove object</em>. Remove an object from the list.
+                        <div>
+                            <label>
+                                Object id: 
+                                <input type="text" data-attributes="id 'objectIdToRemove'">
+                            </label>
+                            <button data-attributes="id 'removeObjectButton'">Remove object</button>
+                        </div>
+                    </li>
+                    <li>
+                        <em>Add item to object</em>. Add an item to an object.
+                        <div>
+                            <label>
+                                Object id: 
+                                <input type="text" data-attributes="id 'objectFromItemToAdd'">
+                            </label>
+                            <label>
+                                Item: 
+                                <input type="text" data-attributes="id 'itemToAdd'">
+                            </label>
+                            <button data-attributes="id 'addItemButton'">Add item</button>
+                        </div>
+                    </li>
+                    <li>
+                        <em>Update item from object</em>. Update an item from an object.
+                        <div>
+                            <label>
+                                Object id: 
+                                <input type="text" data-attributes="id 'objectFromItemToUpdate'">
+                            </label>
+                            <label>
+                                Current item: 
+                                <input type="text" data-attributes="id 'currentItemToUpdate'">
+                            </label>
+                            <label>
+                                New item: 
+                                <input type="text" data-attributes="id 'newItemToUpdate'">
+                            </label>
+                            <button data-attributes="id 'updateItemButton'">Update item</button>
+                        </div>
+                    </li>
+                    <li>
+                        <em>Remove item from object</em>. Remove an item from an object.
+                        <div>
+                            <label>
+                                Object id: 
+                                <input type="text" data-attributes="id 'objectFromItemToRemove'">
+                            </label>
+                            <label>
+                                Item: 
+                                <input type="text" data-attributes="id 'itemToRemove'">
+                            </label>
+                            <button data-attributes="id 'removeItemButton'">Remove item</button>
+                        </div>
+                    </li>
+                </ul>
+                
+                <h2>List of objects</h2>
+                <ol>
+                    <li data-repeat="object objects">
+                        Object id: <span data-content="object/id">An object id</span>
+                        <ul>
+                            <li data-repeat="item object/items">
+                                <span data-content="item">An item</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </article>
+        </div>
+    </body>
+</html>

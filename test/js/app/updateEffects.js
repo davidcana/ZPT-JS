@@ -13,6 +13,7 @@ var errorFunction = function( _errorsArray ) {
 zpt.context.setErrorFunction( errorFunction );
 
 // Run tests!
+
 QUnit.test( "Insert object nested element by index TALRepeat test", function( assert ) {
 
     var testNumber = 1;
@@ -91,7 +92,8 @@ QUnit.test( "Insert object nested element by index TALRepeat test", function( as
                     }
                 ]
             },
-            animation: 'textColorChange 2s 3'
+            animation: 'textColorChangeKeyframes 2s 3'
+            //animation: 'textColorChange'
         }
     ];
     
@@ -174,7 +176,8 @@ QUnit.test( "Insert item nested element by index TALRepeat test", function( asse
                 name: 'Dave',
                 description: 'The number 7'
             },
-            animation: 'textColorChange 2s 3'
+            animation: 'textColorChangeKeyframes 2s 3'
+            //animation: 'textColorChange'
         }
     ];
     
@@ -266,7 +269,8 @@ QUnit.test( "Update object nested element by index TALRepeat test", function( as
                     }
                 ]
             },
-            animation: 'textColorChange 2s 3'
+            animation: 'textColorChangeKeyframes 2s 3'
+            //animation: 'textColorChange'
         }
     ];
     
@@ -351,7 +355,8 @@ QUnit.test( "Update item nested element by index TALRepeat test", function( asse
                 name: 'Dave',
                 description: 'The number 7'
             },
-            animation: 'textColorChange 2s 3'
+            animation: 'textColorChangeKeyframes 2s 3'
+            //animation: 'textColorChange'
         }
     ];
     
@@ -430,7 +435,8 @@ QUnit.test( "Delete object nested element by index TALRepeat test", function( as
                 currentElement: {
                     id: 'object1'
                 },
-                animation: 'textColorChange 1s 3',
+                animation: 'textColorChangeKeyframes 1s 3',
+                //animation: 'textColorChange',
                 animationCallback: function(){
                     testFunction( 'Michael/Chris/Lars', 'The number 4/The number 5/The number 6' );
                     done();
@@ -513,7 +519,8 @@ QUnit.test( "Delete item nested element by index TALRepeat test", function( asse
                 currentElement: {
                     name: 'Luke'
                 },
-                animation: 'textColorChange 1s 3',
+                animation: 'textColorChangeKeyframes 1s 3',
+                //animation: 'textColorChange',
                 animationCallback: function(){
                     testFunction( 'John/Peter/Michael/Chris/Lars', 'The number 1/The number 2/The number 4/The number 5/The number 6' );
                     done();
@@ -521,4 +528,120 @@ QUnit.test( "Delete item nested element by index TALRepeat test", function( asse
             }
         ]
     });
+});
+
+QUnit.test( "Insert and delete item nested element by index TALRepeat test", function( assert ) {
+
+    var testNumber = 7;
+    var done = assert.async();
+    
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [ 
+        {
+            id: 'object1',
+            items: [
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        },
+        {
+            id: 'object2',
+            items: [
+                {
+                    name: 'Michael',
+                    description: 'The number 4'
+                }, 
+                {
+                    name: 'Chris',
+                    description: 'The number 5'
+                },
+                {
+                    name: 'Lars',
+                    description: 'The number 6'
+                }
+            ]
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+    
+    var dictionaryActions = [
+        {
+            search: [
+                'objectList' + testNumber,
+                {
+                    id: 'object2'
+                },
+                'items'
+            ],
+            action: 'createArray',
+            index: '_first_',
+            newElement: {
+                name: 'Dave',
+                description: 'The number 7'
+            },
+            animation: 'textColorChangeKeyframes 1s 3'
+            //animation: 'textColorChange'
+        }
+    ];
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: dictionaryActions
+    });
+    
+    testFunction( 'John/Peter/Luke/Dave/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 7/The number 4/The number 5/The number 6' );
+    
+    setTimeout(
+        function(){
+            zpt.run({
+                command: 'update',
+                dictionaryActions: [
+                    {
+                        search: [
+                            'objectList' + testNumber,
+                            {
+                                id: 'object2'
+                            },
+                            'items'
+                        ],
+                        action: 'deleteArray',
+                        currentElement: {
+                            name: 'Dave'
+                        },
+                        animation: 'textColorChangeKeyframes 1s 3',
+                        //animation: 'textColorChange',
+                        animationCallback: function(){
+                            testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
+                            done();
+                        }
+                    }
+                ]
+            });
+        }, 
+        1500
+    );
 });

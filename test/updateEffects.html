@@ -5,10 +5,20 @@
         <title>Update effects tests</title>
         <link rel="stylesheet" href="/node_modules/qunit/qunit/qunit.css">
         <style>
-@keyframes textColorChange {
+@keyframes textColorChangeKeyframes {
     0% { color: #0000ff; }
     50% { color: #00ff00; }
     100% { color: #0000ff; }
+}
+
+.textColorChange {
+    animation-name: textColorChangeKeyframes;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+}
+            
+.stopped {
+  animation-name: none;
 }
         </style>
         <script src="http://127.0.0.1:9966/updateEffects.js" defer></script>
@@ -103,6 +113,21 @@
                         <li data-repeat="item object/items">
                             <span data-content="item/name" data-attributes="class 'itemName6'">an item name</span>:
                             <span data-content="item/description" data-attributes="class 'itemDescription6'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Insert and delete item nested element by index TALRepeat</h2>
+        <div id="t7">
+            <ol>
+                <li data-repeat="object objectList7">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName7'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription7'">an item description</span>
                         </li>
                     </ol>
                 </li>
