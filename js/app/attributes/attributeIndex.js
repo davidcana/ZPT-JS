@@ -9,11 +9,11 @@ var context = require( '../context.js' );
 module.exports = (function() {
     
     var map;
-    var tags;
+    //var tags;
     
     var reset = function(){
         map = {};
-        tags = context.getTags();
+        //tags = context.getTags();
     };
     reset();
     
@@ -60,7 +60,7 @@ module.exports = (function() {
         list.push(
             {
                 attributeInstance: attributeInstance,
-                nodeId: node.getAttribute( tags.id ),
+                nodeId: node.getAttribute( context.getTags().id ),
                 groupId: groupId
             }
         );
@@ -89,10 +89,59 @@ module.exports = (function() {
         map[ varName ] = filtered;
     };
     
+    var removeMultiple = function( varName, nodeIds ){
+
+        var list = map[ varName ];
+
+        var filtered = list.filter(
+            function( value, index, arr ){
+                return nodeIds.indexOf( value.nodeId ) === -1;
+            }
+        );
+
+        if ( filtered.length === 0 ){
+            delete map[ varName ];
+        } else {
+            map[ varName ] = filtered;
+        }
+    };
+    
+    var getAllNodeIds = function( target ){
+        
+        // Get the list
+        var list = target.querySelectorAll( '[' + context.getTags().id + ']' );
+
+        // Iterate the list
+        var result = [];
+        var nodeIdAttributeName = context.getTags().id;
+        var node;
+        var pos = 0;
+        while ( node = list[ pos++ ] ) {
+            result.push( 
+                node.getAttribute( nodeIdAttributeName ) 
+            );
+        }
+        
+        return result;
+    };
+    
+    var removeNode = function( node ){
+        
+        var nodeIds = getAllNodeIds( node );
+
+        var nodeId = node.getAttribute( context.getTags().id );
+        nodeIds.push( nodeId );
+        
+        for ( var varName in map ){
+            removeMultiple( varName, nodeIds );
+        }
+    };
+    
     return {
         add: add,
         getVarsList: getVarsList,
         remove: remove,
+        removeNode: removeNode,
         reset: reset
     };
 })();

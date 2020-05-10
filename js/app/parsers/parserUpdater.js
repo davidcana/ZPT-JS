@@ -249,10 +249,13 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     var updateNode = function( node, mustRemoveGeneratedNodes ){
         
         // Remove related to node nodes
+        nodeRemover.removeMultipleNodes( node, mustRemoveGeneratedNodes );
+        /*
         nodeRemover.removeRelatedNodes( node );
         if ( mustRemoveGeneratedNodes ){
             nodeRemover.removeGeneratedNodes( node );
         }
+        */
         
         // Instance and invoke parserNodeRenderer to update node
         var parserNodeRenderer = new ParserNodeRenderer( 

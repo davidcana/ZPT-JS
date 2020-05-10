@@ -3337,6 +3337,126 @@ QUnit.test( "Combined actions starting from an empty array with conditions TALRe
     testFunction( '', 'Alexis/Sophia/Jane/Drew/Tania/Brid', 'The number 10/The number 6/The number 7/The number 8/The number 11/The number 12', '1017/1032', '1029/1020/1023/1026/1035/1038' );
 });
 
+QUnit.test( "Combined actions starting from an empty array deleting and selecting by search TALRepeat test", function( assert ) {
+
+    var testNumber = 48;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( '', '' );
+    
+    // Add 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: 'object1',
+                    items: [
+                        {
+                            name: 'John',
+                            description: 'The number 1'
+                        }, 
+                        {
+                            name: 'Peter',
+                            description: 'The number 2'
+                        },
+                        {
+                            name: 'Luke',
+                            description: 'The number 3'
+                        }
+                    ]
+                }
+            }
+        ]
+    });
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+
+    // Delete 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'deleteArray',
+                currentElement: {
+                    id: 'object1'
+                }
+            }
+        ]
+    });
+    testFunction( '', '' );
+    
+    // Add 1 object
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: 'object2',
+                    items: [
+                        {
+                            name: 'Sophia',
+                            description: 'The number 6'
+                        }, 
+                        {
+                            name: 'Jane',
+                            description: 'The number 7'
+                        },
+                        {
+                            name: 'Drew',
+                            description: 'The number 8'
+                        }
+                    ]
+                }
+            }
+        ]
+    });
+    testFunction( 'Sophia/Jane/Drew', 'The number 6/The number 7/The number 8' );
+    
+    // Add 1 item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object2'
+                    },
+                    'items'
+                ],
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    name: 'Mary',
+                    description: 'The number 9'
+                }
+            }
+        ]
+    });
+    testFunction( 'Sophia/Jane/Drew/Mary', 'The number 6/The number 7/The number 8/The number 9' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

@@ -5,6 +5,7 @@
 
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var utils = require( '../../utils.js' );
+var attributeIndex = require( '../../attributes/attributeIndex.js' );
 
 var ArrayDelete = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
@@ -22,19 +23,22 @@ ArrayDelete.prototype.updateDictionary = function( dictionary ){
 ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance ){
     
     // Must get the nodeToUpdate
-    var nodeToUpdate = this.resolveChildNode( indexItem, parserUpdater );
-    if ( ! nodeToUpdate ){
+    var nodeToDelete = this.resolveChildNode( indexItem, parserUpdater );
+    if ( ! nodeToDelete ){
         throw 'No node found to be deleted at this index: ' + this.indexToUse;
     }
     
     // Run animation
     parserUpdater.runAnimation( 
         actionInstance, 
-        nodeToUpdate, 
+        nodeToDelete, 
         function(){
             
+            // Remove the selected node from the index
+            attributeIndex.removeNode( nodeToDelete );
+            
             // Delete the selected node
-            parserUpdater.deleteNode( nodeToUpdate );  
+            parserUpdater.deleteNode( nodeToDelete );  
         } 
     );
 };
