@@ -20,7 +20,7 @@ ArrayDelete.prototype.updateDictionary = function( dictionary ){
     arrayValue.splice( this.indexToUse, 1 );
 };
 
-ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance ){
+ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionInstance, continueData ){
     
     // Must get the nodeToUpdate
     var nodeToDelete = this.resolveChildNode( indexItem, parserUpdater );
@@ -39,8 +39,13 @@ ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
             
             // Delete the selected node
             parserUpdater.deleteNode( nodeToDelete );  
+            
+            // Continue
+            //parserUpdater.continueUpdateHTML( continueData );
         } 
     );
+    
+    return true;
 };
 
 ArrayDelete.buildMultiple = function( object, dictionary ){

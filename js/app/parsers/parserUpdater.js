@@ -11,6 +11,7 @@ var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 var nodeRemover = require( './nodeRemover.js' );
 var utils = require( '../utils.js' );
 var dictionaryActionBuilder = require( './dictionaryActions/dictionaryActionBuilder.js' );
+var AbstractArrayAction = require( './dictionaryActions/abstractArrayAction.js' );
 
 var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOptions ) {
     
@@ -88,13 +89,14 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
 
     var updateHTML = function(){
 
-        updateHTMLFromActions();
-        updateHTMLFromVarChange();
+        if ( updateHTMLFromActions( 0 ) ){
+            updateHTMLFromVarChange();
+        }
     };
     
-    var updateHTMLFromActions = function(){
+    var updateHTMLFromActions = function( initial ){
 
-        for ( var i = 0; i < dictionaryActionsInstances.length; ++i ){
+        for ( var i = initial; i < dictionaryActionsInstances.length; ++i ){
             var actionInstance = dictionaryActionsInstances[ i ];
             
             // Update dictionary using action
@@ -106,18 +108,83 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
                 continue;
             }
             
-            // Iterate list and udate HTML if required
+            // Iterate list and update HTML if required
+            if ( ! updateHTMLFromVarsList( actionInstance, i, 0, list ) ){
+                return false;
+            }
+            /*
             for ( var j = 0; j < list.length; j++ ) {
                 var indexItem = list[ j ];
                 if ( ! actionInstance.attributeInstanceIsRelated( indexItem.attributeInstance ) ){
                     if ( ! utils.isFunction( indexItem.attributeInstance.updatableFromAction ) 
                             || indexItem.attributeInstance.updatableFromAction( self, findNodeById( indexItem.nodeId ) ) ){
-                        buildDataFromVarChange( actionInstance.id );
+                        buildDataFromVarChangeExcluding( actionInstance.id );
                     }
                     continue;
                 }
-                actionInstance.updateHTML( indexItem, self, actionInstance );
+                
+                if ( ! actionInstance.updateHTML( 
+                    indexItem, 
+                    self, 
+                    actionInstance, 
+                    { 
+                        actionInstance: actionInstance,
+                        i: i, 
+                        list: list,
+                        initialJ: j 
+                    }
+                ) ){
+                    return false;
+                }
             }
+            */
+        }
+        
+        return true;
+    };
+    
+    var updateHTMLFromVarsList = function( actionInstance, i, initialJ, list ){
+        
+        // Iterate list and update HTML if required
+        for ( var j = initialJ; j < list.length; j++ ) {
+            var indexItem = list[ j ];
+            if ( ! actionInstance.attributeInstanceIsRelated( indexItem.attributeInstance ) ){
+                if ( ! utils.isFunction( indexItem.attributeInstance.updatableFromAction ) 
+                        || indexItem.attributeInstance.updatableFromAction( self, findNodeById( indexItem.nodeId ) ) ){
+                    buildDataFromVarChangeExcluding( actionInstance.id );
+                }
+                continue;
+            }
+
+            if ( ! actionInstance.updateHTML( 
+                indexItem, 
+                self, 
+                actionInstance, 
+                { 
+                    actionInstance: actionInstance,
+                    i: i, 
+                    initialJ: j,
+                    list: list
+                }
+            ) ){
+                return false;
+            }
+        }
+        
+        return true;
+    };
+    
+    var continueUpdateHTML = function( continueData ){
+
+        updateHTMLFromVarsList(
+            continueData.actionInstance, 
+            continueData.i, 
+            continueData.initialJ, 
+            continueData.list
+        );
+        
+        if ( updateHTMLFromActions( continueData.i ) ){
+            updateHTMLFromVarChange();
         }
     };
     
@@ -162,6 +229,27 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         
         // Get the list of changes related to varName
         var list = attributeIndex.getVarsList( varName );
+        buildDataFromList( varName, list );
+    };
+    
+    var buildDataFromVarChangeExcluding = function( varName ){
+        
+        // Get the list of changes related to varName
+        var list = attributeIndex.getVarsList( varName );
+        
+        var filtered = list.filter(
+            function( indexItem, index, arr ){
+                return ! AbstractArrayAction.staticAttributeInstanceIsRelated(
+                    indexItem.attributeInstance
+                );
+            }
+        );
+        
+        buildDataFromList( varName, filtered );
+    };
+    
+    var buildDataFromList = function( varName, list ){
+        
         if ( ! list ){
             return;
         }

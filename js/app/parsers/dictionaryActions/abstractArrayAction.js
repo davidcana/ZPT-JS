@@ -59,6 +59,10 @@ AbstractArrayAction.prototype.getIndexToUse = function( dictionary ){
 };
 
 AbstractArrayAction.prototype.attributeInstanceIsRelated = function( attributeInstance ){
+    return AbstractArrayAction.staticAttributeInstanceIsRelated( attributeInstance );
+};
+
+AbstractArrayAction.staticAttributeInstanceIsRelated = function( attributeInstance ){
     return attributeInstance.type === 'tal:repeat';
 };
 

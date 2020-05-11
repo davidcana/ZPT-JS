@@ -33,6 +33,8 @@ ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
     
     // Run animation
     parserUpdater.runAnimation( actionInstance, nodeToUpdate );
+    
+    return true;
 };
 
 module.exports = ArrayUpdate;

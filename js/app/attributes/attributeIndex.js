@@ -70,6 +70,11 @@ module.exports = (function() {
         
         var items = map[ varName ];
         
+        // Return an empty list if needed
+        if ( items === undefined ){
+            return [];
+        }
+        
         // We must build another list to avoid sync errors
         var result = [];
         result = result.concat( items );

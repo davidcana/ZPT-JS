@@ -133,5 +133,41 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>Insert item nested element by index using the loop var TALRepeat</h2>
+        <div id="t8">
+            <div data-condition="not: objectList8" data-attributes="id 'noElements8'">
+                No elements
+            </div>
+            <ol>
+                <li data-repeat="object objectList8">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName8'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription8'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        
+        <h2>Insert item nested element by index using the loop var in parent node TALRepeat</h2>
+        <div id="t9">
+            <div data-condition="not: objectList9" data-attributes="id 'noElements9'">
+                No elements
+            </div>
+            <ol data-condition="objectList8">
+                <li data-repeat="object objectList9">
+                    <span data-content="object/id"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName9'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription9'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>

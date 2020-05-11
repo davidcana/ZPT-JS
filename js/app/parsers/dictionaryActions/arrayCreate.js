@@ -66,6 +66,8 @@ ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
     
     // Run animation
     parserUpdater.runAnimation( actionInstance, tmpNode );
+    
+    return true;
 };
 
 ArrayCreate.buildMultiple = function( object, dictionary ){

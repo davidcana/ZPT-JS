@@ -31,6 +31,8 @@ AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater, 
     
     // Run animation
     parserUpdater.runAnimation( actionInstance, node );
+    
+    return true;
 };
 
 module.exports = AbstractObjectAction;
