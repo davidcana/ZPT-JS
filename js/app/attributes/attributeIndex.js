@@ -48,7 +48,24 @@ module.exports = (function() {
             addVar( node, attributeInstance, item, groupId );
         }
     };
+    /*
+    var addVar = function( node, attributeInstance, varName, groupId  ){
+        
+        var list = map[ varName ];
+        if ( ! list ){
+            list = [];
+            map[ varName ] = list;
+        }
 
+        list.push(
+            {
+                attributeInstance: attributeInstance,
+                nodeId: node.getAttribute( context.getTags().id ),
+                groupId: groupId
+            }
+        );
+    };
+    */
     var addVar = function( node, attributeInstance, varName, groupId  ){
         
         var list = map[ varName ];
@@ -57,13 +74,18 @@ module.exports = (function() {
             map[ varName ] = list;
         }
         
-        list.push(
-            {
-                attributeInstance: attributeInstance,
-                nodeId: node.getAttribute( context.getTags().id ),
-                groupId: groupId
-            }
-        );
+        var newItem = {
+            attributeInstance: attributeInstance,
+            nodeId: node.getAttribute( context.getTags().id ),
+            groupId: groupId
+        };
+        
+        var index = list.findIndex( item => utils.deepEqual( item, newItem ) );
+        if ( index === -1 ){
+            list.push( newItem );
+        } else {
+            list[ index ] = newItem;
+        }
     };
     
     var getVarsList = function( varName ){

@@ -3457,6 +3457,96 @@ QUnit.test( "Combined actions starting from an empty array deleting and selectin
     testFunction( 'Sophia/Jane/Drew/Mary', 'The number 6/The number 7/The number 8/The number 9' );
 });
 
+QUnit.test( "Insert and delete object nested element by index using the loop var with partial render TALRepeat test", function( assert ) {
+
+    var testNumber = 49;
+    //var done = assert.async();
+    
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        if ( arguments[ 0 ] ){
+            assert.ok( $('#noElements' + testNumber ).is( ':visible') );
+        } else {
+            assert.notOk( $('#noElements' + testNumber ).is( ':visible') );
+        }
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 1 ] );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 2 ] );
+        assert.equal( errorsArray, undefined );
+    };
+    testFunction( true, '', '' );
+    
+    // Do a partial render
+    zpt.run({
+        command: 'partialRender',
+        target: document.getElementById( 't' + testNumber + '-inside' )
+    });
+    testFunction( true, '', '' );
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_first_',
+                newElement: {
+                    id: 'object1',
+                    items: [
+                        {
+                            name: 'John',
+                            description: 'The number 1'
+                        }, 
+                        {
+                            name: 'Peter',
+                            description: 'The number 2'
+                        },
+                        {
+                            name: 'Luke',
+                            description: 'The number 3'
+                        }
+                    ]
+                },
+                animation: 'textColorChangeKeyframes 1s 2'
+            }
+        ]
+    });
+    testFunction( false, 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    /*
+    setTimeout(
+            function() {
+                zpt.run({
+                    command: 'update',
+                    dictionaryActions: [
+                        {
+                            id: 'objectList' + testNumber,
+                            action: 'deleteArray',
+                            currentElement: {
+                                id: 'object1'
+                            },
+                            animation: 'textColorChangeKeyframes 1s 2',
+                            animationCallback: function(){
+                                //alert( 'animationCallback' );
+                                testFunction( true, '', '' );
+                                done();
+                            }
+                        }
+                    ]
+                });
+            }, 
+            1100
+        );
+        */
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

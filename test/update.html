@@ -635,5 +635,25 @@
                 </li>
             </ol>
         </div>
+        
+        <h2>Insert and delete item nested element by index using the loop var with partial render TALRepeat</h2>
+        <div id="t49">
+            <div id="t49-inside">
+                <div data-condition="not: objectList49" data-attributes="id 'noElements49'">
+                    No elements
+                </div>
+                <ol>
+                    <li data-repeat="object objectList49">
+                        <span data-content="object/id"></span>
+                        <ol>
+                            <li data-repeat="item object/items">
+                                <span data-content="item/name" data-attributes="class 'itemName49'">an item name</span>:
+                                <span data-content="item/description" data-attributes="class 'itemDescription49'">an item description</span>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
     </body>
 </html>
