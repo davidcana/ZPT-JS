@@ -179,11 +179,11 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         updateHTMLFromVarsList(
             continueData.actionInstance, 
             continueData.i, 
-            continueData.initialJ, 
+            continueData.initialJ + 1, 
             continueData.list
         );
         
-        if ( updateHTMLFromActions( continueData.i ) ){
+        if ( updateHTMLFromActions( continueData.i + 1 ) ){
             updateHTMLFromVarChange();
         }
     };
@@ -374,7 +374,8 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         getStatistics: getStatistics,
         addUpdatedToStatistics: addUpdatedToStatistics,
         addRemovedToStatistics: addRemovedToStatistics,
-        runAnimation: runAnimation
+        runAnimation: runAnimation,
+        continueUpdateHTML: continueUpdateHTML
     };
     
     return self;

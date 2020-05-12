@@ -647,7 +647,7 @@ QUnit.test( "Insert and delete item nested element by index TALRepeat test", fun
     );
 });
 
-QUnit.test( "Insert object nested element by index using the loop var TALRepeat test", function( assert ) {
+QUnit.test( "Insert and delete object nested element by index using the loop var TALRepeat test", function( assert ) {
 
     var testNumber = 8;
     var done = assert.async();

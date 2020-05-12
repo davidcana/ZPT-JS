@@ -41,11 +41,12 @@ ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
             parserUpdater.deleteNode( nodeToDelete );  
             
             // Continue
-            //parserUpdater.continueUpdateHTML( continueData );
+            parserUpdater.continueUpdateHTML( continueData );
         } 
     );
     
-    return true;
+    //return true;
+    return false;
 };
 
 ArrayDelete.buildMultiple = function( object, dictionary ){
