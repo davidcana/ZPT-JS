@@ -97,9 +97,15 @@ var TALAttributes = function( stringToApply, attributeItemsToApply ) {
         
         for ( var i = 0; i < attributeItems.length; i++ ) {
             var attributeItem = attributeItems[ i ];
-            object[ attributeItem.name ] = expressionsUtils.buildDependsOnList( undefined, scope, attributeItem.expression );
+            var dependsOnList = expressionsUtils.buildDependsOnList( undefined, scope, attributeItem.expression );
+            if ( dependsOnList && dependsOnList.length > 0 ){
+                object[ attributeItem.name ] = dependsOnList;
+            }
         }
-        result.push( object );
+        
+        if ( Object.keys( object ).length > 0 ){
+            result.push( object );
+        }
         
         return result;
     };
