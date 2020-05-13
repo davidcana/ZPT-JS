@@ -130,3 +130,15 @@ QUnit.test( "Using null target test", function( assert ) {
         assert.equal( e , "Unable to process null root or target!" );
     }
 });
+
+QUnit.test( "Using undefined expression in path expression test", function( assert ) {
+
+    try {
+        zpt.run({
+            root: $( '#t6' )[0],
+            dictionary: dictionary
+        });
+    } catch( e ){
+        assert.equal( e , "Null token inside path expression: 'a' || 'b'" );
+    }
+});

@@ -83,9 +83,13 @@ PathExpression.build = function( s ) {
     // If there are more than 1 they can be any expression instance
     var expressionList = [];
     while ( segments.hasMoreTokens() ) {
+        var nextToken = segments.nextToken();
+        if ( ! nextToken ){
+            throw 'Null token inside path expression: ' + string;
+        }
         expressionList.push( 
             expressionBuilder.build( 
-                segments.nextToken() 
+                nextToken
             ) 
         );
     }
