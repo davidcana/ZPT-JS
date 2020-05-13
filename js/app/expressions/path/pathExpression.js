@@ -7,6 +7,7 @@ var context = require( '../../context.js' );
 var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 var StringLiteral = require( './literals/stringLiteral.js' );
 var PathSegmentExpression = require( './pathSegmentExpression.js' );
+var expressionsUtils = require( '../expressionsUtils.js' );
 
 var PathExpression = function( stringToApply, expressionListToApply ) {
     
@@ -36,12 +37,17 @@ var PathExpression = function( stringToApply, expressionListToApply ) {
         return null;
     };
 
+    var dependsOn = function( depsDataItem, scope ){
+        return expressionsUtils.buildDependsOnList( depsDataItem, scope, expressionList );
+    };
+    
     var toString = function(){
         return string;
     };
     
     return {
         evaluate: evaluate,
+        dependsOn: dependsOn,
         toString: toString
     };
 };

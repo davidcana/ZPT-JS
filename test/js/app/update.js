@@ -3520,31 +3520,94 @@ QUnit.test( "Insert and delete object nested element by index using the loop var
         ]
     });
     testFunction( false, 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
-    /*
-    setTimeout(
-            function() {
-                zpt.run({
-                    command: 'update',
-                    dictionaryActions: [
+});
+
+QUnit.test( "Update object nested element using | operator test", function( assert ) {
+
+    var testNumber = 50;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.objectId' + testNumber ), arguments[ 0 ] );
+        assert.equal( utils.getAllValues( '.objectText' + testNumber ), arguments[ 1 ] );
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 2 ] );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 3 ] );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( '', '', '', '' );
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objectList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: 'object1',
+                    items: [
                         {
-                            id: 'objectList' + testNumber,
-                            action: 'deleteArray',
-                            currentElement: {
-                                id: 'object1'
-                            },
-                            animation: 'textColorChangeKeyframes 1s 2',
-                            animationCallback: function(){
-                                //alert( 'animationCallback' );
-                                testFunction( true, '', '' );
-                                done();
-                            }
+                            name: 'John',
+                            description: 'The number 1'
+                        }, 
+                        {
+                            name: 'Peter',
+                            description: 'The number 2'
+                        },
+                        {
+                            name: 'Luke',
+                            description: 'The number 3'
                         }
                     ]
-                });
-            }, 
-            1100
-        );
-        */
+                }
+            }
+        ]
+    });
+    testFunction( 'object1', '-', 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
+    
+    // Add 1 item
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object1'
+                    },
+                    'items'
+                ],
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    name: 'Mary',
+                    description: 'The number 9'
+                }
+            },
+            {
+                search: [
+                    'objectList' + testNumber,
+                    {
+                        id: 'object1'
+                    }
+                ],
+                action: 'updateObject',
+                property: 'text',
+                newElement: 'object text 1'
+            }
+        ]
+    });
+    
+    testFunction( 'object1', 'object text 1', 'John/Peter/Luke/Mary', 'The number 1/The number 2/The number 3/The number 9' );
 });
 
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {

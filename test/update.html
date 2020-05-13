@@ -655,5 +655,21 @@
                 </ol>
             </div>
         </div>
+        
+        <h2>Update object nested element using | operator</h2>
+        <div id="t50">
+            <ol>
+                <li data-repeat="object objectList50">
+                    <span data-content="object/id" data-attributes="class 'objectId50'"></span>:
+                    <span data-content="object/text | '-'" data-attributes="class 'objectText50'"></span>
+                    <ol>
+                        <li data-repeat="item object/items">
+                            <span data-content="item/name" data-attributes="class 'itemName50'">an item name</span>:
+                            <span data-content="item/description" data-attributes="class 'itemDescription50'">an item description</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
     </body>
 </html>
