@@ -11,6 +11,8 @@ New in future versions
 New in 0.41.0
 - Update command improved: support of method invocation and ranges?
 - Full reactive support: support of nested object?
+- Add support of chaining to dictionary actions (like the DeleteArray)?
+- Implement VariableUpdate as a new dictionary action?
 
 New in 0.40.0
 - Update effects initial support.

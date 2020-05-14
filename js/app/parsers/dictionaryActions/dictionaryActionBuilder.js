@@ -25,7 +25,9 @@ module.exports = (function() {
                 ArrayCreate.buildMultiple( object, dictionary ):
                 new ArrayCreate( object, dictionary );
         case 'updateObject':
-            return new ObjectUpdate( object, dictionary );
+            return object.editedProperties || object.deletedProperties?
+                ObjectUpdate.buildMultiple( object, dictionary ):
+                new ObjectUpdate( object, dictionary );
         case 'deleteObject':
             return new ObjectDelete( object, dictionary );
         default:

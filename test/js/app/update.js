@@ -3610,6 +3610,64 @@ QUnit.test( "Update object nested element using | operator test", function( asse
     testFunction( 'object1', 'object text 1', 'John/Peter/Luke/Mary', 'The number 1/The number 2/The number 3/The number 9' );
 });
 
+QUnit.test( "Multiple properties of objects updated", function( assert ) {
+
+    var testNumber = 51;
+    var dictionary = {};
+    dictionary[ 'objectList' + testNumber ] = [
+        {
+            id: 'object1',
+            text: 'text1',
+            longText: 'longText1',
+            anotherLongText: 'anotherLongText1'
+        },
+        {
+            id: 'object2',
+            text: 'text2',
+            longText: 'longText2',
+            anotherLongText: 'anotherLongText2'
+        }
+    ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.objectId' + testNumber ), arguments[ 0 ] );
+        assert.equal( utils.getAllValues( '.objectText' + testNumber ), arguments[ 1 ] );
+        assert.equal( utils.getAllValues( '.objectLongText' + testNumber ), arguments[ 2 ] );
+        assert.equal( utils.getAllValues( '.anotherLongText' + testNumber ), arguments[ 3 ] );
+        assert.equal( errorsArray, undefined );
+    };
+    
+    testFunction( 'object1/object2', 'text1/text2', 'longText1/longText2', 'anotherLongText1/anotherLongText2' );
+    
+    // Change object/id and object/text; delete object/longText
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objectList' + testNumber,
+                    '_last_'
+                ],
+                action: 'updateObject',
+                editedProperties: {
+                    id: 'object2b',
+                    text: 'text2b'
+                },
+                deletedProperties: [ 'longText', 'anotherLongText' ]
+            }
+        ]
+    });
+    testFunction( 'object1/object2b', 'text1/text2b', 'longText1/-', 'anotherLongText1/-' );
+    
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {
