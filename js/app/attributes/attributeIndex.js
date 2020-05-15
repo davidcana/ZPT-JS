@@ -116,7 +116,7 @@ module.exports = (function() {
         map[ varName ] = filtered;
     };
     
-    var removeMultiple = function( varName, nodeIds ){
+    var removeVarFromNodes = function( varName, nodeIds ){
 
         var list = map[ varName ];
 
@@ -160,7 +160,14 @@ module.exports = (function() {
         nodeIds.push( nodeId );
         
         for ( var varName in map ){
-            removeMultiple( varName, nodeIds );
+            removeVarFromNodes( varName, nodeIds );
+        }
+    };
+    
+    var removeMultipleNodes = function( nodeIds ){
+    
+        for ( var varName in map ){
+            removeVarFromNodes( varName, nodeIds );
         }
     };
     
@@ -169,6 +176,7 @@ module.exports = (function() {
         getVarsList: getVarsList,
         removeVar: removeVar,
         removeNode: removeNode,
+        removeMultipleNodes: removeMultipleNodes,
         reset: reset
     };
 })();

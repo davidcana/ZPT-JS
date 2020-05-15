@@ -9,6 +9,7 @@ var nodeRemover = require( './nodeRemover.js' );
 var Scope = require( '../scopes/scope.js' );
 var i18nHelper = require( '../i18n/i18nHelper.js' );
 var resolver = require( '../resolver.js' );
+var attributeIndex = require( '../attributes/attributeIndex.js' );
 
 var ParserPreloader = function( _parserOptions, _callback, _failCallback, _declaredRemotePageUrls, _i18n, _notRemoveGeneratedTags, _maxFolderDictionaries ) {
     
@@ -24,7 +25,9 @@ var ParserPreloader = function( _parserOptions, _callback, _failCallback, _decla
 
         try {
             if ( ! notRemoveGeneratedTags ){
-                nodeRemover.removeGeneratedNodes( parserOptions.root );
+                attributeIndex.removeMultipleNodes(
+                    nodeRemover.removeGeneratedNodes( parserOptions.root )
+                );
             }
 
             var scope = new Scope( 

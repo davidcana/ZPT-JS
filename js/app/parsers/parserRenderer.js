@@ -32,7 +32,9 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
             }
 
             if ( ! notRemoveGeneratedTags ){
-                nodeRemover.removeGeneratedNodes( target );
+                attributeIndex.removeMultipleNodes(
+                    nodeRemover.removeGeneratedNodes( target )
+                );
             }
 
             if ( resetIndex ){

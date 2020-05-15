@@ -65,11 +65,30 @@ module.exports = (function() {
                 result.push( nodeId );
             }
             
+            // Add the nodeIds of its children
+            addNodeIdsToList( node, result );
+            
             // Remove node
             node.parentNode.removeChild( node );
         }
         
         return result;
+    };
+    
+    var addNodeIdsToList = function( target, result ){
+        
+        // Get the nodes with data-id
+        var nodeIdAttributeName = context.getTags().id;
+        var list = target.querySelectorAll( '[' + nodeIdAttributeName + ']' );
+        
+        // Iterate the list
+        var node;
+        var pos = 0;
+        while ( node = list[ pos++ ] ) {
+            result.push( 
+                node.getAttribute( nodeIdAttributeName ) 
+            );
+        }
     };
     
     var getNodeId = function( node ){

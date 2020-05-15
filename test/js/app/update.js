@@ -3667,7 +3667,7 @@ QUnit.test( "Multiple properties of objects updated", function( assert ) {
     testFunction( 'object1/object2b', 'text1/text2b', 'longText1/-', 'anotherLongText1/-' );
     
 });
-/*
+
 QUnit.test( "Update array and array deleting TALRepeat test", function( assert ) {
 
     var testNumber = 52;
@@ -3754,7 +3754,7 @@ QUnit.test( "Update array and array deleting TALRepeat test", function( assert )
     });
     testFunction( 'John/Peter/Luke/Michael/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 6' );
 });
-*/
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {
