@@ -6,6 +6,7 @@
 var AbstractArrayAction = require( './abstractArrayAction.js' );
 var utils = require( '../../utils.js' );
 var attributeIndex = require( '../../attributes/attributeIndex.js' );
+var nodeRemover = require( '../nodeRemover.js' );
 
 var ArrayDelete = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
@@ -38,7 +39,9 @@ ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
             attributeIndex.removeNode( nodeToDelete );
             
             // Delete the selected node
-            parserUpdater.deleteNode( nodeToDelete );  
+            //parserUpdater.deleteNode( nodeToDelete );  
+            nodeRemover.removeNode( nodeToDelete );
+            //TODO update next siblings?
             
             // Continue
             parserUpdater.continueUpdateHTML( continueData );

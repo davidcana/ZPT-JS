@@ -258,7 +258,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         var length = list.length;
         for ( var i = 0; i < length; i++ ) {
             if ( ! addNewNodeAttribute( varName, list[ i ] ) ){
-                attributeIndex.remove( varName, list[ i ].nodeId );
+                attributeIndex.removeVar( varName, list[ i ].nodeId );
             }
         }
     };
@@ -338,12 +338,6 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         
         // Remove related to node nodes
         nodeRemover.removeMultipleNodes( node, mustRemoveGeneratedNodes );
-        /*
-        nodeRemover.removeRelatedNodes( node );
-        if ( mustRemoveGeneratedNodes ){
-            nodeRemover.removeGeneratedNodes( node );
-        }
-        */
         
         // Instance and invoke parserNodeRenderer to update node
         var parserNodeRenderer = new ParserNodeRenderer( 
@@ -358,17 +352,15 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         );
         parserNodeRenderer.run();
     };
-
+    /*
     var deleteNode = function( node ){
         node.parentNode.removeChild( node );
-        
-        //TODO update next siblings?
     };
-    
+    */
     var self = {
         run: run,
         updateNode: updateNode,
-        deleteNode: deleteNode,
+        //deleteNode: deleteNode,
         findNodeById: findNodeById,
         getNodeScope: getNodeScope,
         getStatistics: getStatistics,

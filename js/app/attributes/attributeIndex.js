@@ -103,7 +103,7 @@ module.exports = (function() {
         return result;
     };
     
-    var remove = function( varName, nodeId ){
+    var removeVar = function( varName, nodeId ){
 
         var list = map[ varName ];
 
@@ -167,7 +167,7 @@ module.exports = (function() {
     return {
         add: add,
         getVarsList: getVarsList,
-        remove: remove,
+        removeVar: removeVar,
         removeNode: removeNode,
         reset: reset
     };
