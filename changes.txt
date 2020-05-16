@@ -13,6 +13,7 @@ New in 0.41.0
 - Full reactive support: support of nested object?
 - Add support of chaining to dictionary actions (like the DeleteArray)?
 - Implement VariableUpdate as a new dictionary action?
+- Don't throw any exception when an indexed node is not found?
 
 New in 0.40.0
 - Update effects initial support.
