@@ -12,19 +12,31 @@
         <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
         <style>
 @keyframes createKeyframes {
-    0% { color: #0000ff; }
-    50% { color: #00ff00; }
-    100% { color: blue; }
+    0% { 
+        color: black;
+    }
+    100% { 
+        color: blue;
+        font-size: 150%;
+    }
 }
 @keyframes updateKeyframes {
-    0% { color: #0000ff; }
-    50% { color: #00ff00; }
-    100% { color: orange; }
+    0% { 
+        color: black;
+    }
+    100% { 
+        color: orange;
+        font-size: 150%;
+    }
 }
 @keyframes deleteKeyframes {
-    0% { color: #0000ff; }
-    50% { color: #00ff00; }
-    100% { color: red; }
+    0% { 
+        color: black;
+    }
+    100% { 
+        color: red;
+        font-size: 150%;
+    }
 }
         </style>
     </head>
@@ -32,13 +44,22 @@
         <div data-use-macro="'page@templates.html'">
             <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Updating example</h1>
+                <ul>
+                    <li><a href="#managing">Managing the list of objects</a>.</li>
+                    <li><a href="#listOfObjects">List of objects</a>.</li>
+                    <li><a href="#how">How does it work?</a></li>
+                </ul>
             </div>
             <article data-fill-slot="'article'">
                 <p>
                     Now we are going to view ZPT-JS in action!
                 </p>
                 
-                <h2>Managing the list of objects</h2>
+                <h2 data-attributes="id 'managing'">Managing the list of objects</h2>
+                <p>
+                    This example shows <em>dictionary actions</em> using <em>CSS animations</em>. Use the next form to manage the <em>list of objects</em>:
+                </p>
+                
                 <ul>
                     <li>
                         <em>Add object</em>. Add an object to the list.
@@ -122,7 +143,7 @@
                     </li>
                 </ul>
                 
-                <h2>List of objects</h2>
+                <h2 data-attributes="id 'listOfObjects'">List of objects</h2>
                 <ol>
                     <li data-repeat="object objects">
                         Object id: <span data-content="object/id">An object id</span>
@@ -133,6 +154,290 @@
                         </ul>
                     </li>
                 </ol>
+                
+                <h2 data-attributes="id 'how'">How does it work?</h2>
+                <p>
+                    To build the initial list of objects:
+                </p>
+                <pre class="brush: js">
+// Init dictionary
+var dictionary = {
+    objects: [
+        {
+            id: 'object1',
+            items: [ 'item1', 'item2', 'item3' ]
+        },
+        {
+            id: 'object2',
+            items: [ 'item1', 'item2', 'item3' ]
+        }
+    ]
+};
+
+// Invoke ZPT
+zpt.run(
+    {
+        command: 'preload',
+        root: document.body,
+        dictionary: dictionary,
+        declaredRemotePageUrls: [ 'templates.html' ],
+        maxFolderDictionaries: 5,
+        callback: function(){
+            zpt.run();
+            
+            // Here is the event listeners code, it will be explained hereunder!
+    }
+                </pre>
+                
+                <p>
+                    When the <em>Add object</em> button is clicked:
+                </p>
+                <pre class="brush: js; highlight: [9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]">
+document.getElementById( 'addObjectButton' ).addEventListener( 'click', function(){
+
+    var objectId = document.getElementById( 'objectIdToAdd' ).value;
+    if ( ! objectId ){
+        alert( 'Please, type an object id!' );
+        return;
+    }
+
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objects',
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    id: objectId,
+                    items: []
+                },
+                animation: 'createKeyframes 1s 3'
+            }
+        ]
+    });
+});
+                </pre>
+                
+                <p>
+                    When the <em>Update object</em> button is clicked:
+                </p>
+                <pre class="brush: js; highlight: [14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]">
+document.getElementById( 'updateObjectButton' ).addEventListener( 'click', function(){
+
+    var currentObjectId = document.getElementById( 'currentObjectIdToUpdate' ).value;
+    if ( ! currentObjectId ){
+        alert( 'Please, type a current object id!' );
+        return;
+    }
+    var newObjectId = document.getElementById( 'newObjectIdToUpdate' ).value;
+    if ( ! newObjectId ){
+        alert( 'Please, type a new current object id!' );
+        return;
+    }
+
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objects',
+                    {
+                        id: currentObjectId
+                    }
+                ],
+                action: 'updateObject',
+                property: 'id',
+                newElement: newObjectId,
+                animation: 'updateKeyframes 1s 3'
+            }
+        ]
+    });
+});
+                </pre>
+                
+                <p>
+                    When the <em>Remove object</em> button is clicked:
+                </p>
+                <pre class="brush: js; highlight: [9,10,11,12,13,14,15,16,17,18,19,20,21]">
+document.getElementById( 'removeObjectButton' ).addEventListener( 'click', function(){
+
+    var objectId = document.getElementById( 'objectIdToRemove' ).value;
+    if ( ! objectId ){
+        alert( 'Please, type an object id!' );
+        return;
+    }
+
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'objects',
+                action: 'deleteArray',
+                currentElement: {
+                    id: objectId
+                },
+                animation: 'deleteKeyframes 1s 3'
+            }
+        ]
+    });
+});
+                </pre>
+                
+                <p>
+                    When the <em>Add item</em> button is clicked:
+                </p>
+                <pre class="brush: js; highlight: [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]">
+document.getElementById( 'addItemButton' ).addEventListener( 'click', function(){
+
+    var objectId = document.getElementById( 'objectFromItemToAdd' ).value;
+    if ( ! objectId ){
+        alert( 'Please, type an object id!' );
+        return;
+    }
+
+    var item = document.getElementById( 'itemToAdd' ).value;
+    if ( ! item ){
+        alert( 'Please, type an item!' );
+        return;
+    }
+
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objects',
+                    {
+                        id: objectId
+                    },
+                    'items'
+                ],
+                action: 'createArray',
+                index: '_last_',
+                newElement: item,
+                animation: 'createKeyframes 1s 3'
+            }
+        ]
+    });
+});
+                </pre>
+                
+                <p>
+                    When the <em>Update item</em> button is clicked:
+                </p>
+                <pre class="brush: js; highlight: [21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38]">
+document.getElementById( 'updateItemButton' ).addEventListener( 'click', function(){
+
+    var objectId = document.getElementById( 'objectFromItemToUpdate' ).value;
+    if ( ! objectId ){
+        alert( 'Please, type an object id!' );
+        return;
+    }
+
+    var currentItem = document.getElementById( 'currentItemToUpdate' ).value;
+    if ( ! currentItem ){
+        alert( 'Please, type a current item!' );
+        return;
+    }
+
+    var newItem = document.getElementById( 'newItemToUpdate' ).value;
+    if ( ! newItem ){
+        alert( 'Please, type a new item!' );
+        return;
+    }
+
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objects',
+                    {
+                        id: objectId
+                    },
+                    'items'
+                ],
+                action: 'updateArray',
+                currentElement: currentItem,
+                newElement: newItem,
+                animation: 'updateKeyframes 1s 3'
+            }
+        ]
+    });
+});
+                </pre>
+                
+                <p>
+                    When the <em>Remove item</em> button is clicked:
+                </p>
+                <pre class="brush: js; highlight: [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]">
+document.getElementById( 'removeItemButton' ).addEventListener( 'click', function(){
+
+    var objectId = document.getElementById( 'objectFromItemToRemove' ).value;
+    if ( ! objectId ){
+        alert( 'Please, type an object id!' );
+        return;
+    }
+
+    var item = document.getElementById( 'itemToRemove' ).value;
+    if ( ! item ){
+        alert( 'Please, type an item!' );
+        return;
+    }
+
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                search: [
+                    'objects',
+                    {
+                        id: objectId
+                    },
+                    'items'
+                ],
+                action: 'deleteArray',
+                currentElement: item,
+                animation: 'deleteKeyframes 1s 3'
+            }
+        ]
+    });
+});
+                </pre>
+                
+                <p>
+                    The keyframes styles of <em>animation</em> elements are embedded in the HTML header:
+                </p>
+                <pre class="brush: css">
+@keyframes createKeyframes {
+    0% { 
+        color: black;
+    }
+    100% { 
+        color: blue;
+        font-size: 150%;
+    }
+}
+@keyframes updateKeyframes {
+    0% { 
+        color: black;
+    }
+    100% { 
+        color: orange;
+        font-size: 150%;
+    }
+}
+@keyframes deleteKeyframes {
+    0% { 
+        color: black;
+    }
+    100% { 
+        color: red;
+        font-size: 150%;
+    }
+}
+                </pre>
             </article>
         </div>
     </body>

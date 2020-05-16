@@ -25,45 +25,6 @@
                 <h2 data-attributes="id 'syntax'">Syntax</h2>
                 <pre class="syntax">
 var name = new zpt.ReactiveDictionary( object, [ autoCommit ] );
-
-dictionaryActions = updateArray || deleteArray || createArray || updateObject || deleteObject
-updateArray = {
-    id: identifier,
-    search: searchObject,
-    action: 'updateArray',
-    index: number,
-    currentElement: number || String || object
-    newElement: number || String || object
-}
-deleteArray = {
-    id: identifier,
-    search: searchObject,
-    action: 'deleteArray',
-    index: number,
-    currentElement: number || String || object
-}
-createArray = {
-    id: identifier,
-    search: searchObject,
-    action: 'createArray',
-    index: number,
-    newElement: number || String || object
-}
-updateObject = {
-    id: identifier,
-    search: searchObject,
-    action: 'updateObject',
-    property: identifier,
-    newElement: number || String || object
-}
-deleteObject = {
-    id: identifier,
-    search: searchObject,
-    action: 'deleteObject',
-    property: identifier
-}
-searchObject = [ searchObjectItem+ ]
-searchObjectItem = number || String || object
                 </pre>
                 
                 <h2 data-attributes="id 'description'">Description</h2>
@@ -87,7 +48,7 @@ searchObjectItem = number || String || object
                     <li><em>_setAutoCommit( autoCommit )</em>. Updates the auto commit mode.</li>
                     <li><em>_commit()</em>. Commits changes. It does nothing if the auto commit mode is on (there is noaction to commit).</li>
                     <li><em>_addVariable( key, value )</em>. Useful to add a new entry to the dictionary. It is needed for adding the getter and the setter to the dictionary.</li>
-                    <li><em>_addActions( dictionaryActions )</em>. Add some special actions to the dictionary. They include add, edit and remove elements in an array or edit and remove element in an object. For more details about dictionary action go to <a href="../tutorial/moreAboutUpdating.html">tutorial</a>.</li>
+                    <li><em>_addActions( dictionaryActions )</em>. Add some special actions to the dictionary. They include add, edit and remove elements in an array or edit and remove element in an object. For more details about dictionary actions go to <a href="configuration-dictionaryActions.html">reference</a> or <a href="../tutorial/moreAboutUpdating.html">tutorial</a>.</li>
                 </ul>
                 
                 <h2 data-attributes="id 'examples'">Examples</h2>

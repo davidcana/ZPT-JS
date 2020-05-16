@@ -80,7 +80,12 @@ module.exports = (function() {
             groupId: groupId
         };
         
-        var index = list.findIndex( item => utils.deepEqual( item, newItem ) );
+        //var index = list.findIndex( item => utils.deepEqual( item, newItem ) );
+        var index = list.findIndex( 
+            function( item ) { 
+                return utils.deepEqual( item, newItem );
+            }
+        );
         if ( index === -1 ){
             list.push( newItem );
         } else {

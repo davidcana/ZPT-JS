@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ZPT-JS reference - Configuration - dictionaryActions</title>
+        
+        <script type="text/javascript" src="../lib/zpt.min.js" defer></script>
+        <script type="text/javascript" src="../js/zpt.js" defer></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS reference - Configuration - dictionaryActions</h1>
+                <ul>
+                    <li><a href="#syntax">Syntax</a>.</li>
+                    <li><a href="#description">Description</a>.</li>
+                    <li><a href="#examples">Examples</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'syntax'">Syntax</h2>
+                <pre class="syntax">
+dictionaryActions ::= [ dictionaryActionsItem+ ]
+dictionaryActionsItem ::= updateArray || deleteArray || createArray || updateObject || deleteObject
+updateArray ::= {
+    id: identifier,
+    search: searchObject,
+    action: 'updateArray',
+    index: number,
+    currentElement: number || String || object
+    newElement: number || String || object
+}
+deleteArray ::= {
+    id: identifier,
+    search: searchObject,
+    action: 'deleteArray',
+    index: number,
+    currentElement: number || String || object
+}
+createArray ::= {
+    id: identifier,
+    search: searchObject,
+    action: 'createArray',
+    index: number,
+    newElement: number || String || object
+}
+updateObject ::= {
+    id: identifier,
+    search: searchObject,
+    action: 'updateObject',
+    property: identifier,
+    newElement: number || String || object
+}
+deleteObject ::= {
+    id: identifier,
+    search: searchObject,
+    action: 'deleteObject',
+    property: identifier
+}
+searchObject ::= [ searchObjectItem+ ]
+searchObjectItem ::= number || String || object
+                </pre>
+                
+                <p>
+                    Some properties can not be set at once:
+                </p>
+                <ul>
+                    <li>To set the object to update use <em>id</em> or <em>search</em>, but not both.</li>
+                    <li>To set the item to create/update/delete use <em>index</em> or <em>currentElement</em>, but not both.</li>
+                </ul>
+                
+                <h2 data-attributes="id 'description'">Description</h2>
+                <p>
+                    The <code>dictionaryActions</code> object is used to declare one or more actions to update the dictionary. It is a javascript object. ZPT-JS will also update HTML!
+                </p>
+                
+                <p>
+                    Important! This configuration option must be used beside <a href="configuration-command.html">update</a> command. It the command is not <em>update</em> it will be ignored.
+                </p>
+                
+                <p>
+                    Nowadays there are 5 types of <em>dictionary actions</em>:
+                </p>
+                <ul>
+                    <li><strong>updateArray</strong>. Updates an element of an array.</li>
+                    <li><strong>deleteArray</strong>. Deletes an element of an array.</li>
+                    <li><strong>createArray</strong>. Insert an element in an array.</li>
+                    <li><strong>updateObject</strong>. Updates a property of an object.</li>
+                    <li><strong>deleteObject</strong>. Deletes (unset) a property of an object.</li>
+                </ul>
+                
+                <p>
+                    To set the object to update we can use:
+                </p>
+                <ul>
+                    <li>The <strong>id</strong> property. The name of a simple variable in the dictionary.</li>
+                    <li>The <strong>search</strong> property. A path to find a variable through variables, array items and properties of objects.</li>
+                </ul>
+                
+                <p>
+                    The list of available properties of a dictionary actions is:
+                </p>
+                <ul>
+                    <li><strong>id</strong>. The name of a simple variable in the dictionary.</li>
+                    <li><strong>search</strong>. A path to find a variable through variables, array items and properties of objects.</li>
+                    <li><strong>action</strong>. The type of <em>dictionary action</em>. Available options are <em>updateArray</em>, <em>deleteArray</em>, <em>createArray</em>, <em>updateObject</em> and <em>deleteObject</em>.</li>
+                    <li><strong>index</strong>. Use it only for arrays. The index of the array element to create, update or delete.</li>
+                    <li><strong>currentElement</strong>. Use it only for arrays. The element of the array to create, update or delete.</li>
+                    <li><strong>newElement</strong>. The element to create or update.</li>
+                    <li><strong>property</strong>. Use it only for objects. The property of the object to update or delete.</li>
+                </ul>
+                
+                <h2 data-attributes="id 'examples'">Examples</h2>
+                <p>
+                    Go to <a href="../tutorial/moreAboutUpdating.html#creatingArrays">tutorial</a> to see some examples.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>
