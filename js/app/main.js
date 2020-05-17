@@ -1,7 +1,4 @@
 /*
-    ZPT-JS 0.39.0
-    2020-05-15 19:20
-    
     Exported functions
 */
 exports.run = function( options ){
@@ -20,6 +17,7 @@ exports.expressionBuilder = require( './expressions/expressionBuilder.js' );
 exports.evaluateHelper = require( './expressions/evaluateHelper.js' );
 exports.ExpressionTokenizer = require( './expressions/expressionTokenizer.js' );
 exports.ReactiveDictionary = require( './scopes/reactiveDictionary.js' );
+exports.version = require( './version.js' );
 
 /* Support RequireJS module pattern */
 if ( typeof define === 'function' && define.amd ) {
@@ -33,4 +31,5 @@ if ( typeof define === 'function' && define.amd ) {
     define( 'zpt.evaluateHelper', exports.evaluateHelper );
     define( 'zpt.ExpressionTokenizer', exports.ExpressionTokenizer );
     define( 'zpt.ReactiveDictionary', exports.ReactiveDictionary );
+    define( 'zpt.version', exports.version );
 }

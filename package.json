@@ -1,6 +1,6 @@
 {
   "name": "zpt",
-  "version": "0.39.0",
+  "version": "0.40.0",
   "main": "./js/app/main.js",
   "description": "Zenon Page Templates - JS (ZPT-JS)",
   "keywords": [
@@ -46,7 +46,8 @@
     "log4javascript": "^1.4.15",
     "npm-run-all": "^4.1.5",
     "qunit": "~2.10.0",
-    "qunit-composite": "^2.0.0"
+    "qunit-composite": "^2.0.0",
+    "genversion": "^2.2.1"
   },
   "scripts": {
     "testNode": "qunit test/js/app/node.js",
@@ -55,6 +56,7 @@
     "http-server": "http-server -p 9000",
     "web": "cd ./docs; http-server -p 9001",
     "beefy": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js ../../../samples/js/app/performance.js:performance.js",
-    "start": "npm-run-all -p -r beefy http-server"
+    "start": "npm-run-all -p -r beefy http-server",
+    "version": "genversion js/app/version.js"
   }
 }
