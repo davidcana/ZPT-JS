@@ -67,8 +67,6 @@ Where **zpt.min.js** is the minimized version of ZPT-JS and **gettingStarted.js*
 ```javascript
     "use strict";
 
-    var zpt = require( 'zpt' );
-
     var dictionary = new zpt.ReactiveDictionary({
         message: "Hello, world!"
     });
