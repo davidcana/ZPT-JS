@@ -547,13 +547,10 @@ ParserNodeRenderer.configureNodeForNewItem = function( tmpNode, tags, parentNode
     tmpNode.setAttribute( tags.qdup, 1 );
     
     // Configure loop attributes
-    var itemIndex = indexToUse === -1? 
-        parentNode.childElementCount - 1:
-        indexToUse;
     Loop.setAutoDefineAttribute( 
         tmpNode, 
         indexItem.attributeInstance.getVarName(), 
-        itemIndex, 
+        indexToUse,
         indexItem.attributeInstance.getExpressionString(), 
         parentNode.childElementCount, 
         0

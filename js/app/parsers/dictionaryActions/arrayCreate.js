@@ -22,8 +22,10 @@ ArrayCreate.prototype.updateDictionary = function( dictionary ){
     var arrayValue = this.getValue( dictionary );
     
     if ( this.indexToUse === -1 ){
+        this.resolvedIndex = arrayValue.length;
         arrayValue.push( this.newElement );
     } else {
+        this.resolvedIndex = this.indexToUse;
         arrayValue.splice( this.indexToUse, 0, this.newElement );
     }
 };
@@ -52,7 +54,7 @@ ArrayCreate.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
         tags, 
         parentNode, 
         indexItem, 
-        this.indexToUse
+        this.resolvedIndex
     );
     
     // Insert it
