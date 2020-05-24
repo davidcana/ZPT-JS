@@ -88,7 +88,21 @@ AbstractArrayAction.prototype.resolveChildNode = function( indexItem, parserUpda
     // Return the node
     return this.indexToUse === -1?
         null:
-        node.parentNode.children[ 1 + this.indexToUse ]; // The first is always the tal:repeat
+        this.getIndexOfLoop( node.parentNode, indexItem.nodeId, this.indexToUse );
+};
+
+AbstractArrayAction.prototype.getIndexOfLoop = function( parentNode, nodeId, indexInLoop ){
+    
+    var numberOfChildren = parentNode.childElementCount;
+    for ( var i = 0; i < numberOfChildren; ++i ){
+        var childNode = parentNode.children[ i ];
+        var currentNodeId = childNode.getAttribute( context.getTags().id );
+        if ( currentNodeId === nodeId ){
+            return parentNode.children[ 1 + i + indexInLoop ];
+        }
+    }
+    
+    return null;
 };
 
 module.exports = AbstractArrayAction;

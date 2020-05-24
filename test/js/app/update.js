@@ -3755,7 +3755,7 @@ QUnit.test( "Update array and array deleting TALRepeat test", function( assert )
     testFunction( 'John/Peter/Luke/Michael/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 6' );
 });
 
-QUnit.test( "insert object element by index = '_last_' with attributes TALRepeat test", function( assert ) {
+QUnit.test( "Insert/update/delete object element by index = '_last_' with attributes in table TALRepeat test", function( assert ) {
 
     var testNumber = 53;
     var dictionary = {};
@@ -3789,24 +3789,53 @@ QUnit.test( "insert object element by index = '_last_' with attributes TALRepeat
 
     testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3' );
     
-    var dictionaryActions = [
-        {
-            id: 'items' + testNumber,
-            action: 'createArray',
-            index: '_last_',
-            newElement: {
-                name: 'Dave',
-                description: 'The number 4'
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'items' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: {
+                    name: 'Dave',
+                    description: 'The number 4'
+                }
             }
-        }
-    ];
+        ]
+    });
+    testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4' );
     
     zpt.run({
         command: 'update',
-        dictionaryActions: dictionaryActions
+        dictionaryActions: [
+            {
+                id: 'items' + testNumber,
+                action: 'updateArray',
+                currentElement: {
+                    name: 'Peter'
+                },
+                newElement: {
+                    name: 'Mary',
+                    description: 'The number 5'
+                }
+            }
+        ]
     });
-
-    testFunction( 'John/Peter/Luke/Dave', 'The number 1/The number 2/The number 3/The number 4' );
+    testFunction( 'John/Mary/Luke/Dave', 'The number 1/The number 5/The number 3/The number 4' );
+    
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'items' + testNumber,
+                action: 'deleteArray',
+                currentElement: {
+                    name: 'John'
+                }
+            }
+        ]
+    });
+    testFunction( 'Mary/Luke/Dave', 'The number 5/The number 3/The number 4' );
 });
 
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
