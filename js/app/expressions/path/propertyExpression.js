@@ -11,9 +11,8 @@ var PropertyExpression = function( nameToApply ) {
         return parent[ name ];
     };
     
-    var dependsOn = function(){
+    var dependsOn = function( parent ){
         return '.' + name;
-        //return [];
     };
     
     var toString = function(){

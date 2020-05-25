@@ -47,19 +47,23 @@ var PathSegmentExpression = function( stringToApply, itemsToApply ) {
             return firstSegmentDependsOn;
         }
         
-        var result = firstSegmentDependsOn[ 0 ];
+        var temp = firstSegmentDependsOn[ 0 ];
+        var result = [ temp ];
         for ( var i = 1; i < items.length; i++ ) {
             var token = items[ i ];
-            var tokenDependsOn = token.dependsOn();
+            var tokenDependsOn = token.dependsOn( temp );
             if ( ! tokenDependsOn ){
-                return result;
+                break;
+                //return temp;
             }
-            result += tokenDependsOn;
+            
+            temp += tokenDependsOn;
+            result.push( temp );
         }
         
         return result;
     };
-
+    
     var toString = function(){
         return string;
     };

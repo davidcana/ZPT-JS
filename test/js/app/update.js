@@ -3838,6 +3838,72 @@ QUnit.test( "Insert/update/delete object element by index = '_last_' with attrib
     testFunction( 'Mary/Luke/Dave', 'The number 5/The number 3/The number 4' );
 });
 
+QUnit.test( "Object updated test", function( assert ) {
+
+    var testNumber = 54;
+    
+    var dictionary = {
+        object: {
+            id: 'id1',
+            items: [ 
+                {
+                    name: 'John',
+                    description: 'The number 1'
+                }, 
+                {
+                    name: 'Peter',
+                    description: 'The number 2'
+                },
+                {
+                    name: 'Luke',
+                    description: 'The number 3'
+                }
+            ]
+        }
+    };
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 0 ]  );
+        assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 1 ]  );
+        assert.equal( $('#t'+ testNumber + '-1').text(), "" + arguments[ 2 ] );      
+        assert.equal( errorsArray, undefined );
+    };
+
+    testFunction( 'John/Peter/Luke', 'The number 1/The number 2/The number 3', 'id1' );
+    
+    // Change object
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: {
+            object: {
+                id: 'id2',
+                items: [ 
+                    {
+                        name: 'Ann',
+                        description: 'The number 4'
+                    }, 
+                    {
+                        name: 'Mary',
+                        description: 'The number 5'
+                    },
+                    {
+                        name: 'Lea',
+                        description: 'The number 6'
+                    }
+                ]
+            }
+        }
+    });
+    testFunction( 'Ann/Mary/Lea', 'The number 4/The number 5/The number 6', 'id2' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {
