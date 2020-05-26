@@ -20,7 +20,7 @@ module.exports = (function() {
         setTimeout(
             function() {
                 // Set the animationend listener
-                node.addEventListener( 'animationend', function(){
+                node.addEventListener( 'animationend', function( event ){
 
                     if ( callback ){
                         callback();
@@ -34,8 +34,13 @@ module.exports = (function() {
         );
     };
     
+    var reset = function( node ) {
+        node.style.animation = 'none';
+    };
+    
     var self = {
-        animate: animate
+        animate: animate,
+        reset: reset
     };
     
     return self;

@@ -191,6 +191,24 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     var runAnimation = function( actionInstance, node, callback ){
         
         // Build combinedCallback combining callback and actionInstance.animationCallback
+        var combinedCallback = function(){
+                if ( callback ){
+                    callback();
+                } else {
+                    context.getAnimationManager().reset( node );
+                }
+                if ( actionInstance.animationCallback ){
+                    actionInstance.animationCallback();
+                }
+            };
+        
+        // Get animation manager to run animation
+        context.getAnimationManager().animate( actionInstance, node, combinedCallback );
+    };
+    /*
+    var runAnimation = function( actionInstance, node, callback ){
+        
+        // Build combinedCallback combining callback and actionInstance.animationCallback
         var combinedCallback = ! callback && ! actionInstance.animationCallback? 
             undefined:
             function(){
@@ -205,6 +223,7 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         // Get animation manager to run animation
         context.getAnimationManager().animate( actionInstance, node, combinedCallback );
     };
+    */
     
     var updateHTMLFromVarChange = function(){
         
