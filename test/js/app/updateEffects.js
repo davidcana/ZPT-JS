@@ -93,8 +93,7 @@ QUnit.test( "Insert object nested element by index TALRepeat test", function( as
                     }
                 ]
             },
-            animation: 'textColorChangeKeyframes 2s 3'
-            //animation: 'textColorChange'
+            animation: 'textColorChangeKeyframes 1s 3'
         }
     ];
     
@@ -177,8 +176,7 @@ QUnit.test( "Insert item nested element by index TALRepeat test", function( asse
                 name: 'Dave',
                 description: 'The number 7'
             },
-            animation: 'textColorChangeKeyframes 2s 3'
-            //animation: 'textColorChange'
+            animation: 'textColorChangeKeyframes 1s 3'
         }
     ];
     
@@ -270,8 +268,7 @@ QUnit.test( "Update object nested element by index TALRepeat test", function( as
                     }
                 ]
             },
-            animation: 'textColorChangeKeyframes 2s 3'
-            //animation: 'textColorChange'
+            animation: 'textColorChangeKeyframes 1s 3'
         }
     ];
     
@@ -356,8 +353,7 @@ QUnit.test( "Update item nested element by index TALRepeat test", function( asse
                 name: 'Dave',
                 description: 'The number 7'
             },
-            animation: 'textColorChangeKeyframes 2s 3'
-            //animation: 'textColorChange'
+            animation: 'textColorChangeKeyframes 1s 3'
         }
     ];
     
@@ -437,7 +433,6 @@ QUnit.test( "Delete object nested element by index TALRepeat test", function( as
                     id: 'object1'
                 },
                 animation: 'textColorChangeKeyframes 1s 3',
-                //animation: 'textColorChange',
                 animationCallback: function(){
                     testFunction( 'Michael/Chris/Lars', 'The number 4/The number 5/The number 6' );
                     done();
@@ -521,7 +516,6 @@ QUnit.test( "Delete item nested element by index TALRepeat test", function( asse
                     name: 'Luke'
                 },
                 animation: 'textColorChangeKeyframes 1s 3',
-                //animation: 'textColorChange',
                 animationCallback: function(){
                     testFunction( 'John/Peter/Michael/Chris/Lars', 'The number 1/The number 2/The number 4/The number 5/The number 6' );
                     done();
@@ -605,7 +599,6 @@ QUnit.test( "Insert and delete item nested element by index TALRepeat test", fun
                 description: 'The number 7'
             },
             animation: 'textColorChangeKeyframes 1s 3'
-            //animation: 'textColorChange'
         }
     ];
     
@@ -634,7 +627,6 @@ QUnit.test( "Insert and delete item nested element by index TALRepeat test", fun
                             name: 'Dave'
                         },
                         animation: 'textColorChangeKeyframes 1s 3',
-                        //animation: 'textColorChange',
                         animationCallback: function(){
                             testFunction( 'John/Peter/Luke/Michael/Chris/Lars', 'The number 1/The number 2/The number 3/The number 4/The number 5/The number 6' );
                             done();

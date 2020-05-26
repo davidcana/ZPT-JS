@@ -4,7 +4,7 @@
 "use strict";
 
 module.exports = (function() {
-
+    
     var animate = function( dictionaryAction, node, callback ) {
         
         // Run callback and return if there is no animation
@@ -20,13 +20,14 @@ module.exports = (function() {
         setTimeout(
             function() {
                 // Set the animationend listener
-                node.addEventListener( 'animationend', function( event ){
-
+                var animationendCallback = function( event ){
                     if ( callback ){
                         callback();
                     }
-                });
-                
+                };
+                //node.removeEventListener( 'animationend', animationendCallback );
+                node.addEventListener( 'animationend', animationendCallback );
+
                 // Set the animation
                 node.style.animation = dictionaryAction.animation;
             }, 
