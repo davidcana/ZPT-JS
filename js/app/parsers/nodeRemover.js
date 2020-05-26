@@ -102,7 +102,10 @@ module.exports = (function() {
     
     var removeNode = function( node ){
         var nodeId = getNodeId( node );
-        node.parentNode.removeChild( node );
+        var parentNode = node.parentNode;
+        if ( parentNode ){
+            parentNode.removeChild( node );
+        }
         return nodeId;
     };
     
