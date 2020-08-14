@@ -9,7 +9,7 @@ var contentHelper = require( './contentHelper.js' );
 var TALOnError = function( stringToApply, structureToApply ) {
     
     var string = stringToApply;
-    var structure = false || structureToApply;
+    var structure = structureToApply;
     
     var putToAutoDefineHelper = function( autoDefineHelper ){
 
