@@ -403,16 +403,16 @@ module.exports = function(grunt) {
                         src: ['Gruntfile.js']
                     }, 
                     {
-                        src: ['LICENSE.txt']
+                        src: ['LICENSE']
                     }, 
+                    {
+                        src: ['package-lock.json']
+                    },
                     {
                         src: ['package.json']
                     },
                     {
-                        src: ['README.txt']
-                    }, 
-                    {
-                        src: ['userguide.html']
+                        src: ['README.md']
                     }
                 ]
             }
