@@ -8,6 +8,7 @@ New in future versions
 - Implement adquisition?
 - Add options.macro (string) to set the name of the macro to invoke in a full render command?
 
+                    
 New in 0.41.0
 - Update command improved: support of method invocation and ranges?
 - Full reactive support: support of nested object?
@@ -16,6 +17,9 @@ New in 0.41.0
 - Add effects support to dictionaryChanges?
 - Don't throw any exception when an indexed node is not found?
 - Replace string keys in AttributeIndex by objects?
+
+New in 0.40.3
+- Bug fixed: problem with log4javascript fixed.
 
 New in 0.40.2
 - Bugs fixed: some errors about updating and effects fixed.
