@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var QUnit = require( 'qunit' );
 var utils = require( './utils.js' );
@@ -656,9 +656,9 @@ QUnit.test( "Insert and delete object nested element by index using the loop var
 
     var testFunction = function(){
         if ( arguments[ 0 ] ){
-            assert.ok( $('#noElements' + testNumber ).is( ':visible') );
+            assert.ok( zz('#noElements' + testNumber ).isVisible() );
         } else {
-            assert.notOk( $('#noElements' + testNumber ).is( ':visible') );
+            assert.notOk( zz('#noElements' + testNumber ).isVisible() );
         }
         assert.equal( utils.getAllValues( '.itemName' + testNumber ), arguments[ 1 ] );
         assert.equal( utils.getAllValues( '.itemDescription' + testNumber ), arguments[ 2 ] );

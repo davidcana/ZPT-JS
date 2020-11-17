@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var utils = require( './utils.js' );
@@ -13,7 +13,7 @@ var init = function( assert ){
     var done = assert.async(); // QUnit's assert.async() function tells the framework to pause all tests until done() is called.
     zpt.run({
         command: 'preload',
-        root: [ $( '#m1' )[0], $( '#m2' )[0], $( '#m3' )[0] ],
+        root: [ zz( '#m1' )[0], zz( '#m2' )[0], zz( '#m3' )[0] ],
         dictionary: dictionary,
         declaredRemotePageUrls: [],
         callback: function(){

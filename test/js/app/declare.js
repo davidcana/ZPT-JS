@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
@@ -32,14 +32,14 @@ QUnit.test( "simple not failing test", function( assert ) {
         dictionary: dictionary
     });
     
-    assert.equal( $('#t1-1').text() , "1" );
-    assert.equal( $('#t1-2').text() , "this is a text" );
-    assert.equal( $('#t1-3').text() , "10,11,12,13,14,15" );
-    assert.equal( $('#t1-4').text() , "this is a text too" );
-    assert.equal( $('#t1-5').text() , "3" );
-    assert.equal( $('#t1-6').text().substring(0,15) , "Mon Dec 24 2018" );
-    assert.equal( $('#t1-7').text() , "Bob" );
-    assert.equal( $('#t1-8').text() , "Oak" );
+    assert.equal( zz('#t1-1').text() , "1" );
+    assert.equal( zz('#t1-2').text() , "this is a text" );
+    assert.equal( zz('#t1-3').text() , "10,11,12,13,14,15" );
+    assert.equal( zz('#t1-4').text() , "this is a text too" );
+    assert.equal( zz('#t1-5').text() , "3" );
+    assert.equal( zz('#t1-6').text().substring(0,15) , "Mon Dec 24 2018" );
+    assert.equal( zz('#t1-7').text() , "Bob" );
+    assert.equal( zz('#t1-8').text() , "Oak" );
     
     assert.equal( errorsArray, undefined );
 });
@@ -55,14 +55,14 @@ QUnit.test( "simple failing test", function( assert ) {
         dictionary: dictionary
     });
     
-    assert.equal( $('#t2-1').text() , "must not be evaluated" );
-    assert.equal( $('#t2-2').text() , "must not be evaluated" );
-    assert.equal( $('#t2-3').text() , "must not be evaluated" );
-    assert.equal( $('#t2-4').text() , "must not be evaluated" );
-    assert.equal( $('#t2-5').text() , "must not be evaluated" );
-    assert.equal( $('#t2-6').text() , "must not be evaluated" );
-    assert.equal( $('#t2-7').text() , "must not be evaluated" );
-    assert.equal( $('#t2-8').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-1').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-2').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-3').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-4').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-5').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-6').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-7').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-8').text() , "must not be evaluated" );
     
     assert.deepEqual( 
         errorsArray, 
@@ -91,10 +91,10 @@ QUnit.test( "Default value not failing test", function( assert ) {
         dictionary: dictionary
     });
 
-    assert.equal( $('#t3-1').text() , "6" );
-    assert.equal( $('#t3-2').text() , "1" );
-    assert.equal( $('#t3-3').text() , "5" );
-    assert.equal( $('#t3-4').text() , "1" );
+    assert.equal( zz('#t3-1').text() , "6" );
+    assert.equal( zz('#t3-2').text() , "1" );
+    assert.equal( zz('#t3-3').text() , "5" );
+    assert.equal( zz('#t3-4').text() , "1" );
     
     assert.equal( errorsArray, undefined );
 });
@@ -112,8 +112,8 @@ QUnit.test( "Default value failing test", function( assert ) {
         dictionary: dictionary
     });
 
-    assert.equal( $('#t4-1').text() , "must not be evaluated" );
-    assert.equal( $('#t4-2').text() , "must not be evaluated" );
+    assert.equal( zz('#t4-1').text() , "must not be evaluated" );
+    assert.equal( zz('#t4-2').text() , "must not be evaluated" );
     
     assert.deepEqual( 
         errorsArray, 
@@ -136,9 +136,9 @@ QUnit.test( "Strict mode using declare test", function( assert ) {
         dictionary: dictionary
     });
 
-    assert.equal( $('#t5-1').text() , "5" );
-    assert.equal( $('#t5-2').text() , "must not be evaluated" );
-    assert.equal( $('#t5-3').text() , "must not be evaluated" );
+    assert.equal( zz('#t5-1').text() , "5" );
+    assert.equal( zz('#t5-2').text() , "must not be evaluated" );
+    assert.equal( zz('#t5-3').text() , "must not be evaluated" );
     
     assert.deepEqual( 
         errorsArray, 
@@ -156,8 +156,8 @@ QUnit.test( "Strict mode using context test", function( assert ) {
         dictionary: dictionary
     });
 
-    assert.equal( $('#t6-1').text() , "must not be evaluated" );
-    assert.equal( $('#t6-2').text() , "must not be evaluated" );
+    assert.equal( zz('#t6-1').text() , "must not be evaluated" );
+    assert.equal( zz('#t6-2').text() , "must not be evaluated" );
 
     assert.deepEqual( 
         errorsArray, 
@@ -175,8 +175,8 @@ QUnit.test( "undefined type", function( assert ) {
         dictionary: dictionary
     });
 
-    assert.equal( $('#t7-1').text() , "it can be of any type" );
-    assert.equal( $('#t7-2').text() , "it can be of any type also" );
+    assert.equal( zz('#t7-1').text() , "it can be of any type" );
+    assert.equal( zz('#t7-2').text() , "it can be of any type also" );
 
     assert.equal( errorsArray, undefined );
 });
@@ -191,8 +191,8 @@ QUnit.test( "using tal:define in strict mode (not failing)", function( assert ) 
         dictionary: dictionary
     });
     
-    assert.equal( $('#t8-1').text() , "1" );
-    assert.equal( $('#t8-2').text() , "2" );
+    assert.equal( zz('#t8-1').text() , "1" );
+    assert.equal( zz('#t8-2').text() , "2" );
     
     assert.equal( errorsArray, undefined );
 });
@@ -207,8 +207,8 @@ QUnit.test( "using tal:define in strict mode (failing)", function( assert ) {
         dictionary: dictionary
     });
     
-    assert.equal( $('#t9-1').text() , "1" );
-    assert.equal( $('#t9-2').text() , "must not be evaluated" );
+    assert.equal( zz('#t9-1').text() , "1" );
+    assert.equal( zz('#t9-2').text() , "must not be evaluated" );
     
     assert.deepEqual( 
         errorsArray, 

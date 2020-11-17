@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
@@ -15,10 +15,10 @@ QUnit.test( "Define test", function( assert ) {
     
     QUnit.config.scrolltop = false;
     
-    assert.equal( $('#t1-1').html() , "1" );
-    assert.equal( $('#t1-2').html() , "1.5" );
-    assert.equal( $('#t1-3').html() , "this is a text" );
-    assert.equal( $('#t1-4').html() , "this is a text too" );
+    assert.equal( zz('#t1-1').html() , "1" );
+    assert.equal( zz('#t1-2').html() , "1.5" );
+    assert.equal( zz('#t1-3').html() , "this is a text" );
+    assert.equal( zz('#t1-4').html() , "this is a text too" );
     
     var element = window.document.getElementById( 't1' );
     assert.equal( isInViewport( element ) , true );

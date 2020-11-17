@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
@@ -17,28 +17,28 @@ QUnit.test( "Before on-error tag test", function( assert ) {
     try {
         errorsCounter = 0;
         zpt.run({
-            root: $( '#group1' )[0],
+            root: zz( '#group1' )[0],
             dictionary: dictionary
         });
     } catch( e ) {
         // Nothing to do
     }
     assert.equal( 1, errorsCounter );
-    assert.equal( $('#t1-1').text() , "false" );
+    assert.equal( zz('#t1-1').text() , "false" );
 });
 
 QUnit.test( "on-error tag test", function( assert ) {
     
     zpt.run({
-        root: $( '#group2' )[0],
+        root: zz( '#group2' )[0],
         dictionary: dictionary
     });
     
-    assert.equal( $('#t2-1').text() , "true" );
-    assert.equal( $('#t2-2').text() , "1" );
-    assert.equal( $('#t2-3').text() , "Oh, noooo!" );
-    assert.equal( $('#t2-4').text() , "yes" );
-    assert.equal( $('#t2-5').text() , "Infinity" );
+    assert.equal( zz('#t2-1').text() , "true" );
+    assert.equal( zz('#t2-2').text() , "1" );
+    assert.equal( zz('#t2-3').text() , "Oh, noooo!" );
+    assert.equal( zz('#t2-4').text() , "yes" );
+    assert.equal( zz('#t2-5').text() , "Infinity" );
 });
 
 QUnit.test( "After on-error tag test", function( assert ) {
@@ -46,7 +46,7 @@ QUnit.test( "After on-error tag test", function( assert ) {
     try {
         errorsCounter = 0;
         zpt.run({
-            root: $( '#group3' )[0],
+            root: zz( '#group3' )[0],
             dictionary: dictionary
         });
     } catch( e ) {
@@ -54,7 +54,7 @@ QUnit.test( "After on-error tag test", function( assert ) {
     }
     
     assert.equal( 1, errorsCounter );
-    assert.equal( $('#t3-1').text() , "false" );
+    assert.equal( zz('#t3-1').text() , "false" );
 });
 
 QUnit.test( "on-error object tag test", function( assert ) {
@@ -64,45 +64,45 @@ QUnit.test( "on-error object tag test", function( assert ) {
     };
     
     zpt.run({
-        root: $( '#group4' )[0],
+        root: zz( '#group4' )[0],
         dictionary: dictionary
     });
 
-    //assert.equal( $('#t4-1').text() , "true" );
-    assert.equal( $('#t4-2').text() , "1" );
-    //assert.equal( $('#t4-3').text() , "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' of null" );
+    //assert.equal( zz('#t4-1').text() , "true" );
+    assert.equal( zz('#t4-2').text() , "1" );
+    //assert.equal( zz('#t4-3').text() , "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' of null" );
     assert.ok( 
-        $('#t4-3').text() == "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' o" 
-        || $('#t4-3').text() == "TypeError/document.getElementById(...) is null/fireError@http://127.0.0.1:9966/on-error.js:"
+        zz('#t4-3').text() == "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' o" 
+        || zz('#t4-3').text() == "TypeError/document.getElementById(...) is null/fireError@http://127.0.0.1:9966/on-error.js:"
     );
-    assert.equal( $('#t4-4').text() , "yes" );
-    assert.equal( $('#t4-5').text() , "Infinity" );
+    assert.equal( zz('#t4-4').text() , "yes" );
+    assert.equal( zz('#t4-5').text() , "Infinity" );
 });
 
 QUnit.test( "on-error nothing test", function( assert ) {
 
     zpt.run({
-        root: $( '#group5' )[0],
+        root: zz( '#group5' )[0],
         dictionary: dictionary
     });
 
-    assert.equal( $('#t5-1').text() , "" );
+    assert.equal( zz('#t5-1').text() , "" );
 });
 
 QUnit.test( "on-error literal structure test", function( assert ) {
     
     zpt.run({
-        root: $( '#group6' )[0],
+        root: zz( '#group6' )[0],
         dictionary: dictionary
     });
 
-    assert.equal( $('#t6-1').html() , "&lt;strong&gt;Oh, noooo!&lt;/strong&gt;" );
+    assert.equal( zz('#t6-1').html() , "&lt;strong&gt;Oh, noooo!&lt;/strong&gt;" );
     
     zpt.run({
-        root: $( '#group7' )[0],
+        root: zz( '#group7' )[0],
         dictionary: dictionary
     });
 
-    assert.equal( $('#t7-1').html() , "<strong>Oh, noooo!</strong>" );
+    assert.equal( zz('#t7-1').html() , "<strong>Oh, noooo!</strong>" );
 });
 

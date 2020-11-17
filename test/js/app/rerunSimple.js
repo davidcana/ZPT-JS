@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var I18n = require( '../../../js/app/i18n/i18n.js' );
@@ -28,16 +28,16 @@ QUnit.test( "Rerun simple tests", function( assert ) {
     }
 
     function runTests( counter ){
-        assert.equal( $('#t1-1').attr('title') , "counter=" + counter );
+        assert.equal( zz('#t1-1').attr('title') , "counter=" + counter );
 
         if ( counter % 2 == 0 ){
-            assert.ok( $('#t1-2').is(':visible') );
+            assert.ok( zz('#t1-2').isVisible() );
         } else {
-            assert.notOk( $('#t1-2').is(':visible') );
+            assert.notOk( zz('#t1-2').isVisible() );
         }
 
-        assert.equal( $('#t1-3').html() , "counter=" + counter );
-        assert.equal( $('#t1-4').html() , "counter=" + counter );
+        assert.equal( zz('#t1-3').html() , "counter=" + counter );
+        assert.equal( zz('#t1-4').html() , "counter=" + counter );
     }
     
     continueTesting();
@@ -58,16 +58,16 @@ QUnit.test( "Rerun and check dictionary vars", function( assert ) {
     
     function runTests(){
         
-        assert.equal( $('#t2-1-1').html() , "1" );
-        assert.equal( $('#t2-1-2').html() , "OK" );
-        assert.equal( $('#t2-1-3').html() , "OK" );
-        assert.equal( $('#t2-2-1').html() , "OK" );
-        assert.equal( $('#t2-3-1').html() , "1" );
-        assert.equal( $('#t2-3-2').html() , "OK" );
-        assert.equal( $('#t2-3-3').html() , "OK" );
-        assert.equal( $('#t2-4-1').html() , "2" );
-        assert.equal( $('#t2-4-2').html() , "OK" );
-        assert.equal( $('#t2-4-3').html() , "OK" );
+        assert.equal( zz('#t2-1-1').html() , "1" );
+        assert.equal( zz('#t2-1-2').html() , "OK" );
+        assert.equal( zz('#t2-1-3').html() , "OK" );
+        assert.equal( zz('#t2-2-1').html() , "OK" );
+        assert.equal( zz('#t2-3-1').html() , "1" );
+        assert.equal( zz('#t2-3-2').html() , "OK" );
+        assert.equal( zz('#t2-3-3').html() , "OK" );
+        assert.equal( zz('#t2-4-1').html() , "2" );
+        assert.equal( zz('#t2-4-2').html() , "OK" );
+        assert.equal( zz('#t2-4-3').html() , "OK" );
     }
 });
 
@@ -99,20 +99,20 @@ QUnit.test( "Rerun and check dictionary vars (more complex)", function( assert )
     
     function runTests( value1, value2, value3 ){
 
-        assert.equal( $('#t3-1-1').html() , "1" );
-        assert.equal( $('#t3-1-2').html() , "2" );
-        assert.equal( $('#t3-1-3').html() , "" + value1 );
+        assert.equal( zz('#t3-1-1').html() , "1" );
+        assert.equal( zz('#t3-1-2').html() , "2" );
+        assert.equal( zz('#t3-1-3').html() , "" + value1 );
         
-        assert.equal( $('#t3-2-1').html() , "1" );
-        assert.equal( $('#t3-2-2').html() , "2" );
-        assert.equal( $('#t3-2-3').html() , "" + value2 );
-        assert.equal( $('#t3-2-4').html() , "" + (value2 + 1 + 2) );
+        assert.equal( zz('#t3-2-1').html() , "1" );
+        assert.equal( zz('#t3-2-2').html() , "2" );
+        assert.equal( zz('#t3-2-3').html() , "" + value2 );
+        assert.equal( zz('#t3-2-4').html() , "" + (value2 + 1 + 2) );
         
-        assert.equal( $('#t3-3-1').html() , "1" );
-        assert.equal( $('#t3-3-2').html() , "2" );
-        assert.equal( $('#t3-3-3').html() , "" + value3 );
-        assert.equal( $('#t3-3-4').html() , "" + (value3 + 1 + 2) );
-        assert.equal( $('#t3-3-5').html() , "" + (value3 + 2) );
+        assert.equal( zz('#t3-3-1').html() , "1" );
+        assert.equal( zz('#t3-3-2').html() , "2" );
+        assert.equal( zz('#t3-3-3').html() , "" + value3 );
+        assert.equal( zz('#t3-3-4').html() , "" + (value3 + 1 + 2) );
+        assert.equal( zz('#t3-3-5').html() , "" + (value3 + 2) );
     }
 });
 
@@ -139,23 +139,23 @@ QUnit.test( "Rerun and check dictionary vars (multiple target)", function( asser
     
     function runTests(){
 
-        assert.equal( $('#t4-1-1').html() , "" + arguments[0] );
-        assert.equal( $('#t4-1-2').html() , "" + arguments[1] );
-        assert.equal( $('#t4-2-1').html() , "" + arguments[2] );
-        assert.equal( $('#t4-2-2').html() , "" + arguments[3] );
-        assert.equal( $('#t4-2-3').html() , "" + arguments[4] );
-        assert.equal( $('#t4-2-4').html() , "" + arguments[5] );
-        assert.equal( $('#t4-3-1').html() , "" + arguments[6] );
-        assert.equal( $('#t4-3-2').html() , "undefined" );
-        assert.equal( $('#t4-3-3').html() , "" + arguments[7] );
-        assert.equal( $('#t4-3-4').html() , "" + arguments[8] );
-        assert.equal( $('#t4-3-5').html() , "" + arguments[9] );
-        assert.equal( $('#t4-3-4-1').html() , "" + arguments[10] );
-        assert.equal( $('#t4-3-4-2').html() , "undefined" );
-        assert.equal( $('#t4-3-4-3').html() , "" + arguments[11] );
-        assert.equal( $('#t4-3-4-4').html() , "" + arguments[12] );
-        assert.equal( $('#t4-3-4-5').html() , ""  + arguments[13] );
-        assert.equal( $('#t4-3-4-6').html() , "" + arguments[14] );
+        assert.equal( zz('#t4-1-1').html() , "" + arguments[0] );
+        assert.equal( zz('#t4-1-2').html() , "" + arguments[1] );
+        assert.equal( zz('#t4-2-1').html() , "" + arguments[2] );
+        assert.equal( zz('#t4-2-2').html() , "" + arguments[3] );
+        assert.equal( zz('#t4-2-3').html() , "" + arguments[4] );
+        assert.equal( zz('#t4-2-4').html() , "" + arguments[5] );
+        assert.equal( zz('#t4-3-1').html() , "" + arguments[6] );
+        assert.equal( zz('#t4-3-2').html() , "undefined" );
+        assert.equal( zz('#t4-3-3').html() , "" + arguments[7] );
+        assert.equal( zz('#t4-3-4').html() , "" + arguments[8] );
+        assert.equal( zz('#t4-3-5').html() , "" + arguments[9] );
+        assert.equal( zz('#t4-3-4-1').html() , "" + arguments[10] );
+        assert.equal( zz('#t4-3-4-2').html() , "undefined" );
+        assert.equal( zz('#t4-3-4-3').html() , "" + arguments[11] );
+        assert.equal( zz('#t4-3-4-4').html() , "" + arguments[12] );
+        assert.equal( zz('#t4-3-4-5').html() , ""  + arguments[13] );
+        assert.equal( zz('#t4-3-4-6').html() , "" + arguments[14] );
     }
 });
 
@@ -165,7 +165,7 @@ QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", funct
         var: 10
     };
     zpt.run({
-        root: [ $( '#ul5-1' )[0], $( '#ul5-2' )[0] ],
+        root: [ zz( '#ul5-1' )[0], zz( '#ul5-2' )[0] ],
         dictionary: dictionary
     });
     runTests( 1, 11, 2, 12 );
@@ -179,10 +179,10 @@ QUnit.test( "Rerun and check dictionary vars (multiple root, one target)", funct
     
     function runTests(){
 
-        assert.equal( $('#t5-1-1').html() , "" + arguments[0] );
-        assert.equal( $('#t5-1-2').html() , "" + arguments[1] );
-        assert.equal( $('#t5-2-1').html() , "" + arguments[2] );
-        assert.equal( $('#t5-2-2').html() , "" + arguments[3] );
+        assert.equal( zz('#t5-1-1').html() , "" + arguments[0] );
+        assert.equal( zz('#t5-1-2').html() , "" + arguments[1] );
+        assert.equal( zz('#t5-2-1').html() , "" + arguments[2] );
+        assert.equal( zz('#t5-2-2').html() , "" + arguments[3] );
     }
 });
 
@@ -203,8 +203,8 @@ QUnit.test( "Rerun using data-domain", function( assert ) {
     
     function runTests(){
 
-        assert.equal( $('#t6-1').html() , "¡¡¡Hola mundo 2!!!" );
-        assert.equal( $('#t6-2').html() , "Él no ha encontrado ningún resultado" );
+        assert.equal( zz('#t6-1').html() , "¡¡¡Hola mundo 2!!!" );
+        assert.equal( zz('#t6-2').html() , "Él no ha encontrado ningún resultado" );
     }
     
 });
@@ -229,8 +229,8 @@ QUnit.test( "Rerun using data-language", function( assert ) {
     
     function runTests( value ){
 
-        assert.equal( $('#t7-1-1').html() , "¡Hola mundo!" );
-        assert.equal( $('#t7-2-1').html() , value );
+        assert.equal( zz('#t7-1-1').html() , "¡Hola mundo!" );
+        assert.equal( zz('#t7-2-1').html() , value );
     }
 
 });
@@ -267,10 +267,10 @@ QUnit.test( "Rerun using on-error", function( assert ) {
     
     function runTests( error1, error2 ){
 
-        assert.equal( $('#t8-1-1').text() , error1 );
-        assert.equal( $('#t8-1-2').text() , "Infinity" );
-        assert.equal( $('#t8-2-1').text() , error2 );
-        assert.equal( $('#t8-2-2').text() , "Infinity" );
+        assert.equal( zz('#t8-1-1').text() , error1 );
+        assert.equal( zz('#t8-1-2').text() , "Infinity" );
+        assert.equal( zz('#t8-2-1').text() , error2 );
+        assert.equal( zz('#t8-2-2').text() , "Infinity" );
     }
 
 });
@@ -373,10 +373,10 @@ var macroTests = function( assert, dictionary, testNumber ){
 
     function runMacroTests( value1, value2 ){
 
-        assert.equal( $('#t' + testNumber + '-2').text() , "" + value1 );
-        assert.equal( $('#t' + testNumber + '-3').text() , "2" );
-        assert.equal( $('#t' + testNumber + '-4').text() , "3" );
-        assert.equal( $('#t' + testNumber + '-5').text() , "" + value2 );
+        assert.equal( zz('#t' + testNumber + '-2').text() , "" + value1 );
+        assert.equal( zz('#t' + testNumber + '-3').text() , "2" );
+        assert.equal( zz('#t' + testNumber + '-4').text() , "3" );
+        assert.equal( zz('#t' + testNumber + '-5').text() , "" + value2 );
     }
 };
 

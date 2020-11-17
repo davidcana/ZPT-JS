@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var expressionBuilder = zpt.expressionBuilder;
@@ -32,8 +32,8 @@ var testNotDefinedExpression = function( assert ){
     } catch ( e ) {
         assert.equal( e , "Unknown expression: avg: aNumber 1" );
     }
-    //assert.equal( $('#t1-1').html() , "undefined" );
-    //assert.equal( $('#t1-2').html() , "undefined" );
+    //assert.equal( zz('#t1-1').html() , "undefined" );
+    //assert.equal( zz('#t1-2').html() , "undefined" );
 };
 
 var testDefinedExpression = function( assert ){
@@ -42,8 +42,8 @@ var testDefinedExpression = function( assert ){
             root: document.body,
             dictionary: buildDictionary()
     });
-    assert.equal( $('#t1-1').html() , 3 );
-    assert.equal( $('#t1-2').html() , 4 );
+    assert.equal( zz('#t1-1').html() , 3 );
+    assert.equal( zz('#t1-2').html() , 4 );
 };
 
 QUnit.test( "Custom expressions test", function( assert ) {

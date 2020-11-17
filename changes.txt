@@ -18,6 +18,10 @@ New in 0.41.0
 - Don't throw any exception when an indexed node is not found?
 - Replace string keys in AttributeIndex by objects?
 
+New in 0.40.4
+- Bug fixed: jsdom dependency moved from dependencies to devDependencies in package.json file.
+- Jquery dependency in devDependencies replaced by zzDOM.
+
 New in 0.40.3
 - Bug fixed: problem with log4javascript fixed.
 

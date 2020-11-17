@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var utils = require( './utils.js' );
@@ -111,7 +111,7 @@ QUnit.test( "Simple macros test", function( assert ) {
 });
 
 QUnit.test( "Dynamic macro", function( assert ) {
-    assert.equal( $('#t2-1').text() , "A test of a dynamic macro" );
+    assert.equal( zz('#t2-1').text() , "A test of a dynamic macro" );
     
     var t2 = `
 <b data-use-macro="'dynamicMacro@externalMacros-definitions.html'" data-id="3" style="display: none;">
@@ -125,7 +125,7 @@ QUnit.test( "Dynamic macro", function( assert ) {
 });
 
 QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
-    assert.equal( $('#t3-1').text() , "undefined" );
+    assert.equal( zz('#t3-1').text() , "undefined" );
     
     var t3 = `
 <b data-define="id string:t3-1" data-use-macro="'dynamicMacroReadingVar@externalMacros-definitions.html'" data-id="5" style="display: none;">
@@ -139,7 +139,7 @@ QUnit.test( "Dynamic macro reading var (var = undefined)", function( assert ) {
 });
 
 QUnit.test( "Dynamic macro reading var (var = 1)", function( assert ) {
-    assert.equal( $('#t4-1').text() , "1" );
+    assert.equal( zz('#t4-1').text() , "1" );
     
     var t4 = `
 <b data-define="var 1; id string:t4-1" data-use-macro="'dynamicMacroReadingVar@externalMacros-definitions.html'" data-id="8" style="display: none;">
@@ -332,8 +332,8 @@ QUnit.test( "Simple external macros with local calls test", function( assert ) {
 });  
 
 QUnit.test( "Using define tags in macro use and macro call", function( assert ) {
-    assert.equal( $('#t13-1').text() , "It works!" );
-    assert.equal( $('#t13-2').text() , "It also works!" );
+    assert.equal( zz('#t13-1').text() , "It works!" );
+    assert.equal( zz('#t13-2').text() , "It also works!" );
 });
 
 QUnit.test( "Slot evaluation", function( assert ) {

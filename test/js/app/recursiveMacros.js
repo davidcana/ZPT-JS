@@ -1,7 +1,6 @@
 /* jshint esversion: 6 */
 "use strict";
 
-var $ = require('jquery');
 var Qunit = require('qunit');
 var zpt = require('../../../js/app/main.js');
 var utils = require('./utils.js');

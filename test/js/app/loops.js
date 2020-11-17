@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
@@ -52,7 +52,7 @@ QUnit.test( "dynamic loops test", function( assert ) {
     // Replace 10/20/30/40 by 10/20/30
     dictionary.someNumbers = [ 10, 20, 30 ];
     zpt.run({
-        root: $( '#dynamicLoop' )[0]
+        root: zz( '#dynamicLoop' )[0]
     });
     assert.equal( utils.getAllValues( '.nValue1' ) , '10/20/30' );
     
@@ -93,7 +93,7 @@ QUnit.test( "dynamic loops in table test", function( assert ) {
     ];
     
     zpt.run({
-        root: $( '#dynamicLoop2' )[0],
+        root: zz( '#dynamicLoop2' )[0],
         notRemoveGeneratedTags: true
     });
     

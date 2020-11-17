@@ -89,14 +89,14 @@ zpt.run({
 
 // Run tests!
 function defineTest( assert, preffix ) {
-    assert.equal( $('#t' + preffix + '-1-1').html() , "1" );
-    assert.equal( $('#t' + preffix + '-1-2').html() , "1.5" );
-    assert.equal( $('#t' + preffix + '-1-3').html() , "this is a text" );
-    assert.equal( $('#t' + preffix + '-1-4').html() , "this is a text too" );
-    assert.equal( $('#t' + preffix + '-1-5').html() , "1" );
-    assert.equal( $('#t' + preffix + '-1-6').html() , "1.5" );
-    assert.equal( $('#t' + preffix + '-1-7').html() , "this is a text" );
-    assert.equal( $('#t' + preffix + '-1-8').html() , "this is a text too" );
+    assert.equal( zz('#t' + preffix + '-1-1').html() , "1" );
+    assert.equal( zz('#t' + preffix + '-1-2').html() , "1.5" );
+    assert.equal( zz('#t' + preffix + '-1-3').html() , "this is a text" );
+    assert.equal( zz('#t' + preffix + '-1-4').html() , "this is a text too" );
+    assert.equal( zz('#t' + preffix + '-1-5').html() , "1" );
+    assert.equal( zz('#t' + preffix + '-1-6').html() , "1.5" );
+    assert.equal( zz('#t' + preffix + '-1-7').html() , "this is a text" );
+    assert.equal( zz('#t' + preffix + '-1-8').html() , "this is a text too" );
 }
 
 QUnit.test( "Define test (using javascript API)", function( assert ) {
@@ -107,24 +107,24 @@ QUnit.test( "Define test (using jQuery plugin)", function( assert ) {
 });
 
 function conditionTest( assert, preffix ) {
-    assert.equal( $('#t' + preffix + '-2-1').html() , "yes!" );
-    assert.ok( $('#t' + preffix + '-2-1').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-2').html() , "Bob" );
-    assert.ok( $('#t' + preffix + '-2-2').is(':visible') );
-    assert.notOk( $('#t' + preffix + '-2-3').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-4').html() , "a name" );
-    assert.notOk( $('#t' + preffix + '-2-4').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-5').html() , "yes!" );
-    assert.ok( $('#t' + preffix + '-2-5').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-6').html() , "Bob" );
-    assert.ok( $('#t' + preffix + '-2-6').is(':visible') );
-    assert.notOk( $('#t' + preffix + '-2-7').is(':visible') );
-    assert.notOk( $('#t' + preffix + '-2-8').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-8').html() , "a name" );
-    assert.equal( $('#t' + preffix + '-2-9').html().trim() , "Bob" );
-    assert.ok( $('#t' + preffix + '-2-9').is(':visible') );
-    assert.equal( $('#t' + preffix + '-2-10').html().trim() , "<span data-replace=\"user/name\">a name</span>" );
-    assert.notOk( $('#t' + preffix + '-2-10').is(':visible') );
+    assert.equal( zz('#t' + preffix + '-2-1').html() , "yes!" );
+    assert.ok( zz('#t' + preffix + '-2-1').isVisible() );
+    assert.equal( zz('#t' + preffix + '-2-2').html() , "Bob" );
+    assert.ok( zz('#t' + preffix + '-2-2').isVisible() );
+    assert.notOk( zz('#t' + preffix + '-2-3').isVisible() );
+    assert.equal( zz('#t' + preffix + '-2-4').html() , "a name" );
+    assert.notOk( zz('#t' + preffix + '-2-4').isVisible() );
+    assert.equal( zz('#t' + preffix + '-2-5').html() , "yes!" );
+    assert.ok( zz('#t' + preffix + '-2-5').isVisible() );
+    assert.equal( zz('#t' + preffix + '-2-6').html() , "Bob" );
+    assert.ok( zz('#t' + preffix + '-2-6').isVisible() );
+    assert.notOk( zz('#t' + preffix + '-2-7').isVisible() );
+    assert.notOk( zz('#t' + preffix + '-2-8').isVisible() );
+    assert.equal( zz('#t' + preffix + '-2-8').html() , "a name" );
+    assert.equal( zz('#t' + preffix + '-2-9').html().trim() , "Bob" );
+    assert.ok( zz('#t' + preffix + '-2-9').isVisible() );
+    assert.equal( zz('#t' + preffix + '-2-10').html().trim() , "<span data-replace=\"user/name\">a name</span>" );
+    assert.notOk( zz('#t' + preffix + '-2-10').isVisible() );
 }
 
 QUnit.test( "Condition test (using javascript API)", function( assert ) {
@@ -135,16 +135,16 @@ QUnit.test( "Condition test (using jQuery plugin)", function( assert ) {
 });
 
 function attributesTest( assert, preffix ) {
-    assert.equal( $('#t' + preffix + '-3-1').attr('placeholder') , "Write something here!" );
-    assert.equal( $('#t' + preffix + '-3-1').attr('rows') , "10" );
-    assert.equal( $('#t' + preffix + '-3-1').attr('cols') , "100" );
-    assert.equal( $('#t' + preffix + '-3-1').attr('maxlength') , "200" );
-    assert.equal( $('#t' + preffix + '-4-1').attr('title') , "title in string expression" );
-    assert.equal( $('#t' + preffix + '-4-1').attr('href') , "http://www.xxx.org" );
-    assert.equal( $('#t' + preffix + '-4-2').attr('title') , "title in string expression" );
-    assert.equal( $('#t' + preffix + '-4-2').attr('href') , "http://www.xxx.org" );
-    assert.equal( $('#t' + preffix + '-5-1').attr('title'), undefined );
-    assert.equal( $('#t' + preffix + '-5-1').attr('href') , "http://www.xxx.org" );
+    assert.equal( zz('#t' + preffix + '-3-1').attr('placeholder') , "Write something here!" );
+    assert.equal( zz('#t' + preffix + '-3-1').attr('rows') , "10" );
+    assert.equal( zz('#t' + preffix + '-3-1').attr('cols') , "100" );
+    assert.equal( zz('#t' + preffix + '-3-1').attr('maxlength') , "200" );
+    assert.equal( zz('#t' + preffix + '-4-1').attr('title') , "title in string expression" );
+    assert.equal( zz('#t' + preffix + '-4-1').attr('href') , "http://www.xxx.org" );
+    assert.equal( zz('#t' + preffix + '-4-2').attr('title') , "title in string expression" );
+    assert.equal( zz('#t' + preffix + '-4-2').attr('href') , "http://www.xxx.org" );
+    assert.equal( zz('#t' + preffix + '-5-1').attr('title'), undefined );
+    assert.equal( zz('#t' + preffix + '-5-1').attr('href') , "http://www.xxx.org" );
 }
 
 QUnit.test( "Attributes test (using javascript API)", function( assert ) {

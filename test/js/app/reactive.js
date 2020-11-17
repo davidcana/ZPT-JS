@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var QUnit = require( 'qunit' );
 var utils = require( './utils.js' );
@@ -34,8 +34,8 @@ QUnit.test( "Simple TALContent autoCommit true test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );        
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );        
         assert.equal( errorsArray, undefined );
     };
 
@@ -70,8 +70,8 @@ QUnit.test( "Simple TALContent autoCommit false test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );        
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );        
         assert.equal( errorsArray, undefined );
     };
 
@@ -109,8 +109,8 @@ QUnit.test( "simple TALAttributes autoCommit true test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
         assert.equal( errorsArray, undefined );
     };
     testFunction( 100, 'test 1' );
@@ -144,8 +144,8 @@ QUnit.test( "simple TALAttributes autoCommit false test", function( assert ) {
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
         assert.equal( errorsArray, undefined );
     };
     testFunction( 100, 'test 1' );
@@ -256,7 +256,7 @@ QUnit.test( "simple METALUseMacro autoCommit true test", function( assert ) {
             </div><p data-mmacro=\"copyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"101\" data-qdup=\"1\">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>`;
-            assert.equal( $('#t' + testNumber ).html().trim(), t );
+            assert.equal( zz('#t' + testNumber ).html().trim(), t );
 
             // Change externalMacro
             dictionary.externalMacro = 'enhancedCopyright@externalMacros-definitions.html';
@@ -274,7 +274,7 @@ QUnit.test( "simple METALUseMacro autoCommit true test", function( assert ) {
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
         </div>`;
-            assert.equal( $( '#t' + testNumber ).html().trim(), t );
+            assert.equal( zz( '#t' + testNumber ).html().trim(), t );
             
             done();
         }
@@ -313,11 +313,11 @@ QUnit.test( "simple METALUseMacro autoCommit false test", function( assert ) {
             </div><p data-mmacro=\"copyright\" data-tauto-define=\"_externalMacroUrl 'externalMacros-definitions.html'\" data-related-id=\"201\" data-qdup=\"1\">
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>`;
-            assert.equal( $('#t' + testNumber ).html().trim(), t );
+            assert.equal( zz('#t' + testNumber ).html().trim(), t );
 
             // Change externalMacro
             dictionary.externalMacro = 'enhancedCopyright@externalMacros-definitions.html';
-            assert.equal( $('#t' + testNumber ).html().trim(), t );
+            assert.equal( zz('#t' + testNumber ).html().trim(), t );
             
             // Commit changes
             dictionary._commit();
@@ -334,7 +334,7 @@ QUnit.test( "simple METALUseMacro autoCommit false test", function( assert ) {
             Copyright 2009, <em>Foo, Bar, and Associates</em> Inc.
         </p>
         </div>`;
-            assert.equal( $( '#t' + testNumber ).html().trim(), t );
+            assert.equal( zz( '#t' + testNumber ).html().trim(), t );
             
             done();
         }
@@ -363,10 +363,10 @@ QUnit.test( "simple TALCondition autoCommit true, last action false test", funct
     });
     
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
-        assert.ok( arguments[ 1 ] === $('#t' + testNumber + '-1').is( ':visible' ) );
-        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 2 ] );  
-        assert.ok( arguments[ 3 ] === $('#t' + testNumber + '-2').is( ':visible' ) );
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.ok( arguments[ 1 ] === zz('#t' + testNumber + '-1').isVisible() );
+        assert.equal( zz('#t' + testNumber + '-2').text(), "" + arguments[ 2 ] );  
+        assert.ok( arguments[ 3 ] === zz('#t' + testNumber + '-2').isVisible() );
         assert.equal( errorsArray, undefined );
     };
 
@@ -453,11 +453,11 @@ QUnit.test( "simple I18NLanguage and I18nDomain autoCommit true test", function(
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );
-        assert.ok( arguments[ 3 ].indexOf( $('#t' + testNumber + '-3').html() ) !== -1 );
-        assert.ok( arguments[ 3 ].indexOf( $('#t' + testNumber + '-4').html() ) !== -1 );
-        assert.equal( $('#t' + testNumber + '-5').text(), "" + arguments[ 4 ] );
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );
+        assert.ok( arguments[ 3 ].indexOf( zz('#t' + testNumber + '-3').html() ) !== -1 );
+        assert.ok( arguments[ 3 ].indexOf( zz('#t' + testNumber + '-4').html() ) !== -1 );
+        assert.equal( zz('#t' + testNumber + '-5').text(), "" + arguments[ 4 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -558,11 +558,11 @@ QUnit.test( "simple I18NLanguage and I18nDomain autoCommit false test", function
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );
-        assert.ok( arguments[ 3 ].indexOf( $('#t' + testNumber + '-3').html() ) !== -1 );
-        assert.ok( arguments[ 3 ].indexOf( $('#t' + testNumber + '-4').html() ) !== -1 );
-        assert.equal( $('#t' + testNumber + '-5').text(), "" + arguments[ 4 ] );
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-2').text(), "" + arguments[ 1 ] );
+        assert.ok( arguments[ 3 ].indexOf( zz('#t' + testNumber + '-3').html() ) !== -1 );
+        assert.ok( arguments[ 3 ].indexOf( zz('#t' + testNumber + '-4').html() ) !== -1 );
+        assert.equal( zz('#t' + testNumber + '-5').text(), "" + arguments[ 4 ] );
         assert.equal( errorsArray, undefined );
     };
 
@@ -631,7 +631,7 @@ QUnit.test( "2 vars in TALContent autoCommit true test", function( assert ) {
     });
 
     var testFunction = function( content ){
-        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( zz('#t' + testNumber + '-1').text(), content );
         assert.equal( errorsArray, undefined );
     };
 
@@ -666,7 +666,7 @@ QUnit.test( "2 vars in TALContent autoCommit false test", function( assert ) {
     });
 
     var testFunction = function( content ){
-        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( zz('#t' + testNumber + '-1').text(), content );
         assert.equal( errorsArray, undefined );
     };
 
@@ -704,7 +704,7 @@ QUnit.test( "var in macro autoCommit true test", function( assert ) {
     });
 
     var testFunction = function( content ){
-        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( zz('#t' + testNumber + '-1').text(), content );
         assert.equal( errorsArray, undefined );
     };
 
@@ -739,7 +739,7 @@ QUnit.test( "var in macro autoCommit false test", function( assert ) {
     });
 
     var testFunction = function( content ){
-        assert.equal( $('#t' + testNumber + '-1').text(), content );
+        assert.equal( zz('#t' + testNumber + '-1').text(), content );
         assert.equal( errorsArray, undefined );
     };
 
@@ -872,9 +872,9 @@ QUnit.test( "mixing TALContent and TALAttributes autoCommit true test", function
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] ); 
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] ); 
         assert.equal( errorsArray, undefined );
     };
 
@@ -921,9 +921,9 @@ QUnit.test( "mixing TALContent and TALAttributes autoCommit false test", functio
     });
 
     var testFunction = function(){
-        assert.equal( $('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
-        assert.equal( $('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
-        assert.equal( $('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] ); 
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'maxlength' ), "" + arguments[ 0 ] );
+        assert.equal( zz('#t' + testNumber + '-1').attr( 'placeholder' ), "" + arguments[ 1 ] );
+        assert.equal( zz('#t' + testNumber + '-1').text(), "" + arguments[ 2 ] ); 
         assert.equal( errorsArray, undefined );
     };
 

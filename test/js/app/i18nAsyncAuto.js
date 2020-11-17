@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var I18nBundle = zpt.I18nBundle;

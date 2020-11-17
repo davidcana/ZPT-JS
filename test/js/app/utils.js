@@ -3,7 +3,8 @@
 */
 "use strict";
 
-var $ = require( 'jquery' );
+//var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require('qunit');
 var htmlComparator = require( './htmlComparator.js' );
 
@@ -11,17 +12,51 @@ module.exports = (function() {
     
     var getAllValues = function( selector ){
         
+        var result = '';
+        
+        zz( selector ).each( 
+            function( index, ss ) {
+                if (  index > 0 ){
+                    result += '/';
+                }
+                result += this.innerHTML;
+            }
+        );
+        
+        return result;
+    };
+    /*
+    var getAllValues = function( selector ){
+        
         return $( selector ).map( function( index, element ) {
             return this.innerHTML;
         } ).get().join( '/' );
     };
+    */
     
+    var getAllNodeIds = function( selector ){
+        
+        var result = '';
+        
+        zz( selector ).each( 
+            function( index, ss ) {
+                if (  index > 0 ){
+                    result += '/';
+                }
+                result += this.getAttribute( 'data-id' );
+            }
+        );
+        
+        return result;
+    };
+    /*
     var getAllNodeIds = function( selector ){
         
         return $( selector ).map( function( index, element ) {
             return this.getAttribute( 'data-id' );
         } ).get().join( '/' );
     };
+    */
     
     var getMilliseconds = function ( startDate ) {
         
@@ -59,7 +94,7 @@ module.exports = (function() {
     /*
     var assertHtml = function ( assert, id, html ){
         assert.equal( 
-            $( id ).html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
+            zz( id ).html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
             html.replace(/(\r\n|\n|\r|\t| )/gm,"")
         );
     };
@@ -67,17 +102,31 @@ module.exports = (function() {
     /*
     var assertHtml = function ( assert, id1, id2 ){
         assert.equal( 
-            $( id1 ).text().replace(/\s+/g, ""), 
-            $( id2 ).text().replace(/\s+/g, "")
+            zz( id1 ).text().replace(/\s+/g, ""), 
+            zz( id2 ).text().replace(/\s+/g, "")
         ); 
     };
     */
     
+    var count = function( selector ){
+        
+        var result = 0;
+        
+        zz( selector ).each( 
+            function( index, ss ) {
+                ++result;
+            }
+        );
+        
+        return result;
+    };
+    /*
     var count = function ( selector ){
         return $( selector ).map( function( index, element ) {
             return this.innerHTML;
         } ).get().length;
     };
+    */
     
     return {
         getAllValues: getAllValues,

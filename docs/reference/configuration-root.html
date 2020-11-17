@@ -34,11 +34,11 @@ root_element ::= a DOM node
                 </p>
 
                 <p>
-                    It can be defined as a configuration option or using ZPT-JS as a jquery plugin, but if the root is an array it can be only defined as a configuration option.
+                    It must be defined as a configuration option.
                 </p>
                 
                 <p>
-                    The first invokation of ZPT using ZPT-JS as a jquery plugin makes ZPT-JS uses the selection as the root. The root defines the limits of the DOM where ZPT-JS will work.
+                    The root defines the limits of the DOM where ZPT-JS will work.
                 </p>
                 <p>
                     Next invokations makes ZPT-JS uses the selection as the root when the command is a full render. If the command is a partial render then the selection will work as the <em>target</em>. The <em>target</em> defines the limits of the update, but a previous definition of the <em>root</em> is needed by ZPT-JS.
@@ -63,24 +63,6 @@ zpt.run({
     dictionary: dictionary
 });
                 </pre>
-
-                <p>
-                    Using ZPT as a jquery plugin:
-                </p>
-                <pre class="brush: js; highlight: [10]">
-"use strict";
-
-var zpt = require( 'zpt' );
-
-var dictionary = {
-    ...
-};
-
-// Parse template
-$( '#id1' ).zpt({
-    dictionary: dictionary
-});
-                </pre>
                 
                 <p>
                     Using an array as a configuration option (the only way):
@@ -100,24 +82,6 @@ zpt.run({
         document.getElementById( 'id1' ),
         document.getElementById( 'id2' ),
     ]
-    dictionary: dictionary
-});
-                </pre>
-                
-                <p>
-                    Using ZPT as a jquery plugin using all the body:
-                </p>
-                <pre class="brush: js; highlight: [10]">
-"use strict";
-
-var zpt = require( 'zpt' );
-
-var dictionary = {
-    ...
-};
-
-// Parse template
-$( 'body' ).zpt({
     dictionary: dictionary
 });
                 </pre>

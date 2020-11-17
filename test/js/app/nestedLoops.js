@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var Qunit = require( 'qunit' );
 
@@ -21,22 +21,22 @@ QUnit.test( "nested loops test", function( assert ) {
     });
     
     // Test nested loop with numeric arrays
-    assert.equal( $('#number10').html() , "10" );
-    assert.equal( $('#number20').html() , "20" );
-    assert.equal( $('#number30').html() , "30" );
-    assert.equal( $('#number40').html() , "40" );
+    assert.equal( zz('#number10').html() , "10" );
+    assert.equal( zz('#number20').html() , "20" );
+    assert.equal( zz('#number30').html() , "30" );
+    assert.equal( zz('#number40').html() , "40" );
     
     // Test nested loop with complex object
-    assert.equal( $('#tool1').html() , "tool A" );
-    assert.equal( $('#tool2').html() , "tool B" );
-    assert.equal( $('#tool3').html() , "tool C" );
+    assert.equal( zz('#tool1').html() , "tool A" );
+    assert.equal( zz('#tool2').html() , "tool B" );
+    assert.equal( zz('#tool3').html() , "tool C" );
     
-    assert.equal( $('#toolNumber110').html() , "10" );
-    assert.equal( $('#toolNumber120').html() , "20" );
-    assert.equal( $('#toolNumber230').html() , "30" );
-    assert.equal( $('#toolNumber240').html() , "40" );
-    assert.equal( $('#toolNumber350').html() , "50" );
-    assert.equal( $('#toolNumber360').html() , "60" );
+    assert.equal( zz('#toolNumber110').html() , "10" );
+    assert.equal( zz('#toolNumber120').html() , "20" );
+    assert.equal( zz('#toolNumber230').html() , "30" );
+    assert.equal( zz('#toolNumber240').html() , "40" );
+    assert.equal( zz('#toolNumber350').html() , "50" );
+    assert.equal( zz('#toolNumber360').html() , "60" );
     
 });
 

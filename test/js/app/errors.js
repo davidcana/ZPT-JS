@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
@@ -16,22 +16,22 @@ QUnit.test( "Non existing expressions test", function( assert ) {
 
     try {
         zpt.run({
-            root: $( '#t1' )[0],
+            root: zz( '#t1' )[0],
             dictionary: dictionary
         });
     } catch ( e ) {
         assert.equal( e , "Unknown expression: strinnnng:" );
     }
     
-    assert.equal( $('#t1-1').html() , "not defined expression" );
-    assert.equal( $('#t1-2').html() , "not defined expression" );
+    assert.equal( zz('#t1-1').html() , "not defined expression" );
+    assert.equal( zz('#t1-2').html() , "not defined expression" );
 });
 
 QUnit.test( "Using null values in expressions test", function( assert ) {
 
     try {
         zpt.run({
-            root: $( '#t2' )[0],
+            root: zz( '#t2' )[0],
             dictionary: dictionary
         });
     } catch( e ){
@@ -43,7 +43,7 @@ QUnit.test( "Using null values in path expressions test", function( assert ) {
 
     try {
         zpt.run({
-            root: $( '#t3' )[0],
+            root: zz( '#t3' )[0],
             dictionary: dictionary
         });
     } catch( e ){
@@ -113,11 +113,11 @@ QUnit.test( "Using null root test", function( assert ) {
 QUnit.test( "Using null target test", function( assert ) {
 
     zpt.run({
-        root: $( '#t5' )[0],
+        root: zz( '#t5' )[0],
         dictionary: dictionary
     });
     
-    assert.equal( $('#t5-1').html() , "3" );
+    assert.equal( zz('#t5-1').html() , "3" );
     
     try {
         zpt.run({
@@ -135,7 +135,7 @@ QUnit.test( "Using undefined expression in path expression test", function( asse
 
     try {
         zpt.run({
-            root: $( '#t6' )[0],
+            root: zz( '#t6' )[0],
             dictionary: dictionary
         });
     } catch( e ){

@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var Qunit = require( 'qunit' );
@@ -48,40 +48,40 @@ zpt.run({
 
 // Run tests!
 QUnit.test( "Content test", function( assert ) {
-    assert.equal( $('#t1-1').html() , "Bob" );
+    assert.equal( zz('#t1-1').html() , "Bob" );
 });
 
 QUnit.test( "Define test", function( assert ) {
-    assert.equal( $('#t2-1').html() , "1" );
+    assert.equal( zz('#t2-1').html() , "1" );
 });
 
 QUnit.test( "Condition test", function( assert ) {
-    assert.equal( $('#t3-1').html() , "Bob" );
-    assert.notOk( $('#t3-2').is(':visible') );
+    assert.equal( zz('#t3-1').html() , "Bob" );
+    assert.notOk( zz('#t3-2').isVisible() );
 });
 
 QUnit.test( "Attributes test", function( assert ) {
-    assert.equal( $('#t4-1').attr('title') , "title in string expression" );
-    assert.equal( $('#t4-1').attr('href') , "http://www.xxx.org" );
+    assert.equal( zz('#t4-1').attr('title') , "title in string expression" );
+    assert.equal( zz('#t4-1').attr('href') , "http://www.xxx.org" );
 });
 
 QUnit.test( "Repeat test", function( assert ) {
     assert.equal( utils.getAllValues( '.cValue1' ) , 'jaja/jeje/jiji' );
-    assert.equal( $( '.cValue2' ).length , 0 );
+    assert.equal( zz( '.cValue2' ).length , 0 );
 });
 
 QUnit.test( "Omit-tag test", function( assert ) {
-    assert.equal( $('#t6-1').html() , "Void omit-tag (should omit)" );
-    assert.equal( $('#t6-2').html() , '<span data-omit-tag="" data-content="c">Void omit-tag (should NOT omit)</span>' );
+    assert.equal( zz('#t6-1').html() , "Void omit-tag (should omit)" );
+    assert.equal( zz('#t6-2').html() , '<span data-omit-tag="" data-content="c">Void omit-tag (should NOT omit)</span>' );
 });
 
 QUnit.test( "Replace test", function( assert ) {
-    assert.equal( $('#t7-1').html() , "replaced text" );
-    assert.equal( $('#t7-2').html() , "<span data-replace=\"'replaced text'\">should NOT be replaced</span>" );
+    assert.equal( zz('#t7-1').html() , "replaced text" );
+    assert.equal( zz('#t7-2').html() , "<span data-replace=\"'replaced text'\">should NOT be replaced</span>" );
 });
 
 QUnit.test( "On-error test", function( assert ) {
-    assert.equal( $('#t8-1').text() , "Oh, noooo!" );
+    assert.equal( zz('#t8-1').text() , "Oh, noooo!" );
 });
 
 QUnit.test( "Macros test", function( assert ) {
@@ -110,13 +110,13 @@ Make sure to check out our <a href="/specials">specials</a>.
     //assert.htmlEqualExt( '#t9', t9 );
     /*
     assert.equal( 
-        $('#t9').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
+        zz('#t9').html().replace(/(\r\n|\n|\r|\t| )/gm,"") , 
         t9.replace(/(\r\n|\n|\r|\t| )/gm,""), 
         "Passed!" );
         */
 });
 
 QUnit.test( "I18n test", function( assert ) {
-    assert.equal( $('#t10-1').html() , "¡Hola mundo!" );
-    assert.equal( $('#t10-2').html() , "Hello world!" );
+    assert.equal( zz('#t10-1').html() , "¡Hola mundo!" );
+    assert.equal( zz('#t10-2').html() , "Hello world!" );
 });

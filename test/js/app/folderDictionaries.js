@@ -1,6 +1,6 @@
 "use strict";
 
-var $ = require( 'jquery' );
+var zz = require( 'zzdom' );
 var Qunit = require( 'qunit' );
 var zpt = require( '../../../js/app/main.js' );
 var utils = require( './utils.js' );
@@ -101,8 +101,8 @@ QUnit.test( "1 level of folder dictionaries with dictionary tests", function( as
 });
 
 var runTests = function( assert ){
-    assert.equal( $('#t1-1').html() , '' + arguments[ 1 ] );
-    assert.equal( $('#t1-2').html() , '' + arguments[ 2 ] );
-    assert.equal( $('#t1-3').html() , '' + arguments[ 3 ] );
-    assert.equal( $('#t1-4').html() , '' + arguments[ 4 ] );
+    assert.equal( zz('#t1-1').html() , '' + arguments[ 1 ] );
+    assert.equal( zz('#t1-2').html() , '' + arguments[ 2 ] );
+    assert.equal( zz('#t1-3').html() , '' + arguments[ 3 ] );
+    assert.equal( zz('#t1-4').html() , '' + arguments[ 4 ] );
 }
