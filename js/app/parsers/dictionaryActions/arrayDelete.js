@@ -36,7 +36,7 @@ ArrayDelete.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
         function(){
             
             // Remove the selected node from the index and from HTML
-            attributeIndex.removeNode( nodeToDelete ); 
+            //attributeIndex.removeNode( nodeToDelete ); 
             nodeRemover.removeNode( nodeToDelete );
             //TODO update next siblings?
             

@@ -276,9 +276,12 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
         // Build data about all changes
         var length = list.length;
         for ( var i = 0; i < length; i++ ) {
+            addNewNodeAttribute( varName, list[ i ] );
+            /*
             if ( ! addNewNodeAttribute( varName, list[ i ] ) ){
                 attributeIndex.removeVar( varName, list[ i ].nodeId );
             }
+            */
         }
     };
     
@@ -356,9 +359,12 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     var updateNode = function( node, mustRemoveGeneratedNodes ){
         
         // Remove related to node nodes
+        nodeRemover.removeMultipleNodes( node, mustRemoveGeneratedNodes );
+        /*
         attributeIndex.removeMultipleNodes(
             nodeRemover.removeMultipleNodes( node, mustRemoveGeneratedNodes )
         );
+        */
         
         // Instance and invoke parserNodeRenderer to update node
         var parserNodeRenderer = new ParserNodeRenderer( 

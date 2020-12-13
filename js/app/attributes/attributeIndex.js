@@ -9,11 +9,9 @@ var context = require( '../context.js' );
 module.exports = (function() {
     
     var map;
-    //var tags;
     
     var reset = function(){
         map = {};
-        //tags = context.getTags();
     };
     reset();
     
@@ -102,14 +100,46 @@ module.exports = (function() {
             return [];
         }
         
+        // Remove items with removed nodes
+        cleanItems( items );
+        
         // We must build another list to avoid sync errors
         var result = [];
         result = result.concat( items );
         return result;
     };
     
+    //TODO findNodeById duplicated
+    var findNodeById = function ( nodeId ) {
+        
+        return window.document.querySelector( 
+            '[' + context.getTags().id + '="' + nodeId + '"]' 
+        );
+    };
+    
+    // Iterate through items and remove them when node does not exist in DOM
+    var cleanItems = function( items ){
+        
+        var indexesToRemove = [];
+        
+        // Build list of items to remove
+        for ( var i = 0; i < items.length; ++i ){
+            var item = items[ i ];
+            var node = findNodeById( item.nodeId );
+            if ( ! node ){
+                indexesToRemove.push( i );
+            }
+        }
+        
+        // Remove items
+        for ( var j = indexesToRemove.length - 1; j >= 0 ; --j ){
+            var indexToRemove = indexesToRemove[ j ];
+            items.splice( indexToRemove, 1 );
+        };
+    };
+    /*
     var removeVar = function( varName, nodeId ){
-
+        
         var list = map[ varName ];
 
         var filtered = list.filter(
@@ -122,7 +152,7 @@ module.exports = (function() {
     };
     
     var removeVarFromNodes = function( varName, nodeIds ){
-
+        
         var list = map[ varName ];
 
         var filtered = list.filter(
@@ -136,6 +166,7 @@ module.exports = (function() {
         } else {
             map[ varName ] = filtered;
         }
+        
     };
     
     var getAllNodeIds = function( target ){
@@ -158,7 +189,7 @@ module.exports = (function() {
     };
     
     var removeNode = function( node ){
-        
+
         var nodeIds = getAllNodeIds( node );
 
         var nodeId = node.getAttribute( context.getTags().id );
@@ -170,18 +201,18 @@ module.exports = (function() {
     };
     
     var removeMultipleNodes = function( nodeIds ){
-    
+
         for ( var varName in map ){
             removeVarFromNodes( varName, nodeIds );
         }
     };
-    
+    */
     return {
         add: add,
         getVarsList: getVarsList,
-        removeVar: removeVar,
-        removeNode: removeNode,
-        removeMultipleNodes: removeMultipleNodes,
+        //removeVar: removeVar,
+        //removeNode: removeNode,
+        //removeMultipleNodes: removeMultipleNodes,
         reset: reset
     };
 })();

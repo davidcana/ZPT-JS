@@ -25,9 +25,12 @@ var ParserPreloader = function( _parserOptions, _callback, _failCallback, _decla
 
         try {
             if ( ! notRemoveGeneratedTags ){
+                nodeRemover.removeGeneratedNodes( parserOptions.root );
+                /*
                 attributeIndex.removeMultipleNodes(
                     nodeRemover.removeGeneratedNodes( parserOptions.root )
                 );
+                */
             }
 
             var scope = new Scope( 

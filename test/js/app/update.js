@@ -3904,6 +3904,41 @@ QUnit.test( "Object updated test", function( assert ) {
     testFunction( 'Ann/Mary/Lea', 'The number 4/The number 5/The number 6', 'id2' );
 });
 
+// Run tests!
+QUnit.test( "simple TALContent removing node outside ZPT test", function( assert ) {
+
+    var testNumber = 55;
+    
+    var dictionary = {
+        number1: 1
+    };
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    assert.equal( zz('#t'+ testNumber + '-1').text(), '1' );
+    assert.equal( zz('#t'+ testNumber + '-2').text(), '1' );
+    
+    // Remove #t55-1
+    zz( '#t'+ testNumber + '-1' ).remove();
+    
+    // Test again
+    var dictionaryChanges = {
+        number1: 2
+    };
+
+    zpt.run({
+        command: 'update',
+        dictionaryChanges: dictionaryChanges
+    });
+
+    assert.equal( zz( '#t'+ testNumber + '-1' ).length, 0 );
+    assert.equal( zz( '#t'+ testNumber + '-2' ).text(), '2' );
+    
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {
