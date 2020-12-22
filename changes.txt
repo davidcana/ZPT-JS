@@ -18,6 +18,9 @@ New in 0.41.0
 - Don't throw any exception when an indexed node is not found?
 - Replace string keys in AttributeIndex by objects?
 
+New in 0.40.6
+- Bug fixed: talCondition did not update properly.
+
 New in 0.40.5
 - Bug fixed: attributeIndex class did not treat properly removing nodes outside ZPT; now it does not remove nodes explicitily, removes them if they are not found in DOM.
 

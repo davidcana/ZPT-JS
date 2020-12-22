@@ -3939,6 +3939,116 @@ QUnit.test( "simple TALContent removing node outside ZPT test", function( assert
     
 });
 
+QUnit.test( "Insert and delete object nested element by index using the loop var with partial render TALRepeat test", function( assert ) {
+
+    var testNumber = 56;
+    
+    var dictionary = {};
+    dictionary[ 'stringList' + testNumber ] = [ 'Red' ];
+
+    errorsArray = undefined;
+
+    zpt.run({
+        root: document.getElementById( 't' + testNumber ),
+        dictionary: dictionary
+    });
+
+    var testFunction = function(){
+        if ( arguments[ 0 ] ){
+            assert.notOk( zz('#noElements' + testNumber ).isVisible() );
+            assert.ok( zz('#elements' + testNumber ).isVisible() );
+        } else {
+            assert.ok( zz('#noElements' + testNumber ).isVisible() );
+            assert.notOk( zz('#elements' + testNumber ).isVisible() );
+        }
+        assert.equal( utils.getAllValues( '.itemString' + testNumber ), arguments[ 1 ] );
+        assert.equal( errorsArray, undefined );
+    };
+    testFunction( true, 'Red' );
+    
+    // Remove the only element
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'stringList' + testNumber,
+                action: 'deleteArray',
+                index: '_first_'
+            }
+        ]
+    });
+    testFunction( false, '' );
+    
+    // Add 1 element
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'stringList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: 'Blue'
+            }
+        ]
+    });
+    testFunction( true, 'Blue' );
+    
+    // Add 1 element
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'stringList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: 'White'
+            }
+        ]
+    });
+    testFunction( true, 'Blue/White' );
+    
+    // Remove 2 elements
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'stringList' + testNumber,
+                action: 'deleteArray',
+                index: [ 0, 1 ]
+            }
+        ]
+    });
+    testFunction( false, '' );
+
+    // Add 1 element
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'stringList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: 'Pink'
+            }
+        ]
+    });
+    testFunction( true, 'Pink' );
+    
+    // Add 1 element
+    zpt.run({
+        command: 'update',
+        dictionaryActions: [
+            {
+                id: 'stringList' + testNumber,
+                action: 'createArray',
+                index: '_last_',
+                newElement: 'Cyan'
+            }
+        ]
+    });
+    testFunction( true, 'Pink/Cyan' );
+});
+
 QUnit.test( "simple TALContent with indexExpressions = false test", function( assert ) {
 
     var dictionary = {

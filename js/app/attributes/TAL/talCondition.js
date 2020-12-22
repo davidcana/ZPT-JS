@@ -27,7 +27,7 @@ var TALCondition = function( stringToApply, expressionToApply ) {
     };
     
     var update = function( parserUpdater, node ){
-        parserUpdater.updateNode( node );
+        parserUpdater.updateNode( node, true );
     };
     
     var updatableFromAction = function( parserUpdater, node ){
