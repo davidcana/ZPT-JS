@@ -70,10 +70,12 @@ QUnit.test( "on-error object tag test", function( assert ) {
 
     //assert.equal( zz('#t4-1').text() , "true" );
     assert.equal( zz('#t4-2').text() , "1" );
-    //assert.equal( zz('#t4-3').text() , "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' of null" );
+    //assert.ok(
+    //    zz('#t4-3').text() == "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' o"
+    //    || zz('#t4-3').text() == "TypeError/document.getElementById(...) is null/fireError@http://127.0.0.1:9966/on-error.js:"
+    //);
     assert.ok( 
-        zz('#t4-3').text() == "TypeError/Cannot set property 'innerHTML' of null/TypeError: Cannot set property 'innerHTML' o" 
-        || zz('#t4-3').text() == "TypeError/document.getElementById(...) is null/fireError@http://127.0.0.1:9966/on-error.js:"
+        zz('#t4-3').text().startsWith( "TypeError/Cannot set properties of null (setting 'innerHTML')/TypeError" )
     );
     assert.equal( zz('#t4-4').text() , "yes" );
     assert.equal( zz('#t4-5').text() , "Infinity" );
