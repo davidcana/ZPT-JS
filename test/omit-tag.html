@@ -61,5 +61,16 @@
                 </span>
             </div>
         </div>
+
+        <h2>omit-tag and location of new nodes</h2>
+        <div id="t4">
+            <div id="t4-parent">
+                <div id="t4-1">tag before omit-tag</div>
+                <div data-omit-tag="" data-define="name 'John'">
+                    User: <span data-content="name" data-attributes="id 't4-2'">A name (should omit div tag)</span>
+                </div>
+                <div id="t4-3">tag after omit-tag</div>
+            </div>
+        </div>
     </body> 
 </html>

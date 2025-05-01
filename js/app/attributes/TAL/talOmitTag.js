@@ -25,11 +25,12 @@ var TALOmitTag = function( stringToApply, expressionToApply ) {
         // Move children from current node to its parent and then remove it
         var tags = context.getTags();
         var parentNode = node.parentNode;
+        var nextSibling = node.nextSibling;
         while ( node.firstChild ) {
             if ( node.firstChild.nodeType === 1 ){
                 node.firstChild.setAttribute( tags.qdup, 1 );
             }
-            parentNode.appendChild( node.firstChild );
+            parentNode.insertBefore( node.firstChild, nextSibling );
         }
         parentNode.removeChild( node );
 

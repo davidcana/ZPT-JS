@@ -4,6 +4,7 @@ var zz = require( 'zzdom' );
 var zpt = require( '../../../js/app/main.js' );
 var dictionary = require( './dictionary.js' );
 var QUnit = require( 'qunit' );
+var utils = require( './utils.js' );
 var context = zpt.context;
 
 // Run tests!
@@ -53,4 +54,18 @@ QUnit.test( "omit-tag and define test", function( assert ) {
     });
     
     assert.equal( zz('#t3-1').html(), "John" );
+});
+
+QUnit.test( "omit-tag and location of new nodes test", function( assert ) {
+    
+    zpt.run({
+        root: document.getElementById( 't4' ),
+        dictionary: dictionary
+    });
+    
+    assert.equal( zz('#t4-2').html(), "John" );
+    assert.equal(
+        utils.getAllChildrenAttrs('#t4-parent', 'id'),
+        't4-1/t4-2/t4-3'
+    );
 });

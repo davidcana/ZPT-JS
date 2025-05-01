@@ -58,6 +58,24 @@ module.exports = (function() {
     };
     */
     
+    var getAllChildrenAttrs = function( selector, attr ){
+        
+        var result = '';
+        
+        zz( selector )
+            .children()
+            .each( 
+                function( index, ss ) {
+                    if (  index > 0 ){
+                        result += '/';
+                    }
+                    result += this.getAttribute( attr );
+                }
+        );
+        
+        return result;
+    };
+
     var getMilliseconds = function ( startDate ) {
         
         var endDate   = new Date();
@@ -131,6 +149,7 @@ module.exports = (function() {
     return {
         getAllValues: getAllValues,
         getAllNodeIds: getAllNodeIds,
+        getAllChildrenAttrs: getAllChildrenAttrs,
         getMilliseconds: getMilliseconds,
         assertHtml: assertHtml,
         count: count
