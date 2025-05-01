@@ -1,6 +1,6 @@
 # ZPT-JS
 
-**Zenon Page Templates - JS (ZPT-JS)** is a Javascript API that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes. **ZPT-JS** is a javascript implementation of Zope Page Templates (ZPT). It is not a fully compliant implementation: there are some differences. Take a look at [Zope2 book](http://docs.zope.org/zope2/zope2book/ZPT.html) to learn about Zope Page Templates.
+**Zenon Page Templates - JS (ZPT-JS)** is a Javascript API that makes it easy to modify the DOM of a HTML document with no Javascript programming, using only some custom attributes. **ZPT-JS** is a javascript implementation of Zope Page Templates (ZPT). It is not a fully compliant implementation: there are some differences. Take a look at [Zope2 book](https://zope.readthedocs.io/en/latest/zopebook/index.html) to learn about Zope Page Templates.
 
 Core features of **ZPT-JS** are:
 
@@ -37,73 +37,8 @@ A main goal of ZPT-JS is not to break a valid HTML document. So, as HTML5 allows
 npm install zpt
 ```
 
-## Usage
-
-A sample of template:
-
-*gettingStarted.html*
-
-```html
-    <!DOCTYPE html>
-    <html> 
-        <head>
-            <meta charset="utf-8">
-            <title>Getting started</title>
-
-            <script src="zpt.min.js" defer></script>
-            <script src="gettingStarted.js" type="text/javascript" defer></script>
-        </head>
-        <body>
-            <p data-content="message">
-                the message
-            </p>
-        </body>
-    </html>
-```
-Where **zpt.min.js** is the minimized version of ZPT-JS and **gettingStarted.js** is:
-
-*gettingStarted.js*
-
-```javascript
-    "use strict";
-
-    var dictionary = new zpt.ReactiveDictionary({
-        message: "Hello, world!"
-    });
-
-    zpt.run({
-        root: document.body,
-        dictionary: dictionary
-    });
-```
-
-The resulting **body** element is:
-
-```html
-    <body>
-        <p data-content="message">
-            Hello, world!
-        </p>
-    </body>
-```
-
-If we change some data in the dictionary this way:
-
-```javascript
-    dictionary.message = "Bye, world!";
-```
-
-We don't need to do anything else, the **body** element now is:
-
-```html
-    <body>
-        <p data-content="message">
-            Bye, world!
-        </p>
-    </body>
-```
-
-Please, take a look at [the ZPT-JS web](https://davidcana.github.io/ZPT-JS) for more information about ZPT-JS.
+## Tutorial, reference and more
+Take a look at [ZPT-JS's home page](https://davidcana.github.io/ZPT-JS/) for more details.
 
 ## License
 [LGPL](http://www.gnu.org/licenses/lgpl.html)
