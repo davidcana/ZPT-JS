@@ -81,7 +81,7 @@ zpt.run({
     dictionary: dictionary
 });
 
-// Parse template using jquery plugin
+// Parse template using plugin
 zpt.run({
     root: document.getElementById( 'tests-2' ),
     dictionary: dictionary

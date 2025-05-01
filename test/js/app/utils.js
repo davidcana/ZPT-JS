@@ -3,7 +3,6 @@
 */
 "use strict";
 
-//var $ = require( 'jquery' );
 var zz = require( 'zzdom' );
 var Qunit = require('qunit');
 var htmlComparator = require( './htmlComparator.js' );

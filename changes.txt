@@ -18,6 +18,9 @@ New in 0.41.0
 - Don't throw any exception when an indexed node is not found?
 - Replace string keys in AttributeIndex by objects?
 
+New in 0.40.7
+- Bug fixed: talOmitTag wasn't adding new nodes in the right position.
+
 New in 0.40.6
 - Bug fixed: talCondition did not update properly.
 
