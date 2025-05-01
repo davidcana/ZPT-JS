@@ -5,7 +5,7 @@
 module.exports = function( languageId, res ) {
     "use strict";
     
-    var MessageFormat = require( 'messageformat' );
+    var MessageFormat = require( '@messageformat/core' );
     var context = require( '../context.js' );
     var utils = require( '../utils.js' );
     
