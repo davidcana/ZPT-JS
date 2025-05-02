@@ -1,15 +1,12 @@
 New in future versions
-- Replace callback functions by promises?
 - Avoid flashing?
+- Replace callback functions by promises?
 - Move configurations from context to configuration object?
 - Add if: expression (example-> if: isImportant 'important' is equals to cond: isImportant 'important' '')?
 - Add data-else and data-else-condition tags?
 - Add data-switch expression and data-tcase expression?
 - Implement adquisition?
 - Add options.macro (string) to set the name of the macro to invoke in a full render command?
-
-                    
-New in 0.41.0
 - Update command improved: support of method invocation and ranges?
 - Full reactive support: support of nested object?
 - Add support of chaining to dictionary actions (like the DeleteArray)?
@@ -17,6 +14,12 @@ New in 0.41.0
 - Add effects support to dictionaryChanges?
 - Don't throw any exception when an indexed node is not found?
 - Replace string keys in AttributeIndex by objects?
+                    
+New in 0.41.0?
+-Add support of list of ids to i18nHelper.tr.
+
+
+
 
 New in 0.40.7
 - Bug fixed: talOmitTag wasn't adding new nodes in the right position.
