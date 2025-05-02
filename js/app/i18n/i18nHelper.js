@@ -7,20 +7,32 @@ var context = require( '../context.js' );
 
 module.exports = (function() {
     "use strict";
-    
-    var tr = function ( i18nList, id, params, format, subformat, language ){
+
+    var tr = function ( i18nList, idItems, params, format, subformat, language ){
         
         if ( ! i18nList ) {
             return 'No I18n instance defined!';
         }
-            
-        var length = i18nList.length;
-        if ( ! length ){
+        
+        if ( ! i18nList.length ){
             return 'Void I18n list!';
         }
 
-        for ( var i = 0; i < length; i++ ) {
-            var i18n = i18nList[ i ];
+        for ( const i18n of i18nList ) {
+
+            // Check if idItems is an array
+            if ( Array.isArray( idItems ) ){
+                // idItems is an array
+                for ( const id of idItems ) {
+                    if ( format !== 'string' || i18n.exists( id ) ){
+                        return i18n.tr( id, params, format, subformat, language );
+                    }
+                }
+                continue;
+            }
+
+            // idItems must be a single id
+            const id = idItems;
             if ( format !== 'string' || i18n.exists( id ) ){
                 return i18n.tr( id, params, format, subformat, language );
             }

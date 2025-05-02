@@ -1,8 +1,9 @@
 "use strict";
 
 var zz = require( 'zzdom' );
+const { i18nHelper } = require('../../../js/app/main');
 
-module.exports = function(){
+module.exports = function( dictionary ){
     
     QUnit.test( "Simple i18n test", function( assert ) {
         assert.equal( zz('#t1-1').html() , "¡Hola mundo!" );
@@ -362,5 +363,89 @@ module.exports = function(){
     QUnit.test( "An array with 2 domains in domain definition: [ i18nEN2 i18nEN1 ] (english) ", function( assert ) {
         assert.equal( zz('#t23-1').html() , "Hello world 2.0!!!" );
         assert.equal( zz('#t23-2').html() , "He found no results" );
+    });
+
+    QUnit.test( "i18nHelper.tr (spanish)", function( assert ) {
+        const i18nList = [ dictionary.i18nES1, dictionary.i18nES2 ];
+        
+        // Search for an id
+        assert.equal(
+            i18nHelper.tr( i18nList, 'option1', {}, 'string' ),
+            "Ésta es la opción 1"
+        );
+        assert.equal(
+            i18nHelper.tr( i18nList, 'option2', {}, 'string' ),
+            "Ésta es la opción 2"
+        );
+
+        // Search for 2 ids, the first is not found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId', 'option1'], {}, 'string' ),
+            "Ésta es la opción 1"
+        );
+
+        // Search for 2 ids, the first is found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['option1', 'notFoundId'], {}, 'string' ),
+            "Ésta es la opción 1"
+        );
+
+        // Search for 2 ids, both are found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['option1', 'option2'], {}, 'string' ),
+            "Ésta es la opción 1"
+        );
+        assert.equal(
+            i18nHelper.tr( i18nList, ['option2', 'option2'], {}, 'string' ),
+            "Ésta es la opción 2"
+        );
+
+        // Search for 3 ids, the third is found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2', 'option1'], {}, 'string' ),
+            "Ésta es la opción 1"
+        );
+    });
+
+    QUnit.test( "i18nHelper.tr (english)", function( assert ) {
+        const i18nList = [ dictionary.i18nEN1, dictionary.i18nEN2 ];
+        
+        // Search for an id
+        assert.equal(
+            i18nHelper.tr( i18nList, 'option1', {}, 'string' ),
+            "This is option 1"
+        );
+        assert.equal(
+            i18nHelper.tr( i18nList, 'option2', {}, 'string' ),
+            "This is option 2"
+        );
+
+        // Search for 2 ids, the first is not found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId', 'option1'], {}, 'string' ),
+            "This is option 1"
+        );
+
+        // Search for 2 ids, the first is found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['option1', 'notFoundId'], {}, 'string' ),
+            "This is option 1"
+        );
+        
+        // Search for 2 ids, both are found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['option1', 'option2'], {}, 'string' ),
+            "This is option 1"
+        );
+        assert.equal(
+            i18nHelper.tr( i18nList, ['option2', 'option2'], {}, 'string' ),
+            "This is option 2"
+        );
+
+        // Search for 3 ids, the third is found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2', 'option1'], {}, 'string' ),
+            "This is option 1"
+        );
     });
 };

@@ -5,5 +5,7 @@
     },
     "Hello world!": "¡Hola mundo!",
     "Results msg": "{ GENDER, select, male{Él} female{Ella} other{Ellos} } { RES, plural, =0{no } other{} }{ GENDER, select, male{ha} female{ha} other{han} } encontrado { RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }",
-    "Oh, noooo!": "Error encontrado... Oh, noooo!"
+    "Oh, noooo!": "Error encontrado... Oh, noooo!",
+    "option1": "Ésta es la opción 1",
+    "option2": "Ésta es la opción 2"
 }

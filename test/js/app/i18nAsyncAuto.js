@@ -51,4 +51,4 @@ QUnit.module( 'module', {
     }
 });
 
-i18nTests();
+i18nTests( dictionary );

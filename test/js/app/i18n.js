@@ -27,6 +27,8 @@ msg1.en[ 'Results msg' ] = '{GENDER, select, male{He} female{She} other{They} }'
     ' found ' +
     '{RES, plural, =0{no results} one{1 result} other{# results} }';
 msg1.en[ 'Oh, noooo!' ] = 'Error found... Oh, noooo!';
+msg1.en[ 'option1' ] = 'This is option 1';
+msg1.en[ 'option2' ] = 'This is option 2';
 msg2.en[ '/CONF/' ] = {
     language: 'en',
     locale: 'en-US'
@@ -46,6 +48,8 @@ msg1.es[ 'Results msg' ] = '{ GENDER, select, male{Él} female{Ella} other{Ellos
     ' encontrado ' +
     '{ RES, plural, =0{ningún resultado} one{un único resultado} other{# resultados} }';
 msg1.es[ 'Oh, noooo!' ] = 'Error encontrado... Oh, noooo!';
+msg1.es[ 'option1' ] = 'Ésta es la opción 1';
+msg1.es[ 'option2' ] = 'Ésta es la opción 2';
 msg2.es[ '/CONF/' ] = {
     language: 'es',
     locale: 'es-ES'
@@ -84,4 +88,4 @@ zpt.run({
 });
 
 // Run tests!
-i18nTests();
+i18nTests( dictionary );
