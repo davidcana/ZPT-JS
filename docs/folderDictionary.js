@@ -3,6 +3,6 @@
 //
 var folderDictionary = {
     'footer-macro': 'footer@templates.html',
-    versionNumber: '0.40.7',
-    versionDate: '1 May 2025'
+    versionNumber: '0.40.8',
+    versionDate: '26 May 2025'
 };

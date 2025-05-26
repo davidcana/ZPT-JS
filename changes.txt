@@ -20,6 +20,8 @@ New in 0.41.0?
 
 
 
+New in 0.40.8
+- Bug fixed: problem with npm solved.
 
 New in 0.40.7
 - Bug fixed: talOmitTag wasn't adding new nodes in the right position.
