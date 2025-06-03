@@ -38,7 +38,7 @@ module.exports = (function() {
             }
         }
         
-        return 'I18n resource "' + id + '" not found!';
+        return 'I18n resource "' + idItems + '" not found!';
     };
     
     var loadAsync = function( remoteList, callback, failCallback ){

@@ -405,6 +405,24 @@ module.exports = function( dictionary ){
             i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2', 'option1'], {}, 'string' ),
             "Ésta es la opción 1"
         );
+
+        // Search for 1 id: not found
+        assert.equal(
+            i18nHelper.tr( i18nList, 'notFoundId1', {}, 'string' ),
+            "I18n resource \"notFoundId1\" not found!"
+        );
+        
+        // Search for 2 ids: not found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2'], {}, 'string' ),
+            "I18n resource \"notFoundId1,notFoundId2\" not found!"
+        );
+
+        // Search for 3 ids: not found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2', 'notFoundId3'], {}, 'string' ),
+            "I18n resource \"notFoundId1,notFoundId2,notFoundId3\" not found!"
+        );
     });
 
     QUnit.test( "i18nHelper.tr (english)", function( assert ) {
@@ -446,6 +464,24 @@ module.exports = function( dictionary ){
         assert.equal(
             i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2', 'option1'], {}, 'string' ),
             "This is option 1"
+        );
+
+        // Search for 1 id: not found
+        assert.equal(
+            i18nHelper.tr( i18nList, 'notFoundId1', {}, 'string' ),
+            "I18n resource \"notFoundId1\" not found!"
+        );
+        
+        // Search for 2 ids: not found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2'], {}, 'string' ),
+            "I18n resource \"notFoundId1,notFoundId2\" not found!"
+        );
+
+        // Search for 3 ids: not found
+        assert.equal(
+            i18nHelper.tr( i18nList, ['notFoundId1', 'notFoundId2', 'notFoundId3'], {}, 'string' ),
+            "I18n resource \"notFoundId1,notFoundId2,notFoundId3\" not found!"
         );
     });
 };
