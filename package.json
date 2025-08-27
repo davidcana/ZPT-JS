@@ -57,6 +57,6 @@
     "web": "cd ./docs; http-server -p 9001",
     "beefy": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js ../../../samples/js/app/performance.js:performance.js",
     "start": "npm-run-all -p -r beefy http-server",
-    "version": "genversion js/app/version.js"
+    "version": "genversion --esm --semi js/app/version.js"
   }
 }
