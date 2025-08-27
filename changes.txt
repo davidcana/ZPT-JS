@@ -15,6 +15,10 @@ New in future versions
 - Don't throw any exception when an indexed node is not found?
 - Replace string keys in AttributeIndex by objects?
                     
+New in 0.40.10
+- Project migrated to ES modules: must work as well as CommonJS module.
+- Esbuild used to bundle production versions.
+
 New in 0.40.9
 - Bug fixed: exception thrown when no i18n resource was found in i18nHelper.
 
