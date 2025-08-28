@@ -1,8 +1,7 @@
 /*
     cacheHelper singleton class
 */
-module.exports = (function() {
-    "use strict";
+export const cacheHelper = (function() {
     
     var hashCode = function( string ) {
 

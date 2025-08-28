@@ -1,12 +1,14 @@
 /* 
     resolver singleton class
 */
-var utils = require( './utils.js' );
-var context = require( './context.js' );
-var expressionBuilder = require( './expressions/expressionBuilder.js' );
+//var utils = require( './utils.js' );
+//var context = require( './context.js' );
+//var expressionBuilder = require( './expressions/expressionBuilder.js' );
+import { utils } from './utils.js';
+import { context } from './context.js';
+import { expressionBuilder } from './expressions/expressionBuilder.js';
 
-module.exports = (function( ) {
-    "use strict";
+export const resolver = (function() {
     
     var macros = {};
     var remotePages = {};

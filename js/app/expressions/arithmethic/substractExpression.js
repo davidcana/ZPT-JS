@@ -1,13 +1,14 @@
 /*
     SubstractExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var arithmethicHelper = require( './arithmethicHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { arithmethicHelper } from './arithmethicHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var arithmethicHelper = require( './arithmethicHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var SubstractExpression = function( stringToApply, expressionListToApply ) {
+export const SubstractExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -57,4 +58,4 @@ SubstractExpression.build = function( string ) {
     return new SubstractExpression( string, expressionList );
 };
 
-module.exports = SubstractExpression;
+//module.exports = SubstractExpression;

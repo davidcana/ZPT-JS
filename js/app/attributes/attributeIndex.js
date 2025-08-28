@@ -1,12 +1,12 @@
 /* 
     attributeIndex singleton class
 */
-"use strict";
+//var utils = require( '../utils.js' );
+//var context = require( '../context.js' );
+import { utils } from '../utils.js';
+import { context } from '../context.js';
 
-var utils = require( '../utils.js' );
-var context = require( '../context.js' );
-
-module.exports = (function() {
+export const attributeIndex = (function() {
     
     var map;
     

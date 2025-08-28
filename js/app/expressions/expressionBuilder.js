@@ -1,14 +1,38 @@
 /* 
     expressionBuilder singleton class
 */
-module.exports = (function() {
-    "use strict";
-    
-    var context = require( '../context.js' );
-    var ExpressionTokenizer = require( './expressionTokenizer.js' );
-    var PathExpression = require( './path/pathExpression.js' );
-    var expressionCache = require( '../cache/expressionCache.js' );
-    /*var log = require( '../logHelper.js' );*/
+//var context = require( '../context.js' );
+//var ExpressionTokenizer = require( './expressionTokenizer.js' );
+//var PathExpression = require( './path/pathExpression.js' );
+//var expressionCache = require( '../cache/expressionCache.js' );
+import { context } from '../context.js';
+import { ExpressionTokenizer } from './expressionTokenizer.js';
+import { PathExpression } from './path/pathExpression.js';
+import { expressionCache } from '../cache/expressionCache.js';
+import { ExistsExpression } from './existsExpression.js';
+import { FormatExpression } from './formatExpression.js';
+import { StringExpression } from './stringExpression.js';
+import { EqualsExpression } from './comparison/equalsExpression.js';
+import { GreaterExpression } from './comparison/greaterExpression.js';
+import { LowerExpression } from './comparison/lowerExpression.js';
+import { InExpression } from './comparison/inExpression.js';
+import { AddExpression } from './arithmethic/addExpression.js';
+import { SubstractExpression } from './arithmethic/substractExpression.js';
+import { MultiplyExpression } from './arithmethic/multiplyExpression.js';
+import { DivideExpression } from  './arithmethic/divideExpression.js';
+import { ModExpression } from './arithmethic/modExpression.js';
+import { AndExpression } from './bool/andExpression.js';
+import { CondExpression } from './bool/condExpression.js';
+import { NotExpression } from './bool/notExpression.js';
+import { OrExpression } from './bool/orExpression.js';
+import { TrCurrencyExpression } from './i18n/trCurrencyExpression.js';
+import { TrDateTimeExpression } from './i18n/trDateTimeExpression.js';
+import { TrNumberExpression } from './i18n/trNumberExpression.js';
+import { TrStringExpression } from './i18n/trStringExpression.js';
+import { JavascriptExpression } from './scripting/javascriptExpression.js';
+import { QueryExpression } from './scripting/queryExpression.js';
+
+export const expressionBuilder = (function() {
     
     var expressionManagers = {};
     var withoutPrefixExpressionManagers = {};
@@ -28,39 +52,63 @@ module.exports = (function() {
     };
     
     var registerGeneralPurpose = function(){
-        register( require( './existsExpression.js' ) );
-        register( require( './formatExpression.js' ) );
-        register( require( './stringExpression.js' ) );
-        register( require( './path/pathExpression.js' ) );
+        //register( require( './existsExpression.js' ) );
+        //register( require( './formatExpression.js' ) );
+        //register( require( './stringExpression.js' ) );
+        //register( require( './path/pathExpression.js' ) );
+        register( ExistsExpression );
+        register( FormatExpression );
+        register( StringExpression );
+        register( PathExpression );
     };
     var registerComparison = function(){
-        register( require( './comparison/equalsExpression.js' ) );
-        register( require( './comparison/greaterExpression.js' ) );
-        register( require( './comparison/lowerExpression.js' ) );
-        register( require( './comparison/inExpression.js' ) );
+        //register( require( './comparison/equalsExpression.js' ) );
+        //register( require( './comparison/greaterExpression.js' ) );
+        //register( require( './comparison/lowerExpression.js' ) );
+        //register( require( './comparison/inExpression.js' ) );
+        register( EqualsExpression );
+        register( GreaterExpression );
+        register( LowerExpression );
+        register( InExpression );
     };
     var registerArithmetic = function(){
-        register( require( './arithmethic/addExpression.js' ) );
-        register( require( './arithmethic/substractExpression.js' ) );
-        register( require( './arithmethic/multiplyExpression.js' ) );
-        register( require( './arithmethic/divideExpression.js' ) );
-        register( require( './arithmethic/modExpression.js' ) );
+        //register( require( './arithmethic/addExpression.js' ) );
+        //register( require( './arithmethic/substractExpression.js' ) );
+        //register( require( './arithmethic/multiplyExpression.js' ) );
+        //register( require( './arithmethic/divideExpression.js' ) );
+        //register( require( './arithmethic/modExpression.js' ) );
+        register( AddExpression );
+        register( SubstractExpression );
+        register( MultiplyExpression );
+        register( DivideExpression );
+        register( ModExpression );
     };
     var registerLogical = function(){
-        register( require( './bool/andExpression.js' ) );
-        register( require( './bool/condExpression.js' ) );
-        register( require( './bool/notExpression.js' ) );
-        register( require( './bool/orExpression.js' ) );
+        //register( require( './bool/andExpression.js' ) );
+        //register( require( './bool/condExpression.js' ) );
+        //register( require( './bool/notExpression.js' ) );
+        //register( require( './bool/orExpression.js' ) );
+        register( AndExpression );
+        register( CondExpression );
+        register( NotExpression );
+        register( OrExpression);
     };
     var registerI18n = function(){
-        register( require( './i18n/trCurrencyExpression.js' ) );
-        register( require( './i18n/trDateTimeExpression.js' ) );
-        register( require( './i18n/trNumberExpression.js' ) );
-        register( require( './i18n/trStringExpression.js' ) );
+        //register( require( './i18n/trCurrencyExpression.js' ) );
+        //register( require( './i18n/trDateTimeExpression.js' ) );
+        //register( require( './i18n/trNumberExpression.js' ) );
+        //register( require( './i18n/trStringExpression.js' ) );
+        register( TrCurrencyExpression );
+        register( TrDateTimeExpression );
+        register( TrNumberExpression );
+        register( TrStringExpression );
+
     };
     var registerScripting = function(){
-        register( require( './scripting/javascriptExpression.js' ) );
-        register( require( './scripting/queryExpression.js' ) );
+        //register( require( './scripting/javascriptExpression.js' ) );
+        //register( require( './scripting/queryExpression.js' ) );
+        register( JavascriptExpression );
+        register( QueryExpression );
     };
     
     var registerAll = function(){

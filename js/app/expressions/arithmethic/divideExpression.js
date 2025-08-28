@@ -1,13 +1,14 @@
 /*
     DivideExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var arithmethicHelper = require( './arithmethicHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { arithmethicHelper } from './arithmethicHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var arithmethicHelper = require( './arithmethicHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var DivideExpression = function( stringToApply, expressionListToApply ) {
+export const DivideExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -57,4 +58,4 @@ DivideExpression.build = function( string ) {
     return new DivideExpression( string, expressionList );
 };
 
-module.exports = DivideExpression;
+//module.exports = DivideExpression;

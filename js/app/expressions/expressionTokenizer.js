@@ -1,10 +1,11 @@
 /* 
     Class ExpressionTokenizer 
 */
-module.exports = function( exp, delimiter, escape ) {
-    "use strict";
+//var expressionBuilder = require( './expressionBuilder.js' );
+import { expressionBuilder } from './expressionBuilder.js';
+
+export const ExpressionTokenizer = function( exp, delimiter, escape ) {
     
-    var expressionBuilder = require( './expressionBuilder.js' );
     var removeParenthesisIfAny = expressionBuilder.removeParenthesisIfAny;
     
     var expression = exp.trim();

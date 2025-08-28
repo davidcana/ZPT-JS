@@ -1,13 +1,14 @@
 /*
     AndExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var evaluateHelper = require( '../evaluateHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { evaluateHelper } from '../evaluateHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var AndExpression = function( stringToApply, expressionListToApply ) {
+export const AndExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -53,4 +54,4 @@ AndExpression.build = function( string ) {
     return new AndExpression( string, expressionList );
 };
 
-module.exports = AndExpression;
+//module.exports = AndExpression;

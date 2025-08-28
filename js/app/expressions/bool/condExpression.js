@@ -1,14 +1,16 @@
 /*
     CondExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+//var evaluateHelper = require( '../evaluateHelper.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionsUtils } from '../expressionsUtils.js';
+import { evaluateHelper } from '../evaluateHelper.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
-
-var CondExpression = function( stringToApply, expression1ToApply, expression2ToApply, expression3ToApply ) {
+export const CondExpression = function( stringToApply, expression1ToApply, expression2ToApply, expression3ToApply ) {
     
     var string = stringToApply;
     var expression1 = expression1ToApply;
@@ -68,4 +70,4 @@ CondExpression.build = function( s ) {
     );
 };
 
-module.exports = CondExpression;
+//module.exports = CondExpression;

@@ -1,10 +1,10 @@
 /*
     logHelper singleton class
 */
-module.exports = (function() {
-    "use strict";
-    
-    var context = require( './context.js' );
+//var context = require( './context.js' );
+import { context } from './context.js';
+
+export const logHelper = (function() {
     
     var trace = function (){
         

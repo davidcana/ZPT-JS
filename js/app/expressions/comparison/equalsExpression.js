@@ -1,13 +1,14 @@
 /*
     EqualsExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var EqualsExpression = function( stringToApply, argsToApply ) {
+export const EqualsExpression = function( stringToApply, argsToApply ) {
     
     var string = stringToApply;
     var args = argsToApply;
@@ -71,4 +72,4 @@ EqualsExpression.build = function( s ) {
     );
 };
 
-module.exports = EqualsExpression;
+//module.exports = EqualsExpression;

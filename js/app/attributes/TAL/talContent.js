@@ -1,13 +1,14 @@
 /*
     TALContent class
 */
-"use strict";
+//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+//var contentHelper = require( './contentHelper.js' );
+//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+import { evaluateHelper } from '../../expressions/evaluateHelper.js';
+import { contentHelper } from './contentHelper.js';
+import { expressionsUtils } from '../../expressions/expressionsUtils.js';
 
-var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
-var contentHelper = require( './contentHelper.js' );
-var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-
-var TALContent = function( stringToApply, expressionToApply, structureToApply ) {
+export const TALContent = function( stringToApply, expressionToApply, structureToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -56,4 +57,4 @@ TALContent.build = function( string ) {
     );
 };
 
-module.exports = TALContent;
+//module.exports = TALContent;

@@ -1,11 +1,10 @@
 /*
     METALFillSlot class
 */
-"use strict";
+//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+import { expressionsUtils } from '../../expressions/expressionsUtils.js';
 
-var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-
-var METALFillSlot = function( _string, _expression, _useMacroNode ) {
+export const METALFillSlot = function( _string, _expression, _useMacroNode ) {
     
     var string = _string;
     var expression = _expression;
@@ -48,4 +47,4 @@ METALFillSlot.build = function( string, useMacroNode ) {
     );
 };
 
-module.exports = METALFillSlot;
+//module.exports = METALFillSlot;

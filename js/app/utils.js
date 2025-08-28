@@ -1,8 +1,7 @@
 /*
     utils singleton class
 */
-module.exports = (function() {
-    "use strict";
+export const utils = (function() {
     
     var generateId = function ( len, _charSet ) {
         

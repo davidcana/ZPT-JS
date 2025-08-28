@@ -1,12 +1,12 @@
 /*
     TrDateTimeExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var trHelper = require( './trHelper.js' );
+import { context } from '../../context.js';
+import { trHelper } from './trHelper.js';
 
-var context = require( '../../context.js' );
-var trHelper = require( './trHelper.js' );
-
-var TrDateTimeExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
+export const TrDateTimeExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -58,4 +58,4 @@ TrDateTimeExpression.build = function( string ) {
             trData.argsExpressions );
 };
 
-module.exports = TrDateTimeExpression;
+//module.exports = TrDateTimeExpression;

@@ -1,12 +1,14 @@
 /* 
     comparisonHelper singleton class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var evaluateHelper = require( '../evaluateHelper.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { evaluateHelper } from '../evaluateHelper.js';
 
-module.exports = (function() {
-    var context = require( '../../context.js' );
-    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-    var evaluateHelper = require( '../evaluateHelper.js' );
+export const comparisonHelper = (function() {
     
     var build = function( s, tag ) {
         var expressionBuilder = require( '../expressionBuilder.js' );

@@ -1,13 +1,14 @@
 /*
     TALOmitTag class
 */
-"use strict";
+//var BooleanLiteral = require( '../../expressions/path/literals/booleanLiteral.js' );
+//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+//var context = require( '../../context.js' );
+import { BooleanLiteral } from '../../expressions/path/literals/booleanLiteral.js';
+import { expressionsUtils } from '../../expressions/expressionsUtils.js';
+import { context } from '../../context.js';
 
-var BooleanLiteral = require( '../../expressions/path/literals/booleanLiteral.js' );
-var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-var context = require( '../../context.js' );
-
-var TALOmitTag = function( stringToApply, expressionToApply ) {
+export const TALOmitTag = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -72,4 +73,4 @@ TALOmitTag.build = function( string ) {
     return new TALOmitTag( string, expression );
 };
 
-module.exports = TALOmitTag;
+//module.exports = TALOmitTag;

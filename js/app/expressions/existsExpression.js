@@ -1,12 +1,12 @@
 /*
     ExistsExpression class
 */
-"use strict";
+//var context = require( '../context.js' );
+//var expressionsUtils = require( './expressionsUtils.js' );
+import { context } from '../context.js';
+import { expressionsUtils } from './expressionsUtils.js';
 
-var context = require( '../context.js' );
-var expressionsUtils = require( './expressionsUtils.js' );
-
-var ExistsExpression = function( stringToApply, expressionToApply ) {
+export const ExistsExpression = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -49,4 +49,4 @@ ExistsExpression.build = function( string ) {
     return new ExistsExpression( string, expression );
 };
 
-module.exports = ExistsExpression;
+//module.exports = ExistsExpression;

@@ -1,11 +1,10 @@
 /*
     I18nLanguage class
 */
-"use strict";
+//var context = require( '../../context.js' );
+import { context } from '../../context.js';
 
-var context = require( '../../context.js' );
-
-var I18NLanguage = function( stringToApply ) {
+export const I18NLanguage = function( stringToApply ) {
     
     var string = stringToApply;
     
@@ -45,4 +44,4 @@ I18NLanguage.build = function( string ) {
     return string? new I18NLanguage( string.trim() ): null;
 };
 
-module.exports = I18NLanguage;
+//module.exports = I18NLanguage;

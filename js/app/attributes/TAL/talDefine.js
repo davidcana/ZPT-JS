@@ -1,12 +1,12 @@
 /*
     TALDefine class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-
-var TALDefine = function( stringToApply, defineItemsToApply ) {
+export const TALDefine = function( stringToApply, defineItemsToApply ) {
     
     var string = stringToApply;
     var defineItems = defineItemsToApply;
@@ -129,4 +129,4 @@ TALDefine.updateAttribute = function( node, defineToAdd ){
     }
 };
 
-module.exports = TALDefine;
+//module.exports = TALDefine;

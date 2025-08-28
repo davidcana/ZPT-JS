@@ -1,12 +1,14 @@
 /* 
     arithmethicHelper singleton class
 */
-module.exports = (function() {
-    "use strict";
-    
-    var context = require( '../../context.js' );
-    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-    var evaluateHelper = require( '../evaluateHelper.js' );
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var evaluateHelper = require( '../evaluateHelper.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { evaluateHelper } from '../evaluateHelper.js';
+
+export const arithmethicHelper = (function() {
     
     var build = function( string, tag ) {
         var expressionBuilder = require( '../expressionBuilder.js' );

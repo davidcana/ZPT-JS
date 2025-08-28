@@ -1,13 +1,14 @@
 /*
     AddExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var arithmethicHelper = require( './arithmethicHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { arithmethicHelper } from './arithmethicHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var arithmethicHelper = require( './arithmethicHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var AddExpression = function( stringToApply, expressionListToApply ) {
+export const AddExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -57,4 +58,4 @@ AddExpression.build = function( string ) {
     return new AddExpression( string, expressionList );
 };
 
-module.exports = AddExpression;
+//module.exports = AddExpression;

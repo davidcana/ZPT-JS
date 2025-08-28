@@ -1,12 +1,12 @@
 /*
     TrCurrencyExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var trHelper = require( './trHelper.js' );
+import { context } from '../../context.js';
+import { trHelper } from './trHelper.js';
 
-var context = require( '../../context.js' );
-var trHelper = require( './trHelper.js' );
-
-var TrCurrencyExpression = function( stringToApply, expressionToApply, argsExpressionsToApply, subformatToApply ) {
+export const TrCurrencyExpression = function( stringToApply, expressionToApply, argsExpressionsToApply, subformatToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -60,4 +60,4 @@ TrCurrencyExpression.build = function( string ) {
             trData.subformat );
 };
 
-module.exports = TrCurrencyExpression;
+//module.exports = TrCurrencyExpression;

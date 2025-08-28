@@ -1,12 +1,14 @@
 /* 
     boolHelper singleton class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
-module.exports = (function() {    
-    var context = require( '../../context.js' );
-    var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-    var expressionBuilder = require( '../expressionBuilder.js' );
+export const boolHelper = (function() {    
     
     var build = function( s, tag ) {
         

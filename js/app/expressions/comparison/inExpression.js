@@ -1,13 +1,14 @@
 /*
     InExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var InExpression = function( stringToApply, expressionListToApply ) {
+export const InExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -82,4 +83,4 @@ InExpression.build = function( s ) {
     );
 };
 
-module.exports = InExpression;
+//module.exports = InExpression;

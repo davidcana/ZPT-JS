@@ -1,13 +1,14 @@
 /*
     NotExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var evaluateHelper = require( '../evaluateHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { evaluateHelper } from '../evaluateHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var NotExpression = function( stringToApply, expressionToApply ) {
+export const NotExpression = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -45,4 +46,4 @@ NotExpression.build = function( string ) {
     return new NotExpression( string, expression );
 };
 
-module.exports = NotExpression;
+//module.exports = NotExpression;

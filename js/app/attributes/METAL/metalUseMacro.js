@@ -1,18 +1,25 @@
 /*
     METALUseMacro class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+//var attributeIndex = require( '../attributeIndex.js' );
+//var attributeCache = require( '../../cache/attributeCache.js' );
+//var TALDefine = require( '../TAL/talDefine.js' );
+//var METALFillSlot = require( './metalFillSlot.js' );
+//var resolver = require( '../../resolver.js' );
 
-var context = require( '../../context.js' );
-var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-var attributeIndex = require( '../attributeIndex.js' );
-var attributeCache = require( '../../cache/attributeCache.js' );
-var TALDefine = require( '../TAL/talDefine.js' );
-var METALFillSlot = require( './metalFillSlot.js' );
-var resolver = require( '../../resolver.js' );
+import { context } from '../../context.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
+import { expressionsUtils } from '../../expressions/expressionsUtils.js';
+import { attributeIndex } from '../attributeIndex.js';
+import { attributeCache } from '../../cache/attributeCache.js';
+import { TALDefine } from '../TAL/talDefine.js';
+import { METALFillSlot } from './metalFillSlot.js';
+import { resolver } from '../../resolver.js';
 
-var METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApply ) {
+export const METALUseMacro = function( stringToApply, macroExpressionToApply, defineToApply ) {
     
     var string = stringToApply;
     var macroExpression = macroExpressionToApply;
@@ -149,4 +156,4 @@ METALUseMacro.build = function( string, stringDefine ) {
     );
 };
 
-module.exports = METALUseMacro;
+//module.exports = METALUseMacro;

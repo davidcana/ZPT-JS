@@ -1,13 +1,14 @@
 /*
     TALCondition class
 */
-"use strict";
+//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+//var context = require( '../../context.js' );
+import { evaluateHelper } from '../../expressions/evaluateHelper.js';
+import { expressionsUtils } from  '../../expressions/expressionsUtils.js';
+import { context } from '../../context.js';
 
-var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
-var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-var context = require( '../../context.js' );
-
-var TALCondition = function( stringToApply, expressionToApply ) {
+export const TALCondition = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -64,4 +65,4 @@ TALCondition.build = function( string ) {
                 expressionBuilder.build( string ) );
 };
 
-module.exports = TALCondition;
+//module.exports = TALCondition;

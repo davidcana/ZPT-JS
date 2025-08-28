@@ -1,14 +1,16 @@
 /*
     StringExpression class
 */
-"use strict";
+//var context = require( '../context.js' );
+//var StringLiteral = require( './path/literals/stringLiteral.js' );
+//var PathExpression = require( './path/pathExpression.js' );
+//var expressionsUtils = require( './expressionsUtils.js' );
+import { context } from '../context.js';
+import { StringLiteral } from './path/literals/stringLiteral.js';
+import { PathExpression } from './path/pathExpression.js';
+import { expressionsUtils } from './expressionsUtils.js';
 
-var context = require( '../context.js' );
-var StringLiteral = require( './path/literals/stringLiteral.js' );
-var PathExpression = require( './path/pathExpression.js' );
-var expressionsUtils = require( './expressionsUtils.js' );
-
-var StringExpression = function( stringToApply, expressionListToApply ) {
+export const StringExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -152,4 +154,4 @@ StringExpression.build = function( string ) {
     return new StringExpression( string, expressionList );
 };
 
-module.exports = StringExpression;
+//module.exports = StringExpression;

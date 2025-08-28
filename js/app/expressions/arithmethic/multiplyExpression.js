@@ -1,13 +1,14 @@
 /*
     MultiplyExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var arithmethicHelper = require( './arithmethicHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { arithmethicHelper } from './arithmethicHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var arithmethicHelper = require( './arithmethicHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var MultiplyExpression = function( stringToApply, expressionListToApply ) {
+export const MultiplyExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -57,4 +58,4 @@ MultiplyExpression.build = function( string ) {
     return new MultiplyExpression( string, expressionList );
 };
 
-module.exports = MultiplyExpression;
+//module.exports = MultiplyExpression;

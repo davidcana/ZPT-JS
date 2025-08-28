@@ -2,13 +2,16 @@
     context singleton class
 */
 
-var log4javascript = require( 'log4javascript' );
-var utils = require( './utils.js' );
-var LoopItem = require( './parsers/loopItem.js' );
-var CSSAnimationManager = require( './parsers/dictionaryActions/cssAnimationManager.js' );
+//var log4javascript = require( 'log4javascript' );
+//var utils = require( './utils.js' );
+//var LoopItem = require( './parsers/loopItem.js' );
+//var CSSAnimationManager = require( './parsers/dictionaryActions/cssAnimationManager.js' );
+import { log4javascript } from 'log4javascript';
+import { utils } from './utils.js';
+import { LoopItem } from './parsers/loopItem.js';
+import { CSSAnimationManager } from './parsers/dictionaryActions/cssAnimationManager.js';
 
-module.exports = (function() {
-    "use strict";
+export const context = (function() {
     
     /* Tags */
     var defaultTags = {

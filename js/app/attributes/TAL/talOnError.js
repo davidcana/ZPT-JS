@@ -1,12 +1,12 @@
 /*
     TALOnError class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var contentHelper = require( './contentHelper.js' );
+import { context } from '../../context.js';
+import { contentHelper } from './contentHelper.js';
 
-var context = require( '../../context.js' );
-var contentHelper = require( './contentHelper.js' );
-
-var TALOnError = function( stringToApply, structureToApply ) {
+export const TALOnError = function( stringToApply, structureToApply ) {
     
     var string = stringToApply;
     var structure = structureToApply;
@@ -62,4 +62,4 @@ TALOnError.build = function( string ) {
     );
 };
 
-module.exports = TALOnError;
+//module.exports = TALOnError;

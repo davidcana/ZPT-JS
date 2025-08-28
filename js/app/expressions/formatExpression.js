@@ -1,15 +1,18 @@
 /*
     FormatExpression class
 */
-"use strict";
+//var utils = require( '../utils.js' );
+//var context = require( '../context.js' );
+//var ExpressionTokenizer = require( './expressionTokenizer.js' );
+//var expressionsUtils = require( './expressionsUtils.js' );
+//var evaluateHelper = require( './evaluateHelper.js' );
+import { utils } from '../utils.js';
+import { context } from '../context.js';
+import { ExpressionTokenizer } from './expressionTokenizer.js';
+import { expressionsUtils } from './expressionsUtils.js';
+import { evaluateHelper } from './evaluateHelper.js';
 
-var utils = require( '../utils.js' );
-var context = require( '../context.js' );
-var ExpressionTokenizer = require( './expressionTokenizer.js' );
-var expressionsUtils = require( './expressionsUtils.js' );
-var evaluateHelper = require( './evaluateHelper.js' );
-
-var FormatExpression = function( stringToApply, formatterExpressionToApply, argsExpressionsToApply ) {
+export const FormatExpression = function( stringToApply, formatterExpressionToApply, argsExpressionsToApply ) {
     
     var string = stringToApply;
     var formatterExpression = formatterExpressionToApply;
@@ -113,4 +116,4 @@ FormatExpression.build = function( s ) {
     return new FormatExpression( string, formatter, argsExpressions );
 };
 
-module.exports = FormatExpression;
+//module.exports = FormatExpression;

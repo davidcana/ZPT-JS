@@ -1,7 +1,14 @@
 {
   "name": "zpt",
   "version": "0.40.10-SNAPSHOT",
-  "main": "./js/app/main.js",
+  "main": "index.cjs",
+  "exports": {
+    "import": "./index.js",
+    "require": "./index.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "description": "Zenon Page Templates - JS (ZPT-JS)",
   "keywords": [
     "template",

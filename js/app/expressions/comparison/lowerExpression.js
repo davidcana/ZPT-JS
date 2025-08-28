@@ -1,13 +1,14 @@
 /*
     LowerExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var comparisonHelper = require( './comparisonHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { comparisonHelper } from './comparisonHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var comparisonHelper = require( './comparisonHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var LowerExpression = function( stringToApply, expression1ToApply, expression2ToApply ) {
+export const LowerExpression = function( stringToApply, expression1ToApply, expression2ToApply ) {
     
     var string = stringToApply;
     var expression1 = expression1ToApply;
@@ -46,4 +47,4 @@ LowerExpression.build = function( string ) {
     return new LowerExpression( string, data.expression1, data.expression2 );
 };
 
-module.exports = LowerExpression;
+//module.exports = LowerExpression;

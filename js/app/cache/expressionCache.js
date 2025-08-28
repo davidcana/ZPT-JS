@@ -1,12 +1,14 @@
 /*
     expressionCache singleton class
 */
-module.exports = (function() {
-    "use strict";
-    
-    var CacheHelper = require( './cacheHelper.js' );
-    var context = require( '../context.js' );
-    var log = require( '../logHelper.js' );
+//var CacheHelper = require( './cacheHelper.js' );
+//var context = require( '../context.js' );
+//var log = require( '../logHelper.js' );
+import { CacheHelper } from './cacheHelper.js';
+import { context } from '../context.js';
+import { log } from '../logHelper.js';
+
+export const expressionCache = (function() {
     
     var map = {};
     

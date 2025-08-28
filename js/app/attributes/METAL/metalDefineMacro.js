@@ -1,9 +1,8 @@
 /*
     METALDefineMacro class
 */
-"use strict";
 
-var METALDefineMacro = function( nameToApply ) {
+export const METALDefineMacro = function( nameToApply ) {
     
     var name = nameToApply;
     
@@ -37,4 +36,4 @@ METALDefineMacro.build = function( string ) {
     return new METALDefineMacro( string.trim() );
 };
 
-module.exports = METALDefineMacro;
+//module.exports = METALDefineMacro;

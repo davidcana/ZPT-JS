@@ -1,14 +1,17 @@
 /*
     attributeCache singleton class
 */
-"use strict";
+//var CacheHelper = require( './cacheHelper.js' );
+//var context = require( '../context.js' );
+//var log = require( '../logHelper.js' );
+//var attributeIndex = require( '../attributes/attributeIndex.js' );
 
-var CacheHelper = require( './cacheHelper.js' );
-var context = require( '../context.js' );
-var log = require( '../logHelper.js' );
-var attributeIndex = require( '../attributes/attributeIndex.js' );
+import { CacheHelper } from './cacheHelper.js';
+import { context } from '../context.js';
+import { log } from '../logHelper.js';
+import { attributeIndex } from '../attributes/attributeIndex.js';
 
-module.exports = (function() {
+export const attributeCache = (function() {
     
     var map;
     

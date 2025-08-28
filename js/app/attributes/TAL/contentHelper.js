@@ -1,13 +1,14 @@
 /* 
     contentHelper singleton class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
+import { context } from '../../context.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
+import { evaluateHelper } from '../../expressions/evaluateHelper.js';
 
-var context = require( '../../context.js' );
-var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
-
-module.exports = (function() {
+export const contentHelper = (function() {
 
     var formInputHasBody = {
         BUTTON: 1,

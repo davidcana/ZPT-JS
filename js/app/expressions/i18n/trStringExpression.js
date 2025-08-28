@@ -1,12 +1,12 @@
 /*
     TrStringExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var trHelper = require( './trHelper.js' );
+import { context } from '../../context.js';
+import { trHelper } from './trHelper.js';
 
-var context = require( '../../context.js' );
-var trHelper = require( './trHelper.js' );
-
-var TrStringExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
+export const TrStringExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -61,4 +61,4 @@ TrStringExpression.build = function( string ) {
     );
 };
 
-module.exports = TrStringExpression;
+//module.exports = TrStringExpression;

@@ -1,13 +1,14 @@
 /* 
     expressionsUtils singleton class
 */
-"use strict";
+//var evaluateHelper = require( './evaluateHelper.js' );
+//var utils = require( '../utils.js' );
+//var DepsDataItem = require( '../parsers/depsDataItem.js' );
+import { evaluateHelper } from './evaluateHelper.js';
+import { utils } from '../utils.js';
+import { DepsDataItem } from '../parsers/depsDataItem.js';
 
-var evaluateHelper = require( './evaluateHelper.js' );
-var utils = require( '../utils.js' );
-var DepsDataItem = require( '../parsers/depsDataItem.js' );
-
-module.exports = (function() {
+export const expressionsUtils = (function() {
     
     var buildLiteral = function( value ) {
         return evaluateHelper.isNumber( value )? "" + value: "'" + value + "'";

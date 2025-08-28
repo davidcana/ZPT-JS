@@ -1,13 +1,15 @@
 /*
     TALDeclare class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
+import { expressionsUtils } from '../../expressions/expressionsUtils.js';
 
-var TALDeclare = function( _string, _declareItems ) {
+export const TALDeclare = function( _string, _declareItems ) {
     
     var string = _string;
     var declareItems = _declareItems;
@@ -255,4 +257,4 @@ TALDeclare.tokenIsRequired = function( token ) {
     return "required" === token.toLowerCase();
 };
 
-module.exports = TALDeclare;
+//module.exports = TALDeclare;

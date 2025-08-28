@@ -1,11 +1,11 @@
 /*
     I18NDomain class
 */
-"use strict";
 
-var context = require( '../../context.js' );
+//var context = require( '../../context.js' );
+import { context } from '../../context.js';
 
-var I18NDomain = function( stringToApply ) {
+export const I18NDomain = function( stringToApply ) {
     
     var string = stringToApply;
     
@@ -59,4 +59,4 @@ I18NDomain.build = function( string ) {
     return string? new I18NDomain( string.trim() ): null;
 };
 
-module.exports = I18NDomain;
+//module.exports = I18NDomain;

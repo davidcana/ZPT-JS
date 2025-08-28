@@ -1,13 +1,14 @@
 /*
     GreaterExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var comparisonHelper = require( './comparisonHelper.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { comparisonHelper } from './comparisonHelper.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var comparisonHelper = require( './comparisonHelper.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var GreaterExpression = function( stringToApply, expression1ToApply, expression2ToApply ) {
+export const GreaterExpression = function( stringToApply, expression1ToApply, expression2ToApply ) {
     
     var string = stringToApply;
     var expression1 = expression1ToApply;
@@ -46,4 +47,4 @@ GreaterExpression.build = function( string ) {
     return new GreaterExpression( string, data.expression1, data.expression2 );
 };
 
-module.exports = GreaterExpression;
+//module.exports = GreaterExpression;

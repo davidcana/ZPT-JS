@@ -1,12 +1,12 @@
 /*
     TrNumberExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var trHelper = require( './trHelper.js' );
+import { context } from '../../context.js';
+import { trHelper } from './trHelper.js';
 
-var context = require( '../../context.js' );
-var trHelper = require( './trHelper.js' );
-
-var TrNumberExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
+export const TrNumberExpression = function( stringToApply, expressionToApply, argsExpressionsToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -61,4 +61,4 @@ TrNumberExpression.build = function( string ) {
     );
 };
 
-module.exports = TrNumberExpression;
+//module.exports = TrNumberExpression;

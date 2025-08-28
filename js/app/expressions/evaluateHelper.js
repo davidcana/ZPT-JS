@@ -1,11 +1,10 @@
 /* 
     evaluateHelper singleton class
 */
-"use strict";
+//var context = require( '../context.js' );
+import { context } from '../context.js';
 
-var context = require( '../context.js' );
-
-module.exports = (function() {
+export const evaluateHelper = (function() {
     
     var evaluateToNotNull = function( scope, expression ) {
         var evaluated = expression.evaluate( scope );
