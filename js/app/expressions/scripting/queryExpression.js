@@ -1,12 +1,13 @@
 /*
     QueryExpression class
 */
-"use strict";
 
-var context = require( '../../context.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
+//var context = require( '../../context.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var QueryExpression = function( stringToApply, expressionToApply ) {
+export const QueryExpression = function( stringToApply, expressionToApply ) {
     
     var string = stringToApply;
     var expression = expressionToApply;
@@ -63,4 +64,4 @@ QueryExpression.build = function( string ) {
     return new QueryExpression( string, expression );
 };
 
-module.exports = QueryExpression;
+//module.exports = QueryExpression;

@@ -1,11 +1,10 @@
 /* 
     Class ObjectDelete
 */
-"use strict";
+//var AbstractObjectAction = require( './abstractObjectAction.js' );
+import { AbstractObjectAction } from './abstractObjectAction.js';
 
-var AbstractObjectAction = require( './abstractObjectAction.js' );
-
-var ObjectDelete = function( object, dictionary ) {
+export const ObjectDelete = function( object, dictionary ) {
     AbstractObjectAction.call( this, object, dictionary );
 };
 
@@ -17,4 +16,4 @@ ObjectDelete.prototype.updateDictionary = function( dictionary ){
     delete objectValue[ this.property ];
 };
 
-module.exports = ObjectDelete;
+//module.exports = ObjectDelete;

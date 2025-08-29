@@ -1,17 +1,23 @@
 /* 
     Class ParserRenderer
 */
-"use strict";
+//var context = require( '../context.js' );
+//var log = require( '../logHelper.js' );
+//var attributeCache = require( '../cache/attributeCache.js' );
+//var attributeIndex = require( '../attributes/attributeIndex.js' );
+//var nodeRemover = require( './nodeRemover.js' );
+//var scopeBuilder = require( '../scopes/scopeBuilder.js' );
+//var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 
-var context = require( '../context.js' );
-var log = require( '../logHelper.js' );
-var attributeCache = require( '../cache/attributeCache.js' );
-var attributeIndex = require( '../attributes/attributeIndex.js' );
-var nodeRemover = require( './nodeRemover.js' );
-var scopeBuilder = require( '../scopes/scopeBuilder.js' );
-var ParserNodeRenderer = require( './parserNodeRenderer.js' );
+import { context } from '../context.js';
+import { logHelper as log } from '../logHelper.js';
+import { attributeCache } from '../cache/attributeCache.js';
+import { attributeIndex } from '../attributes/attributeIndex.js';
+import { nodeRemover } from './nodeRemover.js';
+import { scopeBuilder } from '../scopes/scopeBuilder.js';
+import { ParserNodeRenderer } from './parserNodeRenderer.js';
 
-var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _resetIndex, _goToURLHash ) {
+export const ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _notRemoveGeneratedTags, _resetIndex, _goToURLHash ) {
     
     var parserOptions = _parserOptions;
     var target = _target;
@@ -112,4 +118,4 @@ var ParserRenderer = function( _parserOptions, _target, _dictionaryExtension, _n
     return self;
 };
 
-module.exports = ParserRenderer;
+//module.exports = ParserRenderer;

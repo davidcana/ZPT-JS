@@ -1,11 +1,10 @@
 /*
     ArrayExpression class
 */
-"use strict";
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
+export const ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
     
     var arrayBase = arrayBaseToApply;
     var indexes = indexesToApply;
@@ -152,4 +151,4 @@ ArrayExpression.findArrayAccessor = function( token ) {
     return -1;
 };
 
-module.exports = ArrayExpression;
+//module.exports = ArrayExpression;

@@ -1,23 +1,34 @@
 /*
     PathSegmentExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+//var ArrayExpression = require( './arrayExpression.js' );
+//var StringLiteral = require( './literals/stringLiteral.js' );
+//var NumericLiteral = require( './literals/numericLiteral.js' );
+//var BooleanLiteral = require( './literals/booleanLiteral.js' );
+//var ListExpression = require( './listExpression.js' );
+//var FunctionExpression = require( './functionExpression.js' );
+//var VariableExpression = require( './variableExpression.js' );
+//var IndirectionExpression = require( './indirectionExpression.js' );
+//var MethodExpression = require( './methodExpression.js' );
+//var PropertyExpression = require( './propertyExpression.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionsUtils } from '../expressionsUtils.js';
+import { ArrayExpression } from './arrayExpression.js';
+import { StringLiteral } from './literals/stringLiteral.js';
+import { NumericLiteral } from './literals/numericLiteral.js';
+import { BooleanLiteral } from './literals/booleanLiteral.js';
+import { ListExpression } from './listExpression.js';
+import { FunctionExpression } from './functionExpression.js';
+import { VariableExpression } from './variableExpression.js';
+import { IndirectionExpression } from './indirectionExpression.js';
+import { MethodExpression } from './methodExpression.js';
+import { PropertyExpression } from './propertyExpression.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-var ArrayExpression = require( './arrayExpression.js' );
-var StringLiteral = require( './literals/stringLiteral.js' );
-var NumericLiteral = require( './literals/numericLiteral.js' );
-var BooleanLiteral = require( './literals/booleanLiteral.js' );
-var ListExpression = require( './listExpression.js' );
-var FunctionExpression = require( './functionExpression.js' );
-var VariableExpression = require( './variableExpression.js' );
-var IndirectionExpression = require( './indirectionExpression.js' );
-var MethodExpression = require( './methodExpression.js' );
-var PropertyExpression = require( './propertyExpression.js' );
-
-var PathSegmentExpression = function( stringToApply, itemsToApply ) {
+export const PathSegmentExpression = function( stringToApply, itemsToApply ) {
     
     var string = stringToApply;
     var items = itemsToApply;
@@ -181,4 +192,4 @@ PathSegmentExpression.buildNextPathToken = function( t ){
     return result;
 };
 
-module.exports = PathSegmentExpression;
+//module.exports = PathSegmentExpression;

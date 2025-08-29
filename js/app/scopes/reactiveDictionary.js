@@ -1,11 +1,10 @@
 /* 
     ReactiveDictionary class 
 */
-"use strict";
+//var zpt = require( '../main.js' );
+import { zpt } from '../main.js';
 
-var zpt = require( '../main.js' );
-
-var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) {
+export const ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) {
     
     // Init some vars
     var self = this;
@@ -116,4 +115,4 @@ var ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) 
     this._initialize( this._privateScope.nonReactiveDictionary );
 };
 
-module.exports = ReactiveDictionary;
+//module.exports = ReactiveDictionary;

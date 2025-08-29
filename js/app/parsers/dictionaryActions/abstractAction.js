@@ -1,12 +1,12 @@
 /* 
     Class AbstractAction
 */
-"use strict";
+//var utils = require( '../../utils.js' );
+//var context = require( '../../context.js' );
+import { context } from '../../context.js';
+import { utils } from '../../utils.js';
 
-var utils = require( '../../utils.js' );
-var context = require( '../../context.js' );
-
-var AbstractAction = function( object, dictionary ) {
+export const AbstractAction = function( object, dictionary ) {
     
     this.id = object.id;
     this.var = object.var;
@@ -120,4 +120,4 @@ AbstractAction.prototype.updateHTML = function(){
     throw 'Error: updateHTML must be implemented!';
 };
 
-module.exports = AbstractAction;
+//module.exports = AbstractAction;

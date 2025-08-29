@@ -1,14 +1,16 @@
 /* 
     scopeBuilder singleton class
 */
-"use strict";
+//var context = require( '../context.js' );
+//var Scope = require( './scope.js' );
+//var utils = require( '../utils.js' );
+//var ParserNodeRenderer = require( '../parsers/parserNodeRenderer.js' );
+import { context } from '../context.js';
+import { utils } from '../utils.js';
+import { Scope } from './scope.js';
+import { ParserNodeRenderer } from '../parsers/parserNodeRenderer.js';
 
-var context = require( '../context.js' );
-var Scope = require( './scope.js' );
-var utils = require( '../utils.js' );
-var ParserNodeRenderer = require( '../parsers/parserNodeRenderer.js' );
-
-module.exports = (function() {
+export const scopeBuilder = (function() {
     
     var keyLength = 6;
     

@@ -1,11 +1,10 @@
 /*
     MethodExpression class
 */
-"use strict";
+//var evaluateHelper = require( '../evaluateHelper.js' );
+import { evaluateHelper } from '../evaluateHelper.js';
 
-var evaluateHelper = require( '../evaluateHelper.js' );
-
-var MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
+export const MethodExpression = function( stringToApply, nameToApply, argsToApply ) {
     
     var string = stringToApply;
     var name = nameToApply;
@@ -50,4 +49,4 @@ MethodExpression.build = function( string ) {
     return new MethodExpression( string, methodName, args );
 };
 
-module.exports = MethodExpression;
+//module.exports = MethodExpression;

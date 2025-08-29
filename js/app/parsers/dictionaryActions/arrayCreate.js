@@ -1,14 +1,16 @@
 /* 
     Class ArrayCreate
 */
-"use strict";
+//var AbstractArrayAction = require( './abstractArrayAction.js' );
+//var context = require( '../../context.js' );
+//var ParserNodeRenderer = require( '../../parsers/parserNodeRenderer.js' );
+//var utils = require( '../../utils.js' );
+import { context } from '../../context.js';
+import { utils } from '../../utils.js';
+import { AbstractArrayAction } from './abstractArrayAction.js';
+import { ParserNodeRenderer } from '../../parsers/parserNodeRenderer.js';
 
-var AbstractArrayAction = require( './abstractArrayAction.js' );
-var context = require( '../../context.js' );
-var ParserNodeRenderer = require( '../../parsers/parserNodeRenderer.js' );
-var utils = require( '../../utils.js' );
-
-var ArrayCreate = function( object, dictionary ) {
+export const ArrayCreate = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
     
     this.newElement = object.newElement;
@@ -107,4 +109,4 @@ ArrayCreate.buildMultiple = function( object, dictionary ){
     return actions;
 };
 
-module.exports = ArrayCreate;
+//module.exports = ArrayCreate;

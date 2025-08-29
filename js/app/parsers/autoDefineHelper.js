@@ -1,11 +1,11 @@
 /* 
     Class AutoDefineHelper 
 */
-var context = require( '../context.js' );
-var TALDefine = require( '../attributes/TAL/talDefine.js' );
+//var context = require( '../context.js' );
+//var TALDefine = require( '../attributes/TAL/talDefine.js' );
+import { context } from '../context.js';
 
-module.exports = function ( node ) {
-    "use strict";
+export const AutoDefineHelper = function ( node ) {
     
     var defineDelimiter = context.getConf().defineDelimiter;
     var inDefineDelimiter = context.getConf().inDefineDelimiter;

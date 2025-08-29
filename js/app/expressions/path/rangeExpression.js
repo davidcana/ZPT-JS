@@ -1,15 +1,18 @@
 /*
     RangeExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+//var evaluateHelper = require( '../evaluateHelper.js' );
+//var NumericLiteral = require( './literals/numericLiteral.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionsUtils } from '../expressionsUtils.js';
+import { evaluateHelper } from '../evaluateHelper.js';
+import { NumericLiteral } from './literals/numericLiteral.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-var evaluateHelper = require( '../evaluateHelper.js' );
-var NumericLiteral = require( './literals/numericLiteral.js' );
-
-var RangeExpression = function( stringToApply, startExpressionToApply, endExpressionToApply, stepExpressionToApply ) {
+export const RangeExpression = function( stringToApply, startExpressionToApply, endExpressionToApply, stepExpressionToApply ) {
     
     var string = stringToApply;
     var startExpression = startExpressionToApply;
@@ -95,4 +98,4 @@ RangeExpression.build = function( s ) {
     return new RangeExpression( string, startExpression, endExpression, stepExpression );
 };
 
-module.exports = RangeExpression;
+//module.exports = RangeExpression;

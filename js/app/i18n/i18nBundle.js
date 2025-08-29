@@ -1,8 +1,8 @@
 /* 
     I18nBundle class 
 */
-module.exports = function( ) {
-    "use strict";
+
+export const I18nBundle = function( ) {
     
     var i18nList = {};
     var first = undefined;

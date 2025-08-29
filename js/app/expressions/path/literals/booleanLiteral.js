@@ -1,9 +1,8 @@
 /*
     BooleanLiteral class
 */
-"use strict";
 
-var BooleanLiteral = function( literalToApply ) {
+export const BooleanLiteral = function( literalToApply ) {
 
     var literal = literalToApply;
     
@@ -37,4 +36,4 @@ BooleanLiteral.build = function( string ) {
     return undefined;
 };
 
-module.exports = BooleanLiteral;
+//module.exports = BooleanLiteral;

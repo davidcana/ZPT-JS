@@ -1,13 +1,14 @@
 /* 
     Class AbstractArrayAction
 */
-"use strict";
+//var AbstractAction = require( './abstractAction.js' );
+//var utils = require( '../../utils.js' );
+//var context = require( '../../context.js' );
+import { context } from '../../context.js';
+import { utils } from '../../utils.js';
+import { AbstractAction } from './abstractAction.js';
 
-var AbstractAction = require( './abstractAction.js' );
-var utils = require( '../../utils.js' );
-var context = require( '../../context.js' );
-
-var AbstractArrayAction = function( object, dictionary ) {
+export const AbstractArrayAction = function( object, dictionary ) {
     AbstractAction.call( this, object, dictionary );
     
     this.index = object.index;
@@ -105,4 +106,4 @@ AbstractArrayAction.prototype.getIndexOfLoop = function( parentNode, nodeId, ind
     return null;
 };
 
-module.exports = AbstractArrayAction;
+//module.exports = AbstractArrayAction;

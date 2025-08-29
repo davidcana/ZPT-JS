@@ -1,15 +1,18 @@
 /* 
     Class Parser 
 */
-"use strict";
+//var context = require( '../context.js' );
+//var ParserRenderer = require( './parserRenderer.js' );
+//var ParserUpdater = require( './parserUpdater.js' );
+//var ParserPreloader = require( './parserPreloader.js' );
+//var ReactiveDictionary = require( '../scopes/reactiveDictionary.js' );
+import { context } from '../context.js';
+import { ParserRenderer } from './parserRenderer.js';
+import { ParserUpdater } from './parserUpdater.js';
+import { ParserPreloader } from './parserPreloader.js';
+import { ReactiveDictionary } from '../scopes/reactiveDictionary.js';
 
-var context = require( '../context.js' );
-var ParserRenderer = require( './parserRenderer.js' );
-var ParserUpdater = require( './parserUpdater.js' );
-var ParserPreloader = require( './parserPreloader.js' );
-var ReactiveDictionary = require( '../scopes/reactiveDictionary.js' );
-
-module.exports = (function() {
+export const Parser = (function() {
     
     var parserOptions = {
         command: undefined, // preload, fullRender or partialRender

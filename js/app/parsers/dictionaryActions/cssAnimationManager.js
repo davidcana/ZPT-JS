@@ -1,9 +1,8 @@
 /* 
     Class CSSAnimationManager 
 */
-"use strict";
 
-module.exports = (function() {
+export const CSSAnimationManager = (function() {
     
     var animate = function( dictionaryAction, node, callback ) {
         

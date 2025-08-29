@@ -1,19 +1,27 @@
 /* 
     Class ParserUpdater
 */
-"use strict";
+//var context = require( '../context.js' );
+//var log = require( '../logHelper.js' );
+//var attributeIndex = require( '../attributes/attributeIndex.js' );
+//var scopeBuilder = require( '../scopes/scopeBuilder.js' );
+//var ParserNodeRenderer = require( './parserNodeRenderer.js' );
+//var nodeRemover = require( './nodeRemover.js' );
+//var utils = require( '../utils.js' );
+//var dictionaryActionBuilder = require( './dictionaryActions/dictionaryActionBuilder.js' );
+//var AbstractArrayAction = require( './dictionaryActions/abstractArrayAction.js' );
 
-var context = require( '../context.js' );
-var log = require( '../logHelper.js' );
-var attributeIndex = require( '../attributes/attributeIndex.js' );
-var scopeBuilder = require( '../scopes/scopeBuilder.js' );
-var ParserNodeRenderer = require( './parserNodeRenderer.js' );
-var nodeRemover = require( './nodeRemover.js' );
-var utils = require( '../utils.js' );
-var dictionaryActionBuilder = require( './dictionaryActions/dictionaryActionBuilder.js' );
-var AbstractArrayAction = require( './dictionaryActions/abstractArrayAction.js' );
+import { context } from '../context.js';
+import { logHelper as log } from '../logHelper.js';
+import { attributeIndex } from '../attributes/attributeIndex.js';
+import { scopeBuilder } from '../scopes/scopeBuilder.js';
+import { ParserNodeRenderer } from './parserNodeRenderer.js';
+import { nodeRemover } from './nodeRemover.js';
+import { utils } from '../utils.js';
+import { dictionaryActionBuilder } from './dictionaryActions/dictionaryActionBuilder.js';
+import { AbstractArrayAction } from './dictionaryActions/abstractArrayAction.js';
 
-var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOptions ) {
+export const ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOptions ) {
     
     var dictionaryChanges = _dictionaryChanges;
     var dictionaryActions = _dictionaryActions;
@@ -400,4 +408,4 @@ var ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _parserOpt
     return self;
 };
 
-module.exports = ParserUpdater;
+//module.exports = ParserUpdater;

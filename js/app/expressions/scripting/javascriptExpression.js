@@ -1,13 +1,14 @@
 /*
     JavascriptExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+//var StringExpression = require( '../stringExpression.js' );
+import { context } from '../../context.js';
+import { expressionsUtils } from '../expressionsUtils.js';
+import { StringExpression } from '../stringExpression.js';
 
-var context = require( '../../context.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-var StringExpression = require( '../stringExpression.js' );
-
-var JavascriptExpression = function( expressionToApply ) {
+export const JavascriptExpression = function( expressionToApply ) {
     
     var stringExpression = expressionToApply;
     
@@ -47,4 +48,4 @@ JavascriptExpression.build = function( string ) {
             StringExpression.build( string ) );
 };
 
-module.exports = JavascriptExpression;
+//module.exports = JavascriptExpression;

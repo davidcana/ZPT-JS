@@ -1,11 +1,10 @@
 /*
     FunctionExpression class
 */
-"use strict";
+//var evaluateHelper = require( '../evaluateHelper.js' );
+import { evaluateHelper } from '../evaluateHelper.js';
 
-var evaluateHelper = require( '../evaluateHelper.js' );
-
-var FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
+export const FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
     
     var string = stringToApply;
     var name = nameToApply;
@@ -50,4 +49,4 @@ FunctionExpression.build = function( string ) {
     return new FunctionExpression( string, functionName, args );
 };
 
-module.exports = FunctionExpression;
+//module.exports = FunctionExpression;

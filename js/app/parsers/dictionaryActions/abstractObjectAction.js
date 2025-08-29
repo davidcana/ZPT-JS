@@ -1,11 +1,10 @@
 /* 
     Class AbstractObjectAction
 */
-"use strict";
+//var AbstractAction = require( './abstractAction.js' );
+import { AbstractAction } from './abstractAction.js';
 
-var AbstractAction = require( './abstractAction.js' );
-
-var AbstractObjectAction = function( object, dictionary ) {
+export const AbstractObjectAction = function( object, dictionary ) {
     AbstractAction.call( this, object, dictionary );
     
     this.property = object.property;
@@ -35,4 +34,4 @@ AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater, 
     return true;
 };
 
-module.exports = AbstractObjectAction;
+//module.exports = AbstractObjectAction;

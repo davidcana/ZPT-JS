@@ -1,15 +1,18 @@
 /*
     PathExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var StringLiteral = require( './literals/stringLiteral.js' );
+//var PathSegmentExpression = require( './pathSegmentExpression.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { StringLiteral } from './literals/stringLiteral.js';
+import { PathSegmentExpression } from './pathSegmentExpression.js';
+import { expressionsUtils } from '../expressionsUtils.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var StringLiteral = require( './literals/stringLiteral.js' );
-var PathSegmentExpression = require( './pathSegmentExpression.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-
-var PathExpression = function( stringToApply, expressionListToApply ) {
+export const PathExpression = function( stringToApply, expressionListToApply ) {
     
     var string = stringToApply;
     var expressionList = expressionListToApply;
@@ -96,4 +99,4 @@ PathExpression.build = function( s ) {
     return new PathExpression( string, expressionList );
 };
 
-module.exports = PathExpression;
+//module.exports = PathExpression;

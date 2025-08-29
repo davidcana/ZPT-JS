@@ -1,9 +1,8 @@
 /*
     StringLiteral class
 */
-"use strict";
 
-var StringLiteral = function( literalToApply ) {
+export const StringLiteral = function( literalToApply ) {
 
     var literal = literalToApply;
     
@@ -36,4 +35,4 @@ StringLiteral.build = function( string ) {
     return undefined;
 };
 
-module.exports = StringLiteral;
+//module.exports = StringLiteral;

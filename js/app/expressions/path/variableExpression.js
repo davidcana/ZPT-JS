@@ -1,11 +1,10 @@
 /*
     VariableExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+import { context } from '../../context.js';
 
-var context = require( '../../context.js' );
-
-var VariableExpression = function( nameToApply ) {
+export const VariableExpression = function( nameToApply ) {
     
     var name = nameToApply;
     
@@ -59,4 +58,4 @@ VariableExpression.build = function( string ) {
         undefined;
 };
 
-module.exports = VariableExpression;
+//module.exports = VariableExpression;

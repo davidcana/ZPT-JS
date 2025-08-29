@@ -1,11 +1,10 @@
 /* 
     Class NodeRemover 
 */
-"use strict";
+//var context = require( '../context.js' );
+import { context } from '../context.js';
 
-var context = require( '../context.js' );
-
-module.exports = (function() {
+export const NodeRemover = (function() {
     
     var tags = context.getTags();
     

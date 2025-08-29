@@ -2,13 +2,13 @@
     I18n class 
     External dependencies: Intl (supported by recent browsers) and MessageFormat
 */
-module.exports = function( languageId, res ) {
-    "use strict";
     
-    var MessageFormat = require( '@messageformat/core' );
-    var context = require( '../context.js' );
-    var utils = require( '../utils.js' );
-    
+import { MessageFormat } from '@messageformat/core';
+import { context } from '../context.js';
+import { utils } from '../utils.js';
+
+export const I18n = function( languageId, res ) {
+
     var resources = res;
     var mf = new MessageFormat( languageId );
     var cache = {};

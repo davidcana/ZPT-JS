@@ -1,15 +1,18 @@
 /* 
     Class dictionaryActionBuilder 
 */
-"use strict";
+//var ArrayUpdate = require( './arrayUpdate.js' );
+//var ArrayDelete = require( './arrayDelete.js' );
+//var ArrayCreate = require( './arrayCreate.js' );
+//var ObjectUpdate = require( './objectUpdate.js' );
+//var ObjectDelete = require( './objectDelete.js' );
+import { ArrayUpdate } from './arrayUpdate.js';
+import { ArrayDelete } from './arrayDelete.js';
+import { ArrayCreate } from './arrayCreate.js';
+import { ObjectUpdate } from './objectUpdate.js';
+import { ObjectDelete } from './objectDelete.js';
 
-var ArrayUpdate = require( './arrayUpdate.js' );
-var ArrayDelete = require( './arrayDelete.js' );
-var ArrayCreate = require( './arrayCreate.js' );
-var ObjectUpdate = require( './objectUpdate.js' );
-var ObjectDelete = require( './objectDelete.js' );
-
-module.exports = (function() {
+export const dictionaryActionBuilder = (function() {
     
     var build = function( object, dictionary ) {
         

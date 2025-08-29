@@ -1,13 +1,14 @@
 /* 
     Class Scope 
 */
-"use strict";
+//var context = require( '../context.js' );
+//var utils = require( '../utils.js' );
+//var loadjs = require( 'loadjs' );
+import { context } from '../context.js';
+import { utils } from '../utils.js';
+import { loadjs } from 'loadjs';
 
-var context = require( '../context.js' );
-var utils = require( '../utils.js' );
-var loadjs = require( 'loadjs' );
-
-var Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderDictionaries ) {
+export const Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderDictionaries ) {
     
     this.dictionary = _dictionary || {};
     this.dictionaryExtension = _dictionaryExtension || {};
@@ -307,4 +308,4 @@ Scope.prototype.isLocalVar = function ( name ) {
     return this.vars[ name ] !== undefined;
 };
 
-module.exports = Scope;
+//module.exports = Scope;

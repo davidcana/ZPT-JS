@@ -1,9 +1,8 @@
 /*
     PropertyExpression class
 */
-"use strict";
 
-var PropertyExpression = function( nameToApply ) {
+export const PropertyExpression = function( nameToApply ) {
     
     var name = nameToApply;
     
@@ -30,4 +29,4 @@ PropertyExpression.build = function( string ) {
     return new PropertyExpression( string );
 };
 
-module.exports = PropertyExpression;
+//module.exports = PropertyExpression;

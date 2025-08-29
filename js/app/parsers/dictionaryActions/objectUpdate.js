@@ -1,13 +1,14 @@
 /* 
     Class ObjectUpdate
 */
-"use strict";
+//var AbstractObjectAction = require( './abstractObjectAction.js' );
+//var ObjectDelete = require( './objectDelete.js' );
+//var utils = require( '../../utils.js' );
+import { AbstractObjectAction } from './abstractObjectAction.js';
+import { ObjectDelete } from './objectDelete.js';
+import { utils } from '../../utils.js';
 
-var AbstractObjectAction = require( './abstractObjectAction.js' );
-var ObjectDelete = require( './objectDelete.js' );
-var utils = require( '../../utils.js' );
-
-var ObjectUpdate = function( object, dictionary ) {
+export const ObjectUpdate = function( object, dictionary ) {
     AbstractObjectAction.call( this, object, dictionary );
     
     this.newElement = object.newElement;
@@ -70,4 +71,4 @@ ObjectUpdate.buildMultiple = function( object, dictionary ){
     return actions;
 };
 
-module.exports = ObjectUpdate;
+//module.exports = ObjectUpdate;

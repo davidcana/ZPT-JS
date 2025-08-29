@@ -8,7 +8,7 @@
 
 import { CacheHelper } from './cacheHelper.js';
 import { context } from '../context.js';
-import { log } from '../logHelper.js';
+import { logHelper as log } from '../logHelper.js';
 import { attributeIndex } from '../attributes/attributeIndex.js';
 
 export const attributeCache = (function() {

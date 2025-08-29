@@ -1,9 +1,8 @@
 /*
     NumericLiteral class
 */
-"use strict";
 
-var NumericLiteral = function( literalToApply ) {
+export const NumericLiteral = function( literalToApply ) {
     
     var literal = literalToApply;
     
@@ -43,4 +42,4 @@ NumericLiteral.build = function( string ) {
     return undefined;
 };
 
-module.exports = NumericLiteral;
+//module.exports = NumericLiteral;

@@ -1,14 +1,16 @@
 /*
     ListExpression class
 */
-"use strict";
+//var context = require( '../../context.js' );
+//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
+//var expressionsUtils = require( '../expressionsUtils.js' );
+//var RangeExpression = require( './rangeExpression.js' );
+import { context } from '../../context.js';
+import { ExpressionTokenizer } from '../expressionTokenizer.js';
+import { expressionsUtils } from '../expressionsUtils.js';
+import { RangeExpression } from './rangeExpression.js';
 
-var context = require( '../../context.js' );
-var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-var expressionsUtils = require( '../expressionsUtils.js' );
-var RangeExpression = require( './rangeExpression.js' );
-
-var ListExpression = function( stringToApply, itemsToApply ) {
+export const ListExpression = function( stringToApply, itemsToApply ) {
     
     var string = stringToApply;
     var items = itemsToApply;
@@ -74,4 +76,4 @@ ListExpression.build = function( s ) {
     return new ListExpression( string, items );
 };
 
-module.exports = ListExpression;
+//module.exports = ListExpression;

@@ -1,11 +1,10 @@
 /* 
     Class NodeAttributes 
 */
-"use strict";
+//var context = require( '../context.js' );
+import { context } from '../context.js';
 
-var context = require( '../context.js' );
-
-var NodeAttributes = function( node, indexExpressions ) {
+export const NodeAttributes = function( node, indexExpressions ) {
     
     var tags = context.getTags();
     
@@ -66,4 +65,4 @@ NodeAttributes.prototype.isDynamicContentOn = function() {
         //|| this.qdup;
 };
 
-module.exports = NodeAttributes;
+//module.exports = NodeAttributes;

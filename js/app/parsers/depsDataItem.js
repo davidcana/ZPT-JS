@@ -1,9 +1,8 @@
 /* 
     Class DepsDataItem 
 */
-"use strict";
 
-var DepsDataItem = function() {
+export const DepsDataItem = function() {
     
     this.nonExpressionVars = {};
     this.expressionVars = {};
@@ -36,4 +35,4 @@ DepsDataItem.prototype.add1Var = function( varName, scope ){
     return true;
 };
 
-module.exports = DepsDataItem;
+//module.exports = DepsDataItem;

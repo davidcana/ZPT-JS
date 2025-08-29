@@ -1,17 +1,22 @@
 /* 
     Class ParserPreloader
 */
-"use strict";
+//var context = require( '../context.js' );
+//var log = require( '../logHelper.js' );
+//var nodeRemover = require( './nodeRemover.js' );
+//var Scope = require( '../scopes/scope.js' );
+//var i18nHelper = require( '../i18n/i18nHelper.js' );
+//var resolver = require( '../resolver.js' );
+//var attributeIndex = require( '../attributes/attributeIndex.js' );
 
-var context = require( '../context.js' );
-var log = require( '../logHelper.js' );
-var nodeRemover = require( './nodeRemover.js' );
-var Scope = require( '../scopes/scope.js' );
-var i18nHelper = require( '../i18n/i18nHelper.js' );
-var resolver = require( '../resolver.js' );
-var attributeIndex = require( '../attributes/attributeIndex.js' );
+import { context } from '../context.js';
+import { logHelper as log } from '../logHelper.js';
+import { nodeRemover } from './nodeRemover.js';
+import { Scope } from '../scopes/scope.js';
+import { i18nHelper } from '../i18n/i18nHelper.js';
+import { resolver } from '../resolver.js';
 
-var ParserPreloader = function( _parserOptions, _callback, _failCallback, _declaredRemotePageUrls, _i18n, _notRemoveGeneratedTags, _maxFolderDictionaries ) {
+export const ParserPreloader = function( _parserOptions, _callback, _failCallback, _declaredRemotePageUrls, _i18n, _notRemoveGeneratedTags, _maxFolderDictionaries ) {
     
     var parserOptions = _parserOptions;
     var callback = _callback;
@@ -75,4 +80,4 @@ var ParserPreloader = function( _parserOptions, _callback, _failCallback, _decla
     return self;
 };
 
-module.exports = ParserPreloader;
+//module.exports = ParserPreloader;

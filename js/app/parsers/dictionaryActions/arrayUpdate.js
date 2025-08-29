@@ -1,11 +1,10 @@
 /* 
     Class ArrayUpdate
 */
-"use strict";
+//var AbstractArrayAction = require( './abstractArrayAction.js' );
+import { AbstractArrayAction } from './abstractArrayAction.js';
 
-var AbstractArrayAction = require( './abstractArrayAction.js' );
-
-var ArrayUpdate = function( object, dictionary ) {
+export const ArrayUpdate = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
     
     this.newElement = object.newElement;
@@ -37,4 +36,4 @@ ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
     return true;
 };
 
-module.exports = ArrayUpdate;
+//module.exports = ArrayUpdate;

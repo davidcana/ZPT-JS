@@ -1,9 +1,8 @@
 /* 
     Class LoopItem
 */
-"use strict";
 
-var LoopItem = function ( _currentIndex, _itemsLength, _offset ) {
+export const LoopItem = function ( _currentIndex, _itemsLength, _offset ) {
     
     this.currentIndex = _currentIndex;
     this.itemsLength = _itemsLength;
@@ -139,4 +138,4 @@ LoopItem.prototype.romanArray = [
     ]
 ];
 
-module.exports = LoopItem;
+//module.exports = LoopItem;
