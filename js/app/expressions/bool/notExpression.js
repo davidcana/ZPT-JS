@@ -4,9 +4,11 @@
 //var context = require( '../../context.js' );
 //var evaluateHelper = require( '../evaluateHelper.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { evaluateHelper } from '../evaluateHelper.js';
 import { expressionsUtils } from '../expressionsUtils.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const NotExpression = function( stringToApply, expressionToApply ) {
     
@@ -39,7 +41,7 @@ NotExpression.getPrefix = function() {
 NotExpression.getId = NotExpression.getPrefix;
 
 NotExpression.build = function( string ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var expression = expressionBuilder.build( string );
     

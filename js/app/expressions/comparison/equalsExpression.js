@@ -4,9 +4,11 @@
 //var context = require( '../../context.js' );
 //var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const EqualsExpression = function( stringToApply, argsToApply ) {
     
@@ -50,7 +52,7 @@ EqualsExpression.getPrefix = function() {
 EqualsExpression.getId = EqualsExpression.getPrefix;
 
 EqualsExpression.build = function( s ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var string = s.trim();
     

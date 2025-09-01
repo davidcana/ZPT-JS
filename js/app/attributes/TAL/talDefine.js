@@ -3,8 +3,10 @@
 */
 //var context = require( '../../context.js' );
 //var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
+//var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 
 export const TALDefine = function( stringToApply, defineItemsToApply ) {
     
@@ -51,7 +53,7 @@ TALDefine.id = 'tal:define';
 
 TALDefine.build = function( string ) {
 
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 
     var defineItems = [];
     var expressionString = string.trim();

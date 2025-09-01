@@ -5,10 +5,12 @@
 //var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
 //var evaluateHelper = require( '../evaluateHelper.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
 import { evaluateHelper } from '../evaluateHelper.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const CondExpression = function( stringToApply, expression1ToApply, expression2ToApply, expression3ToApply ) {
     
@@ -46,7 +48,7 @@ CondExpression.getPrefix = function() {
 CondExpression.getId = CondExpression.getPrefix;
 
 CondExpression.build = function( s ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var string = s.trim();
 

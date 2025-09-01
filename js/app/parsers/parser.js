@@ -1,5 +1,5 @@
 /* 
-    Class Parser 
+    Class parser 
 */
 //var context = require( '../context.js' );
 //var ParserRenderer = require( './parserRenderer.js' );
@@ -12,7 +12,7 @@ import { ParserUpdater } from './parserUpdater.js';
 import { ParserPreloader } from './parserPreloader.js';
 import { ReactiveDictionary } from '../scopes/reactiveDictionary.js';
 
-export const Parser = (function() {
+export const parser = (function() {
     
     var parserOptions = {
         command: undefined, // preload, fullRender or partialRender

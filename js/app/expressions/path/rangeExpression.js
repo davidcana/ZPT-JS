@@ -6,11 +6,13 @@
 //var expressionsUtils = require( '../expressionsUtils.js' );
 //var evaluateHelper = require( '../evaluateHelper.js' );
 //var NumericLiteral = require( './literals/numericLiteral.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
 import { evaluateHelper } from '../evaluateHelper.js';
 import { NumericLiteral } from './literals/numericLiteral.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const RangeExpression = function( stringToApply, startExpressionToApply, endExpressionToApply, stepExpressionToApply ) {
     
@@ -55,7 +57,7 @@ export const RangeExpression = function( stringToApply, startExpressionToApply, 
 };
 
 RangeExpression.build = function( s ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     if ( ! s ) {
         return undefined;

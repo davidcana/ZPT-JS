@@ -1,8 +1,7 @@
-'use strict';
-
-var zpt = require( '../../../js/app/main.js' );
-//var log = require( '../../../js/app/logHelper.js' );
-var context = require( '../../../js/app/context.js' );
+//var zpt = require( '../../../js/app/main.js' );
+//var context = require( '../../../js/app/context.js' );
+import { zpt } from '../../../index.js';
+import { context } from '../../../js/app/context.js';
 
 var testPerformance = function ( id, numberOfExecutions, dictionary ){
     

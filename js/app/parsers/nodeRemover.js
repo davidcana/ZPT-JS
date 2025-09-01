@@ -1,10 +1,10 @@
 /* 
-    Class NodeRemover 
+    Class nodeRemover 
 */
 //var context = require( '../context.js' );
 import { context } from '../context.js';
 
-export const NodeRemover = (function() {
+export const nodeRemover = (function() {
     
     var tags = context.getTags();
     

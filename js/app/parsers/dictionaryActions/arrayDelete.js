@@ -9,7 +9,7 @@ import { utils } from '../../utils.js';
 import { AbstractArrayAction } from './abstractArrayAction.js';
 import { nodeRemover } from '../nodeRemover.js';
 
-var ArrayDelete = function( object, dictionary ) {
+export const ArrayDelete = function( object, dictionary ) {
     AbstractArrayAction.call( this, object, dictionary );
 };
 
