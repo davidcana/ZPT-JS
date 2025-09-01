@@ -2,7 +2,9 @@
     FunctionExpression class
 */
 //var evaluateHelper = require( '../evaluateHelper.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { evaluateHelper } from '../evaluateHelper.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const FunctionExpression = function( stringToApply, nameToApply, argsToApply ) {
     
@@ -32,7 +34,7 @@ export const FunctionExpression = function( stringToApply, nameToApply, argsToAp
 };
 
 FunctionExpression.build = function( string ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var leftParent = string.indexOf( '(' );
     if ( leftParent === -1 ) {

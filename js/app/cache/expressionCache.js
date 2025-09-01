@@ -4,7 +4,7 @@
 //var CacheHelper = require( './cacheHelper.js' );
 //var context = require( '../context.js' );
 //var log = require( '../logHelper.js' );
-import { CacheHelper } from './cacheHelper.js';
+import { cacheHelper } from './cacheHelper.js';
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';
 
@@ -13,11 +13,11 @@ export const expressionCache = (function() {
     var map = {};
     
     var get = function( string ) {
-        return map[ CacheHelper.hashCode( string ) ];
+        return map[ cacheHelper.hashCode( string ) ];
     };
     
     var put = function( string, value ){
-        map[ CacheHelper.hashCode( string ) ] = value;
+        map[ cacheHelper.hashCode( string ) ] = value;
     };
     
     var process = function( string, buildFunction, force ) {

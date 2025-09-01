@@ -6,11 +6,13 @@
 //var StringLiteral = require( './literals/stringLiteral.js' );
 //var PathSegmentExpression = require( './pathSegmentExpression.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { StringLiteral } from './literals/stringLiteral.js';
 import { PathSegmentExpression } from './pathSegmentExpression.js';
 import { expressionsUtils } from '../expressionsUtils.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const PathExpression = function( stringToApply, expressionListToApply ) {
     
@@ -64,7 +66,7 @@ PathExpression.getId = function() {
 };
 
 PathExpression.build = function( s ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var string = s.trim();
     

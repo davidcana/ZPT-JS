@@ -6,7 +6,8 @@
 //var utils = require( './utils.js' );
 //var LoopItem = require( './parsers/loopItem.js' );
 //var CSSAnimationManager = require( './parsers/dictionaryActions/cssAnimationManager.js' );
-import { log4javascript } from 'log4javascript';
+//import * as log4javascript from '../../../node_modules/log4javascript/log4javascript.js';
+import log4javascript from '../../../lib/log4javascript-esm.js';
 import { utils } from './utils.js';
 import { LoopItem } from './parsers/loopItem.js';
 import { CSSAnimationManager } from './parsers/dictionaryActions/cssAnimationManager.js';

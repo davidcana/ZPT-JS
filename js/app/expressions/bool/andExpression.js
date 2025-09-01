@@ -4,9 +4,11 @@
 //var context = require( '../../context.js' );
 //var evaluateHelper = require( '../evaluateHelper.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
+//var boolHelper = require( './boolHelper.js' );
 import { context } from '../../context.js';
 import { evaluateHelper } from '../evaluateHelper.js';
 import { expressionsUtils } from '../expressionsUtils.js';
+import { boolHelper } from './boolHelper.js';
 
 export const AndExpression = function( stringToApply, expressionListToApply ) {
     
@@ -47,7 +49,7 @@ AndExpression.getPrefix = function() {
 AndExpression.getId = AndExpression.getPrefix;
 
 AndExpression.build = function( string ) {
-    var boolHelper = require( './boolHelper.js' );
+    //var boolHelper = require( './boolHelper.js' );
     
     var expressionList = boolHelper.build( string, 'And' );
 

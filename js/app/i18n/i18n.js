@@ -3,7 +3,8 @@
     External dependencies: Intl (supported by recent browsers) and MessageFormat
 */
     
-import { MessageFormat } from '@messageformat/core';
+//import * as MessageFormat from '../../../node_modules/@messageformat/core/messageformat.js';
+import MessageFormat from '../../../lib/messageformat-esm.js';
 import { context } from '../context.js';
 import { utils } from '../utils.js';
 

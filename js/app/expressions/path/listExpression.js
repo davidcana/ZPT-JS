@@ -5,10 +5,12 @@
 //var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
 //var RangeExpression = require( './rangeExpression.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
 import { RangeExpression } from './rangeExpression.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const ListExpression = function( stringToApply, itemsToApply ) {
     
@@ -49,7 +51,7 @@ export const ListExpression = function( stringToApply, itemsToApply ) {
 };
 
 ListExpression.build = function( s ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     if ( s.charAt( 0 ) !== '[' || s.charAt( s.length - 1 ) !==  ']' ) {
         return undefined;

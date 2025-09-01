@@ -1,7 +1,7 @@
-"use strict";
-
-var Scope = require( '../../../js/app/scopes/scope.js' );
-var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
+//var Scope = require( '../../../js/app/scopes/scope.js' );
+//var expressionBuilder = require( '../../../js/app/expressions/expressionBuilder.js' );
+import { Scope } from '../../../js/app/scopes/scope.js';
+import { expressionBuilder } from '../../../js/app/expressions/expressionBuilder.js';
 
 var dictionary = { 
     aString: "string",

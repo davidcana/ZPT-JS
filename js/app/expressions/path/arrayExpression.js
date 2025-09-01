@@ -2,7 +2,9 @@
     ArrayExpression class
 */
 //var expressionsUtils = require( '../expressionsUtils.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { expressionsUtils } from '../expressionsUtils.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
     
@@ -63,7 +65,7 @@ export const ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
 };
 
 ArrayExpression.build = function( arrayBase, accessor ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var indexes = [];
     

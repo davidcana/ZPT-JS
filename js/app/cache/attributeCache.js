@@ -6,7 +6,7 @@
 //var log = require( '../logHelper.js' );
 //var attributeIndex = require( '../attributes/attributeIndex.js' );
 
-import { CacheHelper } from './cacheHelper.js';
+import { cacheHelper } from './cacheHelper.js';
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';
 import { attributeIndex } from '../attributes/attributeIndex.js';
@@ -28,7 +28,7 @@ export const attributeCache = (function() {
             return null;
         }
          
-        return attributeMap[ CacheHelper.hashCode( string ) ];
+        return attributeMap[ cacheHelper.hashCode( string ) ];
     };
     
     var put = function( attribute, string, value ){
@@ -40,7 +40,7 @@ export const attributeCache = (function() {
             map[ attribute ] = attributeMap;
         }
         
-        attributeMap[ CacheHelper.hashCode( string ) ] = value;
+        attributeMap[ cacheHelper.hashCode( string ) ] = value;
     };
     
     var index = function( node, attribute, scope ){

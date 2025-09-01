@@ -37,6 +37,7 @@
     "beefy": "2.1.8",
     "browserify": "17.0.1",
     "browserify-derequire": "1.1.1",
+    "esbuild": "0.25.5",
     "genversion": "3.2.0",
     "grunt": "1.6.1",
     "grunt-browserify": "6.0.0",
@@ -64,6 +65,11 @@
     "web": "cd ./docs; http-server -p 9001",
     "beefy": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js ../../../samples/js/app/performance.js:performance.js",
     "start": "npm-run-all -p -r beefy http-server",
-    "version": "genversion --esm --semi js/app/version.js"
+    "version": "genversion --esm --semi js/app/version.js",
+    "build-loadjs-esm": "esbuild ./node_modules/loadjs/dist/loadjs.umd.js --bundle --outfile=./lib/loadjs-esm.js --format=esm",
+    "build-log4javascript-esm": "esbuild ./node_modules/log4javascript/log4javascript.js --bundle --outfile=./lib/log4javascript-esm.js --format=esm",
+    "build-messageformat-esm": "esbuild ./node_modules/@messageformat/core/messageformat.js --bundle --outfile=./lib/messageformat-esm.js --format=esm",
+    "build-all-deps-esm": "npm run build-loadjs-esm && npm run build-log4javascript-esm && npm run build-messageformat-esm",
+    "build": "npm run build-all-deps-esm"
   }
 }
