@@ -1,5 +1,4 @@
-/* */
-"use strict";
+import { zpt } from '../../../index.js';
 
 var dictionary = { 
     aString: "string",
