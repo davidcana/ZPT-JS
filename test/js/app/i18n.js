@@ -1,11 +1,14 @@
-"use strict";
+//var zz = require( 'zzdom' );
+//var Qunit = require( 'qunit' );
+//var zpt = require( '../../../js/app/main.js' );
+//var I18n = zpt.I18n;
+//var I18nBundle = zpt.I18nBundle;
+//var i18nTests = require( './i18nTests.js' );
+import { zpt } from '../../../index.js';
+import { i18nTests } from './i18nTests.js';
 
-var zz = require( 'zzdom' );
-var Qunit = require( 'qunit' );
-var zpt = require( '../../../js/app/main.js' );
 var I18n = zpt.I18n;
 var I18nBundle = zpt.I18nBundle;
-var i18nTests = require( './i18nTests.js' );
 
 /* I18n maps init */
 var msg1 = {

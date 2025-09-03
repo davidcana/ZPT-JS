@@ -1,13 +1,15 @@
 /*
     utils singleton class
 */
-"use strict";
 
-var zz = require( 'zzdom' );
-var Qunit = require('qunit');
-var htmlComparator = require( './htmlComparator.js' );
+//var zz = require( 'zzdom' );
+//var Qunit = require('qunit');
+//var htmlComparator = require( './htmlComparator.js' );
+import { zzDOM } from '../../../node_modules/zzdom/index.js';
+const zz = zzDOM.zz;
+import { htmlComparator } from './htmlComparator.js';
 
-module.exports = (function() {
+export const utils = (function() {
     
     var getAllValues = function( selector ){
         

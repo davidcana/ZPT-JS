@@ -4,14 +4,16 @@
 //var context = require( '../../context.js' );
 //var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 //var evaluateHelper = require( '../evaluateHelper.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { evaluateHelper } from '../evaluateHelper.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const arithmethicHelper = (function() {
     
     var build = function( string, tag ) {
-        var expressionBuilder = require( '../expressionBuilder.js' );
+        //var expressionBuilder = require( '../expressionBuilder.js' );
 
         if ( string.length === 0 ) {
             throw tag + " expression void.";

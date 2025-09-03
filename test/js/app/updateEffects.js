@@ -1,9 +1,12 @@
-"use strict";
-
-var zz = require( 'zzdom' );
-var zpt = require( '../../../js/app/main.js' );
-var QUnit = require( 'qunit' );
-var utils = require( './utils.js' );
+//var zz = require( 'zzdom' );
+//var zpt = require( '../../../js/app/main.js' );
+//var QUnit = require( 'qunit' );
+//var utils = require( './utils.js' );
+import QUnit from '../../../lib/qunit-esm.js';
+import { zzDOM } from '../../../node_modules/zzdom/index.js';
+const zz = zzDOM.zz;
+import { zpt } from '../../../index.js';
+import { utils } from './utils.js';
 
 var errorsArray;
 var errorFunction = function( _errorsArray ) {

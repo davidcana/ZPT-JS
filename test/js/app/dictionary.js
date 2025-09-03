@@ -1,7 +1,8 @@
 
-var context = require( '../../../js/app/context.js' );
+//var context = require( '../../../js/app/context.js' );
+import { context } from '../../../js/app/context.js';
 
-module.exports = { 
+export const dictionary = { 
     nullValue: null,
     aString: "string",
     yes: "yes",

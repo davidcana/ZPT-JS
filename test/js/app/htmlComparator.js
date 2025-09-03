@@ -1,9 +1,8 @@
 /*
     htmlComparator singleton class
 */
-"use strict";
 
-module.exports = (function() {
+export const htmlComparator = (function() {
     
     /**
      * Find an appropriate `Assert` context to `push` results to.

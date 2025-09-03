@@ -7,6 +7,7 @@
 import { evaluateHelper } from '../../expressions/evaluateHelper.js';
 import { expressionsUtils } from  '../../expressions/expressionsUtils.js';
 import { context } from '../../context.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 
 export const TALCondition = function( stringToApply, expressionToApply ) {
     
@@ -58,7 +59,7 @@ TALCondition.id = 'tal:condition';
 
 TALCondition.build = function( string ) {
     
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new TALCondition( 
                 string,

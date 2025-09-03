@@ -1,17 +1,19 @@
-"use strict";
-
-var zz = require( 'zzdom' );
-var Qunit = require( 'qunit' );
-var zpt = require( '../../../js/app/main.js' );
+//var zz = require( 'zzdom' );
+//var Qunit = require( 'qunit' );
+//var zpt = require( '../../../js/app/main.js' );
+//var AverageExpression = require( './averageExpression.js' );
+import QUnit from '../../../lib/qunit-esm.js';
+import { zzDOM } from '../../../node_modules/zzdom/index.js';
+const zz = zzDOM.zz;
+import { zpt } from '../../../index.js';
 var expressionBuilder = zpt.expressionBuilder;
 var context = zpt.context;
+import { AverageExpression } from './averageExpression.js';
 
 var errorFunction = function( errors ) {
     throw errors;
 };
 zpt.context.setErrorFunction( errorFunction );
-
-var AverageExpression = require( './averageExpression.js' );
 
 var buildDictionary = function(){
     
@@ -47,7 +49,6 @@ var testDefinedExpression = function( assert ){
 };
 
 QUnit.test( "Custom expressions test", function( assert ) {
-    
     
     // Set all cache off
     context.getConf().attributeCacheOn = false;

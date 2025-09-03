@@ -1,13 +1,20 @@
 /* jshint esversion: 6 */
-"use strict";
 
-var zz = require( 'zzdom' );
-var zpt = require( '../../../js/app/main.js' );
-var dictionary = require( './dictionary.js' );
-var Qunit = require( 'qunit' );
-var I18n = require( '../../../js/app/i18n/i18n.js' );
-var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
-var utils = require( './utils.js' );
+//var zz = require( 'zzdom' );
+//var zpt = require( '../../../js/app/main.js' );
+//var dictionary = require( './dictionary.js' );
+//var Qunit = require( 'qunit' );
+//var I18n = require( '../../../js/app/i18n/i18n.js' );
+//var I18nBundle = require( '../../../js/app/i18n/i18nBundle.js' );
+//var utils = require( './utils.js' );
+import QUnit from '../../../lib/qunit-esm.js';
+import { zzDOM } from '../../../node_modules/zzdom/index.js';
+const zz = zzDOM.zz;
+import { zpt } from '../../../index.js';
+import { dictionary } from './dictionary.js';
+import { I18n } from '../../../js/app/i18n/i18n.js';
+import { I18nBundle } from  '../../../js/app/i18n/i18nBundle.js';
+import { utils } from './utils.js';
 
 /* I18n maps init */
 var msg = {

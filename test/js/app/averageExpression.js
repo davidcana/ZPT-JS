@@ -3,13 +3,14 @@
 */
 "use strict";
 
-var zpt = require( '../../../js/app/main.js' );
+//var zpt = require( '../../../js/app/main.js' );
+import { zpt } from '../../../index.js';
 var context = zpt.context;
 var evaluateHelper = zpt.evaluateHelper;
 var ExpressionTokenizer = zpt.ExpressionTokenizer;
 var expressionBuilder = zpt.expressionBuilder;
 
-var AverageExpression = function( _string, _expressionList ) {
+export const AverageExpression = function( _string, _expressionList ) {
     
     var string = _string;
     var expressionList = _expressionList;
@@ -98,4 +99,4 @@ AverageExpression.build = function( string ) {
     );
 }
 
-module.exports = AverageExpression;
+//module.exports = AverageExpression;

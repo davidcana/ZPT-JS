@@ -1,8 +1,10 @@
-"use strict";
-
-var zz = require( 'zzdom' );
-var zpt = require( '../../../js/app/main.js' );
-var Qunit = require( 'qunit' );
+//var zz = require( 'zzdom' );
+//var zpt = require( '../../../js/app/main.js' );
+//var Qunit = require( 'qunit' );
+import QUnit from '../../../lib/qunit-esm.js';
+import { zzDOM } from '../../../node_modules/zzdom/index.js';
+const zz = zzDOM.zz;
+import { zpt } from '../../../index.js';
 
 QUnit.test( "nested loops test", function( assert ) {
     

@@ -4,14 +4,16 @@
 //var context = require( '../../context.js' );
 //var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 //var evaluateHelper = require( '../evaluateHelper.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { evaluateHelper } from '../evaluateHelper.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const comparisonHelper = (function() {
     
     var build = function( s, tag ) {
-        var expressionBuilder = require( '../expressionBuilder.js' );
+        //var expressionBuilder = require( '../expressionBuilder.js' );
         
         var string = s.trim();
         
@@ -20,9 +22,10 @@ export const comparisonHelper = (function() {
         }
 
         var segments = new ExpressionTokenizer( 
-                string, 
-                context.getConf().expressionDelimiter, 
-                false );
+            string,
+            context.getConf().expressionDelimiter,
+            false
+        );
         if ( segments.countTokens() !== 2 ) {
             throw 'Wrong number of elements in expression "' + string + '", ' + tag + ' expressions only support two.';
         }

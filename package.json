@@ -55,7 +55,7 @@
     "npm-run-all": "4.1.5",
     "qunit": "2.24.1",
     "qunit-composite": "2.0.0",
-    "zzdom": "0.3.0"
+    "zzdom": "0.6.0"
   },
   "scripts": {
     "testNode": "qunit test/js/app/node.js",
@@ -69,7 +69,8 @@
     "build-loadjs-esm": "esbuild ./node_modules/loadjs/dist/loadjs.umd.js --bundle --outfile=./lib/loadjs-esm.js --format=esm",
     "build-log4javascript-esm": "esbuild ./node_modules/log4javascript/log4javascript.js --bundle --outfile=./lib/log4javascript-esm.js --format=esm",
     "build-messageformat-esm": "esbuild ./node_modules/@messageformat/core/messageformat.js --bundle --outfile=./lib/messageformat-esm.js --format=esm",
-    "build-all-deps-esm": "npm run build-loadjs-esm && npm run build-log4javascript-esm && npm run build-messageformat-esm",
+    "build-qunit-esm": "esbuild ./node_modules/qunit/qunit/qunit.js --bundle --outfile=./lib/qunit-esm.js --format=esm",
+    "build-all-deps-esm": "npm run build-loadjs-esm && npm run build-log4javascript-esm && npm run build-messageformat-esm && npm run build-all-deps-esm",
     "build": "npm run build-all-deps-esm"
   }
 }

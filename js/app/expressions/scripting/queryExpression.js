@@ -6,6 +6,7 @@
 //var expressionsUtils = require( '../expressionsUtils.js' );
 import { context } from '../../context.js';
 import { expressionsUtils } from '../expressionsUtils.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 
 export const QueryExpression = function( stringToApply, expressionToApply ) {
     
@@ -57,7 +58,7 @@ QueryExpression.getPrefix = function() {
 QueryExpression.getId = QueryExpression.getPrefix;
 
 QueryExpression.build = function( string ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var expression = expressionBuilder.build( string );
     

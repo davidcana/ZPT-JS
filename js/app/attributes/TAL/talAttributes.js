@@ -9,6 +9,7 @@ import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
 import { utils } from '../../utils.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 
 export const TALAttributes = function( stringToApply, attributeItemsToApply ) {
     
@@ -133,7 +134,7 @@ TALAttributes.id = 'tal:attributes';
 
 TALAttributes.build = function( string ) {
 
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     var attributeItems = [];
     var expressionString = string.trim();

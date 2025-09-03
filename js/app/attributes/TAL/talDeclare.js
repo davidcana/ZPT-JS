@@ -8,6 +8,7 @@
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
+import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 
 export const TALDeclare = function( _string, _declareItems ) {
     
@@ -188,7 +189,7 @@ TALDeclare.id = 'tal:declare';
 
 TALDeclare.build = function( string ) {
 
-    var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
 
     var declareItems = [];
     var omitTypes = [ 'undefined', 'null' ];

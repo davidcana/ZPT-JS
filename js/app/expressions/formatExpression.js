@@ -11,6 +11,7 @@ import { context } from '../context.js';
 import { ExpressionTokenizer } from './expressionTokenizer.js';
 import { expressionsUtils } from './expressionsUtils.js';
 import { evaluateHelper } from './evaluateHelper.js';
+import { expressionBuilder } from './expressionBuilder.js';
 
 export const FormatExpression = function( stringToApply, formatterExpressionToApply, argsExpressionsToApply ) {
     
@@ -42,7 +43,7 @@ export const FormatExpression = function( stringToApply, formatterExpressionToAp
         // Try to get a function evaluating the expression
         if ( ! isValidFormatter( formatter ) ){
             try {
-                var expressionBuilder = require( './expressionBuilder.js' );
+                //var expressionBuilder = require( './expressionBuilder.js' );
                 var formatterExpression = expressionBuilder.build( expression );
                 var value = formatterExpression.evaluate( scope );
                 
@@ -87,7 +88,7 @@ FormatExpression.getPrefix = function() {
 FormatExpression.getId = FormatExpression.getPrefix;
 
 FormatExpression.build = function( s ) {
-    var expressionBuilder = require( './expressionBuilder.js' );
+    //var expressionBuilder = require( './expressionBuilder.js' );
     
     var string = s.trim();
     if ( string.length === 0 ) {

@@ -4,9 +4,11 @@
 //var context = require( '../../context.js' );
 //var ExpressionTokenizer = require( '../expressionTokenizer.js' );
 //var expressionsUtils = require( '../expressionsUtils.js' );
+//var expressionBuilder = require( '../expressionBuilder.js' );
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
+import { expressionBuilder } from '../expressionBuilder.js';
 
 export const InExpression = function( stringToApply, expressionListToApply ) {
     
@@ -60,7 +62,7 @@ InExpression.getPrefix = function() {
 InExpression.getId = InExpression.getPrefix;
 
 InExpression.build = function( s ) {
-    var expressionBuilder = require( '../expressionBuilder.js' );
+    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var string = s.trim();
     

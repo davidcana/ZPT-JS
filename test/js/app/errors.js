@@ -1,10 +1,13 @@
-"use strict";
-
-var zz = require( 'zzdom' );
-var zpt = require( '../../../js/app/main.js' );
-var dictionary = require( './dictionary.js' );
-var Qunit = require( 'qunit' );
-var context = require( '../../../js/app/context.js' );
+//var zz = require( 'zzdom' );
+//var zpt = require( '../../../js/app/main.js' );
+//var dictionary = require( './dictionary.js' );
+//var Qunit = require( 'qunit' );
+//var context = require( '../../../js/app/context.js' );
+import QUnit from '../../../lib/qunit-esm.js';
+import { zzDOM } from '../../../node_modules/zzdom/index.js';
+const zz = zzDOM.zz;
+import { zpt } from '../../../index.js';
+import { dictionary } from './dictionary.js';
 
 var errorFunction = function( errors ) {
     throw errors;

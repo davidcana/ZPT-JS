@@ -1,9 +1,11 @@
 /* jshint esversion: 6 */
-"use strict";
 
-var Qunit = require('qunit');
-var zpt = require('../../../js/app/main.js');
-var utils = require('./utils.js');
+//var Qunit = require('qunit');
+//var zpt = require('../../../js/app/main.js');
+//var utils = require('./utils.js');
+import QUnit from '../../../lib/qunit-esm.js';
+import { zpt } from '../../../index.js';
+import { utils } from './utils.js';
 
 var dictionary = {
     items: [
