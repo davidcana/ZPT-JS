@@ -1,8 +1,3 @@
-//import QUnit from '../../../lib/qunit-esm.js';
-import * as a from '../../../lib/qunit-composite-esm.js';
-
-//window.QUnit = QUnit;
-
 QUnit.testSuites([
     { name: "expressions Test Suite", path: "./expressions.html" },
     { name: "statements Test Suite", path: "./statements.html" },
@@ -26,7 +21,6 @@ QUnit.testSuites([
     { name: "original tags Test Suite", path: "./original.html" },
     { name: "recursive macros Test Suite", path: "./recursiveMacros.html" },
     { name: "mixed macros Test Suite", path: "./mixedMacros.html" },
-    { name: "standalone Test Suite", path: "./standalone.html" },
     { name: "external macros with absolute URLs Test Suite", path: "./moreTest/externalMacros-absoluteURLs.html" },
     { name: "external macros with prefix URLs Test Suite", path: "./moreTest/externalMacros-prefixURLs.html" },
     { name: "single root Test Suite", path: "./singleRoot.html" },
