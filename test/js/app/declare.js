@@ -66,7 +66,9 @@ QUnit.test( "simple failing test", function( assert ) {
     assert.equal( zz('#t2-6').text() , "must not be evaluated" );
     assert.equal( zz('#t2-7').text() , "must not be evaluated" );
     assert.equal( zz('#t2-8').text() , "must not be evaluated" );
-    
+    assert.equal( zz('#t2-9').text() , "must not be evaluated" );
+    assert.equal( zz('#t2-10').text() , "must not be evaluated" );
+
     assert.deepEqual( 
         errorsArray, 
         [
