@@ -4,7 +4,7 @@
 //var I18nBundle = zpt.I18nBundle;
 //var i18nHelper = zpt.i18nHelper;
 //var i18nTests = require( './i18nTests.js' );
-import QUnit from '../../../lib/qunit-esm.js';
+//import QUnit from '../../../lib/qunit-esm.js';
 import { zpt } from '../../../index.js';
 import { i18nTests } from './i18nTests.js';
 

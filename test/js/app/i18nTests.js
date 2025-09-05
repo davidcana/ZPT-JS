@@ -1,6 +1,6 @@
 //var zz = require( 'zzdom' );
 //const { i18nHelper } = require('../../../js/app/main');
-import QUnit from '../../../lib/qunit-esm.js';
+//import QUnit from '../../../lib/qunit-esm.js';
 import { zzDOM } from '../../../node_modules/zzdom/index.js';
 const zz = zzDOM.zz;
 import { i18nHelper } from '../../../js/app/i18n/i18nHelper.js';

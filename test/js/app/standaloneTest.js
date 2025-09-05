@@ -1,4 +1,4 @@
-//import QUnit from '../../../lib/qunit-esm.js';
+////import QUnit from '../../../lib/qunit-esm.js';
 //import { zpt } from '../../../index.js';
 
 // Build dictionary

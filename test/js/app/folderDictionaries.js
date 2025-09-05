@@ -2,7 +2,7 @@
 //var Qunit = require( 'qunit' );
 //var zpt = require( '../../../js/app/main.js' );
 //var utils = require( './utils.js' );
-import QUnit from '../../../lib/qunit-esm.js';
+//import QUnit from '../../../lib/qunit-esm.js';
 import { zzDOM } from '../../../node_modules/zzdom/index.js';
 const zz = zzDOM.zz;
 import { zpt } from '../../../index.js';

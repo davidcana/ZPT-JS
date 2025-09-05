@@ -1,3 +1,8 @@
+//import QUnit from '../../../lib/qunit-esm.js';
+import * as a from '../../../lib/qunit-composite-esm.js';
+
+//window.QUnit = QUnit;
+
 QUnit.testSuites([
     { name: "expressions Test Suite", path: "./expressions.html" },
     { name: "statements Test Suite", path: "./statements.html" },
