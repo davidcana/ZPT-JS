@@ -18,7 +18,7 @@ var document = window.document;
 global.window = window;
 
 // Parse template
-var zpt = require( '../../../js/app/main.js' );
+var zpt = require( '../../../index.cjs' );
 zpt.run({
     root: document.body,
     dictionary: {}

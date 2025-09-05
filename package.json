@@ -42,13 +42,11 @@
     "grunt": "1.6.1",
     "grunt-browserify": "6.0.0",
     "grunt-contrib-compress": "2.0.0",
-    "grunt-contrib-concat": "2.1.0",
     "grunt-contrib-copy": "1.0.0",
     "grunt-contrib-jshint": "3.2.0",
     "grunt-contrib-nodeunit": "5.0.0",
     "grunt-contrib-qunit": "10.1.1",
     "grunt-contrib-uglify": "5.2.2",
-    "grunt-contrib-watch": "1.1.0",
     "grunt-exec": "3.0.0",
     "http-server": "14.1.1",
     "jsdom": "26.1.0",
@@ -61,15 +59,25 @@
     "testNode": "qunit test/js/app/node.js",
     "testBrowser": "grunt qunit",
     "test": "npm-run-all testBrowser testNode",
-    "http-server": "http-server -p 9000",
-    "web": "cd ./docs; http-server -p 9001",
-    "beefy": "cd ./test/js/app; beefy *.js ../../../js/app/standalone.js:standalone.js ../../../samples/js/app/expressionTester.js:expressionTester.js ../../../samples/js/app/performance.js:performance.js",
-    "start": "npm-run-all -p -r beefy http-server",
+
+    "http-server": "http-server -p 9000 -c-1",
+    "web": "cd ./docs; http-server -p 9001 -c-1",
+    "start": "npm-run-all -p -r web http-server",
+    
     "version": "genversion --esm --semi js/app/version.js",
+
     "build-loadjs-esm": "esbuild ./node_modules/loadjs/dist/loadjs.umd.js --bundle --outfile=./lib/loadjs-esm.js --format=esm",
     "build-log4javascript-esm": "esbuild ./node_modules/log4javascript/log4javascript.js --bundle --outfile=./lib/log4javascript-esm.js --format=esm",
     "build-messageformat-esm": "esbuild ./node_modules/@messageformat/core/messageformat.js --bundle --outfile=./lib/messageformat-esm.js --format=esm",
-    "build-all-deps-esm": "npm run build-loadjs-esm && npm run build-log4javascript-esm && npm run build-messageformat-esm && npm run build-all-deps-esm",
-    "build": "npm run build-all-deps-esm"
+    "build-all-deps-esm": "npm run build-loadjs-esm && npm run build-log4javascript-esm && npm run build-messageformat-esm",
+
+    "build-esm": "esbuild ./index.js --bundle --outfile=./dist/zpt-esm.js --format=esm",
+    "build-esm-minify": "esbuild ./index.js --bundle --outfile=./dist/zpt-esm.min.js --format=esm --minify",
+    "build-esm-gz": "gzip -fk ./dist/zpt-esm.min.js",
+    "build-esm-all": "npm run build-esm && npm run build-esm-minify && npm run build-esm-gz",
+    "build-cjs": "esbuild ./index.js --bundle --outfile=./dist/zpt-cjs.cjs --format=cjs",
+    "build-all": "npm run build-esm-all && npm run build-cjs",
+
+    "build": "npm run build-all-deps-esm && npm run build-all"
   }
 }

@@ -7,7 +7,7 @@
 //var LoopItem = require( './parsers/loopItem.js' );
 //var CSSAnimationManager = require( './parsers/dictionaryActions/cssAnimationManager.js' );
 //import * as log4javascript from '../../../node_modules/log4javascript/log4javascript.js';
-import log4javascript from '../../../lib/log4javascript-esm.js';
+import log4javascript from '../../lib/log4javascript-esm.js';
 import { utils } from './utils.js';
 import { LoopItem } from './parsers/loopItem.js';
 import { CSSAnimationManager } from './parsers/dictionaryActions/cssAnimationManager.js';
@@ -25,7 +25,7 @@ export const context = (function() {
         talOmitTag:       "data-omit-tag",
         talReplace:       "data-replace",
         talOnError:       "data-on-error",
-        talDeclare:         "data-declare",
+        talDeclare:       "data-declare",
         metalDefineMacro: "data-define-macro",
         metalUseMacro:    "data-use-macro",
         metalDefineSlot:  "data-define-slot",

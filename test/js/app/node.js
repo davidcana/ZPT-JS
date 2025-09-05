@@ -35,7 +35,7 @@ var init = function( assert ){
             //console.log( 'document.body.innerHTML:\n' + document.body.innerHTML );
 
             // Parse template
-            var zpt = require( '../../../js/app/main.js' );
+            var zpt = require( '../../../index.cjs' );
             zpt.run({
                 root: document.body,
                 dictionary: {
