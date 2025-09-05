@@ -14,6 +14,6 @@ exports.logHelper = require( './js/app/logHelper.js' );
 exports.expressionBuilder = require( './js/app/expressions/expressionBuilder.js' );
 exports.evaluateHelper = require( './js/app/expressions/evaluateHelper.js' );
 exports.ExpressionTokenizer = require( './js/app/expressions/expressionTokenizer.js' );
-//exports.ReactiveDictionary = require( './js/app/scopes/reactiveDictionary.js' );
+exports.ReactiveDictionary = require( './js/app/scopes/reactiveDictionary.js' );
 exports.version = require( './js/app/version.js' );
 

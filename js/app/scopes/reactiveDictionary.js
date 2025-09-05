@@ -2,7 +2,13 @@
     ReactiveDictionary class 
 */
 //var zpt = require( '../main.js' );
-import { zpt } from '../../../index.js';
+//import { zpt } from '../../../index.js';
+import { parser } from '../../../js/app/parsers/parser.js';
+
+const zpt = {};
+zpt.run = function( options ){
+    return parser.run( options );
+};
 
 export const ReactiveDictionary = function( _nonReactiveDictionary, _initialAutoCommit ) {
     
