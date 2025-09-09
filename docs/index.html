@@ -76,8 +76,7 @@
         &lt;meta charset="utf-8"&gt;
         &lt;title&gt;Getting started&lt;/title&gt;
 
-        &lt;script src="zpt.min.js" defer&gt;&lt;/script&gt;
-        &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
+        &lt;script src="gettingStarted.js" type="module"&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;p data-content="message"&gt;
@@ -88,10 +87,10 @@
                 </pre>
                 
                 <p>
-                    Where <code>zpt.min.js</code> is the minimized version of ZPT-JS and <code>gettingStarted.js</code> is:
+                    Where <code>gettingStarted.js</code> contains:
                 </p>
                 <pre class="brush: js">
-"use strict";
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     message: "Hello, world!"

@@ -55,9 +55,7 @@ var name = new zpt.ReactiveDictionary( object, [ autoCommit ] );
                     An example of use:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     message: 'Hello, world!'
@@ -85,9 +83,7 @@ dictionary.message = "Bye, world!";
                     More examples. If we want to do some changes but only one update of HTML we must set the auto commit to off:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary(
     {

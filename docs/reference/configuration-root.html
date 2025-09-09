@@ -47,10 +47,8 @@ root_element ::= a DOM node
                 <p>
                     Using the configuration option:
                 </p>
-                <pre class="brush: js; highlight: [11]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [9]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...
@@ -66,10 +64,8 @@ zpt.run({
                 <p>
                     Using an array as a configuration option (the only way):
                 </p>
-                <pre class="brush: js; highlight: [11]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [9]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...

@@ -43,10 +43,8 @@ maxFolderDictionaries ::= Integer
                 <p>
                     An example of ZPT-JS invokation using <em>maxFolderDictionaries</em> (reading a maximum of 5):
                 </p>
-                <pre class="brush: js; highlight: [13]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [11]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...

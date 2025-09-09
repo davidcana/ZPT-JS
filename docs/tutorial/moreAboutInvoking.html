@@ -37,9 +37,7 @@
                     An example of <em>fullRender</em>:
                 </p>
                 <pre class="brush: js; highlight: [13]">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     message: "Hello, world!"
@@ -56,9 +54,7 @@ zpt.run({
                     This is exactly equivalent to the next example (without setting command, <em>fullRender</em> is the default command):
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     message: "Hello, world!"
@@ -76,10 +72,8 @@ zpt.run({
                     With this command ZPT-JS updates the DOM inside the root element depending on some changes in the dictionary. To do this ZPT-JS builds an index with data about the expressions and attributes to know the parts of the DOM to update. Let's see an example:
                 </p>
                 
-                <pre class="brush: js; highlight: [19]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [17]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     message: "Hello, world!"
@@ -110,10 +104,8 @@ zpt.run({
                     ZPT-JS provides a special type of object, the <strong>reactive dictionary</strong>. Defines a dictionary with reactive capabilities: it can detect some type of modifications done to it and invoke an update command immediately.
                 </p>
                 
-                <pre class="brush: js; highlight: [5,6,7]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3,4,5]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     message: "Hello, world!"
@@ -138,10 +130,8 @@ dictionary.message = "Bye, world!";
                 <p>
                     Another alternative command to render again some DOM elements several times is the <em>partialRender</em> command and defining a <em>target</em> element instead of a <em>root</em>:
                 </p>
-                <pre class="brush: js; highlight: [19]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [17]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     message: "Hello, world!"

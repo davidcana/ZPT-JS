@@ -74,10 +74,8 @@ i18n: {
                 <p>
                     An example preloading only one language:
                 </p>
-                <pre class="brush: js; highlight: [13]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [11]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...
@@ -123,10 +121,8 @@ zpt.run({
                 <p>
                     An example using preloading 2 languages (and using I18nBundle to group i18n resources):
                 </p>
-                <pre class="brush: js; highlight: [13]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [11]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...

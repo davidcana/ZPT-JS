@@ -50,10 +50,8 @@
                 <p>
                     Removing first character of attributes:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3]">
+import { zpt } from './zpt-esm.js';
 
 zpt.context.setTags({
         talCondition:     "data-ondition",
@@ -83,10 +81,8 @@ zpt.context.setTags({
                 <p>
                     Using attributes of ZPT:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3]">
+import { zpt } from './zpt-esm.js';
 
 zpt.context.useOriginalTags();
 
@@ -96,10 +92,8 @@ zpt.context.useOriginalTags();
                 <p>
                     ... that is equivalent to do:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3]">
+import { zpt } from './zpt-esm.js';
 
 zpt.context.setTags({
         talCondition:     "tal:condition",
@@ -158,10 +152,8 @@ zpt.context.setTags({
                 <p>
                     Registering <em>myCustomFormatter</em>:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3]">
+import { zpt } from './zpt-esm.js';
 
 zpt.context.registerFormatter( 
     'myCustomFormatter', 
@@ -188,10 +180,8 @@ zpt.context.registerFormatter(
                 <p>
                     Getting the value of <em>conf</em> object:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3]">
+import { zpt } from './zpt-esm.js';
 
 var conf = zpt.context.getConf();
                 </pre>
@@ -360,10 +350,8 @@ var altAttributes = {
                 <p>
                     Setting an error function to count errors using alert to show them:
                 </p>
-                <pre class="brush: js; highlight: [7]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [5]">
+import { zpt } from './zpt-esm.js';
 
 var errorCounter = 0;
 zpt.context.setErrorFunction(

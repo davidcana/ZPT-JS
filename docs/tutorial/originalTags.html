@@ -29,10 +29,8 @@
                     If you prefer to use the original ZPT's attributes invoke <code>zpt.context.useOriginalTags()</code> method before <code>run</code> method:
                 </p>
                 <strong>original-tags-sample.js</strong>
-                <pre class="brush: js; highlight: [15]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [13]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = { 
     user: {

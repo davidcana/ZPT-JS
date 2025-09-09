@@ -25,8 +25,6 @@
                     A <em>folder dictionary</em> is a javascript file called <em>folderDictionary.js</em> that defines a <code>folderDictionary</code> variable. An example:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
 var folderDictionary = {
     myVar: 1
 };
@@ -49,8 +47,6 @@ var folderDictionary = {
                     Let's define 2 folder dictionaries. The URL of the first one is at <em>/folder/folderDictionary.js</em>:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
 var folderDictionary = {
     var1: 1
 };
@@ -60,8 +56,6 @@ var folderDictionary = {
                     The URL of the second one is at <em>/folderDictionary.js</em>:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
 var folderDictionary = {
     var1: 10,
     var2: 2
@@ -84,9 +78,7 @@ var folderDictionary = {
                     And the ZPT-JS invokation:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...
@@ -119,8 +111,6 @@ zpt.run({
 
                 <strong>/reference/folderDictionary.js</strong>
                 <pre class="brush: js">
-"use strict";
-
 var folderDictionary = {
     'footer-macro': 'referenceFooter@templates.html'
 };
@@ -128,8 +118,6 @@ var folderDictionary = {
 
                 <strong>/folderDictionary.js</strong>
                 <pre class="brush: js">
-"use strict";
-
 var folderDictionary = {
     'footer-macro': 'generalFooter@templates.html'
 };

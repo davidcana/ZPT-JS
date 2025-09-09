@@ -94,9 +94,7 @@ format_arguments   ::= [expression]*
                     The javascript code:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 // To register customFormatter add it to the dictionary
 var dictionary = {
@@ -127,9 +125,7 @@ zpt.run({
                     The javascript code:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {};
 

@@ -23,9 +23,7 @@
                     First we must implement the class (<em>averageExpression.js</em> file):
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 var context = zpt.context;
 var evaluateHelper = zpt.evaluateHelper;
 var ExpressionTokenizer = zpt.ExpressionTokenizer;
@@ -127,7 +125,7 @@ module.exports = AverageExpression;
                     Don't forget to register that class!
                 </p>
                 <pre class="brush: js">
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 var expressionBuilder = zpt.expressionBuilder;
 var AverageExpression = require( './averageExpression.js' );
 

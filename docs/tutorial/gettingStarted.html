@@ -38,8 +38,7 @@
                 <pre class="brush: html">
 &lt;head&gt;
     ...
-    &lt;script src="zpt.min.js" type="text/javascript" defer&gt;&lt;/script&gt;
-    &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
+    &lt;script src="gettingStarted.js" type="module"&gt;&lt;/script&gt;
     ...
 &lt;/head&gt;
                 </pre>
@@ -81,6 +80,8 @@
                     Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template. You can use any javascript object, but ZPT provides an specific type that supports a reactive behaviour:
                 </p>
                 <pre class="brush: js">
+import { zpt } from './zpt-esm.js';
+
 var dictionary = new zpt.ReactiveDictionary({
     message: "Hello, world!"
 });
@@ -91,7 +92,7 @@ var dictionary = new zpt.ReactiveDictionary({
                     Invoke the <code>run</code> method of ZPT:
                 </p>
                 <pre class="brush: js">
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 ...
 
@@ -105,9 +106,7 @@ zpt.run({
                     The resulting Javascript file (<em>gettingStarted.js</em>) is:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     message: "Hello, world!"
@@ -162,8 +161,6 @@ dictionary.message = "Bye, world!";
                     That's OK. But... how can we use ZPT-JS at the server side (using <a href="https://nodejs.org/">node.js</a>)? <a href="https://www.npmjs.com/package/jsdom">jsdom</a> is needed when no browser is available:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
 var jsdom = require( 'jsdom' );
 var { JSDOM } = jsdom;
 
@@ -181,7 +178,7 @@ var document = window.document;
 global.window = window;
 
 // Parse template
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 zpt.run({
     root: document.body,
     dictionary: {}

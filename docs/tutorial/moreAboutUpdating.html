@@ -47,9 +47,7 @@
                     The javascript code to invoke ZPT-JS:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     items: [ 
@@ -254,9 +252,7 @@ zpt.run({
                     The javascript code to invoke ZPT-JS:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     objectList: [ 
@@ -520,9 +516,7 @@ zpt.run({
                     An alternative way of working with <em>dictionary actions</em> is using a reactive dictionary:
                 </p>
                 <pre class="brush: js">
-"use strict";
-
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 
 var dictionary = new zpt.ReactiveDictionary({
     items: [ 

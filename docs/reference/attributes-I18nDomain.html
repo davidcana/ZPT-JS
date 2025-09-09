@@ -39,7 +39,7 @@ argument ::= expression [ expression ]*
                     <em>I18n</em> class is the most basic of them. It represents a set of translations using a language. The constructor of <em>I18n</em> class accepts 2 parameters: the language (a string) and the translations (an object with strings). An example:
                 </p>
                 <pre class="brush: js">
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 var i18nES = new zpt.I18n(
     'es', 
     { 
@@ -63,7 +63,7 @@ zpt.run({
                     <em>I18nBundle</em> class is a little bit more complex. It groups several <em>I18n</em> instances with the same translations using different languages. The constructor of <em>I18nBundle</em> class accepts one or more <em>I18n</em> instances. ZPT-JS will use the <em>I18n</em> instance depending of the value defined using a <a href="attributes-I18nLanguage.html">data-language</a> statement. An example:
                 </p>
                 <pre class="brush: js">
-var zpt = require( 'zpt' );
+import { zpt } from './zpt-esm.js';
 var i18nES = new zpt.I18n(
     'es', 
     { 

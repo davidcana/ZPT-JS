@@ -51,10 +51,8 @@ dictionary ::= a javascript object
                 <p>
                     An example of <em>fullRender</em>:
                 </p>
-                <pre class="brush: js; highlight: [5]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [3]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     aString: "string",

@@ -47,10 +47,8 @@ indexExpressions ::= Boolean
                 <p>
                     An example of ZPT-JS invokation using <em>indexExpressions</em>:
                 </p>
-                <pre class="brush: js; highlight: [12]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [10]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     ...

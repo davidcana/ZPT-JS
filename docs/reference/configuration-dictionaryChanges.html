@@ -39,10 +39,8 @@ dictionaryChanges ::= a javascript object
                 <p>
                     An example of <em>fullRender</em>:
                 </p>
-                <pre class="brush: js; highlight: [29]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [27]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     aString: "string",

@@ -43,10 +43,8 @@ notRemoveGeneratedTags ::= a boolean value
                 <p>
                     We are goint to invoke ZPT-JS twice, setting <code>notRemoveGeneratedTags</code> to <code>true</code> the second time:
                 </p>
-                <pre class="brush: js; highlight: [21]">
-"use strict";
-
-var zpt = require( 'zpt' );
+                <pre class="brush: js; highlight: [19]">
+import { zpt } from './zpt-esm.js';
 
 var dictionary = {
     someNumbers: [ 10, 20, 30 ]
