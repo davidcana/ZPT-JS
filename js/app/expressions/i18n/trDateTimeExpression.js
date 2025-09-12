@@ -1,8 +1,7 @@
 /*
     TrDateTimeExpression class
 */
-//var context = require( '../../context.js' );
-//var trHelper = require( './trHelper.js' );
+
 import { context } from '../../context.js';
 import { trHelper } from './trHelper.js';
 
@@ -58,4 +57,3 @@ TrDateTimeExpression.build = function( string ) {
             trData.argsExpressions );
 };
 
-//module.exports = TrDateTimeExpression;

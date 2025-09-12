@@ -1,9 +1,7 @@
 /*
     ExistsExpression class
 */
-//var context = require( '../context.js' );
-//var expressionsUtils = require( './expressionsUtils.js' );
-//var expressionBuilder = require( './expressionBuilder.js' );
+
 import { context } from '../context.js';
 import { expressionsUtils } from './expressionsUtils.js';
 import { expressionBuilder }  from './expressionBuilder.js';
@@ -45,10 +43,8 @@ ExistsExpression.getPrefix = function() {
 ExistsExpression.getId = ExistsExpression.getPrefix;
 
 ExistsExpression.build = function( string ) {
-    //var expressionBuilder = require( './expressionBuilder.js' );
     
     var expression = expressionBuilder.build( string );
     return new ExistsExpression( string, expression );
 };
 
-//module.exports = ExistsExpression;

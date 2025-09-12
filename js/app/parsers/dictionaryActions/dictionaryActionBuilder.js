@@ -1,11 +1,7 @@
 /* 
     Class dictionaryActionBuilder 
 */
-//var ArrayUpdate = require( './arrayUpdate.js' );
-//var ArrayDelete = require( './arrayDelete.js' );
-//var ArrayCreate = require( './arrayCreate.js' );
-//var ObjectUpdate = require( './objectUpdate.js' );
-//var ObjectDelete = require( './objectDelete.js' );
+
 import { ArrayUpdate } from './arrayUpdate.js';
 import { ArrayDelete } from './arrayDelete.js';
 import { ArrayCreate } from './arrayCreate.js';

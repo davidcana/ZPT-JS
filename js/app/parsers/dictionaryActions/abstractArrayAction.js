@@ -1,9 +1,7 @@
 /* 
     Class AbstractArrayAction
 */
-//var AbstractAction = require( './abstractAction.js' );
-//var utils = require( '../../utils.js' );
-//var context = require( '../../context.js' );
+
 import { context } from '../../context.js';
 import { utils } from '../../utils.js';
 import { AbstractAction } from './abstractAction.js';
@@ -106,4 +104,3 @@ AbstractArrayAction.prototype.getIndexOfLoop = function( parentNode, nodeId, ind
     return null;
 };
 
-//module.exports = AbstractArrayAction;

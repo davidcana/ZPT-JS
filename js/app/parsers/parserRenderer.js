@@ -1,13 +1,6 @@
 /* 
     Class ParserRenderer
 */
-//var context = require( '../context.js' );
-//var log = require( '../logHelper.js' );
-//var attributeCache = require( '../cache/attributeCache.js' );
-//var attributeIndex = require( '../attributes/attributeIndex.js' );
-//var nodeRemover = require( './nodeRemover.js' );
-//var scopeBuilder = require( '../scopes/scopeBuilder.js' );
-//var ParserNodeRenderer = require( './parserNodeRenderer.js' );
 
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';
@@ -118,4 +111,3 @@ export const ParserRenderer = function( _parserOptions, _target, _dictionaryExte
     return self;
 };
 
-//module.exports = ParserRenderer;

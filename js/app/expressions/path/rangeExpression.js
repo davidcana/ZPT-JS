@@ -1,12 +1,7 @@
 /*
     RangeExpression class
 */
-//var context = require( '../../context.js' );
-//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
-//var evaluateHelper = require( '../evaluateHelper.js' );
-//var NumericLiteral = require( './literals/numericLiteral.js' );
-//var expressionBuilder = require( '../expressionBuilder.js' );
+
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
@@ -57,7 +52,6 @@ export const RangeExpression = function( stringToApply, startExpressionToApply, 
 };
 
 RangeExpression.build = function( s ) {
-    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     if ( ! s ) {
         return undefined;
@@ -100,4 +94,3 @@ RangeExpression.build = function( s ) {
     return new RangeExpression( string, startExpression, endExpression, stepExpression );
 };
 
-//module.exports = RangeExpression;

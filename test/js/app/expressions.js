@@ -1,13 +1,8 @@
-//var zz = require( 'zzdom' );
-//var zpt = require( '../../../js/app/main.js' );
-//var dictionary = require( './dictionary.js' );
-//var Qunit = require( 'qunit' );
-//import QUnit from '../../../lib/qunit-esm.js';
+
 import { zzDOM } from '../../../node_modules/zzdom/index.js';
 const zz = zzDOM.zz;
 import { zpt } from '../../../index.js';
 import { dictionary } from './dictionary.js';
-//import QUnit from '../../../lib/qunit-esm.js';
 
 window.globalVar = 'It works!';
 

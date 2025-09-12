@@ -2,11 +2,6 @@
     context singleton class
 */
 
-//var log4javascript = require( 'log4javascript' );
-//var utils = require( './utils.js' );
-//var LoopItem = require( './parsers/loopItem.js' );
-//var CSSAnimationManager = require( './parsers/dictionaryActions/cssAnimationManager.js' );
-//import * as log4javascript from '../../../node_modules/log4javascript/log4javascript.js';
 import log4javascript from '../../lib/log4javascript-esm.js';
 import { utils } from './utils.js';
 import { LoopItem } from './parsers/loopItem.js';

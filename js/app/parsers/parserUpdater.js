@@ -1,15 +1,6 @@
 /* 
     Class ParserUpdater
 */
-//var context = require( '../context.js' );
-//var log = require( '../logHelper.js' );
-//var attributeIndex = require( '../attributes/attributeIndex.js' );
-//var scopeBuilder = require( '../scopes/scopeBuilder.js' );
-//var ParserNodeRenderer = require( './parserNodeRenderer.js' );
-//var nodeRemover = require( './nodeRemover.js' );
-//var utils = require( '../utils.js' );
-//var dictionaryActionBuilder = require( './dictionaryActions/dictionaryActionBuilder.js' );
-//var AbstractArrayAction = require( './dictionaryActions/abstractArrayAction.js' );
 
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';
@@ -408,4 +399,3 @@ export const ParserUpdater = function( _dictionaryChanges, _dictionaryActions, _
     return self;
 };
 
-//module.exports = ParserUpdater;

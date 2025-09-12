@@ -1,9 +1,6 @@
 /*
     TALDeclare class
 */
-//var context = require( '../../context.js' );
-//var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
 
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
@@ -189,8 +186,6 @@ TALDeclare.id = 'tal:declare';
 
 TALDeclare.build = function( string ) {
 
-    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-
     var declareItems = [];
     var omitTypes = [ 'undefined', 'null' ];
     
@@ -258,4 +253,3 @@ TALDeclare.tokenIsRequired = function( token ) {
     return "required" === token.toLowerCase();
 };
 
-//module.exports = TALDeclare;

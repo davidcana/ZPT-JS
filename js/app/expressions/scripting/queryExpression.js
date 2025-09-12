@@ -2,8 +2,6 @@
     QueryExpression class
 */
 
-//var context = require( '../../context.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
 import { context } from '../../context.js';
 import { expressionsUtils } from '../expressionsUtils.js';
 import { expressionBuilder } from '../../expressions/expressionBuilder.js';
@@ -58,11 +56,9 @@ QueryExpression.getPrefix = function() {
 QueryExpression.getId = QueryExpression.getPrefix;
 
 QueryExpression.build = function( string ) {
-    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var expression = expressionBuilder.build( string );
     
     return new QueryExpression( string, expression );
 };
 
-//module.exports = QueryExpression;

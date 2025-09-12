@@ -1,8 +1,7 @@
 /*
     TrStringExpression class
 */
-//var context = require( '../../context.js' );
-//var trHelper = require( './trHelper.js' );
+
 import { context } from '../../context.js';
 import { trHelper } from './trHelper.js';
 
@@ -61,4 +60,3 @@ TrStringExpression.build = function( string ) {
     );
 };
 
-//module.exports = TrStringExpression;

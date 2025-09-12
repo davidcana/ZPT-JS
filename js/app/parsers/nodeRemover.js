@@ -1,7 +1,7 @@
 /* 
     Class nodeRemover 
 */
-//var context = require( '../context.js' );
+
 import { context } from '../context.js';
 
 export const nodeRemover = (function() {

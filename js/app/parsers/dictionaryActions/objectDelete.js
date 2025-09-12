@@ -1,7 +1,7 @@
 /* 
     Class ObjectDelete
 */
-//var AbstractObjectAction = require( './abstractObjectAction.js' );
+
 import { AbstractObjectAction } from './abstractObjectAction.js';
 
 export const ObjectDelete = function( object, dictionary ) {
@@ -16,4 +16,3 @@ ObjectDelete.prototype.updateDictionary = function( dictionary ){
     delete objectValue[ this.property ];
 };
 
-//module.exports = ObjectDelete;

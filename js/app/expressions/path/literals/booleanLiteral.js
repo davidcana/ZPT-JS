@@ -36,4 +36,3 @@ BooleanLiteral.build = function( string ) {
     return undefined;
 };
 
-//module.exports = BooleanLiteral;

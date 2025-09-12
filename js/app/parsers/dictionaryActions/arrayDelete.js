@@ -1,10 +1,7 @@
 /* 
     Class ArrayDelete
 */
-//var AbstractArrayAction = require( './abstractArrayAction.js' );
-//var utils = require( '../../utils.js' );
-//var attributeIndex = require( '../../attributes/attributeIndex.js' );
-//var nodeRemover = require( '../nodeRemover.js' );
+
 import { utils } from '../../utils.js';
 import { AbstractArrayAction } from './abstractArrayAction.js';
 import { nodeRemover } from '../nodeRemover.js';
@@ -80,4 +77,3 @@ ArrayDelete.buildMultiple = function( object, dictionary ){
     return actions;
 };
 
-//module.exports = ArrayDelete;

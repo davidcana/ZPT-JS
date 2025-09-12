@@ -1,11 +1,7 @@
 /*
     FormatExpression class
 */
-//var utils = require( '../utils.js' );
-//var context = require( '../context.js' );
-//var ExpressionTokenizer = require( './expressionTokenizer.js' );
-//var expressionsUtils = require( './expressionsUtils.js' );
-//var evaluateHelper = require( './evaluateHelper.js' );
+
 import { utils } from '../utils.js';
 import { context } from '../context.js';
 import { ExpressionTokenizer } from './expressionTokenizer.js';
@@ -43,7 +39,6 @@ export const FormatExpression = function( stringToApply, formatterExpressionToAp
         // Try to get a function evaluating the expression
         if ( ! isValidFormatter( formatter ) ){
             try {
-                //var expressionBuilder = require( './expressionBuilder.js' );
                 var formatterExpression = expressionBuilder.build( expression );
                 var value = formatterExpression.evaluate( scope );
                 
@@ -88,8 +83,6 @@ FormatExpression.getPrefix = function() {
 FormatExpression.getId = FormatExpression.getPrefix;
 
 FormatExpression.build = function( s ) {
-    //var expressionBuilder = require( './expressionBuilder.js' );
-    
     var string = s.trim();
     if ( string.length === 0 ) {
         throw 'Format expression void.';
@@ -117,4 +110,3 @@ FormatExpression.build = function( s ) {
     return new FormatExpression( string, formatter, argsExpressions );
 };
 
-//module.exports = FormatExpression;

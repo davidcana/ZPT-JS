@@ -1,13 +1,6 @@
 /* 
     Class ParserPreloader
 */
-//var context = require( '../context.js' );
-//var log = require( '../logHelper.js' );
-//var nodeRemover = require( './nodeRemover.js' );
-//var Scope = require( '../scopes/scope.js' );
-//var i18nHelper = require( '../i18n/i18nHelper.js' );
-//var resolver = require( '../resolver.js' );
-//var attributeIndex = require( '../attributes/attributeIndex.js' );
 
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';
@@ -80,4 +73,3 @@ export const ParserPreloader = function( _parserOptions, _callback, _failCallbac
     return self;
 };
 
-//module.exports = ParserPreloader;

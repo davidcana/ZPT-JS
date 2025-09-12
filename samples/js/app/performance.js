@@ -1,5 +1,4 @@
-//var zpt = require( '../../../js/app/main.js' );
-//var context = require( '../../../js/app/context.js' );
+
 import { zpt } from '../../../index.js';
 import { context } from '../../../js/app/context.js';
 

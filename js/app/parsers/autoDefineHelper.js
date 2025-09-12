@@ -1,8 +1,7 @@
 /* 
     Class AutoDefineHelper 
 */
-//var context = require( '../context.js' );
-//var TALDefine = require( '../attributes/TAL/talDefine.js' );
+
 import { context } from '../context.js';
 
 export const AutoDefineHelper = function ( node ) {

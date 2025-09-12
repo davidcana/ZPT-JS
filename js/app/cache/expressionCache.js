@@ -1,9 +1,7 @@
 /*
     expressionCache singleton class
 */
-//var CacheHelper = require( './cacheHelper.js' );
-//var context = require( '../context.js' );
-//var log = require( '../logHelper.js' );
+
 import { cacheHelper } from './cacheHelper.js';
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';

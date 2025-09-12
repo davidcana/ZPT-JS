@@ -35,4 +35,3 @@ DepsDataItem.prototype.add1Var = function( varName, scope ){
     return true;
 };
 
-//module.exports = DepsDataItem;

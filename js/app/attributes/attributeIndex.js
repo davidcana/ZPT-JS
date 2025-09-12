@@ -1,8 +1,7 @@
 /* 
     attributeIndex singleton class
 */
-//var utils = require( '../utils.js' );
-//var context = require( '../context.js' );
+
 import { utils } from '../utils.js';
 import { context } from '../context.js';
 

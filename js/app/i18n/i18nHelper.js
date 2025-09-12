@@ -1,9 +1,7 @@
 /* 
     i18nHelper singleton class 
 */
-//var utils = require( '../utils.js' );
-//var I18n = require( './i18n.js' );
-//var context = require( '../context.js' );
+
 import { context } from '../context.js';
 import { utils } from '../utils.js';
 import { I18n } from './i18n.js';

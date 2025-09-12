@@ -1,7 +1,7 @@
 /* 
     evaluateHelper singleton class
 */
-//var context = require( '../context.js' );
+
 import { context } from '../context.js';
 
 export const evaluateHelper = (function() {

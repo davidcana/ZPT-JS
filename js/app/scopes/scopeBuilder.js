@@ -1,10 +1,7 @@
 /* 
     scopeBuilder singleton class
 */
-//var context = require( '../context.js' );
-//var Scope = require( './scope.js' );
-//var utils = require( '../utils.js' );
-//var ParserNodeRenderer = require( '../parsers/parserNodeRenderer.js' );
+
 import { context } from '../context.js';
 import { utils } from '../utils.js';
 import { Scope } from './scope.js';

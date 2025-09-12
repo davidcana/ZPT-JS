@@ -1,10 +1,7 @@
 /*
     TALAttributes class
 */
-//var context = require( '../../context.js' );
-//var ExpressionTokenizer = require( '../../expressions/expressionTokenizer.js' );
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-//var utils = require( '../../utils.js' );
+
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../../expressions/expressionTokenizer.js';
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
@@ -133,8 +130,6 @@ export const TALAttributes = function( stringToApply, attributeItemsToApply ) {
 TALAttributes.id = 'tal:attributes';
 
 TALAttributes.build = function( string ) {
-
-    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     var attributeItems = [];
     var expressionString = string.trim();
@@ -164,4 +159,3 @@ TALAttributes.build = function( string ) {
     return new TALAttributes( string, attributeItems );
 };
 
-//module.exports = TALAttributes;

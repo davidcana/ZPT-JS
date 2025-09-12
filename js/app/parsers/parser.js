@@ -1,11 +1,7 @@
 /* 
     Class parser 
 */
-//var context = require( '../context.js' );
-//var ParserRenderer = require( './parserRenderer.js' );
-//var ParserUpdater = require( './parserUpdater.js' );
-//var ParserPreloader = require( './parserPreloader.js' );
-//var ReactiveDictionary = require( '../scopes/reactiveDictionary.js' );
+
 import { context } from '../context.js';
 import { ParserRenderer } from './parserRenderer.js';
 import { ParserUpdater } from './parserUpdater.js';

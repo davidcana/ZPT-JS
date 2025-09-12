@@ -1,7 +1,7 @@
 /*
     VariableExpression class
 */
-//var context = require( '../../context.js' );
+
 import { context } from '../../context.js';
 
 export const VariableExpression = function( nameToApply ) {
@@ -58,4 +58,3 @@ VariableExpression.build = function( string ) {
         undefined;
 };
 
-//module.exports = VariableExpression;

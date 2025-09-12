@@ -1,8 +1,7 @@
 /*
     ArrayExpression class
 */
-//var expressionsUtils = require( '../expressionsUtils.js' );
-//var expressionBuilder = require( '../expressionBuilder.js' );
+
 import { expressionsUtils } from '../expressionsUtils.js';
 import { expressionBuilder } from '../expressionBuilder.js';
 
@@ -65,7 +64,6 @@ export const ArrayExpression = function( arrayBaseToApply, indexesToApply ) {
 };
 
 ArrayExpression.build = function( arrayBase, accessor ) {
-    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var indexes = [];
     
@@ -153,4 +151,3 @@ ArrayExpression.findArrayAccessor = function( token ) {
     return -1;
 };
 
-//module.exports = ArrayExpression;

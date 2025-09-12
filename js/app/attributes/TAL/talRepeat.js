@@ -1,9 +1,7 @@
 /*
     TALRepeat class
 */
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-//var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-//var Loop = require( '../../parsers/loop.js' );
+
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
 import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 import { Loop } from '../../parsers/loop.js';
@@ -67,4 +65,3 @@ TALRepeat.build = function( string ) {
     return new TALRepeat( string, varName, loopExpression );
 };
 
-//module.exports = TALRepeat;

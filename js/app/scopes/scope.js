@@ -1,12 +1,9 @@
 /* 
     Class Scope 
 */
-//var context = require( '../context.js' );
-//var utils = require( '../utils.js' );
-//var loadjs = require( 'loadjs' );
+
 import { context } from '../context.js';
 import { utils } from '../utils.js';
-//import * as loadjs from '../../../node_modules/loadjs/dist/loadjs.js';
 import loadjs from '../../../lib/loadjs-esm.js';
 
 export const Scope = function( _dictionary, _dictionaryExtension, addCommonVars, _folderDictionaries ) {
@@ -309,4 +306,3 @@ Scope.prototype.isLocalVar = function ( name ) {
     return this.vars[ name ] !== undefined;
 };
 
-//module.exports = Scope;

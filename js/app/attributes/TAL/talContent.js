@@ -1,9 +1,7 @@
 /*
     TALContent class
 */
-//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
-//var contentHelper = require( './contentHelper.js' );
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
+
 import { evaluateHelper } from '../../expressions/evaluateHelper.js';
 import { contentHelper } from './contentHelper.js';
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
@@ -57,4 +55,3 @@ TALContent.build = function( string ) {
     );
 };
 
-//module.exports = TALContent;

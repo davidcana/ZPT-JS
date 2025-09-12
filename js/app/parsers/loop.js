@@ -1,9 +1,7 @@
 /* 
     Class Loop 
 */
-//var AutoDefineHelper = require( './autoDefineHelper.js' );
-//var expressionBuilder = require( '../expressions/expressionBuilder.js' );
-//var context = require( '../context.js' );
+
 import { context } from '../context.js';
 import { AutoDefineHelper } from './autoDefineHelper.js';
 import { expressionBuilder } from '../expressions/expressionBuilder.js';
@@ -96,4 +94,3 @@ Loop.setAutoDefineAttribute = function( node, itemVariableName, itemIndex, expre
     );
 };
 
-//module.exports = Loop;

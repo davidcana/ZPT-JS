@@ -42,4 +42,3 @@ NumericLiteral.build = function( string ) {
     return undefined;
 };
 
-//module.exports = NumericLiteral;

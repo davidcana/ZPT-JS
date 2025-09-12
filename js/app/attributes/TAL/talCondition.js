@@ -1,9 +1,7 @@
 /*
     TALCondition class
 */
-//var evaluateHelper = require( '../../expressions/evaluateHelper.js' );
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-//var context = require( '../../context.js' );
+
 import { evaluateHelper } from '../../expressions/evaluateHelper.js';
 import { expressionsUtils } from  '../../expressions/expressionsUtils.js';
 import { context } from '../../context.js';
@@ -59,11 +57,8 @@ TALCondition.id = 'tal:condition';
 
 TALCondition.build = function( string ) {
     
-    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-    
     return new TALCondition( 
                 string,
                 expressionBuilder.build( string ) );
 };
 
-//module.exports = TALCondition;

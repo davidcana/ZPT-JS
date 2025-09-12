@@ -1,7 +1,7 @@
 /* 
     Class ArrayUpdate
 */
-//var AbstractArrayAction = require( './abstractArrayAction.js' );
+
 import { AbstractArrayAction } from './abstractArrayAction.js';
 
 export const ArrayUpdate = function( object, dictionary ) {
@@ -36,4 +36,3 @@ ArrayUpdate.prototype.updateHTML = function( indexItem, parserUpdater, actionIns
     return true;
 };
 
-//module.exports = ArrayUpdate;

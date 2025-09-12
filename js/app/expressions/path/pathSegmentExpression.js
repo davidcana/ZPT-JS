@@ -1,19 +1,7 @@
 /*
     PathSegmentExpression class
 */
-//var context = require( '../../context.js' );
-//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
-//var ArrayExpression = require( './arrayExpression.js' );
-//var StringLiteral = require( './literals/stringLiteral.js' );
-//var NumericLiteral = require( './literals/numericLiteral.js' );
-//var BooleanLiteral = require( './literals/booleanLiteral.js' );
-//var ListExpression = require( './listExpression.js' );
-//var FunctionExpression = require( './functionExpression.js' );
-//var VariableExpression = require( './variableExpression.js' );
-//var IndirectionExpression = require( './indirectionExpression.js' );
-//var MethodExpression = require( './methodExpression.js' );
-//var PropertyExpression = require( './propertyExpression.js' );
+
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { expressionsUtils } from '../expressionsUtils.js';
@@ -192,4 +180,3 @@ PathSegmentExpression.buildNextPathToken = function( t ){
     return result;
 };
 
-//module.exports = PathSegmentExpression;

@@ -1,7 +1,7 @@
 /*
     I18nLanguage class
 */
-//var context = require( '../../context.js' );
+
 import { context } from '../../context.js';
 
 export const I18NLanguage = function( stringToApply ) {
@@ -44,4 +44,3 @@ I18NLanguage.build = function( string ) {
     return string? new I18NLanguage( string.trim() ): null;
 };
 
-//module.exports = I18NLanguage;

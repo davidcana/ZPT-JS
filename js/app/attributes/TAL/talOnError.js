@@ -1,8 +1,7 @@
 /*
     TALOnError class
 */
-//var context = require( '../../context.js' );
-//var contentHelper = require( './contentHelper.js' );
+
 import { context } from '../../context.js';
 import { contentHelper } from './contentHelper.js';
 
@@ -62,4 +61,3 @@ TALOnError.build = function( string ) {
     );
 };
 
-//module.exports = TALOnError;

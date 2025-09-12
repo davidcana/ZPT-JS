@@ -1,7 +1,7 @@
 /* 
     Class ExpressionTokenizer 
 */
-//var expressionBuilder = require( './expressionBuilder.js' );
+
 import { expressionBuilder } from './expressionBuilder.js';
 
 export const ExpressionTokenizer = function( exp, delimiter, escape ) {

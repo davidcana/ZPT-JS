@@ -34,4 +34,3 @@ IndirectionExpression.build = function( string ) {
     return new IndirectionExpression( string.substring( 1 ) );
 };
 
-//module.exports = IndirectionExpression;

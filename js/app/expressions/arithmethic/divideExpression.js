@@ -1,9 +1,7 @@
 /*
     DivideExpression class
 */
-//var context = require( '../../context.js' );
-//var arithmethicHelper = require( './arithmethicHelper.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
+
 import { context } from '../../context.js';
 import { arithmethicHelper } from './arithmethicHelper.js';
 import { expressionsUtils } from '../expressionsUtils.js';
@@ -58,4 +56,3 @@ DivideExpression.build = function( string ) {
     return new DivideExpression( string, expressionList );
 };
 
-//module.exports = DivideExpression;

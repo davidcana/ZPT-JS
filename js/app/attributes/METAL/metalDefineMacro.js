@@ -36,4 +36,3 @@ METALDefineMacro.build = function( string ) {
     return new METALDefineMacro( string.trim() );
 };
 
-//module.exports = METALDefineMacro;

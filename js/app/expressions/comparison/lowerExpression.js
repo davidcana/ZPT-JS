@@ -1,9 +1,7 @@
 /*
     LowerExpression class
 */
-//var context = require( '../../context.js' );
-//var comparisonHelper = require( './comparisonHelper.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
+
 import { context } from '../../context.js';
 import { comparisonHelper } from './comparisonHelper.js';
 import { expressionsUtils } from '../expressionsUtils.js';
@@ -47,4 +45,3 @@ LowerExpression.build = function( string ) {
     return new LowerExpression( string, data.expression1, data.expression2 );
 };
 
-//module.exports = LowerExpression;

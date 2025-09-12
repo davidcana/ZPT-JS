@@ -1,10 +1,7 @@
 /*
     TALOmitTag class
 */
-//var BooleanLiteral = require( '../../expressions/path/literals/booleanLiteral.js' );
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-//var context = require( '../../context.js' );
-//var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
+
 import { BooleanLiteral } from '../../expressions/path/literals/booleanLiteral.js';
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
 import { context } from '../../context.js';
@@ -65,8 +62,6 @@ TALOmitTag.id = 'tal:omit-tag';
 
 TALOmitTag.build = function( string ) {
     
-    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-    
     var expressionString = string.trim();
     var expression = expressionString == ''?
             new BooleanLiteral( true ):
@@ -75,4 +70,3 @@ TALOmitTag.build = function( string ) {
     return new TALOmitTag( string, expression );
 };
 
-//module.exports = TALOmitTag;

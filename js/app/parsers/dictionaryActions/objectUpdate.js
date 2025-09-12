@@ -1,9 +1,7 @@
 /* 
     Class ObjectUpdate
 */
-//var AbstractObjectAction = require( './abstractObjectAction.js' );
-//var ObjectDelete = require( './objectDelete.js' );
-//var utils = require( '../../utils.js' );
+
 import { AbstractObjectAction } from './abstractObjectAction.js';
 import { ObjectDelete } from './objectDelete.js';
 import { utils } from '../../utils.js';
@@ -71,4 +69,3 @@ ObjectUpdate.buildMultiple = function( object, dictionary ){
     return actions;
 };
 
-//module.exports = ObjectUpdate;

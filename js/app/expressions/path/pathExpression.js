@@ -1,12 +1,7 @@
 /*
     PathExpression class
 */
-//var context = require( '../../context.js' );
-//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-//var StringLiteral = require( './literals/stringLiteral.js' );
-//var PathSegmentExpression = require( './pathSegmentExpression.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
-//var expressionBuilder = require( '../expressionBuilder.js' );
+
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { StringLiteral } from './literals/stringLiteral.js';
@@ -66,7 +61,6 @@ PathExpression.getId = function() {
 };
 
 PathExpression.build = function( s ) {
-    //var expressionBuilder = require( '../expressionBuilder.js' );
     
     var string = s.trim();
     
@@ -101,4 +95,3 @@ PathExpression.build = function( s ) {
     return new PathExpression( string, expressionList );
 };
 
-//module.exports = PathExpression;

@@ -1,10 +1,7 @@
 /*
     StringExpression class
 */
-//var context = require( '../context.js' );
-//var StringLiteral = require( './path/literals/stringLiteral.js' );
-//var PathExpression = require( './path/pathExpression.js' );
-//var expressionsUtils = require( './expressionsUtils.js' );
+
 import { context } from '../context.js';
 import { StringLiteral } from './path/literals/stringLiteral.js';
 import { PathExpression } from './path/pathExpression.js';
@@ -154,4 +151,3 @@ StringExpression.build = function( string ) {
     return new StringExpression( string, expressionList );
 };
 
-//module.exports = StringExpression;

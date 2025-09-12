@@ -2,9 +2,6 @@
     utils singleton class
 */
 
-//var zz = require( 'zzdom' );
-//var Qunit = require('qunit');
-//var htmlComparator = require( './htmlComparator.js' );
 import { zzDOM } from '../../../node_modules/zzdom/index.js';
 const zz = zzDOM.zz;
 import { htmlComparator } from './htmlComparator.js';

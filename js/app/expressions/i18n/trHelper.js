@@ -1,13 +1,7 @@
 /* 
     trHelper singleton class
 */
-//var context = require( '../../context.js' );
-//var ExpressionTokenizer = require( '../expressionTokenizer.js' );
-//var i18nHelper = require( '../../i18n/i18nHelper.js' );
-//var evaluateHelper = require( '../evaluateHelper.js' );
-//var expressionsUtils = require( '../expressionsUtils.js' );
-//var VariableExpression = require( '../path/variableExpression.js' );
-//var expressionBuilder = require( '../expressionBuilder.js' );
+
 import { context } from '../../context.js';
 import { ExpressionTokenizer } from '../expressionTokenizer.js';
 import { i18nHelper } from '../../i18n/i18nHelper.js';
@@ -19,7 +13,6 @@ import { expressionBuilder } from '../expressionBuilder.js';
 export const trHelper = (function() {
     
     var build = function( string, tag, minElements, maxElements, useSubformat ) {
-        //var expressionBuilder = require( '../expressionBuilder.js' );
         
         if ( string.length === 0 ) {
             throw tag + ' expression void.';
@@ -59,7 +52,6 @@ export const trHelper = (function() {
     };
     
     var buildI18nArgs = function( segment ){
-        //var expressionBuilder = require( '../expressionBuilder.js' );
         
         var args = {};
         if ( ! segment ){

@@ -1,8 +1,7 @@
 /* 
     ReactiveDictionary class 
 */
-//var zpt = require( '../main.js' );
-//import { zpt } from '../../../index.js';
+
 import { parser } from '../../../js/app/parsers/parser.js';
 
 const zpt = {};
@@ -121,4 +120,3 @@ export const ReactiveDictionary = function( _nonReactiveDictionary, _initialAuto
     this._initialize( this._privateScope.nonReactiveDictionary );
 };
 
-//module.exports = ReactiveDictionary;

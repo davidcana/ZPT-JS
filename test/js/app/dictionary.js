@@ -1,5 +1,4 @@
 
-//var context = require( '../../../js/app/context.js' );
 import { context } from '../../../js/app/context.js';
 
 export const dictionary = { 

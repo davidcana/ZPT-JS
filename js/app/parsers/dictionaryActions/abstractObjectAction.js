@@ -1,7 +1,7 @@
 /* 
     Class AbstractObjectAction
 */
-//var AbstractAction = require( './abstractAction.js' );
+
 import { AbstractAction } from './abstractAction.js';
 
 export const AbstractObjectAction = function( object, dictionary ) {
@@ -34,4 +34,3 @@ AbstractObjectAction.prototype.updateHTML = function( indexItem, parserUpdater, 
     return true;
 };
 
-//module.exports = AbstractObjectAction;

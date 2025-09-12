@@ -1,10 +1,9 @@
 /*
     AverageExpression class
 */
-"use strict";
 
-//var zpt = require( '../../../js/app/main.js' );
 import { zpt } from '../../../index.js';
+
 var context = zpt.context;
 var evaluateHelper = zpt.evaluateHelper;
 var ExpressionTokenizer = zpt.ExpressionTokenizer;
@@ -99,4 +98,3 @@ AverageExpression.build = function( string ) {
     );
 }
 
-//module.exports = AverageExpression;

@@ -59,7 +59,7 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            standalone: {
+            update_ZPT_in_docs: {
                 src: 'dist/zpt-esm.js',
                 dest: 'docs/lib/zpt-esm.js'
             }

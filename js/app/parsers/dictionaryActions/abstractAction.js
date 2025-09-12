@@ -1,8 +1,7 @@
 /* 
     Class AbstractAction
 */
-//var utils = require( '../../utils.js' );
-//var context = require( '../../context.js' );
+
 import { context } from '../../context.js';
 import { utils } from '../../utils.js';
 
@@ -120,4 +119,3 @@ AbstractAction.prototype.updateHTML = function(){
     throw 'Error: updateHTML must be implemented!';
 };
 
-//module.exports = AbstractAction;

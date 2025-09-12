@@ -1,9 +1,7 @@
 /* 
     expressionsUtils singleton class
 */
-//var evaluateHelper = require( './evaluateHelper.js' );
-//var utils = require( '../utils.js' );
-//var DepsDataItem = require( '../parsers/depsDataItem.js' );
+
 import { evaluateHelper } from './evaluateHelper.js';
 import { utils } from '../utils.js';
 import { DepsDataItem } from '../parsers/depsDataItem.js';

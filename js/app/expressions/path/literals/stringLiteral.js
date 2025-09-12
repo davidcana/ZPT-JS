@@ -35,4 +35,3 @@ StringLiteral.build = function( string ) {
     return undefined;
 };
 
-//module.exports = StringLiteral;

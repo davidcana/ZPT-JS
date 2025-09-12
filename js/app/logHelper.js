@@ -1,7 +1,7 @@
 /*
     logHelper singleton class
 */
-//var context = require( './context.js' );
+
 import { context } from './context.js';
 
 export const logHelper = (function() {

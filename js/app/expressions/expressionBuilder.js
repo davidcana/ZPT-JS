@@ -1,10 +1,7 @@
 /* 
     expressionBuilder singleton class
 */
-//var context = require( '../context.js' );
-//var ExpressionTokenizer = require( './expressionTokenizer.js' );
-//var PathExpression = require( './path/pathExpression.js' );
-//var expressionCache = require( '../cache/expressionCache.js' );
+
 import { context } from '../context.js';
 import { ExpressionTokenizer } from './expressionTokenizer.js';
 import { PathExpression } from './path/pathExpression.js';

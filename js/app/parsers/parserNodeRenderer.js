@@ -1,29 +1,6 @@
 /* 
     Class ParserNodeRenderer
 */
-//var context = require( '../context.js' );
-//var log = require( '../logHelper.js' );
-//var NodeAttributes = require( './nodeAttributes.js' );
-//var attributeCache = require( '../cache/attributeCache.js' );
-//var attributeIndex = require( '../attributes/attributeIndex.js' );
-//var AutoDefineHelper = require( './autoDefineHelper.js' );
-//var evaluateHelper = require( '../expressions/evaluateHelper.js' );
-//var Loop = require( './loop.js' );
-
-//var I18NDomain = require( '../attributes/I18N/i18nDomain.js' );
-//var I18NLanguage = require( '../attributes/I18N/i18nLanguage.js' );
-//var METALDefineMacro = require( '../attributes/METAL/metalDefineMacro.js' );
-//var METALUseMacro = require( '../attributes/METAL/metalUseMacro.js' );
-//var TALAttributes = require( '../attributes/TAL/talAttributes.js' );
-//var TALCondition = require( '../attributes/TAL/talCondition.js' );
-//var TALContent = require( '../attributes/TAL/talContent.js' );
-//var TALDefine = require( '../attributes/TAL/talDefine.js' );
-//var TALOmitTag = require( '../attributes/TAL/talOmitTag.js' );
-//var TALOnError = require( '../attributes/TAL/talOnError.js' );
-//var TALRepeat = require( '../attributes/TAL/talRepeat.js' );
-//var TALReplace = require( '../attributes/TAL/talReplace.js' );
-//var TALDeclare = require( '../attributes/TAL/talDeclare.js' );
-//var contentHelper = require( '../attributes/TAL/contentHelper.js' );
 
 import { context } from '../context.js';
 import { logHelper as log } from '../logHelper.js';
@@ -579,4 +556,3 @@ ParserNodeRenderer.configureNodeForNewItem = function( tmpNode, tags, parentNode
     );
 };
 
-//module.exports = ParserNodeRenderer;

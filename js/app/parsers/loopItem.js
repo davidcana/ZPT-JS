@@ -138,4 +138,3 @@ LoopItem.prototype.romanArray = [
     ]
 ];
 
-//module.exports = LoopItem;

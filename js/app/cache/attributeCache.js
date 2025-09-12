@@ -1,10 +1,6 @@
 /*
     attributeCache singleton class
 */
-//var CacheHelper = require( './cacheHelper.js' );
-//var context = require( '../context.js' );
-//var log = require( '../logHelper.js' );
-//var attributeIndex = require( '../attributes/attributeIndex.js' );
 
 import { cacheHelper } from './cacheHelper.js';
 import { context } from '../context.js';

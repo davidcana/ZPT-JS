@@ -29,4 +29,3 @@ PropertyExpression.build = function( string ) {
     return new PropertyExpression( string );
 };
 
-//module.exports = PropertyExpression;

@@ -1,11 +1,5 @@
 /* jshint esversion: 6 */
 
-//var zz = require( 'zzdom' );
-//var Qunit = require( 'qunit' );
-//var zpt = require( '../../../js/app/main.js' );
-//var context = require( '../../../js/app/context.js' );
-//var utils = require( './utils.js' );
-//import QUnit from '../../../lib/qunit-esm.js';
 import { zpt } from '../../../index.js';
 import { utils } from './utils.js';
 import { context } from '../../../js/app/context.js';

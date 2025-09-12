@@ -1,7 +1,7 @@
 /* 
     Class NodeAttributes 
 */
-//var context = require( '../context.js' );
+
 import { context } from '../context.js';
 
 export const NodeAttributes = function( node, indexExpressions ) {
@@ -65,4 +65,3 @@ NodeAttributes.prototype.isDynamicContentOn = function() {
         //|| this.qdup;
 };
 
-//module.exports = NodeAttributes;

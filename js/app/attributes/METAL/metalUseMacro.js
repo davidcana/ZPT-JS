@@ -1,14 +1,7 @@
 /*
     METALUseMacro class
 */
-//var context = require( '../../context.js' );
-//var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
-//var expressionsUtils = require( '../../expressions/expressionsUtils.js' );
-//var attributeIndex = require( '../attributeIndex.js' );
-//var attributeCache = require( '../../cache/attributeCache.js' );
-//var TALDefine = require( '../TAL/talDefine.js' );
-//var METALFillSlot = require( './metalFillSlot.js' );
-//var resolver = require( '../../resolver.js' );
+
 import { context } from '../../context.js';
 import { expressionBuilder } from '../../expressions/expressionBuilder.js';
 import { expressionsUtils } from '../../expressions/expressionsUtils.js';
@@ -146,7 +139,6 @@ export const METALUseMacro = function( stringToApply, macroExpressionToApply, de
 METALUseMacro.id = 'metal:use-macro';
 
 METALUseMacro.build = function( string, stringDefine ) {
-    //var expressionBuilder = require( '../../expressions/expressionBuilder.js' );
     
     return new METALUseMacro( 
             string,
@@ -154,5 +146,3 @@ METALUseMacro.build = function( string, stringDefine ) {
             stringDefine? stringDefine.trim(): undefined
     );
 };
-
-//module.exports = METALUseMacro;
