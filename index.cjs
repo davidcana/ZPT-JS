@@ -1,19 +1,23 @@
 /*
     Declare exports
 */
+
+const zpt = require( './dist/zpt-cjs.cjs' ).zpt;
+
+exports.parser = zpt.parser;
+
 exports.run = function( options ){
-    var parser = require( './js/app/parsers/parser.js' );
-    return parser.run( options );
+    return zpt.parser.run( options );
 };
 
-exports.I18n = require( './js/app/i18n/i18n.js' );
-exports.I18nBundle = require( './js/app/i18n/i18nBundle.js' );
-exports.i18nHelper = require( './js/app/i18n/i18nHelper.js' );
-exports.context = require( './js/app/context.js' );
-exports.logHelper = require( './js/app/logHelper.js' );
-exports.expressionBuilder = require( './js/app/expressions/expressionBuilder.js' );
-exports.evaluateHelper = require( './js/app/expressions/evaluateHelper.js' );
-exports.ExpressionTokenizer = require( './js/app/expressions/expressionTokenizer.js' );
-exports.ReactiveDictionary = require( './js/app/scopes/reactiveDictionary.js' );
-exports.version = require( './js/app/version.js' );
+exports.I18n = zpt.I18n;
+exports.I18nBundle = zpt.I18nBundle;
+exports.i18nHelper = zpt.i18nHelper;
+exports.context = zpt.context;
+exports.logHelper = zpt.logHelper;
+exports.expressionBuilder = zpt.expressionBuilder;
+exports.evaluateHelper = zpt.evaluateHelper;
+exports.ExpressionTokenizer = zpt.ExpressionTokenizer;
+exports.ReactiveDictionary = zpt.ReactiveDictionary;
+exports.version = zpt.version;
 

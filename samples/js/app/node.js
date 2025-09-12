@@ -18,7 +18,8 @@ var document = window.document;
 global.window = window;
 
 // Parse template
-var zpt = require( '../../../index.cjs' );
+//var zpt = require( '../../../index.cjs' );
+var zpt = require( 'zpt' );
 zpt.run({
     root: document.body,
     dictionary: {}

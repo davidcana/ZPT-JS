@@ -1,9 +1,12 @@
 /* 
     Declare exports
 */
-export const zpt = {};
+
+const zpt = {};
 
 import { parser } from './js/app/parsers/parser.js';
+zpt.parser = parser;
+
 zpt.run = function( options ){
     return parser.run( options );
 };
@@ -38,3 +41,4 @@ zpt.ReactiveDictionary = ReactiveDictionary;
 import { version } from './js/app/version.js';
 zpt.version = version;
 
+export { zpt };
