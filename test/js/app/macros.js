@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 import { zzDOM } from '../../../node_modules/zzdom/index.js';
 const zz = zzDOM.zz;
 import { zpt } from '../../../index.js';

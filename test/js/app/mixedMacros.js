@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 import { zpt } from '../../../index.js';
 import { utils } from './utils.js';
 

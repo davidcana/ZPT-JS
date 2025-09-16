@@ -170,7 +170,6 @@ export const resolver = (function() {
         for ( var c = 0; c < remotePageUrls.length; c++ ) {
             var currentPageUrl = buildURL( remotePageUrls[ c ] );
             
-            /* jshint loopfunc: true */
             utils.ajax(
                 {
                     url: currentPageUrl,

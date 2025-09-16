@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 "use strict";
 
 var Qunit = require( 'qunit' );

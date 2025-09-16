@@ -14261,6 +14261,10 @@ var ParserPreloader = function(_parserOptions, _callback, _failCallback, _declar
 };
 
 // js/app/scopes/reactiveDictionary.js
+var zpt = {};
+zpt.run = function(options) {
+  return parser.run(options);
+};
 var ReactiveDictionary = function(_nonReactiveDictionary, _initialAutoCommit) {
   var self2 = this;
   this._privateScope = {
@@ -14475,20 +14479,21 @@ var I18nBundle = function() {
 var version = "0.40.10-SNAPSHOT";
 
 // index.js
-var zpt = {};
-zpt.run = function(options) {
+var zpt2 = {};
+zpt2.parser = parser;
+zpt2.run = function(options) {
   return parser.run(options);
 };
-zpt.I18n = I18n;
-zpt.I18nBundle = I18nBundle;
-zpt.i18nHelper = i18nHelper;
-zpt.context = context;
-zpt.logHelper = logHelper;
-zpt.expressionBuilder = expressionBuilder;
-zpt.evaluateHelper = evaluateHelper;
-zpt.ExpressionTokenizer = ExpressionTokenizer;
-zpt.ReactiveDictionary = ReactiveDictionary;
-zpt.version = version;
+zpt2.I18n = I18n;
+zpt2.I18nBundle = I18nBundle;
+zpt2.i18nHelper = i18nHelper;
+zpt2.context = context;
+zpt2.logHelper = logHelper;
+zpt2.expressionBuilder = expressionBuilder;
+zpt2.evaluateHelper = evaluateHelper;
+zpt2.ExpressionTokenizer = ExpressionTokenizer;
+zpt2.ReactiveDictionary = ReactiveDictionary;
+zpt2.version = version;
 export {
-  zpt
+  zpt2 as zpt
 };
