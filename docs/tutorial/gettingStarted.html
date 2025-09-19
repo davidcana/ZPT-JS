@@ -15,33 +15,21 @@
             <div data-fill-slot="'page-header'">
                 <h1>ZPT-JS tutorial - Getting started</h1>
                 <ul>
-                    <li><a href="#downloading">Downloading ZPT-JS and its dependencies</a>.</li>
-                    <li><a href="#header">Configuring the HTML header</a>.</li>
+                    <li><a href="#downloading">Downloading ZPT-JS</a>.</li>
                     <li><a href="#template">Write the template</a>.</li>
                     <li><a href="#dictionary">Build the dictionary</a>.</li>
                     <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
                     <li><a href="#result">The result</a>.</li>
+                    <li><a href="#partialRendering">PArtial rendering</a>.</li>
                     <li><a href="#updates">Updates</a>.</li>
                     <li><a href="#node">Using ZPT-JS and node.js</a>.</li>
                 </ul>
             </div>
             <article data-fill-slot="'article'">
-                <h2 data-attributes="id 'downloading'">Downloading ZPT-JS and its dependencies</h2>
+                <h2 data-attributes="id 'downloading'">Downloading ZPT-JS</h2>
                 <p>
-                    Go to <a href="../download.html">Download</a> section and follow the instructions to download ZPT-JS and its dependencies.
+                    Go to <a href="../download.html">Download</a> section and follow the instructions to download ZPT-JS.
                 </p>
-
-                <h2 data-attributes="id 'header'">Configuring the HTML header</h2>
-                <p>
-                    You must add to your web page the javascript code of ZPT-JS and its dependencies(<em>zpt.min.js</em>). Don't forget to add the reference of the javascript file with the invokation to ZPT-JS (for example <em>gettingStarted.js</em>):
-                </p>
-                <pre class="brush: html">
-&lt;head&gt;
-    ...
-    &lt;script src="gettingStarted.js" type="module"&gt;&lt;/script&gt;
-    ...
-&lt;/head&gt;
-                </pre>
 
                 <h2 data-attributes="id 'template'">Write the template</h2>
                 <p>
@@ -65,8 +53,7 @@
         &lt;meta charset="utf-8"&gt;
         &lt;title&gt;Getting started&lt;/title&gt;
 
-        &lt;script src="/zpt/zpt.min.js" defer&gt;&lt;/script&gt;
-        &lt;script src="gettingStarted.js" type="text/javascript" defer&gt;&lt;/script&gt;
+        &lt;script src="gettingStarted.js" type="module"&gt;&lt;/script&gt;
     &lt;/head&gt;
     &lt;body&gt;
         &lt;p data-content="message"&gt;
@@ -75,16 +62,22 @@
     &lt;/body&gt;
 &lt;/html&gt;
                 </pre>
+
+                <p>
+                    The <em>data-content</em> attribute is ignored by browsers: all the <em>data-*</em> attributes are completely ignored by the user agent.
+                </p>
+                
                 <h2 data-attributes="id 'dictionary'">Build the dictionary</h2>
                 <p>
-                    Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template. You can use any javascript object, but ZPT provides an specific type that supports a reactive behaviour:
+                    Build a javascript object with key/value pairs. These key/value pairs will be accesible by the whole template. You can use any 
+                    javascript object:
                 </p>
                 <pre class="brush: js">
 import { zpt } from './zpt-esm.js';
 
-var dictionary = new zpt.ReactiveDictionary({
-    message: "Hello, world!"
-});
+var dictionary = {
+    message: 'Hello, world!'
+};
                 </pre>
 
                 <h2 data-attributes="id 'invoke'">Invoke ZPT-JS</h2>
@@ -108,9 +101,9 @@ zpt.run({
                 <pre class="brush: js">
 import { zpt } from './zpt-esm.js';
 
-var dictionary = new zpt.ReactiveDictionary({
-    message: "Hello, world!"
-});
+var dictionary = {
+    message: 'Hello, world!'
+};
 
 zpt.run({
     root: document.body,
@@ -133,16 +126,23 @@ zpt.run({
 &lt;/body&gt;
                 </pre>
                 
-                <h2 data-attributes="id 'updating'">Updates</h2>
+                <h2 data-attributes="id 'partialRendering'">Partial rendering</h2>
                 <p>
-                    If we change some data in the dictionary this way:
+                    If we change some data in the dictionary and run a <em>partial render</em> this way:
                 </p>
                 <pre class="brush: js">
-dictionary.message = "Bye, world!";
+dictionary.message = 'Bye, world!';
+
+zpt.run({
+    command: 'partialRender',
+    target: [ 
+        document.body
+    ]
+});
                 </pre>
                 
                 <p>
-                    We don't need to do anything else, the <code>body</code> element now is:
+                    The <code>body</code> element now is:
                 </p>
                 <pre class="brush: html">
 &lt;body&gt;
@@ -152,40 +152,29 @@ dictionary.message = "Bye, world!";
 &lt;/body&gt;
                 </pre>
                 
+                <h2 data-attributes="id 'updating'">Updates</h2>
                 <p>
-                    The <em>data-content</em> attribute is ignored by browsers: all the <em>data-*</em> attributes are completely ignored by the user agent.
-                </p>
-                
-                <h2 data-attributes="id 'node'">Using ZPT-JS and node.js</h2>
-                <p>
-                    That's OK. But... how can we use ZPT-JS at the server side (using <a href="https://nodejs.org/">node.js</a>)? <a href="https://www.npmjs.com/package/jsdom">jsdom</a> is needed when no browser is available:
+                    Another way of updating:
                 </p>
                 <pre class="brush: js">
-var jsdom = require( 'jsdom' );
-var { JSDOM } = jsdom;
-
-// Build JSDOM instance
-var dom = new JSDOM(
-    '&lt;!doctype html&gt;'
-	+ '&lt;html&gt;'
-	+ '&lt;body&gt;&lt;h1 data-content="'hello, world!'"&gt;a text&lt;/h1&gt;&lt;/body&gt;'
-	+ '&lt;/html&gt;'
-);
-
-// Init some important vars
-var window = dom.window;
-var document = window.document;
-global.window = window;
-
-// Parse template
-import { zpt } from './zpt-esm.js';
 zpt.run({
-    root: document.body,
-    dictionary: {}
+    command: 'update',
+    dictionaryChanges: {
+        message: 'Bye again, world!'
+    }
 });
-
-console.log( 'Done!' );
-    </pre>
+                </pre>
+                
+                <p>
+                    We don't need to do anything else, the <code>body</code> element now is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-content="message"&gt;
+        Bye again, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
             </article>
         </div>
     </body>

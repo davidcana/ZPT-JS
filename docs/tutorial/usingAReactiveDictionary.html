@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Getting started</title>
+        
+        <script type="module" src="../js/zpt.js"></script>
+        <script type="text/javascript" src="../lib/syntaxHighlighter/lib.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../docs.css">
+        <link rel="stylesheet" type="text/css" href="../lib/syntaxHighlighter/theme.css">
+    </head>
+    <body>
+        <div data-use-macro="'page@templates.html'">
+            <div data-fill-slot="'page-header'">
+                <h1>ZPT-JS tutorial - Using a reactive dictionary</h1>
+                <ul>
+                    <li><a href="#dictionary">Build the dictionary</a>.</li>
+                    <li><a href="#invoke">Invoke ZPT-JS</a>.</li>
+                    <li><a href="#result">The result</a>.</li>
+                    <li><a href="#updates">Updates</a>.</li>
+                </ul>
+            </div>
+            <article data-fill-slot="'article'">
+                <h2 data-attributes="id 'dictionary'">Build the dictionary</h2>
+                <p>
+                    You can use any javascript object, but ZPT provides an specific type that supports a reactive behaviour:
+                </p>
+                <pre class="brush: js">
+import { zpt } from './zpt-esm.js';
+
+var dictionary = new zpt.ReactiveDictionary({
+    message: "Hello, world!"
+});
+                </pre>
+
+                <h2 data-attributes="id 'invoke'">Invoke ZPT-JS</h2>
+                <p>
+                    Invoke the <code>run</code> method of ZPT:
+                </p>
+                <pre class="brush: js">
+import { zpt } from './zpt-esm.js';
+
+...
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+
+                <p>
+                    The resulting Javascript file (<em>gettingStarted.js</em>) is:
+                </p>
+                <pre class="brush: js">
+import { zpt } from './zpt-esm.js';
+
+var dictionary = new zpt.ReactiveDictionary({
+    message: "Hello, world!"
+});
+
+zpt.run({
+    root: document.body,
+    dictionary: dictionary
+});
+                </pre>
+                <p>
+                    That's all!
+                </p>
+                
+                <h2 data-attributes="id 'result'">The result</h2>
+                <p>
+                    The resulting <code>body</code> element is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-content="message"&gt;
+        Hello, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
+                
+                <h2 data-attributes="id 'updating'">Updates</h2>
+                <p>
+                    If we change some data in the dictionary this way:
+                </p>
+                <pre class="brush: js">
+dictionary.message = "Bye, world!";
+                </pre>
+                
+                <p>
+                    We don't need to do anything else, the <code>body</code> element now is:
+                </p>
+                <pre class="brush: html">
+&lt;body&gt;
+    &lt;p data-content="message"&gt;
+        Bye, world!
+    &lt;/p&gt;
+&lt;/body&gt;
+                </pre>
+            </article>
+        </div>
+    </body>
+</html>

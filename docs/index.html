@@ -67,6 +67,10 @@
                 
                 <h2>Usage</h2>
                 <p>
+                    Let's see ZPT in action. You can use ZPT this way:
+                </p>
+
+                <p>
                     A sample of template:
                 </p>
                 <pre class="brush: html">
@@ -92,9 +96,9 @@
                 <pre class="brush: js">
 import { zpt } from './zpt-esm.js';
 
-var dictionary = new zpt.ReactiveDictionary({
+var dictionary = {
     message: "Hello, world!"
-});
+};
 
 zpt.run({
     root: document.body,
@@ -114,14 +118,21 @@ zpt.run({
                 </pre>
                 
                 <p>
-                    If we change some data in the dictionary this way:
+                    If we want to update the <em>message</em>:
                 </p>
                 <pre class="brush: js">
 dictionary.message = "Bye, world!";
+
+zpt.run({
+    command: 'partialRender',
+    target: [ 
+        document.body
+    ]
+});
                 </pre>
                 
                 <p>
-                    We don't need to do anything else, the <code>body</code> element now is:
+                    The <code>body</code> element now is:
                 </p>
                 <pre class="brush: html">
 &lt;body&gt;
@@ -130,7 +141,10 @@ dictionary.message = "Bye, world!";
     &lt;/p&gt;
 &lt;/body&gt;
                 </pre>
-                
+
+                <p>
+                    For more details check <a href="tutorial/gettingStarted.html">getting started page</a>.
+                </p>
             </article>
         </div>
     </body>
