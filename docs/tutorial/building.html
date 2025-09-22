@@ -18,32 +18,32 @@
                     <li><a href="#starting">Starting ZPT-JS</a>.</li>
                     <li><a href="#web">The web of ZPT-JS</a>.</li>
                     <li><a href="#testing">Testing</a>.</li>
+                    <li><a href="#otherScripts">Other scripts</a>.</li>
                 </ul>
             </div>
             <article data-fill-slot="'article'">
                 <h2 data-attributes="id 'starting'">Starting ZPT-JS</h2>
                 <p>
-                    Asumming you have <a href="../download.html">downloaded ZPT-JS</a> before, move to the directory of ZPT-JS and use the next command to install the dependencies of ZPT-JS:
+                    Asumming you have <a href="../download.html">downloaded ZPT-JS</a> before, move to the directory of ZPT-JS and use the next command to
+                    install the dependencies of ZPT-JS and build dist files:
                 </p>
                 <pre class="console">
-$ npm run install
+$ npm run init
                 </pre>
                 <p>
-                    Then use the next command to initialize a <a href="http://didact.us/beefy/">beefy server</a> (port 9966) to make it easy to test ZPT-JS without browserifying by hand and a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve static files (HTML, CSS and JSON files):
+                    That command runs a <code>npm install</code> (install all dependencies) and <code>npm run build-all</code> (build dist files).
+                </p>
+                <p>
+                    Then use the next command to initialize a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9000) to serve
+                    static files (HTML, CSS, JS and JSON files):
                 </p>
                 <pre class="console">
-$ npm run start
+$ npm run http-server
                 </pre>
-                <p>
-                    ZPT-JS uses <a href="http://gruntjs.com/">Grunt</a> as task runner tool. Grunt file uses:
-                </p>
-                <ul>
-                    <li><em>grunt-browserify</em>. Build javascript files to be understood for browsers.</li>
-                    <li><em>grunt-contrib-watch</em>. Watch changes of javascript files to invoke <em>browserify</em> automatically.</li>
-                </ul>
                 <h2 data-attributes="id 'web'">The web of ZPT-JS</h2>
                 <p>
-                    Use the next command to initialize a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9001) to serve static files of the web of ZPT-JS:
+                    Use the next command to initialize a <a href="https://www.npmjs.com/package/http-server">HTTP server</a> (port 9001) to serve 
+                    static files of the web of ZPT-JS:
                 </p>
                 <pre class="console">
 $ npm run web
@@ -51,27 +51,31 @@ $ npm run web
                 <p>
                     Open <a href="http://localhost:9001">http://localhost:9001</a> with your favourite browser to view the web of ZPT-JS.
                 </p>
+                <p>
+                    Run the next command to initialize both HTTP servers:
+                </p>
+                <pre class="console">
+$ npm run start
+                </pre> 
                 <h2 data-attributes="id 'testing'">Testing</h2>
                 <p>
-                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework. There are some different ways for testing ZPT-JS:
+                    ZPT-JS uses <a href="https://qunitjs.com/">QUnit</a> as testing framework.
+                </p>
+                <p>
+                    Open <a href="http://localhost:9000/test/">http://localhost:9000/test/</a> with your favourite browser. Be careful: only related to 
+                    browser test are run! All tests passed using last versions of Mozilla Firefox and Chromium. Perhaps some tests fail using other browsers!
+                </p>
+                <h2 data-attributes="id 'otherScripts'">Other scripts</h2>
+                <p>
+                    Description of other scripts defined in <em>package.json</em> file:
                 </p>
                 <ul>
-                    <li>
-                        Open <a href="http://localhost:9000/test/">http://localhost:9000/test/</a> with your favourite browser. Be careful: only related to browser test are run! All tests passed using last versions of Mozilla Firefox (68.0.1, 64-bit) and Chromium (74.0.3729.169, 64-bit). Perhaps some tests fail using other browsers!
-                    </li>
-                    <li>
-                        Test ZPT-JS using console:
-                        <pre class="console">
-$ npm run testBrowser   // Run the related to browser tests
-$ npm run testNode      // Run the related to node.js tests
-$ npm run test          // Run all tests
-                        </pre>
-                        Some tests (<code>errors.html</code>, <code>folderDictionaries.html</code> and <code>folderDictionaries2.html</code>) show this error message several times:
-                        <pre class="console">
-Failed to load resource: the server responded with a status of 404 (Not Found)
-                        </pre>
-                        This is due to forced loading errors (<code>errors.html</code>) or errors trying to load <em>folder dictionaries</em> (<code>folderDictionaries.html</code> and <code>folderDictionaries2.html</code>). This is the expected behaviour.
-                    </li>
+                    <li><em>version</em>: Creates a file in <em>js/app/version.js</em> containing the version of ZPT-JS.</li>
+                    <li><em>updateZPTInDocs</em>: Updates the ZPT version used in ZPT's web with the version in <em>./dist/zpt-esm.js</em>.</li>
+                    <li><em>checkNode</em>: Runs a simple test to check if node version of ZPT-Js works properly.</li>
+                    <li><em>build-all-deps-esm</em>: Builds esm versions of dependencies from <em>./node_modules</em> and put them in <em>./lib</em> directory. It uses <a href="https://esbuild.github.io/">esbuild</a>.</li>
+                    <li><em>build-all</em>: Builds different standalone versions of ZPT-JS (esm, esm minified, esm minified gzipped, cjs) and put them in <em>./dist</em> directory. It uses <em>esbuild</em> too.</li>
+                    <li><em>build</em>: Runs <em>build-all-deps-esm</em> and <em>build-all</em>.</li>
                 </ul>
             </article>
         </div>
